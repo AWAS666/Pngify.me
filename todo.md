@@ -1,0 +1,21 @@
+- [x] show off progress
+- [ ] find a better name??
+	- [ ] picture pal
+	- [ ] Picturoo
+	- [ ] Inkwave Reactive Image Animation Studio (IRIAS)
+	- [ ] Metuber
+	- [ ] PNGuppet
+	- [ ] SockTuber
+	- [ ] SUckTuber
+	- [ ] PuppetTuber 
+	- [ ] Streamsprite
+	- [ ] PngCaster
+	- [ ] Wacky Tuber
+	- [ ] ScribbleStream
+	- [ ] PNGify (me) pngify.me
+- [x] allowing change if pngs
+- [x] structured ui
+	- [x] organize all the menus into a single tab menu
+- [x] settings not shown all the time
+- [ ] hotkeys (https://github.com/kyrylomyr/GlobalHotKey)
+- [ ] twitch
