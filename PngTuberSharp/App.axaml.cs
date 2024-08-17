@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using PngTuberSharp.Services;
 using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.Services.Twitch;
 using PngTuberSharp.ViewModels;
@@ -19,13 +20,12 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-
+            WinHotkey.Start(desktop);
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainViewModel()
             };
 
-            WinHotkey.Start(desktop);
             await TwitchEventSocket.Start();
         }
         //else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

@@ -12,12 +12,12 @@ namespace PngTuberSharp.Layers.Microphone
         public BasicMicroPhoneLayer()
         {
             Unique = true;
-            SettingsManager.Current.Avatar.Refresh += RefreshImage;
         }
 
-        private void RefreshImage(object? sender, EventArgs e)
+        private void RefreshImage(object? sender = null, EventArgs e = null)
         {
-            OnEnter();
+            openImage = new Bitmap(SettingsManager.Current.Avatar.Open);
+            closedImage = new Bitmap(SettingsManager.Current.Avatar.Closed);
         }
 
         public override void OnCalculateParameters(float dt, ref LayerValues values)
@@ -30,8 +30,8 @@ namespace PngTuberSharp.Layers.Microphone
 
         public override void OnEnter()
         {
-            openImage = new Bitmap(SettingsManager.Current.Avatar.Open);
-            closedImage = new Bitmap(SettingsManager.Current.Avatar.Closed);
+            SettingsManager.Current.Avatar.Refresh += RefreshImage;
+            RefreshImage();
         }
 
         public override void OnExit()

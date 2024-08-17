@@ -1,4 +1,5 @@
-﻿using PngTuberSharp.Services.Settings;
+﻿using PngTuberSharp.Layers;
+using PngTuberSharp.Services.Settings;
 using System;
 using System.IO;
 using System.Text.Json;
@@ -25,7 +26,10 @@ namespace PngTuberSharp.Services
         {
             if (File.Exists(FilePath))
             {
-                Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath));
+                var options = new JsonSerializerOptions();
+                options.Converters.Add(new BaseLayerJsonConverter());
+                options.Converters.Add(new TriggerJsonConverter());
+                Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath), options);
             }
             else
             {
@@ -36,7 +40,10 @@ namespace PngTuberSharp.Services
 
         public static void Save()
         {
-            File.WriteAllText(FilePath, JsonSerializer.Serialize(Current));
+            var options = new JsonSerializerOptions();
+            options.Converters.Add(new BaseLayerJsonConverter());
+            options.Converters.Add(new TriggerJsonConverter());
+            File.WriteAllText(FilePath, JsonSerializer.Serialize(Current, options));
         }
     }
 }

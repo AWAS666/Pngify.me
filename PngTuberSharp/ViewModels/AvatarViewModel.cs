@@ -2,6 +2,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Layers.Microphone;
+using PngTuberSharp.Services;
 
 namespace PngTuberSharp.ViewModels;
 
@@ -32,7 +33,7 @@ public partial class AvatarViewModel : ViewModelBase
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
-        LayerManager.AddLayer(new BasicMicroPhoneLayer());
+        SettingsManager.Current.LayerSetup.ApplySettings();        
     }
 
     private void UpdatePosition(object? sender, LayerValues e)
