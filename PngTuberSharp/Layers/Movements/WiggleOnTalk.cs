@@ -1,21 +1,22 @@
-﻿using PngTuberSharp.Layers.Movements;
-using PngTuberSharp.Services;
+﻿using PngTuberSharp.Services;
 using System;
 
 namespace PngTuberSharp.Layers
 {
-    public class WiggleOnTalk : MovementBaseLayer
+    public class WiggleOnTalk : RampOnConditionLayer
     {
         public float Offset { get; set; } = 20f;
         public float Frequency { get; set; } = 5f;
-        public WiggleOnTalk()
-        {
-        }
+
         public override void OnCalculateParameters(float dt, ref LayerValues values)
         {
             float pi2 = MathF.PI * 2;
-            if (MicrophoneService.Talking)
-                values.PosY += (float)Math.Sin(pi2 * CurrentTime * Frequency) * Offset * CurrentStrength;
+            var sine = (float)Math.Sin(pi2 * CurrentTime * Frequency);
+            values.PosY += (float)Math.Sin(pi2 * CurrentTime * Frequency) * Offset * CurrentStrength;
+            values.PosX += (float)Math.Sin(pi2 * CurrentTime * Frequency / 2) * Offset * CurrentStrength;
         }
+
+        public override bool Triggered() => MicrophoneService.Talking;
+
     }
 }

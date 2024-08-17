@@ -3,6 +3,7 @@ using PngTuberSharp.Services.Settings;
 using PngTuberSharp.Services.Twitch;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -62,6 +63,8 @@ namespace PngTuberSharp.Layers
 
         public static void Update(float dt)
         {
+            var watch = new Stopwatch();
+            watch.Start();
             Time += dt;
             foreach (BaseLayer layer in Layers.ToList())
             {
@@ -78,6 +81,7 @@ namespace PngTuberSharp.Layers
                 layer.OnCalculateParameters(dt, ref layert);
             }
             ValueUpdate?.Invoke(null, layert);
+            Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
         }
     }
 }

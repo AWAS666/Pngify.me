@@ -4,7 +4,7 @@ using System;
 
 namespace PngTuberSharp.Layers.Microphone
 {
-    public class BasicMicroPhoneLayer : BaseLayer
+    public class BasicMicroPhoneLayer : PermaLayer
     {
         private Bitmap openImage;
         private Bitmap closedImage;
@@ -32,22 +32,6 @@ namespace PngTuberSharp.Layers.Microphone
         {
             SettingsManager.Current.Avatar.Refresh += RefreshImage;
             RefreshImage();
-        }
-
-        public override void OnExit()
-        {
-        }
-
-        public override void OnUpdate(float dt, float time)
-        {
-        }
-
-        public override void OnUpdateEnter(float dt, float fraction)
-        {
-        }
-
-        public override void OnUpdateExit(float dt, float fraction)
-        {
-        }
+        }        
     }
 }
