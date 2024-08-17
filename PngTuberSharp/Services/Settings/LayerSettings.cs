@@ -1,9 +1,7 @@
-﻿using Avalonia.Input;
+﻿using GlobalHotKeys.Native.Types;
 using PngTuberSharp.Layers;
-using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
+
 namespace PngTuberSharp.Services.Settings
 {
     public class LayerSettings
@@ -25,6 +23,8 @@ namespace PngTuberSharp.Services.Settings
 
     public class HotkeyTrigger() : Trigger
     {
+        public VirtualKeyCode VirtualKeyCode { get; set; }
+        public Modifiers Modifiers { get; set; }
     }
 
     public class TwitchTrigger() : Trigger

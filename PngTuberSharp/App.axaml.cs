@@ -1,7 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
-using PngTuberSharp.Services;
+using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.ViewModels;
 using PngTuberSharp.Views;
 
@@ -18,11 +18,13 @@ public partial class App : Application
     {
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
+            
             desktop.MainWindow = new MainWindow
             {
                 DataContext = new MainViewModel()
             };
 
+            WinHotkey.Start(desktop);           
         }
         //else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         //{

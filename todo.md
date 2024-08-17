@@ -17,5 +17,6 @@
 - [x] structured ui
 	- [x] organize all the menus into a single tab menu
 - [x] settings not shown all the time
-- [ ] hotkeys (https://github.com/kyrylomyr/GlobalHotKey)
+- [x] hotkeys (https://github.com/8/GlobalHotKeys)
+	- [ ] win hotkey
 - [ ] twitch

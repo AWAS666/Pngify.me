@@ -36,12 +36,15 @@ public partial class LayerAdder : UserControl
 
     private void RefreshLayers(object? sender, BaseLayer e)
     {
-        activeStack.Children.Clear();
-        foreach (var item in LayerManager.Layers)
+        Dispatcher.UIThread.Invoke(() =>
         {
-            var text = new TextBlock { Text = item.GetType().Name, Margin = new Thickness(5, 5, 5, 5) };
-            activeStack.Children.Add(text);
-        }
+            activeStack.Children.Clear();
+            foreach (var item in LayerManager.Layers)
+            {
+                var text = new TextBlock { Text = item.GetType().Name, Margin = new Thickness(5, 5, 5, 5) };
+                activeStack.Children.Add(text);
+            }
+        });
     }
 
     private void OnButtonClick(Type type)
