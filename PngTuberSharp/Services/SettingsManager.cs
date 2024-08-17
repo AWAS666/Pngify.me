@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PngTuberSharp.Services.Settings;
+using System;
 using System.IO;
 using System.Text.Json;
-using PngTuberSharp.Services.Settings;
 
 namespace PngTuberSharp.Services
 {
@@ -26,7 +26,7 @@ namespace PngTuberSharp.Services
             if (File.Exists(FilePath))
             {
                 Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath));
-            } 
+            }
             else
             {
                 Current = new();

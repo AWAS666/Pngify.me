@@ -1,5 +1,6 @@
 ﻿using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
+using PngTuberSharp.Services.Twitch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,7 +23,7 @@ namespace PngTuberSharp.Layers
         static LayerManager()
         {
             tickLoop = Task.Run(TickLoop);
-            TwitchHandler.RedeemUsed += TwitchRedeem;
+            TwitchEventSocket.RedeemUsed += TwitchRedeem;
         }
 
         private static void TwitchRedeem(object? sender, string e)
@@ -31,7 +32,7 @@ namespace PngTuberSharp.Layers
             foreach (var layer in layers)
             {
                 // todo clone layer here
-                AddLayer(layer.Layer.Clone());
+                //AddLayer(layer.Layer.Clone());
             }
         }
 

@@ -2,7 +2,6 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Layers.Microphone;
-using System;
 
 namespace PngTuberSharp.ViewModels;
 

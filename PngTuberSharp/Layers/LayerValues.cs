@@ -1,6 +1,4 @@
 ﻿using Avalonia.Media.Imaging;
-using PngTuberSharp.Services;
-using System;
 
 namespace PngTuberSharp.Layers
 {

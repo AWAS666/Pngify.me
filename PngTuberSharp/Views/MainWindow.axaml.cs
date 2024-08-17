@@ -1,7 +1,6 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Data;
 using PngTuberSharp.Services;
-using System;
 
 namespace PngTuberSharp.Views;
 

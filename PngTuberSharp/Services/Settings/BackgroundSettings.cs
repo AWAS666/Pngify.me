@@ -23,7 +23,7 @@ namespace PngTuberSharp.Settings
         public string Image { get; set; } = string.Empty;
         public string ColourHex
         {
-            get => _colourHex; 
+            get => _colourHex;
             set
             {
                 _colourHex = value;

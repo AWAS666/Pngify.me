@@ -3,8 +3,6 @@ using PngTuberSharp.Services.Settings;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PngTuberSharp.Services
@@ -18,7 +16,7 @@ namespace PngTuberSharp.Services
         public static event EventHandler<MicroPhoneLevel> LevelChanged;
 
         static MicrophoneService()
-        {            
+        {
             Start();
         }
 

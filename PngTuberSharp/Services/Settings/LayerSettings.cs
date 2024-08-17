@@ -6,13 +6,13 @@ namespace PngTuberSharp.Services.Settings
 {
     public class LayerSettings
     {
-        public List<Layersetting> Layers { get; set; } = new();       
+        public List<Layersetting> Layers { get; set; } = new();
     }
 
     public class Layersetting
     {
         public string Name { get; set; }
-        public BaseLayer Layer { get; set; }
+        public List<BaseLayer> Layers { get; set; }
         public Trigger Trigger { get; set; }
 
     }

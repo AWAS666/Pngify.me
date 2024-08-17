@@ -1,5 +1,4 @@
-﻿using System;
-namespace PngTuberSharp.Services.Settings
+﻿namespace PngTuberSharp.Services.Settings
 {
     public class MicroPhoneSettings
     {

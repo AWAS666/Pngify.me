@@ -1,6 +1,5 @@
 ﻿using PngTuberSharp.Layers.Movements;
 using PngTuberSharp.Services;
-using System;
 
 namespace PngTuberSharp.Layers
 {
