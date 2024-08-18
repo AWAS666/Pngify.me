@@ -16,12 +16,12 @@
 		<DataTemplate DataType="{x:Type sett:HotkeyTrigger}">
 			<StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock VerticalAlignment="Center" Text="Key" Width="150"/>
+					<TextBlock VerticalAlignment="Center" Text="Key" Width="75"/>
 					<ComboBox SelectedItem="{Binding VirtualKeyCode, Mode=TwoWay}" Width="200"
 						ItemsSource="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).AllKeys }"></ComboBox>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock VerticalAlignment="Center" Text="Modifier" Width="150"/>
+					<TextBlock VerticalAlignment="Center" Text="Modifier" Width="75"/>
 					<ComboBox SelectedItem="{Binding Modifiers}" Width="200"
 						ItemsSource="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).AllModifiers }"></ComboBox>
 				</StackPanel>
@@ -29,7 +29,7 @@
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:TwitchTrigger}">
 			<StackPanel Orientation="Horizontal" Margin="5">
-				<TextBlock VerticalAlignment="Center" Text="Redeem" Width="150"/>
+				<TextBlock VerticalAlignment="Center" Text="Redeem" Width="75"/>
 				<TextBox VerticalAlignment="Center" Text="{Binding Redeem}" Width="150"/>
 			</StackPanel>
 		</DataTemplate>

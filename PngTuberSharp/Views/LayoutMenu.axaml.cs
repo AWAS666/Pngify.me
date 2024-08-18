@@ -1,4 +1,6 @@
 using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Media;
 using PngTuberSharp.Services;
 using PngTuberSharp.Settings;
@@ -52,6 +54,13 @@ public partial class LayoutMenu : UserControl
         if (e.AddedItems.Count != 1)
             return;
         SettingsManager.Current.Background.Colour = (IBrush)e.AddedItems[0];
+        UpdateText();
+    }
+
+    private void SetToTransparant(object sender, RoutedEventArgs e)
+    {
+        background.SelectedValue = Brushes.Transparent;
+        SettingsManager.Current.Background.Colour = Brushes.Transparent;
         UpdateText();
     }
 }

@@ -14,6 +14,7 @@
 		<vm:LayerSetupViewModel/>
 	</Design.DataContext>
 	<StackPanel>
+		<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
 		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 			<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
 			<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus" />

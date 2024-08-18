@@ -4,23 +4,28 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
              x:Class="PngTuberSharp.Views.LayoutMenu">
-	<Grid ColumnDefinitions="100,200,*" RowDefinitions="45,25, *">
-		<Label VerticalAlignment="Center">Background:</Label>
-		<ComboBox x:Name="background"
-				  Width="200"
-				  VerticalAlignment="Center"
-				  Grid.Column="1">
-			<ComboBox.ItemTemplate>
-				<DataTemplate>
-					<StackPanel Orientation="Horizontal">
-						<TextBlock Text="{Binding}" Margin="0,0,10,0" />
-						<Ellipse Width="15" Height="15" Fill="{Binding}"/>
-					</StackPanel>
-				</DataTemplate>
-			</ComboBox.ItemTemplate>
-		</ComboBox>
-		<Label Grid.Row="1" VerticalAlignment="Center">Hex:</Label>
-		<TextBox IsReadOnly="True" x:Name="backgroundHex" Grid.Row="1" Grid.Column="1" ></TextBox>
+	<StackPanel>
 
-	</Grid>
+		<TextBlock FontSize="24">Background Setup</TextBlock>
+		<Grid ColumnDefinitions="100,200,150" RowDefinitions="45,25,*">
+			<Label VerticalAlignment="Center">Background:</Label>
+			<ComboBox x:Name="background"
+					  Width="200"
+					  VerticalAlignment="Center"
+					  Grid.Column="1">
+				<ComboBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal">
+							<TextBlock Text="{Binding}" Margin="0,0,10,0" />
+							<Ellipse Width="15" Height="15" Fill="{Binding}"/>
+						</StackPanel>
+					</DataTemplate>
+				</ComboBox.ItemTemplate>
+			</ComboBox>
+			<Button Click="SetToTransparant" Margin="5,5,5,5" Grid.Column="2">Set to Transparent</Button>
+			<Label Grid.Row="1" VerticalAlignment="Center">Hex:</Label>
+			<TextBox IsReadOnly="True" x:Name="backgroundHex" Grid.Row="1" Grid.Column="1" ></TextBox>
+
+		</Grid>
+	</StackPanel>
 </UserControl>

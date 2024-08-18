@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:PngTuberSharp.Views"
-        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
 		 xmlns:sett="clr-namespace:PngTuberSharp.Settings"
         x:Class="PngTuberSharp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
@@ -20,9 +20,9 @@
 			<TabItem Header="LayoutMenu" FontSize="12" Width="125">
 				<views:LayoutMenu />
 			</TabItem>
-			<TabItem Header="LayerAdder" FontSize="12" Width="125">
+			<!--<TabItem Header="LayerAdder" FontSize="12" Width="125">
 				<views:LayerAdder />
-			</TabItem>
+			</TabItem>-->
 			<TabItem Header="LayerSetup" FontSize="12" Width="125">
 				<views:LayerSetup />
 			</TabItem>
