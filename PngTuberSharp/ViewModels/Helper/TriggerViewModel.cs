@@ -23,6 +23,7 @@ namespace PngTuberSharp.ViewModels.Helper
 
             AllKeys = new ObservableCollection<VirtualKeyCode>(Enum.GetValues(typeof(VirtualKeyCode)).Cast<VirtualKeyCode>());
             AllModifiers = new ObservableCollection<Modifiers>(Enum.GetValues(typeof(Modifiers)).Cast<Modifiers>());
+            AllModifiers.Insert(0, 0);
         }
 
         [ObservableProperty]

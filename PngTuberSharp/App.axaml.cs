@@ -26,7 +26,8 @@ public partial class App : Application
                 DataContext = new MainViewModel()
             };
 
-            await TwitchEventSocket.Start();
+            if (SettingsManager.Current.Twitch.Enabled == true)
+                await TwitchEventSocket.Start();
 
         }
         //else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)

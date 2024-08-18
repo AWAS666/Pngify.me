@@ -71,5 +71,8 @@
     <Compile Update="Views\LayerAdder.axaml.cs">
       <DependentUpon>LayerAdder.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\GeneralSettings.axaml.cs">
+      <DependentUpon>GeneralSettings.axaml</DependentUpon>
+    </Compile>
   </ItemGroup>
 </Project>

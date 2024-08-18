@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+             x:Class="PngTuberSharp.Views.GeneralSettings">
+	<StackPanel>
+		<TextBlock FontSize="24">General Settings</TextBlock>
+
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Label VerticalAlignment="Center">Twitch Enabled</Label>
+			<CheckBox x:Name="twitchEnabled"></CheckBox>
+			<Button Click="TwitchRetry">Retry Twitch Connection</Button>
+		</StackPanel>
+
+	</StackPanel>
+</UserControl>
