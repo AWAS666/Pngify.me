@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels.Helper"
+			  x:DataType="vm:TriggerEditorViewModel"
+             x:Class="PngTuberSharp.Views.Helper.TriggerEditorView"
+			 >
+	<Grid>
+		<Grid.ColumnDefinitions>
+			<ColumnDefinition Width="200"/>
+			<ColumnDefinition Width="*"/>
+		</Grid.ColumnDefinitions>
+		
+		<!-- Left side: ComboBox for class selection -->
+		<ComboBox Grid.Column="0"
+                  ItemsSource="{Binding TriggerTypes}"
+                  SelectedItem="{Binding SelectedTriggerType}"
+				  DisplayMemberBinding="{Binding Name}"
+                  />
+
+		<!-- Right side: List of properties for the selected class -->
+		<StackPanel Grid.Column="1">
+			<ItemsControl ItemsSource="{Binding PropertyList}">
+				<ItemsControl.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal" Margin="5">
+							<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
+							<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="200"/>
+						</StackPanel>
+					</DataTemplate>
+				</ItemsControl.ItemTemplate>
+			</ItemsControl>
+		</StackPanel>
+	</Grid>
+	
+	
+</UserControl>

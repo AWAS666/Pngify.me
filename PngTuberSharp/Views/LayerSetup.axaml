@@ -2,30 +2,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
-             x:Class="PngTuberSharp.Views.LayerSetup">
+			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
+			 xmlns:helper="clr-namespace:PngTuberSharp.Views.Helper"
+			  x:DataType="vm:LayerSetupViewModel"
+             x:Class="PngTuberSharp.Views.LayerSetup"
+			 >
 	<StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
-			<TextBlock>Always Active Layers:</TextBlock>
-			<Button  i:Attached.Icon="fa-solid fa-plus" />
+			<TextBlock VerticalAlignment="Center">Always Active Layers:</TextBlock>
+			<Button Command="{Binding AddNewSettings}"  i:Attached.Icon="fa-solid fa-plus" />
 		</StackPanel>
 
-		<StackPanel x:Name="alwaysLayers" Margin="5,5,5,5">
-			<Grid ColumnDefinitions="100,100,50">
-				<TextBox>Name</TextBox>
-				<ComboBox Grid.Column="1"></ComboBox>
-				<Button Grid.Column="2"  i:Attached.Icon="fa-solid fa-minus" />
-			</Grid>
-		</StackPanel>
 
-		<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
+
+		<ListBox ItemsSource="{Binding PermaLayers}" Margin="5,5,5,5">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,35,200">
+						<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
+						<Button Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
+
+						<TextBlock VerticalAlignment="Center" Grid.Row="1">Trigger:</TextBlock>
+						<helper:TriggerEditorViewProxy Grid.Row="2" Grid.ColumnSpan="3" LayerSetting="{Binding}" />
+					</Grid>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+
+		<!--<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
 			<TextBlock>Triggered Layers:</TextBlock>
 			<Button  i:Attached.Icon="fa-solid fa-plus" />
 		</StackPanel>
 
 		<StackPanel x:Name="triggeredLayers" Margin="5,5,5,5">
-		</StackPanel>
+		</StackPanel>-->
 
 	</StackPanel>
 </UserControl>

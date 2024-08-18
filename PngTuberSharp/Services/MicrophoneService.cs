@@ -37,7 +37,7 @@ namespace PngTuberSharp.Services
             }
             Talking = max * 100f > Settings.ThreshHold;
             LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)(max * 100f)));
-            Debug.WriteLine(max * 100f);
+            //Debug.WriteLine(max * 100f);
         }
 
         public static void Start()

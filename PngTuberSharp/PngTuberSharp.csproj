@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <AvaloniaUseCompiledBindingsByDefault>true</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
   </PropertyGroup>
 
   <ItemGroup>
@@ -57,6 +57,12 @@
   <ItemGroup>
     <Compile Update="Views\ChangeAvatar.axaml.cs">
       <DependentUpon>ChangeAvatar.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Helper\TriggerEditorViewProxy.axaml.cs">
+      <DependentUpon>TriggerEditorViewProxy.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Helper\TriggerEditorView.axaml.cs">
+      <DependentUpon>TriggerEditorView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LayerSetup.axaml.cs">
       <SubType>Code</SubType>

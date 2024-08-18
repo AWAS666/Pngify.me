@@ -23,6 +23,9 @@
 			<TabItem Header="LayerAdder" FontSize="12" Width="125">
 				<views:LayerAdder />
 			</TabItem>
+			<TabItem Header="LayerSetup" FontSize="12" Width="125">
+				<views:LayerSetup />
+			</TabItem>
 			<TabItem Header="ChangeAvatar" FontSize="12" Width="125">
 				<views:ChangeAvatar/>
 			</TabItem>

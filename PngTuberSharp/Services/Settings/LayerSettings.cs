@@ -53,7 +53,7 @@ namespace PngTuberSharp.Services.Settings
     public class Layersetting
     {
         public string Name { get; set; }
-        public List<BaseLayer> Layers { get; set; }
+        public List<BaseLayer> Layers { get; set; } = new();
         public Trigger Trigger
         {
             get => trigger;
@@ -63,7 +63,7 @@ namespace PngTuberSharp.Services.Settings
                 trigger.Parent = this;
             }
         }
-        private Trigger trigger;
+        private Trigger trigger = new AlwaysActive();
 
         public void AddLayers()
         {

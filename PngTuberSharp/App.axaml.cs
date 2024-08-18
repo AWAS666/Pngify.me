@@ -27,6 +27,7 @@ public partial class App : Application
             };
 
             await TwitchEventSocket.Start();
+
         }
         //else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         //{

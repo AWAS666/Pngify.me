@@ -81,7 +81,7 @@ namespace PngTuberSharp.Layers
                 layer.OnCalculateParameters(dt, ref layert);
             }
             ValueUpdate?.Invoke(null, layert);
-            Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
+            //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
         }
     }
 }
