@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
 			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
+			  xmlns:vmh="clr-namespace:PngTuberSharp.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngTuberSharp.Views.Helper"
 			 x:DataType="vm:LayerSetupViewModel"
              x:Class="PngTuberSharp.Views.LayerSetup"
@@ -13,9 +14,10 @@
 		<vm:LayerSetupViewModel/>
 	</Design.DataContext>
 	<StackPanel>
-		<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
-			<TextBlock VerticalAlignment="Center">Always Active Layers:</TextBlock>
-			<Button Command="{Binding AddNewSettings}"  i:Attached.Icon="fa-solid fa-plus" />
+		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
+			<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
+			<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus" />
+			<Button Command="{Binding Save}" i:Attached.Icon="fa-solid fa-save" />
 		</StackPanel>
 
 		<ListBox ItemsSource="{Binding Layers}" Margin="5,5,5,5">
@@ -23,7 +25,9 @@
 				<DataTemplate>
 					<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
 						<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
-						<Button Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
+						<Button Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
+													CommandParameter="{Binding}"							
+							Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
 						<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
 
 						<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
@@ -43,15 +47,15 @@
 										<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
 											<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
 											<Button Content="Remove" 
+													Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
+													CommandParameter="{Binding}"
 													></Button>
-													<!--Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
-													CommandParameter="{Binding}"-->
 										</StackPanel>
 										<ItemsControl ItemsSource="{Binding PropertyList}">
 											<ItemsControl.ItemTemplate>
 												<DataTemplate>
 													<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
-														<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="100"/>
+														<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
 														<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
 														<TextBlock VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
 													</StackPanel>

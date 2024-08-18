@@ -1,8 +1,10 @@
 ﻿using Avalonia.Interactivity;
 using CommunityToolkit.Mvvm.ComponentModel;
+using DynamicData;
 using Newtonsoft.Json.Linq;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Services.Settings;
+using PngTuberSharp.Views.Helper;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -70,8 +72,12 @@ namespace PngTuberSharp.ViewModels.Helper
             {
                 SetProperty(ref _selectedTrigger, value);
                 UpdatePropertyList();
+                SelectedTriggerView = new TriggerViewModel(value);
             }
         }
+
+        [ObservableProperty]
+        private TriggerViewModel selectedTriggerView;
 
         [ObservableProperty]
         private Type selectedLayer;
@@ -104,8 +110,25 @@ namespace PngTuberSharp.ViewModels.Helper
 
         public void AddNewLayer()
         {
+            if (selectedLayer == null)
+                return;
             var newLayer = (BaseLayer)Activator.CreateInstance(selectedLayer);
-            Layers.Add(new BaseLayerViewModel(newLayer));           
+            Layers.Add(new BaseLayerViewModel(newLayer));
+            LayerSettModel.Layers.Add(newLayer);
+        }
+
+        public void RemoveCommand(BaseLayerViewModel vm)
+        {
+            Layers.Remove(vm);
+            LayerSettModel.Layers.Remove(vm.LayerModel);
+        }
+
+        public void Save()
+        {
+            foreach (var layer in Layers)
+            {
+                layer.Save();
+            }
         }
     }
 }

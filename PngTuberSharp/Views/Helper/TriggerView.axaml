@@ -1,0 +1,40 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngTuberSharp.ViewModels.Helper"
+			 xmlns:sett="clr-namespace:PngTuberSharp.Services.Settings"
+			 x:DataType="vm:TriggerViewModel"
+             x:Class="PngTuberSharp.Views.Helper.TriggerView"
+			 >
+
+	<UserControl.DataTemplates>
+		<DataTemplate DataType="{x:Type sett:AlwaysActive}">
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type sett:HotkeyTrigger}">
+			<StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock VerticalAlignment="Center" Text="Key" Width="150"/>
+					<ComboBox SelectedItem="{Binding VirtualKeyCode, Mode=TwoWay}" Width="200"
+						ItemsSource="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).AllKeys }"></ComboBox>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock VerticalAlignment="Center" Text="Modifier" Width="150"/>
+					<ComboBox SelectedItem="{Binding Modifiers}" Width="200"
+						ItemsSource="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).AllModifiers }"></ComboBox>
+				</StackPanel>
+			</StackPanel>
+		</DataTemplate>
+		<DataTemplate DataType="{x:Type sett:TwitchTrigger}">
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock VerticalAlignment="Center" Text="Redeem" Width="150"/>
+				<TextBox VerticalAlignment="Center" Text="{Binding Redeem}" Width="150"/>
+			</StackPanel>
+		</DataTemplate>
+	</UserControl.DataTemplates>
+	<StackPanel>
+		<ContentControl Content="{Binding Trigger}"/>
+	</StackPanel>
+</UserControl>

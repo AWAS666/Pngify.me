@@ -10,11 +10,11 @@ namespace PngTuberSharp.ViewModels.Helper
 {
     public partial class BaseLayerViewModel : ObservableObject
     {
-        private BaseLayer _layer;
+        public BaseLayer LayerModel { get; }
 
         public BaseLayerViewModel(BaseLayer layer)
         {
-            _layer = layer;
+            LayerModel = layer;
             Name = layer.GetType().Name;
             UpdatePropertyList();
         }
@@ -28,7 +28,7 @@ namespace PngTuberSharp.ViewModels.Helper
         {
             PropertyList.Clear();
             // Use reflection to get properties
-            foreach (var prop in _layer.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            foreach (var prop in LayerModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 // Ignore JSON ignored properties
                 if (Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)))
@@ -37,7 +37,7 @@ namespace PngTuberSharp.ViewModels.Helper
                 var propertyViewModel = new PropertyViewModel
                 {
                     Name = prop.Name,
-                    Value = prop.GetValue(_layer)?.ToString()
+                    Value = prop.GetValue(LayerModel)?.ToString()
                 };
 
                 var unitAttribute = prop.GetCustomAttribute<UnitAttribute>();
@@ -47,6 +47,20 @@ namespace PngTuberSharp.ViewModels.Helper
                 }
 
                 PropertyList.Add(propertyViewModel);
+            }
+        }
+
+        public void Save()
+        {
+            foreach (var propertyViewModel in PropertyList)
+            {
+                var prop = LayerModel.GetType().GetProperty(propertyViewModel.Name, BindingFlags.Public | BindingFlags.Instance);
+
+                if (prop != null)
+                {
+                    var convertedValue = Convert.ChangeType(propertyViewModel.Value, prop.PropertyType);
+                    prop.SetValue(LayerModel, convertedValue);
+                }
             }
         }
     }
