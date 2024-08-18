@@ -8,6 +8,9 @@ namespace PngTuberSharp.ViewModels.Helper
         private string name;      
 
         [ObservableProperty]
-        private string value;       
+        private string value;
+
+        [ObservableProperty]
+        private string unit;
     }
 }

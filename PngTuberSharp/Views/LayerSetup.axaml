@@ -2,43 +2,71 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="800"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
 			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
 			 xmlns:helper="clr-namespace:PngTuberSharp.Views.Helper"
-			  x:DataType="vm:LayerSetupViewModel"
+			 x:DataType="vm:LayerSetupViewModel"
              x:Class="PngTuberSharp.Views.LayerSetup"
 			 >
+	<Design.DataContext>
+		<vm:LayerSetupViewModel/>
+	</Design.DataContext>
 	<StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
 			<TextBlock VerticalAlignment="Center">Always Active Layers:</TextBlock>
 			<Button Command="{Binding AddNewSettings}"  i:Attached.Icon="fa-solid fa-plus" />
 		</StackPanel>
 
-
-
-		<ListBox ItemsSource="{Binding PermaLayers}" Margin="5,5,5,5">
+		<ListBox ItemsSource="{Binding Layers}" Margin="5,5,5,5">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
-					<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,35,200">
+					<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
 						<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
 						<Button Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
+						<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
 
-						<TextBlock VerticalAlignment="Center" Grid.Row="1">Trigger:</TextBlock>
-						<helper:TriggerEditorViewProxy Grid.Row="2" Grid.ColumnSpan="3" LayerSetting="{Binding}" />
+						<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
+							<ComboBox VerticalAlignment="Center"
+									  ItemsSource="{Binding AllLayers}"
+									  DisplayMemberBinding="{Binding Name}"
+									  SelectedItem="{Binding SelectedLayer}"
+									  Width="150"></ComboBox>
+							<Button Command="{Binding AddNewLayer}">AddLayer</Button>
+						</StackPanel>
+
+						<ListBox ItemsSource="{Binding Layers}" Grid.Row="3" Grid.ColumnSpan="3">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<StackPanel>
+										<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
+											<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+											<Button Content="Remove" 
+													></Button>
+													<!--Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
+													CommandParameter="{Binding}"-->
+										</StackPanel>
+										<ItemsControl ItemsSource="{Binding PropertyList}">
+											<ItemsControl.ItemTemplate>
+												<DataTemplate>
+													<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
+														<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="100"/>
+														<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
+														<TextBlock VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
+													</StackPanel>
+												</DataTemplate>
+											</ItemsControl.ItemTemplate>
+										</ItemsControl>
+									</StackPanel>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
 					</Grid>
 				</DataTemplate>
 			</ListBox.ItemTemplate>
 		</ListBox>
 
-
-		<!--<StackPanel Orientation="Horizontal" Margin="5,5,5,5">
-			<TextBlock>Triggered Layers:</TextBlock>
-			<Button  i:Attached.Icon="fa-solid fa-plus" />
-		</StackPanel>
-
-		<StackPanel x:Name="triggeredLayers" Margin="5,5,5,5">
-		</StackPanel>-->
 
 	</StackPanel>
 </UserControl>

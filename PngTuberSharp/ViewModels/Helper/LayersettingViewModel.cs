@@ -1,4 +1,7 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Interactivity;
+using CommunityToolkit.Mvvm.ComponentModel;
+using Newtonsoft.Json.Linq;
+using PngTuberSharp.Layers;
 using PngTuberSharp.Services.Settings;
 using System;
 using System.Collections.ObjectModel;
@@ -8,35 +11,44 @@ using System.Text.Json.Serialization;
 
 namespace PngTuberSharp.ViewModels.Helper
 {
-    public partial class TriggerEditorViewModel : ObservableObject
+    public partial class LayersettingViewModel : ObservableObject
     {
 
-        public TriggerEditorViewModel()
-        {          
+        /// <summary>
+        /// just for preview in designer
+        /// </summary>
+        public LayersettingViewModel() : this(new Layersetting())
+        {
+        }
+
+        public LayersettingViewModel(Layersetting layerSett)
+        {
             TriggerTypes = new ObservableCollection<Type>(Assembly.GetExecutingAssembly()
                                     .GetTypes()
                                     .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(Trigger))));
 
+            AllLayers = new ObservableCollection<Type>(Assembly.GetExecutingAssembly()
+                                    .GetTypes()
+                                    .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(BaseLayer))));
+
+            LayerSettModel = layerSett;
+            SelectedTriggerType = LayerSettModel.Trigger?.GetType();
+            SelectedTrigger = LayerSettModel.Trigger;
+            Name = layerSett.Name;
+            layers = new ObservableCollection<BaseLayerViewModel>(layerSett.Layers.Select(x => new BaseLayerViewModel(x)));
         }
 
-        private Layersetting _layerSetting;
-        public Layersetting LayerSetting
-        {
-            get => _layerSetting;
-            set
-            {
-                SetProperty(ref _layerSetting, value);
-                // Set the initial trigger when the Layersetting changes
-                if (_layerSetting?.Trigger != null)
-                {
-                    SelectedTriggerType = _layerSetting.Trigger?.GetType();
-                    SelectedTrigger = _layerSetting.Trigger;
-                }
-            }
-        }
+        [ObservableProperty]
+        private string name;
+
+        [ObservableProperty]
+        private ObservableCollection<BaseLayerViewModel> layers;
+
+        public Layersetting LayerSettModel { get; }
 
         // List of available trigger types
         public ObservableCollection<Type> TriggerTypes { get; }
+        public ObservableCollection<Type> AllLayers { get; }
 
         private Type _selectedTriggerType;
         public Type SelectedTriggerType
@@ -62,6 +74,9 @@ namespace PngTuberSharp.ViewModels.Helper
         }
 
         [ObservableProperty]
+        private Type selectedLayer;
+
+        [ObservableProperty]
         private ObservableCollection<PropertyViewModel> _propertyList = new ObservableCollection<PropertyViewModel>();
 
         private void UpdatePropertyList()
@@ -84,6 +99,13 @@ namespace PngTuberSharp.ViewModels.Helper
                     PropertyList.Add(propertyViewModel);
                 }
             }
+        }
+
+
+        public void AddNewLayer()
+        {
+            var newLayer = (BaseLayer)Activator.CreateInstance(selectedLayer);
+            Layers.Add(new BaseLayerViewModel(newLayer));           
         }
     }
 }

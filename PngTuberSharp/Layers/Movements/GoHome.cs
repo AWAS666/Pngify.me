@@ -1,14 +1,18 @@
-﻿using PngTuberSharp.Layers.Movements;
+﻿using PngTuberSharp.Layers.Helper;
+using PngTuberSharp.Layers.Movements;
 using System;
 
 namespace PngTuberSharp.Layers
 {
     public class GoHome : MovementBaseLayer
     {
-
+        [Unit("pixels/s")]
         public float Speed { get; set; } = 400;
+
+        [Unit("seconds")]
         public float TotalTime { get; set; } = 8;
-        public bool Reverse { get; private set; }
+
+        private bool Reverse;
 
         public GoHome()
         {

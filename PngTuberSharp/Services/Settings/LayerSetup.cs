@@ -5,11 +5,10 @@ using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.Services.Twitch;
 using System;
 using System.Collections.Generic;
-using System.Text.Json.Serialization;
 
 namespace PngTuberSharp.Services.Settings
 {
-    public class LayerSettings
+    public class LayerSetup
     {
         public List<Layersetting> Layers { get; set; } = new()
         {
@@ -74,34 +73,5 @@ namespace PngTuberSharp.Services.Settings
         }
     }
 
-    public class AlwaysActive : Trigger
-    {
 
-    }
-
-    public class HotkeyTrigger : Trigger
-    {
-        public VirtualKeyCode VirtualKeyCode { get; set; }
-        public Modifiers Modifiers { get; set; }
-    }
-
-    public class TwitchTrigger : Trigger
-    {
-        public string Redeem { get; set; }
-
-        public void Triggered(object? sender, string e)
-        {
-            if (string.Compare(Redeem, e, StringComparison.OrdinalIgnoreCase) == 0)
-            {
-                Parent.AddLayers();
-            }
-        }
-    }
-
-    public abstract class Trigger
-    {
-        [JsonIgnore]
-        public Layersetting Parent { get; internal set; }
-
-    }
 }

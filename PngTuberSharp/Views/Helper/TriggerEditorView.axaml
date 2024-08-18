@@ -5,24 +5,25 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
 			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels.Helper"
-			  x:DataType="vm:TriggerEditorViewModel"
-             x:Class="PngTuberSharp.Views.Helper.TriggerEditorView"
+			  x:DataType="vm:LayersettingViewModel"
+             x:Class="PngTuberSharp.Views.Helper.TriggerEditorView"			 
 			 >
-	<Grid>
-		<Grid.ColumnDefinitions>
-			<ColumnDefinition Width="200"/>
-			<ColumnDefinition Width="*"/>
-		</Grid.ColumnDefinitions>
+	<Design.DataContext>
+		<vm:LayersettingViewModel/>
+	</Design.DataContext>
+	<Grid ColumnDefinitions="200,*" RowDefinitions="35,*">
+
+		<TextBlock VerticalAlignment="Center" Grid.Row="0">Trigger:</TextBlock>
 		
 		<!-- Left side: ComboBox for class selection -->
-		<ComboBox Grid.Column="0"
+		<ComboBox Grid.Column="0" Grid.Row="1"
                   ItemsSource="{Binding TriggerTypes}"
                   SelectedItem="{Binding SelectedTriggerType}"
 				  DisplayMemberBinding="{Binding Name}"
                   />
 
 		<!-- Right side: List of properties for the selected class -->
-		<StackPanel Grid.Column="1">
+		<StackPanel Grid.Column="1" Grid.Row="1">
 			<ItemsControl ItemsSource="{Binding PropertyList}">
 				<ItemsControl.ItemTemplate>
 					<DataTemplate>

@@ -1,11 +1,6 @@
-﻿using Avalonia.Interactivity;
-using Avalonia.Media.Imaging;
-using CommunityToolkit.Mvvm.ComponentModel;
-using PngTuberSharp.Layers;
-using PngTuberSharp.Layers.Microphone;
-using PngTuberSharp.Services;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Services.Settings;
-using ReactiveUI;
+using PngTuberSharp.ViewModels.Helper;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,20 +9,29 @@ namespace PngTuberSharp.ViewModels;
 
 public partial class LayerSetupViewModel : ObservableObject
 {
-    public ObservableCollection<Layersetting> PermaLayers { get; set; } =
-        new ObservableCollection<Layersetting>(SettingsManager.Current.LayerSetup.Layers.FindAll(x => x.Trigger is AlwaysActive));
-    public ObservableCollection<Layersetting> TriggeredLayers { get; set; } =
-        new ObservableCollection<Layersetting>(SettingsManager.Current.LayerSetup.Layers.FindAll(x => !(x.Trigger is AlwaysActive)));
+
+    public LayerSetupViewModel() : this(new List<Layersetting>())
+    { }
+    public LayerSetupViewModel(List<Layersetting> layers)
+    {
+        _layers = layers;
+        Layers = new ObservableCollection<LayersettingViewModel>(layers.Select(x => new LayersettingViewModel(x)));
+    }
+
+    private List<Layersetting> _layers;
+
+    public ObservableCollection<LayersettingViewModel> Layers { get; set; }
 
     public void AddNewSettings()
     {
         var set = new Layersetting();
-        PermaLayers.Add(set);
+        Layers.Add(new LayersettingViewModel(set));
+        _layers.Add(set);
     }
 
-    public void Remove(object sender, RoutedEventArgs e)
+    public void RemoveCommand(LayersettingViewModel vm)
     {
+        Layers.Remove(vm);
+        _layers.Remove(vm.LayerSettModel);
     }
-
-    public string Name { get; set; } = "test";
 }
