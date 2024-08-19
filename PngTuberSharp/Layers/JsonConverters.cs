@@ -39,7 +39,7 @@ namespace PngTuberSharp.Layers
             writer.WriteStartObject();
 
             // Write type discriminator
-            writer.WriteString("$type", actualType.AssemblyQualifiedName);
+            writer.WriteString("$type", actualType.Namespace + "." + actualType.Name);
 
             // Serialize all properties of the actual derived type, including inherited properties
             foreach (PropertyInfo property in actualType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
@@ -88,7 +88,7 @@ namespace PngTuberSharp.Layers
             writer.WriteStartObject();
 
             // Write type discriminator
-            writer.WriteString("$type", actualType.AssemblyQualifiedName);
+            writer.WriteString("$type", actualType.Namespace + "." + actualType.Name);
 
             // Serialize all properties of the actual derived type, including inherited properties
             foreach (PropertyInfo property in actualType.GetProperties(BindingFlags.Public | BindingFlags.Instance))

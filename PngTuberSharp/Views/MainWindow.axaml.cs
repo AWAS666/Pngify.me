@@ -1,6 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Data;
 using PngTuberSharp.Services;
+using System.Reflection;
 
 namespace PngTuberSharp.Views;
 
@@ -18,6 +19,8 @@ public partial class MainWindow : Window
         };
 
         grid.Bind(Grid.BackgroundProperty, binding);
+
+        this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}-alpha";
 
     }
 
