@@ -1,5 +1,7 @@
-﻿using GlobalHotKeys;
+﻿using DynamicData;
+using GlobalHotKeys;
 using GlobalHotKeys.Native.Types;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -22,6 +24,7 @@ namespace PngTuberSharp.Services.Hotkey
         private static void HotkeyTriggered(HotKey hotKey)
         {
             Debug.WriteLine($"HotKey Pressed: Id = {hotKey.Id}, Key = {hotKey.Key}, Modifiers = {hotKey.Modifiers}");
+            Log.Debug($"HotKey Pressed: Id = {hotKey.Id}, Key = {hotKey.Key}, Modifiers = {hotKey.Modifiers}");
             if (callBacks.TryGetValue((hotKey.Key, hotKey.Modifiers), out var actions))
             {
                 foreach (var action in actions)
@@ -48,6 +51,17 @@ namespace PngTuberSharp.Services.Hotkey
             var hotKeySubscription = hotKeyManager.Register(virtualKeyCode, modifier);
             subscriptions.Add(hotKeySubscription);
             callBacks.Add((virtualKeyCode, modifier), [callback]);
+        }
+
+        public static void RemoveCallbacks(List<Action> actions)
+        {
+            foreach (var item in callBacks)
+            {                
+                foreach (var action in actions)
+                {
+                    item.Value.Remove(action);
+                }
+            }
         }
     }
 }

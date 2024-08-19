@@ -31,7 +31,6 @@ namespace PngTuberSharp.Services.Twitch
             "channel:read:hype_train",
         };
         private TwitchAuth? auth;
-        private Timer refreshTimer;
 
         public TwitchApi()
         {

@@ -1,6 +1,8 @@
-﻿using PngTuberSharp.Services;
+﻿using PngTuberSharp.Layers.Microphone;
+using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.Services.Twitch;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -20,6 +22,8 @@ namespace PngTuberSharp.Layers
 
         public static EventHandler<LayerValues> ValueUpdate;
         public static EventHandler<BaseLayer> NewLayer;
+
+        public static MicroPhoneStateLayer MicroPhoneStateLayer { get; private set; } = new MicroPhoneStateLayer();
 
         static LayerManager()
         {
@@ -76,12 +80,13 @@ namespace PngTuberSharp.Layers
                 }
             }
             var layert = new LayerValues();
+            MicroPhoneStateLayer.Update(dt, ref layert);
             foreach (BaseLayer layer in Layers)
             {
                 layer.OnCalculateParameters(dt, ref layert);
             }
             ValueUpdate?.Invoke(null, layert);
-            //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
+            Log.Debug($"Position code took: {watch.ElapsedMilliseconds} ms");
         }
     }
 }

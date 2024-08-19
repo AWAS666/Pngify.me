@@ -3,7 +3,7 @@ using PngTuberSharp.Services;
 
 namespace PngTuberSharp.Layers.Microphone
 {
-    public class MicroPhoneBlink : PermaLayer
+    public class MicroPhoneBlink
     {
         private Bitmap openImage;
         private Bitmap openBlinkImage;
@@ -18,11 +18,10 @@ namespace PngTuberSharp.Layers.Microphone
         public string? ClosedBlink { get; set; } = null;
         public float Interval { get; set; } = 2f;
         public float Time { get; set; } = 0.25f;
-
+        public float CurrentTime { get; private set; }
 
         public MicroPhoneBlink()
         {
-            Unique = true;
             openImage = new Bitmap(Open);
             openBlinkImage = new Bitmap(OpenBlink ?? Open);
             closedImage = new Bitmap(Closed);
@@ -31,8 +30,9 @@ namespace PngTuberSharp.Layers.Microphone
             transTime = Interval;
         }
 
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
+        public void OnCalculateParameters(float dt, ref LayerValues values)
         {
+            CurrentTime += dt;
             if (!blinking && CurrentTime > transTime)
             {
                 transTime += Interval;

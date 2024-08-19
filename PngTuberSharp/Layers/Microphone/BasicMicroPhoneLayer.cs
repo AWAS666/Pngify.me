@@ -4,15 +4,10 @@ using System;
 
 namespace PngTuberSharp.Layers.Microphone
 {
-    public class BasicMicroPhoneLayer : PermaLayer
+    public class BasicMicroPhoneLayer : MicroPhoneLayer
     {
         private Bitmap openImage;
-        private Bitmap closedImage;
-
-        public BasicMicroPhoneLayer()
-        {
-            Unique = true;
-        }
+        private Bitmap closedImage;      
 
         private void RefreshImage(object? sender = null, EventArgs e = null)
         {
@@ -20,7 +15,7 @@ namespace PngTuberSharp.Layers.Microphone
             closedImage = new Bitmap(SettingsManager.Current.Avatar.Closed);
         }
 
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
+        public override void Update(float dt, ref LayerValues values)
         {
             if (MicrophoneService.Talking)
                 values.Image = openImage;
@@ -28,7 +23,7 @@ namespace PngTuberSharp.Layers.Microphone
                 values.Image = closedImage;
         }
 
-        public override void OnEnter()
+        public override void Enter()
         {
             SettingsManager.Current.Avatar.Refresh += RefreshImage;
             RefreshImage();

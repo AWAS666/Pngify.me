@@ -1,0 +1,100 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
+			  xmlns:vmh="clr-namespace:PngTuberSharp.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngTuberSharp.Views.Helper"
+			 x:DataType="vm:MicroPhoneSetupViewModel"
+             x:Class="PngTuberSharp.Views.MicStateSetup"
+			   xmlns:int="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+				xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 >
+	<Design.DataContext>
+		<vm:MicroPhoneSetupViewModel/>
+	</Design.DataContext>
+	<StackPanel>
+		<TextBlock FontSize="24">Microphone State Setup</TextBlock>
+		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
+			<TextBlock VerticalAlignment="Center">States</TextBlock>
+			<Button Command="{Binding Add}" i:Attached.Icon="fa-solid fa-plus" />
+			<Button Command="{Binding Apply}" i:Attached.Icon="fa-solid fa-save" />
+		</StackPanel>
+
+		<ListBox ItemsSource="{Binding States}" Margin="5,5,5,5">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
+							<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
+							<Button 
+								Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
+								CommandParameter="{Binding}"
+								Margin="5,0,0,0" HorizontalAlignment="Left"
+								i:Attached.Icon="fa-solid fa-minus" />
+
+							<Button
+								Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).SwitchState}"
+								CommandParameter="{Binding}"
+								Margin="5,0,0,0" HorizontalAlignment="Left"
+								Content="Activate" />
+							<TextBox Name="Hotkeybox"													
+									 Text="{Binding Hotkey}"
+									 Margin="25,0,0,0" Watermark="Hotkey" Width="150">
+								<int:Interaction.Behaviors>
+									<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="Hotkeybox">
+										<ia:InvokeCommandAction Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
+									</ia:EventTriggerBehavior>
+								</int:Interaction.Behaviors>
+							</TextBox>
+						</StackPanel>
+
+						<Grid ColumnDefinitions="100,200,100,200">
+							<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
+							<Button Command="{Binding LoadFile}" Grid.Column="1"
+									CommandParameter="{Binding State.Open}">
+								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
+									   Source="{Binding State.Open.Bitmap}"></Image>
+							</Button>
+
+							<TextBlock VerticalAlignment="Center" Grid.Column="2">Closed Mouth</TextBlock>
+							<Button Command="{Binding LoadFile}" Grid.Column="3"
+									CommandParameter="{Binding State.Closed}">
+								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
+									   Source="{Binding State.Closed.Bitmap}"></Image>
+							</Button>
+						</Grid>
+
+						<Grid ColumnDefinitions="100,200,100,200">
+							<StackPanel VerticalAlignment="Center">
+								<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
+							</StackPanel>
+							<Button Command="{Binding LoadFile}" Grid.Column="1"
+									CommandParameter="{Binding State.OpenBlink}">
+								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
+									   Source="{Binding State.OpenBlink.Bitmap}"></Image>
+							</Button>
+
+							<StackPanel VerticalAlignment="Center" Grid.Column="2">
+								<TextBlock VerticalAlignment="Center">Closed Mouth</TextBlock>
+								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
+							</StackPanel>
+							<Button Command="{Binding LoadFile}" Grid.Column="3"
+									CommandParameter="{Binding State.ClosedBlink}">
+								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
+									   Source="{Binding State.ClosedBlink.Bitmap}"></Image>
+							</Button>
+						</Grid>	
+
+
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+
+
+	</StackPanel>
+</UserControl>

@@ -110,9 +110,9 @@ namespace PngTuberSharp.ViewModels.Helper
 
         public void AddNewLayer()
         {
-            if (selectedLayer == null)
+            if (SelectedLayer == null)
                 return;
-            var newLayer = (BaseLayer)Activator.CreateInstance(selectedLayer);
+            var newLayer = (BaseLayer)Activator.CreateInstance(SelectedLayer);
             Layers.Add(new BaseLayerViewModel(newLayer));
             LayerSettModel.Layers.Add(newLayer);
         }

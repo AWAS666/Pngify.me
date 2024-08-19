@@ -14,12 +14,6 @@ namespace PngTuberSharp.Services.Settings
         {
             new Layersetting()
             {
-                Name = "Default Mic",
-                Layers = [new BasicMicroPhoneLayer()],
-                Trigger = new AlwaysActive()
-            },
-            new Layersetting()
-            {
                 Name = "Rotate",
                 Layers = [new RotateByRel()],
                 Trigger = new HotkeyTrigger() { VirtualKeyCode = VirtualKeyCode.VK_F11 },

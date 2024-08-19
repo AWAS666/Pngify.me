@@ -26,8 +26,8 @@
 			<TabItem Header="LayerSetup" FontSize="12" Width="125">
 				<views:LayerSetup />
 			</TabItem>
-			<TabItem Header="ChangeAvatar" FontSize="12" Width="125">
-				<views:ChangeAvatar/>
+			<TabItem Header="Avatar States" FontSize="12" Width="125">
+				<views:MicStateSetup/>
 			</TabItem>
 			<TabItem Header="GeneralSettings" FontSize="12" Width="125">
 				<views:GeneralSettings />
