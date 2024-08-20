@@ -13,8 +13,8 @@ namespace PngTuberSharp.Services.Settings
     {
         public int ThreshHold { get; set; } = 50;
         public int Device { get; set; } = 1;
-        public float BlinkInterval { get; set; } = 2f;
-        public float BlinkTime { get; set; } = 0.25f;
+        public double BlinkInterval { get; set; } = 2f;
+        public double BlinkTime { get; set; } = 0.25f;
         public List<MicroPhoneState> States { get; set; } = new List<MicroPhoneState>()
         {
             new MicroPhoneState()

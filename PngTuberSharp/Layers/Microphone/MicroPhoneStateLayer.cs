@@ -35,12 +35,12 @@ namespace PngTuberSharp.Layers.Microphone
             CurrentTime += dt;
             if (!blinking && CurrentTime > transTime)
             {
-                transTime += SettingsManager.Current.Microphone.BlinkTime;
+                transTime += (float)SettingsManager.Current.Microphone.BlinkTime;
                 blinking = true;
             }
             else if (blinking && CurrentTime > transTime)
             {
-                transTime += SettingsManager.Current.Microphone.BlinkInterval;
+                transTime += (float)SettingsManager.Current.Microphone.BlinkInterval;
                 blinking = false;
             }
 

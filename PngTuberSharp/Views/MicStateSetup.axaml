@@ -7,6 +7,7 @@
 			  xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
 			  xmlns:vmh="clr-namespace:PngTuberSharp.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngTuberSharp.Views.Helper"
+			 xmlns:conv="clr-namespace:PngTuberSharp.Views.Converter"
 			 x:DataType="vm:MicroPhoneSetupViewModel"
              x:Class="PngTuberSharp.Views.MicStateSetup"
 			   xmlns:int="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
@@ -15,6 +16,9 @@
 	<Design.DataContext>
 		<vm:MicroPhoneSetupViewModel/>
 	</Design.DataContext>
+	<UserControl.Resources>
+		<conv:FloatConverter x:Key="FloatConverter" />
+	</UserControl.Resources>
 	<StackPanel>
 		<TextBlock FontSize="24">Microphone State Setup</TextBlock>
 		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
@@ -25,11 +29,11 @@
 
 		<Grid ColumnDefinitions="150,100,100" RowDefinitions="30,30" Margin="5,5,5,5">
 			<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
-			<TextBox Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}"></TextBox>
+			<helper:NumericTextBox Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}" />
 			<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 
 			<TextBlock Grid.Row="1" VerticalAlignment="Center">Blink Time</TextBlock>
-			<TextBox Grid.Row="1" Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkTime}"></TextBox>
+			<helper:NumericTextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Settings.BlinkTime}" Watermark="Time"/>
 			<TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 		</Grid>
 
@@ -39,7 +43,7 @@
 					<StackPanel>
 						<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
 							<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
-							<Button 
+							<Button
 								Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
 								CommandParameter="{Binding}"
 								Margin="5,0,0,0" HorizontalAlignment="Left"
@@ -50,7 +54,7 @@
 								CommandParameter="{Binding}"
 								Margin="5,0,0,0" HorizontalAlignment="Left"
 								Content="Activate" />
-							<TextBox Name="Hotkeybox"													
+							<TextBox Name="Hotkeybox"
 									 Text="{Binding Hotkey}"
 									 Margin="25,0,0,0" Watermark="Hotkey" Width="150">
 								<int:Interaction.Behaviors>
@@ -68,7 +72,7 @@
 								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
 									   Source="{Binding State.Open.Bitmap}"></Image>
 							</Button>
-							<Button Command="{Binding Delete}" CommandParameter="{Binding State.Open}" 
+							<Button Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
 									Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 
 							<TextBlock VerticalAlignment="Center" Grid.Column="3">Closed Mouth</TextBlock>
@@ -105,7 +109,7 @@
 							</Button>
 							<Button Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
 									Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
-						</Grid>	
+						</Grid>
 
 
 					</StackPanel>
