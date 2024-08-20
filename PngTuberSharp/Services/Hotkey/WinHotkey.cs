@@ -5,14 +5,16 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 
 namespace PngTuberSharp.Services.Hotkey
 {
     public static class WinHotkey
     {
         private static HotKeyManager hotKeyManager;
-        private static List<IRegistration> subscriptions = new List<IRegistration>();
+        //private static List<IRegistration> subscriptions = new List<IRegistration>();
         private static new Dictionary<(VirtualKeyCode, Modifiers), List<Action>> callBacks = new();
+        private static new Dictionary<(VirtualKeyCode, Modifiers), IRegistration> subscriptions = new ();
 
         public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
         {
@@ -37,7 +39,7 @@ namespace PngTuberSharp.Services.Hotkey
         private static void Desktop_Exit(object? sender, Avalonia.Controls.ApplicationLifetimes.ControlledApplicationLifetimeExitEventArgs e)
         {
             hotKeyManager.Dispose();
-            subscriptions.ForEach(s => s.Dispose());
+            subscriptions.Values.ToList().ForEach(s => s.Dispose());
         }
 
         public static void AddHotkey(VirtualKeyCode virtualKeyCode, Modifiers modifier, Action callback)
@@ -49,17 +51,25 @@ namespace PngTuberSharp.Services.Hotkey
                 return;
             }
             var hotKeySubscription = hotKeyManager.Register(virtualKeyCode, modifier);
-            subscriptions.Add(hotKeySubscription);
+            subscriptions.Add((virtualKeyCode, modifier), hotKeySubscription);
             callBacks.Add((virtualKeyCode, modifier), [callback]);
         }
 
         public static void RemoveCallbacks(List<Action> actions)
         {
-            foreach (var item in callBacks)
-            {                
+            foreach (var item in callBacks.ToList())
+            {
                 foreach (var action in actions)
                 {
                     item.Value.Remove(action);
+                }
+                if (item.Value.Count == 0)
+                {
+                    callBacks.Remove(item.Key);
+
+                    // dispose subscribtion objects
+                    subscriptions[item.Key].Dispose();
+                    subscriptions.Remove(item.Key);
                 }
             }
         }
