@@ -1,6 +1,7 @@
 ﻿using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
+using PngTuberSharp.Services.ThrowingSystem;
 using PngTuberSharp.Services.Twitch;
 using Serilog;
 using System;
@@ -24,6 +25,7 @@ namespace PngTuberSharp.Layers
         public static EventHandler<BaseLayer> NewLayer;
 
         public static MicroPhoneStateLayer MicroPhoneStateLayer { get; private set; } = new MicroPhoneStateLayer();
+        public static ThrowingSystem ThrowingSystem { get; private set; } = new ThrowingSystem();
 
         static LayerManager()
         {
@@ -74,6 +76,10 @@ namespace PngTuberSharp.Layers
             {
                 layer.OnCalculateParameters(dt, ref layert);
             }
+
+            ThrowingSystem.SwapImage(layert.Image);
+            ThrowingSystem.Update(dt, ref layert);
+
             ValueUpdate?.Invoke(null, layert);
             Log.Debug($"Position code took: {watch.ElapsedMilliseconds} ms");
         }        

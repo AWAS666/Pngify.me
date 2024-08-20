@@ -4,6 +4,8 @@ using PngTuberSharp.Layers;
 using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
+using PngTuberSharp.ViewModels.Helper;
+using System.Collections.ObjectModel;
 
 namespace PngTuberSharp.ViewModels;
 
@@ -31,6 +33,8 @@ public partial class AvatarViewModel : ViewModelBase
     private Bitmap image = ImageSetting.PlaceHolder;
 
     private LayerValues layerValues = new();
+
+    private ObservableCollection<ImageViewModel> imageViewModels = new();
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
