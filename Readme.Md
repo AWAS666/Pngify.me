@@ -7,11 +7,11 @@ Feel free to suggest features and submit code yourself
 ## Todo Basics
 - [x] Basic functionality, showing two different Pngs depending if speaking or not
 - [x] Save config
-- [ ] Blinking images in both states
-- [ ] State transition images (mouth opening/mouth closing) ?
-- [ ] Switch between different png setups (states) using hotkeys
+- [x] Blinking images in both states
+- [x] State transition images (mouth opening/mouth closing) ?
+- [x] Switch between different png setups (states) using hotkeys
 - [ ] Multiple profiles
-- [ ] Effect editor, allow layering of different effects and custom setup
+- [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 
 ## Todo Advanced
@@ -19,14 +19,14 @@ Feel free to suggest features and submit code yourself
 	- [ ] Ko-Fi
 	- [ ] Steam
 - [ ] Spout integration
-- [ ] Twitch integration
+- [x] Twitch integration
 - [ ] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
-- [ ] full Twitch integration
+- [x] full Twitch integration
 - [ ] Chatgpt/other llm 
 - [ ] TTS like Elevenlabs/Openai/local
 - [ ] STT to talk with your TTS pet

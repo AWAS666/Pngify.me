@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
+			   xmlns:gif="clr-namespace:Avalonia.Gif;assembly=Avalonia.Gif"
 			  x:DataType="vm:AvatarViewModel"
              x:Class="PngTuberSharp.Views.AvatarView">
 	<Grid>
@@ -23,6 +24,9 @@
 				<Binding Path="Opacity" />
 			</Grid.Opacity>
 			<Image Source="{Binding Image}" Name="image"></Image>
+
+			<!--<gif:GifImage Grid.Column="1" SourceStream="{Binding Image}"
+					 StretchDirection="Both" />-->
 		</Grid>
 	</Grid>
 </UserControl>

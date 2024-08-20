@@ -46,7 +46,7 @@ namespace PngTuberSharp.Services.Settings
 
     public partial class ImageSetting : ObservableObject
     {
-        static Bitmap PlaceHolder = new Bitmap(AssetLoader.Open(new Uri("avares://PngTuberSharp/Assets/placeholder.png")));
+        public static Bitmap PlaceHolder = new Bitmap(AssetLoader.Open(new Uri("avares://PngTuberSharp/Assets/placeholder.png")));
 
         private Bitmap bitmap = PlaceHolder;
 

@@ -18,5 +18,5 @@
 	- [x] organize all the menus into a single tab menu
 - [x] settings not shown all the time
 - [x] hotkeys (https://github.com/8/GlobalHotKeys)
-	- [ ] win hotkey
-- [ ] twitch
+	- [x] win hotkey
+- [x] twitch

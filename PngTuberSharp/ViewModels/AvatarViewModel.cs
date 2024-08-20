@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
+using PngTuberSharp.Services.Settings;
 
 namespace PngTuberSharp.ViewModels;
 
@@ -27,13 +28,13 @@ public partial class AvatarViewModel : ViewModelBase
     private double opacity;
 
     [ObservableProperty]
-    private Bitmap image;
+    private Bitmap image = ImageSetting.PlaceHolder;
 
     private LayerValues layerValues = new();
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
-        SettingsManager.Current.LayerSetup.ApplySettings();        
+        SettingsManager.Current.LayerSetup.ApplySettings();
     }
 
     private void UpdatePosition(object? sender, LayerValues e)

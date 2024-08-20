@@ -55,6 +55,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Avalonia.GIF\Avalonia.Gif\Avalonia.Gif.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <AvaloniaXaml Update="Views\LayerSetup.axaml">
       <SubType>Designer</SubType>
     </AvaloniaXaml>
