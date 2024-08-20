@@ -18,7 +18,7 @@
 		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 			<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
 			<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus" />
-			<Button Command="{Binding Save}" i:Attached.Icon="fa-solid fa-save" />
+			<Button Command="{Binding Save}" Content="Apply and Save" />
 		</StackPanel>
 
 		<ListBox ItemsSource="{Binding Layers}" Margin="5,5,5,5">

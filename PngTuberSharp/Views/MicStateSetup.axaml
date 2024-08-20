@@ -24,7 +24,7 @@
 		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 			<TextBlock VerticalAlignment="Center">States</TextBlock>
 			<Button Command="{Binding Add}" i:Attached.Icon="fa-solid fa-plus" />
-			<Button Command="{Binding Apply}" i:Attached.Icon="fa-solid fa-save" />
+			<Button Command="{Binding Apply}" Content="Apply and Save" />
 		</StackPanel>
 
 		<Grid ColumnDefinitions="150,100,100" RowDefinitions="30,30" Margin="5,5,5,5">

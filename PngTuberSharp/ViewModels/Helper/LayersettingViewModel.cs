@@ -34,7 +34,7 @@ namespace PngTuberSharp.ViewModels.Helper
                                     .Where(t => t.IsClass && !t.IsAbstract && t.IsSubclassOf(typeof(BaseLayer))));
 
             LayerSettModel = layerSett;
-            SelectedTriggerType = LayerSettModel.Trigger?.GetType();
+            _selectedTriggerType = LayerSettModel.Trigger?.GetType();
             SelectedTrigger = LayerSettModel.Trigger;
             Name = layerSett.Name;
             layers = new ObservableCollection<BaseLayerViewModel>(layerSett.Layers.Select(x => new BaseLayerViewModel(x)));
@@ -72,6 +72,7 @@ namespace PngTuberSharp.ViewModels.Helper
             {
                 SetProperty(ref _selectedTrigger, value);
                 UpdatePropertyList();
+                LayerSettModel.Trigger = value;
                 SelectedTriggerView = new TriggerViewModel(value);
             }
         }

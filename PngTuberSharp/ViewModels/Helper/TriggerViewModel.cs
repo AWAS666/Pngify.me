@@ -1,15 +1,10 @@
 ﻿using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using GlobalHotKeys.Native.Types;
-using PngTuberSharp.Layers;
 using PngTuberSharp.Services.Settings;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PngTuberSharp.ViewModels.Helper
 {
@@ -23,6 +18,17 @@ namespace PngTuberSharp.ViewModels.Helper
 
         [ObservableProperty]
         private ObservableCollection<Modifiers> allModifiers;
+
+        private string redeem;
+
+        public string Redeem
+        {
+            get => redeem; set
+            {
+                ((TwitchTrigger)trigger).Redeem = value;
+                SetProperty(ref redeem, value);
+            }
+        }
 
         private string hotkey;
 
@@ -48,10 +54,20 @@ namespace PngTuberSharp.ViewModels.Helper
         public TriggerViewModel(Trigger trigger)
         {
             Trigger = trigger;
-
-            AllKeys = new ObservableCollection<VirtualKeyCode>(Enum.GetValues(typeof(VirtualKeyCode)).Cast<VirtualKeyCode>());
-            AllModifiers = new ObservableCollection<Modifiers>(Enum.GetValues(typeof(Modifiers)).Cast<Modifiers>());
-            AllModifiers.Insert(0, 0);
+            switch (trigger)
+            {
+                case TwitchTrigger twitch:
+                    Redeem = twitch.Redeem;
+                    break;
+                case HotkeyTrigger hotkey:
+                    AllKeys = new ObservableCollection<VirtualKeyCode>(Enum.GetValues(typeof(VirtualKeyCode)).Cast<VirtualKeyCode>());
+                    AllModifiers = new ObservableCollection<Modifiers>(Enum.GetValues(typeof(Modifiers)).Cast<Modifiers>());
+                    AllModifiers.Insert(0, 0);
+                    SetHotkey();
+                    break;
+                default:
+                    break;
+            }
         }
 
 

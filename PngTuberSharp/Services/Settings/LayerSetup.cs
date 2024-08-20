@@ -5,11 +5,14 @@ using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.Services.Twitch;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PngTuberSharp.Services.Settings
 {
     public class LayerSetup
     {
+        private List<Action> callbacks = new();
+
         public List<Layersetting> Layers { get; set; } = new()
         {
             new Layersetting()
@@ -22,6 +25,7 @@ namespace PngTuberSharp.Services.Settings
 
         public void ApplySettings()
         {
+            CleanUp();
             foreach (var item in Layers)
             {
                 switch (item.Trigger)
@@ -30,15 +34,27 @@ namespace PngTuberSharp.Services.Settings
                         item.AddLayers();
                         break;
                     case HotkeyTrigger hotKey:
-                        WinHotkey.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, item.AddLayers);
+                        var callback = () => item.AddLayers();
+                        WinHotkey.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
+                        callbacks.Add(callback);
                         break;
-
                     case TwitchTrigger redeem:
                         TwitchEventSocket.RedeemUsed += redeem.Triggered;
                         break;
                     default:
                         break;
                 }
+            }
+        }
+
+        public void CleanUp()
+        {
+            WinHotkey.RemoveCallbacks(callbacks);
+            callbacks.Clear();
+
+            foreach (var item in Layers.Where(x => x.Trigger is TwitchTrigger))
+            {
+                TwitchEventSocket.RedeemUsed -= ((TwitchTrigger)item.Trigger).Triggered;
             }
         }
     }
@@ -63,6 +79,18 @@ namespace PngTuberSharp.Services.Settings
             foreach (var layer in Layers)
             {
                 LayerManager.AddLayer(layer.Clone());
+            }
+        }
+
+        public void Cleanup()
+        {
+            switch (Trigger)
+            {
+                case TwitchTrigger redeem:
+                    TwitchEventSocket.RedeemUsed -= redeem.Triggered;
+                    break;
+                default:
+                    break;
             }
         }
     }

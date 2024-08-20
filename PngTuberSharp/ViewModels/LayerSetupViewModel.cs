@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngTuberSharp.Layers;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.ViewModels.Helper;
@@ -33,6 +34,7 @@ public partial class LayerSetupViewModel : ObservableObject
     public void RemoveCommand(LayersettingViewModel vm)
     {
         Layers.Remove(vm);
+        vm.LayerSettModel.Cleanup();
         _layers.Remove(vm.LayerSettModel);
     }
 
@@ -43,5 +45,6 @@ public partial class LayerSetupViewModel : ObservableObject
             layer.Save();
         }
         SettingsManager.Save();
+        SettingsManager.Current.LayerSetup.ApplySettings();
     }
 }

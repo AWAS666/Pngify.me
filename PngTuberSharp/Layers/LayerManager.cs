@@ -28,18 +28,7 @@ namespace PngTuberSharp.Layers
         static LayerManager()
         {
             tickLoop = Task.Run(TickLoop);
-            TwitchEventSocket.RedeemUsed += TwitchRedeem;
-        }
-
-        private static void TwitchRedeem(object? sender, string e)
-        {
-            var layers = SettingsManager.Current.LayerSetup.Layers.Where(x => x.Trigger is TwitchTrigger);
-            foreach (var layer in layers)
-            {
-                // todo clone layer here
-                //AddLayer(layer.Layer.Clone());
-            }
-        }
+        }      
 
         private static async Task TickLoop()
         {
@@ -87,6 +76,6 @@ namespace PngTuberSharp.Layers
             }
             ValueUpdate?.Invoke(null, layert);
             Log.Debug($"Position code took: {watch.ElapsedMilliseconds} ms");
-        }
+        }        
     }
 }
