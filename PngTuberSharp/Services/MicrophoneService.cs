@@ -10,6 +10,8 @@ namespace PngTuberSharp.Services
     public static class MicrophoneService
     {
         private static WaveInEvent _waveIn;
+        private static float last = 0f;
+
         public static MicroPhoneSettings Settings { get; private set; } = SettingsManager.Current.Microphone;
         public static bool Talking { get; private set; }
 
@@ -35,9 +37,16 @@ namespace PngTuberSharp.Services
                 // is this the max value?
                 if (sample32 > max) max = sample32;
             }
-            Talking = max * 100f > Settings.ThreshHold;
-            LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)(max * 100f)));
-            //Debug.WriteLine(max * 100f);
+            float current = Current(max);
+            Talking = current > Settings.ThreshHold;
+            LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
+        }
+
+        private static float Current(float max)
+        {
+            float current = (last + max) / 2;
+            last = current;
+            return current * 100;
         }
 
         public static void Start()
