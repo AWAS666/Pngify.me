@@ -8,6 +8,9 @@
 			 xmlns:sett="clr-namespace:PngTuberSharp.Services.Settings"
 			 x:DataType="vm:TriggerViewModel"
              x:Class="PngTuberSharp.Views.Helper.TriggerView"
+			 xmlns:int="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
+				xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
+			 
 			 >
 
 	<UserControl.DataTemplates>
@@ -15,7 +18,7 @@
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:HotkeyTrigger}">
 			<StackPanel>
-				<StackPanel Orientation="Horizontal" Margin="5">
+				<!--<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock VerticalAlignment="Center" Text="Key" Width="75"/>
 					<ComboBox SelectedItem="{Binding VirtualKeyCode, Mode=TwoWay}" Width="200"
 						ItemsSource="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).AllKeys }"></ComboBox>
@@ -24,7 +27,23 @@
 					<TextBlock VerticalAlignment="Center" Text="Modifier" Width="75"/>
 					<ComboBox SelectedItem="{Binding Modifiers}" Width="200"
 						ItemsSource="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).AllModifiers }"></ComboBox>
+				</StackPanel>-->
+
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock VerticalAlignment="Center" Text="Hotkey" Width="75"/>
+					<TextBox HorizontalAlignment="Left" Name="Hotkeybox"
+						Text="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).Hotkey}"
+						 Watermark="Hotkey" Width="150">
+						<int:Interaction.Behaviors>
+							<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="Hotkeybox">
+								<ia:InvokeCommandAction
+									Command="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).OnKeyDown}" PassEventArgsToCommand="True" />
+							</ia:EventTriggerBehavior>
+						</int:Interaction.Behaviors>
+					</TextBox>
 				</StackPanel>
+
+
 			</StackPanel>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:TwitchTrigger}">
