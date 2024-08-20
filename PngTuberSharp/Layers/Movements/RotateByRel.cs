@@ -1,4 +1,5 @@
-﻿using PngTuberSharp.Layers.Movements;
+﻿using Microsoft.FSharp.Core;
+using PngTuberSharp.Layers.Movements;
 
 namespace PngTuberSharp.Layers
 {
@@ -9,8 +10,14 @@ namespace PngTuberSharp.Layers
 
         public RotateByRel()
         {
-            AutoRemoveTime = TotalTime;
             ExitTime = 0f;
+            EnterTime = 0f;
+        }
+
+        public override void OnEnter()
+        {
+            AutoRemoveTime = TotalTime;
+            base.OnEnter();
         }
         public override void OnCalculateParameters(float dt, ref LayerValues values)
         {
