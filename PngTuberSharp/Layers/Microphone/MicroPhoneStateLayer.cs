@@ -14,6 +14,7 @@ namespace PngTuberSharp.Layers.Microphone
         private Bitmap openBlinkImage;
         private Bitmap closedImage;
         private Bitmap closedBlinkImage;
+        private MicroPhoneState current;
         private float transTime;
         private bool blinking;
         private List<Action> callbacks = new();
@@ -34,12 +35,12 @@ namespace PngTuberSharp.Layers.Microphone
             CurrentTime += dt;
             if (!blinking && CurrentTime > transTime)
             {
-                transTime += Interval;
+                transTime += SettingsManager.Current.Microphone.BlinkTime;
                 blinking = true;
             }
             else if (blinking && CurrentTime > transTime)
             {
-                transTime += Time;
+                transTime += SettingsManager.Current.Microphone.BlinkInterval;
                 blinking = false;
             }
 
@@ -55,6 +56,7 @@ namespace PngTuberSharp.Layers.Microphone
             openBlinkImage = !string.IsNullOrEmpty(state.OpenBlink.FilePath) ?  state.OpenBlink.Bitmap : state.Open.Bitmap;
             closedImage = state.Closed.Bitmap;
             closedBlinkImage = !string.IsNullOrEmpty(state.ClosedBlink.FilePath) ? state.ClosedBlink.Bitmap : state.Closed.Bitmap;
+            current = state;
         }
 
         public void SetupHotKeys()
@@ -69,6 +71,8 @@ namespace PngTuberSharp.Layers.Microphone
                 WinHotkey.AddHotkey(state.Trigger.VirtualKeyCode, state.Trigger.Modifiers, callback);
                 callbacks.Add(callback);
             }
+            // also reloads current just in case
+            SwitchState(current);
         }
     }
 

@@ -13,6 +13,8 @@ namespace PngTuberSharp.Services.Settings
     {
         public int ThreshHold { get; set; } = 50;
         public int Device { get; set; } = 1;
+        public float BlinkInterval { get; set; } = 2f;
+        public float BlinkTime { get; set; } = 0.25f;
         public List<MicroPhoneState> States { get; set; } = new List<MicroPhoneState>()
         {
             new MicroPhoneState()
@@ -80,7 +82,10 @@ namespace PngTuberSharp.Services.Settings
         public void ApplyPath()
         {
             if (string.IsNullOrEmpty(FilePath))
+            {
+                Bitmap = PlaceHolder;
                 return;
+            }
             if (File.Exists(FilePath))
                 Bitmap = new Bitmap(FilePath);
         }

@@ -9,6 +9,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Avalonia.Platform.Storage;
 using Avalonia.Input;
+using System.Net;
 
 
 namespace PngTuberSharp.ViewModels
@@ -18,6 +19,8 @@ namespace PngTuberSharp.ViewModels
         public Func<IStorageProvider> GetStorageProvider { get; }
 
         private List<MicroPhoneState> baseStates;
+
+        public MicroPhoneSettings Settings { get; }
 
         [ObservableProperty]
         private ObservableCollection<MicroPhoneStateViewModel> states;
@@ -32,6 +35,7 @@ namespace PngTuberSharp.ViewModels
         {
             GetStorageProvider = getStorage;
             baseStates = SettingsManager.Current.Microphone.States;
+            Settings = SettingsManager.Current.Microphone;
             states = new ObservableCollection<MicroPhoneStateViewModel>(baseStates.Select(x => new MicroPhoneStateViewModel(x, this)));
         }
 
@@ -44,6 +48,9 @@ namespace PngTuberSharp.ViewModels
 
         public void Remove(MicroPhoneStateViewModel vm)
         {
+            // dont allow removal of final state
+            if (States.Count <= 1)
+                return;
             States.Remove(vm);
             baseStates.Remove(vm.State);
         }
@@ -99,8 +106,12 @@ namespace PngTuberSharp.ViewModels
                 FileTypeFilter = new[] { ImageAll },
                 AllowMultiple = false
             });
-            set.FilePath = path.FirstOrDefault()?.Path?.AbsolutePath;
+            set.FilePath = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+        }
 
+        public void Delete(ImageSetting set)
+        {
+            set.FilePath = string.Empty;
         }
 
         public void OnKeyDown(KeyEventArgs e)

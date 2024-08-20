@@ -23,6 +23,16 @@
 			<Button Command="{Binding Apply}" i:Attached.Icon="fa-solid fa-save" />
 		</StackPanel>
 
+		<Grid ColumnDefinitions="150,100,100" RowDefinitions="30,30" Margin="5,5,5,5">
+			<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
+			<TextBox Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}"></TextBox>
+			<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+
+			<TextBlock Grid.Row="1" VerticalAlignment="Center">Blink Time</TextBlock>
+			<TextBox Grid.Row="1" Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkTime}"></TextBox>
+			<TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+		</Grid>
+
 		<ListBox ItemsSource="{Binding States}" Margin="5,5,5,5">
 			<ListBox.ItemTemplate>
 				<DataTemplate>
@@ -51,23 +61,27 @@
 							</TextBox>
 						</StackPanel>
 
-						<Grid ColumnDefinitions="100,200,100,200">
+						<Grid ColumnDefinitions="100,125,35,100,125,35">
 							<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
 							<Button Command="{Binding LoadFile}" Grid.Column="1"
 									CommandParameter="{Binding State.Open}">
 								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
 									   Source="{Binding State.Open.Bitmap}"></Image>
 							</Button>
+							<Button Command="{Binding Delete}" CommandParameter="{Binding State.Open}" 
+									Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 
-							<TextBlock VerticalAlignment="Center" Grid.Column="2">Closed Mouth</TextBlock>
-							<Button Command="{Binding LoadFile}" Grid.Column="3"
+							<TextBlock VerticalAlignment="Center" Grid.Column="3">Closed Mouth</TextBlock>
+							<Button Command="{Binding LoadFile}" Grid.Column="4"
 									CommandParameter="{Binding State.Closed}">
 								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
 									   Source="{Binding State.Closed.Bitmap}"></Image>
 							</Button>
+							<Button Command="{Binding Delete}" CommandParameter="{Binding State.Closed}"
+									Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 						</Grid>
 
-						<Grid ColumnDefinitions="100,200,100,200">
+						<Grid ColumnDefinitions="100,125,35,100,125,35">
 							<StackPanel VerticalAlignment="Center">
 								<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
 								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
@@ -77,16 +91,20 @@
 								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
 									   Source="{Binding State.OpenBlink.Bitmap}"></Image>
 							</Button>
+							<Button Command="{Binding Delete}" CommandParameter="{Binding State.OpenBlink}"
+									Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 
-							<StackPanel VerticalAlignment="Center" Grid.Column="2">
+							<StackPanel VerticalAlignment="Center" Grid.Column="3">
 								<TextBlock VerticalAlignment="Center">Closed Mouth</TextBlock>
 								<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
 							</StackPanel>
-							<Button Command="{Binding LoadFile}" Grid.Column="3"
+							<Button Command="{Binding LoadFile}" Grid.Column="4"
 									CommandParameter="{Binding State.ClosedBlink}">
 								<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
 									   Source="{Binding State.ClosedBlink.Bitmap}"></Image>
 							</Button>
+							<Button Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
+									Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 						</Grid>	
 
 
