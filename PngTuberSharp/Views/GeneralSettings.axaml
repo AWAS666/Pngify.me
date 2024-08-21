@@ -14,5 +14,10 @@
 			<Button Click="TwitchRetry">Retry Twitch Connection</Button>
 		</StackPanel>
 
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Label VerticalAlignment="Center">Show FPS Counter</Label>
+			<CheckBox x:Name="fps"></CheckBox>
+		</StackPanel>
+
 	</StackPanel>
 </UserControl>

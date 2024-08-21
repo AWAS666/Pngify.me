@@ -23,6 +23,15 @@ public partial class GeneralSettings : UserControl
 
         twitchEnabled.Bind(CheckBox.IsCheckedProperty, binding);
 
+        var bindingFps = new Binding
+        {
+            Source = SettingsManager.Current.LayerSetup,
+            Path = nameof(SettingsManager.Current.LayerSetup.ShowFPS),
+            Mode = BindingMode.TwoWay
+        };
+
+        fps.Bind(CheckBox.IsCheckedProperty, bindingFps);
+
     }
 
     private async void TwitchRetry(object sender, RoutedEventArgs e)

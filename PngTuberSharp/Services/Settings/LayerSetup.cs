@@ -1,4 +1,5 @@
-﻿using GlobalHotKeys.Native.Types;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using GlobalHotKeys.Native.Types;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services.Hotkey;
@@ -9,9 +10,12 @@ using System.Linq;
 
 namespace PngTuberSharp.Services.Settings
 {
-    public class LayerSetup
+    public partial class LayerSetup : ObservableObject
     {
         private List<Action> callbacks = new();
+
+        [ObservableProperty]
+        private bool showFPS = true;
 
         public List<Layersetting> Layers { get; set; } = new()
         {
