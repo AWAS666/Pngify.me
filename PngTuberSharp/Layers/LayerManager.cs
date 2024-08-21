@@ -44,7 +44,7 @@ namespace PngTuberSharp.Layers
                 watch.Start();
                 Update(UpdateInterval + delay);
 
-              
+
                 Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
                 int time = (int)(UpdateInterval * 1000f - watch.ElapsedMilliseconds);
 
@@ -71,28 +71,35 @@ namespace PngTuberSharp.Layers
 
         public static void Update(float dt)
         {
-
-            Time += dt;
-            foreach (BaseLayer layer in Layers.ToList())
+            try
             {
-                bool exit = layer.Update(dt);
-                if (exit)
+                Time += dt;
+                foreach (BaseLayer layer in Layers.ToList())
                 {
-                    layer.OnExit();
-                    Layers.Remove(layer);
+                    bool exit = layer.Update(dt);
+                    if (exit)
+                    {
+                        layer.OnExit();
+                        Layers.Remove(layer);
+                    }
                 }
+                var layert = new LayerValues();
+                MicroPhoneStateLayer.Update(dt, ref layert);
+                foreach (BaseLayer layer in Layers)
+                {
+                    layer.OnCalculateParameters(dt, ref layert);
+                }
+
+                //ThrowingSystem.SwapImage(layert.Image);
+                //ThrowingSystem.Update(dt, ref layert);
+
+                ValueUpdate?.Invoke(null, layert);
+
             }
-            var layert = new LayerValues();
-            MicroPhoneStateLayer.Update(dt, ref layert);
-            foreach (BaseLayer layer in Layers)
+            catch (Exception e)
             {
-                layer.OnCalculateParameters(dt, ref layert);
+                Log.Error(e, $"Error in LayerManagerupdate: {e.Message}");
             }
-
-            //ThrowingSystem.SwapImage(layert.Image);
-            //ThrowingSystem.Update(dt, ref layert);
-
-            ValueUpdate?.Invoke(null, layert);
         }
     }
 }
