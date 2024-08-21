@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace PngTuberSharp.Layers
@@ -44,15 +45,32 @@ namespace PngTuberSharp.Layers
                 watch.Start();
                 Update(UpdateInterval + delay);
 
-
                 Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
-                int time = (int)(UpdateInterval * 1000f - watch.ElapsedMilliseconds);
+                double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
                 // todo fix to more accurate timer
-                await Task.Delay(Math.Max(1, time));
+                //await Task.Delay(Math.Max(1, time));
+                await Delay(Math.Max(1, time));               
+
                 TotalRunTime += UpdateInterval;
-                FPSUpdate?.Invoke(null, 1f / watch.ElapsedMilliseconds * 1000f);
-                delay = watch.ElapsedMilliseconds / 1000f - UpdateInterval;
+                FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
+                delay = (float)(watch.Elapsed.TotalMilliseconds / 1000f - UpdateInterval);
+                Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
+            }
+        }
+
+        private static async Task Delay(double ms)
+        {
+            var sw = new System.Diagnostics.Stopwatch();
+            sw.Start();
+            while (true)
+            {
+                if (sw.Elapsed.TotalMilliseconds >= ms)
+                {
+                    return;
+                }
+                await Task.Yield();
+                //Thread.Sleep(0); // setting at least 1 here would involve a timer which we don't want to
             }
         }
 
