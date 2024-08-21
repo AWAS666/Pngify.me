@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using PngTuberSharp.Services;
 using System.Reflection;
 
@@ -27,6 +29,11 @@ public partial class MainWindow : Window
     private void DoubleClick(object? sender, Avalonia.Input.TappedEventArgs e)
     {
         settings.IsVisible = !settings.IsVisible;
+    }
+
+    private void SaveSettings(object? sender, RoutedEventArgs e)
+    {
+        SettingsManager.Save();
     }
 
 }
