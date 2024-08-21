@@ -5,6 +5,7 @@ using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.ViewModels.Helper;
+using System;
 using System.Collections.ObjectModel;
 
 namespace PngTuberSharp.ViewModels;
@@ -30,6 +31,9 @@ public partial class AvatarViewModel : ViewModelBase
     private double opacity;
 
     [ObservableProperty]
+    private float fps;
+
+    [ObservableProperty]
     private Bitmap image = ImageSetting.PlaceHolder;
 
     private LayerValues layerValues = new();
@@ -38,7 +42,13 @@ public partial class AvatarViewModel : ViewModelBase
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
+        LayerManager.FPSUpdate += UpdateFPS;
         SettingsManager.Current.LayerSetup.ApplySettings();
+    }
+
+    private void UpdateFPS(object? sender, float e)
+    {
+        Fps = e;
     }
 
     private void UpdatePosition(object? sender, LayerValues e)

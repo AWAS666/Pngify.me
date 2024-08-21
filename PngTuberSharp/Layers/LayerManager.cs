@@ -18,11 +18,13 @@ namespace PngTuberSharp.Layers
         public static List<BaseLayer> Layers { get; set; } = new List<BaseLayer>();
         public static float Time { get; private set; }
 
-        public static int UpdateInterval { get; private set; } = 1000 / 60;
-        public static int TotalRunTime { get; private set; }
+        public static float UpdateInterval => 1.0f / FPS;
+        public static int FPS { get; private set; } = 60;
+        public static float TotalRunTime { get; private set; }
 
         public static EventHandler<LayerValues> ValueUpdate;
         public static EventHandler<BaseLayer> NewLayer;
+        public static EventHandler<float> FPSUpdate;
 
         public static MicroPhoneStateLayer MicroPhoneStateLayer { get; private set; } = new MicroPhoneStateLayer();
         public static ThrowingSystem ThrowingSystem { get; private set; } = new ThrowingSystem();
@@ -30,16 +32,27 @@ namespace PngTuberSharp.Layers
         static LayerManager()
         {
             tickLoop = Task.Run(TickLoop);
-        }      
+        }
 
         private static async Task TickLoop()
         {
+            float delay = 0f;
             TotalRunTime = 0;
             while (true)
             {
-                Update(UpdateInterval / 1000f);
-                await Task.Delay(UpdateInterval);
+                var watch = new Stopwatch();
+                watch.Start();
+                Update(UpdateInterval + delay);
+
+              
+                Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
+                int time = (int)(UpdateInterval * 1000f - watch.ElapsedMilliseconds);
+
+                // todo fix to more accurate timer
+                await Task.Delay(Math.Max(1, time));
                 TotalRunTime += UpdateInterval;
+                FPSUpdate?.Invoke(null, 1f / watch.ElapsedMilliseconds * 1000f);
+                delay = watch.ElapsedMilliseconds / 1000f - UpdateInterval;
             }
         }
 
@@ -58,8 +71,7 @@ namespace PngTuberSharp.Layers
 
         public static void Update(float dt)
         {
-            var watch = new Stopwatch();
-            watch.Start();
+
             Time += dt;
             foreach (BaseLayer layer in Layers.ToList())
             {
@@ -77,11 +89,10 @@ namespace PngTuberSharp.Layers
                 layer.OnCalculateParameters(dt, ref layert);
             }
 
-            ThrowingSystem.SwapImage(layert.Image);
-            ThrowingSystem.Update(dt, ref layert);
+            //ThrowingSystem.SwapImage(layert.Image);
+            //ThrowingSystem.Update(dt, ref layert);
 
             ValueUpdate?.Invoke(null, layert);
-            Log.Debug($"Position code took: {watch.ElapsedMilliseconds} ms");
-        }        
+        }
     }
 }
