@@ -22,7 +22,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         SetupSerilog();
-
+       
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             WinHotkey.Start(desktop);

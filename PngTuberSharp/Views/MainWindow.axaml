@@ -12,27 +12,30 @@
         Title="PngTuberSharp">
 	<Grid x:Name="grid" >
 		<views:AvatarView DoubleTapped="DoubleClick" />
-		<TabControl x:Name="settings" Background="#AAFF5733" Margin="1" 
-					Padding="5,5,5,5" HorizontalAlignment="Right">			
-			<TabItem Header="Microphone" FontSize="12" Width="125">
-				<views:VolumeSlider />
-			</TabItem>
-			<TabItem Header="LayoutMenu" FontSize="12" Width="125">
-				<views:LayoutMenu />
-			</TabItem>
-			<!--<TabItem Header="LayerAdder" FontSize="12" Width="125">
+		<StackPanel x:Name="settings" Background="#AAFF5733" Margin="1"
+					 HorizontalAlignment="Right">
+			<TabControl Padding="5,5,5,5">
+				<TabItem Header="Microphone" FontSize="12" Width="125">
+					<views:VolumeSlider />
+				</TabItem>
+				<TabItem Header="LayoutMenu" FontSize="12" Width="125">
+					<views:LayoutMenu />
+				</TabItem>
+				<!--<TabItem Header="LayerAdder" FontSize="12" Width="125">
 				<views:LayerAdder />
 			</TabItem>-->
-			<TabItem Header="LayerSetup" FontSize="12" Width="125">
-				<views:LayerSetup />
-			</TabItem>
-			<TabItem Header="Avatar States" FontSize="12" Width="125">
-				<views:MicStateSetup/>
-			</TabItem>
-			<TabItem Header="GeneralSettings" FontSize="12" Width="125">
-				<views:GeneralSettings />
-			</TabItem>
-		</TabControl>
+				<TabItem Header="LayerSetup" FontSize="12" Width="125">
+					<views:LayerSetup />
+				</TabItem>
+				<TabItem Header="Avatar States" FontSize="12" Width="125">
+					<views:MicStateSetup/>
+				</TabItem>
+				<TabItem Header="GeneralSettings" FontSize="12" Width="125">
+					<views:GeneralSettings />
+				</TabItem>
+			</TabControl>
+			<!--<Button>Save settings</Button>-->
+		</StackPanel>
 	</Grid>
 
 </Window>
