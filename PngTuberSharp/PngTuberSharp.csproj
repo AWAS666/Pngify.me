@@ -4,9 +4,9 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
-    <AssemblyVersion>0.0.0.4</AssemblyVersion>
+    <AssemblyVersion>0.0.0.5</AssemblyVersion>
     <Version>$(VersionPrefix)</Version>
-    <FileVersion>0.0.0.4</FileVersion>
+    <FileVersion>0.0.0.5</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
