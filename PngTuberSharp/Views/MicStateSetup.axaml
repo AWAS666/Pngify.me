@@ -30,11 +30,11 @@
 
 			<Grid ColumnDefinitions="150,100,100" RowDefinitions="30,30" Margin="5,5,5,5">
 				<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
-				<helper:NumericTextBox Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}" />
+				<helper:FloatTextBox Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}" />
 				<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 
 				<TextBlock Grid.Row="1" VerticalAlignment="Center">Blink Time</TextBlock>
-				<helper:NumericTextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Settings.BlinkTime}" Watermark="Time"/>
+				<helper:FloatTextBox  Grid.Row="1" Grid.Column="1" Text="{Binding Settings.BlinkTime}" Watermark="Time"/>
 				<TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 			</Grid>
 		</StackPanel>

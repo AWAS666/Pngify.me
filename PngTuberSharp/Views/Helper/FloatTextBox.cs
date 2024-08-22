@@ -6,11 +6,11 @@ using System.Text.RegularExpressions;
 
 namespace PngTuberSharp.Views.Helper
 {
-    public class NumericTextBox : TextBox
+    public class FloatTextBox : TextBox
     {
         private bool handling;
 
-        public NumericTextBox()
+        public FloatTextBox()
         {
             this.GetObservable(TextProperty).Subscribe(OnTextChanged);
         }

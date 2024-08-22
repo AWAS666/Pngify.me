@@ -19,17 +19,6 @@ namespace PngTuberSharp.ViewModels.Helper
         [ObservableProperty]
         private ObservableCollection<Modifiers> allModifiers;
 
-        private string redeem;
-
-        public string Redeem
-        {
-            get => redeem; set
-            {
-                ((TwitchTrigger)trigger).Redeem = value;
-                SetProperty(ref redeem, value);
-            }
-        }
-
         private string hotkey;
 
         public string Hotkey
@@ -56,9 +45,6 @@ namespace PngTuberSharp.ViewModels.Helper
             Trigger = trigger;
             switch (trigger)
             {
-                case TwitchTrigger twitch:
-                    Redeem = twitch.Redeem;
-                    break;
                 case HotkeyTrigger hotkey:
                     AllKeys = new ObservableCollection<VirtualKeyCode>(Enum.GetValues(typeof(VirtualKeyCode)).Cast<VirtualKeyCode>());
                     AllModifiers = new ObservableCollection<Modifiers>(Enum.GetValues(typeof(Modifiers)).Cast<Modifiers>());

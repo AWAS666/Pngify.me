@@ -1,6 +1,7 @@
 ﻿using GlobalHotKeys.Native.Types;
 using System;
 using System.Text.Json.Serialization;
+using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
 namespace PngTuberSharp.Services.Settings
 {
@@ -21,13 +22,27 @@ namespace PngTuberSharp.Services.Settings
         public Modifiers Modifiers { get; set; }
     }
 
-    public class TwitchTrigger : Trigger
+    public class TwitchRedeem : Trigger
     {
         public string Redeem { get; set; }
 
         public void Triggered(object? sender, string e)
         {
             if (string.Compare(Redeem, e, StringComparison.OrdinalIgnoreCase) == 0)
+            {
+                Parent.AddLayers();
+            }
+        }
+    }
+
+    public class TwitchBits : Trigger
+    {
+        public uint MinAmount { get; set; }
+        public uint MaxAmount { get; set; } = uint.MaxValue;
+
+        internal void Triggered(object? sender, ChannelCheer e)
+        {
+            if (e.Bits >= MinAmount && e.Bits < MaxAmount)
             {
                 Parent.AddLayers();
             }

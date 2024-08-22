@@ -42,8 +42,11 @@ namespace PngTuberSharp.Services.Settings
                         WinHotkey.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
                         callbacks.Add(callback);
                         break;
-                    case TwitchTrigger redeem:
+                    case TwitchRedeem redeem:
                         TwitchEventSocket.RedeemUsed += redeem.Triggered;
+                        break;
+                    case TwitchBits bits:
+                        TwitchEventSocket.BitsUsed += bits.Triggered;
                         break;
                     default:
                         break;
@@ -56,9 +59,14 @@ namespace PngTuberSharp.Services.Settings
             WinHotkey.RemoveCallbacks(callbacks);
             callbacks.Clear();
 
-            foreach (var item in Layers.Where(x => x.Trigger is TwitchTrigger))
+            foreach (var item in Layers.Where(x => x.Trigger is TwitchRedeem))
             {
-                TwitchEventSocket.RedeemUsed -= ((TwitchTrigger)item.Trigger).Triggered;
+                TwitchEventSocket.RedeemUsed -= ((TwitchRedeem)item.Trigger).Triggered;
+            }
+
+            foreach (var item in Layers.Where(x => x.Trigger is TwitchBits))
+            {
+                TwitchEventSocket.BitsUsed -= ((TwitchBits)item.Trigger).Triggered;
             }
         }
     }
@@ -90,8 +98,11 @@ namespace PngTuberSharp.Services.Settings
         {
             switch (Trigger)
             {
-                case TwitchTrigger redeem:
+                case TwitchRedeem redeem:
                     TwitchEventSocket.RedeemUsed -= redeem.Triggered;
+                    break;
+                case TwitchBits redeem:
+                    TwitchEventSocket.BitsUsed -= redeem.Triggered;
                     break;
                 default:
                     break;
