@@ -9,6 +9,7 @@ using PngTuberSharp.Views;
 using Serilog;
 using System.IO;
 using System;
+using System.Threading.Tasks;
 
 namespace PngTuberSharp;
 
@@ -30,6 +31,7 @@ public partial class App : Application
             {
                 DataContext = new MainViewModel()
             };
+            TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
 
             if (SettingsManager.Current.Twitch.Enabled == true)
                 await TwitchEventSocket.Start();
@@ -46,6 +48,11 @@ public partial class App : Application
         base.OnFrameworkInitializationCompleted();
     }
 
+    private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
+    {
+        Log.Fatal($"Task error: {e.Exception.Message}");
+    }
+
     private static void SetupSerilog()
     {
         // Define the path to the log file in %localappdata%/appname
@@ -55,6 +62,7 @@ public partial class App : Application
         // Configure Serilog to write to a file
         Log.Logger = new LoggerConfiguration()
             .WriteTo.File(localAppDataPath, rollingInterval: RollingInterval.Day)
+            .MinimumLevel.Warning()
             .CreateLogger();
     }
 }
