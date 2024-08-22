@@ -13,65 +13,67 @@
 	<Design.DataContext>
 		<vm:LayerSetupViewModel/>
 	</Design.DataContext>
-	<StackPanel>
-		<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
-		<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
-			<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
-			<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus" />
-			<Button Command="{Binding Save}" Content="Apply and Save" />
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel>
+			<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
+			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
+				<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
+				<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus" />
+				<Button Command="{Binding Save}" Content="Apply and Save" />
+			</StackPanel>
 		</StackPanel>
+		<ScrollViewer Grid.Row="1"
+					  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+			<ListBox ItemsSource="{Binding Layers}" Margin="0,5,0,0">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
+							<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
+							<Button Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
+														CommandParameter="{Binding}"
+								Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
+							<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
 
-		<ListBox ItemsSource="{Binding Layers}" Margin="5,5,5,5">
-			<ListBox.ItemTemplate>
-				<DataTemplate>
-					<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
-						<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
-						<Button Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
-													CommandParameter="{Binding}"							
-							Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
-						<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
+							<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
+								<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
+								<ComboBox VerticalAlignment="Center"
+										  ItemsSource="{Binding AllLayers}"
+										  DisplayMemberBinding="{Binding Name}"
+										  SelectedItem="{Binding SelectedLayer}"
+										  Width="150"></ComboBox>
+								<Button Command="{Binding AddNewLayer}">AddLayer</Button>
+							</StackPanel>
 
-						<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
-							<ComboBox VerticalAlignment="Center"
-									  ItemsSource="{Binding AllLayers}"
-									  DisplayMemberBinding="{Binding Name}"
-									  SelectedItem="{Binding SelectedLayer}"
-									  Width="150"></ComboBox>
-							<Button Command="{Binding AddNewLayer}">AddLayer</Button>
-						</StackPanel>
-
-						<ListBox ItemsSource="{Binding Layers}" Grid.Row="3" Grid.ColumnSpan="3">
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel>
-										<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
-											<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-											<Button Content="Remove" 
-													Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
-													CommandParameter="{Binding}"
+							<ListBox ItemsSource="{Binding Layers}" Grid.Row="3" Grid.ColumnSpan="3">
+								<ListBox.ItemTemplate>
+									<DataTemplate>
+										<StackPanel>
+											<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
+												<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+												<Button Content="Remove"
+														Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
+														CommandParameter="{Binding}"
 													></Button>
+											</StackPanel>
+											<ItemsControl ItemsSource="{Binding PropertyList}">
+												<ItemsControl.ItemTemplate>
+													<DataTemplate>
+														<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
+															<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
+															<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
+															<TextBlock VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
+														</StackPanel>
+													</DataTemplate>
+												</ItemsControl.ItemTemplate>
+											</ItemsControl>
 										</StackPanel>
-										<ItemsControl ItemsSource="{Binding PropertyList}">
-											<ItemsControl.ItemTemplate>
-												<DataTemplate>
-													<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
-														<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
-														<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
-														<TextBlock VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
-													</StackPanel>
-												</DataTemplate>
-											</ItemsControl.ItemTemplate>
-										</ItemsControl>
-									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
-					</Grid>
-				</DataTemplate>
-			</ListBox.ItemTemplate>
-		</ListBox>
-
-
-	</StackPanel>
+									</DataTemplate>
+								</ListBox.ItemTemplate>
+							</ListBox>
+						</Grid>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</ScrollViewer>
+	</Grid>
 </UserControl>
