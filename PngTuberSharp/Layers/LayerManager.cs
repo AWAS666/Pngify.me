@@ -19,8 +19,8 @@ namespace PngTuberSharp.Layers
         public static List<BaseLayer> Layers { get; set; } = new List<BaseLayer>();
         public static float Time { get; private set; }
 
-        public static float UpdateInterval => 1.0f / FPS;
-        public static int FPS { get; private set; } = 60;
+        public static float UpdateInterval => 1.0f / SettingsManager.Current.LayerSetup.TargetFPS;
+        //public static int FPS { get; private set; } = 120;
         public static float TotalRunTime { get; private set; }
 
         public static EventHandler<LayerValues> ValueUpdate;
@@ -45,7 +45,7 @@ namespace PngTuberSharp.Layers
                 watch.Start();
                 Update(UpdateInterval + delay);
 
-                Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
+                //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
                 double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
                 // todo fix to more accurate timer
@@ -55,7 +55,7 @@ namespace PngTuberSharp.Layers
                 TotalRunTime += UpdateInterval;
                 FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
                 delay = (float)(watch.Elapsed.TotalMilliseconds / 1000f - UpdateInterval);
-                Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
+                //Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
             }
         }
 

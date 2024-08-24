@@ -17,6 +17,9 @@ namespace PngTuberSharp.Services.Settings
         [ObservableProperty]
         private bool showFPS = true;
 
+        [ObservableProperty]
+        private uint targetFPS = 60;
+
         public List<Layersetting> Layers { get; set; } = new()
         {
             new Layersetting()

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:helper="clr-namespace:PngTuberSharp.Views.Helper"
              x:Class="PngTuberSharp.Views.GeneralSettings">
 	<StackPanel>
 		<TextBlock FontSize="24">General Settings</TextBlock>
@@ -17,6 +18,11 @@
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Show FPS Counter</Label>
 			<CheckBox x:Name="fps"></CheckBox>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Label VerticalAlignment="Center">Target FPS</Label>
+			<helper:UintTextBox x:Name="targetFPS"></helper:UintTextBox>
 		</StackPanel>
 
 	</StackPanel>

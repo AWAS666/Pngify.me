@@ -32,6 +32,15 @@ public partial class GeneralSettings : UserControl
 
         fps.Bind(CheckBox.IsCheckedProperty, bindingFps);
 
+        var bindingFpsTarget = new Binding
+        {
+            Source = SettingsManager.Current.LayerSetup,
+            Path = nameof(SettingsManager.Current.LayerSetup.TargetFPS),
+            Mode = BindingMode.TwoWay
+        };
+
+        targetFPS.Bind(TextBox.TextProperty, bindingFpsTarget);
+
     }
 
     private async void TwitchRetry(object sender, RoutedEventArgs e)
