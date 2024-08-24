@@ -1,5 +1,7 @@
 ﻿using Avalonia.Media.Imaging;
+using PngTuberSharp.Helpers;
 using PngTuberSharp.Layers;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -74,6 +76,28 @@ namespace PngTuberSharp.Services.ThrowingSystem
                 }
             }
 
+            return outline;
+        }
+
+        private List<(int x, int y)> GetImageOutlineNew()
+        {
+            var outline = new List<(int x, int y)>();
+            using var ms = new MemoryStream();
+            Values.Image.Save(ms);  
+            using (var bitmap = ms.ToSKBitmap())
+            {
+                for (int y = 0; y < bitmap.Height; y++)
+                {
+                    for (int x = 0; x < bitmap.Width; x++)
+                    {
+                        var color = bitmap.GetPixel(x, y);
+                        if (color.Alpha > 0) // If pixel is not fully transparent
+                        {
+                            outline.Add((x, y));
+                        }
+                    }
+                }
+            }
             return outline;
         }
 
