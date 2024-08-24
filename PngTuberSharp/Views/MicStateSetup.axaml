@@ -73,7 +73,7 @@
 								<Button Command="{Binding LoadFile}" Grid.Column="1"
 										CommandParameter="{Binding State.Open}">
 									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.Open.Bitmap}"></Image>
+										   Source="{Binding State.Open.Image}"></Image>
 								</Button>
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
 										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
@@ -82,7 +82,7 @@
 								<Button Command="{Binding LoadFile}" Grid.Column="4"
 										CommandParameter="{Binding State.Closed}">
 									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.Closed.Bitmap}"></Image>
+										   Source="{Binding State.Closed.Image}"></Image>
 								</Button>
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.Closed}"
 										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
@@ -96,7 +96,7 @@
 								<Button Command="{Binding LoadFile}" Grid.Column="1"
 										CommandParameter="{Binding State.OpenBlink}">
 									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.OpenBlink.Bitmap}"></Image>
+										   Source="{Binding State.OpenBlink.Image}"></Image>
 								</Button>
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.OpenBlink}"
 										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
@@ -108,8 +108,9 @@
 								<Button Command="{Binding LoadFile}" Grid.Column="4"
 										CommandParameter="{Binding State.ClosedBlink}">
 									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.ClosedBlink.Bitmap}"></Image>
+									   Source="{Binding State.ClosedBlink.Image}"></Image>
 								</Button>
+							
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
 										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 							</Grid>

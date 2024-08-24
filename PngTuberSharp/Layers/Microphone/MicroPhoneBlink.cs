@@ -1,14 +1,15 @@
 ﻿using Avalonia.Media.Imaging;
 using PngTuberSharp.Services;
+using SkiaSharp;
 
 namespace PngTuberSharp.Layers.Microphone
 {
     public class MicroPhoneBlink
     {
-        private Bitmap openImage;
-        private Bitmap openBlinkImage;
-        private Bitmap closedImage;
-        private Bitmap closedBlinkImage;
+        private SKBitmap openImage;
+        private SKBitmap openBlinkImage;
+        private SKBitmap closedImage;
+        private SKBitmap closedBlinkImage;
         private float transTime;
         private bool blinking;
 
@@ -22,10 +23,10 @@ namespace PngTuberSharp.Layers.Microphone
 
         public MicroPhoneBlink()
         {
-            openImage = new Bitmap(Open);
-            openBlinkImage = new Bitmap(OpenBlink ?? Open);
-            closedImage = new Bitmap(Closed);
-            closedBlinkImage = new Bitmap(ClosedBlink ?? Closed);
+            openImage = SKBitmap.Decode(Open);
+            openBlinkImage = SKBitmap.Decode(OpenBlink ?? Open);
+            closedImage = SKBitmap.Decode(Closed);
+            closedBlinkImage = SKBitmap.Decode(ClosedBlink ?? Closed);
 
             transTime = Interval;
         }

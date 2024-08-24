@@ -1,12 +1,16 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
+using PngTuberSharp.Helpers;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.ViewModels.Helper;
+using SkiaSharp;
 using System;
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 
 namespace PngTuberSharp.ViewModels;
 
@@ -34,11 +38,13 @@ public partial class AvatarViewModel : ViewModelBase
     private float fps;
 
     [ObservableProperty]
-    private Bitmap image = ImageSetting.PlaceHolder;
+    private IImage image = ImageSetting.PlaceHolder.ToAvaloniaImage();
 
     private LayerValues layerValues = new();
 
     private ObservableCollection<ImageViewModel> imageViewModels = new();
+    private SKBitmap cache;
+
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
@@ -59,6 +65,9 @@ public partial class AvatarViewModel : ViewModelBase
         ZoomX = e.ZoomX;
         ZoomY = e.ZoomY;
         Opacity = e.Opacity;
-        Image = e.Image;
+        var watch = new Stopwatch();
+        watch.Start();
+        Image = e.Image.ToAvaloniaImage();
+        //Debug.WriteLine($"Conversion to avalonia took: {watch.Elapsed.TotalMilliseconds}ms");
     }
 }

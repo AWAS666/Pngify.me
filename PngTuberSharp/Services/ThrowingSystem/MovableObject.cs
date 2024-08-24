@@ -26,12 +26,12 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public MovableObject(string path, Vector2 speed)
         {
             Values = new LayerValues();
-            Values.Image = new Bitmap(path);
+            Values.Image = SKBitmap.Decode(path);
             Outline = GetImageOutline();
             this.speed = speed;
         }
 
-        public MovableObject(Bitmap map, Vector2 speed)
+        public MovableObject(SKBitmap map, Vector2 speed)
         {
             Values = new LayerValues();
             Values.Image = map;
@@ -59,49 +59,23 @@ namespace PngTuberSharp.Services.ThrowingSystem
         {
             var outline = new List<(int x, int y)>();
 
-            using var ms = new MemoryStream();
-            Values.Image.Save(ms);
-
-            var bitmap = new System.Drawing.Bitmap(ms);
+            var bitmap = Values.Image;
 
             for (int y = 0; y < bitmap.Height; y++)
             {
                 for (int x = 0; x < bitmap.Width; x++)
                 {
                     var color = bitmap.GetPixel(x, y);
-                    if (color.A > 0) // If pixel is not fully transparent
+                    if (color.Alpha > 0) // If pixel is not fully transparent
                     {
                         outline.Add((x, y));
                     }
                 }
             }
-
             return outline;
         }
 
-        private List<(int x, int y)> GetImageOutlineNew()
-        {
-            var outline = new List<(int x, int y)>();
-            using var ms = new MemoryStream();
-            Values.Image.Save(ms);  
-            using (var bitmap = ms.ToSKBitmap())
-            {
-                for (int y = 0; y < bitmap.Height; y++)
-                {
-                    for (int x = 0; x < bitmap.Width; x++)
-                    {
-                        var color = bitmap.GetPixel(x, y);
-                        if (color.Alpha > 0) // If pixel is not fully transparent
-                        {
-                            outline.Add((x, y));
-                        }
-                    }
-                }
-            }
-            return outline;
-        }
-
-        public bool SameBitmap(Bitmap bitmap)
+        public bool SameBitmap(SKBitmap bitmap)
         {
             return bitmap == Values.Image;
         }

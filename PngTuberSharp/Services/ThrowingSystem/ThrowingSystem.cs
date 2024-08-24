@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 
@@ -35,7 +36,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
             UpdateObjects?.Invoke(this, dt);
         }
 
-        public void SwapImage(Avalonia.Media.Imaging.Bitmap bitmap)
+        public void SwapImage(SKBitmap bitmap)
         {
             if (MainBody != null && MainBody.SameBitmap(bitmap))
                 return;

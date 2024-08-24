@@ -1,7 +1,10 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Microsoft.VisualBasic;
+using PngTuberSharp.Helpers;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -46,12 +49,16 @@ namespace PngTuberSharp.Services.Settings
 
     public partial class ImageSetting : ObservableObject
     {
-        public static Bitmap PlaceHolder = new Bitmap(AssetLoader.Open(new Uri("avares://PngTuberSharp/Assets/placeholder.png")));
+        public static SKBitmap PlaceHolder = SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngTuberSharp/Assets/placeholder.png")));
+        private static Bitmap img = new Bitmap(AssetLoader.Open(new Uri("avares://PngTuberSharp/Assets/placeholder.png")));
 
-        private Bitmap bitmap = PlaceHolder;
+        private SKBitmap bitmap = PlaceHolder;
+
+        // todo fix why this here cant bind for whatever reason
+        private IImage image = img;
 
         [JsonIgnore]
-        public Bitmap Bitmap
+        public SKBitmap Bitmap
         {
             get
             {
@@ -59,7 +66,24 @@ namespace PngTuberSharp.Services.Settings
             }
             set
             {
-                SetProperty(ref bitmap, value);
+                bitmap = value;
+                if (!string.IsNullOrEmpty(FilePath))
+                    Image = new Bitmap(FilePath);
+                else
+                    Image = img;
+            }
+        }
+
+        [JsonIgnore]
+        public IImage Image
+        {
+            get
+            {
+                return image;
+            }
+            set
+            {
+                SetProperty(ref image, value);
             }
         }
 
@@ -87,7 +111,7 @@ namespace PngTuberSharp.Services.Settings
                 return;
             }
             if (File.Exists(FilePath))
-                Bitmap = new Bitmap(FilePath);
+                Bitmap = SKBitmap.Decode(FilePath);
         }
     }
 }

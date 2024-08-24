@@ -1,4 +1,5 @@
 ﻿using Avalonia.Media.Imaging;
+using SkiaSharp;
 
 namespace PngTuberSharp.Layers
 {
@@ -24,6 +25,6 @@ namespace PngTuberSharp.Layers
         public float ZoomY { get; set; } = 1f;
         public double Opacity { get; set; } = 1f;
 
-        public Bitmap Image { get; set; }
+        public SKBitmap Image { get; set; }
     }
 }

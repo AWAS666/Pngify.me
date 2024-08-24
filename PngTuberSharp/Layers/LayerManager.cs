@@ -49,7 +49,6 @@ namespace PngTuberSharp.Layers
                 double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
                 // todo fix to more accurate timer
-                //await Task.Delay(Math.Max(1, time));
                 await Delay(Math.Max(1, time));               
 
                 TotalRunTime += UpdateInterval;
@@ -69,8 +68,11 @@ namespace PngTuberSharp.Layers
                 {
                     return;
                 }
-                await Task.Yield();
-                //Thread.Sleep(0); // setting at least 1 here would involve a timer which we don't want to
+                //await Task.Yield();
+                // setting at least 1 here would involve a timer which we don't want to
+                Thread.Sleep(0); 
+                // thread sleep takes only half as much cpu as task.delay, but limits fps more
+                // todo find better option for doing this
             }
         }
 
@@ -108,8 +110,11 @@ namespace PngTuberSharp.Layers
                     layer.OnCalculateParameters(dt, ref layert);
                 }
 
+                //var watch = new Stopwatch();
+                //watch.Start();
                 //ThrowingSystem.SwapImage(layert.Image);
                 //ThrowingSystem.Update(dt, ref layert);
+                //Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
 
                 ValueUpdate?.Invoke(null, layert);
 
