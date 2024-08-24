@@ -2,32 +2,58 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
 			 xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
-			   xmlns:gif="clr-namespace:Avalonia.Gif;assembly=Avalonia.Gif"
 			  x:DataType="vm:AvatarViewModel"
              x:Class="PngTuberSharp.Views.AvatarView">
-	<Grid>
+	<Grid  Width="1920" Height="1080" >
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
-		<Grid.RenderTransform>
-			<TransformGroup>
-				<ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}" />
-				<TranslateTransform X="{Binding PosX}" Y="{Binding PosY}"  />
-			</TransformGroup>
-		</Grid.RenderTransform>
-		<Grid>
+		<Grid VerticalAlignment="Bottom" HorizontalAlignment="Left">
 			<Grid.RenderTransform>
 				<TransformGroup>
-					<RotateTransform Angle="{Binding Rotation}" />
+					<ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}" />
+					<TranslateTransform X="{Binding PosX}" Y="{Binding PosY}"  />
 				</TransformGroup>
 			</Grid.RenderTransform>
-			<Grid.Opacity>
-				<Binding Path="Opacity" />
-			</Grid.Opacity>
-			<Image Source="{Binding Image}" Name="image"></Image>
-
-			<!--<gif:GifImage Grid.Column="1" SourceStream="{Binding Image}"
-					 StretchDirection="Both" />-->
+			<Grid VerticalAlignment="Bottom" HorizontalAlignment="Left">
+				<Grid.RenderTransform>
+					<TransformGroup>
+						<RotateTransform Angle="{Binding Rotation}" />
+					</TransformGroup>
+				</Grid.RenderTransform>
+				<Grid.Opacity>
+					<Binding Path="Opacity" />
+				</Grid.Opacity>
+				<Image VerticalAlignment="Bottom" HorizontalAlignment="Left" 
+					   Source="{Binding Image}" Name="image"></Image>
+			</Grid>
 		</Grid>
+		<!--<ItemsControl ItemsSource="{Binding Throwables}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<ContentControl>
+						<ContentControl.RenderTransform>
+							<TransformGroup>
+								<RotateTransform Angle="{Binding Rotation}"/>
+								<TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
+							</TransformGroup>
+						</ContentControl.RenderTransform>
+						<Image Source="{Binding Image}"></Image>
+					</ContentControl>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>-->
+		<!--<ListBox Margin="0,50,0,0" Background="Transparent" ItemsSource="{Binding Throwables}" HorizontalAlignment="Left">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<StackPanel>
+						<TextBlock Text="{Binding X}"></TextBlock>
+						<TextBlock Text="{Binding Y}"></TextBlock>
+						<TextBlock Text="{Binding Rotation}"></TextBlock>
+						<Image Source="{Binding Image}}" Height="50" Width="50"></Image>
+					</StackPanel>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ListBox>-->
 	</Grid>
 </UserControl>

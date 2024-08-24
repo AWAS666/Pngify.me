@@ -4,6 +4,7 @@ using PngTuberSharp.Services.Settings;
 using PngTuberSharp.Services.ThrowingSystem;
 using PngTuberSharp.Services.Twitch;
 using Serilog;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -39,6 +40,7 @@ namespace PngTuberSharp.Layers
         {
             float delay = 0f;
             TotalRunTime = 0;
+            SettingsManager.Current.LayerSetup.ApplySettings();
             while (true)
             {
                 var watch = new Stopwatch();
@@ -49,7 +51,7 @@ namespace PngTuberSharp.Layers
                 double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
                 // todo fix to more accurate timer
-                await Delay(Math.Max(1, time));               
+                await Delay(Math.Max(1, time));
 
                 TotalRunTime += UpdateInterval;
                 FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
@@ -70,7 +72,7 @@ namespace PngTuberSharp.Layers
                 }
                 //await Task.Yield();
                 // setting at least 1 here would involve a timer which we don't want to
-                Thread.Sleep(0); 
+                Thread.Sleep(0);
                 // thread sleep takes only half as much cpu as task.delay, but limits fps more
                 // todo find better option for doing this
             }
@@ -110,11 +112,45 @@ namespace PngTuberSharp.Layers
                     layer.OnCalculateParameters(dt, ref layert);
                 }
 
-                //var watch = new Stopwatch();
-                //watch.Start();
-                //ThrowingSystem.SwapImage(layert.Image);
-                //ThrowingSystem.Update(dt, ref layert);
-                //Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
+                var watch = new Stopwatch();
+                watch.Start();
+                ThrowingSystem.SwapImage(layert.Image, layert);
+                ThrowingSystem.Update(dt, ref layert);
+                Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
+
+                //using (SKCanvas canvas = new SKCanvas(layert.Image))
+                //{
+                //    foreach (var obj in ThrowingSystem.Objects)
+                //    {
+                //        canvas.DrawBitmap(obj.Image, obj.X, obj.Y);
+                //    }
+                //}
+
+                int width = 1920;
+                int height = 1080;
+                SKBitmap mainBitmap = new SKBitmap(width, height);
+                using (SKCanvas canvas = new SKCanvas(mainBitmap))
+                {
+                    // Clear canvas with white color
+                    canvas.Clear();
+
+                    // Load the main bitmap to be drawn at the bottom center
+                    SKBitmap mainImage = layert.Image; // Assume you have a method to load the main image
+                    int mainImageX = (width - mainImage.Width) / 2;
+                    int mainImageY = height - mainImage.Height;
+
+                    // Draw the main bitmap on the canvas
+                    canvas.DrawBitmap(mainImage, mainImageX, mainImageY);
+
+                    // Draw moving objects from ThrowingSystem.Objects
+                    foreach (var obj in ThrowingSystem.Objects)
+                    {
+                        canvas.DrawBitmap(obj.Image, obj.X, obj.Y);
+                    }
+                }
+
+                layert.Image = mainBitmap;
+
 
                 ValueUpdate?.Invoke(null, layert);
 

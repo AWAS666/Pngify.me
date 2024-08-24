@@ -11,6 +11,7 @@ using SkiaSharp;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Linq;
 
 namespace PngTuberSharp.ViewModels;
 
@@ -42,14 +43,38 @@ public partial class AvatarViewModel : ViewModelBase
 
     private LayerValues layerValues = new();
 
-    private ObservableCollection<ImageViewModel> imageViewModels = new();
+    [ObservableProperty]
+    private ObservableCollection<ImageViewModel> throwables = new();
     private SKBitmap cache;
 
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
         LayerManager.FPSUpdate += UpdateFPS;
-        SettingsManager.Current.LayerSetup.ApplySettings();
+        LayerManager.ThrowingSystem.UpdateObjects += UpdateObjects;
+    }
+
+    private void UpdateObjects(object? sender, float e)
+    {
+        foreach (var item in LayerManager.ThrowingSystem.Objects)
+        {
+            var throwable = Throwables.FirstOrDefault(x => x.Item == item);
+            if(throwable == null)
+            {
+                throwable = new ImageViewModel(item)
+                {
+                    X = item.X,
+                    Y = item.Y,
+                    Rotation = item.Rotation,
+                    Image = item.Image.ToAvaloniaImage()
+                };
+                Throwables.Add(throwable);
+            }
+
+            throwable.X = item.X;
+            throwable.Y = item.Y;
+            throwable.Rotation = item.Rotation;           
+        }
     }
 
     private void UpdateFPS(object? sender, float e)
@@ -65,9 +90,7 @@ public partial class AvatarViewModel : ViewModelBase
         ZoomX = e.ZoomX;
         ZoomY = e.ZoomY;
         Opacity = e.Opacity;
-        var watch = new Stopwatch();
-        watch.Start();
         Image = e.Image.ToAvaloniaImage();
-        //Debug.WriteLine($"Conversion to avalonia took: {watch.Elapsed.TotalMilliseconds}ms");
+      
     }
 }

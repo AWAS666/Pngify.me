@@ -1,7 +1,9 @@
-﻿using Avalonia.Media.Imaging;
+﻿using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using Newtonsoft.Json.Linq;
 using PngTuberSharp.Layers;
+using PngTuberSharp.Services.ThrowingSystem;
 using System.Collections.Generic;
 using System.IO;
 using System.Numerics;
@@ -20,16 +22,13 @@ namespace PngTuberSharp.ViewModels.Helper
         private float rotation;
 
         [ObservableProperty]
-        private Bitmap image;
+        private IImage image;
 
-        public ImageViewModel()
+        public MovableObject Item { get; }
+
+        public ImageViewModel(Services.ThrowingSystem.MovableObject item)
         {
-
+            Item = item;
         }
-
     }
-
-    
-
-
 }
