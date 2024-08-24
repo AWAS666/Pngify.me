@@ -118,17 +118,10 @@ namespace PngTuberSharp.Layers
                 ThrowingSystem.Update(dt, ref layert);
                 Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
 
-                //using (SKCanvas canvas = new SKCanvas(layert.Image))
-                //{
-                //    foreach (var obj in ThrowingSystem.Objects)
-                //    {
-                //        canvas.DrawBitmap(obj.Image, obj.X, obj.Y);
-                //    }
-                //}
 
                 int width = 1920;
                 int height = 1080;
-                SKBitmap mainBitmap = new SKBitmap(width, height);
+                var mainBitmap = new SKBitmap(width, height);
                 using (SKCanvas canvas = new SKCanvas(mainBitmap))
                 {
                     // Clear canvas with white color
@@ -150,7 +143,6 @@ namespace PngTuberSharp.Layers
                 }
 
                 layert.Image = mainBitmap;
-
 
                 ValueUpdate?.Invoke(null, layert);
 

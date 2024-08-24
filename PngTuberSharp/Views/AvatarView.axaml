@@ -6,16 +6,16 @@
 			 xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
 			  x:DataType="vm:AvatarViewModel"
              x:Class="PngTuberSharp.Views.AvatarView">
-	<Grid  Width="1920" Height="1080" >
+	<Grid >
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
-		<Grid VerticalAlignment="Bottom" HorizontalAlignment="Left">
+		<Grid>
 			<Grid.RenderTransform>
 				<TransformGroup>
 					<ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}" />
 					<TranslateTransform X="{Binding PosX}" Y="{Binding PosY}"  />
 				</TransformGroup>
 			</Grid.RenderTransform>
-			<Grid VerticalAlignment="Bottom" HorizontalAlignment="Left">
+			<Grid>
 				<Grid.RenderTransform>
 					<TransformGroup>
 						<RotateTransform Angle="{Binding Rotation}" />
@@ -24,8 +24,10 @@
 				<Grid.Opacity>
 					<Binding Path="Opacity" />
 				</Grid.Opacity>
-				<Image VerticalAlignment="Bottom" HorizontalAlignment="Left" 
-					   Source="{Binding Image}" Name="image"></Image>
+				<Image  Stretch="UniformToFill"
+               HorizontalAlignment="Stretch"
+               VerticalAlignment="Stretch"
+						Source="{Binding Image}" Name="image"></Image>
 			</Grid>
 		</Grid>
 		<!--<ItemsControl ItemsSource="{Binding Throwables}">

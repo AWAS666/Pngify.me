@@ -140,7 +140,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
                     return true;
             }
             return false;
-        }      
+        }
 
     }
 }

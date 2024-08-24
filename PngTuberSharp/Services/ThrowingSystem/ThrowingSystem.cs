@@ -50,11 +50,11 @@ namespace PngTuberSharp.Services.ThrowingSystem
                 {
                     layert.PosX += obj.CurrentSpeed.X * dt;
                     layert.PosY += obj.CurrentSpeed.Y * dt;
-                    obj.SetCollision();
+                    obj.SetCollision(dt);
 
                 }
                 if (obj.X > 1920 || obj.X < 0 || obj.Y > 1080 || obj.Y < 0)
-                    obj.SetCollision();
+                    obj.SetCollision(dt);
             }
 
 

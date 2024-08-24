@@ -9,9 +9,11 @@ using PngTuberSharp.Services.Settings;
 using PngTuberSharp.ViewModels.Helper;
 using SkiaSharp;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
 using System.Linq;
+using static PngTuberSharp.Helpers.SkiaExtensions;
 
 namespace PngTuberSharp.ViewModels;
 
@@ -39,13 +41,14 @@ public partial class AvatarViewModel : ViewModelBase
     private float fps;
 
     [ObservableProperty]
-    private IImage image = ImageSetting.PlaceHolder.ToAvaloniaImage();
+    private AvaloniaImage image = (AvaloniaImage)ImageSetting.PlaceHolder.ToAvaloniaImage();
 
     private LayerValues layerValues = new();
 
     [ObservableProperty]
     private ObservableCollection<ImageViewModel> throwables = new();
     private SKBitmap cache;
+    private List<AvaloniaImage> oldImages = new();
 
     public AvatarViewModel()
     {
@@ -59,7 +62,7 @@ public partial class AvatarViewModel : ViewModelBase
         foreach (var item in LayerManager.ThrowingSystem.Objects)
         {
             var throwable = Throwables.FirstOrDefault(x => x.Item == item);
-            if(throwable == null)
+            if (throwable == null)
             {
                 throwable = new ImageViewModel(item)
                 {
@@ -73,7 +76,7 @@ public partial class AvatarViewModel : ViewModelBase
 
             throwable.X = item.X;
             throwable.Y = item.Y;
-            throwable.Rotation = item.Rotation;           
+            throwable.Rotation = item.Rotation;
         }
     }
 
@@ -90,7 +93,19 @@ public partial class AvatarViewModel : ViewModelBase
         ZoomX = e.ZoomX;
         ZoomY = e.ZoomY;
         Opacity = e.Opacity;
-        Image = e.Image.ToAvaloniaImage();
-      
+
+        // this is hacky af, but else the memory gets filled with the newly generated drawings
+        var img = (AvaloniaImage)e.Image.ToAvaloniaImage();
+        Image = img;
+        oldImages.Add(img);
+
+        if (oldImages.Count > 10)
+        {
+            foreach (var image in oldImages.Take(5).ToList())
+            {
+                oldImages.Remove(image);
+                image.Dispose();
+            }
+        }
     }
 }

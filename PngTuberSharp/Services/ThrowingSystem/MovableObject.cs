@@ -47,14 +47,14 @@ namespace PngTuberSharp.Services.ThrowingSystem
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
         }
 
-        public void SetCollision()
+        public void SetCollision(float dt)
         {
             // just invert vector I guess
             speed.X = -speed.X * 0.9f;
             speed.Y = -speed.Y * 0.9f;
 
             // update position to make it move away quicker
-            Update(0.1f);
+            Update(dt);
         }
 
         //private List<(int x, int y)> GetImageOutline()
