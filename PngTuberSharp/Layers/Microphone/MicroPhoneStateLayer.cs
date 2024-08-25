@@ -2,6 +2,7 @@
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.Services.Settings;
+using PngTuberSharp.Services.Settings.Images;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -11,10 +12,10 @@ namespace PngTuberSharp.Layers.Microphone
 {
     public class MicroPhoneStateLayer
     {
-        private SKBitmap openImage;
-        private SKBitmap openBlinkImage;
-        private SKBitmap closedImage;
-        private SKBitmap closedBlinkImage;
+        private BaseImage openImage;
+        private BaseImage openBlinkImage;
+        private BaseImage closedImage;
+        private BaseImage closedBlinkImage;
         private MicroPhoneState current;
         private float transTime;
         private bool blinking;
@@ -45,10 +46,12 @@ namespace PngTuberSharp.Layers.Microphone
                 blinking = false;
             }
 
+            BaseImage baseImage = null;
             if (MicrophoneService.Talking)
-                values.Image = blinking ? openBlinkImage : openImage;
+                baseImage = blinking ? openBlinkImage : openImage;
             else
-                values.Image = blinking ? closedBlinkImage : closedImage;
+                baseImage = blinking ? closedBlinkImage : closedImage;
+            values.Image = baseImage.GetImage(TimeSpan.FromSeconds(CurrentTime));
         }
 
         public void SwitchState(MicroPhoneState state)

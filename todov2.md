@@ -1,0 +1,4 @@
+- [ ] Globalhotkey bricks the hotkey on all other applications
+- [ ] fix ram usage
+- [ ] scale image to full size, even gifs
+- [ ] position mainimage using coordinates aswell

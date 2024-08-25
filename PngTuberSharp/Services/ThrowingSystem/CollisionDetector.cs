@@ -56,23 +56,31 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
         public void DrawOutlines(SKCanvas canvas, SKPaint paint)
         {
-            // Draw left outline
+            // Apply offset to each point while drawing
             for (int i = 0; i < leftOutline.Count - 1; i++)
             {
-                canvas.DrawLine(leftOutline[i], leftOutline[i + 1], paint);
+                SKPoint p1 = new SKPoint(leftOutline[i].X + Offset.X, leftOutline[i].Y + Offset.Y);
+                SKPoint p2 = new SKPoint(leftOutline[i + 1].X + Offset.X, leftOutline[i + 1].Y + Offset.Y);
+                canvas.DrawLine(p1, p2, paint);
             }
 
-            // Draw right outline
             for (int i = 0; i < rightOutline.Count - 1; i++)
             {
-                canvas.DrawLine(rightOutline[i], rightOutline[i + 1], paint);
+                SKPoint p1 = new SKPoint(rightOutline[i].X + Offset.X, rightOutline[i].Y + Offset.Y);
+                SKPoint p2 = new SKPoint(rightOutline[i + 1].X + Offset.X, rightOutline[i + 1].Y + Offset.Y);
+                canvas.DrawLine(p1, p2, paint);
             }
 
-            // Connect the two outlines
+            // Connect the two outlines with offset
             if (leftOutline.Count > 0 && rightOutline.Count > 0)
             {
-                canvas.DrawLine(leftOutline[0], rightOutline[0], paint);
-                canvas.DrawLine(leftOutline[^1], rightOutline[^1], paint);
+                SKPoint leftStart = new SKPoint(leftOutline[0].X + Offset.X, leftOutline[0].Y + Offset.Y);
+                SKPoint rightStart = new SKPoint(rightOutline[0].X + Offset.X, rightOutline[0].Y + Offset.Y);
+                SKPoint leftEnd = new SKPoint(leftOutline[^1].X + Offset.X, leftOutline[^1].Y + Offset.Y);
+                SKPoint rightEnd = new SKPoint(rightOutline[^1].X + Offset.X, rightOutline[^1].Y + Offset.Y);
+
+                canvas.DrawLine(leftStart, rightStart, paint);
+                canvas.DrawLine(leftEnd, rightEnd, paint);
             }
         }
 

@@ -9,6 +9,7 @@ namespace PngTuberSharp.Services.Settings
         public AvatarSettings Avatar { get; set; } = new();
         public LayerSetup LayerSetup { get; set; } = new();
         public TwitchSettings Twitch { get; set; } = new();
+        public TitsSettings Tits { get; set; } = new();
 
     }
 }

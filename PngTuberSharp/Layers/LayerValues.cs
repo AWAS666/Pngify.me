@@ -23,7 +23,7 @@ namespace PngTuberSharp.Layers
         }
         public float ZoomX { get; set; } = 1f;
         public float ZoomY { get; set; } = 1f;
-        public double Opacity { get; set; } = 1f;
+        public float Opacity { get; set; } = 1f;
 
         public SKBitmap Image { get; set; }
     }

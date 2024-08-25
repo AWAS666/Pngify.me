@@ -8,43 +8,11 @@
              x:Class="PngTuberSharp.Views.AvatarView">
 	<Grid >
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
-		<Grid>
-			<Grid.RenderTransform>
-				<TransformGroup>
-					<ScaleTransform ScaleX="{Binding ZoomX}" ScaleY="{Binding ZoomY}" />
-					<TranslateTransform X="{Binding PosX}" Y="{Binding PosY}"  />
-				</TransformGroup>
-			</Grid.RenderTransform>
-			<Grid>
-				<Grid.RenderTransform>
-					<TransformGroup>
-						<RotateTransform Angle="{Binding Rotation}" />
-					</TransformGroup>
-				</Grid.RenderTransform>
-				<Grid.Opacity>
-					<Binding Path="Opacity" />
-				</Grid.Opacity>
-				<Image  Stretch="UniformToFill"
-               HorizontalAlignment="Stretch"
-               VerticalAlignment="Stretch"
-						Source="{Binding Image}" Name="image"></Image>
-			</Grid>
-		</Grid>
-		<!--<ItemsControl ItemsSource="{Binding Throwables}">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<ContentControl>
-						<ContentControl.RenderTransform>
-							<TransformGroup>
-								<RotateTransform Angle="{Binding Rotation}"/>
-								<TranslateTransform X="{Binding X}" Y="{Binding Y}"/>
-							</TransformGroup>
-						</ContentControl.RenderTransform>
-						<Image Source="{Binding Image}"></Image>
-					</ContentControl>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ItemsControl>-->
+
+		<Image  Stretch="Uniform"
+	   HorizontalAlignment="Stretch"
+	   VerticalAlignment="Stretch"
+				Source="{Binding Image}" Name="image"></Image>
 		<!--<ListBox Margin="0,50,0,0" Background="Transparent" ItemsSource="{Binding Throwables}" HorizontalAlignment="Left">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>

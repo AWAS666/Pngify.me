@@ -65,7 +65,8 @@ namespace PngTuberSharp.Services.ThrowingSystem
         {
             if (MainBody != null && MainBody.SameBitmap(bitmap))
                 return;
-            MainBody = new MovableObject(bitmap, new(0, 0), (int)(540 + layert.PosX), (int)(0 + layert.PosY), 15);
+            int posX = (int)((1920-layert.Image.Width)/2 + layert.PosX);
+            MainBody = new MovableObject(bitmap, new(0, 0), posX, (int)(0 + layert.PosY), 15);
         }
 
         private bool IsColliding(MovableObject image1, MovableObject image2)

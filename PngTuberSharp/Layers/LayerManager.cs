@@ -3,6 +3,7 @@ using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.Services.ThrowingSystem;
 using PngTuberSharp.Services.Twitch;
+using ReactiveUI;
 using Serilog;
 using SkiaSharp;
 using System;
@@ -105,44 +106,15 @@ namespace PngTuberSharp.Layers
                         Layers.Remove(layer);
                     }
                 }
+
                 var layert = new LayerValues();
                 MicroPhoneStateLayer.Update(dt, ref layert);
-                foreach (BaseLayer layer in Layers)
+                foreach (BaseLayer layer in Layers.ToList())
                 {
                     layer.OnCalculateParameters(dt, ref layert);
                 }
 
-                var watch = new Stopwatch();
-                watch.Start();
-                ThrowingSystem.SwapImage(layert.Image, layert);
-                ThrowingSystem.Update(dt, ref layert);
-                Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
-
-
-                int width = 1920;
-                int height = 1080;
-                var mainBitmap = new SKBitmap(width, height);
-                using (SKCanvas canvas = new SKCanvas(mainBitmap))
-                {
-                    // Clear canvas with white color
-                    canvas.Clear();
-
-                    // Load the main bitmap to be drawn at the bottom center
-                    SKBitmap mainImage = layert.Image; // Assume you have a method to load the main image
-                    int mainImageX = (width - mainImage.Width) / 2;
-                    int mainImageY = height - mainImage.Height;
-
-                    // Draw the main bitmap on the canvas
-                    canvas.DrawBitmap(mainImage, mainImageX, mainImageY);
-
-                    // Draw moving objects from ThrowingSystem.Objects
-                    foreach (var obj in ThrowingSystem.Objects)
-                    {
-                        canvas.DrawBitmap(obj.Image, obj.X, obj.Y);
-                    }
-                }
-
-                layert.Image = mainBitmap;
+                UpdateThrowingSystem(dt, ref layert);
 
                 ValueUpdate?.Invoke(null, layert);
 
@@ -151,6 +123,107 @@ namespace PngTuberSharp.Layers
             {
                 Log.Error(e, $"Error in LayerManagerupdate: {e.Message}");
             }
+        }
+
+        private static void UpdateThrowingSystem(float dt, ref LayerValues layert)
+        {
+            SettingsManager.Current.Tits.Enabled = false;
+            SettingsManager.Current.Tits.HitLinesVisible = true;
+            ThrowingSystem.SwapImage(layert.Image, layert);
+            if (SettingsManager.Current.Tits.Enabled)
+            {
+                var watch = new Stopwatch();
+                watch.Start();                
+                ThrowingSystem.Update(dt, ref layert);
+                Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
+            }
+
+
+            int width = 1920;
+            int height = 1080;
+            using var mainBitmap = new SKBitmap(width, height);
+            using (SKCanvas canvas = new SKCanvas(mainBitmap))
+            {
+                // Clear canvas with white color
+                canvas.Clear();
+
+                // Load the main bitmap to be drawn at the bottom center
+                SKBitmap mainImage = layert.Image;
+
+                // Define the rotation angle in degrees
+                float rotationAngle = layert.Rotation; // Adjust the angle as needed
+
+                // Define the zoom factor (1.0 means no zoom, 2.0 means 2x zoom, etc.)
+                float zoomFactor = layert.ZoomX; // Adjust the zoom factor as needed
+
+                // Define the opacity (1.0 means fully opaque, 0.0 means fully transparent)
+                float opacity = layert.Opacity; // Adjust the opacity as needed
+
+                // Calculate new dimensions based on zoom factor
+                int zoomedWidth = (int)(mainImage.Width * zoomFactor);
+                int zoomedHeight = (int)(mainImage.Height * zoomFactor);
+
+                // Create a new SKBitmap for the rotated, zoomed, and opaque image
+                SKBitmap transformedImage = new SKBitmap(zoomedWidth, zoomedHeight);
+
+                using (SKCanvas transformedCanvas = new SKCanvas(transformedImage))
+                {
+                    // Set the pivot point for rotation and zoom to the center of the image
+                    transformedCanvas.Translate(zoomedWidth / 2, zoomedHeight / 2);
+                    transformedCanvas.Scale(zoomFactor);
+                    transformedCanvas.RotateDegrees(rotationAngle);
+                    transformedCanvas.Translate(-mainImage.Width / 2, -mainImage.Height / 2);
+
+                    // Set opacity
+                    using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
+                    {
+                        transformedCanvas.DrawBitmap(mainImage, 0, 0, paint);
+                    }
+                }
+
+                layert.PosX += (width - mainImage.Width) / 2;
+
+                // Draw the main bitmap on the canvas
+                canvas.DrawBitmap(transformedImage, layert.PosX, layert.PosY);
+
+                if (SettingsManager.Current.Tits.HitLinesVisible)
+                {
+                    using (var paint = new SKPaint
+                    {
+                        Color = SKColors.Red,
+                        StrokeWidth = 2,
+                        IsAntialias = true,
+                        Style = SKPaintStyle.Stroke,
+
+                    })
+                    {
+                        ThrowingSystem.MainBody.Collision.DrawOutlines(canvas, paint);
+                    }
+                }
+
+                // Draw moving objects from ThrowingSystem.Objects
+                if (SettingsManager.Current.Tits.Enabled)
+                    foreach (var obj in ThrowingSystem.Objects)
+                    {
+                        canvas.DrawBitmap(obj.Image, obj.X, obj.Y);
+                        if (SettingsManager.Current.Tits.HitLinesVisible)
+                        {
+                            using (var paint = new SKPaint
+                            {
+                                Color = SKColors.Blue,
+                                StrokeWidth = 2,
+                                IsAntialias = true,
+                                Style = SKPaintStyle.Stroke,
+
+                            })
+                            {
+                                obj.Collision.DrawOutlines(canvas, paint);
+                            }
+                        }
+                    }
+            }
+
+            layert.Image = mainBitmap.Copy();
         }
     }
 }
