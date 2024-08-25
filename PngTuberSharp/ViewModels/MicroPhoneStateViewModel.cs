@@ -36,7 +36,7 @@ namespace PngTuberSharp.ViewModels
         {
             this.state = state;
             this.parent = parent;
-
+            SetHotkey();
         }
 
         public async Task LoadFile(ImageSetting set)
