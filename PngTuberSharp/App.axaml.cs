@@ -7,8 +7,8 @@ using PngTuberSharp.Services.Twitch;
 using PngTuberSharp.ViewModels;
 using PngTuberSharp.Views;
 using Serilog;
-using System.IO;
 using System;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PngTuberSharp;
@@ -23,7 +23,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         SetupSerilog();
-       
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             WinHotkey.Start(desktop);

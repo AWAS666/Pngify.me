@@ -1,7 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using GlobalHotKeys.Native.Types;
 using PngTuberSharp.Layers;
-using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.Services.Twitch;
 using System;

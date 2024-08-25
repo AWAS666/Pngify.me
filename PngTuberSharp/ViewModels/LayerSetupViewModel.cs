@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PngTuberSharp.Layers;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.ViewModels.Helper;

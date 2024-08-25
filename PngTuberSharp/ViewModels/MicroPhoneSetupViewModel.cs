@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
@@ -6,7 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Avalonia.Platform.Storage;
 
 
 namespace PngTuberSharp.ViewModels

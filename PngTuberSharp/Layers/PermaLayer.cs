@@ -1,7 +1,7 @@
 ﻿namespace PngTuberSharp.Layers
 {
     public abstract class PermaLayer : BaseLayer
-    {      
+    {
         protected float CurrentStrength = 0;
         public override void OnEnter()
         {
@@ -21,6 +21,6 @@
 
         public override void OnUpdateExit(float dt, float fraction)
         {
-        }        
+        }
     }
 }

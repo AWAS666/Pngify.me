@@ -39,7 +39,7 @@ namespace PngTuberSharp.Services
                 {
                     Current = new();
                     Save();
-                    Log.Error(e.Message);   
+                    Log.Error(e.Message);
                 }
             }
             else

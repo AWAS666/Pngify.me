@@ -4,8 +4,6 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Twitch;
-using System;
-using System.Threading.Tasks;
 
 namespace PngTuberSharp.Views;
 

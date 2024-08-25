@@ -1,5 +1,4 @@
-﻿using Microsoft.FSharp.Core;
-using PngTuberSharp.Layers.Movements;
+﻿using PngTuberSharp.Layers.Movements;
 
 namespace PngTuberSharp.Layers
 {

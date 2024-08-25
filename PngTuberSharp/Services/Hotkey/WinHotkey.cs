@@ -1,5 +1,4 @@
-﻿using DynamicData;
-using GlobalHotKeys;
+﻿using GlobalHotKeys;
 using GlobalHotKeys.Native.Types;
 using Serilog;
 using System;
@@ -7,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
-using TwitchLib.Api.Helix.Models.Subscriptions;
 
 namespace PngTuberSharp.Services.Hotkey
 {
@@ -18,7 +16,7 @@ namespace PngTuberSharp.Services.Hotkey
 
         //private static List<IRegistration> subscriptions = new List<IRegistration>();
         private static new Dictionary<(VirtualKeyCode, Modifiers), List<Action>> callBacks = new();
-        private static new Dictionary<(VirtualKeyCode, Modifiers), IRegistration> hotkeys = new ();
+        private static new Dictionary<(VirtualKeyCode, Modifiers), IRegistration> hotkeys = new();
 
         public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
         {

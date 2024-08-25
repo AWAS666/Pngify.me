@@ -1,10 +1,10 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Input;
+using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Services.Settings;
 using System.Linq;
-using System.Threading.Tasks;
-using Avalonia.Platform.Storage;
-using Avalonia.Input;
 using System.Net;
+using System.Threading.Tasks;
 
 
 namespace PngTuberSharp.ViewModels

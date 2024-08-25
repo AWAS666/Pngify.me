@@ -1,9 +1,6 @@
 ﻿using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
-using PngTuberSharp.Services.Settings;
 using PngTuberSharp.Services.ThrowingSystem;
-using PngTuberSharp.Services.Twitch;
-using ReactiveUI;
 using Serilog;
 using SkiaSharp;
 using System;
@@ -237,7 +234,7 @@ namespace PngTuberSharp.Layers
                 }
             }
 
-           return mainBitmap.Copy();
+            return mainBitmap.Copy();
         }
     }
 }

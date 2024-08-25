@@ -1,5 +1,4 @@
-﻿using Avalonia.Media.Imaging;
-using PngTuberSharp.Services;
+﻿using PngTuberSharp.Services;
 using SkiaSharp;
 using System;
 
@@ -8,7 +7,7 @@ namespace PngTuberSharp.Layers.Microphone
     public class BasicMicroPhoneLayer : MicroPhoneLayer
     {
         private SKBitmap openImage;
-        private SKBitmap closedImage;      
+        private SKBitmap closedImage;
 
         private void RefreshImage(object? sender = null, EventArgs e = null)
         {
@@ -28,6 +27,6 @@ namespace PngTuberSharp.Layers.Microphone
         {
             SettingsManager.Current.Avatar.Refresh += RefreshImage;
             RefreshImage();
-        }        
+        }
     }
 }

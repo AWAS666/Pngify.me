@@ -1,9 +1,7 @@
-﻿using Avalonia.Media.Imaging;
-using PngTuberSharp.Services;
+﻿using PngTuberSharp.Services;
 using PngTuberSharp.Services.Hotkey;
 using PngTuberSharp.Services.Settings;
 using PngTuberSharp.Services.Settings.Images;
-using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -57,7 +55,7 @@ namespace PngTuberSharp.Layers.Microphone
         public void SwitchState(MicroPhoneState state)
         {
             openImage = state.Open.Bitmap;
-            openBlinkImage = !string.IsNullOrEmpty(state.OpenBlink.FilePath) ?  state.OpenBlink.Bitmap : state.Open.Bitmap;
+            openBlinkImage = !string.IsNullOrEmpty(state.OpenBlink.FilePath) ? state.OpenBlink.Bitmap : state.Open.Bitmap;
             closedImage = state.Closed.Bitmap;
             closedBlinkImage = !string.IsNullOrEmpty(state.ClosedBlink.FilePath) ? state.ClosedBlink.Bitmap : state.Closed.Bitmap;
             current = state;

@@ -1,5 +1,4 @@
-﻿using Avalonia.Media.Imaging;
-using SkiaSharp;
+﻿using SkiaSharp;
 
 namespace PngTuberSharp.Layers
 {

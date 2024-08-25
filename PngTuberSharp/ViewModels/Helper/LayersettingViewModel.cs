@@ -1,10 +1,6 @@
-﻿using Avalonia.Interactivity;
-using CommunityToolkit.Mvvm.ComponentModel;
-using DynamicData;
-using Newtonsoft.Json.Linq;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Services.Settings;
-using PngTuberSharp.Views.Helper;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;

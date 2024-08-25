@@ -5,7 +5,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text.Json;
-using System.Threading;
 using System.Threading.Tasks;
 using TwitchLib.Api;
 

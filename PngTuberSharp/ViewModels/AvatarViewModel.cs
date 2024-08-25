@@ -1,19 +1,10 @@
 ﻿using Avalonia.Media;
-using Avalonia.Media.Imaging;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Helpers;
 using PngTuberSharp.Layers;
-using PngTuberSharp.Layers.Microphone;
-using PngTuberSharp.Services;
 using PngTuberSharp.Services.Settings;
-using PngTuberSharp.ViewModels.Helper;
 using SkiaSharp;
-using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Diagnostics;
-using System.Drawing;
-using System.IO;
 using System.Linq;
 using static PngTuberSharp.Helpers.SkiaExtensions;
 
@@ -83,7 +74,7 @@ public partial class AvatarViewModel : ViewModelBase
         Rotation = e.Rotation;
         ZoomX = e.ZoomX;
         ZoomY = e.ZoomY;
-        Opacity = e.Opacity;      
+        Opacity = e.Opacity;
 
         // this is hacky af, but else the memory gets filled with the newly generated drawings
         var img = (AvaloniaImage)e.Image.ToAvaloniaImage();

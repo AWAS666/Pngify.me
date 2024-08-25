@@ -1,5 +1,5 @@
-﻿using GlobalHotKeys.Native.Types;
-using GlobalHotKeys;
+﻿using GlobalHotKeys;
+using GlobalHotKeys.Native.Types;
 
 namespace HotkeyTEst
 {

@@ -1,14 +1,6 @@
-﻿using Avalonia.Media.Imaging;
-using PngTuberSharp.Helpers;
-using PngTuberSharp.Layers;
+﻿using PngTuberSharp.Layers;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PngTuberSharp.Services.ThrowingSystem
 {
@@ -59,7 +51,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
             // update position to make it move away quicker
             Update(dt);
-        }    
+        }
 
         public bool SameBitmap(SKBitmap bitmap)
         {

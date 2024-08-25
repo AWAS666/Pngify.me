@@ -1,6 +1,4 @@
-﻿using Microsoft.VisualBasic;
-using PngTuberSharp.Helpers;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace PngTuberSharp.Services.Settings
 {

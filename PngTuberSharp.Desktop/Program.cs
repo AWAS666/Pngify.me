@@ -1,10 +1,9 @@
-﻿using System;
-
-using Avalonia;
+﻿using Avalonia;
 using Avalonia.ReactiveUI;
-using Projektanker.Icons.Avalonia.FontAwesome;
 using Projektanker.Icons.Avalonia;
+using Projektanker.Icons.Avalonia.FontAwesome;
 using Serilog;
+using System;
 
 namespace PngTuberSharp.Desktop;
 

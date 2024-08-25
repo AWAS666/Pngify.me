@@ -2,7 +2,6 @@
 using PngTuberSharp.Services.Settings;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace PngTuberSharp.Services

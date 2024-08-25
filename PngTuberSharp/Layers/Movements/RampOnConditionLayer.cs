@@ -30,7 +30,7 @@ namespace PngTuberSharp.Layers
                 stateChangeTime = CurrentTime;
             }
 
-            var value = Math.Min(1, 
+            var value = Math.Min(1,
                 Easings.CubicEaseOut((CurrentTime - stateChangeTime) / (current ? ActivationRamp : DeActivationRamp)));
 
             if (current)

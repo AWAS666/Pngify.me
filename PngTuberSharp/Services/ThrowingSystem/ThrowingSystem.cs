@@ -4,7 +4,6 @@ using PngTuberSharp.Services.Twitch;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;

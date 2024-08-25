@@ -1,9 +1,5 @@
-﻿using System;
-using SkiaSharp;
-using System.Collections.Generic;
-using System.Drawing;
+﻿using SkiaSharp;
 using System.Diagnostics;
-using System.IO;
 
 namespace TestSkiaCollission
 {

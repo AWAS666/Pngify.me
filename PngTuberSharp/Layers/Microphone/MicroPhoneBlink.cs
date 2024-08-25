@@ -1,5 +1,4 @@
-﻿using Avalonia.Media.Imaging;
-using PngTuberSharp.Services;
+﻿using PngTuberSharp.Services;
 using SkiaSharp;
 
 namespace PngTuberSharp.Layers.Microphone
@@ -49,6 +48,6 @@ namespace PngTuberSharp.Layers.Microphone
                 values.Image = blinking ? openBlinkImage : openImage;
             else
                 values.Image = blinking ? closedBlinkImage : closedImage;
-        }       
+        }
     }
 }
