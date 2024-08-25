@@ -70,6 +70,7 @@ namespace PngTuberSharp.Helpers
 
         public void Dispose()
         {
+            Bitmap?.Dispose();
         }
 
         public bool Equals(ICustomDrawOperation? other) => false;

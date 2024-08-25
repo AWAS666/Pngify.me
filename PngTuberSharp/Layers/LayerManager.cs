@@ -26,6 +26,7 @@ namespace PngTuberSharp.Layers
         public static float TotalRunTime { get; private set; }
 
         public static EventHandler<LayerValues> ValueUpdate;
+        public static EventHandler<SKBitmap> ImageUpdate;
         public static EventHandler<BaseLayer> NewLayer;
         public static EventHandler<float> FPSUpdate;
 
@@ -114,9 +115,12 @@ namespace PngTuberSharp.Layers
                     layer.OnCalculateParameters(dt, ref layert);
                 }
 
-                UpdateThrowingSystem(dt, ref layert);
+                var draw = UpdateThrowingSystem(dt, ref layert);
 
                 ValueUpdate?.Invoke(null, layert);
+                ImageUpdate?.Invoke(null, draw);
+
+                GC.Collect();
 
             }
             catch (Exception e)
@@ -125,7 +129,7 @@ namespace PngTuberSharp.Layers
             }
         }
 
-        private static void UpdateThrowingSystem(float dt, ref LayerValues layert)
+        private static SKBitmap UpdateThrowingSystem(float dt, ref LayerValues layert)
         {
             ThrowingSystem.SwapImage(layert.Image, layert);
             if (SettingsManager.Current.Tits.Enabled)
@@ -136,7 +140,7 @@ namespace PngTuberSharp.Layers
                 Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
             }
 
-
+            using var baseImg = layert.Image.Copy();
             int width = 1920;
             int height = 1080;
             using var mainBitmap = new SKBitmap(width, height);
@@ -144,9 +148,6 @@ namespace PngTuberSharp.Layers
             {
                 // Clear canvas with white color
                 canvas.Clear();
-
-                // Load the main bitmap to be drawn at the bottom center
-                SKBitmap mainImage = layert.Image;
 
                 // Define the rotation angle in degrees
                 float rotationAngle = layert.Rotation; // Adjust the angle as needed
@@ -158,11 +159,11 @@ namespace PngTuberSharp.Layers
                 float opacity = layert.Opacity; // Adjust the opacity as needed
 
                 // Calculate new dimensions based on zoom factor
-                int zoomedWidth = (int)(mainImage.Width * zoomFactor);
-                int zoomedHeight = (int)(mainImage.Height * zoomFactor);
+                int zoomedWidth = (int)(baseImg.Width * zoomFactor);
+                int zoomedHeight = (int)(baseImg.Height * zoomFactor);
 
                 // Create a new SKBitmap for the rotated, zoomed, and opaque image
-                SKBitmap transformedImage = new SKBitmap(zoomedWidth, zoomedHeight);
+                using var transformedImage = new SKBitmap(zoomedWidth, zoomedHeight);
 
                 using (SKCanvas transformedCanvas = new SKCanvas(transformedImage))
                 {
@@ -170,16 +171,16 @@ namespace PngTuberSharp.Layers
                     transformedCanvas.Translate(zoomedWidth / 2, zoomedHeight / 2);
                     transformedCanvas.Scale(zoomFactor);
                     transformedCanvas.RotateDegrees(rotationAngle);
-                    transformedCanvas.Translate(-mainImage.Width / 2, -mainImage.Height / 2);
+                    transformedCanvas.Translate(-baseImg.Width / 2, -baseImg.Height / 2);
 
                     // Set opacity
                     using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
                     {
-                        transformedCanvas.DrawBitmap(mainImage, 0, 0, paint);
+                        transformedCanvas.DrawBitmap(baseImg, 0, 0, paint);
                     }
                 }
 
-                layert.PosX += (width - mainImage.Width) / 2;
+                layert.PosX += (width - baseImg.Width) / 2;
 
                 // Draw the main bitmap on the canvas
                 canvas.DrawBitmap(transformedImage, layert.PosX, layert.PosY);
@@ -192,7 +193,6 @@ namespace PngTuberSharp.Layers
                         StrokeWidth = 2,
                         IsAntialias = true,
                         Style = SKPaintStyle.Stroke,
-
                     })
                     {
                         ThrowingSystem.MainBody.Collision.DrawOutlines(canvas, paint);
@@ -201,10 +201,11 @@ namespace PngTuberSharp.Layers
 
                 // Draw moving objects from ThrowingSystem.Objects
                 if (SettingsManager.Current.Tits.Enabled)
+                {
                     foreach (var obj in ThrowingSystem.Objects.ToList())
                     {
                         // Create a new SKBitmap for the rotated, zoomed, and opaque image
-                        SKBitmap rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
+                        using var rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
 
                         using (SKCanvas rotatedCanvas = new SKCanvas(rotobj))
                         {
@@ -233,9 +234,10 @@ namespace PngTuberSharp.Layers
                             }
                         }
                     }
+                }
             }
 
-            layert.Image = mainBitmap.Copy();
+           return mainBitmap.Copy();
         }
     }
 }

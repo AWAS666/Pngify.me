@@ -50,9 +50,26 @@ public partial class AvatarViewModel : ViewModelBase
 
     public AvatarViewModel()
     {
-        LayerManager.ValueUpdate += UpdatePosition;
+        //LayerManager.ValueUpdate += UpdatePosition;
+        LayerManager.ImageUpdate += UpdateImage;
         LayerManager.FPSUpdate += UpdateFPS;
-    }  
+    }
+
+    private void UpdateImage(object? sender, SKBitmap e)
+    {
+        var img = (AvaloniaImage)e.ToAvaloniaImage();
+        Image = img;
+        //oldImages.Add(img);
+
+        if (oldImages.Count > 15)
+        {
+            foreach (var image in oldImages.Take(5).ToList())
+            {
+                oldImages.Remove(image);
+                image.Dispose();
+            }
+        }
+    }
 
     private void UpdateFPS(object? sender, float e)
     {
@@ -66,8 +83,7 @@ public partial class AvatarViewModel : ViewModelBase
         Rotation = e.Rotation;
         ZoomX = e.ZoomX;
         ZoomY = e.ZoomY;
-        Opacity = e.Opacity;
-      
+        Opacity = e.Opacity;      
 
         // this is hacky af, but else the memory gets filled with the newly generated drawings
         var img = (AvaloniaImage)e.Image.ToAvaloniaImage();
