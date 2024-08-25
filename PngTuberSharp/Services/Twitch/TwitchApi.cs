@@ -30,7 +30,7 @@ namespace PngTuberSharp.Services.Twitch
             "channel:read:predictions",
             "channel:read:hype_train",
         };
-        private TwitchAuth? auth;
+        public TwitchAuth? Auth { get; private set; }
 
         public TwitchApi()
         {
@@ -45,9 +45,9 @@ namespace PngTuberSharp.Services.Twitch
             Api = new TwitchAPI();
             Api.Settings.ClientId = SecretsManager.TwitchClientId;
             LoadAuth();
-            if (auth == null || DateTime.Now > auth.Expiration)
+            if (Auth == null || DateTime.Now > Auth.Expiration)
             {
-                auth = new TwitchAuth();
+                Auth = new TwitchAuth();
 
                 // open browser to let user verify here
                 Process.Start(new ProcessStartInfo
@@ -58,12 +58,12 @@ namespace PngTuberSharp.Services.Twitch
 
                 string token = await StartHttpListener(Redirect);
 
-                auth.AccessToken = token;
+                Auth.AccessToken = token;
                 Api.Settings.AccessToken = token;
             }
 
             var validation = await Api.Auth.ValidateAccessTokenAsync();
-            auth.Expiration = DateTime.Now.AddSeconds(validation.ExpiresIn);
+            Auth.Expiration = DateTime.Now.AddSeconds(validation.ExpiresIn);
             UserId = validation.UserId;
 
             Save();
@@ -73,14 +73,14 @@ namespace PngTuberSharp.Services.Twitch
         {
             if (File.Exists(FilePath))
             {
-                auth = JsonSerializer.Deserialize<TwitchAuth>(File.ReadAllText(FilePath));
-                Api.Settings.AccessToken = auth.AccessToken;
+                Auth = JsonSerializer.Deserialize<TwitchAuth>(File.ReadAllText(FilePath));
+                Api.Settings.AccessToken = Auth.AccessToken;
             }
         }
 
         private void Save()
         {
-            File.WriteAllText(FilePath, JsonSerializer.Serialize(auth));
+            File.WriteAllText(FilePath, JsonSerializer.Serialize(Auth));
         }
 
         private static string GetAuthorizationCodeUrl(string clientId, string redirectUri, List<string> scopes)

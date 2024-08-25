@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.Twitch;
+using System;
 using System.Threading.Tasks;
 
 namespace PngTuberSharp.Views;
@@ -41,6 +42,16 @@ public partial class GeneralSettings : UserControl
 
         targetFPS.Bind(TextBox.TextProperty, bindingFpsTarget);
 
+        TwitchEventSocket.Authenticated += UpdateText;
+
+    }
+
+    private void UpdateText(object? sender, TwitchAuth e)
+    {
+        Dispatcher.UIThread.Invoke(() =>
+        {
+            tokenValid.Text = e.Expiration.ToString();
+        });
     }
 
     private async void TwitchRetry(object sender, RoutedEventArgs e)

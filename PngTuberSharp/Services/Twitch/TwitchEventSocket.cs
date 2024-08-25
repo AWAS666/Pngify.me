@@ -15,11 +15,12 @@ namespace PngTuberSharp.Services.Twitch
         public static EventHandler<string> RedeemUsed;
         public static EventHandler<ChannelCheer> BitsUsed;
         public static EventHandler<string> NewFollower;
+        public static EventHandler<TwitchAuth> Authenticated;
 
         private static EventSubWebsocketClient _eventSubWebsocketClient;
 
         private static string ws = "wss://eventsub.wss.twitch.tv/ws";
-        private static TwitchApi twitchAPI;
+        public static TwitchApi Api { get; private set; }
 
         public static async Task Start()
         {
@@ -41,53 +42,53 @@ namespace PngTuberSharp.Services.Twitch
             await _eventSubWebsocketClient.ConnectAsync(new Uri(ws));
         }
 
-
-
         private static async Task WebsocketConnected(object sender, TwitchLib.EventSub.Websockets.Core.EventArgs.WebsocketConnectedArgs args)
         {
-            twitchAPI = new TwitchApi();
-            await twitchAPI.Connect();
+            Api = new TwitchApi();
+            await Api.Connect();
 
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.update", "1",
-                    new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.update", "1",
+                    new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                     EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
             //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelfollow
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.follow", "2",
-                new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId }, { "moderator_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.follow", "2",
+                new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }, { "moderator_user_id", Api.UserId } },
                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("stream.online", "1",
-                new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId }, },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("stream.online", "1",
+                new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }, },
                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
 
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("stream.offline", "1",
-                new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId }, },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("stream.offline", "1",
+                new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }, },
                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.raid", "1",
-                  new Dictionary<string, string>() { { "to_broadcaster_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.raid", "1",
+                  new Dictionary<string, string>() { { "to_broadcaster_user_id", Api.UserId } },
                   EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
             //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelhype_trainend
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.hype_train.begin", "1",
-                 new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.hype_train.begin", "1",
+                 new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                  EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.hype_train.end", "1",
-                new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.hype_train.end", "1",
+                new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
             //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchannel_points_custom_reward_redemptionadd
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.channel_points_custom_reward_redemption.add", "1",
-                new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.channel_points_custom_reward_redemption.add", "1",
+                new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
             //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelcheer
-            await twitchAPI.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.cheer", "1",
-                new Dictionary<string, string>() { { "broadcaster_user_id", twitchAPI.UserId } },
+            await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.cheer", "1",
+                new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
+
+            Authenticated?.Invoke(Api, Api.Auth);
         }
 
         private static async Task OnWebsocketDisconnected(object? sender, EventArgs e)
