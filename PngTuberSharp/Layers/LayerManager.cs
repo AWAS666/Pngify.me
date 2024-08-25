@@ -127,13 +127,11 @@ namespace PngTuberSharp.Layers
 
         private static void UpdateThrowingSystem(float dt, ref LayerValues layert)
         {
-            SettingsManager.Current.Tits.Enabled = false;
-            SettingsManager.Current.Tits.HitLinesVisible = true;
             ThrowingSystem.SwapImage(layert.Image, layert);
             if (SettingsManager.Current.Tits.Enabled)
             {
                 var watch = new Stopwatch();
-                watch.Start();                
+                watch.Start();
                 ThrowingSystem.Update(dt, ref layert);
                 Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
             }
@@ -203,9 +201,23 @@ namespace PngTuberSharp.Layers
 
                 // Draw moving objects from ThrowingSystem.Objects
                 if (SettingsManager.Current.Tits.Enabled)
-                    foreach (var obj in ThrowingSystem.Objects)
+                    foreach (var obj in ThrowingSystem.Objects.ToList())
                     {
-                        canvas.DrawBitmap(obj.Image, obj.X, obj.Y);
+                        // Create a new SKBitmap for the rotated, zoomed, and opaque image
+                        SKBitmap rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
+
+                        using (SKCanvas rotatedCanvas = new SKCanvas(rotobj))
+                        {
+                            // Set the pivot point for rotation and zoom to the center of the image
+                            rotatedCanvas.Translate(obj.Image.Width / 2, obj.Image.Height / 2);
+                            rotatedCanvas.RotateDegrees(obj.Rotation);
+                            rotatedCanvas.Translate(-obj.Image.Width / 2, -obj.Image.Height / 2);
+
+                            rotatedCanvas.DrawBitmap(obj.Image, 0, 0);
+                        }
+
+                        canvas.DrawBitmap(rotobj, obj.X, obj.Y);
+
                         if (SettingsManager.Current.Tits.HitLinesVisible)
                         {
                             using (var paint = new SKPaint

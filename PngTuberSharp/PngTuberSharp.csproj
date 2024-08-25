@@ -74,6 +74,9 @@
     <Compile Update="Views\Helper\TriggerEditorView.axaml.cs">
       <DependentUpon>TriggerEditorView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\TITSSetup.axaml.cs">
+      <DependentUpon>TITSSetup.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\MicStateSetup.axaml.cs">
       <DependentUpon>MicStateSetup.axaml</DependentUpon>
     </Compile>

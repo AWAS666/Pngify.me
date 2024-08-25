@@ -33,6 +33,9 @@
 				<TabItem Header="Avatar States" FontSize="12" Width="125">
 					<views:MicStateSetup/>
 				</TabItem>
+				<TabItem Header="Throwing System" FontSize="12" Width="125">
+					<views:TITSSetup/>
+				</TabItem>
 				<TabItem Header="GeneralSettings" FontSize="12" Width="125">
 					<views:GeneralSettings />
 				</TabItem>

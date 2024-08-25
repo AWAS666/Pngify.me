@@ -17,6 +17,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
         private LayerValues Values;
 
         private Vector2 speed;
+        private float rotSpeed;
 
         public Vector2 CurrentSpeed => speed;
         public float X { get => Values.PosX; }
@@ -27,7 +28,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public CollisionDetector Collision { get; }
 
 
-        public MovableObject(SKBitmap map, Vector2 speed, int x, int y, int details)
+        public MovableObject(SKBitmap map, Vector2 speed, float rotSpeed, int x, int y, int details)
         {
             Values = new LayerValues();
             Values.Image = map;
@@ -36,12 +37,15 @@ namespace PngTuberSharp.Services.ThrowingSystem
             Collision = new CollisionDetector(map, details);
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
             this.speed = speed;
+            this.rotSpeed = rotSpeed;
         }
 
         public void Update(float dt)
         {
             Values.PosX += speed.X * dt;
             Values.PosY += speed.Y * dt;
+            Values.Rotation += rotSpeed * dt;
+
             // settle for a gravity constant here
             speed.Y -= -dt * 100;
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
@@ -55,27 +59,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
             // update position to make it move away quicker
             Update(dt);
-        }
-
-        //private List<(int x, int y)> GetImageOutline()
-        //{
-        //    var outline = new List<(int x, int y)>();
-
-        //    var bitmap = Values.Image;
-
-        //    for (int y = 0; y < bitmap.Height; y += 4)
-        //    {
-        //        for (int x = 0; x < bitmap.Width; x += 4)
-        //        {
-        //            var color = bitmap.GetPixel(x, y);
-        //            if (color.Alpha > 0) // If pixel is not fully transparent
-        //            {
-        //                outline.Add((x, y));
-        //            }
-        //        }
-        //    }
-        //    return outline;
-        //}
+        }    
 
         public bool SameBitmap(SKBitmap bitmap)
         {

@@ -45,42 +45,14 @@ public partial class AvatarViewModel : ViewModelBase
     [ObservableProperty]
     private IImage image = (AvaloniaImage)ImageSetting.PlaceHolder.ToAvaloniaImage();
 
-    private LayerValues layerValues = new();
 
-    [ObservableProperty]
-    private ObservableCollection<ImageViewModel> throwables = new();
-    private SKBitmap cache;
     private List<AvaloniaImage> oldImages = new();
 
     public AvatarViewModel()
     {
         LayerManager.ValueUpdate += UpdatePosition;
         LayerManager.FPSUpdate += UpdateFPS;
-        LayerManager.ThrowingSystem.UpdateObjects += UpdateObjects;
-    }
-
-    private void UpdateObjects(object? sender, float e)
-    {
-        foreach (var item in LayerManager.ThrowingSystem.Objects)
-        {
-            var throwable = Throwables.FirstOrDefault(x => x.Item == item);
-            if (throwable == null)
-            {
-                throwable = new ImageViewModel(item)
-                {
-                    X = item.X,
-                    Y = item.Y,
-                    Rotation = item.Rotation,
-                    Image = item.Image.ToAvaloniaImage()
-                };
-                Throwables.Add(throwable);
-            }
-
-            throwable.X = item.X;
-            throwable.Y = item.Y;
-            throwable.Rotation = item.Rotation;
-        }
-    }
+    }  
 
     private void UpdateFPS(object? sender, float e)
     {

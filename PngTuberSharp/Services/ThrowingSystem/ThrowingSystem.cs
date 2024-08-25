@@ -1,9 +1,13 @@
 ﻿using Avalonia.Platform;
+using PngTuberSharp.Layers;
+using PngTuberSharp.Services.Twitch;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
+using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
 namespace PngTuberSharp.Services.ThrowingSystem
 {
@@ -13,6 +17,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public MovableObject MainBody { get; set; }
 
         public EventHandler<float> UpdateObjects;
+        private Vector2 recoil = Vector2.Zero;
 
         public List<SKBitmap> Throwables { get; set; } = new()
         {
@@ -26,17 +31,26 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
         public ThrowingSystem()
         {
-            for (var i = 0; i < 5; i++)
-            {
-                Objects.Add(new MovableObject(Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
-                    new System.Numerics.Vector2(1000, -300), 0, Random.Shared.Next(200, 800), 15));
-            }
+            TwitchEventSocket.BitsUsed += TriggerBits;
+            TwitchEventSocket.RedeemUsed += TriggerRedeem;
         }
 
+        private void TriggerRedeem(object? sender, string e)
+        {
+
+        }
+
+        private void TriggerBits(object? sender, ChannelCheer e)
+        {
+            Trigger(e.Bits);
+        }
 
         public void Update(float dt, ref Layers.LayerValues layert)
         {
-            foreach (var obj in Objects)
+            // dampend recoil
+            recoil /= 1.5f;
+
+            foreach (var obj in Objects.ToList())
             {
                 obj.Update(dt);
                 //foreach (var otherObject in Objects)
@@ -48,25 +62,35 @@ namespace PngTuberSharp.Services.ThrowingSystem
                 //}
                 if (IsColliding(obj, MainBody))
                 {
-                    layert.PosX += obj.CurrentSpeed.X * dt;
-                    layert.PosY += obj.CurrentSpeed.Y * dt;
+                    RecoilMain(dt, obj, ref layert);
                     obj.SetCollision(dt);
 
                 }
-                if (obj.X > 1920 || obj.X < 0 || obj.Y > 1080 || obj.Y < 0)
-                    obj.SetCollision(dt);
+                if (obj.X > 2200 || obj.X < -300 || obj.Y > 1300 || obj.Y < -300)
+                {
+                    Objects.Remove(obj);
+                    //obj.SetCollision(dt);
+                }
             }
 
+            layert.PosX += recoil.X;
+            layert.PosY += recoil.Y;
+            layert.Rotation += recoil.Length() / 2;
 
             UpdateObjects?.Invoke(this, dt);
+        }
+
+        private void RecoilMain(float dt, MovableObject? obj, ref LayerValues layert)
+        {
+            recoil += new Vector2(obj.CurrentSpeed.X * dt, obj.CurrentSpeed.Y * dt);
         }
 
         public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert)
         {
             if (MainBody != null && MainBody.SameBitmap(bitmap))
                 return;
-            int posX = (int)((1920-layert.Image.Width)/2 + layert.PosX);
-            MainBody = new MovableObject(bitmap, new(0, 0), posX, (int)(0 + layert.PosY), 15);
+            int posX = (int)((1920 - layert.Image.Width) / 2 + layert.PosX);
+            MainBody = new MovableObject(bitmap, new(0, 0), 0, posX, (int)(0 + layert.PosY), 15);
         }
 
         private bool IsColliding(MovableObject image1, MovableObject image2)
@@ -74,55 +98,15 @@ namespace PngTuberSharp.Services.ThrowingSystem
             return image1.Collision.CollidesWith(image2.Collision);
         }
 
-        //private bool IsColliding(MovableObject image1, MovableObject image2)
-        //{
-        //    foreach (var (x1, y1) in image1.Outline)
-        //    {
-        //        int globalX1 = (int)(x1 + image1.X);
-        //        int globalY1 = (int)(y1 + image1.Y);
-
-        //        foreach (var (x2, y2) in image2.Outline)
-        //        {
-        //            int globalX2 = (int)(x2 + image2.X);
-        //            int globalY2 = (int)(y2 + image2.Y);
-
-        //            if (globalX1 == globalX2 && globalY1 == globalY2)
-        //            {
-        //                return true;
-        //            }
-        //        }
-        //    }
-        //    return false;
-        //}
-
-        //private void CollideWithMain(float dt, ref Layers.LayerValues layert)
-        //{
-        //    var toCheck = Objects.ToList();
-        //    foreach (var (x1, y1) in MainBody.Outline)
-        //    {
-        //        int globalX1 = (int)(x1 + MainBody.X);
-        //        int globalY1 = (int)(y1 + MainBody.Y);
-
-        //        foreach (var item in toCheck.ToList())
-        //        {
-        //            foreach (var (x2, y2) in item.Outline)
-        //            {
-        //                int globalX2 = (int)(x2 + item.X);
-        //                int globalY2 = (int)(y2 + item.Y);
-
-        //                if (globalX1 == globalX2 && globalY1 == globalY2)
-        //                {
-
-        //                    layert.PosX += item.CurrentSpeed.X * dt;
-        //                    layert.PosY += item.CurrentSpeed.Y * dt;
-        //                    item.SetCollision();
-
-        //                    toCheck.Remove(item);
-        //                    break;
-        //                }
-        //            }
-        //        }               
-        //    }
-        //}
+        public void Trigger(int amount)
+        {
+            for (var i = 0; i < amount; i++)
+            {
+                Objects.Add(new MovableObject(Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
+                    new Vector2(Random.Shared.Next(2000, 2500), -300),
+                    Random.Shared.Next(-20, 20)
+                    , -100, Random.Shared.Next(400, 700), 10));
+            }
+        }
     }
 }
