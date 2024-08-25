@@ -61,14 +61,14 @@ public partial class AvatarViewModel : ViewModelBase
         Image = img;
         //oldImages.Add(img);
 
-        if (oldImages.Count > 15)
-        {
-            foreach (var image in oldImages.Take(5).ToList())
-            {
-                oldImages.Remove(image);
-                image.Dispose();
-            }
-        }
+        //if (oldImages.Count > 15)
+        //{
+        //    foreach (var image in oldImages.Take(5).ToList())
+        //    {
+        //        oldImages.Remove(image);
+        //        image.Dispose();
+        //    }
+        //}
     }
 
     private void UpdateFPS(object? sender, float e)

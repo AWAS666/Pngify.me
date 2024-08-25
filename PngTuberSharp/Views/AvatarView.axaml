@@ -6,7 +6,8 @@
 			 xmlns:vm="clr-namespace:PngTuberSharp.ViewModels"
 			  x:DataType="vm:AvatarViewModel"
              x:Class="PngTuberSharp.Views.AvatarView">
-	<Grid >
+	<Grid  HorizontalAlignment="Stretch"
+	   VerticalAlignment="Stretch" >
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
 
 		<Image  Stretch="Uniform"
