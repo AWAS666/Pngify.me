@@ -76,7 +76,7 @@ namespace PngTuberSharp.Services.Settings
             if (File.Exists(FilePath))
             {
                 Bitmap = LoadImage(FilePath);
-
+                Bitmap.Resize(1920, 1080);
             }
         }
 

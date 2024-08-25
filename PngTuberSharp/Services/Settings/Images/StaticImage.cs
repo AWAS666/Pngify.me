@@ -23,5 +23,10 @@ namespace PngTuberSharp.Services.Settings.Images
         {
             return Bitmap;
         }
+
+        public override void Resize(int maxWidth, int maxHeight)
+        {
+            Bitmap = base.Resize(Bitmap, maxWidth, maxHeight);
+        }
     }
 }
