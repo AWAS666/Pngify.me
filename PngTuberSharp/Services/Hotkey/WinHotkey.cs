@@ -6,20 +6,25 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reactive.Linq;
+using TwitchLib.Api.Helix.Models.Subscriptions;
 
 namespace PngTuberSharp.Services.Hotkey
 {
     public static class WinHotkey
     {
         private static HotKeyManager hotKeyManager;
+        private static IDisposable subscription;
+
         //private static List<IRegistration> subscriptions = new List<IRegistration>();
         private static new Dictionary<(VirtualKeyCode, Modifiers), List<Action>> callBacks = new();
-        private static new Dictionary<(VirtualKeyCode, Modifiers), IRegistration> subscriptions = new ();
+        private static new Dictionary<(VirtualKeyCode, Modifiers), IRegistration> hotkeys = new ();
 
         public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
         {
             hotKeyManager = new HotKeyManager();
-            hotKeyManager.HotKeyPressed.Subscribe(HotkeyTriggered);
+            subscription = hotKeyManager.HotKeyPressed
+                .Subscribe(HotkeyTriggered);
             desktop.Exit += Desktop_Exit;
         }
 
@@ -39,7 +44,8 @@ namespace PngTuberSharp.Services.Hotkey
         private static void Desktop_Exit(object? sender, Avalonia.Controls.ApplicationLifetimes.ControlledApplicationLifetimeExitEventArgs e)
         {
             hotKeyManager.Dispose();
-            subscriptions.Values.ToList().ForEach(s => s.Dispose());
+            subscription.Dispose();
+            hotkeys.Values.ToList().ForEach(s => s.Dispose());
         }
 
         public static void AddHotkey(VirtualKeyCode virtualKeyCode, Modifiers modifier, Action callback)
@@ -51,7 +57,7 @@ namespace PngTuberSharp.Services.Hotkey
                 return;
             }
             var hotKeySubscription = hotKeyManager.Register(virtualKeyCode, modifier);
-            subscriptions.Add((virtualKeyCode, modifier), hotKeySubscription);
+            hotkeys.Add((virtualKeyCode, modifier), hotKeySubscription);
             callBacks.Add((virtualKeyCode, modifier), [callback]);
         }
 
@@ -68,8 +74,8 @@ namespace PngTuberSharp.Services.Hotkey
                     callBacks.Remove(item.Key);
 
                     // dispose subscribtion objects
-                    subscriptions[item.Key].Dispose();
-                    subscriptions.Remove(item.Key);
+                    hotkeys[item.Key].Dispose();
+                    hotkeys.Remove(item.Key);
                 }
             }
         }
