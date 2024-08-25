@@ -47,7 +47,10 @@ namespace PngTuberSharp.ViewModels
                 FileTypeFilter = new[] { ImageAll },
                 AllowMultiple = false
             });
-            set.FilePath = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+            {
+                set.FilePath = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            }
         }
 
         public void Delete(ImageSetting set)
