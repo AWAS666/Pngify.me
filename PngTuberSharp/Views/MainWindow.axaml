@@ -17,7 +17,7 @@
 			  HorizontalAlignment="Right" RowDefinitions="Auto,*">
 			<Button HorizontalAlignment="Center" Click="SaveSettings" Margin="5,5,5,5"
 					ToolTip.Tip="Only save, doesnt apply">Save settings</Button>
-			<TabControl Grid.Row="1">
+			<TabControl Grid.Row="1" WrapSelection="True">
 				<TabItem Header="Microphone" FontSize="12" Width="125">
 					<views:VolumeSlider />
 				</TabItem>

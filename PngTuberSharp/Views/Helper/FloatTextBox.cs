@@ -40,7 +40,7 @@ namespace PngTuberSharp.Views.Helper
             else if (!Regex.IsMatch(newValue, "^[0-9]*$"))
             {
                 // Remove any non-numeric characters
-                Text = Regex.Replace(newValue, @"[^0-9\.]", "");
+                Text = Regex.Replace(newValue, @"[^0-9\.\,]", "");
 
                 // Move the caret to the end
                 CaretIndex = Text.Length;
