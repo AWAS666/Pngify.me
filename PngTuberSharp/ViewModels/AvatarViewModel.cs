@@ -44,61 +44,18 @@ public partial class AvatarViewModel : ViewModelBase
 
     public AvatarViewModel()
     {
-        //LayerManager.ValueUpdate += UpdatePosition;
         LayerManager.ImageUpdate += UpdateImage;
         LayerManager.FPSUpdate += UpdateFPS;
     }
 
     private void UpdateImage(object? sender, SKImage e)
     {
-        //Image?.Dispose();
-        //Image = (AvaloniaImage)e.ToAvaloniaImage();
         Image.UpdateImage(e);
         RequestRedraw?.Invoke(this, new EventArgs());
-
-
-        //var img = (AvaloniaImage)e.ToAvaloniaImage();
-        //Image = img;
-
-        //bool status = SetProperty(ref image, image);
-        //oldImages.Add(img);
-
-        //if (oldImages.Count > 15)
-        //{
-        //    foreach (var image in oldImages.Take(5).ToList())
-        //    {
-        //        oldImages.Remove(image);
-        //        image.Dispose();
-        //    }
-        //}
     }
 
     private void UpdateFPS(object? sender, float e)
     {
         Fps = e;
-    }
-
-    private void UpdatePosition(object? sender, LayerValues e)
-    {
-        PosX = e.PosX;
-        PosY = e.PosY;
-        Rotation = e.Rotation;
-        ZoomX = e.ZoomX;
-        ZoomY = e.ZoomY;
-        Opacity = e.Opacity;
-
-        // this is hacky af, but else the memory gets filled with the newly generated drawings
-        var img = (AvaloniaImage)e.Image.ToAvaloniaImage();
-        Image = img;
-        oldImages.Add(img);
-
-        if (oldImages.Count > 15)
-        {
-            foreach (var image in oldImages.Take(5).ToList())
-            {
-                oldImages.Remove(image);
-                image.Dispose();
-            }
-        }
-    }
+    }    
 }

@@ -29,10 +29,6 @@ public partial class AvatarView : UserControl
 
     private void RedrawVisual(object? sender, EventArgs e)
     {
-        Dispatcher.UIThread.Post(() =>
-        {
-            image.InvalidateVisual();
-        });
-        //InvalidateVisual();
+        Dispatcher.UIThread.Post(image.InvalidateVisual);
     }
 }

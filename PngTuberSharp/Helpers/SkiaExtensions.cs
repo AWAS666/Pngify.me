@@ -7,7 +7,6 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using TwitchLib.Api.Helix.Models.Soundtrack;
 
 namespace PngTuberSharp.Helpers
 {
@@ -60,12 +59,7 @@ namespace PngTuberSharp.Helpers
             }
             if (_drawImageOperation != null)
             {
-                var next = _drawImageOperation.NextBitmap;
-                //for (int i = 0; i < next.Count-1; i++)
-                //{
-                //    next[i].Dispose();
-                //    next.Remove(next[i]);
-                //}
+                var next = _drawImageOperation.NextBitmap;              
                 foreach (var item in next.SkipLast(1).ToList())
                 {
                     item.Dispose();
@@ -91,11 +85,6 @@ namespace PngTuberSharp.Helpers
             _drawImageOperation.Bounds = sourceRect;
             context.Custom(_drawImageOperation);
         }
-
-        //public override bool Equals(object? obj)
-        //{
-        //    return false;
-        //}
     }
 
     public record class SKBitmapDrawOperation : ICustomDrawOperation
@@ -124,13 +113,7 @@ namespace PngTuberSharp.Helpers
             if (NextBitmap.Count > 0)
             {
                 old = Bitmap;
-                Bitmap = NextBitmap.Last();
-                //for (int i = 0; i < NextBitmap.Count - 1; i++)
-                //{
-                //    NextBitmap[i].Dispose();
-                //}
-
-                //NextBitmap.Clear();
+                Bitmap = NextBitmap.Last();             
             }
             if (Bitmap is SKImage bitmap && context.PlatformImpl.GetFeature<ISkiaSharpApiLeaseFeature>() is ISkiaSharpApiLeaseFeature leaseFeature)
             {
@@ -138,7 +121,6 @@ namespace PngTuberSharp.Helpers
                 using (lease)
                 {
                     lease.SkCanvas.DrawImage(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
-                    //lease.SkCanvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
                 }
             }
             old?.Dispose();
