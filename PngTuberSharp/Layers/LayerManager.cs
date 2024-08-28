@@ -23,7 +23,7 @@ namespace PngTuberSharp.Layers
         public static float TotalRunTime { get; private set; }
 
         public static EventHandler<LayerValues> ValueUpdate;
-        public static EventHandler<SKBitmap> ImageUpdate;
+        public static EventHandler<SKImage> ImageUpdate;
         public static EventHandler<BaseLayer> NewLayer;
         public static EventHandler<float> FPSUpdate;
 
@@ -124,7 +124,7 @@ namespace PngTuberSharp.Layers
             }
         }
 
-        private static SKBitmap UpdateThrowingSystem(float dt, ref LayerValues layert)
+        private static SKImage UpdateThrowingSystem(float dt, ref LayerValues layert)
         {
             ThrowingSystem.SwapImage(layert.Image, layert);
             if (SettingsManager.Current.Tits.Enabled)
@@ -138,7 +138,7 @@ namespace PngTuberSharp.Layers
             var baseImg = layert.Image;
             int width = 1920;
             int height = 1080;
-            var mainBitmap = new SKBitmap(width, height);
+            using var mainBitmap = new SKBitmap(width, height);
             using (SKCanvas canvas = new SKCanvas(mainBitmap))
             {
                 // Clear canvas with white color
@@ -232,7 +232,7 @@ namespace PngTuberSharp.Layers
                 }
             }
 
-            return mainBitmap;
+            return SKImage.FromBitmap(mainBitmap);
         }
     }
 }

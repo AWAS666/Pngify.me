@@ -49,7 +49,7 @@ public partial class AvatarViewModel : ViewModelBase
         LayerManager.FPSUpdate += UpdateFPS;
     }
 
-    private void UpdateImage(object? sender, SKBitmap e)
+    private void UpdateImage(object? sender, SKImage e)
     {
         Image.UpdateImage(e);
         RequestRedraw?.Invoke(this, new EventArgs());

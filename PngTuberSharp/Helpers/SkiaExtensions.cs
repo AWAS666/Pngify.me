@@ -23,18 +23,18 @@ namespace PngTuberSharp.Helpers
         {
             if (bitmap is not null)
             {
-                return new AvaloniaImage(bitmap);
+                return new AvaloniaImage(SKImage.FromBitmap(bitmap));
             }
             return default;
         }
     }
     public class AvaloniaImage : IImage, IDisposable
     {
-        private SKBitmap? _source;
+        private SKImage? _source;
         SKBitmapDrawOperation? _drawImageOperation;
         private SKBitmap _next;
 
-        public AvaloniaImage(SKBitmap? source)
+        public AvaloniaImage(SKImage? source)
         {
             _source = source;
             if (source?.Info.Size is SKSizeI size)
@@ -43,10 +43,21 @@ namespace PngTuberSharp.Helpers
             }
         }
 
-        public void UpdateImage(SKBitmap newBitmap)
+        public void UpdateImage(SKImage newBitmap)
         {
             if (_drawImageOperation != null)
             {
+                var next = _drawImageOperation.NextBitmap;
+                //for (int i = 0; i < next.Count-1; i++)
+                //{
+                //    next[i].Dispose();
+                //    next.Remove(next[i]);
+                //}
+                foreach (var item in next.SkipLast(1).ToList())
+                {
+                    item.Dispose();
+                    next.Remove(item);
+                }
                 _drawImageOperation.NextBitmap.Add(newBitmap);
             }
         }
@@ -80,8 +91,8 @@ namespace PngTuberSharp.Helpers
 
         public Rect Bounds { get; set; }
 
-        public SKBitmap? Bitmap { get; set; }
-        public List<SKBitmap> NextBitmap { get; set; } = new();
+        public SKImage? Bitmap { get; set; }
+        public List<SKImage> NextBitmap { get; set; } = new();
 
         public void Dispose()
         {
@@ -100,19 +111,20 @@ namespace PngTuberSharp.Helpers
             {
                 Bitmap?.Dispose();
                 Bitmap = NextBitmap.Last();
-                for (int i = 0; i < NextBitmap.Count - 1; i++)
-                {
-                    NextBitmap[i].Dispose();
-                }
+                //for (int i = 0; i < NextBitmap.Count - 1; i++)
+                //{
+                //    NextBitmap[i].Dispose();
+                //}
 
-                NextBitmap.Clear();
+                //NextBitmap.Clear();
             }
-            if (Bitmap is SKBitmap bitmap && context.PlatformImpl.GetFeature<ISkiaSharpApiLeaseFeature>() is ISkiaSharpApiLeaseFeature leaseFeature)
+            if (Bitmap is SKImage bitmap && context.PlatformImpl.GetFeature<ISkiaSharpApiLeaseFeature>() is ISkiaSharpApiLeaseFeature leaseFeature)
             {
                 ISkiaSharpApiLease lease = leaseFeature.Lease();
                 using (lease)
                 {
-                    lease.SkCanvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
+                    lease.SkCanvas.DrawImage(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
+                    //lease.SkCanvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
                 }
             }
             rendering = false;
