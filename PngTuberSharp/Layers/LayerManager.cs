@@ -117,8 +117,6 @@ namespace PngTuberSharp.Layers
                 ValueUpdate?.Invoke(null, layert);
                 ImageUpdate?.Invoke(null, draw);
 
-                GC.Collect();
-
             }
             catch (Exception e)
             {
@@ -137,10 +135,10 @@ namespace PngTuberSharp.Layers
                 Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
             }
 
-            using var baseImg = layert.Image.Copy();
+            var baseImg = layert.Image;
             int width = 1920;
             int height = 1080;
-            using var mainBitmap = new SKBitmap(width, height);
+            var mainBitmap = new SKBitmap(width, height);
             using (SKCanvas canvas = new SKCanvas(mainBitmap))
             {
                 // Clear canvas with white color
@@ -234,7 +232,7 @@ namespace PngTuberSharp.Layers
                 }
             }
 
-            return mainBitmap.Copy();
+            return mainBitmap;
         }
     }
 }

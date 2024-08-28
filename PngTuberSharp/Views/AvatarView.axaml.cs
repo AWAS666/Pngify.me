@@ -1,7 +1,9 @@
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Threading;
 using PngTuberSharp.Services;
 using PngTuberSharp.ViewModels;
+using System;
 
 namespace PngTuberSharp.Views;
 
@@ -20,6 +22,17 @@ public partial class AvatarView : UserControl
 
         fpsCounter.Bind(TextBlock.IsVisibleProperty, bindingFps);
 
-        DataContext = new AvatarViewModel();
+        var vm = new AvatarViewModel();
+        vm.RequestRedraw += RedrawVisual;
+        DataContext = vm;
+    }
+
+    private void RedrawVisual(object? sender, EventArgs e)
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            image.InvalidateVisual();
+        });
+        //InvalidateVisual();
     }
 }

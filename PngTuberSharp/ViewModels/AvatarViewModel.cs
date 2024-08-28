@@ -4,6 +4,7 @@ using PngTuberSharp.Helpers;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Services.Settings;
 using SkiaSharp;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using static PngTuberSharp.Helpers.SkiaExtensions;
@@ -34,10 +35,12 @@ public partial class AvatarViewModel : ViewModelBase
     private float fps;
 
     [ObservableProperty]
-    private IImage image = (AvaloniaImage)ImageSetting.PlaceHolder.ToAvaloniaImage();
+    private AvaloniaImage image = (AvaloniaImage)ImageSetting.PlaceHolder.ToAvaloniaImage();
 
 
     private List<AvaloniaImage> oldImages = new();
+
+    public EventHandler RequestRedraw;
 
     public AvatarViewModel()
     {
@@ -48,8 +51,14 @@ public partial class AvatarViewModel : ViewModelBase
 
     private void UpdateImage(object? sender, SKBitmap e)
     {
-        var img = (AvaloniaImage)e.ToAvaloniaImage();
-        Image = img;
+        Image.UpdateImage(e);
+        RequestRedraw?.Invoke(this, new EventArgs());
+
+
+        //var img = (AvaloniaImage)e.ToAvaloniaImage();
+        //Image = img;
+
+        //bool status = SetProperty(ref image, image);
         //oldImages.Add(img);
 
         //if (oldImages.Count > 15)
