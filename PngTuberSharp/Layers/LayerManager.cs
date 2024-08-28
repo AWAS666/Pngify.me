@@ -1,4 +1,5 @@
-﻿using PngTuberSharp.Layers.Microphone;
+﻿using Newtonsoft.Json.Linq;
+using PngTuberSharp.Layers.Microphone;
 using PngTuberSharp.Services;
 using PngTuberSharp.Services.ThrowingSystem;
 using Serilog;
@@ -231,7 +232,6 @@ namespace PngTuberSharp.Layers
                     }
                 }
             }
-
             return SKImage.FromBitmap(mainBitmap);
         }
     }

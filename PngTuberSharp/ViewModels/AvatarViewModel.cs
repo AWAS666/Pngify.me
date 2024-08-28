@@ -51,6 +51,8 @@ public partial class AvatarViewModel : ViewModelBase
 
     private void UpdateImage(object? sender, SKImage e)
     {
+        //Image?.Dispose();
+        //Image = (AvaloniaImage)e.ToAvaloniaImage();
         Image.UpdateImage(e);
         RequestRedraw?.Invoke(this, new EventArgs());
 

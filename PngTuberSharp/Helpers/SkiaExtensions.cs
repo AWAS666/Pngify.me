@@ -7,6 +7,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using TwitchLib.Api.Helix.Models.Soundtrack;
 
 namespace PngTuberSharp.Helpers
 {
@@ -27,12 +28,20 @@ namespace PngTuberSharp.Helpers
             }
             return default;
         }
+
+        public static IImage? ToAvaloniaImage(this SKImage? bitmap)
+        {
+            if (bitmap is not null)
+            {
+                return new AvaloniaImage(bitmap);
+            }
+            return default;
+        }
     }
     public class AvaloniaImage : IImage, IDisposable
     {
         private SKImage? _source;
         SKBitmapDrawOperation? _drawImageOperation;
-        private SKBitmap _next;
 
         public AvaloniaImage(SKImage? source)
         {
@@ -45,6 +54,10 @@ namespace PngTuberSharp.Helpers
 
         public void UpdateImage(SKImage newBitmap)
         {
+            if (newBitmap?.Info.Size is SKSizeI size)
+            {
+                Size = new(size.Width, size.Height);
+            }
             if (_drawImageOperation != null)
             {
                 var next = _drawImageOperation.NextBitmap;
@@ -62,7 +75,7 @@ namespace PngTuberSharp.Helpers
             }
         }
 
-        public Size Size { get; }
+        public Size Size { get; set; }
 
         public void Dispose() => _source?.Dispose();
 
@@ -79,10 +92,10 @@ namespace PngTuberSharp.Helpers
             context.Custom(_drawImageOperation);
         }
 
-        public override bool Equals(object? obj)
-        {
-            return false;
-        }
+        //public override bool Equals(object? obj)
+        //{
+        //    return false;
+        //}
     }
 
     public record class SKBitmapDrawOperation : ICustomDrawOperation
@@ -105,11 +118,12 @@ namespace PngTuberSharp.Helpers
 
         public void Render(ImmediateDrawingContext context)
         {
-            if (rendering) return;
+            //if (rendering) return;
             rendering = true;
+            SKImage old = null;
             if (NextBitmap.Count > 0)
             {
-                Bitmap?.Dispose();
+                old = Bitmap;
                 Bitmap = NextBitmap.Last();
                 //for (int i = 0; i < NextBitmap.Count - 1; i++)
                 //{
@@ -127,6 +141,7 @@ namespace PngTuberSharp.Helpers
                     //lease.SkCanvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
                 }
             }
+            old?.Dispose();
             rendering = false;
         }
     }
