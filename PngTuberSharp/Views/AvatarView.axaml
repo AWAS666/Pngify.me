@@ -8,23 +8,11 @@
              x:Class="PngTuberSharp.Views.AvatarView">
 	<Grid  HorizontalAlignment="Stretch"
 	   VerticalAlignment="Stretch" >
-		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
-
 		<Image  Stretch="Uniform"
-	   HorizontalAlignment="Stretch"
-	   VerticalAlignment="Stretch"
-				Source="{Binding Image}" x:Name="image"></Image>
-		<!--<ListBox Margin="0,50,0,0" Background="Transparent" ItemsSource="{Binding Throwables}" HorizontalAlignment="Left">
-			<ItemsControl.ItemTemplate>
-				<DataTemplate>
-					<StackPanel>
-						<TextBlock Text="{Binding X}"></TextBlock>
-						<TextBlock Text="{Binding Y}"></TextBlock>
-						<TextBlock Text="{Binding Rotation}"></TextBlock>
-						<Image Source="{Binding Image}}" Height="50" Width="50"></Image>
-					</StackPanel>
-				</DataTemplate>
-			</ItemsControl.ItemTemplate>
-		</ListBox>-->
+	   HorizontalAlignment="Center"
+	   VerticalAlignment="Center"				
+				Source="{Binding Image}"
+				x:Name="image"></Image>
+		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
 	</Grid>
 </UserControl>

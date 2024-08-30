@@ -9,10 +9,14 @@
         x:Class="PngTuberSharp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
 		Background="Transparent"
+		  MinWidth="192"
+        MinHeight="108"
         Title="PngTuberSharp">
 	<Grid x:Name="grid" >
-		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch" 
-						  DoubleTapped="DoubleClick" />
+		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+						  Width="{Binding Width, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+					  Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+						  DoubleTapped="DoubleClick"  />
 		<Grid x:Name="settings" Background="#AAFF5733" 
 			  HorizontalAlignment="Right" RowDefinitions="Auto,*">
 			<Button HorizontalAlignment="Center" Click="SaveSettings" Margin="5,5,5,5"

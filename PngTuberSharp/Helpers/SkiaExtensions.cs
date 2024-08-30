@@ -82,7 +82,7 @@ namespace PngTuberSharp.Helpers
                     Bitmap = _source,
                 };
             };
-            _drawImageOperation.Bounds = sourceRect;
+            _drawImageOperation.Bounds = destRect;
             context.Custom(_drawImageOperation);
         }
     }
