@@ -20,7 +20,10 @@ Feel free to suggest features and submit code yourself
 	- [ ] Steam
 - [ ] Spout integration
 - [x] Twitch integration
-- [ ] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
+- [x] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
+	- [ ] custom assets
+	- [ ] sound
+	- [ ] custom triggers
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 
@@ -33,7 +36,6 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
-- [ ] support gif on image tags (https://github.com/AvaloniaUI/Avalonia.GIF/issues/31)
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, ko-fi and steam (if it sees some support as steam isn't free)

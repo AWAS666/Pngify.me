@@ -1,9 +1,9 @@
 - [ ] Globalhotkey bricks the hotkey on all other applications
-- [ ] fix ram usage
+- [x] fix ram usage
 - [x] scale image to full size, even gifs
 - [x] position mainimage using coordinates aswell
 - [ ] tits
-	- [ ] hook up to twitch
-	- [ ] test button
+	- [x] hook up to twitch
+	- [x] test button
 	- [ ] collission sound
 	- [ ] allow changing of assets
