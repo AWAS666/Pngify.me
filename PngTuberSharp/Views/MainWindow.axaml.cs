@@ -1,8 +1,10 @@
-﻿using Avalonia.Controls;
+﻿using Avalonia;
+using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Interactivity;
 using PngTuberSharp.Services;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace PngTuberSharp.Views;
 
@@ -22,7 +24,6 @@ public partial class MainWindow : Window
         grid.Bind(Grid.BackgroundProperty, binding);
 
         this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}-alpha";
-
     }
 
     private void DoubleClick(object? sender, Avalonia.Input.TappedEventArgs e)
@@ -33,6 +34,6 @@ public partial class MainWindow : Window
     private void SaveSettings(object? sender, RoutedEventArgs e)
     {
         SettingsManager.Save();
-    }
+    }  
 
 }

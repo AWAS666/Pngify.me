@@ -9,19 +9,26 @@
         x:Class="PngTuberSharp.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
 		Background="Transparent"
-		  MinWidth="192"
-        MinHeight="108"
+		  MinWidth="768"
+        MinHeight="432"
         Title="PngTuberSharp">
-	<Grid x:Name="grid" >
-		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-						  Width="{Binding Width, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-					  Height="{Binding Height, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+	<Window.Styles>
+		<Style Selector="TabItem">
+			<Setter Property="MinWidth" Value="100"/>
+			<Setter Property="MinHeight" Value="30"/>
+		</Style>
+	</Window.Styles>
+	<Grid x:Name="grid" >		
+		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+						 
 						  DoubleTapped="DoubleClick"  />
 		<Grid x:Name="settings" Background="#AAFF5733" 
-			  HorizontalAlignment="Right" RowDefinitions="Auto,*">
-			<Button HorizontalAlignment="Center" Click="SaveSettings" Margin="5,5,5,5"
+			  HorizontalAlignment="Right" RowDefinitions="Auto,*" Width="700">
+			<Button HorizontalAlignment="Right" Click="SaveSettings" Margin="5,5,5,5"
 					ToolTip.Tip="Only save, doesnt apply">Save settings</Button>
-			<TabControl Grid.Row="1" WrapSelection="True">
+			<TabControl Grid.Row="1" WrapSelection="True" 
+						TabStripPlacement="Right"						
+						>
 				<TabItem Header="Microphone" FontSize="12" Width="125">
 					<views:VolumeSlider />
 				</TabItem>

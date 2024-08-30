@@ -7,3 +7,4 @@
 	- [x] test button
 	- [ ] collission sound
 	- [ ] allow changing of assets
+- [ ] fix rotation cutting of image
