@@ -50,6 +50,9 @@
 				<TabItem Header="GeneralSettings" FontSize="12" Width="125">
 					<views:GeneralSettings />
 				</TabItem>
+				<TabItem Header="Credits" FontSize="12" Width="125">
+					<views:CreditsAndInfo />
+				</TabItem>
 			</TabControl>
 		</Grid>
 	</Grid>
