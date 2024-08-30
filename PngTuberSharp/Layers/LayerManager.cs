@@ -51,7 +51,8 @@ namespace PngTuberSharp.Layers
                 double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
                 // todo fix to more accurate timer
-                await Delay(Math.Max(1, time));
+                //await Delay(Math.Max(1, time));
+                await Task.Delay(1);
 
                 TotalRunTime += UpdateInterval;
                 FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));

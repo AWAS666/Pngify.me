@@ -25,10 +25,10 @@
 			<CheckBox x:Name="fps"></CheckBox>
 		</StackPanel>
 
-		<StackPanel Orientation="Horizontal" Spacing="5">
+		<!--<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Target FPS</Label>
 			<helper:UintTextBox x:Name="targetFPS"></helper:UintTextBox>
-		</StackPanel>
+		</StackPanel>-->
 
 	</StackPanel>
 </UserControl>
