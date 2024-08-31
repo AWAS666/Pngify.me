@@ -1,11 +1,14 @@
 ﻿using Avalonia.Platform;
+using NAudio.Wave;
 using PngTuberSharp.Layers;
 using PngTuberSharp.Services.Twitch;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Numerics;
+using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
 namespace PngTuberSharp.Services.ThrowingSystem
@@ -47,7 +50,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public void Update(float dt, ref Layers.LayerValues layert)
         {
             // dampend recoil
-            recoil /= 1.5f;
+            recoil /= 1 + (dt * 15f);
 
             foreach (var obj in Objects.ToList())
             {
@@ -63,6 +66,8 @@ namespace PngTuberSharp.Services.ThrowingSystem
                 {
                     RecoilMain(dt, obj, ref layert);
                     obj.SetCollision(dt);
+                    if (SettingsManager.Current.Tits.EnableSound)
+                        PlaySound();
 
                 }
                 if (obj.X > 2200 || obj.X < -300 || obj.Y > 1300 || obj.Y < -300)
@@ -74,9 +79,37 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
             layert.PosX += recoil.X;
             layert.PosY += recoil.Y;
-            layert.Rotation += recoil.Length() / 2;
+            layert.Rotation += recoil.Length() / 4;
 
             UpdateObjects?.Invoke(this, dt);
+        }
+
+        private void PlaySound()
+        {
+            var settings = SettingsManager.Current.Tits;
+            Stream audio = null;
+            if (string.IsNullOrEmpty(settings.HitSound))
+                audio = AssetLoader.Open(new Uri("avares://PngTuberSharp/Assets/oof.wav"));
+            else
+                audio = File.OpenRead(settings.HitSound);
+            var reader = new WaveFileReader(audio);
+            var player = new WaveOutEvent();
+
+            player.Init(reader);
+
+            // Subscribe to the PlaybackStopped event to dispose of resources when playback is done
+            player.PlaybackStopped += (sender, args) =>
+            {
+                player.Dispose();
+                reader.Dispose();
+                audio.Dispose();
+            };
+            _ = Task.Run(async () =>
+            {
+                await Task.Delay(Random.Shared.Next(1, 200));
+                player.Play();
+            });
+
         }
 
         private void RecoilMain(float dt, MovableObject? obj, ref LayerValues layert)
@@ -92,7 +125,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
                 MainBody.Update(posX, (int)layert.PosY);
                 return;
             }
-            MainBody = new MovableObject(bitmap, new(0, 0), 0, posX, (int)(0 + layert.PosY), 15);
+            MainBody = new MovableObject(this, bitmap, new(0, 0), 0, posX, (int)(0 + layert.PosY), 15);
         }
 
         private bool IsColliding(MovableObject image1, MovableObject image2)
@@ -104,10 +137,12 @@ namespace PngTuberSharp.Services.ThrowingSystem
         {
             for (var i = 0; i < amount; i++)
             {
-                Objects.Add(new MovableObject(Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
-                    new Vector2(Random.Shared.Next(2000, 2500), -300),
-                    Random.Shared.Next(-20, 20)
-                    , -100, Random.Shared.Next(400, 700), 10));
+                Objects.Add(new MovableObject(
+                    this,
+                    item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
+                   speed: new Vector2(Random.Shared.Next((int)SettingsManager.Current.Tits.ObjectSpeedMin, (int)SettingsManager.Current.Tits.ObjectSpeedMax), -300),
+                   rotSpeed: Random.Shared.Next(-20, 20)
+                    , x: -100, y: Random.Shared.Next(300, 1000), details: 10));
             }
         }
     }

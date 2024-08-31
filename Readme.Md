@@ -18,7 +18,7 @@ Feel free to suggest features and submit code yourself
 - [ ] Release aside from git
 	- [ ] Ko-Fi
 	- [ ] Steam
-- [ ] Spout integration
+- [x] Spout integration
 - [x] Twitch integration
 - [x] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
 	- [ ] custom assets

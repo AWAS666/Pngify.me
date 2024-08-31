@@ -1,5 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Platform.Storage;
 using PngTuberSharp.Services;
 using PngTuberSharp.ViewModels;
 
@@ -27,7 +28,12 @@ public partial class TITSSetup : UserControl
         };
         showHitbox.Bind(CheckBox.IsCheckedProperty, bindingHit);
 
+        DataContext = new TITSSetupViewModel(GetStorage);
+    }
 
-        DataContext = new TITSSetupViewModel();
+    private IStorageProvider GetStorage()
+    {
+        var topLevel = TopLevel.GetTopLevel(this);
+        return topLevel.StorageProvider;
     }
 }

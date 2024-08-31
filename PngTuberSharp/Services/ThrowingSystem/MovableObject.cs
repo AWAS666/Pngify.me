@@ -10,6 +10,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
         private Vector2 speed;
         private float rotSpeed;
+        private ThrowingSystem parent;
 
         public Vector2 CurrentSpeed => speed;
         public float X { get => Values.PosX; }
@@ -20,16 +21,17 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public CollisionDetector Collision { get; }
 
 
-        public MovableObject(SKBitmap map, Vector2 speed, float rotSpeed, int x, int y, int details)
+        public MovableObject(ThrowingSystem parent, SKBitmap item, Vector2 speed, float rotSpeed, int x, int y, int details)
         {
             Values = new LayerValues();
-            Values.Image = map;
+            Values.Image = item;
             Values.PosX = x;
             Values.PosY = y;
-            Collision = CollissionCache.GetAndCache(map, details);
+            Collision = CollissionCache.GetAndCache(item, details);
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
             this.speed = speed;
             this.rotSpeed = rotSpeed;
+            this.parent = parent;
         }
 
         public void Update(float dt)
@@ -38,8 +40,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
             Values.PosY += speed.Y * dt;
             Values.Rotation += rotSpeed * dt;
 
-            // settle for a gravity constant here
-            speed.Y -= -dt * 100;
+            speed.Y -= -dt * SettingsManager.Current.Tits.Gravity;
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
         }
 
@@ -53,8 +54,8 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public void SetCollision(float dt)
         {
             // just invert vector I guess
-            speed.X = -speed.X * 0.9f;
-            speed.Y = -speed.Y * 0.9f;
+            speed.X = -speed.X * (1f - SettingsManager.Current.Tits.CollissionEnergyLossPercent / 100f);
+            speed.Y = -speed.Y * (1f - SettingsManager.Current.Tits.CollissionEnergyLossPercent / 100f);
 
             // update position to make it move away quicker
             Update(dt);
