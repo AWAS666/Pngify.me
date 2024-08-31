@@ -43,6 +43,13 @@ namespace PngTuberSharp.Services.ThrowingSystem
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
         }
 
+        public void Update(int x, int y)
+        {
+            Values.PosX = x;
+            Values.PosY = y;
+            Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
+        }
+
         public void SetCollision(float dt)
         {
             // just invert vector I guess

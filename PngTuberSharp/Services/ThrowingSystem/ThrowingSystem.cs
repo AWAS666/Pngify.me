@@ -86,9 +86,12 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
         public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert)
         {
-            if (MainBody != null && MainBody.SameBitmap(bitmap))
-                return;
             int posX = (int)((1920 - layert.Image.Width) / 2 + layert.PosX);
+            if (MainBody != null && MainBody.SameBitmap(bitmap))
+            {
+                MainBody.Update(posX, (int)layert.PosY);
+                return;
+            }
             MainBody = new MovableObject(bitmap, new(0, 0), 0, posX, (int)(0 + layert.PosY), 15);
         }
 
