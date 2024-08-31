@@ -36,6 +36,8 @@ public partial class App : Application
             if (SettingsManager.Current.Twitch.Enabled == true)
                 await TwitchEventSocket.Start();
 
+            SpoutRenderer.Init();
+
         }
         //else if (ApplicationLifetime is ISingleViewApplicationLifetime singleViewPlatform)
         //{

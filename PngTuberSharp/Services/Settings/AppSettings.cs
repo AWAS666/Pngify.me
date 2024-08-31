@@ -4,6 +4,7 @@ namespace PngTuberSharp.Services.Settings
 {
     public class AppSettings
     {
+        public GeneralSettings General { get; set; } = new();
         public MicroPhoneSettings Microphone { get; set; } = new();
         public BackgroundSettings Background { get; set; } = new();
         public AvatarSettings Avatar { get; set; } = new();
