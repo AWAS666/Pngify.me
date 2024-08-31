@@ -40,6 +40,15 @@ public partial class GeneralSettings : UserControl
 
         //targetFPS.Bind(TextBox.TextProperty, bindingFpsTarget);
 
+        var spout = new Binding
+        {
+            Source = SettingsManager.Current.General,
+            Path = nameof(SettingsManager.Current.General.EnableSpout),
+            Mode = BindingMode.TwoWay
+        };
+
+        spout2.Bind(CheckBox.IsCheckedProperty, spout);
+
         TwitchEventSocket.Authenticated += UpdateText;
 
     }
