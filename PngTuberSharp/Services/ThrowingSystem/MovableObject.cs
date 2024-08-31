@@ -26,7 +26,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
             Values.Image = map;
             Values.PosX = x;
             Values.PosY = y;
-            Collision = new CollisionDetector(map, details);
+            Collision = CollissionCache.GetAndCache(map, details);
             Collision.Offset = new SKPoint(Values.PosX, Values.PosY);
             this.speed = speed;
             this.rotSpeed = rotSpeed;

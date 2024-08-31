@@ -1,15 +1,16 @@
 ﻿using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PngTuberSharp.Services.ThrowingSystem
 {
     public class CollisionDetector
     {
         private SKBitmap bitmap;
-        private List<SKPoint> leftOutline;
-        private List<SKPoint> rightOutline;
-        private int details;
+        public List<SKPoint> leftOutline;
+        public List<SKPoint> rightOutline;
+        public int details;
         public SKPoint Offset { get; set; } = new SKPoint(0, 0);
 
         public CollisionDetector(SKBitmap bitmap, int details)
@@ -19,6 +20,14 @@ namespace PngTuberSharp.Services.ThrowingSystem
             this.rightOutline = new List<SKPoint>();
             this.details = details;
             GenerateOutlines();
+        }
+
+        public CollisionDetector(SKBitmap bitmap, List<SKPoint> left, List<SKPoint> right,  int details)
+        {
+            this.bitmap = bitmap;
+            this.leftOutline = left.ToList();
+            this.rightOutline = right.ToList();
+            this.details = details;
         }
 
         private void GenerateOutlines()
