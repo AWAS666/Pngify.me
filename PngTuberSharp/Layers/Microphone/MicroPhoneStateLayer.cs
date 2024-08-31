@@ -89,7 +89,7 @@ namespace PngTuberSharp.Layers.Microphone
             {
                 if (state.Trigger == null)
                     continue;
-                var callback = () => SwitchState(state);
+                var callback = () => ToggleState(state);
                 WinHotkey.AddHotkey(state.Trigger.VirtualKeyCode, state.Trigger.Modifiers, callback);
                 callbacks.Add(callback);
             }
