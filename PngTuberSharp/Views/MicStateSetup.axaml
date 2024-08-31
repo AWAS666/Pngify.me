@@ -57,9 +57,10 @@
 									CommandParameter="{Binding}"
 									Margin="5,0,0,0" HorizontalAlignment="Left"
 									Content="Activate" />
+								<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default"></CheckBox>
 								<TextBox Name="Hotkeybox"
 										 Text="{Binding Hotkey}"
-										 Margin="25,0,0,0" Watermark="Hotkey" Width="150">
+										 Margin="15,0,0,0" Watermark="Hotkey" Width="150">
 									<int:Interaction.Behaviors>
 										<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="Hotkeybox">
 											<ia:InvokeCommandAction Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
@@ -110,7 +111,7 @@
 									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
 									   Source="{Binding State.ClosedBlink.Image}"></Image>
 								</Button>
-							
+
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
 										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 							</Grid>

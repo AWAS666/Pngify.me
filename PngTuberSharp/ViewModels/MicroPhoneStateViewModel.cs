@@ -1,4 +1,6 @@
-﻿using Avalonia.Input;
+﻿using Avalonia.Controls;
+using Avalonia.Input;
+using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngTuberSharp.Services.Settings;
@@ -29,6 +31,17 @@ namespace PngTuberSharp.ViewModels
             }
         }
 
+        private bool defaultState;
+
+        public bool DefaultState
+        {
+            get => defaultState; set
+            {
+                SetProperty(ref defaultState, value);
+                state.Default = value;
+            }
+        }
+
         bool hotkeyByTrigger;
 
 
@@ -36,6 +49,7 @@ namespace PngTuberSharp.ViewModels
         {
             this.state = state;
             this.parent = parent;
+            DefaultState = state.Default;
             SetHotkey();
         }
 
@@ -90,4 +104,5 @@ namespace PngTuberSharp.ViewModels
             MimeTypes = new[] { "image/*" }
         };
     }
+
 }

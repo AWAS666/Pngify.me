@@ -13,6 +13,7 @@ namespace PngTuberSharp.Services.Settings
             new MicroPhoneState()
             {
                 Name = "Basic",
+                Default = true,
                 Open = new ImageSetting()
                 {
                     FilePath = "Assets/open.png",
@@ -28,6 +29,7 @@ namespace PngTuberSharp.Services.Settings
     public class MicroPhoneState
     {
         public string Name { get; set; }
+        public bool Default { get; set; }
         public ImageSetting Open { get; set; } = new();
         public ImageSetting OpenBlink { get; set; } = new();
         public ImageSetting Closed { get; set; } = new();

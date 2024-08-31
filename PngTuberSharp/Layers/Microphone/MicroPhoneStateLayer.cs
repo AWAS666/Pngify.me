@@ -26,7 +26,13 @@ namespace PngTuberSharp.Layers.Microphone
         public MicroPhoneStateLayer()
         {
             transTime = Interval;
-            SwitchState(SettingsManager.Current.Microphone.States.First());
+            var def = SettingsManager.Current.Microphone.States.FirstOrDefault(x => x.Default);
+            if (def == null)
+            {
+                def = SettingsManager.Current.Microphone.States.First();
+                def.Default = true;
+            }
+            SwitchState(def);
             SetupHotKeys();
         }
 

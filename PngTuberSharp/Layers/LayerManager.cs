@@ -135,7 +135,7 @@ namespace PngTuberSharp.Layers
                 var watch = new Stopwatch();
                 watch.Start();
                 ThrowingSystem.Update(dt, ref layert);
-                Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
+                //Debug.WriteLine($"Tits took: {watch.Elapsed.TotalMilliseconds}ms");
             }
 
             var baseImg = layert.Image;
