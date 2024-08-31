@@ -58,13 +58,27 @@ namespace PngTuberSharp.Layers.Microphone
             values.Image = baseImage.GetImage(TimeSpan.FromSeconds(CurrentTime));
         }
 
-        public void SwitchState(MicroPhoneState state)
+        public void SwitchState(MicroPhoneState state, bool reload = false)
         {
+            if (current == state && !reload) return;
+
             openImage = state.Open.Bitmap;
             openBlinkImage = !string.IsNullOrEmpty(state.OpenBlink.FilePath) ? state.OpenBlink.Bitmap : state.Open.Bitmap;
             closedImage = state.Closed.Bitmap;
             closedBlinkImage = !string.IsNullOrEmpty(state.ClosedBlink.FilePath) ? state.ClosedBlink.Bitmap : state.Closed.Bitmap;
             current = state;
+        }
+
+        public void ToggleState(MicroPhoneState state)
+        {
+            if (current == state)
+            {
+                SwitchState(SettingsManager.Current.Microphone.States.First(x => x.Default));
+            }
+            else
+            {
+                SwitchState(state);
+            }
         }
 
         public void SetupHotKeys()
@@ -80,7 +94,7 @@ namespace PngTuberSharp.Layers.Microphone
                 callbacks.Add(callback);
             }
             // also reloads current just in case
-            SwitchState(current);
+            SwitchState(current, reload: true);
         }
     }
 

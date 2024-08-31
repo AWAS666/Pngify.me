@@ -54,7 +54,7 @@ namespace PngTuberSharp.ViewModels
 
         public void SwitchState(MicroPhoneStateViewModel vm)
         {
-            LayerManager.MicroPhoneStateLayer.SwitchState(vm.State);
+            LayerManager.MicroPhoneStateLayer.ToggleState(vm.State);
         }
 
         public void Apply()
