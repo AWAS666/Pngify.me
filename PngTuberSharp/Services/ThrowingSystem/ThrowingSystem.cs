@@ -20,6 +20,7 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
         public EventHandler<float> UpdateObjects;
         private Vector2 recoil = Vector2.Zero;
+        private Vector2 recoilChange = Vector2.Zero;
 
         public List<SKBitmap> Throwables { get; set; } = new()
         {
@@ -50,7 +51,8 @@ namespace PngTuberSharp.Services.ThrowingSystem
         public void Update(float dt, ref Layers.LayerValues layert)
         {
             // dampend recoil
-            recoil /= 1 + (dt * 15f);
+            recoilChange /= 1 + (dt * 4f);
+            recoilChange -= dt * recoil / 2f;
 
             foreach (var obj in Objects.ToList())
             {
@@ -77,9 +79,11 @@ namespace PngTuberSharp.Services.ThrowingSystem
                 }
             }
 
-            layert.PosX += recoil.X;
-            layert.PosY += recoil.Y;
-            layert.Rotation += recoil.Length() / 4;
+            recoil += recoilChange;
+
+            layert.PosX += recoil.X / 4;
+            layert.PosY += recoil.Y / 4;
+            layert.Rotation += recoil.Length() / 5;
 
             UpdateObjects?.Invoke(this, dt);
         }
@@ -114,7 +118,8 @@ namespace PngTuberSharp.Services.ThrowingSystem
 
         private void RecoilMain(float dt, MovableObject? obj, ref LayerValues layert)
         {
-            recoil += new Vector2(obj.CurrentSpeed.X * dt, obj.CurrentSpeed.Y * dt);
+            //recoil += new Vector2(obj.CurrentSpeed.X * dt, obj.CurrentSpeed.Y * dt);
+            recoilChange += new Vector2(obj.CurrentSpeed.X * dt / 10, obj.CurrentSpeed.Y * dt / 10);
         }
 
         public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert)

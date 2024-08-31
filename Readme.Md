@@ -22,8 +22,9 @@ Feel free to suggest features and submit code yourself
 - [x] Twitch integration
 - [x] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
 	- [ ] custom assets
-	- [ ] sound
+	- [x] sound
 	- [ ] custom triggers
+	- [ ] throw emotes
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 
