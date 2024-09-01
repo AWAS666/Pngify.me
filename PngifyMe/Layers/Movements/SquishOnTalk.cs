@@ -1,12 +1,16 @@
-﻿using PngifyMe.Layers.Movements;
+﻿using PngifyMe.Layers.Helper;
+using PngifyMe.Layers.Movements;
 using PngifyMe.Services;
 
 namespace PngifyMe.Layers
 {
     public class SquishOnTalk : MovementBaseLayer
     {
-        public float StrengthX { get; set; } = 0.2f;
-        public float StrengthY { get; set; } = 0.2f;
+        [Unit("%")]
+        public uint StrengthX { get; set; } = 20;
+
+        [Unit("%")]
+        public uint StrengthY { get; set; } = 20;
         public float Frequency { get; set; } = 5f;
         public SquishOnTalk()
         {
@@ -16,8 +20,8 @@ namespace PngifyMe.Layers
         {
             if (MicrophoneService.Talking)
             {
-                values.ZoomX += StrengthX * CurrentStrength;
-                values.ZoomY += StrengthY * CurrentStrength;
+                values.ZoomX += StrengthX / 100f * CurrentStrength;
+                values.ZoomY += StrengthY / 100f * CurrentStrength;
             }
         }
     }
