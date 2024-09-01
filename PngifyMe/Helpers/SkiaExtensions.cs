@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.InteropServices;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PngifyMe.Helpers
 {
@@ -107,11 +108,18 @@ namespace PngifyMe.Helpers
 
         public void Render(ImmediateDrawingContext context)
         {
+            if(rendering) return;
+            rendering = true;
             SKImage old = null;
             if (NextBitmap.Count > 0)
             {
                 old = Bitmap;
                 Bitmap = NextBitmap.Last();
+                foreach (var item in NextBitmap.SkipLast(1).ToList())
+                {
+                    item.Dispose();
+                    NextBitmap.Remove(item);
+                }
                 NextBitmap.Remove(Bitmap);
             }
             if (Bitmap is SKImage bitmap && context.PlatformImpl.GetFeature<ISkiaSharpApiLeaseFeature>() is ISkiaSharpApiLeaseFeature leaseFeature)
@@ -125,6 +133,7 @@ namespace PngifyMe.Helpers
             GC.KeepAlive(old);
             GC.KeepAlive(Bitmap);
             old?.Dispose();
+            rendering = false;
         }
     }
 }

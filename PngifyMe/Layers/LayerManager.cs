@@ -119,7 +119,6 @@ namespace PngifyMe.Layers
 
                 ValueUpdate?.Invoke(null, layert);
                 ImageUpdate?.Invoke(null, draw);
-
             }
             catch (Exception e)
             {
