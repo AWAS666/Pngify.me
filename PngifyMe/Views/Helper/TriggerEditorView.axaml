@@ -1,0 +1,33 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			  xmlns:views="clr-namespace:PngifyMe.Views.Helper"
+			  x:DataType="vm:LayersettingViewModel"
+             x:Class="PngifyMe.Views.Helper.TriggerEditorView"
+			 >
+	<Design.DataContext>
+		<vm:LayersettingViewModel/>
+	</Design.DataContext>
+	<Grid ColumnDefinitions="150,*" RowDefinitions="35,*">
+
+		<TextBlock VerticalAlignment="Center" Grid.Row="0">Trigger:</TextBlock>
+
+		<!-- Left side: ComboBox for class selection -->
+		<ComboBox Grid.Column="0" Grid.Row="1"
+                  ItemsSource="{Binding TriggerTypes}"
+                  SelectedItem="{Binding SelectedTriggerType}"
+				  DisplayMemberBinding="{Binding Name}"
+                  />
+
+		<!-- Right side: List of properties for the selected class -->
+		<views:TriggerView DataContext="{Binding SelectedTriggerView}"
+						   Grid.Column="1" Grid.RowSpan="2" Grid.Row="0"></views:TriggerView>
+
+	</Grid>
+
+
+</UserControl>

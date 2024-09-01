@@ -12,7 +12,7 @@
 	- [ ] PngCaster
 	- [ ] Wacky Tuber
 	- [ ] ScribbleStream
-	- [ ] PNGify (me) pngify.me
+	- [x] PNGify (me) pngify.me
 - [x] allowing change if pngs
 - [x] structured ui
 	- [x] organize all the menus into a single tab menu

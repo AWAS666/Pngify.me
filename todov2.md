@@ -5,6 +5,6 @@
 - [ ] tits
 	- [x] hook up to twitch
 	- [x] test button
-	- [ ] collission sound
+	- [x] collission sound
 	- [ ] allow changing of assets
 - [ ] fix rotation cutting of image

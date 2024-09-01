@@ -1,0 +1,18 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  x:DataType="vm:AvatarViewModel"
+             x:Class="PngifyMe.Views.AvatarView">
+	<Grid  HorizontalAlignment="Stretch"
+	   VerticalAlignment="Stretch" >
+		<Image  Stretch="Uniform"
+	   HorizontalAlignment="Center"
+	   VerticalAlignment="Center"				
+				Source="{Binding Image}"
+				x:Name="image"></Image>
+		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
+	</Grid>
+</UserControl>
