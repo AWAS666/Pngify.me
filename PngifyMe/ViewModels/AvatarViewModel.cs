@@ -11,7 +11,7 @@ using static PngifyMe.Helpers.SkiaExtensions;
 
 namespace PngifyMe.ViewModels;
 
-public partial class AvatarViewModel : ViewModelBase
+public partial class AvatarViewModel : ObservableObject
 {
     [ObservableProperty]
     private double posX;

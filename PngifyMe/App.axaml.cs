@@ -29,7 +29,6 @@ public partial class App : Application
             WinHotkey.Start(desktop);
             desktop.MainWindow = new MainWindow
             {
-                DataContext = new MainViewModel()
             };
             TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
 

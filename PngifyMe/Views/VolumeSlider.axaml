@@ -10,7 +10,7 @@
 			<TextBlock FontSize="24">Microphone Setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
 				<ComboBox x:Name="combo"/>
-				<Button VerticalAlignment="Center" Click="SaveClick" Grid.Column="1" i:Attached.Icon="fa-regular fa-floppy-disk" />
+				<!--<Button VerticalAlignment="Center" Click="SaveClick" Grid.Column="1" i:Attached.Icon="fa-regular fa-floppy-disk" />-->
 			</StackPanel>			
 
 			<Grid RowDefinitions="200,35" ColumnDefinitions="75,75" Margin="5,5,5,5">
