@@ -43,7 +43,7 @@
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBlock VerticalAlignment="Center">Maximum Object Speed:</TextBlock>
-				<helper:UintTextBox Text="{Binding Settings.ObjectSpeedMax}"></helper:UintTextBox>
+				<helper:UintTextBox Text="{Binding Settings.ObjectSpeedMax}" Min="{Binding Settings.ObjectSpeedMin}">"</helper:UintTextBox>
 				<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
 			</StackPanel>
 

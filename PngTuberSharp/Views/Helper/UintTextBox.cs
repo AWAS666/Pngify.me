@@ -34,6 +34,28 @@ namespace PngTuberSharp.Views.Helper
         }
         protected override Type StyleKeyOverride { get { return typeof(TextBox); } }
 
+        protected override void OnKeyDown(KeyEventArgs e)
+        {
+            if (e.PhysicalKey == PhysicalKey.Backspace)
+            {
+                if (Text.Length <= 1)
+                {
+                    Text = "0";
+                    e.Handled = true;
+                    return;
+                }
+            }
+            base.OnKeyDown(e);
+
+            if (string.IsNullOrEmpty(Text))
+                Text = "0";
+
+            uint newValue = uint.Parse(Text);
+            uint? fixedVal = CheckBounds(newValue);
+            if (fixedVal != null)
+                Text = fixedVal.ToString();
+        }
+
         protected override void OnTextInput(TextInputEventArgs e)
         {
             inputHandler = true;
@@ -65,6 +87,7 @@ namespace PngTuberSharp.Views.Helper
 
         private void OnTextChanged(string newValue)
         {
+            return;
             if (inputHandler)
                 return;
             string valueToSet = newValue;
