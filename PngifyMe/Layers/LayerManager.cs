@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using System.Reflection.Metadata;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
@@ -146,41 +147,34 @@ namespace PngifyMe.Layers
                 // Clear canvas with white color
                 canvas.Clear();
 
-                // Define the rotation angle in degrees
-                float rotationAngle = layert.Rotation; // Adjust the angle as needed
+                float rotationAngle = layert.Rotation;
+                float zoomFactor = layert.ZoomX;
+                float opacity = layert.Opacity;
 
-                // Define the zoom factor (1.0 means no zoom, 2.0 means 2x zoom, etc.)
-                float zoomFactor = layert.ZoomX; // Adjust the zoom factor as needed
+                using var rotatedBitmap = new SKBitmap(width, height);
 
-                // Define the opacity (1.0 means fully opaque, 0.0 means fully transparent)
-                float opacity = layert.Opacity; // Adjust the opacity as needed
-
-                // Calculate new dimensions based on zoom factor
-                int zoomedWidth = (int)(baseImg.Width * zoomFactor);
-                int zoomedHeight = (int)(baseImg.Height * zoomFactor);
-
-                // Create a new SKBitmap for the rotated, zoomed, and opaque image
-                using var transformedImage = new SKBitmap(zoomedWidth, zoomedHeight);
-
-                using (SKCanvas transformedCanvas = new SKCanvas(transformedImage))
+                using (var surface = new SKCanvas(rotatedBitmap))
                 {
-                    // Set the pivot point for rotation and zoom to the center of the image
-                    transformedCanvas.Translate(zoomedWidth / 2, zoomedHeight / 2);
-                    transformedCanvas.Scale(zoomFactor);
-                    transformedCanvas.RotateDegrees(rotationAngle);
-                    transformedCanvas.Translate(-baseImg.Width / 2, -baseImg.Height / 2);
+                    surface.Clear();
+                    surface.Translate(width / 2, height / 2);
+                    surface.RotateDegrees((float)rotationAngle);
+                    surface.Scale(layert.ZoomX, layert.ZoomY);
+                    surface.Translate(-width / 2, -height / 2);
+                    surface.DrawBitmap(baseImg, width / 2 - baseImg.Width / 2, 0);
 
-                    // Set opacity
                     using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
                     {
-                        transformedCanvas.DrawBitmap(baseImg, 0, 0, paint);
+                        surface.DrawBitmap(baseImg, 
+                            width / 2 - baseImg.Width / 2 + layert.PosX, 
+                            height / 2 - baseImg.Height / 2 + layert.PosY, 
+                            paint);
                     }
                 }
 
-                layert.PosX += (width - baseImg.Width) / 2;
+                //layert.PosX += (width - baseImg.Width) / 2;
 
                 // Draw the main bitmap on the canvas
-                canvas.DrawBitmap(transformedImage, layert.PosX, layert.PosY);
+                canvas.DrawBitmap(rotatedBitmap, 0, 0);
 
                 if (SettingsManager.Current.Tits.HitLinesVisible)
                 {
