@@ -1,4 +1,5 @@
-﻿using PngifyMe.Layers.Movements;
+﻿using PngifyMe.Layers.Helper;
+using PngifyMe.Layers.Movements;
 using PngifyMe.Services;
 using System;
 
@@ -6,6 +7,7 @@ namespace PngifyMe.Layers
 {
     public class HopOnTalk : MovementBaseLayer
     {
+        [Unit("pixels")]
         public float Offset { get; set; } = 20f;
         public float Frequency { get; set; } = 5f;
         public HopOnTalk()

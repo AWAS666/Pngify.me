@@ -1,10 +1,15 @@
-﻿using PngifyMe.Layers.Movements;
+﻿using PngifyMe.Layers.Helper;
+using PngifyMe.Layers.Movements;
 
 namespace PngifyMe.Layers
 {
     public class RotateByRel : MovementBaseLayer
     {
+
+        [Unit("degrees")]
         public float Rotation { get; set; } = 360;
+
+        [Unit("seconds")]
         public float TotalTime { get; set; } = 2f;
 
         public RotateByRel()

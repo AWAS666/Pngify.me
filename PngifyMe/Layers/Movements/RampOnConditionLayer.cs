@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PngifyMe.Layers.Helper;
+using System;
 
 namespace PngifyMe.Layers
 {
@@ -7,7 +8,10 @@ namespace PngifyMe.Layers
         private float stateChangeTime;
         private bool lastCondition;
 
+        [Unit("s")]
         public float ActivationRamp { get; set; } = 0.5f;
+
+        [Unit("s")]
         public float DeActivationRamp { get; set; } = 0.5f;
 
         public RampOnConditionLayer()
