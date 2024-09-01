@@ -14,6 +14,15 @@ namespace PngifyMe.Layers
         [Unit("s")]
         public float DeActivationRamp { get; set; } = 0.5f;
 
+        [Unit("s")]
+        public float RemoveTime { get; set; } = float.MaxValue;
+
+        public override void OnEnter()
+        {
+            AutoRemoveTime = RemoveTime;
+            base.OnEnter();
+        }
+
         public RampOnConditionLayer()
         {
             EnterTime = 0f;
