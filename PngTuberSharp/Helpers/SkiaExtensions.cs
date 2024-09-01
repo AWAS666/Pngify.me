@@ -65,7 +65,7 @@ namespace PngTuberSharp.Helpers
                     item.Dispose();
                     next.Remove(item);
                 }
-                _drawImageOperation.NextBitmap.Add(newBitmap);
+                _drawImageOperation.NextBitmap.Add(newBitmap);               
             }
         }
 
@@ -107,8 +107,6 @@ namespace PngTuberSharp.Helpers
 
         public void Render(ImmediateDrawingContext context)
         {
-            //if (rendering) return;
-            rendering = true;
             SKImage old = null;
             if (NextBitmap.Count > 0)
             {
@@ -123,8 +121,9 @@ namespace PngTuberSharp.Helpers
                     lease.SkCanvas.DrawImage(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
                 }
             }
+            GC.KeepAlive(old);
+            GC.KeepAlive(Bitmap);
             old?.Dispose();
-            rendering = false;
         }
     }
 }
