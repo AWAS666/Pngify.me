@@ -1,0 +1,109 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
+    <AssemblyVersion>0.0.0.9</AssemblyVersion>
+    <Version>$(VersionPrefix)</Version>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <FileVersion>0.0.0.9</FileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <DebugType>embedded</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Include="Assets\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaResource Remove="Assets\closed.png" />
+    <AvaloniaResource Remove="Assets\open.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="secrets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\closed.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\open.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="secrets.json" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Avalonia" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Skia" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.1.3" />
+    <PackageReference Include="Avalonia.ReactiveUI" Version="11.1.3" />
+    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Win32" Version="11.1.3" />
+    <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
+    <PackageReference Include="GlobalHotKeys.Windows" Version="0.1.0" />
+    <PackageReference Include="NAudio" Version="2.2.1" />
+    <PackageReference Include="OpenGL.Net" Version="0.8.4" />
+    <PackageReference Include="Projektanker.Icons.Avalonia" Version="9.4.0" />
+    <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.4.0" />
+    <PackageReference Include="Serilog" Version="4.0.1" />
+    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+    <PackageReference Include="SkiaSharp" Version="2.88.8" />
+    <PackageReference Include="System.Drawing.Common" Version="8.0.8" />
+    <PackageReference Include="TwitchLib" Version="3.5.3" />
+    <PackageReference Include="TwitchLib.EventSub.Websockets" Version="0.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Spout.NETCore\Spout.NETCore\Spout.NETCore.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AvaloniaXaml Update="Views\LayerSetup.axaml">
+      <SubType>Designer</SubType>
+    </AvaloniaXaml>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Views\ChangeAvatar.axaml.cs">
+      <DependentUpon>ChangeAvatar.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Helper\TriggerView.axaml.cs">
+      <DependentUpon>TriggerView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Helper\TriggerEditorView.axaml.cs">
+      <DependentUpon>TriggerEditorView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\CreditsAndInfo.axaml.cs">
+      <DependentUpon>CreditsAndInfo.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\TITSSetup.axaml.cs">
+      <DependentUpon>TITSSetup.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\MicStateSetup.axaml.cs">
+      <DependentUpon>MicStateSetup.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LayerSetup.axaml.cs">
+      <SubType>Code</SubType>
+      <DependentUpon>LayerSetup.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LayerAdder.axaml.cs">
+      <DependentUpon>LayerAdder.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\GeneralSettings.axaml.cs">
+      <DependentUpon>GeneralSettings.axaml</DependentUpon>
+    </Compile>
+  </ItemGroup>
+</Project>

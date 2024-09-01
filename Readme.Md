@@ -1,4 +1,4 @@
-# PNGTuberSharp
+# PngifyMe
 The goal of this to build a funtional software for any pngtuber, 
 meaning a vtuber who just has a png/gif as their avatar.
 

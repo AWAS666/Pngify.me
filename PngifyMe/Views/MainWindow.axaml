@@ -1,0 +1,60 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="using:PngifyMe.ViewModels"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:views="clr-namespace:PngifyMe.Views"
+        mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
+		 xmlns:sett="clr-namespace:PngifyMe.Settings"
+        x:Class="PngifyMe.Views.MainWindow"
+        Icon="/Assets/avalonia-logo.ico"
+		Background="Transparent"
+		  MinWidth="768"
+        MinHeight="432"
+        Title="PngifyMe">
+	<Window.Styles>
+		<Style Selector="TabItem">
+			<Setter Property="MinWidth" Value="100"/>
+			<Setter Property="MinHeight" Value="30"/>
+		</Style>
+	</Window.Styles>
+	<Grid x:Name="grid" >		
+		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
+						 
+						  DoubleTapped="DoubleClick"  />
+		<Grid x:Name="settings" Background="#AAFF5733" 
+			  HorizontalAlignment="Right" RowDefinitions="Auto,*" Width="700">
+			<Button HorizontalAlignment="Right" Click="SaveSettings" Margin="5,5,5,5"
+					ToolTip.Tip="Only save, doesnt apply">Save settings</Button>
+			<TabControl Grid.Row="1" WrapSelection="True" 
+						TabStripPlacement="Right"						
+						>
+				<TabItem Header="Microphone" FontSize="12" Width="125">
+					<views:VolumeSlider />
+				</TabItem>
+				<TabItem Header="LayoutMenu" FontSize="12" Width="125">
+					<views:LayoutMenu />
+				</TabItem>
+				<!--<TabItem Header="LayerAdder" FontSize="12" Width="125">
+				<views:LayerAdder />
+			</TabItem>-->
+				<TabItem Header="LayerSetup" FontSize="12" Width="125">
+					<views:LayerSetup />
+				</TabItem>
+				<TabItem Header="Avatar States" FontSize="12" Width="125">
+					<views:MicStateSetup/>
+				</TabItem>
+				<TabItem Header="Throwing System" FontSize="12" Width="130">
+					<views:TITSSetup/>
+				</TabItem>
+				<TabItem Header="General Settings" FontSize="12" Width="125">
+					<views:GeneralSettings />
+				</TabItem>
+				<TabItem Header="Credits" FontSize="12" Width="125">
+					<views:CreditsAndInfo />
+				</TabItem>
+			</TabControl>
+		</Grid>
+	</Grid>
+
+</Window>
