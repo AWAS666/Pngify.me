@@ -32,6 +32,7 @@ namespace PngifyMe.Services.Settings
         public void ApplySettings()
         {
             CleanUp();
+            LayerManager.Layers.Clear();
             foreach (var item in Layers)
             {
                 switch (item.Trigger)
