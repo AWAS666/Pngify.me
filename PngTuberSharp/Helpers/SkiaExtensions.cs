@@ -7,6 +7,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 
 namespace PngTuberSharp.Helpers
 {
@@ -90,7 +91,6 @@ namespace PngTuberSharp.Helpers
     public record class SKBitmapDrawOperation : ICustomDrawOperation
     {
         private bool rendering;
-
         public Rect Bounds { get; set; }
 
         public SKImage? Bitmap { get; set; }
@@ -111,7 +111,8 @@ namespace PngTuberSharp.Helpers
             if (NextBitmap.Count > 0)
             {
                 old = Bitmap;
-                Bitmap = NextBitmap.Last();             
+                Bitmap = NextBitmap.Last();
+                NextBitmap.Remove(Bitmap);
             }
             if (Bitmap is SKImage bitmap && context.PlatformImpl.GetFeature<ISkiaSharpApiLeaseFeature>() is ISkiaSharpApiLeaseFeature leaseFeature)
             {
