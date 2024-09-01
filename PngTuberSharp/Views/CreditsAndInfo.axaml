@@ -24,7 +24,23 @@
 				<HyperlinkButton NavigateUri="https://ko-fi.com/awas666">Ko-Fi</HyperlinkButton>
 			</StackPanel>
 
-			<TextBlock VerticalAlignment="Bottom">more to come...</TextBlock>
+			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+			<TextBlock FontSize="24">Other Software/Games</TextBlock>
+
+
+			<StackPanel Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center">Meteora's Mystic Merge:</TextBlock>
+				<HyperlinkButton NavigateUri="https://store.steampowered.com/app/2751810/Meteoras_Mystic_Merge">Meteora's Mystic Merge</HyperlinkButton>
+			</StackPanel>
+
+			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+			<TextBlock FontSize="24">Art</TextBlock>
+			<StackPanel Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center">Default Character by:</TextBlock>
+				<HyperlinkButton NavigateUri="https://x.com/Ztermidsy_">Berry (x.com)</HyperlinkButton>
+			</StackPanel>
+
+
 		</StackPanel>
 	</Grid>
 </UserControl>
