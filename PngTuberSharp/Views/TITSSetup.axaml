@@ -37,7 +37,7 @@
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBlock VerticalAlignment="Center">Minimum Object Speed:</TextBlock>
-				<helper:UintTextBox Text="{Binding Settings.ObjectSpeedMin}"></helper:UintTextBox>
+				<helper:UintTextBox Text="{Binding Settings.ObjectSpeedMin}" Max="{Binding Settings.ObjectSpeedMax}">"</helper:UintTextBox>
 				<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
 			</StackPanel>
 
@@ -49,7 +49,7 @@
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBlock VerticalAlignment="Center">Collission speed drop:</TextBlock>
-				<helper:UintTextBox Text="{Binding Settings.CollissionEnergyLossPercent}"></helper:UintTextBox>
+				<helper:UintTextBox Text="{Binding Settings.CollissionEnergyLossPercent}" Max="99"></helper:UintTextBox>
 				<TextBlock VerticalAlignment="Center">%</TextBlock>
 			</StackPanel>
 

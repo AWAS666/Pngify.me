@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
 
@@ -8,7 +9,24 @@ namespace PngTuberSharp.Views.Helper
 {
     public class UintTextBox : TextBox
     {
-        private bool handling;
+        public static readonly StyledProperty<uint> MaxProperty =
+            AvaloniaProperty.Register<UintTextBox, uint>(nameof(Max), defaultValue: uint.MaxValue);
+
+        public uint Max
+        {
+            get => GetValue(MaxProperty);
+            set => SetValue(MaxProperty, value);
+        }
+
+        public static readonly StyledProperty<uint> MinProperty =
+            AvaloniaProperty.Register<UintTextBox, uint>(nameof(Min), defaultValue: uint.MinValue);
+        private bool inputHandler;
+
+        public uint Min
+        {
+            get => GetValue(MinProperty);
+            set => SetValue(MinProperty, value);
+        }
 
         public UintTextBox()
         {
@@ -18,6 +36,7 @@ namespace PngTuberSharp.Views.Helper
 
         protected override void OnTextInput(TextInputEventArgs e)
         {
+            inputHandler = true;
             // Regex to allow only numeric input
             if (!Regex.IsMatch(e.Text, "^[0-9]*$")
                 || !uint.TryParse(e.Text, out var num)
@@ -25,28 +44,50 @@ namespace PngTuberSharp.Views.Helper
             {
                 e.Handled = true;
             }
+
             base.OnTextInput(e);
+
+            uint newValue = uint.Parse(Text);
+            uint? fixedVal = CheckBounds(newValue);
+            if (fixedVal != null)
+                Text = fixedVal.ToString();
+            inputHandler = false;
+        }
+
+        private uint? CheckBounds(uint newValue)
+        {
+            if (newValue > Max)
+                return Max;
+            if (newValue < Min)
+                return Min;
+            return null;
         }
 
         private void OnTextChanged(string newValue)
         {
-            if (handling)
+            if (inputHandler)
                 return;
-            handling = true;
-            if (string.IsNullOrEmpty(newValue))
+            string valueToSet = newValue;
+            if (string.IsNullOrEmpty(valueToSet))
             {
-                Text = "0";
+                valueToSet = "0";
             }
-            else if (!Regex.IsMatch(newValue, "^[0-9]*$"))
+            else if (!Regex.IsMatch(valueToSet, "^[0-9]*$"))
             {
                 // Remove any non-numeric characters
-                Text = Regex.Replace(newValue, @"[^0-9]", "");
+                valueToSet = Regex.Replace(valueToSet, @"[^0-9]", string.Empty);
 
                 // Move the caret to the end
-                CaretIndex = Text.Length;
+                CaretIndex = valueToSet.Length;
+            }
+            if (!string.IsNullOrEmpty(valueToSet))
+            {
+                var fixedVal = CheckBounds(uint.Parse(valueToSet));
+                if (fixedVal != null)
+                    valueToSet = fixedVal.ToString();
             }
 
-            handling = false;
+            SetValue(TextProperty, valueToSet);
         }
 
     }
