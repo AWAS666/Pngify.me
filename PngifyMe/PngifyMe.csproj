@@ -78,9 +78,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\ChangeAvatar.axaml.cs">
-      <DependentUpon>ChangeAvatar.axaml</DependentUpon>
-    </Compile>
     <Compile Update="Views\Helper\TriggerView.axaml.cs">
       <DependentUpon>TriggerView.axaml</DependentUpon>
     </Compile>
