@@ -14,6 +14,8 @@
 		<StackPanel Spacing="10">
 			<TextBlock FontSize="24">Credits</TextBlock>
 
+			<Image Source="/Assets/logo_full.png" MaxHeight="250"></Image>
+
 			<StackPanel Orientation="Horizontal">
 				<TextBlock VerticalAlignment="Center">Created by:</TextBlock>
 				<HyperlinkButton NavigateUri="https://store.steampowered.com/search/?developer=Meteora%20Labs">MeteoraLabs</HyperlinkButton>
@@ -37,7 +39,14 @@
 			<TextBlock FontSize="24">Art</TextBlock>
 			<StackPanel Orientation="Horizontal">
 				<TextBlock VerticalAlignment="Center">Default Character by:</TextBlock>
-				<HyperlinkButton NavigateUri="https://x.com/Ztermidsy_">Berry (x.com)</HyperlinkButton>
+				<HyperlinkButton NavigateUri="https://x.com/Ztermidsy_"
+								 >Berry (x.com)</HyperlinkButton>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal">
+				<TextBlock VerticalAlignment="Center">Logo by:</TextBlock>
+				<HyperlinkButton NavigateUri="https://www.reddit.com/user/123Thundernugget/"
+								 >Thundernugget</HyperlinkButton>
 			</StackPanel>
 
 

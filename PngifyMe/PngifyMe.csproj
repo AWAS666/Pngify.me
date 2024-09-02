@@ -3,7 +3,7 @@
     <TargetFramework>net8.0</TargetFramework>
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
-    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaUseCompiledBindingsByDefault>False</AvaloniaUseCompiledBindingsByDefault>
     <AssemblyVersion>0.0.1.0</AssemblyVersion>
     <Version>$(VersionPrefix)</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
@@ -26,6 +26,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Remove="Assets\logo_full.png" />
     <None Remove="secrets.json" />
   </ItemGroup>
 

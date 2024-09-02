@@ -16,8 +16,12 @@
     <DebugType>embedded</DebugType>
   </PropertyGroup>
   <PropertyGroup Label="Avalonia">
-    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
+    <AvaloniaUseCompiledBindingsByDefault>False</AvaloniaUseCompiledBindingsByDefault>
+    <ApplicationIcon>icon.ico</ApplicationIcon>
   </PropertyGroup>
+  <ItemGroup>
+    <Content Include="icon.ico" />
+  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia.Desktop" Version="11.1.3" />

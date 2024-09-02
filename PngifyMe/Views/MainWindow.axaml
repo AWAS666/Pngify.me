@@ -7,7 +7,7 @@
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
 		 xmlns:sett="clr-namespace:PngifyMe.Settings"
         x:Class="PngifyMe.Views.MainWindow"
-        Icon="/Assets/avalonia-logo.ico"
+        Icon="/Assets/icon.ico"
 		Background="Transparent"
 		  MinWidth="768"
         MinHeight="432"
