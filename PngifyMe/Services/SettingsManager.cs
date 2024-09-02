@@ -10,6 +10,7 @@ namespace PngifyMe.Services
     public static class SettingsManager
     {
         public static string FilePath { get; }
+        public static string BasePath { get; }
 
         public static AppSettings Current { get; private set; }
 
@@ -19,6 +20,7 @@ namespace PngifyMe.Services
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder) + "\\PngifyMe";
             Directory.CreateDirectory(path);
+            BasePath = path;
             FilePath = Path.Join(path, "settings.json");
             Load();
         }
