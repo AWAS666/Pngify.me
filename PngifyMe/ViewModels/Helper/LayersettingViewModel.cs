@@ -112,6 +112,7 @@ namespace PngifyMe.ViewModels.Helper
             var newLayer = (BaseLayer)Activator.CreateInstance(SelectedLayer);
             Layers.Add(new BaseLayerViewModel(newLayer));
             LayerSettModel.Layers.Add(newLayer);
+            SelectedLayer = null;
         }
 
         public void RemoveCommand(BaseLayerViewModel vm)

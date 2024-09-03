@@ -36,12 +36,14 @@
 
 							<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
 								<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
-								<ComboBox VerticalAlignment="Center"
+								<ComboBox VerticalAlignment="Center" 
+										  ToolTip.Tip="Selected layer, then click AddLayer to add it"
 										  ItemsSource="{Binding AllLayers}"
 										  DisplayMemberBinding="{Binding Name}"
 										  SelectedItem="{Binding SelectedLayer}"
 										  Width="150"></ComboBox>
-								<Button Command="{Binding AddNewLayer}">AddLayer</Button>
+								<Button ToolTip.Tip="Add Selected Layer"
+									Command="{Binding AddNewLayer}">AddLayer</Button>
 							</StackPanel>
 
 							<ListBox ItemsSource="{Binding Layers}" Grid.Row="3" Grid.ColumnSpan="3">
