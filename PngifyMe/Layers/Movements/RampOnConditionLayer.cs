@@ -51,6 +51,9 @@ namespace PngifyMe.Layers
             else
                 CurrentStrength = 1 - value;
 
+            if (stateChangeTime == 0)
+                CurrentStrength = 0;
+
             lastCondition = current;
             base.OnUpdate(dt, time);
         }
