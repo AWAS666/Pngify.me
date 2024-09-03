@@ -31,6 +31,17 @@ namespace PngifyMe.ViewModels
             }
         }
 
+        private string name;
+
+        public string Name
+        {
+            get => name; set
+            {
+                SetProperty(ref name, value);
+                state.Name = value;
+            }
+        }
+
         private bool defaultState;
 
         public bool DefaultState
@@ -49,6 +60,7 @@ namespace PngifyMe.ViewModels
         {
             this.state = state;
             this.parent = parent;
+            Name = state.Name;
             DefaultState = state.Default;
             SetHotkey();
         }

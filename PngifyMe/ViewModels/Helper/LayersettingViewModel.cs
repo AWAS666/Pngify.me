@@ -122,6 +122,7 @@ namespace PngifyMe.ViewModels.Helper
 
         public void Save()
         {
+            LayerSettModel.Name = Name;
             foreach (var layer in Layers)
             {
                 layer.Save();

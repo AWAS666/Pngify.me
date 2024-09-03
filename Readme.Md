@@ -13,6 +13,7 @@ Feel free to suggest features and submit code yourself
 - [ ] Multiple profiles
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
+- [ ] stick on any png (redeem)
 
 ## Todo Advanced
 - [ ] Release aside from git
