@@ -1,4 +1,4 @@
-﻿namespace PngifyMe.Layers
+﻿namespace PngifyMe.Layers.Helper
 {
     public abstract class PermaLayer : BaseLayer
     {

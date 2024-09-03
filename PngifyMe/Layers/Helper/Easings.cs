@@ -1,7 +1,7 @@
 ﻿
 using System;
 
-namespace PngifyMe.Layers;
+namespace PngifyMe.Layers.Helper;
 
 /// <summary>
 /// Visualization: https://easings.net/#
@@ -159,7 +159,7 @@ public static class Easings
         {
             return 2 * p * p;
         }
-        return (-2 * p * p) + (4 * p) - 1;
+        return -2 * p * p + 4 * p - 1;
     }
 
     /// <summary>
@@ -175,7 +175,7 @@ public static class Easings
     /// </summary>
     public static float CubicEaseOut(float p)
     {
-        float f = (p - 1);
+        float f = p - 1;
         return f * f * f + 1;
     }
 
@@ -190,7 +190,7 @@ public static class Easings
         {
             return 4 * p * p * p;
         }
-        float f = ((2 * p) - 2);
+        float f = 2 * p - 2;
         return 0.5f * f * f * f + 1;
     }
 
@@ -207,7 +207,7 @@ public static class Easings
     /// </summary>
     public static float QuarticEaseOut(float p)
     {
-        float f = (p - 1);
+        float f = p - 1;
         return f * f * f * (1 - p) + 1;
     }
 
@@ -222,7 +222,7 @@ public static class Easings
         {
             return 8 * p * p * p * p;
         }
-        float f = (p - 1);
+        float f = p - 1;
         return -8 * f * f * f * f + 1;
     }
 
@@ -239,7 +239,7 @@ public static class Easings
     /// </summary>
     public static float QuinticEaseOut(float p)
     {
-        float f = (p - 1);
+        float f = p - 1;
         return f * f * f * f * f + 1;
     }
 
@@ -254,7 +254,7 @@ public static class Easings
         {
             return 16 * p * p * p * p * p;
         }
-        float f = ((2 * p) - 2);
+        float f = 2 * p - 2;
         return 0.5f * f * f * f * f * f + 1;
     }
 
@@ -279,7 +279,7 @@ public static class Easings
     /// </summary>
     public static double SineEaseInOut(float p)
     {
-        return (0.5f * (1 - Math.Cos(p * PI)));
+        return 0.5f * (1 - Math.Cos(p * PI));
     }
 
     /// <summary>
@@ -287,7 +287,7 @@ public static class Easings
     /// </summary>
     public static double CircularEaseIn(float p)
     {
-        return (1 - Math.Sqrt(1 - (p * p)));
+        return 1 - Math.Sqrt(1 - p * p);
     }
 
     /// <summary>
@@ -309,7 +309,7 @@ public static class Easings
         {
             return 0.5f * (1 - Math.Sqrt(1 - 4 * (p * p)));
         }
-        return 0.5f * (Math.Sqrt(-((2 * p) - 3) * ((2 * p) - 1)) + 1);
+        return 0.5f * (Math.Sqrt(-(2 * p - 3) * (2 * p - 1)) + 1);
     }
 
     /// <summary>
@@ -317,7 +317,7 @@ public static class Easings
     /// </summary>
     public static double ExponentialEaseIn(float p)
     {
-        return (p == 0.0f) ? p : Math.Pow(2, 10 * (p - 1));
+        return p == 0.0f ? p : Math.Pow(2, 10 * (p - 1));
     }
 
     /// <summary>
@@ -325,7 +325,7 @@ public static class Easings
     /// </summary>
     public static double ExponentialEaseOut(float p)
     {
-        return (p == 1.0f) ? p : 1 - Math.Pow(2, -10 * p);
+        return p == 1.0f ? p : 1 - Math.Pow(2, -10 * p);
     }
 
     /// <summary>
@@ -340,9 +340,9 @@ public static class Easings
 
         if (p < 0.5f)
         {
-            return 0.5f * Math.Pow(2, (20 * p) - 10);
+            return 0.5f * Math.Pow(2, 20 * p - 10);
         }
-        return -0.5f * Math.Pow(2, (-20 * p) + 10) + 1;
+        return -0.5f * Math.Pow(2, -20 * p + 10) + 1;
     }
 
     /// <summary>
@@ -370,9 +370,9 @@ public static class Easings
     {
         if (p < 0.5f)
         {
-            return 0.5f * Math.Sin(13 * HALF_PI * (2 * p)) * Math.Pow(2, 10 * ((2 * p) - 1));
+            return 0.5f * Math.Sin(13 * HALF_PI * (2 * p)) * Math.Pow(2, 10 * (2 * p - 1));
         }
-        return 0.5f * (Math.Sin(-13 * HALF_PI * ((2 * p - 1) + 1)) * Math.Pow(2, -10 * (2 * p - 1)) + 2);
+        return 0.5f * (Math.Sin(-13 * HALF_PI * (2 * p - 1 + 1)) * Math.Pow(2, -10 * (2 * p - 1)) + 2);
     }
 
     /// <summary>
@@ -388,7 +388,7 @@ public static class Easings
     /// </summary>	
     public static double BackEaseOut(float p)
     {
-        float f = (1 - p);
+        float f = 1 - p;
         return 1 - (f * f * f - f * Math.Sin(f * PI));
     }
 
@@ -406,7 +406,7 @@ public static class Easings
         }
         else
         {
-            float f = (1 - (2 * p - 1));
+            float f = 1 - (2 * p - 1);
             return 0.5f * (1 - (f * f * f - f * Math.Sin(f * PI))) + 0.5f;
         }
     }
@@ -424,17 +424,17 @@ public static class Easings
     {
         if (p < 4 / 11.0f)
         {
-            return (121 * p * p) / 16.0f;
+            return 121 * p * p / 16.0f;
         }
         if (p < 8 / 11.0f)
         {
-            return (363 / 40.0f * p * p) - (99 / 10.0f * p) + 17 / 5.0f;
+            return 363 / 40.0f * p * p - 99 / 10.0f * p + 17 / 5.0f;
         }
         if (p < 9 / 10.0f)
         {
-            return (4356 / 361.0f * p * p) - (35442 / 1805.0f * p) + 16061 / 1805.0f;
+            return 4356 / 361.0f * p * p - 35442 / 1805.0f * p + 16061 / 1805.0f;
         }
-        return (54 / 5.0f * p * p) - (513 / 25.0f * p) + 268 / 25.0f;
+        return 54 / 5.0f * p * p - 513 / 25.0f * p + 268 / 25.0f;
     }
 
     /// <summary>

@@ -4,7 +4,7 @@ using System.Reflection;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace PngifyMe.Layers
+namespace PngifyMe.Layers.Helper
 {
     // Custom JsonConverter for BaseLayer and its derived types
     public class BaseLayerJsonConverter : JsonConverter<BaseLayer>

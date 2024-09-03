@@ -1,0 +1,64 @@
+﻿using Avalonia.Controls;
+using PngifyMe.Layers.Helper;
+using PngifyMe.Services.Settings.Images;
+using SkiaSharp;
+using System;
+using System.IO;
+
+namespace PngifyMe.Layers.Image
+{
+    public class Image : ImageLayer
+    {
+        [Unit("pixels (center)")]
+        public float PosX { get; set; } = 960;
+
+        [Unit("pixels (center)")]
+        public float PosY { get; set; } = 540;
+
+        [Unit("Path")]
+        public string FilePath { get; set; }
+
+        private BaseImage image;
+
+        public override void OnEnter()
+        {
+            if (!File.Exists(FilePath))
+            {
+                IsExiting = true;
+                return;
+            }
+
+            string extension = Path.GetExtension(FilePath).ToLower();
+            if (extension == ".gif")
+            {
+                image = new GifImage(FilePath);
+            }
+            else if (extension == ".png" || extension == ".jpg" || extension == ".jpeg" || extension == ".bmp")
+            {
+                image = new StaticImage(FilePath);
+            }
+            base.OnEnter();
+        }
+
+        public override void OnExit()
+        {
+            image?.Dispose();
+            base.OnExit();
+        }
+
+        public override void OnCalculateParameters(float dt, ref LayerValues values)
+        {
+            // nothing prolly
+        }
+
+        public override void RenderImage(SKCanvas canvas)
+        {
+            canvas.DrawBitmap(GetImage(), PosX, PosY);
+        }
+
+        public override SKBitmap GetImage()
+        {
+            return image.GetImage(TimeSpan.FromSeconds(CurrentTime));
+        }
+    }
+}

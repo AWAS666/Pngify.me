@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using PngifyMe.Layers.Microphone;
 using PngifyMe.Services;
+using PngifyMe.Services.Settings.Images;
 using PngifyMe.Services.ThrowingSystem;
 using Serilog;
 using SkiaSharp;
@@ -59,6 +60,7 @@ namespace PngifyMe.Layers
                 TotalRunTime += UpdateInterval;
                 FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
                 delay = (float)(watch.Elapsed.TotalMilliseconds / 1000f - UpdateInterval);
+                TotalRunTime += delay;
                 //Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
             }
         }
@@ -164,9 +166,9 @@ namespace PngifyMe.Layers
 
                     using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
                     {
-                        surface.DrawBitmap(baseImg, 
-                            width / 2 - baseImg.Width / 2 + layert.PosX, 
-                            height / 2 - baseImg.Height / 2 + layert.PosY, 
+                        surface.DrawBitmap(baseImg,
+                            width / 2 - baseImg.Width / 2 + layert.PosX,
+                            height / 2 - baseImg.Height / 2 + layert.PosY,
                             paint);
                     }
                 }
@@ -225,6 +227,11 @@ namespace PngifyMe.Layers
                             }
                         }
                     }
+                }
+
+                foreach (ImageLayer img in Layers.Where(x => x is ImageLayer).Cast<ImageLayer>())
+                {
+                    img.RenderImage(canvas);
                 }
             }
             return SKImage.FromBitmap(mainBitmap);

@@ -1,5 +1,6 @@
 ﻿using SkiaSharp;
 using System;
+using TwitchLib.Api.Helix;
 
 namespace PngifyMe.Services.Settings.Images
 {
@@ -27,6 +28,11 @@ namespace PngifyMe.Services.Settings.Images
         public override void Resize(int maxWidth, int maxHeight)
         {
             Bitmap = base.Resize(Bitmap, maxWidth, maxHeight);
+        }
+
+        public override void Dispose()
+        {
+            Bitmap.Dispose();
         }
     }
 }
