@@ -36,7 +36,7 @@
 
 							<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
 								<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
-								<ComboBox VerticalAlignment="Center" 
+								<ComboBox VerticalAlignment="Center"
 										  ToolTip.Tip="Selected layer, then click AddLayer to add it"
 										  ItemsSource="{Binding AllLayers}"
 										  DisplayMemberBinding="{Binding Name}"
@@ -63,7 +63,8 @@
 														<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
 															<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
 															<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
-															<TextBlock VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
+															<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
+															<Button IsVisible="{Binding FilePicker}" Click="SelectFile">Pick File</Button>
 														</StackPanel>
 													</DataTemplate>
 												</ItemsControl.ItemTemplate>

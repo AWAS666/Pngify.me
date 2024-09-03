@@ -4,6 +4,7 @@ using NAudio.CoreAudioApi;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
+using PngifyMe.ViewModels.Helper;
 using System;
 using System.Linq;
 using System.Net;
@@ -38,7 +39,7 @@ public partial class TITSSetupViewModel : ObservableObject
         var path = await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
         {
             Title = "Select a wav file",
-            FileTypeFilter = new[] { AudioALl },
+            FileTypeFilter = new[] { FilePickers.AudioAll },
             AllowMultiple = false
         });
         if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
@@ -50,9 +51,5 @@ public partial class TITSSetupViewModel : ObservableObject
         SettingsManager.Current.Tits.HitSound = string.Empty;
     }
 
-    public static FilePickerFileType AudioALl { get; } = new("Wav")
-    {
-        Patterns = new[] { "*.wav", },
-        AppleUniformTypeIdentifiers = new[] { "public.image" },
-    };
+  
 }

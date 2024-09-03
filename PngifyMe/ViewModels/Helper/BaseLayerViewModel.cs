@@ -46,6 +46,9 @@ namespace PngifyMe.ViewModels.Helper
                     propertyViewModel.Unit = unitAttribute.Unit;
                 }
 
+                var filePickerAttribute = prop.GetCustomAttribute<FilePickerAttribute>();
+                propertyViewModel.FilePicker = filePickerAttribute != null;
+
                 PropertyList.Add(propertyViewModel);
             }
         }

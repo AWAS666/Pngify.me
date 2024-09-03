@@ -16,6 +16,7 @@ namespace PngifyMe.Layers.Image
         public float PosY { get; set; } = 540;
 
         [Unit("Path")]
+        [FilePicker]
         public string FilePath { get; set; }
 
         private BaseImage image;
@@ -53,7 +54,10 @@ namespace PngifyMe.Layers.Image
 
         public override void RenderImage(SKCanvas canvas)
         {
-            canvas.DrawBitmap(GetImage(), PosX, PosY);
+            if (IsExiting)
+                return;
+            var img = GetImage();
+            canvas.DrawBitmap(img, PosX-img.Width/2, PosY - img.Height / 2);
         }
 
         public override SKBitmap GetImage()
