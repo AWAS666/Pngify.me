@@ -1,5 +1,4 @@
-﻿using Avalonia.Controls;
-using PngifyMe.Layers.Helper;
+﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Settings.Images;
 using SkiaSharp;
 using System;
@@ -19,6 +18,9 @@ namespace PngifyMe.Layers.Image
         [FilePicker]
         public string FilePath { get; set; }
 
+        [Unit("seconds")]
+        public float StickyFor { get; set; } = float.MaxValue;          
+
         private BaseImage image;
 
         public override void OnEnter()
@@ -28,6 +30,8 @@ namespace PngifyMe.Layers.Image
                 IsExiting = true;
                 return;
             }
+
+            AutoRemoveTime = StickyFor;
 
             string extension = Path.GetExtension(FilePath).ToLower();
             if (extension == ".gif")

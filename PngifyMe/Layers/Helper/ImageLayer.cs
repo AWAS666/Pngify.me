@@ -10,5 +10,11 @@ namespace PngifyMe.Layers
         public abstract void RenderImage(SKCanvas canvas);
 
         public abstract SKBitmap GetImage();
+
+        public ImageLayer()
+        {
+            ExitTime = 0f;
+            EnterTime = 0f;
+        }
     }
 }
