@@ -6,6 +6,8 @@ namespace PngifyMe.Layers
     public abstract class RampOnConditionLayer : PermaLayer
     {
         private float stateChangeTime;
+        private float highest;
+        private float maxval;
         private bool lastCondition;
 
         [Unit("s")]
@@ -41,6 +43,7 @@ namespace PngifyMe.Layers
             if (lastCondition && !current)
             {
                 stateChangeTime = CurrentTime;
+                highest = maxval;
             }
 
             var value = Math.Min(1,
@@ -49,10 +52,12 @@ namespace PngifyMe.Layers
             if (current)
                 CurrentStrength = value;
             else
-                CurrentStrength = 1 - value;
+                CurrentStrength = Math.Max(0, highest - value);
 
             if (stateChangeTime == 0)
                 CurrentStrength = 0;
+
+            maxval = value;
 
             lastCondition = current;
             base.OnUpdate(dt, time);
