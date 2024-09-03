@@ -25,7 +25,7 @@ namespace PngifyMe.Services.Settings
             {
                 Name = "Rotate",
                 Layers = [new RotateByRel()],
-                Trigger = new HotkeyTrigger() { VirtualKeyCode = VirtualKeyCode.VK_F11 },
+                Trigger = new HotkeyTrigger() { VirtualKeyCode = VirtualKeyCode.KEY_1, Modifiers = Modifiers.Control },
             },
         };
 

@@ -21,8 +21,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <AvaloniaResource Remove="Assets\closed.png" />
-    <AvaloniaResource Remove="Assets\open.png" />
+    <AvaloniaResource Remove="Assets\closedMouthclosedEyes.png" />
+    <AvaloniaResource Remove="Assets\closedMouthopenEyes.png" />
+    <AvaloniaResource Remove="Assets\openMouthclosedEyes.png" />
+    <AvaloniaResource Remove="Assets\openMouthopenEyes.png" />
   </ItemGroup>
 
   <ItemGroup>
@@ -31,10 +33,19 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Assets\closed.png">
+    <Content Include="Assets\closedMouthclosedEyes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Assets\open.png">
+    <Content Include="Assets\closedMouthopenEyes.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Assets\openMouthclosedEyes.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Assets\openMouthopenEyes.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

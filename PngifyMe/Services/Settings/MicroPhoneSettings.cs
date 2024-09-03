@@ -16,12 +16,20 @@ namespace PngifyMe.Services.Settings
                 Default = true,
                 Open = new ImageSetting()
                 {
-                    FilePath = "Assets/open.png",
+                    FilePath = "Assets/openMouthopenEyes.png",
                 },
                  Closed = new ImageSetting()
                 {
-                    FilePath = "Assets/closed.png",
+                    FilePath = "Assets/closedMouthopenEyes.png",
                 },
+                 ClosedBlink = new ImageSetting()
+                 {
+                     FilePath = "Assets/closedMouthclosedEyes.png"
+                 },
+                 OpenBlink = new ImageSetting()
+                 {
+                     FilePath = "Assets/openMouthclosedEyes.png"
+                 }
             }
         };
     }
