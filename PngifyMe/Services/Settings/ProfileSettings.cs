@@ -10,6 +10,7 @@ namespace PngifyMe.Services.Settings
     public partial class ProfileSettings : ObservableObject
     {
         // json ignore this, this loads based on folders
+        // load this instead of json
         public List<Profile> ProfileList { get; set; } = new List<Profile>();
 
         [ObservableProperty]
@@ -17,7 +18,6 @@ namespace PngifyMe.Services.Settings
 
         public ProfileSettings()
         {
-            Load();
         }
 
         public void Load()

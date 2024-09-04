@@ -12,6 +12,9 @@ Feel free to suggest features and submit code yourself
 - [x] State transition images (mouth opening/mouth closing) ?
 - [x] Switch between different png setups (states) using hotkeys
 - [x] Multiple profiles
+	- [ ] save all needed files into the profile folder instead of keeping a global reference
+	- [ ] show icon?
+	- [ ] import/export as zipped archive
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
