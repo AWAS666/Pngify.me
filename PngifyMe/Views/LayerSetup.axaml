@@ -46,33 +46,37 @@
 									Command="{Binding AddNewLayer}">AddLayer</Button>
 							</StackPanel>
 
-							<ListBox ItemsSource="{Binding Layers}" Grid.Row="3" Grid.ColumnSpan="3">
-								<ListBox.ItemTemplate>
-									<DataTemplate>
-										<StackPanel>
-											<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
-												<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-												<Button Content="Remove"
-														Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
-														CommandParameter="{Binding}"
+							<Expander Grid.Row="3" Grid.ColumnSpan="3" IsExpanded="true" 
+									  Header="Layer Settings" >							
+								<ListBox ItemsSource="{Binding Layers}">
+									<ListBox.ItemTemplate>
+										<DataTemplate>
+											<StackPanel>
+												<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
+													<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+													<Button Content="Remove"
+															Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
+															CommandParameter="{Binding}"
 													></Button>
+												</StackPanel>
+												<ItemsControl ItemsSource="{Binding PropertyList}">
+													<ItemsControl.ItemTemplate>
+														<DataTemplate>
+															<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
+																<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
+																<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
+																<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
+																<Button IsVisible="{Binding FilePicker}" Click="SelectFile">Pick File</Button>
+															</StackPanel>
+														</DataTemplate>
+													</ItemsControl.ItemTemplate>
+												</ItemsControl>
 											</StackPanel>
-											<ItemsControl ItemsSource="{Binding PropertyList}">
-												<ItemsControl.ItemTemplate>
-													<DataTemplate>
-														<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
-															<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
-															<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
-															<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
-															<Button IsVisible="{Binding FilePicker}" Click="SelectFile">Pick File</Button>
-														</StackPanel>
-													</DataTemplate>
-												</ItemsControl.ItemTemplate>
-											</ItemsControl>
-										</StackPanel>
-									</DataTemplate>
-								</ListBox.ItemTemplate>
-							</ListBox>
+										</DataTemplate>
+									</ListBox.ItemTemplate>
+								</ListBox>
+							</Expander>
+
 						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
