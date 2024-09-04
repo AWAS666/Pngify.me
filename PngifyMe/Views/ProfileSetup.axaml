@@ -22,8 +22,8 @@
 			</StackPanel>
 			
 			<StackPanel Orientation="Horizontal" Spacing="10">
-				<TextBox Watermark="New Profile Name"></TextBox>
-				<Button>Save Current as new Profile</Button>
+				<TextBox Name="newProfile" Watermark="New Profile Name" Width="150"></TextBox>
+				<Button Click="CreateNewProfile">Add New Profile</Button>
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
@@ -39,7 +39,7 @@
 							<ComboBox ItemsSource="{Binding ProfileTypes}"
 									  SelectedItem="{Binding Type}">
 							</ComboBox>
-							<Button>Load</Button>
+							<Button Click="LoadProfile">Load</Button>
 						</StackPanel>
 					</DataTemplate>
 

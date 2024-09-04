@@ -1,4 +1,5 @@
-﻿using PngifyMe.Layers.Helper;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Layers.Helper;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -6,12 +7,13 @@ using System.Text.Json;
 
 namespace PngifyMe.Services.Settings
 {
-    public class ProfileSettings
+    public partial class ProfileSettings : ObservableObject
     {
         // json ignore this, this loads based on folders
         public List<Profile> ProfileList { get; set; } = new List<Profile>();
 
-        public Profile Active { get; set; }
+        [ObservableProperty]
+        private Profile active;
 
         public ProfileSettings()
         {
@@ -62,6 +64,11 @@ namespace PngifyMe.Services.Settings
         {
             ProfileList.ForEach(x => x.Default = false);
             profile.Default = true;
+        }
+
+        public void LoadNewProfile(Profile profile)
+        {
+            Active = profile;
         }
 
         private void FixNames()

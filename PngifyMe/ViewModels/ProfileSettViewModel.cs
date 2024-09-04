@@ -16,7 +16,7 @@ namespace PngifyMe.ViewModels
     {
 
         public ObservableCollection<ProfileViewModel> Profiles { get; set; }
-        public ProfileSettings ProfilesSettings { get; set; }      
+        public ProfileSettings ProfilesSettings { get; set; }
 
         public ProfileSettViewModel()
         {
@@ -31,10 +31,18 @@ namespace PngifyMe.ViewModels
 
         public Profile Profile { get; }
 
-        [ObservableProperty]
         private ProfileType type;
 
-        public static List<ProfileType> ProfileTypes { get ; set; } =new List<ProfileType>(Enum.GetValues(typeof(ProfileType)).Cast<ProfileType>());
+        public ProfileType Type
+        {
+            get => type; set
+            {
+                SetProperty(ref type, value);
+                Profile.Type = value;
+            }
+        }
+
+        public static List<ProfileType> ProfileTypes { get; set; } = new List<ProfileType>(Enum.GetValues(typeof(ProfileType)).Cast<ProfileType>());
 
         public ProfileViewModel(Profile profile)
         {
