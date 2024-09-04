@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
+using Serilog;
 using System;
 using System.Collections.ObjectModel;
 using System.Reflection;
@@ -46,6 +47,9 @@ namespace PngifyMe.ViewModels.Helper
                     propertyViewModel.Unit = unitAttribute.Unit;
                 }
 
+                var filePickerAttribute = prop.GetCustomAttribute<FilePickerAttribute>();
+                propertyViewModel.FilePicker = filePickerAttribute != null;
+
                 PropertyList.Add(propertyViewModel);
             }
         }
@@ -58,8 +62,16 @@ namespace PngifyMe.ViewModels.Helper
 
                 if (prop != null)
                 {
-                    var convertedValue = Convert.ChangeType(propertyViewModel.Value, prop.PropertyType);
-                    prop.SetValue(LayerModel, convertedValue);
+                    try
+                    {
+                        var convertedValue = Convert.ChangeType(propertyViewModel.Value, prop.PropertyType);
+                        prop.SetValue(LayerModel, convertedValue);
+                    }
+                    catch (Exception e)
+                    {
+                        Log.Debug("Conversion error: " + e.Message, e);
+                        propertyViewModel.Value = prop.GetValue(LayerModel)?.ToString();
+                    }
                 }
             }
         }

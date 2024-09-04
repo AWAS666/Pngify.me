@@ -147,7 +147,7 @@ namespace PngifyMe.Services.ThrowingSystem
                     item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
                    speed: new Vector2(Random.Shared.Next((int)SettingsManager.Current.Tits.ObjectSpeedMin, (int)SettingsManager.Current.Tits.ObjectSpeedMax), -300),
                    rotSpeed: Random.Shared.Next(-20, 20)
-                    , x: -100, y: Random.Shared.Next(500, 1000), details: 10));
+                    , x: -100, y: Random.Shared.Next(300, 500), details: 10));
             }
         }
     }

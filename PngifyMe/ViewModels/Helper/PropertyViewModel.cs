@@ -12,5 +12,8 @@ namespace PngifyMe.ViewModels.Helper
 
         [ObservableProperty]
         private string unit;
+
+        [ObservableProperty]
+        private bool filePicker;      
     }
 }

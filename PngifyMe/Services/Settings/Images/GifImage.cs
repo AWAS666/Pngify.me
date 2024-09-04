@@ -83,5 +83,13 @@ namespace PngifyMe.Services.Settings.Images
                 frame.Bitmap = base.Resize(frame.Bitmap, maxWidth, maxHeight);
             }
         }
+
+        public override void Dispose()
+        {
+            foreach (var item in Frames)
+            {
+                item.Bitmap.Dispose();
+            }
+        }
     }
 }

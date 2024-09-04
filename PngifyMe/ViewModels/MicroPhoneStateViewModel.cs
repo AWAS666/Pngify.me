@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.Settings;
+using PngifyMe.ViewModels.Helper;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -31,6 +32,17 @@ namespace PngifyMe.ViewModels
             }
         }
 
+        private string name;
+
+        public string Name
+        {
+            get => name; set
+            {
+                SetProperty(ref name, value);
+                state.Name = value;
+            }
+        }
+
         private bool defaultState;
 
         public bool DefaultState
@@ -49,6 +61,7 @@ namespace PngifyMe.ViewModels
         {
             this.state = state;
             this.parent = parent;
+            Name = state.Name;
             DefaultState = state.Default;
             SetHotkey();
         }
@@ -58,7 +71,7 @@ namespace PngifyMe.ViewModels
             var path = await parent.GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
             {
                 Title = "Select an Image",
-                FileTypeFilter = new[] { ImageAll },
+                FileTypeFilter = new[] { FilePickers.ImageAll },
                 AllowMultiple = false
             });
             if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
@@ -97,12 +110,7 @@ namespace PngifyMe.ViewModels
             Hotkey = text;
         }
 
-        public static FilePickerFileType ImageAll { get; } = new("All Images")
-        {
-            Patterns = new[] { "*.png", "*.jpg", "*.jpeg", "*.gif", "*.bmp", "*.webp" },
-            AppleUniformTypeIdentifiers = new[] { "public.image" },
-            MimeTypes = new[] { "image/*" }
-        };
+       
     }
 
 }

@@ -1,4 +1,5 @@
 ﻿using PngifyMe.Layers;
+using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Settings;
 using Serilog;
 using System;

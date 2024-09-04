@@ -21,7 +21,6 @@ namespace PngifyMe.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<MicroPhoneStateViewModel> states;
-        private Func<IStorageProvider> getStorage;
 
         public MicroPhoneSetupViewModel() : this(null)
         {

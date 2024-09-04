@@ -3,8 +3,9 @@ using System;
 
 namespace PngifyMe.Services.Settings.Images
 {
-    public abstract class BaseImage
+    public abstract class BaseImage : IDisposable
     {
+        public abstract void Dispose();
         public abstract SKBitmap GetImage(TimeSpan time);
 
         public abstract void Resize(int maxWidth, int maxHeight);

@@ -1,4 +1,6 @@
-﻿namespace PngifyMe.Layers.Movements
+﻿using PngifyMe.Layers.Helper;
+
+namespace PngifyMe.Layers.Movements
 {
     public abstract class MovementBaseLayer : BaseLayer
     {

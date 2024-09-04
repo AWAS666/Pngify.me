@@ -8,11 +8,16 @@ Feel free to suggest features and submit code yourself
 - [x] Basic functionality, showing two different Pngs depending if speaking or not
 - [x] Save config
 - [x] Blinking images in both states
+	- [ ] smooth transitions (show old state at 50% opacity)
 - [x] State transition images (mouth opening/mouth closing) ?
 - [x] Switch between different png setups (states) using hotkeys
 - [ ] Multiple profiles
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
+	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
+- [x] stick on any png (redeem)
+	- [ ] move with model (figure out nearest outline in both states and move by difference)
+	- [ ] visualize location
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -37,6 +42,12 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
+- [ ] use views and view models properly
+- [ ] more usercontrols to avoid overnesting
+
+## Todo better ui/ux
+- [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI)
+- [ ] fix number inputs, sorta wacky right now
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, ko-fi and steam (if it sees some support as steam isn't free)
