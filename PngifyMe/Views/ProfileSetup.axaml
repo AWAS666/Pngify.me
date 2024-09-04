@@ -26,6 +26,9 @@
 				<Button Click="CreateNewProfile">Add New Profile</Button>
 			</StackPanel>
 
+			<TextBlock >TTSPet is still in development and not working (yet)</TextBlock>
+
+
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
 
 			<TextBlock FontSize="18">All Profiles:</TextBlock>
