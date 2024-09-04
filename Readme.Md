@@ -11,6 +11,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] smooth transitions (show old state at 50% opacity)
 - [x] State transition images (mouth opening/mouth closing) ?
 - [x] Switch between different png setups (states) using hotkeys
+	- [ ] Hotkeys currently override the input for all applications
 - [x] Multiple profiles
 	- [ ] save all needed files into the profile folder instead of keeping a global reference
 	- [ ] show icon?
