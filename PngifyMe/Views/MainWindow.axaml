@@ -28,16 +28,13 @@
 					ToolTip.Tip="Only save, doesnt apply">Save settings</Button>
 			<TabControl Grid.Row="1" WrapSelection="True" 
 						TabStripPlacement="Right"						
-						>
+						>			
 				<TabItem Header="Microphone" FontSize="12" Width="125">
 					<views:VolumeSlider />
 				</TabItem>
 				<TabItem Header="LayoutMenu" FontSize="12" Width="125">
 					<views:LayoutMenu />
 				</TabItem>
-				<!--<TabItem Header="LayerAdder" FontSize="12" Width="125">
-				<views:LayerAdder />
-			</TabItem>-->
 				<TabItem Header="LayerSetup" FontSize="12" Width="125">
 					<views:LayerSetup />
 				</TabItem>
@@ -46,6 +43,9 @@
 				</TabItem>
 				<TabItem Header="Throwing System" FontSize="12" Width="130">
 					<views:TITSSetup/>
+				</TabItem>
+				<TabItem Header="Profiles" FontSize="12" Width="125">
+					<views:ProfileSetup />
 				</TabItem>
 				<TabItem Header="General Settings" FontSize="12" Width="125">
 					<views:GeneralSettings />

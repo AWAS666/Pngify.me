@@ -10,6 +10,7 @@ namespace PngifyMe.Services.Settings
         public LayerSetup LayerSetup { get; set; } = new();
         public TwitchSettings Twitch { get; set; } = new();
         public TitsSettings Tits { get; set; } = new();
+        public ProfileSettings Profile { get; set; } = new();
 
     }
 }

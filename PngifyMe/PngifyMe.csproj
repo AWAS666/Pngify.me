@@ -89,6 +89,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\ProfileSetup.axaml.cs">
+      <DependentUpon>ProfileSetup.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Helper\TriggerView.axaml.cs">
       <DependentUpon>TriggerView.axaml</DependentUpon>
     </Compile>

@@ -1,0 +1,50 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+             x:Class="PngifyMe.Views.ProfileSetup"
+			  x:DataType="vm:ProfileSettViewModel"
+			 >
+	<Design.DataContext>
+		<vm:ProfileSettViewModel/>
+	</Design.DataContext>
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel Spacing="10">
+			<TextBlock FontSize="24">Profiles</TextBlock>
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<TextBlock>Current Profile:</TextBlock>
+				<TextBlock Text="{Binding ProfilesSettings.Active.Name}"></TextBlock>
+			</StackPanel>
+			
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<TextBox Watermark="New Profile Name"></TextBox>
+				<Button>Save Current as new Profile</Button>
+			</StackPanel>
+
+			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+
+			<TextBlock FontSize="18">All Profiles:</TextBlock>
+
+			<ListBox ItemsSource="{Binding Profiles}" >
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<StackPanel Orientation="Horizontal" Spacing="10">
+							<TextBlock VerticalAlignment="Center" Text="{Binding Profile.Name}" ></TextBlock>
+							<CheckBox IsChecked="{Binding Profile.Default}">Default</CheckBox>
+							<ComboBox ItemsSource="{Binding ProfileTypes}"
+									  SelectedItem="{Binding Type}">
+							</ComboBox>
+							<Button>Load</Button>
+						</StackPanel>
+					</DataTemplate>
+
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</StackPanel>
+	</Grid>
+</UserControl>
