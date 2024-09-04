@@ -20,7 +20,7 @@
 				<TextBlock>Current Profile:</TextBlock>
 				<TextBlock Text="{Binding ProfilesSettings.Active.Name}"></TextBlock>
 			</StackPanel>
-			
+
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBox Name="newProfile" Watermark="New Profile Name" Width="150"></TextBox>
 				<Button Click="CreateNewProfile">Add New Profile</Button>
@@ -34,7 +34,7 @@
 				<ListBox.ItemTemplate>
 					<DataTemplate>
 						<StackPanel Orientation="Horizontal" Spacing="10">
-							<TextBlock VerticalAlignment="Center" Text="{Binding Profile.Name}" ></TextBlock>
+							<TextBox Padding="10,5,10,5" VerticalAlignment="Center" Text="{Binding Profile.Name, Mode=TwoWay}" ></TextBox>
 							<CheckBox IsChecked="{Binding Profile.Default}">Default</CheckBox>
 							<ComboBox ItemsSource="{Binding ProfileTypes}"
 									  SelectedItem="{Binding Type}">
