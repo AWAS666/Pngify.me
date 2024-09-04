@@ -1,8 +1,10 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using PngifyMe.Services;
 using PngifyMe.ViewModels;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using TwitchLib.Api.Helix.Models.Soundtrack;
 
@@ -13,6 +15,12 @@ public partial class MicStateSetup : UserControl
     public MicStateSetup()
     {
         InitializeComponent();
+        DataContext = new MicroPhoneSetupViewModel(GetStorage);
+        SettingsManager.Current.Profile.PropertyChanged += Profile_PropertyChanged;
+    }
+
+    private void Profile_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
         DataContext = new MicroPhoneSetupViewModel(GetStorage);
     }
 

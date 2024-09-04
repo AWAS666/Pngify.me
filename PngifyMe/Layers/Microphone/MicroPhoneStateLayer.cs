@@ -5,6 +5,7 @@ using PngifyMe.Services.Settings.Images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime;
 
 namespace PngifyMe.Layers.Microphone
 {
@@ -16,6 +17,7 @@ namespace PngifyMe.Layers.Microphone
         private BaseImage closedBlinkImage;
         private MicroPhoneState current;
         private float transTime;
+        private MicroPhoneSettings micSettings;
         private bool blinking;
         private List<Action> callbacks = new();
 
@@ -26,10 +28,22 @@ namespace PngifyMe.Layers.Microphone
         public MicroPhoneStateLayer()
         {
             transTime = Interval;
-            var def = SettingsManager.Current.Microphone.States.FirstOrDefault(x => x.Default);
+            RefreshMicSettings();
+            SettingsManager.Current.Profile.PropertyChanged += Profile_PropertyChanged;
+        }
+
+        private void Profile_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            RefreshMicSettings();
+        }
+
+        private void RefreshMicSettings()
+        {
+            micSettings = SettingsManager.Current.Profile.Active.MicroPhone;
+            var def = micSettings.States.FirstOrDefault(x => x.Default);
             if (def == null)
             {
-                def = SettingsManager.Current.Microphone.States.First();
+                def = micSettings.States.First();
                 def.Default = true;
             }
             SwitchState(def);
@@ -41,12 +55,12 @@ namespace PngifyMe.Layers.Microphone
             CurrentTime += dt;
             if (!blinking && CurrentTime > transTime)
             {
-                transTime += (float)SettingsManager.Current.Microphone.BlinkTime;
+                transTime += (float)micSettings.BlinkTime;
                 blinking = true;
             }
             else if (blinking && CurrentTime > transTime)
             {
-                transTime += (float)SettingsManager.Current.Microphone.BlinkInterval;
+                transTime += (float)micSettings.BlinkInterval;
                 blinking = false;
             }
 
@@ -73,7 +87,7 @@ namespace PngifyMe.Layers.Microphone
         {
             if (current == state)
             {
-                SwitchState(SettingsManager.Current.Microphone.States.First(x => x.Default));
+                SwitchState(micSettings.States.First(x => x.Default));
             }
             else
             {
@@ -85,7 +99,7 @@ namespace PngifyMe.Layers.Microphone
         {
             WinHotkey.RemoveCallbacks(callbacks);
             callbacks.Clear();
-            foreach (var state in SettingsManager.Current.Microphone.States)
+            foreach (var state in micSettings.States)
             {
                 if (state.Trigger == null)
                     continue;

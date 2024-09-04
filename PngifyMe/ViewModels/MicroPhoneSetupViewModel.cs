@@ -30,8 +30,8 @@ namespace PngifyMe.ViewModels
         public MicroPhoneSetupViewModel(Func<IStorageProvider> getStorage)
         {
             GetStorageProvider = getStorage;
-            baseStates = SettingsManager.Current.Microphone.States;
-            Settings = SettingsManager.Current.Microphone;
+            baseStates = SettingsManager.Current.Profile.Active.MicroPhone.States;
+            Settings = SettingsManager.Current.Profile.Active.MicroPhone;
             states = new ObservableCollection<MicroPhoneStateViewModel>(baseStates.Select(x => new MicroPhoneStateViewModel(x, this)));
         }
 

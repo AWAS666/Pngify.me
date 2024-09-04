@@ -11,7 +11,7 @@ namespace PngifyMe.Services
         private static WaveInEvent _waveIn;
         private static float last = 0f;
 
-        public static MicroPhoneSettings Settings { get; private set; } = SettingsManager.Current.Microphone;
+        public static MicroPhoneSettings Settings => SettingsManager.Current.Profile.Active.MicroPhone;
         public static bool Talking { get; private set; }
 
         public static event EventHandler<MicroPhoneLevel> LevelChanged;

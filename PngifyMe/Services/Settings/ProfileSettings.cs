@@ -90,7 +90,7 @@ namespace PngifyMe.Services.Settings
         public string Name { get; set; } = "Profile1";
         public bool Default { get; set; }
         public ProfileType Type { get; set; } = ProfileType.Human;
-        public MicroPhoneSettings MicrophoneSettings { get; set; } = new();
+        public MicroPhoneSettings MicroPhone { get; set; } = new();
     }
 
     public enum ProfileType
