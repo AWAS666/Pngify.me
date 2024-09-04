@@ -35,7 +35,7 @@
 					<DataTemplate>
 						<StackPanel Orientation="Horizontal" Spacing="10">
 							<TextBox Padding="10,5,10,5" VerticalAlignment="Center" Text="{Binding Profile.Name, Mode=TwoWay}" ></TextBox>
-							<CheckBox IsChecked="{Binding Profile.Default}">Default</CheckBox>
+							<CheckBox IsChecked="{Binding DefaultValue, Mode=TwoWay}" Click="CheckChanged">Default</CheckBox>
 							<ComboBox ItemsSource="{Binding ProfileTypes}"
 									  SelectedItem="{Binding Type}">
 							</ComboBox>

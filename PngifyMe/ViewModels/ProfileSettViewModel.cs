@@ -42,12 +42,24 @@ namespace PngifyMe.ViewModels
             }
         }
 
+        private bool defaultValue;
+
+        public bool DefaultValue
+        {
+            get => defaultValue; set
+            {
+                SetProperty(ref defaultValue, value);
+                Profile.Default = value;
+            }
+        }
+
         public static List<ProfileType> ProfileTypes { get; set; } = new List<ProfileType>(Enum.GetValues(typeof(ProfileType)).Cast<ProfileType>());
 
         public ProfileViewModel(Profile profile)
         {
             Profile = profile;
             Type = profile.Type;
+            DefaultValue = profile.Default;
         }
 
     }
