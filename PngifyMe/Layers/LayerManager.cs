@@ -229,7 +229,7 @@ namespace PngifyMe.Layers
                     }
                 }
 
-                foreach (ImageLayer img in Layers.Where(x => x is ImageLayer).Cast<ImageLayer>())
+                foreach (ImageLayer img in Layers.ToList().Where(x => x is ImageLayer).Cast<ImageLayer>())
                 {
                     img.RenderImage(canvas);
                 }
