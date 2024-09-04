@@ -11,7 +11,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] smooth transitions (show old state at 50% opacity)
 - [x] State transition images (mouth opening/mouth closing) ?
 - [x] Switch between different png setups (states) using hotkeys
-- [ ] Multiple profiles
+- [x] Multiple profiles
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
