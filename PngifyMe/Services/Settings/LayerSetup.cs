@@ -14,7 +14,7 @@ namespace PngifyMe.Services.Settings
         private List<Action> callbacks = new();
 
         [ObservableProperty]
-        private bool showFPS = true;
+        private bool showFPS = false;
 
         [ObservableProperty]
         private uint targetFPS = 60;
