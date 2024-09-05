@@ -23,7 +23,7 @@ public partial class MainWindow : Window
 
         grid.Bind(Grid.BackgroundProperty, binding);
 
-        this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}-alpha";
+        this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}-beta";
     }
 
     private void DoubleClick(object? sender, Avalonia.Input.TappedEventArgs e)
