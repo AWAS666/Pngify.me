@@ -69,6 +69,8 @@ namespace PngifyMe.Helpers
                 }
                 _drawImageOperation.NextBitmap.Add(newBitmap);               
             }
+            else 
+                newBitmap?.Dispose();
         }
 
         public Size Size { get; set; }
