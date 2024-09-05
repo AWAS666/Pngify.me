@@ -3,6 +3,7 @@ using Avalonia.Media;
 using Avalonia.Platform;
 using Avalonia.Rendering.SceneGraph;
 using Avalonia.Skia;
+using Serilog;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -76,8 +77,7 @@ namespace PngifyMe.Helpers
             }
             catch (Exception e)
             {
-
-                throw;
+                Log.Error("Update image failed: " + e.Message, e);
             }
         }
 

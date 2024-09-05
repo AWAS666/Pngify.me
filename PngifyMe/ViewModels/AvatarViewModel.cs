@@ -1,13 +1,6 @@
-﻿using Avalonia.Media;
-using CommunityToolkit.Mvvm.ComponentModel;
-using PngifyMe.Helpers;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
-using PngifyMe.Services.Settings;
 using SkiaSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using static PngifyMe.Helpers.SkiaExtensions;
 
 namespace PngifyMe.ViewModels;
 
@@ -32,15 +25,10 @@ public partial class AvatarViewModel : ObservableObject
     private double opacity;
 
     [ObservableProperty]
-    private float fps;
+    private float fps;   
 
     [ObservableProperty]
-    private AvaloniaImage image = (AvaloniaImage)ImageSetting.PlaceHolder.ToAvaloniaImage();
-
-
-    private List<AvaloniaImage> oldImages = new();
-
-    public EventHandler RequestRedraw;
+    private SKImage skImage;
 
     public AvatarViewModel()
     {
@@ -50,8 +38,7 @@ public partial class AvatarViewModel : ObservableObject
 
     private void UpdateImage(object? sender, SKImage e)
     {
-        Image.UpdateImage(e);
-        RequestRedraw?.Invoke(this, new EventArgs());
+        SkImage = e;
     }
 
     private void UpdateFPS(object? sender, float e)

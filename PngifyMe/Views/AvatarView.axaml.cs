@@ -23,12 +23,6 @@ public partial class AvatarView : UserControl
         fpsCounter.Bind(TextBlock.IsVisibleProperty, bindingFps);
 
         var vm = new AvatarViewModel();
-        vm.RequestRedraw += RedrawVisual;
         DataContext = vm;
-    }
-
-    private void RedrawVisual(object? sender, EventArgs e)
-    {
-        Dispatcher.UIThread.Post(image.InvalidateVisual);
-    }
+    }    
 }

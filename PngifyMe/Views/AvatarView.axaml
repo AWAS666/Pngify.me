@@ -5,14 +5,21 @@
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
 			  x:DataType="vm:AvatarViewModel"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
              x:Class="PngifyMe.Views.AvatarView">
 	<Grid  HorizontalAlignment="Stretch"
 	   VerticalAlignment="Stretch" >
-		<Image  Stretch="Uniform"
+		<!--<Image  Stretch="Uniform"
 	   HorizontalAlignment="Center"
 	   VerticalAlignment="Center"				
 				Source="{Binding Image}"
-				x:Name="image"></Image>
+				x:Name="image"></Image>-->
+		<siv:SKImageView
+			HorizontalAlignment="Center"
+				VerticalAlignment="Center"
+				Source="{Binding SkImage}"
+			RenderMode="AsynchronouslyForFetching"
+				Stretch="Uniform" />
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
 	</Grid>
 </UserControl>
