@@ -42,7 +42,7 @@ namespace PngifyMe.Helpers
     public class AvaloniaImage : IImage, IDisposable
     {
         private SKImage? _source;
-        SKBitmapDrawOperation? _drawImageOperation;
+        private SKBitmapDrawOperation? _drawImageOperation;
 
         public AvaloniaImage(SKImage? source)
         {
@@ -55,22 +55,30 @@ namespace PngifyMe.Helpers
 
         public void UpdateImage(SKImage newBitmap)
         {
-            if (newBitmap?.Info.Size is SKSizeI size)
+            try
             {
-                Size = new(size.Width, size.Height);
-            }
-            if (_drawImageOperation != null)
-            {
-                var next = _drawImageOperation.NextBitmap;              
-                foreach (var item in next.SkipLast(1).ToList())
+                if (newBitmap?.Info.Size is SKSizeI size)
                 {
-                    item.Dispose();
-                    next.Remove(item);
+                    Size = new(size.Width, size.Height);
                 }
-                _drawImageOperation.NextBitmap.Add(newBitmap);               
+                if (_drawImageOperation != null)
+                {
+                    var next = _drawImageOperation.NextBitmap;
+                    foreach (var item in next.SkipLast(1).ToList())
+                    {
+                        item.Dispose();
+                        next.Remove(item);
+                    }
+                    _drawImageOperation.NextBitmap.Add(newBitmap);
+                }
+                else
+                    newBitmap?.Dispose();
             }
-            else 
-                newBitmap?.Dispose();
+            catch (Exception e)
+            {
+
+                throw;
+            }
         }
 
         public Size Size { get; set; }
@@ -110,18 +118,18 @@ namespace PngifyMe.Helpers
 
         public void Render(ImmediateDrawingContext context)
         {
-            if(rendering) return;
+            if (rendering) return;
             rendering = true;
             SKImage old = null;
             if (NextBitmap.Count > 0)
             {
                 old = Bitmap;
                 Bitmap = NextBitmap.Last();
-                foreach (var item in NextBitmap.SkipLast(1).ToList())
-                {
-                    item.Dispose();
-                    NextBitmap.Remove(item);
-                }
+                //foreach (var item in NextBitmap.SkipLast(1).ToList())
+                //{
+                //    item.Dispose();
+                //    NextBitmap.Remove(item);
+                //}
                 NextBitmap.Remove(Bitmap);
             }
             if (Bitmap is SKImage bitmap && context.PlatformImpl.GetFeature<ISkiaSharpApiLeaseFeature>() is ISkiaSharpApiLeaseFeature leaseFeature)
