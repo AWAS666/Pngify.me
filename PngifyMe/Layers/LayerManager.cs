@@ -22,7 +22,15 @@ namespace PngifyMe.Layers
         public static List<BaseLayer> Layers { get; set; } = new List<BaseLayer>();
         public static float Time { get; private set; }
 
-        public static float UpdateInterval => 1.0f / SettingsManager.Current.LayerSetup.TargetFPS;
+        public static float UpdateInterval
+        {
+            get
+            {
+                if (SettingsManager.Current.LayerSetup.LowSpecMode)
+                    return 1.0f / SettingsManager.Current.LayerSetup.TargetFPS * 2.0f;
+                return 1.0f / SettingsManager.Current.LayerSetup.TargetFPS;
+            }
+        }
         //public static int FPS { get; private set; } = 120;
         public static float TotalRunTime { get; private set; }
 
@@ -51,7 +59,7 @@ namespace PngifyMe.Layers
                 Update(UpdateInterval + delay);
 
                 //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
-                double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
+                double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;              
 
                 // todo fix to more accurate timer
                 //await Delay(Math.Max(1, time));

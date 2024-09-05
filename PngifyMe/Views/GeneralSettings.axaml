@@ -26,6 +26,11 @@
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Label ToolTip.Tip="(limits to 30 fps)" VerticalAlignment="Center">Low Spec Mode</Label>
+			<CheckBox x:Name="lowSpec"></CheckBox>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Enable Spout2 (experimental)</Label>
 			<CheckBox x:Name="spout2"></CheckBox>
 			<HyperlinkButton NavigateUri="https://github.com/Off-World-Live/obs-spout2-plugin">Install in OBS</HyperlinkButton>

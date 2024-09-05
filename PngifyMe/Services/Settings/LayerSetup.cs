@@ -17,6 +17,9 @@ namespace PngifyMe.Services.Settings
         private bool showFPS = false;
 
         [ObservableProperty]
+        private bool lowSpecMode = false;
+
+        [ObservableProperty]
         private uint targetFPS = 60;
 
         public List<Layersetting> Layers { get; set; } = new()
