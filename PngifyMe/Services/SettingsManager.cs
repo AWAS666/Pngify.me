@@ -24,7 +24,7 @@ namespace PngifyMe.Services
             BasePath = path;
             FilePath = Path.Join(path, "settings.json");
             Load();
-        }
+        }    
 
         public static void Load()
         {
@@ -36,7 +36,7 @@ namespace PngifyMe.Services
                     var options = new JsonSerializerOptions();
                     options.Converters.Add(new BaseLayerJsonConverter());
                     options.Converters.Add(new TriggerJsonConverter());
-                    Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath), options);
+                    Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath), options);                    
                 }
                 catch (Exception e)
                 {
@@ -50,6 +50,7 @@ namespace PngifyMe.Services
                 Current = new();
                 Save();
             }
+            Current.Profile.Load();
         }
 
         public static void Save()

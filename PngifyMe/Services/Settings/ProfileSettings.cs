@@ -11,7 +11,13 @@ namespace PngifyMe.Services.Settings
     {
         // json ignore this, this loads based on folders
         // load this instead of json
-        public List<Profile> ProfileList { get; set; } = new List<Profile>();
+        public List<Profile> ProfileList { get; set; } = [
+            new Profile()
+            {
+                Name= "Default",                
+                Default = true
+            }
+        ];
 
         [ObservableProperty]
         private Profile active;
@@ -22,23 +28,23 @@ namespace PngifyMe.Services.Settings
 
         public void Load()
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new BaseLayerJsonConverter());
-            options.Converters.Add(new TriggerJsonConverter());
+            //var options = new JsonSerializerOptions();
+            //options.Converters.Add(new BaseLayerJsonConverter());
+            //options.Converters.Add(new TriggerJsonConverter());
 
-            string path = Path.Combine(SettingsManager.BasePath, "Profiles");
-            Directory.CreateDirectory(path);
-            foreach (var dir in Directory.GetDirectories(path))
-            {
-                var prof = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(dir, "setup.json")), options);
-                ProfileList.Add(prof);
-            }
+            //string path = Path.Combine(SettingsManager.BasePath, "Profiles");
+            //Directory.CreateDirectory(path);
+            //foreach (var dir in Directory.GetDirectories(path))
+            //{
+            //    var prof = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(dir, "setup.json")), options);
+            //    ProfileList.Add(prof);
+            //}
 
-            if (ProfileList.Count == 0)
-            {
-                ProfileList.Add(new Profile() { Default = true });
-                Save();
-            }
+            //if (ProfileList.Count == 0)
+            //{
+            //    ProfileList.Add(new Profile() { Default = true });
+            //    Save();
+            //}
             Active = ProfileList.First(x => x.Default);
         }
 
