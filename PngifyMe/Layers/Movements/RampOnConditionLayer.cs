@@ -6,8 +6,9 @@ namespace PngifyMe.Layers
     public abstract class RampOnConditionLayer : PermaLayer
     {
         private float stateChangeTime;
+        private float lowest;
         private float highest;
-        private float maxval;
+        private float lastVal;
         private bool lastCondition;
 
         [Unit("s")]
@@ -38,26 +39,37 @@ namespace PngifyMe.Layers
             bool current = Triggered();
             if (!lastCondition && current)
             {
-                stateChangeTime = CurrentTime;
+                if (CurrentTime - stateChangeTime < DeActivationRamp)
+                {
+                    var perce = 1 - (CurrentTime - stateChangeTime) / DeActivationRamp;
+                    stateChangeTime = CurrentTime - ActivationRamp * perce;
+                }
+                else
+                    stateChangeTime = CurrentTime;
+
             }
             if (lastCondition && !current)
             {
-                stateChangeTime = CurrentTime;
-                highest = maxval;
+                if (CurrentTime - stateChangeTime < ActivationRamp)
+                {
+                    var perce = (CurrentTime - stateChangeTime) / DeActivationRamp;
+                    stateChangeTime = CurrentTime - DeActivationRamp * (1 - perce);
+                }
+                else
+                    stateChangeTime = CurrentTime;
             }
 
-            var value = Math.Min(1,
-                Easings.CubicEaseOut((CurrentTime - stateChangeTime) / (current ? ActivationRamp : DeActivationRamp)));
+            var value = Easings.CubicEaseInOut(Math.Min(1, (CurrentTime - stateChangeTime) / (current ? ActivationRamp : DeActivationRamp)));
 
             if (current)
                 CurrentStrength = value;
             else
-                CurrentStrength = Math.Max(0, highest - value);
+                CurrentStrength = 1 - value;
 
             if (stateChangeTime == 0)
                 CurrentStrength = 0;
 
-            maxval = value;
+            lastVal = value;
 
             lastCondition = current;
             base.OnUpdate(dt, time);
