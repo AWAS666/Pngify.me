@@ -64,7 +64,7 @@ Current Date and time: {DateTime.Now}"),
             var speech = await LLMService.CreateSpeech<Stream>(new AudioCreateSpeechRequest()
             {
                 Input = input,
-                Model = "tts-1",
+                Model = SettingsManager.Current.LLM.TTSModel,
                 Voice = SettingsManager.Current.LLM.TTSVoice.ToString().ToLower(),
             });
 

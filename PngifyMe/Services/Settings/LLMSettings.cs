@@ -41,6 +41,11 @@ namespace PngifyMe.Services.Settings
         private string modelName = "gpt-4o-mini";
 
         [ObservableProperty]
+        private string tTSModel = "tts-1";
+
+        [ObservableProperty]
         private OpenAITTS tTSVoice = OpenAITTS.Echo;
+
+        public static List<OpenAITTS> TTSTypes { get; set; } = new List<OpenAITTS>(Enum.GetValues(typeof(OpenAITTS)).Cast<OpenAITTS>());
     }
 }

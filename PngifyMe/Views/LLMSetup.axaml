@@ -31,6 +31,14 @@
 				<Label VerticalAlignment="Center" >Model: </Label>
 				<TextBox Text="{Binding ModelName}"></TextBox>
 			</StackPanel>
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<Label VerticalAlignment="Center" >TTS Voice: </Label>
+				<ComboBox ItemsSource="{Binding TTSTypes}"
+										  SelectedItem="{Binding TTSVoice}"/>
+				<Label VerticalAlignment="Center" >TTS Model: </Label>
+				<TextBox Text="{Binding TTSModel}"></TextBox>
+
+			</StackPanel>
 			<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding SystemPrompt}"></TextBox>
