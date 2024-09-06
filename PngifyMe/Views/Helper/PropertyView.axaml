@@ -14,11 +14,21 @@
 	<Design.DataContext>
 		<vm:PropertyViewModel/>
 	</Design.DataContext>
+	
 	<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
 		<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
-		<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
+		<ContentControl Content="{Binding Value}" Width="100" VerticalAlignment="Center">
+			<ContentControl.DataTemplates>
+				<DataTemplate DataType="{x:Type x:String}">
+					<TextBox Text="{Binding $parent[UserControl].((vm:PropertyViewModel)DataContext).Value}"/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type x:Boolean}">
+					<CheckBox IsChecked="{Binding $parent[UserControl].((vm:PropertyViewModel)DataContext).Value, Mode=TwoWay}"/>
+				</DataTemplate>
+			</ContentControl.DataTemplates>
+		</ContentControl>
 		<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
-		<Button IsVisible="{Binding FilePicker}" Click="SelectFile">Pick File</Button>
+		<Button IsVisible="{Binding FilePicker}" Click="SelectFile" Content="Pick File"></Button>		
 	</StackPanel>
 	
 </UserControl>

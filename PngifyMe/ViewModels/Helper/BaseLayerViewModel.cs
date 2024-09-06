@@ -38,7 +38,7 @@ namespace PngifyMe.ViewModels.Helper
                 var propertyViewModel = new PropertyViewModel
                 {
                     Name = prop.Name,
-                    Value = prop.GetValue(LayerModel)?.ToString(),
+                    Value = prop.PropertyType == typeof(bool) ? (bool)prop.GetValue(LayerModel) : prop.GetValue(LayerModel)?.ToString(),
                     Type = prop.PropertyType,
                 };
 

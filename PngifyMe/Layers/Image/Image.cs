@@ -16,7 +16,7 @@ namespace PngifyMe.Layers.Image
 
         [Unit("Path")]
         [FilePicker]
-        public string FilePath { get; set; }
+        public string FilePath { get; set; } = string.Empty;
 
         [Unit("seconds")]
         public float StickyFor { get; set; } = float.MaxValue;

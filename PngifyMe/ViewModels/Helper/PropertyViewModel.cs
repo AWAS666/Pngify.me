@@ -9,7 +9,7 @@ namespace PngifyMe.ViewModels.Helper
         private string name;
 
         [ObservableProperty]
-        private string value;
+        private object value;
 
         [ObservableProperty]
         private string unit;
