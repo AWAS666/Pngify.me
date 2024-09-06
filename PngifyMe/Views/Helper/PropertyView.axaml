@@ -1,0 +1,24 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 x:DataType="vm:PropertyViewModel"
+             x:Class="PngifyMe.Views.Helper.PropertyView"
+			 >
+
+	<Design.DataContext>
+		<vm:PropertyViewModel/>
+	</Design.DataContext>
+	<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
+		<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
+		<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
+		<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
+		<Button IsVisible="{Binding FilePicker}" Click="SelectFile">Pick File</Button>
+	</StackPanel>
+	
+</UserControl>

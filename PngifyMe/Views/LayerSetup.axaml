@@ -62,12 +62,7 @@
 												<ItemsControl ItemsSource="{Binding PropertyList}">
 													<ItemsControl.ItemTemplate>
 														<DataTemplate>
-															<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
-																<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
-																<TextBox VerticalAlignment="Center" Text="{Binding Value}" Width="100"/>
-																<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
-																<Button IsVisible="{Binding FilePicker}" Click="SelectFile">Pick File</Button>
-															</StackPanel>
+															<helper:PropertyView DataContext="{Binding}"></helper:PropertyView>
 														</DataTemplate>
 													</ItemsControl.ItemTemplate>
 												</ItemsControl>

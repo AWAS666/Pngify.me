@@ -90,6 +90,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Helper\PropertyView.axaml.cs">
+      <DependentUpon>PropertyView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\ProfileSetup.axaml.cs">
       <DependentUpon>ProfileSetup.axaml</DependentUpon>
     </Compile>
