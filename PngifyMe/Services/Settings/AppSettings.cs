@@ -10,6 +10,6 @@ namespace PngifyMe.Services.Settings
         public TwitchSettings Twitch { get; set; } = new();
         public TitsSettings Tits { get; set; } = new();
         public ProfileSettings Profile { get; set; } = new();
-
+        public LLMSettings LLM { get; set; } = new();
     }
 }

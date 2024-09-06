@@ -44,6 +44,9 @@
 				<TabItem Header="Throwing System" FontSize="12" Width="130">
 					<views:TITSSetup/>
 				</TabItem>
+				<TabItem Header="TTSPet" FontSize="12" Width="125">
+					<views:LLMSetup />
+				</TabItem>
 				<TabItem Header="Profiles" FontSize="12" Width="125">
 					<views:ProfileSetup />
 				</TabItem>

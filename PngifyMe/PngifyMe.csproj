@@ -64,6 +64,7 @@
     <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.1.3" />
     <PackageReference Include="Avalonia.Win32" Version="11.1.3" />
     <PackageReference Include="Avalonia.Xaml.Behaviors" Version="11.1.0" />
+    <PackageReference Include="Betalgo.OpenAI" Version="8.6.2" />
     <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.2" />
     <PackageReference Include="GlobalHotKeys.Windows" Version="0.1.0" />
     <PackageReference Include="NAudio" Version="2.2.1" />
@@ -92,6 +93,9 @@
   <ItemGroup>
     <Compile Update="Views\Helper\PropertyView.axaml.cs">
       <DependentUpon>PropertyView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\LLMSetup.axaml.cs">
+      <DependentUpon>LLMSetup.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\ProfileSetup.axaml.cs">
       <DependentUpon>ProfileSetup.axaml</DependentUpon>
