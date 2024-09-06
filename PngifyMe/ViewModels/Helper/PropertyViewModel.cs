@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 
 namespace PngifyMe.ViewModels.Helper
 {
@@ -12,6 +13,9 @@ namespace PngifyMe.ViewModels.Helper
 
         [ObservableProperty]
         private string unit;
+
+        [ObservableProperty]
+        private Type type;
 
         [ObservableProperty]
         private bool filePicker;      

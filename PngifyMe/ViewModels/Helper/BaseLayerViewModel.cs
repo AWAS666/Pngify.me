@@ -38,7 +38,8 @@ namespace PngifyMe.ViewModels.Helper
                 var propertyViewModel = new PropertyViewModel
                 {
                     Name = prop.Name,
-                    Value = prop.GetValue(LayerModel)?.ToString()
+                    Value = prop.GetValue(LayerModel)?.ToString(),
+                    Type = prop.PropertyType,
                 };
 
                 var unitAttribute = prop.GetCustomAttribute<UnitAttribute>();

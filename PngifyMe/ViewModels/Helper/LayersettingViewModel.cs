@@ -97,7 +97,8 @@ namespace PngifyMe.ViewModels.Helper
                     var propertyViewModel = new PropertyViewModel
                     {
                         Name = prop.Name,
-                        Value = prop.GetValue(SelectedTrigger)?.ToString()
+                        Value = prop.GetValue(SelectedTrigger)?.ToString(),
+                        Type = prop.PropertyType
                     };
                     PropertyList.Add(propertyViewModel);
                 }
