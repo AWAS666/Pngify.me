@@ -16,7 +16,7 @@ namespace PngifyMe.Services.TTSPet
         static TTSPet()
         {
             TwitchEventSocket.BitsUsed += BitsUsed;
-            TwitchEventSocket.RedeemUsed += RedeemUsed;
+            TwitchEventSocket.RedeemFull += RedeemUsed;
             TwitchEventSocket.NewFollower += NewFollower;
         }
 
@@ -25,7 +25,7 @@ namespace PngifyMe.Services.TTSPet
 
         }
 
-        private static void RedeemUsed(object? sender, string e)
+        private static void RedeemUsed(object? sender, ChannelPointsCustomRewardRedemption e)
         {
         }
 
