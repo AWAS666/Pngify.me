@@ -7,7 +7,10 @@ namespace PngifyMe.Layers
 {
     public abstract class ImageLayer : PermaLayer
     {
-        public abstract void RenderImage(SKCanvas canvas);
+        [Unit("bool")]
+        public bool ApplyOtherEffects { get; set; } = false;
+
+        public abstract void RenderImage(SKCanvas canvas, float x, float y);
 
         public abstract SKBitmap GetImage();
 

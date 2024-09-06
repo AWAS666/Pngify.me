@@ -59,7 +59,7 @@ namespace PngifyMe.Layers
                 Update(UpdateInterval + delay);
 
                 //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
-                double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;              
+                double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
                 // todo fix to more accurate timer
                 //await Delay(Math.Max(1, time));
@@ -179,6 +179,11 @@ namespace PngifyMe.Layers
                             height / 2 - baseImg.Height / 2 + layert.PosY,
                             paint);
                     }
+
+                    foreach (ImageLayer img in Layers.ToList().Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
+                    {
+                        img.RenderImage(surface, layert.PosX, layert.PosY);
+                    }
                 }
 
                 //layert.PosX += (width - baseImg.Width) / 2;
@@ -237,9 +242,9 @@ namespace PngifyMe.Layers
                     }
                 }
 
-                foreach (ImageLayer img in Layers.ToList().Where(x => x is ImageLayer).Cast<ImageLayer>())
+                foreach (ImageLayer img in Layers.ToList().Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects))
                 {
-                    img.RenderImage(canvas);
+                    img.RenderImage(canvas, 0, 0);
                 }
             }
             return SKImage.FromBitmap(mainBitmap);

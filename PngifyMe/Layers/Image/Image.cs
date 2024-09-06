@@ -56,12 +56,12 @@ namespace PngifyMe.Layers.Image
             // nothing prolly
         }
 
-        public override void RenderImage(SKCanvas canvas)
+        public override void RenderImage(SKCanvas canvas, float x, float y)
         {
             if (IsExiting || image == null)
                 return;
             var img = GetImage();
-            canvas.DrawBitmap(img, PosX - img.Width / 2, PosY - img.Height / 2);
+            canvas.DrawBitmap(img, PosX - img.Width / 2 + x, PosY - img.Height / 2 + y);
         }
 
         public override SKBitmap GetImage()
