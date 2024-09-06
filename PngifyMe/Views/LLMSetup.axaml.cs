@@ -3,8 +3,10 @@ using Avalonia.Data;
 using Avalonia.Interactivity;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
+using PngifyMe.Services.TTSPet;
 using PngifyMe.ViewModels;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Views;
 
@@ -14,5 +16,10 @@ public partial class LLMSetup : UserControl
     {
         InitializeComponent();
         DataContext = SettingsManager.Current.LLM;
-    }    
+    }
+
+    private async void TriggerTest(object sender, RoutedEventArgs e)
+    {
+        await TTSPet.GenerateAndRead(inputText.Text);
+    }
 }

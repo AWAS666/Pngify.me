@@ -3,6 +3,7 @@ using PngifyMe.Services.Twitch;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
@@ -42,11 +43,28 @@ namespace PngifyMe.Services.TTSPet
 
         public static async Task GenerateAndRead(string input)
         {
-            using var stream = await GenerateResponse(input);
-            WaveStream waveStream = new Mp3FileReader(stream);
-            var waveOut = new WaveOutEvent();
-            waveOut.Init(waveStream);
-            waveOut.Play();
+            var audio = await GenerateResponse(input);
+            WaveStream reader = new Mp3FileReader(audio);
+            var player = new WaveOutEvent();
+
+            player.Init(reader);
+
+            // Subscribe to the PlaybackStopped event to dispose of resources when playback is done
+            player.PlaybackStopped += (sender, args) =>
+            {
+                player.Dispose();
+                reader.Dispose();
+                audio.Dispose();
+            };
+            await Task.Run(async () =>
+            {
+                //await Task.Delay(Random.Shared.Next(1, 200));
+                player.Play();
+                while (player.PlaybackState != PlaybackState.Stopped)
+                {
+                    await Task.Delay(50);
+                }
+            });
         }
     }
 }

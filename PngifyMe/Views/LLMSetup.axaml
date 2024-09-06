@@ -64,7 +64,7 @@
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center" >Input Text: </Label>
 				<TextBox x:Name="inputText" Width="300" >Hello, how are you?</TextBox>
-				<Button>Respond</Button>
+				<Button Click="TriggerTest">Respond</Button>
 			</StackPanel>
 
 
