@@ -4,10 +4,10 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
-    <AssemblyVersion>0.0.1.8</AssemblyVersion>
+    <AssemblyVersion>0.0.1.9</AssemblyVersion>
     <Version>$(VersionPrefix)</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <FileVersion>0.0.1.8</FileVersion>
+    <FileVersion>0.0.1.9</FileVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>embedded</DebugType>
