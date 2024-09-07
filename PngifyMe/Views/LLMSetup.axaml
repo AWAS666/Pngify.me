@@ -17,58 +17,86 @@
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel Spacing="10">
 			<TextBlock FontSize="24">TTS Pet Setup</TextBlock>
-			<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}">Enable</CheckBox>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center" >OpenAI API Key: </Label>
-				<TextBox PasswordChar="*" Width="200" Text="{Binding Settings.OpenAIKey}"></TextBox>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center" ToolTip.Tip="for non OpenAI Models" >Custom Domain: </Label>
-				<TextBox Text="{Binding Settings.Domain}"></TextBox>
-				<TextBlock VerticalAlignment="Center">(optional)</TextBlock>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center" >Model: </Label>
-				<TextBox Text="{Binding Settings.ModelName}"></TextBox>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center" >TTS Voice: </Label>
-				<ComboBox ItemsSource="{Binding TTSTypes}"
-						  SelectedItem="{Binding Settings.TTSVoice}"/>
-				<Label VerticalAlignment="Center" >TTS Model: </Label>
-				<TextBox Text="{Binding Settings.TTSModel}"></TextBox>
+			<TabControl>
+				<TabItem Header="Setup">
+					<StackPanel Spacing="10">
+						<TextBlock Margin="0,5,0,5" FontSize="24">Settings</TextBlock>
 
-			</StackPanel>
-			<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap" 
-						 Text="{Binding Settings.SystemPrompt}"></TextBox>
-			</StackPanel>
+						<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}">Enable</CheckBox>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" >OpenAI API Key: </Label>
+							<TextBox PasswordChar="*" Width="200" Text="{Binding Settings.OpenAIKey}"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" ToolTip.Tip="for non OpenAI Models" >Custom Domain: </Label>
+							<TextBox Text="{Binding Settings.Domain}"></TextBox>
+							<TextBlock VerticalAlignment="Center">(optional)</TextBlock>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" >Model: </Label>
+							<TextBox Text="{Binding Settings.ModelName}"></TextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" >TTS Voice: </Label>
+							<ComboBox ItemsSource="{Binding TTSTypes}"
+									  SelectedItem="{Binding Settings.TTSVoice}"/>
+							<Label VerticalAlignment="Center" >TTS Model: </Label>
+							<TextBox Text="{Binding Settings.TTSModel}"></TextBox>
 
-			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
-
-			<TextBlock FontSize="24">Twitch triggers</TextBlock>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center">Minimum Bits: </Label>
-				<helper:UintTextBox Text="{Binding Settings.MinBits}"></helper:UintTextBox>
-			</StackPanel>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center" >Twitch Redeem: </Label>
-				<TextBox ToolTip.Tip="Enter the name of any redeem that should trigger the ttspet"
-						 Text="{Binding Settings.Redeem}"></TextBox>
-			</StackPanel>
-			<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
-
-			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
-
-			<TextBlock FontSize="24">Test your setup</TextBlock>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<Label VerticalAlignment="Center" >Input Text: </Label>
-				<TextBox x:Name="inputText" Width="300" >Hello, how are you?</TextBox>
-				<Button Click="TriggerTest">Respond</Button>
-			</StackPanel>
+						</StackPanel>
+						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap"
+									 Text="{Binding Settings.SystemPrompt}"></TextBox>
+						</StackPanel>
 
 
+						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+
+						<TextBlock FontSize="24">Twitch triggers</TextBlock>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center">Minimum Bits: </Label>
+							<helper:UintTextBox Text="{Binding Settings.MinBits}"></helper:UintTextBox>
+						</StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" >Twitch Redeem: </Label>
+							<TextBox ToolTip.Tip="Enter the name of any redeem that should trigger the ttspet"
+									 Text="{Binding Settings.Redeem}"></TextBox>
+						</StackPanel>
+						<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="History and Test">
+					<StackPanel Spacing="10">
+						<TextBlock Margin="0,5,0,5"  FontSize="24">Test your setup</TextBlock>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" >Input Text: </Label>
+							<TextBox x:Name="inputText" Width="300" >Hello, how are you?</TextBox>
+							<Button Click="TriggerTest">Respond</Button>
+						</StackPanel>
+
+						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+
+						<TextBlock FontSize="24">History</TextBlock>
+
+						<DataGrid ItemsSource="{Binding Messages}"
+								  AutoGenerateColumns="False" IsReadOnly="True"
+								  GridLinesVisibility="All"
+								  BorderThickness="1" BorderBrush="Gray">
+							<DataGrid.Columns>
+								<DataGridTextColumn IsReadOnly="True" Header="TimeStamp" Binding="{Binding Created}"/>
+								<DataGridTextColumn IsReadOnly="True"  Header="Input" Binding="{Binding Input}"/>
+								<DataGridTextColumn IsReadOnly="True"  Header="Output" Binding="{Binding Output}"/>
+								<DataGridTextColumn IsReadOnly="True"  Header="User" Binding="{Binding UserName}"/>
+								<DataGridCheckBoxColumn IsReadOnly="True"  Header="Read" Binding="{Binding Read}"/>
+							</DataGrid.Columns>
+						</DataGrid>
+					</StackPanel>
+
+				</TabItem>
+			</TabControl>
 		</StackPanel>
+
+
 	</Grid>
 </UserControl>

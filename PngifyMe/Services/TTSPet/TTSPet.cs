@@ -140,7 +140,7 @@ namespace PngifyMe.Services.TTSPet
             {
                 Input = text,
             };
-            Queue.Add(msg);
+            QueueMsg(msg);
         }
     }
 }
