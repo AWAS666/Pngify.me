@@ -22,7 +22,11 @@ namespace PngifyMe.Services
             var path = Environment.GetFolderPath(folder) + "\\PngifyMe";
             Directory.CreateDirectory(path);
             BasePath = path;
+#if DEBUG
+            FilePath = Path.Join(path, "settings.dev.json");
+#else
             FilePath = Path.Join(path, "settings.json");
+#endif
             Load();
         }    
 
