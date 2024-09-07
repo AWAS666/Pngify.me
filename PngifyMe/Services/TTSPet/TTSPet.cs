@@ -18,7 +18,7 @@ namespace PngifyMe.Services.TTSPet
         private static Task task;
 
         public static OpenAILLM LLMProvider { get; set; } = new();
-        public static OpenAITTSProvider TTSProvider { get; set; } = new();
+        public static ITTSProvider TTSProvider { get; set; } = new OpenAITTSProvider();
 
         public static List<LLMMessage> Queue { get; set; } = new();
 

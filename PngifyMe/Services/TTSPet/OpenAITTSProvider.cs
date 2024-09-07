@@ -15,7 +15,7 @@ using System.IO;
 
 namespace PngifyMe.Services.TTSPet
 {
-    public class OpenAITTSProvider
+    public class OpenAITTSProvider : ITTSProvider
     {
         public OpenAIService LLMService { get; private set; }
 
@@ -35,7 +35,7 @@ namespace PngifyMe.Services.TTSPet
             if (!string.IsNullOrEmpty(SettingsManager.Current.LLM.Domain))
                 options.BaseDomain = SettingsManager.Current.LLM.Domain;
             LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(3) });
-        }        
+        }
 
         public async Task<Stream?> GenerateSpeech(string input)
         {
