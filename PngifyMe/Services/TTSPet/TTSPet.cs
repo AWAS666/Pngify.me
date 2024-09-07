@@ -22,6 +22,8 @@ namespace PngifyMe.Services.TTSPet
 
         public static List<LLMMessage> Queue { get; set; } = new();
 
+        public static EventHandler<LLMMessage> NewOrUpdated;
+
         static TTSPet()
         {
             TwitchEventSocket.BitsUsed += BitsUsed;
@@ -37,7 +39,15 @@ namespace PngifyMe.Services.TTSPet
                 Input = $"Thanks {e} for following the channel",
                 ReadInput = true,
             };
+            QueueMsg(msg);
+        }
+
+        private static void QueueMsg(LLMMessage msg)
+        {
+            if (!SettingsManager.Current.LLM.Enabled)
+                return;
             Queue.Add(msg);
+            NewOrUpdated?.Invoke(null, msg);
         }
 
         private static void RedeemUsed(object? sender, ChannelPointsCustomRewardRedemption e)
@@ -49,7 +59,7 @@ namespace PngifyMe.Services.TTSPet
                 Input = string.IsNullOrEmpty(e.UserInput) ? $"{e.UserName} used the redeem: {e.Reward.Title}" : e.UserInput,
                 UserName = e.UserName,
             };
-            Queue.Add(msg);
+            QueueMsg(msg);
         }
 
         private static void BitsUsed(object? sender, ChannelCheer e)
@@ -59,7 +69,7 @@ namespace PngifyMe.Services.TTSPet
                 Input = e.Message,
                 UserName = e.UserName ?? string.Empty,
             };
-            Queue.Add(msg);
+            QueueMsg(msg);
         }
 
         static async Task ProcessQueue()
@@ -96,13 +106,7 @@ namespace PngifyMe.Services.TTSPet
         private static async Task GetResponse(LLMMessage item)
         {
             item.Output = await LLMProvider.GetResponse(item.Input, item.UserName);
-        }
-
-        public static async Task<System.IO.Stream?> GenerateResponse(string input)
-        {
-            var output = await LLMProvider.GetResponse(input);
-            return await TTSProvider.GenerateSpeech(output);
-        }
+        }       
 
         public static async Task ReadText(string input)
         {
