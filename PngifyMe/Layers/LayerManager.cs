@@ -156,9 +156,7 @@ namespace PngifyMe.Layers
             int height = 1080;
             using var mainBitmap = new SKBitmap(width, height);
             using (SKCanvas canvas = new SKCanvas(mainBitmap))
-            {
-                // Clear canvas with white color
-                canvas.Clear();
+            {               
 
                 float rotationAngle = layert.Rotation;
                 float zoomFactor = layert.ZoomX;
@@ -168,12 +166,10 @@ namespace PngifyMe.Layers
 
                 using (var surface = new SKCanvas(rotatedBitmap))
                 {
-                    surface.Clear();
                     surface.Translate(width / 2, height / 2);
                     surface.RotateDegrees((float)rotationAngle);
                     surface.Scale(layert.ZoomX, layert.ZoomY);
                     surface.Translate(-width / 2, -height / 2);
-                    //surface.DrawBitmap(baseImg, width / 2 - baseImg.Width / 2, 0);
 
                     using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
                     {
@@ -188,8 +184,6 @@ namespace PngifyMe.Layers
                         img.RenderImage(surface, layert.PosX, layert.PosY);
                     }
                 }
-
-                //layert.PosX += (width - baseImg.Width) / 2;
 
                 // Draw the main bitmap on the canvas
                 canvas.DrawBitmap(rotatedBitmap, 0, 0);
