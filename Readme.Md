@@ -37,6 +37,11 @@ Feel free to suggest features and submit code yourself
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff
+- [ ] optimize performance
+	- [ ] avoid .Clear() when creating a new frame anyway
+	- [ ] remove .tolist of layer all the time, use one copy
+	- [ ] reuse canvases
+	- [ ] avoid drawing of unchanged objects
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
