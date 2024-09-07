@@ -20,6 +20,7 @@ namespace PngifyMe.Layers
     {
         private static Task tickLoop;
         public static List<BaseLayer> Layers { get; set; } = new List<BaseLayer>();
+        public static List<BaseLayer> RenderedLayers { get; set; } = new List<BaseLayer>();
         public static float Time { get; private set; }
 
         public static float UpdateInterval
@@ -119,9 +120,11 @@ namespace PngifyMe.Layers
                     }
                 }
 
+                RenderedLayers = Layers.ToList();
+
                 var layert = new LayerValues();
                 MicroPhoneStateLayer.Update(dt, ref layert);
-                foreach (BaseLayer layer in Layers.ToList())
+                foreach (BaseLayer layer in RenderedLayers)
                 {
                     layer.OnCalculateParameters(dt, ref layert);
                 }
@@ -180,7 +183,7 @@ namespace PngifyMe.Layers
                             paint);
                     }
 
-                    foreach (ImageLayer img in Layers.ToList().Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
+                    foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
                     {
                         img.RenderImage(surface, layert.PosX, layert.PosY);
                     }
@@ -242,7 +245,7 @@ namespace PngifyMe.Layers
                     }
                 }
 
-                foreach (ImageLayer img in Layers.ToList().Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects))
+                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects))
                 {
                     img.RenderImage(canvas, 0, 0);
                 }
