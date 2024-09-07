@@ -44,8 +44,8 @@ namespace PngifyMe.Services.Settings
         private string tTSModel = "tts-1";
 
         [ObservableProperty]
-        private OpenAITTS tTSVoice = OpenAITTS.Echo;
+        private OpenAITTSVoices tTSVoice = OpenAITTSVoices.Echo;
 
-        public static List<OpenAITTS> TTSTypes { get; set; } = new List<OpenAITTS>(Enum.GetValues(typeof(OpenAITTS)).Cast<OpenAITTS>());
+        public static List<OpenAITTSVoices> TTSTypes { get; set; } = new List<OpenAITTSVoices>(Enum.GetValues(typeof(OpenAITTSVoices)).Cast<OpenAITTSVoices>());
     }
 }

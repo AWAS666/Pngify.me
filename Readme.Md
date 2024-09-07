@@ -36,12 +36,15 @@ Feel free to suggest features and submit code yourself
 	- [ ] throw emotes
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
+- [ ] stream deck websocket to trigger stuff
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration
 - [ ] Chatgpt/other llm 
 - [ ] TTS like Elevenlabs/Openai/local
+	- [x] openai
+	- [ ] elevenlabs
 - [ ] STT to talk with your TTS pet
 
 ## Todo Refactors

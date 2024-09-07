@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Services.TTSPet
 {
-    public enum OpenAITTS
+    public enum OpenAITTSVoices
     {
         Alloy,
         Echo,

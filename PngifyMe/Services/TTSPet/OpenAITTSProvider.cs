@@ -15,11 +15,11 @@ using System.IO;
 
 namespace PngifyMe.Services.TTSPet
 {
-    public class LLMProvider
+    public class OpenAITTSProvider
     {
         public OpenAIService LLMService { get; private set; }
 
-        public LLMProvider()
+        public OpenAITTSProvider()
         {
             Init();
         }
@@ -33,31 +33,7 @@ namespace PngifyMe.Services.TTSPet
             if (!string.IsNullOrEmpty(SettingsManager.Current.LLM.Domain))
                 options.BaseDomain = SettingsManager.Current.LLM.Domain;
             LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(3) });
-        }
-
-        public async Task<string> GetResponse(string input)
-        {
-            try
-            {
-                var completionResult = await LLMService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
-                {
-                    Messages = new List<ChatMessage>
-                {
-                    ChatMessage.FromSystem($@"{SettingsManager.Current.LLM.SystemPrompt}
-### Additional Info:
-Current Date and time: {DateTime.Now}"),
-                    ChatMessage.FromUser(input)
-                },
-                    Model = SettingsManager.Current.LLM.ModelName,
-                });
-                return completionResult.Choices.First().Message.Content;
-            }
-            catch (Exception e)
-            {
-                Log.Error($"Openai error: " + e.Message, e);
-                return "Oh, oh I ran into an issue";
-            }
-        }
+        }        
 
         public async Task<Stream?> GenerateSpeech(string input)
         {

@@ -1,10 +1,13 @@
 ﻿using NAudio.Wave;
 using PngifyMe.Services.Twitch;
+using Serilog;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
@@ -12,38 +15,98 @@ namespace PngifyMe.Services.TTSPet
 {
     public static class TTSPet
     {
-        public static LLMProvider LLMProvider { get; set; } = new();
+        private static Task task;
+
+        public static OpenAILLM LLMProvider { get; set; } = new();
+        public static OpenAITTSProvider TTSProvider { get; set; } = new();
+
+        public static List<LLMMessage> Queue { get; set; } = new();
 
         static TTSPet()
         {
             TwitchEventSocket.BitsUsed += BitsUsed;
             TwitchEventSocket.RedeemFull += RedeemUsed;
             TwitchEventSocket.NewFollower += NewFollower;
+            task = Task.Run(ProcessQueue);
         }
 
         private static void NewFollower(object? sender, string e)
         {
-
+            var msg = new LLMMessage()
+            {
+                Input = $"Thanks {e} for following the channel",
+                ReadInput = true,
+            };
+            Queue.Add(msg);
         }
 
         private static void RedeemUsed(object? sender, ChannelPointsCustomRewardRedemption e)
         {
+            if (e.Reward.Title.ToLower() != SettingsManager.Current.LLM.Redeem.ToLower())
+                return;
+            var msg = new LLMMessage()
+            {
+                Input = string.IsNullOrEmpty(e.UserInput) ? $"{e.UserName} used the redeem: {e.Reward.Title}" : e.UserInput,
+                UserName = e.UserName,
+            };
+            Queue.Add(msg);
         }
 
         private static void BitsUsed(object? sender, ChannelCheer e)
         {
+            var msg = new LLMMessage()
+            {
+                Input = e.Message,
+                UserName = e.UserName ?? string.Empty,
+            };
+            Queue.Add(msg);
+        }
 
+        static async Task ProcessQueue()
+        {
+            while (true)
+            {
+                try
+                {
+                    var item = Queue.FirstOrDefault(x => !x.Read);
+                    if (item == null)
+                    {
+                        continue;
+                    }
+
+                    if (!item.ReadInput)
+                        await GetResponse(item);
+
+                    await ReadText(item.ToRead);
+
+                    item.Read = true;
+                }
+                catch (Exception e)
+                {
+                    Log.Error("Error in LLM loop: " + e.Message, e);
+                    await Task.Delay(1000);
+                }
+                finally
+                {
+                    await Task.Delay(500);
+                }
+            }
+        }
+
+        private static async Task GetResponse(LLMMessage item)
+        {
+            item.Output = await LLMProvider.GetResponse(item.Input, item.UserName);
         }
 
         public static async Task<System.IO.Stream?> GenerateResponse(string input)
         {
             var output = await LLMProvider.GetResponse(input);
-            return await LLMProvider.GenerateSpeech(output);
+            return await TTSProvider.GenerateSpeech(output);
         }
 
-        public static async Task GenerateAndRead(string input)
+        public static async Task ReadText(string input)
         {
-            var audio = await GenerateResponse(input);
+            var audio = await TTSProvider.GenerateSpeech(input);
             WaveStream reader = new Mp3FileReader(audio);
             var player = new WaveOutEvent();
 
@@ -65,6 +128,15 @@ namespace PngifyMe.Services.TTSPet
                     await Task.Delay(50);
                 }
             });
+        }
+
+        public static void QueueText(string text)
+        {
+            var msg = new LLMMessage()
+            {
+                Input = text,
+            };
+            Queue.Add(msg);
         }
     }
 }

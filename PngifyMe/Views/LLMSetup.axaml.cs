@@ -18,8 +18,8 @@ public partial class LLMSetup : UserControl
         DataContext = SettingsManager.Current.LLM;
     }
 
-    private async void TriggerTest(object sender, RoutedEventArgs e)
+    private void TriggerTest(object sender, RoutedEventArgs e)
     {
-        await TTSPet.GenerateAndRead(inputText.Text);
+        TTSPet.QueueText(inputText.Text);
     }
 }
