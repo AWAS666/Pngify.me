@@ -26,6 +26,8 @@ namespace PngifyMe.Services.TTSPet
 
         public void Init()
         {
+            if (string.IsNullOrEmpty(SettingsManager.Current.LLM.OpenAIKey))
+                return;
             var options = new OpenAiOptions()
             {
                 ApiKey = SettingsManager.Current.LLM.OpenAIKey
