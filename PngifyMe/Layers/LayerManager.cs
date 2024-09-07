@@ -160,33 +160,29 @@ namespace PngifyMe.Layers
 
                 float rotationAngle = layert.Rotation;
                 float zoomFactor = layert.ZoomX;
-                float opacity = layert.Opacity;
+                float opacity = layert.Opacity;             
 
-                using var rotatedBitmap = new SKBitmap(width, height);
+                canvas.Save();
+                canvas.Translate(width / 2, height / 2);
+                canvas.RotateDegrees((float)rotationAngle);
+                canvas.Scale(layert.ZoomX, layert.ZoomY);
+                canvas.Translate(-width / 2, -height / 2);
 
-                using (var surface = new SKCanvas(rotatedBitmap))
+                // Apply transformations directly to the main canvas
+                using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
                 {
-                    surface.Translate(width / 2, height / 2);
-                    surface.RotateDegrees((float)rotationAngle);
-                    surface.Scale(layert.ZoomX, layert.ZoomY);
-                    surface.Translate(-width / 2, -height / 2);
-
-                    using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
-                    {
-                        surface.DrawBitmap(baseImg,
-                            width / 2 - baseImg.Width / 2 + layert.PosX,
-                            height / 2 - baseImg.Height / 2 + layert.PosY,
-                            paint);
-                    }
-
-                    foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
-                    {
-                        img.RenderImage(surface, layert.PosX, layert.PosY);
-                    }
+                    canvas.DrawBitmap(baseImg,
+                        width / 2 - baseImg.Width / 2 + layert.PosX,
+                        height / 2 - baseImg.Height / 2 + layert.PosY,
+                        paint);
                 }
 
-                // Draw the main bitmap on the canvas
-                canvas.DrawBitmap(rotatedBitmap, 0, 0);
+                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
+                {
+                    img.RenderImage(canvas, layert.PosX, layert.PosY);
+                }
+
+                canvas.Restore();
 
                 if (SettingsManager.Current.Tits.HitLinesVisible)
                 {
