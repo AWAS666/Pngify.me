@@ -43,6 +43,7 @@ namespace PngifyMe.Services.TTSPet
         {
             try
             {
+                string? user = userName != null ? Regex.Replace(userName, @"[^a-zA-Z\d_-]", "") : null;
                 var completionResult = await LLMService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
                 {
                     Messages = new List<ChatMessage>
@@ -50,7 +51,7 @@ namespace PngifyMe.Services.TTSPet
                     ChatMessage.FromSystem($@"{SettingsManager.Current.LLM.SystemPrompt}
 ### Additional Info:
 Current Date and time: {DateTime.Now}"),
-                    ChatMessage.FromUser(input, Regex.Replace(userName, @"[^a-zA-Z\d_-]", ""))
+                    ChatMessage.FromUser(input, user)
                 },
                     Model = SettingsManager.Current.LLM.ModelName,
                     FrequencyPenalty = 1f,

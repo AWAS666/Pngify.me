@@ -67,7 +67,7 @@ namespace PngifyMe.Services.TTSPet
             var msg = new LLMMessage()
             {
                 Input = e.Message,
-                UserName = e.UserName ?? string.Empty,
+                UserName = e.UserName,
             };
             QueueMsg(msg);
         }

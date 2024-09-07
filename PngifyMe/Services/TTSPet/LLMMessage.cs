@@ -16,6 +16,6 @@ namespace PngifyMe.Services.TTSPet
 
         public string ToRead => ReadInput ? Input : Output;
 
-        public string UserName { get; internal set; }
+        public string? UserName { get; set; } = null;
     }
 }
