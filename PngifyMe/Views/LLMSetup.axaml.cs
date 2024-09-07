@@ -15,7 +15,7 @@ public partial class LLMSetup : UserControl
     public LLMSetup()
     {
         InitializeComponent();
-        DataContext = SettingsManager.Current.LLM;
+        DataContext = new LLMProviderViewModel();
     }
 
     private void TriggerTest(object sender, RoutedEventArgs e)

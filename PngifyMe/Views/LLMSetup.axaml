@@ -9,39 +9,40 @@
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
              x:Class="PngifyMe.Views.LLMSetup"
-			  x:DataType="sett:LLMSettings"
+			 x:DataType="vm:LLMProviderViewModel"
 			 >
 	<Design.DataContext>
-		<sett:LLMSettings/>
+		<vm:LLMProviderViewModel/>
 	</Design.DataContext>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel Spacing="10">
 			<TextBlock FontSize="24">TTS Pet Setup</TextBlock>
-			<CheckBox IsChecked="{Binding Enabled, Mode=TwoWay}">Enable</CheckBox>
+			<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}">Enable</CheckBox>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center" >OpenAI API Key: </Label>
-				<TextBox PasswordChar="*" Width="200" Text="{Binding OpenAIKey}"></TextBox>
+				<TextBox PasswordChar="*" Width="200" Text="{Binding Settings.OpenAIKey}"></TextBox>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center" ToolTip.Tip="for non OpenAI Models" >Custom Domain: </Label>
-				<TextBox Text="{Binding Domain}"></TextBox>
+				<TextBox Text="{Binding Settings.Domain}"></TextBox>
 				<TextBlock VerticalAlignment="Center">(optional)</TextBlock>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center" >Model: </Label>
-				<TextBox Text="{Binding ModelName}"></TextBox>
+				<TextBox Text="{Binding Settings.ModelName}"></TextBox>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center" >TTS Voice: </Label>
 				<ComboBox ItemsSource="{Binding TTSTypes}"
-										  SelectedItem="{Binding TTSVoice}"/>
+						  SelectedItem="{Binding Settings.TTSVoice}"/>
 				<Label VerticalAlignment="Center" >TTS Model: </Label>
-				<TextBox Text="{Binding TTSModel}"></TextBox>
+				<TextBox Text="{Binding Settings.TTSModel}"></TextBox>
 
 			</StackPanel>
 			<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap" Text="{Binding SystemPrompt}"></TextBox>
+				<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap" 
+						 Text="{Binding Settings.SystemPrompt}"></TextBox>
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
@@ -49,14 +50,14 @@
 			<TextBlock FontSize="24">Twitch triggers</TextBlock>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center">Minimum Bits: </Label>
-				<helper:UintTextBox Text="{Binding MinBits}"></helper:UintTextBox>
+				<helper:UintTextBox Text="{Binding Settings.MinBits}"></helper:UintTextBox>
 			</StackPanel>
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<Label VerticalAlignment="Center" >Twitch Redeem: </Label>
 				<TextBox ToolTip.Tip="Enter the name of any redeem that should trigger the ttspet"
-						 Text="{Binding Redeem}"></TextBox>
+						 Text="{Binding Settings.Redeem}"></TextBox>
 			</StackPanel>
-			<CheckBox IsChecked="{Binding ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
+			<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
 

@@ -45,7 +45,5 @@ namespace PngifyMe.Services.Settings
 
         [ObservableProperty]
         private OpenAITTSVoices tTSVoice = OpenAITTSVoices.Echo;
-
-        public static List<OpenAITTSVoices> TTSTypes { get; set; } = new List<OpenAITTSVoices>(Enum.GetValues(typeof(OpenAITTSVoices)).Cast<OpenAITTSVoices>());
     }
 }

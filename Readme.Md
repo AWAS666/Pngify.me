@@ -46,6 +46,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [x] openai
 	- [ ] elevenlabs
 - [ ] STT to talk with your TTS pet
+- [ ] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
