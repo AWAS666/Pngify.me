@@ -105,6 +105,8 @@ namespace PngifyMe.Services
             }
             // cleanup
             stream.Dispose();
+            // close at the end
+            LevelChanged?.Invoke(null, new MicroPhoneLevel(false, 0));
         }
 
         public static void Stop()
