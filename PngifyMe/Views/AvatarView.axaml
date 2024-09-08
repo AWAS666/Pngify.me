@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="1280" d:DesignHeight="720"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vh="clr-namespace:PngifyMe.Views.Helper"
 			  x:DataType="vm:AvatarViewModel"
 			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
              x:Class="PngifyMe.Views.AvatarView">
@@ -15,6 +16,8 @@
 				Source="{Binding SkImage}"
 				RenderMode="AsynchronouslyForFetching"
 				Stretch="Uniform" />
+		<!--<vh:SKImageViewer Source="{Binding SkImage}"
+				></vh:SKImageViewer>-->
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
 	</Grid>
 </UserControl>

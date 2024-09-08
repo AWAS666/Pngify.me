@@ -1,6 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using SkiaSharp;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PngifyMe.ViewModels;
 
@@ -29,6 +31,7 @@ public partial class AvatarViewModel : ObservableObject
 
     [ObservableProperty]
     private SKImage skImage;
+    private List<SKImage> oldFrame = new();
 
     public AvatarViewModel()
     {
@@ -39,6 +42,14 @@ public partial class AvatarViewModel : ObservableObject
     private void UpdateImage(object? sender, SKImage e)
     {
         SkImage = e;
+
+        oldFrame.Add(e);
+        if (oldFrame.Count > 4)
+            foreach (var frame in oldFrame.Take(1))
+            {
+                frame.Dispose();
+                oldFrame.Remove(frame);
+            }
     }
 
     private void UpdateFPS(object? sender, float e)

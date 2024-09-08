@@ -19,8 +19,7 @@
 		</Style>
 	</Window.Styles>
 	<Grid x:Name="grid" >		
-		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-						 
+		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"						 
 						  DoubleTapped="DoubleClick"  />
 		<Grid x:Name="settings" Background="#AAFF5733" 
 			  HorizontalAlignment="Right" RowDefinitions="Auto,*" Width="700">
