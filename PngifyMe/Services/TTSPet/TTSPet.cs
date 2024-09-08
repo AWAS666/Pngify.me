@@ -119,7 +119,8 @@ namespace PngifyMe.Services.TTSPet
 
         private static async Task GetResponse(LLMMessage item)
         {
-            item.Output = await LLMProvider.GetResponse(item.Input, item.UserName);
+            if (string.IsNullOrEmpty(item.Output))
+                item.Output = await LLMProvider.GetResponse(item.Input, item.UserName);
         }
 
         public static async Task ReadText(string input)

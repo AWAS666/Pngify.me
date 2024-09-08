@@ -43,6 +43,8 @@ namespace PngifyMe.Services.TTSPet
         {
             try
             {
+                if (LLMService == null)
+                    Init();
                 string? user = userName != null ? Regex.Replace(userName, @"[^a-zA-Z\d_-]", "") : null;
                 var completionResult = await LLMService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
                 {
