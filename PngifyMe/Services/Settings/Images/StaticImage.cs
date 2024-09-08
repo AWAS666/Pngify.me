@@ -8,6 +8,8 @@ namespace PngifyMe.Services.Settings.Images
     {
         private SKBitmap Bitmap { get; set; }
 
+        public override SKBitmap Preview => Bitmap;
+
         public StaticImage(string filePath)
         {
             Bitmap = SKBitmap.Decode(filePath);

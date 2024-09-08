@@ -10,6 +10,8 @@ namespace PngifyMe.Services.Settings.Images
         public List<GifFrame> Frames { get; private set; } = new List<GifFrame>();
         public int RepeatCount { get; private set; }
 
+        public override SKBitmap Preview => GetImage(TimeSpan.FromSeconds(0));
+
         public GifImage(string filePath)
         {
             LoadGif(filePath);

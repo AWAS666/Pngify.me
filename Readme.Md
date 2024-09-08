@@ -38,8 +38,8 @@ Feel free to suggest features and submit code yourself
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff
 - [ ] optimize performance
-	- [ ] avoid .Clear() when creating a new frame anyway
-	- [ ] remove .tolist of layer all the time, use one copy
+	- [x] avoid .Clear() when creating a new frame anyway
+	- [x] remove .tolist of layer all the time, use one copy
 	- [ ] reuse canvases
 	- [ ] avoid drawing of unchanged objects
 

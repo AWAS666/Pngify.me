@@ -9,16 +9,11 @@
              x:Class="PngifyMe.Views.AvatarView">
 	<Grid  HorizontalAlignment="Stretch"
 	   VerticalAlignment="Stretch" >
-		<!--<Image  Stretch="Uniform"
-	   HorizontalAlignment="Center"
-	   VerticalAlignment="Center"				
-				Source="{Binding Image}"
-				x:Name="image"></Image>-->
 		<siv:SKImageView
 			HorizontalAlignment="Center"
 				VerticalAlignment="Center"
 				Source="{Binding SkImage}"
-			RenderMode="AsynchronouslyForFetching"
+				RenderMode="AsynchronouslyForFetching"
 				Stretch="Uniform" />
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
 	</Grid>

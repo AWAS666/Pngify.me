@@ -10,6 +10,7 @@
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
 			 x:DataType="vm:MicroPhoneSetupViewModel"
              x:Class="PngifyMe.Views.MicStateSetup"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"			 
 			   xmlns:int="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
 				xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 >
@@ -73,17 +74,21 @@
 								<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
 								<Button Command="{Binding LoadFile}" Grid.Column="1"
 										CommandParameter="{Binding State.Open}">
-									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.Open.Image}"></Image>
+									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right" 
+													 MaxWidth="100" Stretch="Uniform"
+										   Source="{Binding State.Open.Bitmap.Preview}">										
+									</siv:SKImageView>
 								</Button>
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
 										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 
 								<TextBlock VerticalAlignment="Center" Grid.Column="3">Closed Mouth</TextBlock>
 								<Button Command="{Binding LoadFile}" Grid.Column="4"
-										CommandParameter="{Binding State.Closed}">
-									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.Closed.Image}"></Image>
+										CommandParameter="{Binding State.Closed}">									
+									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
+													 MaxWidth="100" Stretch="Uniform"
+													 Source="{Binding State.Closed.Bitmap.Preview}">
+									</siv:SKImageView>
 								</Button>
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.Closed}"
 										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
@@ -95,9 +100,11 @@
 									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
 								</StackPanel>
 								<Button Command="{Binding LoadFile}" Grid.Column="1"
-										CommandParameter="{Binding State.OpenBlink}">
-									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-										   Source="{Binding State.OpenBlink.Image}"></Image>
+										CommandParameter="{Binding State.OpenBlink}">								
+									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
+													 MaxWidth="100" Stretch="Uniform"
+													 Source="{Binding State.OpenBlink.Bitmap.Preview}">
+									</siv:SKImageView>
 								</Button>
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.OpenBlink}"
 										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
@@ -108,8 +115,10 @@
 								</StackPanel>
 								<Button Command="{Binding LoadFile}" Grid.Column="4"
 										CommandParameter="{Binding State.ClosedBlink}">
-									<Image VerticalAlignment="Center" HorizontalAlignment="Right" MaxWidth="100"
-									   Source="{Binding State.ClosedBlink.Image}"></Image>
+									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
+													 MaxWidth="100" Stretch="Uniform"
+													 Source="{Binding State.ClosedBlink.Bitmap.Preview}">
+									</siv:SKImageView>
 								</Button>
 
 								<Button Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
