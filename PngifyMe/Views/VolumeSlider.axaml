@@ -4,19 +4,34 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
-             x:Class="PngifyMe.Views.VolumeSlider">
+             xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 x:Class="PngifyMe.Views.VolumeSlider"
+			 x:DataType="vm:AudioSetupViewModel">
+	<Design.DataContext>
+		<vm:AudioSetupViewModel/>
+	</Design.DataContext>
 	<Grid>
 		<StackPanel>
 			<TextBlock FontSize="24">Microphone Setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
-				<ComboBox x:Name="combo"/>
-				<!--<Button VerticalAlignment="Center" Click="SaveClick" Grid.Column="1" i:Attached.Icon="fa-regular fa-floppy-disk" />-->
-			</StackPanel>			
+				<TextBlock Width="50" VerticalAlignment="Center">Input: </TextBlock>
+				<ComboBox ItemsSource="{Binding InputDevices }"
+						  SelectedIndex="{Binding Settings.DeviceIn}"
+						  SelectionChanged="InputDeviceChanged"/>
+			</StackPanel>
+
+			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
+				<TextBlock Width="50" VerticalAlignment="Center">Output: </TextBlock>
+				<ComboBox ItemsSource="{Binding OutputDevices}"
+						  SelectedIndex="{Binding Settings.DeviceOut}"/>
+			</StackPanel>
 
 			<Grid RowDefinitions="200,35" ColumnDefinitions="75,75" Margin="5,5,5,5">
 				<Slider Orientation="Vertical" Minimum="0" Maximum="100" x:Name="current" />
-				<Slider Grid.Column="1" Orientation="Vertical" Minimum="0" Maximum="100" x:Name="max" />
-				
+				<Slider Value="{Binding Settings.ThreshHold}"
+						Grid.Column="1" Orientation="Vertical" 
+						Minimum="0" Maximum="100" />
+
 				<TextBlock Grid.Row="1">Current</TextBlock>
 				<TextBlock Grid.Row="1" Grid.Column="1">Treshhold</TextBlock>
 			</Grid>

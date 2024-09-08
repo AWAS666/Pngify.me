@@ -143,7 +143,6 @@ namespace PngifyMe.Services.TTSPet
             };
             await Task.Run(async () =>
             {
-                //await Task.Delay(Random.Shared.Next(1, 200));
                 player.Play();
                 while (player.PlaybackState != PlaybackState.Stopped)
                 {

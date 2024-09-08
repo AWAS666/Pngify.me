@@ -1,4 +1,5 @@
-﻿using NAudio.Wave;
+﻿using NAudio.CoreAudioApi;
+using NAudio.Wave;
 using PngifyMe.Services.Settings;
 using System;
 using System.Collections.Generic;
@@ -53,7 +54,7 @@ namespace PngifyMe.Services
             _waveIn = new WaveInEvent
             {
                 WaveFormat = new WaveFormat(8000, 1),
-                DeviceNumber = Settings.Device
+                DeviceNumber = Settings.DeviceIn
             };
 
             _waveIn.DataAvailable += OnDataAvailable;
@@ -65,7 +66,7 @@ namespace PngifyMe.Services
             _waveIn.StopRecording();
         }
 
-        public static List<string> GetAllDevices()
+        public static List<string> GetAllInDevices()
         {
             var list = new List<string>();
             int waveInDevices = WaveInEvent.DeviceCount;
@@ -75,6 +76,19 @@ namespace PngifyMe.Services
             {
                 var deviceInfo = WaveInEvent.GetCapabilities(i);
                 list.Add(deviceInfo.ProductName);
+            }
+            return list;
+        }
+
+        public static List<string> GetAllOutDevices()
+        {
+            var list = new List<string>();
+            var enumerator = new MMDeviceEnumerator();
+            var devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
+
+            foreach (var device in devices)
+            {
+                list.Add(device.FriendlyName);
             }
             return list;
         }

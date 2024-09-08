@@ -19,6 +19,11 @@ Feel free to suggest features and submit code yourself
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
+	- [ ] cross plattform audio lib, naudio wont do
+		- [ ] https://opentk.net/
+		- [ ] https://www.ambiera.com/irrklang/
+		- [ ] libvlcsharp
+	- [ ] disable spout on non windows
 - [x] stick on any png (redeem)
 	- [ ] move with model (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
