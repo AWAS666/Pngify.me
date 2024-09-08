@@ -2,6 +2,7 @@
 using CppSharp.Types.Std;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.TTSPet.Settings
 {
@@ -11,6 +12,7 @@ namespace PngifyMe.Services.TTSPet.Settings
         private StreamElementsVoice voice;
 
         //https://lazypy.ro/tts/
+        [JsonIgnore]
         public List<StreamElementsVoice> VoiceList { get; } = new()
         {
             new StreamElementsVoice(){ Title = "Brian (English, British)", Gender = "M", Api= "StreamElements", Voice = "Brian"},

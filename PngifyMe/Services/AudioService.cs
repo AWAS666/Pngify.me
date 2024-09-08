@@ -89,12 +89,12 @@ namespace PngifyMe.Services
             player.DeviceNumber = Settings.DeviceOut;
             var meter = new MeteringSampleProvider(reader.ToSampleProvider());
             meter.StreamVolume += (s, e) =>
-            {
-                float value = e.MaxSampleValues.OrderDescending().First();
-                float current = Current(value);
-                Talking = current > Settings.ThreshHold;
-                LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
-            };
+                        {
+                            float value = e.MaxSampleValues.OrderDescending().First();
+                            float current = Current(value);
+                            Talking = current > Settings.ThreshHold;
+                            LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
+                        };
 
             player.Init(meter);
             player.Play();
@@ -105,6 +105,7 @@ namespace PngifyMe.Services
             }
             // cleanup
             stream.Dispose();
+            Talking = false;
             // close at the end
             LevelChanged?.Invoke(null, new MicroPhoneLevel(false, 0));
         }
