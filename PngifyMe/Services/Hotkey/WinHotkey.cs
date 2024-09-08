@@ -18,12 +18,15 @@ namespace PngifyMe.Services.Hotkey
         private static new Dictionary<(VirtualKeyCode, Modifiers), List<Action>> callBacks = new();
         private static new Dictionary<(VirtualKeyCode, Modifiers), IRegistration> hotkeys = new();
 
+        public static bool Started { get; private set; }
+
         public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
         {
             hotKeyManager = new HotKeyManager();
             subscription = hotKeyManager.HotKeyPressed
                 .Subscribe(HotkeyTriggered);
             desktop.Exit += Desktop_Exit;
+            Started = true;
         }
 
         private static void HotkeyTriggered(HotKey hotKey)
@@ -48,6 +51,7 @@ namespace PngifyMe.Services.Hotkey
 
         public static void AddHotkey(VirtualKeyCode virtualKeyCode, Modifiers modifier, Action callback)
         {
+            if (!Started) return;
             // just add to existing callbacks
             if (callBacks.TryGetValue((virtualKeyCode, modifier), out var actions))
             {
@@ -61,6 +65,7 @@ namespace PngifyMe.Services.Hotkey
 
         public static void RemoveCallbacks(List<Action> actions)
         {
+            if (!Started) return;
             foreach (var item in callBacks.ToList())
             {
                 foreach (var action in actions)
