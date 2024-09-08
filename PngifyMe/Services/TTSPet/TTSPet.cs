@@ -1,15 +1,11 @@
-﻿using NAudio.Wave;
+﻿using PngifyMe.Services.Settings;
 using PngifyMe.Services.TTSPet.OpenAI;
 using PngifyMe.Services.TTSPet.StreamElements;
 using PngifyMe.Services.Twitch;
 using Serilog;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
@@ -62,7 +58,7 @@ namespace PngifyMe.Services.TTSPet
 
         private static void QueueMsg(LLMMessage msg)
         {
-            if (!SettingsManager.Current.LLM.Enabled)
+            if (SettingsManager.Current.Profile.Active.Type != ProfileType.TTS)
                 return;
             Queue.Add(msg);
             NewOrUpdated?.Invoke(null, msg);
@@ -124,31 +120,32 @@ namespace PngifyMe.Services.TTSPet
         private static async Task GetResponse(LLMMessage item)
         {
             item.Output = await LLMProvider.GetResponse(item.Input, item.UserName);
-        }       
+        }
 
         public static async Task ReadText(string input)
         {
             var audio = await TTSProvider.GenerateSpeech(input);
-            WaveStream reader = new Mp3FileReader(audio);
-            var player = new WaveOutEvent();
+            await AudioService.PlaySound(audio);
+            //WaveStream reader = new Mp3FileReader(audio);
+            //var player = new WaveOutEvent();
 
-            player.Init(reader);
+            //player.Init(reader);
 
-            // Subscribe to the PlaybackStopped event to dispose of resources when playback is done
-            player.PlaybackStopped += (sender, args) =>
-            {
-                player.Dispose();
-                reader.Dispose();
-                audio.Dispose();
-            };
-            await Task.Run(async () =>
-            {
-                player.Play();
-                while (player.PlaybackState != PlaybackState.Stopped)
-                {
-                    await Task.Delay(50);
-                }
-            });
+            //// Subscribe to the PlaybackStopped event to dispose of resources when playback is done
+            //player.PlaybackStopped += (sender, args) =>
+            //{
+            //    player.Dispose();
+            //    reader.Dispose();
+            //    audio.Dispose();
+            //};
+            //await Task.Run(async () =>
+            //{
+            //    player.Play();
+            //    while (player.PlaybackState != PlaybackState.Stopped)
+            //    {
+            //        await Task.Delay(50);
+            //    }
+            //});
         }
 
         public static void QueueText(string text)

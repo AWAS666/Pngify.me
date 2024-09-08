@@ -12,7 +12,7 @@ public partial class VolumeSlider : UserControl
     public VolumeSlider()
     {
         InitializeComponent();
-        MicrophoneService.LevelChanged += MicrophoneService_LevelChanged;       
+        AudioService.LevelChanged += MicrophoneService_LevelChanged;       
 
         DataContext = new AudioSetupViewModel();
     }
@@ -21,7 +21,7 @@ public partial class VolumeSlider : UserControl
 
     private void InputDeviceChanged(object? sender, SelectionChangedEventArgs e)
     {
-        _ = MicrophoneService.Restart();
+        _ = AudioService.Restart();
     }   
 
     private void MicrophoneService_LevelChanged(object? sender, MicroPhoneLevel e)

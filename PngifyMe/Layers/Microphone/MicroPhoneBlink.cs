@@ -44,7 +44,7 @@ namespace PngifyMe.Layers.Microphone
                 blinking = false;
             }
 
-            if (MicrophoneService.Talking)
+            if (AudioService.Talking)
                 values.Image = blinking ? openBlinkImage : openImage;
             else
                 values.Image = blinking ? closedBlinkImage : closedImage;

@@ -92,6 +92,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Helper\ModeSelect.axaml.cs">
+      <DependentUpon>ModeSelect.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Helper\PropertyView.axaml.cs">
       <DependentUpon>PropertyView.axaml</DependentUpon>
     </Compile>

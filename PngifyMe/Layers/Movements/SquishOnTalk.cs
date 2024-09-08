@@ -21,6 +21,6 @@ namespace PngifyMe.Layers
             values.ZoomY += StrengthY / 100f * CurrentStrength;
         }
 
-        public override bool Triggered() => MicrophoneService.Talking;
+        public override bool Triggered() => AudioService.Talking;
     }
 }

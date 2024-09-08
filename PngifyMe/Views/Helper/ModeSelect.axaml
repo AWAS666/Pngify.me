@@ -1,0 +1,22 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+             x:Class="PngifyMe.Views.Helper.ModeSelect"
+			 >
+	
+
+	<StackPanel Orientation="Horizontal" Spacing="5">
+		<TextBlock VerticalAlignment="Center" FontSize="16">Mode Select:</TextBlock>
+		<Button Click="SwitchToHuman" Name="human" Margin="15,0,15,0">Human Mode</Button>
+		<Button Click="SwitchToTTS" Name="tts" Margin="15,0,15,0">TTS Pet Mode</Button>
+	</StackPanel>
+
+
+
+</UserControl>

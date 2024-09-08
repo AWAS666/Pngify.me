@@ -18,7 +18,7 @@ namespace PngifyMe.Layers
             values.PosX += (float)Math.Sin(pi2 * CurrentTime * Frequency / 2) * Offset * CurrentStrength;
         }
 
-        public override bool Triggered() => MicrophoneService.Talking;
+        public override bool Triggered() => AudioService.Talking;
 
     }
 }

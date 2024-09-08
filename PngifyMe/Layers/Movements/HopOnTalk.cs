@@ -20,6 +20,6 @@ namespace PngifyMe.Layers
                 + Offset * CurrentStrength;
         }
 
-        public override bool Triggered() => MicrophoneService.Talking;
+        public override bool Triggered() => AudioService.Talking;
     }
 }
