@@ -7,10 +7,10 @@ namespace PngifyMe.Layers
     public class SquishOnTalk : RampOnConditionLayer
     {
         [Unit("%")]
-        public uint StrengthX { get; set; } = 20;
+        public uint StrengthX { get; set; } = 10;
 
         [Unit("%")]
-        public uint StrengthY { get; set; } = 20;
+        public uint StrengthY { get; set; } = 10;
         public SquishOnTalk()
         {
             EnterTime = 0f;
