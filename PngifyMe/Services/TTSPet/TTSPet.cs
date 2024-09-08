@@ -56,7 +56,7 @@ namespace PngifyMe.Services.TTSPet
             QueueMsg(msg);
         }
 
-        private static void QueueMsg(LLMMessage msg)
+        public static void QueueMsg(LLMMessage msg)
         {
             if (SettingsManager.Current.Profile.Active.Type != ProfileType.TTS)
                 return;
@@ -126,30 +126,10 @@ namespace PngifyMe.Services.TTSPet
         public static async Task ReadText(string input)
         {
             var audio = await TTSProvider.GenerateSpeech(input);
-            await AudioService.PlaySound(audio);
-            //WaveStream reader = new Mp3FileReader(audio);
-            //var player = new WaveOutEvent();
-
-            //player.Init(reader);
-
-            //// Subscribe to the PlaybackStopped event to dispose of resources when playback is done
-            //player.PlaybackStopped += (sender, args) =>
-            //{
-            //    player.Dispose();
-            //    reader.Dispose();
-            //    audio.Dispose();
-            //};
-            //await Task.Run(async () =>
-            //{
-            //    player.Play();
-            //    while (player.PlaybackState != PlaybackState.Stopped)
-            //    {
-            //        await Task.Delay(50);
-            //    }
-            //});
+            await AudioService.PlaySound(audio);          
         }
 
-        public static void QueueText(string text)
+        public static void QueueText(string text, bool readOnly = false)
         {
             var msg = new LLMMessage()
             {

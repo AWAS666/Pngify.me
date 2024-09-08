@@ -23,6 +23,16 @@ public partial class LLMSetup : UserControl
         TTSPet.QueueText(inputText.Text);
     }
 
+    private void JustRead(object sender, RoutedEventArgs e)
+    {
+        // set input and output to same to just read it
+        TTSPet.QueueMsg(new LLMMessage()
+        {
+            Input = inputText.Text,
+            Output = inputText.Text
+        });
+    }    
+
     private void UpdateTTSProvider(object sender, SelectionChangedEventArgs e)
     {
         var vm = (LLMProviderViewModel)DataContext;

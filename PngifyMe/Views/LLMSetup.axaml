@@ -97,6 +97,7 @@
 							<Label VerticalAlignment="Center" >Input Text: </Label>
 							<TextBox x:Name="inputText" Width="300" >Hello, how are you?</TextBox>
 							<Button Click="TriggerTest">Respond</Button>
+							<Button Click="JustRead">Read this</Button>
 						</StackPanel>
 
 						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
