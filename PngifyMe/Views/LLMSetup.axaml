@@ -71,7 +71,7 @@
 								<DataTemplate DataType="{x:Type ttssett:StreamElementsTTSSettings}">
 									<StackPanel Orientation="Horizontal" Spacing="5">
 										<Label VerticalAlignment="Center" >TTS Voice: </Label>
-										<ComboBox ItemsSource="{Binding VoiceList}"
+										<ComboBox ItemsSource="{Binding VoiceList}" DisplayMemberBinding="{Binding Title}"
 												  SelectedItem="{Binding Voice}"/>
 									</StackPanel>
 								</DataTemplate>

@@ -26,7 +26,7 @@ namespace PngifyMe.Services.TTSPet.StreamElements
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
-                RequestUri = new Uri($"https://api.streamelements.com/kappa/v2/speech?voice={settings.Voice}&text={input}"),
+                RequestUri = new Uri($"https://api.streamelements.com/kappa/v2/speech?voice={settings.Voice.Voice}&text={input}"),
             };
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
