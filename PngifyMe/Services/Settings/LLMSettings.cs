@@ -1,10 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PngifyMe.Services.TTSPet;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using PngifyMe.Services.TTSPet.Settings;
+using PngifyMe.Services.TTSPet.StreamElements;
 
 namespace PngifyMe.Services.Settings
 {
@@ -41,9 +37,12 @@ namespace PngifyMe.Services.Settings
         private string modelName = "gpt-4o-mini";
 
         [ObservableProperty]
-        private string tTSModel = "tts-1";
+        private string tTSSystem = "StreamElements";
 
-        [ObservableProperty]
-        private OpenAITTSVoices tTSVoice = OpenAITTSVoices.Echo;
+
+        // storing each of these seperatly, as these might have user api keys in them
+        // throwing away on switch might be a hbad idea...
+        public OpenAITTSSettings OpenAITTS { get; set; } = new();
+        public StreamElementsTTSSettings StreamElementsTTS { get; set; } = new();
     }
 }

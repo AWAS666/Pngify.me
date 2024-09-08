@@ -13,13 +13,13 @@ using OpenAI.ObjectModels;
 using Serilog;
 using System.IO;
 
-namespace PngifyMe.Services.TTSPet
+namespace PngifyMe.Services.TTSPet.OpenAI
 {
-    public class OpenAITTSProvider : ITTSProvider
+    public class OpenAITTS : ITTSProvider
     {
         public OpenAIService LLMService { get; private set; }
 
-        public OpenAITTSProvider()
+        public OpenAITTS()
         {
             Init();
         }
@@ -39,11 +39,13 @@ namespace PngifyMe.Services.TTSPet
 
         public async Task<Stream?> GenerateSpeech(string input)
         {
+            if(LLMService == null)
+                Init();
             var speech = await LLMService.CreateSpeech<Stream>(new AudioCreateSpeechRequest()
             {
                 Input = input,
-                Model = SettingsManager.Current.LLM.TTSModel,
-                Voice = SettingsManager.Current.LLM.TTSVoice.ToString().ToLower(),
+                Model = SettingsManager.Current.LLM.OpenAITTS.TTSModel,
+                Voice = SettingsManager.Current.LLM.OpenAITTS.TTSVoice.ToString().ToLower(),
             });
 
             return speech.Data;

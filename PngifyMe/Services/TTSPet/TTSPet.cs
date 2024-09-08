@@ -1,4 +1,6 @@
 ﻿using NAudio.Wave;
+using PngifyMe.Services.TTSPet.OpenAI;
+using PngifyMe.Services.TTSPet.StreamElements;
 using PngifyMe.Services.Twitch;
 using Serilog;
 using System;
@@ -18,7 +20,7 @@ namespace PngifyMe.Services.TTSPet
         private static Task task;
 
         public static OpenAILLM LLMProvider { get; set; } = new();
-        public static ITTSProvider TTSProvider { get; set; } = new OpenAITTSProvider();
+        public static ITTSProvider TTSProvider { get; set; }
 
         public static List<LLMMessage> Queue { get; set; } = new();
 
@@ -29,7 +31,23 @@ namespace PngifyMe.Services.TTSPet
             TwitchEventSocket.BitsUsed += BitsUsed;
             TwitchEventSocket.RedeemFull += RedeemUsed;
             TwitchEventSocket.NewFollower += NewFollower;
+            SetupTTS();
             task = Task.Run(ProcessQueue);
+        }
+
+        public static void SetupTTS()
+        {
+            switch (SettingsManager.Current.LLM.TTSSystem)
+            {
+                case "StreamElements":
+                    TTSProvider = new StreamElementsTTS();
+                    break;
+                case "OpenAI":
+                    TTSProvider = new OpenAITTS();
+                    break;
+                default:
+                    break;
+            }
         }
 
         private static void NewFollower(object? sender, string e)

@@ -8,6 +8,7 @@
 			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 xmlns:ttssett="clr-namespace:PngifyMe.Services.TTSPet.Settings"
              x:Class="PngifyMe.Views.LLMSetup"
 			 x:DataType="vm:LLMProviderViewModel"
 			 >
@@ -18,7 +19,7 @@
 		<StackPanel Spacing="10">
 			<TextBlock FontSize="24">TTS Pet Setup</TextBlock>
 			<TabControl>
-				<TabItem Header="Setup">
+				<TabItem Header="LLM">
 					<StackPanel Spacing="10">
 						<TextBlock Margin="0,5,0,5" FontSize="24">Settings</TextBlock>
 
@@ -36,20 +37,12 @@
 							<Label VerticalAlignment="Center" >Model: </Label>
 							<TextBox Text="{Binding Settings.ModelName}"></TextBox>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal" Spacing="5">
-							<Label VerticalAlignment="Center" >TTS Voice: </Label>
-							<ComboBox ItemsSource="{Binding TTSTypes}"
-									  SelectedItem="{Binding Settings.TTSVoice}"/>
-							<Label VerticalAlignment="Center" >TTS Model: </Label>
-							<TextBox Text="{Binding Settings.TTSModel}"></TextBox>
 
-						</StackPanel>
 						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap"
 									 Text="{Binding Settings.SystemPrompt}"></TextBox>
 						</StackPanel>
-
 
 						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
 
@@ -64,6 +57,37 @@
 									 Text="{Binding Settings.Redeem}"></TextBox>
 						</StackPanel>
 						<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="TTS">
+					<StackPanel Spacing="10">
+						<TextBlock Margin="0,5,0,5" FontSize="24">Choose your TTS Provider</TextBlock>
+
+						<ComboBox SelectionChanged="UpdateTTSProvider" 
+								  ItemsSource="{Binding TTSProviderKeys}"
+								  SelectedItem="{Binding Settings.TTSSystem}"/>
+						<ContentControl Content="{Binding TTSSettings}">
+							<ContentControl.DataTemplates>
+								<DataTemplate DataType="{x:Type ttssett:StreamElementsTTSSettings}">
+									<StackPanel Orientation="Horizontal" Spacing="5">
+										<Label VerticalAlignment="Center" >TTS Voice: </Label>
+										<ComboBox ItemsSource="{Binding VoiceList}"
+												  SelectedItem="{Binding Voice}"/>
+									</StackPanel>
+								</DataTemplate>
+								
+								<DataTemplate DataType="{x:Type ttssett:OpenAITTSSettings}">									
+									<StackPanel Orientation="Horizontal" Spacing="5">
+										<Label VerticalAlignment="Center" >TTS Voice: </Label>
+										<ComboBox ItemsSource="{Binding TTSTypes}"
+												  SelectedItem="{Binding TTSVoice}"/>
+										<Label VerticalAlignment="Center" >TTS Model: </Label>
+										<TextBox Text="{Binding TTSModel}"></TextBox>
+									</StackPanel>
+								</DataTemplate>
+								
+							</ContentControl.DataTemplates>
+						</ContentControl>
 					</StackPanel>
 				</TabItem>
 				<TabItem Header="History and Test">

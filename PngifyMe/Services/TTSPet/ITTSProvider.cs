@@ -6,6 +6,5 @@ namespace PngifyMe.Services.TTSPet
     public interface ITTSProvider
     {
         Task<Stream?> GenerateSpeech(string input);
-        void Init();
     }
 }

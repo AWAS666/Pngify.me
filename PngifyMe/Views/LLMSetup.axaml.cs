@@ -22,4 +22,11 @@ public partial class LLMSetup : UserControl
     {
         TTSPet.QueueText(inputText.Text);
     }
+
+    private void UpdateTTSProvider(object sender, SelectionChangedEventArgs e)
+    {
+        var vm = (LLMProviderViewModel)DataContext;
+        vm.SetTTS();
+        TTSPet.SetupTTS();
+    }    
 }

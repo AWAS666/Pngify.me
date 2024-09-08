@@ -2,6 +2,8 @@
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.TTSPet;
+using PngifyMe.Services.TTSPet.OpenAI;
+using PngifyMe.Services.TTSPet.StreamElements;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,12 +20,30 @@ namespace PngifyMe.ViewModels
 
         [ObservableProperty]
         private ObservableCollection<LLMMessage> messages;
-        public static List<OpenAITTSVoices> TTSTypes { get; set; } = new List<OpenAITTSVoices>(Enum.GetValues(typeof(OpenAITTSVoices)).Cast<OpenAITTSVoices>());
+
+        public Dictionary<string, ITTSSettings> TTSProviders { get; }
+        public IEnumerable<string> TTSProviderKeys => TTSProviders.Keys;
+
+        [ObservableProperty]
+        private ITTSSettings tTSSettings;
+
         public LLMProviderViewModel()
         {
             Settings = SettingsManager.Current.LLM;
             Messages = new ObservableCollection<LLMMessage>(TTSPet.Queue);
             TTSPet.NewOrUpdated += UpdateMessages;
+
+            TTSProviders = new Dictionary<string, ITTSSettings>()
+            {
+                {"StreamElements", Settings.StreamElementsTTS },
+                {"OpenAI", Settings.OpenAITTS },
+            };
+            SetTTS();
+        }
+
+        public void SetTTS()
+        {
+            TTSSettings = TTSProviders[Settings.TTSSystem];
         }
 
         private void UpdateMessages(object? sender, LLMMessage e)
