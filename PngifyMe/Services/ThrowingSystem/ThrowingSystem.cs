@@ -22,6 +22,9 @@ namespace PngifyMe.Services.ThrowingSystem
         private Vector2 recoil = Vector2.Zero;
         private Vector2 recoilChange = Vector2.Zero;
 
+        private string cachedSound;
+        private Stream audio;
+
         public List<SKBitmap> Throwables { get; set; } = new()
         {
             SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
@@ -45,7 +48,8 @@ namespace PngifyMe.Services.ThrowingSystem
 
         private void TriggerBits(object? sender, ChannelCheer e)
         {
-            Trigger(e.Bits);
+            // dont do e.Bits here as that may (tm) crash it
+            Trigger(Math.Clamp(e.Bits / 10, 5, 50));            
         }
 
         public void Update(float dt, ref Layers.LayerValues layert)
@@ -57,25 +61,17 @@ namespace PngifyMe.Services.ThrowingSystem
             foreach (var obj in Objects.ToList())
             {
                 obj.Update(dt);
-                //foreach (var otherObject in Objects)
-                //{
-                //    if (otherObject != obj && IsColliding(obj, otherObject))
-                //    {
-                //        obj.SetCollision();
-                //    }
-                //}
                 if (IsColliding(obj, MainBody))
                 {
                     RecoilMain(dt, obj, ref layert);
                     obj.SetCollision(dt);
                     if (SettingsManager.Current.Tits.EnableSound)
-                        PlaySound();
+                        PlaySound(obj);
 
                 }
                 if (obj.X > 2200 || obj.X < -300 || obj.Y > 1300 || obj.Y < -300)
                 {
                     Objects.Remove(obj);
-                    //obj.SetCollision(dt);
                 }
             }
 
@@ -88,15 +84,24 @@ namespace PngifyMe.Services.ThrowingSystem
             UpdateObjects?.Invoke(this, dt);
         }
 
-        private void PlaySound()
+        private void PlaySound(MovableObject obj)
         {
             var settings = SettingsManager.Current.Tits;
-            Stream audio = null;
-            if (string.IsNullOrEmpty(settings.HitSound))
-                audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
-            else
-                audio = File.OpenRead(settings.HitSound);
-            var reader = new WaveFileReader(audio);
+
+            if (cachedSound != settings.HitSound && audio == null)
+                if (string.IsNullOrEmpty(settings.HitSound))
+                    audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
+                else
+                    audio = File.OpenRead(settings.HitSound);
+
+            cachedSound = settings.HitSound;
+
+            MemoryStream copy = new MemoryStream();
+            audio.CopyTo(copy);
+            audio.Seek(0, SeekOrigin.Begin);
+            copy.Seek(0, SeekOrigin.Begin);
+
+            var reader = new WaveFileReader(copy);
             var player = new WaveOutEvent();
 
             player.Init(reader);
@@ -106,7 +111,6 @@ namespace PngifyMe.Services.ThrowingSystem
             {
                 player.Dispose();
                 reader.Dispose();
-                audio.Dispose();
             };
             _ = Task.Run(async () =>
             {

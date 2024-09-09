@@ -7,6 +7,7 @@ namespace PngifyMe.Services.Settings.Images
     {
         public abstract void Dispose();
         public abstract SKBitmap GetImage(TimeSpan time);
+        public abstract SKBitmap Preview { get; }
 
         public abstract void Resize(int maxWidth, int maxHeight);
 

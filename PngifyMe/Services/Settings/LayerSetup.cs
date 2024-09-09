@@ -26,6 +26,12 @@ namespace PngifyMe.Services.Settings
         {
             new Layersetting()
             {
+                Name = "Basic",
+                Layers = [new WiggleOnTalk(), new SquishOnTalk()],
+                Trigger = new AlwaysActive(),
+            },
+            new Layersetting()
+            {
                 Name = "Rotate",
                 Layers = [new RotateByRel()],
                 Trigger = new HotkeyTrigger() { VirtualKeyCode = VirtualKeyCode.KEY_1, Modifiers = Modifiers.Control },

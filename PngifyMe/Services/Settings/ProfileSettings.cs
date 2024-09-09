@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers.Helper;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -14,7 +15,7 @@ namespace PngifyMe.Services.Settings
         public List<Profile> ProfileList { get; set; } = [
             new Profile()
             {
-                Name= "Default",                
+                Name= "Default",
                 Default = true
             }
         ];
@@ -97,6 +98,12 @@ namespace PngifyMe.Services.Settings
         public bool Default { get; set; }
         public ProfileType Type { get; set; } = ProfileType.Human;
         public MicroPhoneSettings MicroPhone { get; set; } = new();
+
+        public void SwitchType(ProfileType type)
+        {
+            Type = type;
+            AudioService.ChangeMode(type);
+        }
     }
 
     public enum ProfileType

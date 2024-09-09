@@ -1,13 +1,24 @@
-﻿using System.Collections.Generic;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System.Collections.Generic;
 
 namespace PngifyMe.Services.Settings
 {
-    public class MicroPhoneSettings
+    public partial class MicroPhoneSettings : ObservableObject
     {
-        public int ThreshHold { get; set; } = 50;
-        public int Device { get; set; } = 0;
-        public double BlinkInterval { get; set; } = 2f;
-        public double BlinkTime { get; set; } = 0.25f;
+        [ObservableProperty]
+        private int threshHold = 50;
+
+        [ObservableProperty]
+        private int deviceIn = 0;
+
+        [ObservableProperty]
+        private int deviceOut = 0;
+
+        [ObservableProperty]
+        private double blinkInterval = 2f;
+
+        [ObservableProperty]
+        private double blinkTime = 0.25f;
         public List<MicroPhoneState> States { get; set; } = new List<MicroPhoneState>()
         {
             new MicroPhoneState()

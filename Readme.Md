@@ -19,6 +19,11 @@ Feel free to suggest features and submit code yourself
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
+	- [ ] cross plattform audio lib, naudio wont do
+		- [ ] https://opentk.net/
+		- [ ] https://www.ambiera.com/irrklang/
+		- [ ] libvlcsharp
+	- [ ] disable spout on non windows
 - [x] stick on any png (redeem)
 	- [ ] move with model (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
@@ -36,13 +41,22 @@ Feel free to suggest features and submit code yourself
 	- [ ] throw emotes
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
+- [ ] stream deck websocket to trigger stuff
+- [ ] optimize performance
+	- [x] avoid .Clear() when creating a new frame anyway
+	- [x] remove .tolist of layer all the time, use one copy
+	- [ ] reuse canvases
+	- [ ] avoid drawing of unchanged objects
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration
 - [ ] Chatgpt/other llm 
 - [ ] TTS like Elevenlabs/Openai/local
+	- [x] openai
+	- [ ] elevenlabs
 - [ ] STT to talk with your TTS pet
+- [ ] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static

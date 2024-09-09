@@ -13,6 +13,7 @@ namespace PngifyMe.Services.Twitch
     public static class TwitchEventSocket
     {
         public static EventHandler<string> RedeemUsed;
+        public static EventHandler<ChannelPointsCustomRewardRedemption> RedeemFull;
         public static EventHandler<ChannelCheer> BitsUsed;
         public static EventHandler<string> NewFollower;
         public static EventHandler<TwitchAuth> Authenticated;
@@ -114,8 +115,9 @@ namespace PngifyMe.Services.Twitch
 
         private static async Task OnChannelPointsRedeemed(object? sender, ChannelPointsCustomRewardRedemptionArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            ChannelPointsCustomRewardRedemption eventData = e.Notification.Payload.Event;
             RedeemUsed?.Invoke(null, eventData.Reward.Title);
+            RedeemFull?.Invoke(null, eventData);
         }
 
         private static async Task Cheer(object sender, ChannelCheerArgs e)

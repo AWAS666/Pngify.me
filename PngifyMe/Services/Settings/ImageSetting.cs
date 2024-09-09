@@ -1,6 +1,4 @@
-﻿using Avalonia.Media;
-using Avalonia.Media.Imaging;
-using Avalonia.Platform;
+﻿using Avalonia.Platform;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.Settings.Images;
 using SkiaSharp;
@@ -13,42 +11,10 @@ namespace PngifyMe.Services.Settings
     public partial class ImageSetting : ObservableObject
     {
         public static SKBitmap PlaceHolder = SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/placeholder.png")));
-        private static Bitmap img = new Bitmap(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/placeholder.png")));
 
-        private BaseImage bitmap = new StaticImage(PlaceHolder);
-
-        // todo fix why this here cant bind for whatever reason
-        private IImage image = img;
-
-        [JsonIgnore]
-        public BaseImage Bitmap
-        {
-            get
-            {
-                return bitmap;
-            }
-            set
-            {
-                bitmap = value;
-                if (!string.IsNullOrEmpty(FilePath))
-                    Image = new Bitmap(FilePath);
-                else
-                    Image = img;
-            }
-        }
-
-        [JsonIgnore]
-        public IImage Image
-        {
-            get
-            {
-                return image;
-            }
-            set
-            {
-                SetProperty(ref image, value);
-            }
-        }
+        [property: JsonIgnore]
+        [ObservableProperty]
+        private BaseImage bitmap = new StaticImage(PlaceHolder);  
 
         public string? FilePath
         {

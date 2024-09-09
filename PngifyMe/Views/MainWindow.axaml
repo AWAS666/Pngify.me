@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:PngifyMe.Views"
+        xmlns:vmh="clr-namespace:PngifyMe.Views.Helper"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
 		 xmlns:sett="clr-namespace:PngifyMe.Settings"
         x:Class="PngifyMe.Views.MainWindow"
@@ -18,17 +19,17 @@
 			<Setter Property="MinHeight" Value="30"/>
 		</Style>
 	</Window.Styles>
-	<Grid x:Name="grid" >		
-		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Bottom"
-						 
+	<Grid x:Name="grid" >
+		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 						  DoubleTapped="DoubleClick"  />
-		<Grid x:Name="settings" Background="#AAFF5733" 
+		<Grid x:Name="settings" Background="#AAFF5733"
 			  HorizontalAlignment="Right" RowDefinitions="Auto,*" Width="700">
+			<vmh:ModeSelect></vmh:ModeSelect>
 			<Button HorizontalAlignment="Right" Click="SaveSettings" Margin="5,5,5,5"
 					ToolTip.Tip="Only save, doesnt apply">Save settings</Button>
-			<TabControl Grid.Row="1" WrapSelection="True" 
-						TabStripPlacement="Right"						
-						>			
+			<TabControl Grid.Row="1" WrapSelection="True"
+						TabStripPlacement="Right"
+						>
 				<TabItem Header="Microphone" FontSize="12" Width="125">
 					<views:VolumeSlider />
 				</TabItem>
@@ -43,6 +44,9 @@
 				</TabItem>
 				<TabItem Header="Throwing System" FontSize="12" Width="130">
 					<views:TITSSetup/>
+				</TabItem>
+				<TabItem Header="TTSPet" FontSize="12" Width="125">
+					<views:LLMSetup />
 				</TabItem>
 				<TabItem Header="Profiles" FontSize="12" Width="125">
 					<views:ProfileSetup />
