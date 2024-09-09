@@ -42,7 +42,7 @@ namespace PngifyMe.Services.Settings
             if (File.Exists(FilePath))
             {
                 Bitmap = LoadImage(FilePath);
-                Bitmap.Resize(1920, 1080);
+                Bitmap.Resize(Specsmanager.Width, Specsmanager.Height);
             }
         }
 

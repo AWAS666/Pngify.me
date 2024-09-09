@@ -17,15 +17,11 @@ namespace PngifyMe.Services
 
         static SettingsManager()
         {
-            // load settings
-            var folder = Environment.SpecialFolder.LocalApplicationData;
-            var path = Environment.GetFolderPath(folder) + "\\PngifyMe";
-            Directory.CreateDirectory(path);
-            BasePath = path;
+
 #if DEBUG
-            FilePath = Path.Join(path, "settings.dev.json");
+            FilePath = Path.Join(Specsmanager.BasePath, "settings.dev.json");
 #else
-            FilePath = Path.Join(path, "settings.json");
+            FilePath = Path.Join(Specsmanager.BasePath, "settings.json");
 #endif
             Load();
         }    

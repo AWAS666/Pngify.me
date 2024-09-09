@@ -4,6 +4,7 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using PngifyMe.Services;
 using PngifyMe.Services.Twitch;
+using PngifyMe.ViewModels;
 
 namespace PngifyMe.Views;
 
@@ -48,18 +49,11 @@ public partial class GeneralSettings : UserControl
         };
 
         spout2.Bind(CheckBox.IsCheckedProperty, spout);
-
-
-        var lowspecbind = new Binding
-        {
-            Source = SettingsManager.Current.LayerSetup,
-            Path = nameof(SettingsManager.Current.LayerSetup.LowSpecMode),
-            Mode = BindingMode.TwoWay
-        };
-
-        lowSpec.Bind(CheckBox.IsCheckedProperty, lowspecbind);
+      
 
         TwitchEventSocket.Authenticated += UpdateText;
+
+        DataContext = new GeneralSettingsViewModel();
 
     }
 

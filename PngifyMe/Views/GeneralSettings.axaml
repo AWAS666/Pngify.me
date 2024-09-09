@@ -5,7 +5,13 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
-             x:Class="PngifyMe.Views.GeneralSettings">
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+             x:Class="PngifyMe.Views.GeneralSettings"
+			 x:DataType="vm:GeneralSettingsViewModel"
+			 >
+	<Design.DataContext>
+		<vm:GeneralSettingsViewModel></vm:GeneralSettingsViewModel>
+	</Design.DataContext>
 	<StackPanel Spacing="5">
 		<TextBlock FontSize="24">General Settings</TextBlock>
 
@@ -25,12 +31,24 @@
 			<CheckBox x:Name="fps"></CheckBox>
 		</StackPanel>
 
-		<StackPanel Orientation="Horizontal" Spacing="5">
-			<Label ToolTip.Tip="(limits to 30 fps)" VerticalAlignment="Center">Low Spec Mode</Label>
-			<CheckBox x:Name="lowSpec"></CheckBox>
+		<StackPanel Margin="0,10,0,10" Orientation="Horizontal" Spacing="5">
+			<StackPanel VerticalAlignment="Center" Spacing="20">
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<Label VerticalAlignment="Center">Run Specs</Label>
+					<ComboBox VerticalAlignment="Center" ItemsSource="{Binding SpecSettings.Modes}"
+							  SelectedItem="{Binding SpecSettings.Mode}"></ComboBox>
+				</StackPanel>
+				<TextBlock VerticalAlignment="Center">Requires save and restart to apply</TextBlock>
+			</StackPanel>
+			<StackPanel Margin="20,0,0,0" Spacing="10">
+				<TextBlock>Very Low is 960x540 30fps</TextBlock>
+				<TextBlock>Low is 1280x720 60fps</TextBlock>
+				<TextBlock>Normal is 1920x1080 60fps</TextBlock>
+				<TextBlock>Ultra is 3840x2160 60fps</TextBlock>
+			</StackPanel>
 		</StackPanel>
 
-		<StackPanel Orientation="Horizontal" Spacing="5">
+		<StackPanel  Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Enable Spout2 (experimental)</Label>
 			<CheckBox x:Name="spout2"></CheckBox>
 			<HyperlinkButton NavigateUri="https://github.com/Off-World-Live/obs-spout2-plugin">Install in OBS</HyperlinkButton>

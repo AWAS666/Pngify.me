@@ -34,6 +34,7 @@ public partial class MainWindow : Window
     private void SaveSettings(object? sender, RoutedEventArgs e)
     {
         SettingsManager.Save();
+        Specsmanager.Save();
     }  
 
 }

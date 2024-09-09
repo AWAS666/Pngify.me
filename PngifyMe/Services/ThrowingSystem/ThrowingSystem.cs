@@ -49,7 +49,7 @@ namespace PngifyMe.Services.ThrowingSystem
         private void TriggerBits(object? sender, ChannelCheer e)
         {
             // dont do e.Bits here as that may (tm) crash it
-            Trigger(Math.Clamp(e.Bits / 10, 5, 50));            
+            Trigger(Math.Clamp(e.Bits / 10, 5, 50));
         }
 
         public void Update(float dt, ref Layers.LayerValues layert)
@@ -69,7 +69,7 @@ namespace PngifyMe.Services.ThrowingSystem
                         PlaySound(obj);
 
                 }
-                if (obj.X > 2200 || obj.X < -300 || obj.Y > 1300 || obj.Y < -300)
+                if (obj.X > Specsmanager.Width + 200 || obj.X < -200 || obj.Y > Specsmanager.Height + 200 || obj.Y < -200)
                 {
                     Objects.Remove(obj);
                 }
@@ -128,7 +128,7 @@ namespace PngifyMe.Services.ThrowingSystem
 
         public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert)
         {
-            int posX = (int)((1920 - layert.Image.Width) / 2 + layert.PosX);
+            int posX = (int)((Specsmanager.Width - layert.Image.Width) / 2 + layert.PosX);
             if (MainBody != null && MainBody.SameBitmap(bitmap))
             {
                 MainBody.Update(posX, (int)layert.PosY);
@@ -144,6 +144,8 @@ namespace PngifyMe.Services.ThrowingSystem
 
         public void Trigger(int amount)
         {
+            int height = Specsmanager.Height / 4;
+            int offset = Specsmanager.Height / 8;
             for (var i = 0; i < amount; i++)
             {
                 Objects.Add(new MovableObject(
@@ -151,7 +153,7 @@ namespace PngifyMe.Services.ThrowingSystem
                     item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
                    speed: new Vector2(Random.Shared.Next((int)SettingsManager.Current.Tits.ObjectSpeedMin, (int)SettingsManager.Current.Tits.ObjectSpeedMax), -300),
                    rotSpeed: Random.Shared.Next(-20, 20)
-                    , x: -100, y: Random.Shared.Next(300, 500), details: 10));
+                    , x: -100, y: Random.Shared.Next(offset, height), details: 10));
             }
         }
     }

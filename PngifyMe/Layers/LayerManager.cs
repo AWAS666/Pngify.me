@@ -27,9 +27,7 @@ namespace PngifyMe.Layers
         {
             get
             {
-                if (SettingsManager.Current.LayerSetup.LowSpecMode)
-                    return 1.0f / SettingsManager.Current.LayerSetup.TargetFPS * 2.0f;
-                return 1.0f / SettingsManager.Current.LayerSetup.TargetFPS;
+                return 1.0f / Specsmanager.FPS;
             }
         }
         //public static int FPS { get; private set; } = 120;
@@ -152,8 +150,8 @@ namespace PngifyMe.Layers
             }
 
             var baseImg = layert.Image;
-            int width = 1920;
-            int height = 1080;
+            int width = Specsmanager.Width;
+            int height = Specsmanager.Height;
             using var mainBitmap = new SKBitmap(width, height);
             using (SKCanvas canvas = new SKCanvas(mainBitmap))
             {               

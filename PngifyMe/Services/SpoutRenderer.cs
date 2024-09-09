@@ -5,6 +5,7 @@ using SkiaSharp;
 using Spout.Interop;
 using System;
 using System.Linq;
+using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -36,7 +37,7 @@ namespace PngifyMe.Services
                     // Send the byte array via Spout
                     fixed (byte* pData = swappedPixels)
                     {
-                        spoutSender.SendImage(pData, 1920, 1080, Gl.RGBA, false, 0);
+                        spoutSender.SendImage(pData, (uint)Specsmanager.Width, (uint)Specsmanager.Height, Gl.RGBA, false, 0);
                     }
                 }
                 catch (Exception er)
