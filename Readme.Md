@@ -25,12 +25,13 @@ Feel free to suggest features and submit code yourself
 		- [ ] libvlcsharp
 	- [ ] disable spout on non windows
 - [x] stick on any png (redeem)
-	- [ ] move with model (figure out nearest outline in both states and move by difference)
+	- [x] apply same effects as model 
+	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
 
 ## Todo Advanced
 - [ ] Release aside from git
-	- [ ] Ko-Fi
+	- [x] Ko-Fi
 	- [ ] Steam
 - [x] Spout integration
 - [x] Twitch integration
@@ -55,6 +56,8 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] TTS like Elevenlabs/Openai/local
 	- [x] openai
 	- [ ] elevenlabs
+	- [x] stream elements
+	- [ ] tik tok
 - [ ] STT to talk with your TTS pet
 - [ ] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 

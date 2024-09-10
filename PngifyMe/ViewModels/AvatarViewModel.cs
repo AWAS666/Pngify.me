@@ -43,13 +43,13 @@ public partial class AvatarViewModel : ObservableObject
     {
         SkImage = e;
 
-        oldFrame.Add(e);
-        if (oldFrame.Count > 4)
-            foreach (var frame in oldFrame.Take(1))
-            {
-                frame.Dispose();
-                oldFrame.Remove(frame);
-            }
+        //oldFrame.Add(e);
+        //if (oldFrame.Count > 4)
+        //    foreach (var frame in oldFrame.Take(1))
+        //    {
+        //        frame.Dispose();
+        //        oldFrame.Remove(frame);
+        //    }
     }
 
     private void UpdateFPS(object? sender, float e)

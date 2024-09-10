@@ -8,6 +8,7 @@ using System.Linq;
 using System.Numerics;
 using System.Threading;
 using System.Threading.Tasks;
+using TwitchLib.PubSub.Models.Responses.Messages.AutomodCaughtMessage;
 
 namespace PngifyMe.Services
 {
@@ -20,6 +21,7 @@ namespace PngifyMe.Services
         public static void Init()
         {
             spoutSender = new SpoutSender();
+            spoutSender.CreateSender("Pngify.me", (uint)Specsmanager.Width, (uint)Specsmanager.Height, 0);
             LayerManager.ImageUpdate += NewImage;
         }
 
@@ -33,9 +35,9 @@ namespace PngifyMe.Services
                 try
                 {                  
                     ConvertSKImageToRawByteArray(e);
-                    SwapChannels();
+                    //SwapChannels();
                     // Send the byte array via Spout
-                    fixed (byte* pData = swappedPixels)
+                    fixed (byte* pData = pixelData)
                     {
                         spoutSender.SendImage(pData, (uint)Specsmanager.Width, (uint)Specsmanager.Height, Gl.RGBA, false, 0);
                     }
@@ -51,15 +53,7 @@ namespace PngifyMe.Services
         {
             if (swappedPixels == null)
                 swappedPixels = new byte[pixelData.Count()];
-            //for (int i = 0; i < pixelData.Length; i += 4)
-            //{
-            //    swappedPixels[i] = pixelData[i + 2];     // R
-            //    swappedPixels[i + 1] = pixelData[i + 1]; // G
-            //    swappedPixels[i + 2] = pixelData[i + 0]; // B
-            //    swappedPixels[i + 3] = pixelData[i + 3];     // A
-            //}
-
-            // slightly faster
+           
             fixed (byte* pSrc = pixelData)
             fixed (byte* pDst = swappedPixels)
             {
@@ -69,10 +63,10 @@ namespace PngifyMe.Services
                 int length = pixelData.Length;
                 for (int i = 0; i < length; i += 4)
                 {
-                    dst[i] = src[i + 2];     // R
-                    dst[i + 1] = src[i + 1]; // G
-                    dst[i + 2] = src[i + 0]; // B
-                    dst[i + 3] = src[i + 3]; // A
+                    dst[i] = src[i + 2];     // R B
+                    dst[i + 1] = src[i + 1]; // G G
+                    dst[i + 2] = src[i + 0]; // B R 
+                    dst[i + 3] = src[i + 3]; // A A
                 }
             }
         }
@@ -83,6 +77,7 @@ namespace PngifyMe.Services
             using var bitmap = SKBitmap.FromImage(image);
             // Ensure the bitmap has the correct configuration
             SKImageInfo imageInfo = bitmap.Info;
+            imageInfo.ColorType = SKColorType.Rgba8888;
 
             // Allocate a byte array large enough to hold all the pixel data
             if (pixelData == null)
