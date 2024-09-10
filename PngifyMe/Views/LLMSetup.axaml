@@ -23,7 +23,7 @@
 					<StackPanel Spacing="10">
 						<TextBlock Margin="0,5,0,5" FontSize="24">Settings</TextBlock>
 
-						<!--<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}">Enable</CheckBox>-->
+						<CheckBox IsChecked="{Binding Settings.JustRead, Mode=TwoWay}">Just Read, no LLM</CheckBox>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<Label VerticalAlignment="Center" >OpenAI API Key: </Label>
 							<TextBox PasswordChar="*" Width="200" Text="{Binding Settings.OpenAIKey}"></TextBox>

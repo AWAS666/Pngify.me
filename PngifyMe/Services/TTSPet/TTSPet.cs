@@ -14,6 +14,7 @@ namespace PngifyMe.Services.TTSPet
     public static class TTSPet
     {
         private static Task task;
+        private static LLMSettings settings;
 
         public static OpenAILLM LLMProvider { get; set; } = new();
         public static ITTSProvider TTSProvider { get; set; }
@@ -29,6 +30,7 @@ namespace PngifyMe.Services.TTSPet
             TwitchEventSocket.NewFollower += NewFollower;
             SetupTTS();
             task = Task.Run(ProcessQueue);
+            settings = SettingsManager.Current.LLM;
         }
 
         public static void SetupTTS()
@@ -66,8 +68,9 @@ namespace PngifyMe.Services.TTSPet
 
         private static void RedeemUsed(object? sender, ChannelPointsCustomRewardRedemption e)
         {
-            if (e.Reward.Title.ToLower() != SettingsManager.Current.LLM.Redeem.ToLower())
+            if (!e.Reward.Title.Equals(SettingsManager.Current.LLM.Redeem, StringComparison.CurrentCultureIgnoreCase))
                 return;
+            if (settings.JustRead) return;
             var msg = new LLMMessage()
             {
                 Input = string.IsNullOrEmpty(e.UserInput) ? $"{e.UserName} used the redeem: {e.Reward.Title}" : e.UserInput,
@@ -78,11 +81,22 @@ namespace PngifyMe.Services.TTSPet
 
         private static void BitsUsed(object? sender, ChannelCheer e)
         {
-            var msg = new LLMMessage()
-            {
-                Input = e.Message,
-                UserName = e.UserName,
-            };
+            if (e.Bits < settings.MinBits) return;
+
+            LLMMessage msg;
+            if (settings.JustRead)
+                msg = new LLMMessage()
+                {
+                    Input = $"{e.UserName} donated {e.Bits} with the message: {e.Message}",
+                    ReadInput = true,
+                    UserName = e.UserName,
+                };
+            else
+                msg = new LLMMessage()
+                {
+                    Input = e.Message,
+                    UserName = e.UserName,
+                };
             QueueMsg(msg);
         }
 
@@ -126,7 +140,7 @@ namespace PngifyMe.Services.TTSPet
         public static async Task ReadText(string input)
         {
             var audio = await TTSProvider.GenerateSpeech(input);
-            await AudioService.PlaySound(audio);          
+            await AudioService.PlaySound(audio);
         }
 
         public static void QueueText(string text, bool readOnly = false)

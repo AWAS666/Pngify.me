@@ -5,7 +5,10 @@ using PngifyMe.Services.TTSPet.StreamElements;
 namespace PngifyMe.Services.Settings
 {
     public partial class LLMSettings : ObservableObject
-    {      
+    {
+        [ObservableProperty]
+        private bool justRead;
+
         [ObservableProperty]
         private uint minBits;
 

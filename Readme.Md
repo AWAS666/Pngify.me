@@ -62,6 +62,8 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [ ] tik tok
 - [ ] STT to talk with your TTS pet
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
+- [ ] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
+	- [ ] possibly use openai moderation, but always need an openai api key for that... 
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
