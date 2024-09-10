@@ -154,11 +154,11 @@ namespace PngifyMe.Layers
             int height = Specsmanager.Height;
             using var mainBitmap = new SKBitmap(width, height);
             using (SKCanvas canvas = new SKCanvas(mainBitmap))
-            {               
+            {
 
                 float rotationAngle = layert.Rotation;
                 float zoomFactor = layert.ZoomX;
-                float opacity = layert.Opacity;             
+                float opacity = layert.Opacity;
 
                 canvas.Save();
                 canvas.Translate(width / 2, height / 2);
@@ -173,6 +173,18 @@ namespace PngifyMe.Layers
                         width / 2 - baseImg.Width / 2 + layert.PosX,
                         height / 2 - baseImg.Height / 2 + layert.PosY,
                         paint);
+                }
+
+                if (MicroPhoneStateLayer.BlendTime != null && MicroPhoneStateLayer.LastImage != null)
+                {
+                    var blend = (MicroPhoneStateLayer.BlendTime - MicroPhoneStateLayer.CurrentTime) / SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime;
+                    using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })
+                    {
+                        canvas.DrawBitmap(MicroPhoneStateLayer.LastImage.GetImage(TimeSpan.FromSeconds(MicroPhoneStateLayer.CurrentTime)),
+                            width / 2 - baseImg.Width / 2 + layert.PosX,
+                            height / 2 - baseImg.Height / 2 + layert.PosY,
+                            paint);
+                    }
                 }
 
                 foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))

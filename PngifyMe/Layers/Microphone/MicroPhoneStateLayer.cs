@@ -20,10 +20,12 @@ namespace PngifyMe.Layers.Microphone
         private MicroPhoneSettings micSettings;
         private bool blinking;
         private List<Action> callbacks = new();
+        public double? BlendTime { get; private set; }
 
         public float Interval { get; set; } = 2f;
         public float Time { get; set; } = 0.25f;
         public float CurrentTime { get; private set; }
+        public BaseImage LastImage { get; private set; }
 
         public MicroPhoneStateLayer()
         {
@@ -70,6 +72,16 @@ namespace PngifyMe.Layers.Microphone
             else
                 baseImage = blinking ? closedBlinkImage : closedImage;
             values.Image = baseImage.GetImage(TimeSpan.FromSeconds(CurrentTime));
+
+            if (LastImage != baseImage && BlendTime == null)
+            {
+                BlendTime = CurrentTime + micSettings.TransitionTime;
+            }
+            else if (BlendTime < CurrentTime)
+            {
+                LastImage = baseImage;
+                BlendTime = null;
+            }
         }
 
         public void SwitchState(MicroPhoneState state, bool reload = false)

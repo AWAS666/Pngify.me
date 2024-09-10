@@ -8,14 +8,14 @@ Feel free to suggest features and submit code yourself
 - [x] Basic functionality, showing two different Pngs depending if speaking or not
 - [x] Save config
 - [x] Blinking images in both states
-	- [ ] smooth transitions (show old state at 50% opacity)
+	- [x] smooth transitions (show old state at 50% opacity)
 - [x] State transition images (mouth opening/mouth closing) ?
 - [x] Switch between different png setups (states) using hotkeys
 	- [ ] Hotkeys currently override the input for all applications
 - [x] Multiple profiles
 	- [ ] save all needed files into the profile folder instead of keeping a global reference
 	- [ ] show icon?
-	- [ ] import/export as zipped archive
+	- [ ] import/export as zipped archive, custom extension
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
@@ -48,6 +48,7 @@ Feel free to suggest features and submit code yourself
 	- [x] remove .tolist of layer all the time, use one copy
 	- [ ] reuse canvases
 	- [ ] avoid drawing of unchanged objects
+	- [ ] switch out skia view component, triggers gc to much
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
@@ -57,9 +58,10 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [x] openai
 	- [ ] elevenlabs
 	- [x] stream elements
+		- [ ] double check
 	- [ ] tik tok
 - [ ] STT to talk with your TTS pet
-- [ ] change to use profile parameter, enabled has to switch current profile from human -> ttspet
+- [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static

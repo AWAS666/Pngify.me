@@ -19,6 +19,10 @@ namespace PngifyMe.Services.Settings
 
         [ObservableProperty]
         private double blinkTime = 0.25f;
+
+        [ObservableProperty]
+        private double transitionTime = 0.15f;
+
         public List<MicroPhoneState> States { get; set; } = new List<MicroPhoneState>()
         {
             new MicroPhoneState()
