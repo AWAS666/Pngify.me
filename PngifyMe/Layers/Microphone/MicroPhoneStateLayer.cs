@@ -73,6 +73,7 @@ namespace PngifyMe.Layers.Microphone
                 baseImage = blinking ? closedBlinkImage : closedImage;
             values.Image = baseImage.GetImage(TimeSpan.FromSeconds(CurrentTime));
 
+
             if (LastImage != baseImage && BlendTime == null)
             {
                 BlendTime = CurrentTime + micSettings.TransitionTime;

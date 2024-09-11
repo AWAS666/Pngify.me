@@ -39,7 +39,7 @@
 				<TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 
 				<TextBlock Grid.Row="2" VerticalAlignment="Center">Blend Time</TextBlock>
-				<helper:FloatTextBox Min="0.1" Max="{Binding Settings.BlinkTime}"  Grid.Row="2" Grid.Column="1" 
+				<helper:FloatTextBox Min="0" Max="{Binding Settings.BlinkTime}"  Grid.Row="2" Grid.Column="1" 
 									 Text="{Binding Settings.TransitionTime}" Watermark="Blend Time"/>
 				<TextBlock Grid.Row="2" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 

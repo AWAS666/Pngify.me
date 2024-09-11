@@ -175,17 +175,18 @@ namespace PngifyMe.Layers
                         paint);
                 }
 
-                if (MicroPhoneStateLayer.BlendTime != null && MicroPhoneStateLayer.LastImage != null)
-                {
-                    var blend = (MicroPhoneStateLayer.BlendTime - MicroPhoneStateLayer.CurrentTime) / SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime;
-                    using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })
+                if (SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime != 0f)
+                    if (MicroPhoneStateLayer.BlendTime != null && MicroPhoneStateLayer.LastImage != null)
                     {
-                        canvas.DrawBitmap(MicroPhoneStateLayer.LastImage.GetImage(TimeSpan.FromSeconds(MicroPhoneStateLayer.CurrentTime)),
-                            width / 2 - baseImg.Width / 2 + layert.PosX,
-                            height / 2 - baseImg.Height / 2 + layert.PosY,
-                            paint);
+                        var blend = (MicroPhoneStateLayer.BlendTime - MicroPhoneStateLayer.CurrentTime) / SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime;
+                        using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })
+                        {
+                            canvas.DrawBitmap(MicroPhoneStateLayer.LastImage.GetImage(TimeSpan.FromSeconds(MicroPhoneStateLayer.CurrentTime)),
+                                width / 2 - baseImg.Width / 2 + layert.PosX,
+                                height / 2 - baseImg.Height / 2 + layert.PosY,
+                                paint);
+                        }
                     }
-                }
 
                 foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
                 {
