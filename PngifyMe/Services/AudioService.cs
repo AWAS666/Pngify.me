@@ -112,7 +112,11 @@ namespace PngifyMe.Services
 
         public static void Stop()
         {
-            _waveIn?.StopRecording();
+            if (_waveIn != null)
+            {
+                _waveIn.StopRecording();
+                _waveIn.DataAvailable -= OnDataAvailable;
+            }
         }
 
         public static List<string> GetAllInDevices()
