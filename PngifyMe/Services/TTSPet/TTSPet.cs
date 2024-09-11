@@ -6,6 +6,7 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
@@ -62,6 +63,7 @@ namespace PngifyMe.Services.TTSPet
         {
             if (SettingsManager.Current.Profile.Active.Type != ProfileType.TTS)
                 return;
+            msg.Input = ReplaceWithSafe(msg.Input);
             Queue.Add(msg);
             NewOrUpdated?.Invoke(null, msg);
         }
@@ -150,6 +152,30 @@ namespace PngifyMe.Services.TTSPet
                 Input = text,
             };
             QueueMsg(msg);
+        }
+
+        public static bool CheckTextSafe(string text)
+        {
+            foreach (var keyword in settings.BannedPhrases)
+            {
+                if (Regex.Match(text, @$"\b{keyword}\b", RegexOptions.IgnoreCase).Success)
+                {
+                    return false;
+                }
+            }
+            return true;
+        }
+
+        public static string ReplaceWithSafe(string text)
+        {
+            foreach (var keyword in settings.BannedPhrases)
+            {
+                if (Regex.Match(text, @$"\b{keyword}\b", RegexOptions.IgnoreCase).Success)
+                {
+                    text = Regex.Replace(text, @$"\b{keyword}\b", settings.Replacement, RegexOptions.IgnoreCase);
+                }
+            }
+            return text;
         }
     }
 }

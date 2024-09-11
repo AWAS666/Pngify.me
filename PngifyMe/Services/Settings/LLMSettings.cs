@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.TTSPet.Settings;
 using PngifyMe.Services.TTSPet.StreamElements;
+using System.Collections.Generic;
 
 namespace PngifyMe.Services.Settings
 {
@@ -38,6 +39,11 @@ namespace PngifyMe.Services.Settings
 
         [ObservableProperty]
         private string tTSSystem = "StreamElements";
+
+        public List<string> BannedPhrases { get; set; } = new List<string>();
+
+        [ObservableProperty]
+        private string replacement = "filtered";
 
 
         // storing each of these seperatly, as these might have user api keys in them

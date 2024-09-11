@@ -9,12 +9,16 @@
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
 			 xmlns:ttssett="clr-namespace:PngifyMe.Services.TTSPet.Settings"
+			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
              x:Class="PngifyMe.Views.LLMSetup"
 			 x:DataType="vm:LLMProviderViewModel"
 			 >
 	<Design.DataContext>
 		<vm:LLMProviderViewModel/>
 	</Design.DataContext>
+	<UserControl.Resources>
+		<conv:ListToStringConverter x:Key="ListToStringConverter" />
+	</UserControl.Resources>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel Spacing="10">
 			<TextBlock FontSize="24">TTS Pet Setup</TextBlock>
@@ -63,7 +67,7 @@
 					<StackPanel Spacing="10">
 						<TextBlock Margin="0,5,0,5" FontSize="24">Choose your TTS Provider</TextBlock>
 
-						<ComboBox SelectionChanged="UpdateTTSProvider" 
+						<ComboBox SelectionChanged="UpdateTTSProvider"
 								  ItemsSource="{Binding TTSProviderKeys}"
 								  SelectedItem="{Binding Settings.TTSSystem}"/>
 						<ContentControl Content="{Binding TTSSettings}">
@@ -75,8 +79,8 @@
 												  SelectedItem="{Binding Voice}"/>
 									</StackPanel>
 								</DataTemplate>
-								
-								<DataTemplate DataType="{x:Type ttssett:OpenAITTSSettings}">									
+
+								<DataTemplate DataType="{x:Type ttssett:OpenAITTSSettings}">
 									<StackPanel Orientation="Horizontal" Spacing="5">
 										<Label VerticalAlignment="Center" >TTS Voice: </Label>
 										<ComboBox ItemsSource="{Binding TTSTypes}"
@@ -85,9 +89,27 @@
 										<TextBox Text="{Binding TTSModel}"></TextBox>
 									</StackPanel>
 								</DataTemplate>
-								
+
 							</ContentControl.DataTemplates>
 						</ContentControl>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="Filter">
+					<StackPanel Spacing="10">
+						<TextBlock Margin="0,5,0,5" FontSize="24">Filter</TextBlock>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">Replacement:</TextBlock>
+							<TextBox Text="{Binding Settings.Replacement}"></TextBox>
+						</StackPanel>
+						<StackPanel Spacing="5">
+							<TextBlock VerticalAlignment="Center">Filtered Words (separated with ";"):</TextBlock>
+							<TextBox Text="{Binding Settings.BannedPhrases ,Converter={StaticResource ListToStringConverter}, Mode=TwoWay}" 
+									 HorizontalAlignment="Left"
+									 MaxLines="100" Width="500" Height="200"
+									 AcceptsReturn="True" TextWrapping="Wrap">
+							</TextBox>
+						</StackPanel>
+
 					</StackPanel>
 				</TabItem>
 				<TabItem Header="History and Test">
