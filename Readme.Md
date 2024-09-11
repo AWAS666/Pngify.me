@@ -28,6 +28,7 @@ Feel free to suggest features and submit code yourself
 	- [x] apply same effects as model 
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
+- [ ] make audio smoothing changable 
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -64,6 +65,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 - [ ] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
 	- [ ] possibly use openai moderation, but always need an openai api key for that... 
+- [ ] fix audio levels
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
