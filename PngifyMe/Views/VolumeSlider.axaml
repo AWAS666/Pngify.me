@@ -26,14 +26,25 @@
 						  SelectedIndex="{Binding Settings.DeviceOut}"/>
 			</StackPanel>
 
-			<Grid RowDefinitions="200,35" ColumnDefinitions="75,75" Margin="5,5,5,5">
-				<Slider Orientation="Vertical" Minimum="0" Maximum="100" x:Name="current" />
-				<Slider Value="{Binding Settings.ThreshHold}"
-						Grid.Column="1" Orientation="Vertical" 
+			<Grid RowDefinitions="35,200,35" ColumnDefinitions="75,75,75" Margin="5,5,5,5">
+				<TextBlock Text="{Binding #current.Value}" HorizontalAlignment="Center"></TextBlock>
+				<TextBlock Text="{Binding Settings.ThreshHold}" HorizontalAlignment="Center" Grid.Column="1"></TextBlock>
+				<TextBlock Text="{Binding Settings.Smoothing}" HorizontalAlignment="Center" Grid.Column="2"></TextBlock>
+				
+				<Slider Grid.Row="1" Orientation="Vertical" Minimum="0" Maximum="100" x:Name="current" 
+						HorizontalAlignment="Center" />
+				<Slider Value="{Binding Settings.ThreshHold}" Grid.Row="1"
+						Grid.Column="1" Orientation="Vertical"
+						HorizontalAlignment="Center"
 						Minimum="0" Maximum="100" />
 
-				<TextBlock Grid.Row="1">Current</TextBlock>
-				<TextBlock Grid.Row="1" Grid.Column="1">Treshhold</TextBlock>
+				<Slider Orientation="Vertical" Grid.Column="2" Grid.Row="1"
+						HorizontalAlignment="Center"
+						Value="{Binding Settings.Smoothing}" Minimum="1" Maximum="100" />
+
+				<TextBlock Grid.Row="2" HorizontalAlignment="Center">Current</TextBlock>
+				<TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">Treshhold</TextBlock>
+				<TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">Smoothing</TextBlock>
 			</Grid>
 		</StackPanel>
 	</Grid>

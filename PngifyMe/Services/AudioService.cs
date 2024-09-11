@@ -65,7 +65,7 @@ namespace PngifyMe.Services
 
         private static float Current(float max)
         {
-            float current = (last + max) / 2;
+            float current = (max * 4 + last * Settings.Smoothing) / (Settings.Smoothing + 4);
             last = current;
             return current * 100;
         }

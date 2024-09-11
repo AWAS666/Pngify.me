@@ -28,7 +28,7 @@ Feel free to suggest features and submit code yourself
 	- [x] apply same effects as model 
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
-- [ ] make audio smoothing changable 
+- [x] make audio smoothing changable 
 
 ## Todo Advanced
 - [ ] Release aside from git

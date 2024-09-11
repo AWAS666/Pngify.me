@@ -15,6 +15,9 @@ namespace PngifyMe.Services.Settings
         private int deviceOut = 0;
 
         [ObservableProperty]
+        private int smoothing = 5;
+
+        [ObservableProperty]
         private double blinkInterval = 2f;
 
         [ObservableProperty]
