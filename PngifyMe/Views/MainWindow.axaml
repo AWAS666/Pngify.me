@@ -133,8 +133,9 @@
 				</TabItem>
 			</TabControl>
 		</Grid>
-		<Border  Classes="Hover" Theme="{StaticResource CardBorder}" 
+		<Border  Classes="Hover" Theme="{StaticResource CardBorder}"
 				 PointerPressed="HintPressed" Name="hintBox"
+				 Opacity="0.8"
 				VerticalAlignment="Bottom" HorizontalAlignment="Left">
 			<Border.Styles>
 				<Style Selector="Border">
@@ -144,7 +145,7 @@
 								<Setter Property="Opacity" Value="0.0"/>
 							</KeyFrame>
 							<KeyFrame Cue="100%">
-								<Setter Property="Opacity" Value="1.0"/>
+								<Setter Property="Opacity" Value="0.8"/>
 							</KeyFrame>
 						</Animation>
 					</Style.Animations>
