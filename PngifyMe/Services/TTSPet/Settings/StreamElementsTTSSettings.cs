@@ -8,8 +8,24 @@ namespace PngifyMe.Services.TTSPet.Settings
 {
     public partial class StreamElementsTTSSettings : ObservableObject, ITTSSettings
     {
-        [ObservableProperty]
         private StreamElementsVoice voice;
+
+        public StreamElementsVoice Voice
+        {
+            get
+            {
+                // Ensure the voice is always up-to-date with the reference list
+                if (voice != null)
+                {
+                    voice = VoiceList.Find(v => v.Voice == voice.Voice);
+                }
+                return voice;
+            }
+            set
+            {
+                SetProperty(ref voice, value);
+            }
+        }
 
         //https://lazypy.ro/tts/
         [JsonIgnore]
