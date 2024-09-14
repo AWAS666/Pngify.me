@@ -23,7 +23,7 @@ namespace PngifyMe.Views.Converter
         {
             if (value is string str)
             {
-                return str.Split(';').Select(x => x.Trim()).ToList();
+                return str.Split(';', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Trim()).ToList();
             }
             return new List<string>();
         }

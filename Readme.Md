@@ -38,6 +38,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] Steam
 - [x] Spout integration
 - [x] Twitch integration
+	- [ ] show twitch status globally 
 - [x] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
 	- [ ] custom assets
 	- [x] sound
@@ -64,6 +65,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [x] stream elements
 		- [ ] double check
 	- [ ] tik tok
+- [ ] max tokens, limit yapping 
 - [ ] STT to talk with your TTS pet
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 - [ ] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
