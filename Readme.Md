@@ -34,6 +34,7 @@ Feel free to suggest features and submit code yourself
 ## Todo Advanced
 - [ ] Release aside from git
 	- [x] Ko-Fi
+	- [ ] itch.io
 	- [ ] Steam
 - [x] Spout integration
 - [x] Twitch integration
