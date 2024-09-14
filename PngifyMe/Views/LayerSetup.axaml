@@ -16,7 +16,7 @@
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
 			<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
-			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
+			<StackPanel Orientation="Horizontal"  Spacing="5">
 				<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
 				<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
@@ -26,13 +26,29 @@
 		</StackPanel>
 		<ScrollViewer Grid.Row="1"
 					  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
-			<ListBox ItemsSource="{Binding Layers}" Margin="0,5,0,0">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<helper:LayerSettingsView DataContext="{Binding}"/>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+			<StackPanel>
+				<TextBlock FontSize="24" >All Triggers:</TextBlock>
+				<ListBox ItemsSource="{Binding Layers}"
+						 SelectedItem="{Binding Selected, Mode= TwoWay}"
+						 Margin="0,5,0,0">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" Spacing="20">
+								<TextBox MinWidth="100" Text="{Binding Name}"></TextBox>
+								<Button Command="{Binding Parent.RemoveCommand}" 
+										CommandParameter="{Binding}">Remove</Button>
+								<Label>Trigger:</Label>
+								<TextBlock Text="{Binding SelectedTriggerType.Name}"></TextBlock>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				
+				<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+				<TextBlock FontSize="24">Selected Trigger Settings:</TextBlock>
+				<helper:LayerSettingsView Margin="0,5,0,0" DataContext="{Binding Selected}" />
+
+			</StackPanel>
 		</ScrollViewer>
 	</Grid>
 </UserControl>

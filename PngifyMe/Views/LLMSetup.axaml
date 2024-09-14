@@ -131,7 +131,7 @@
 									Click="JustRead">Read</Button>
 						</StackPanel>
 
-						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+						<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
 						<TextBlock FontSize="24">History</TextBlock>
 

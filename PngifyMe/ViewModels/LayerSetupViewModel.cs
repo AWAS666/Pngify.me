@@ -17,9 +17,13 @@ public partial class LayerSetupViewModel : ObservableObject
     {
         _layers = layers;
         Layers = new ObservableCollection<LayersettingViewModel>(layers.Select(x => new LayersettingViewModel(x, this)));
+        Selected = Layers.FirstOrDefault();
     }
 
     private List<Layersetting> _layers;
+
+    [ObservableProperty]
+    private LayersettingViewModel selected;
 
     public ObservableCollection<LayersettingViewModel> Layers { get; set; }
 
@@ -28,6 +32,7 @@ public partial class LayerSetupViewModel : ObservableObject
         var set = new Layersetting();
         Layers.Add(new LayersettingViewModel(set, this));
         _layers.Add(set);
+        Selected = Layers.Last();
     }
 
     public void RemoveCommand(LayersettingViewModel vm)

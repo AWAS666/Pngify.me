@@ -46,7 +46,7 @@
 				</HyperlinkButton>
 			</StackPanel>
 
-			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 			<TextBlock FontSize="24">Other Software/Games</TextBlock>
 
 
@@ -65,7 +65,7 @@
 				</HyperlinkButton>
 			</StackPanel>
 
-			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
+			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 			<TextBlock FontSize="24">Art</TextBlock>
 
 			<StackPanel Orientation="Horizontal" Spacing="5">
