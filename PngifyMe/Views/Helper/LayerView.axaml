@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 x:DataType="vm:BaseLayerViewModel"
+             x:Class="PngifyMe.Views.Helper.LayerView"
+			 >
+
+	<Design.DataContext>
+		<vm:BaseLayerViewModel/>
+	</Design.DataContext>
+	<StackPanel>
+		<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
+			<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
+			<Button Content="Remove"
+					Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+					Command="{Binding Parent.RemoveCommand}"
+					CommandParameter="{Binding}"></Button>
+		</StackPanel>
+		<ItemsControl ItemsSource="{Binding PropertyList}">
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<helper:PropertyView DataContext="{Binding}"></helper:PropertyView>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</StackPanel>
+	
+</UserControl>

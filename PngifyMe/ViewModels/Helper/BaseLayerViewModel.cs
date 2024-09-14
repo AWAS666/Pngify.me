@@ -12,12 +12,14 @@ namespace PngifyMe.ViewModels.Helper
     public partial class BaseLayerViewModel : ObservableObject
     {
         public BaseLayer LayerModel { get; }
+        public LayersettingViewModel Parent { get; }
 
-        public BaseLayerViewModel(BaseLayer layer)
+        public BaseLayerViewModel(BaseLayer layer, LayersettingViewModel parent)
         {
             LayerModel = layer;
             Name = layer.GetType().Name;
             UpdatePropertyList();
+            Parent = parent;
         }
 
         [ObservableProperty]

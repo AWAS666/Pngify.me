@@ -98,8 +98,14 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Helper\LayerSettingsView.axaml.cs">
+      <DependentUpon>LayerSettingsView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Helper\ModeSelect.axaml.cs">
       <DependentUpon>ModeSelect.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Helper\LayerView.axaml.cs">
+      <DependentUpon>LayerView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\Helper\PropertyView.axaml.cs">
       <DependentUpon>PropertyView.axaml</DependentUpon>

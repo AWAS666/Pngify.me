@@ -1,0 +1,48 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 x:DataType="vm:LayersettingViewModel"
+             x:Class="PngifyMe.Views.Helper.LayerSettingsView"
+			 >
+
+	<Design.DataContext>
+		<vm:LayersettingViewModel/>
+	</Design.DataContext>
+	<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
+		<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
+		<Button Command="{Binding Parent.RemoveCommand}"
+				CommandParameter="{Binding}" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+			Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
+		<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
+
+		<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
+			<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
+			<ComboBox VerticalAlignment="Center"
+					  ToolTip.Tip="Selected layer, then click AddLayer to add it"
+					  ItemsSource="{Binding AllLayers}"
+					  DisplayMemberBinding="{Binding Name}"
+					  SelectedItem="{Binding SelectedLayer}"
+					  Width="150"></ComboBox>
+			<Button ToolTip.Tip="Add Selected Layer"
+				Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+				Command="{Binding AddNewLayer}">AddLayer</Button>
+		</StackPanel>
+
+		<Expander Grid.Row="3" Grid.ColumnSpan="3" IsExpanded="true"
+				  Header="Layer Settings" >
+			<ListBox ItemsSource="{Binding Layers}">
+				<ListBox.ItemTemplate>
+					<DataTemplate>
+						<helper:LayerView DataContext="{Binding}"></helper:LayerView>
+					</DataTemplate>
+				</ListBox.ItemTemplate>
+			</ListBox>
+		</Expander>
+	</Grid>
+</UserControl>

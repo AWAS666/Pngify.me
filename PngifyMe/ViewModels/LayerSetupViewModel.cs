@@ -16,7 +16,7 @@ public partial class LayerSetupViewModel : ObservableObject
     public LayerSetupViewModel(List<Layersetting> layers)
     {
         _layers = layers;
-        Layers = new ObservableCollection<LayersettingViewModel>(layers.Select(x => new LayersettingViewModel(x)));
+        Layers = new ObservableCollection<LayersettingViewModel>(layers.Select(x => new LayersettingViewModel(x, this)));
     }
 
     private List<Layersetting> _layers;
@@ -26,7 +26,7 @@ public partial class LayerSetupViewModel : ObservableObject
     public void AddNewSettings()
     {
         var set = new Layersetting();
-        Layers.Add(new LayersettingViewModel(set));
+        Layers.Add(new LayersettingViewModel(set, this));
         _layers.Add(set);
     }
 

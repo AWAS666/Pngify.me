@@ -15,11 +15,11 @@ namespace PngifyMe.ViewModels.Helper
         /// <summary>
         /// just for preview in designer
         /// </summary>
-        public LayersettingViewModel() : this(new Layersetting())
+        public LayersettingViewModel() : this(new Layersetting(), new LayerSetupViewModel())
         {
         }
 
-        public LayersettingViewModel(Layersetting layerSett)
+        public LayersettingViewModel(Layersetting layerSett, LayerSetupViewModel parent)
         {
             TriggerTypes = new ObservableCollection<Type>(Assembly.GetExecutingAssembly()
                                     .GetTypes()
@@ -33,7 +33,8 @@ namespace PngifyMe.ViewModels.Helper
             _selectedTriggerType = LayerSettModel.Trigger?.GetType();
             SelectedTrigger = LayerSettModel.Trigger;
             Name = layerSett.Name;
-            layers = new ObservableCollection<BaseLayerViewModel>(layerSett.Layers.Select(x => new BaseLayerViewModel(x)));
+            layers = new ObservableCollection<BaseLayerViewModel>(layerSett.Layers.Select(x => new BaseLayerViewModel(x, this)));
+            Parent = parent;
         }
 
         [ObservableProperty]
@@ -42,6 +43,7 @@ namespace PngifyMe.ViewModels.Helper
         [ObservableProperty]
         private ObservableCollection<BaseLayerViewModel> layers;
 
+        public LayerSetupViewModel Parent { get; }
         public Layersetting LayerSettModel { get; }
 
         // List of available trigger types
@@ -111,7 +113,7 @@ namespace PngifyMe.ViewModels.Helper
             if (SelectedLayer == null)
                 return;
             var newLayer = (BaseLayer)Activator.CreateInstance(SelectedLayer);
-            Layers.Add(new BaseLayerViewModel(newLayer));
+            Layers.Add(new BaseLayerViewModel(newLayer, this));
             LayerSettModel.Layers.Add(newLayer);
             SelectedLayer = null;
         }

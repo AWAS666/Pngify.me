@@ -29,54 +29,7 @@
 			<ListBox ItemsSource="{Binding Layers}" Margin="0,5,0,0">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
-							<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
-							<Button Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
-									CommandParameter="{Binding}" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-								Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
-							<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
-
-							<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
-								<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
-								<ComboBox VerticalAlignment="Center"
-										  ToolTip.Tip="Selected layer, then click AddLayer to add it"
-										  ItemsSource="{Binding AllLayers}"
-										  DisplayMemberBinding="{Binding Name}"
-										  SelectedItem="{Binding SelectedLayer}"
-										  Width="150"></ComboBox>
-								<Button ToolTip.Tip="Add Selected Layer"
-									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-									Command="{Binding AddNewLayer}">AddLayer</Button>
-							</StackPanel>
-
-							<Expander Grid.Row="3" Grid.ColumnSpan="3" IsExpanded="true" 
-									  Header="Layer Settings" >							
-								<ListBox ItemsSource="{Binding Layers}">
-									<ListBox.ItemTemplate>
-										<DataTemplate>
-											<StackPanel>
-												<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
-													<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-													<Button Content="Remove"
-															Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-															Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
-															CommandParameter="{Binding}"
-													></Button>
-												</StackPanel>
-												<ItemsControl ItemsSource="{Binding PropertyList}">
-													<ItemsControl.ItemTemplate>
-														<DataTemplate>
-															<helper:PropertyView DataContext="{Binding}"></helper:PropertyView>
-														</DataTemplate>
-													</ItemsControl.ItemTemplate>
-												</ItemsControl>
-											</StackPanel>
-										</DataTemplate>
-									</ListBox.ItemTemplate>
-								</ListBox>
-							</Expander>
-
-						</Grid>
+						<helper:LayerSettingsView DataContext="{Binding}"/>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
