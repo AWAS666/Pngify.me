@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using PngifyMe.Services;
 using System.Reflection;
@@ -26,15 +27,22 @@ public partial class MainWindow : Window
         this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}-beta";
     }
 
-    private void DoubleClick(object? sender, Avalonia.Input.TappedEventArgs e)
+    private void DoubleClick(object? sender, TappedEventArgs e)
     {
         settings.IsVisible = !settings.IsVisible;
+        hintBox.IsVisible = false;
     }
+
+    private void HintPressed(object? sender, PointerPressedEventArgs e)
+    {
+        hintBox.IsVisible = false;
+    }
+
 
     private void SaveSettings(object? sender, RoutedEventArgs e)
     {
         SettingsManager.Save();
         Specsmanager.Save();
-    }  
+    }
 
 }

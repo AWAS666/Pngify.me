@@ -133,6 +133,25 @@
 				</TabItem>
 			</TabControl>
 		</Grid>
+		<Border  Classes="Hover" Theme="{StaticResource CardBorder}" 
+				 PointerPressed="HintPressed" Name="hintBox"
+				VerticalAlignment="Bottom" HorizontalAlignment="Left">
+			<Border.Styles>
+				<Style Selector="Border">
+					<Style.Animations>
+						<Animation Duration="0:0:1">
+							<KeyFrame Cue="0%">
+								<Setter Property="Opacity" Value="0.0"/>
+							</KeyFrame>
+							<KeyFrame Cue="100%">
+								<Setter Property="Opacity" Value="1.0"/>
+							</KeyFrame>
+						</Animation>
+					</Style.Animations>
+				</Style>
+			</Border.Styles>
+			<TextBlock>Double Click your avatar to hide the settings</TextBlock>
+		</Border>
 	</Grid>
 
 </Window>
