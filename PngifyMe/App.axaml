@@ -1,11 +1,25 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              x:Class="PngifyMe.App"
-             RequestedThemeVariant="Default">
-             <!-- "Default" ThemeVariant follows system theme variant. "Dark" or "Light" are other available options. -->
+			 xmlns:semi="https://irihi.tech/semi"
+			xmlns:u-semi="https://irihi.tech/ursa/themes/semi"
+             RequestedThemeVariant="Dark">
 
-    <Application.Styles>
-        <FluentTheme />
-		<StyleInclude Source="avares://Avalonia.Controls.DataGrid/Themes/Fluent.xaml"/>
-    </Application.Styles>
+	<Application.Styles>
+		<semi:SemiTheme Locale="en-us" />
+		<u-semi:SemiTheme Locale="en-us"/>
+		<StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" />
+		<Style Selector="Button">
+			<Setter Property="FontWeight" Value="Medium"/>
+		</Style>
+	</Application.Styles>
+	<Application.Resources>
+		<ResourceDictionary>
+			<ResourceDictionary.ThemeDictionaries>				
+				<ResourceDictionary x:Key="Dark">
+					<SolidColorBrush x:Key="Button" Color="#B553C2"/>
+				</ResourceDictionary>
+			</ResourceDictionary.ThemeDictionaries>
+		</ResourceDictionary>
+	</Application.Resources>
 </Application>

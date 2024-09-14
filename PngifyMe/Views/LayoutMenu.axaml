@@ -7,7 +7,7 @@
 	<StackPanel>
 
 		<TextBlock FontSize="24">Background Setup</TextBlock>
-		<Grid ColumnDefinitions="100,200,150" RowDefinitions="45,25,*">
+		<Grid ColumnDefinitions="100,200,175" RowDefinitions="45,25,*">
 			<Label VerticalAlignment="Center">Background:</Label>
 			<ComboBox x:Name="background"
 					  Width="200"
@@ -22,7 +22,8 @@
 					</DataTemplate>
 				</ComboBox.ItemTemplate>
 			</ComboBox>
-			<Button Click="SetToTransparant" Margin="5,5,5,5" Grid.Column="2">Set to Transparent</Button>
+			<Button Click="SetToTransparant" Margin="5,5,5,5" Grid.Column="2"
+					Classes="Secondary" Theme="{DynamicResource OutlineButton}">Set to Transparent</Button>
 			<Label Grid.Row="1" VerticalAlignment="Center">Hex:</Label>
 			<TextBox IsReadOnly="True" x:Name="backgroundHex" Grid.Row="1" Grid.Column="1" ></TextBox>
 

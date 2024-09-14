@@ -13,8 +13,10 @@
 
 	<StackPanel Orientation="Horizontal" Spacing="5">
 		<TextBlock VerticalAlignment="Center" FontSize="16">Mode Select:</TextBlock>
-		<Button Click="SwitchToHuman" Name="human" Margin="15,0,15,0">Human Mode</Button>
-		<Button Click="SwitchToTTS" Name="tts" Margin="15,0,15,0">TTS Pet Mode</Button>
+		<Button Theme="{DynamicResource SolidButton}" 
+				Click="SwitchToHuman" Name="human" Margin="15,0,15,0">Human Mode</Button>
+		<Button Theme="{DynamicResource SolidButton}" 
+				Click="SwitchToTTS" Name="tts" Margin="15,0,15,0">TTS Pet Mode</Button>
 	</StackPanel>
 
 

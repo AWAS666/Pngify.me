@@ -16,37 +16,86 @@
 
 			<Image Source="/Assets/logo_full.png" MaxHeight="250"></Image>
 
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" Spacing="5">
 				<TextBlock VerticalAlignment="Center">Created by:</TextBlock>
-				<HyperlinkButton NavigateUri="https://store.steampowered.com/search/?developer=Meteora%20Labs">MeteoraLabs</HyperlinkButton>
+				<HyperlinkButton
+					  BorderThickness="1"
+					  Classes="WithIcon"
+					  Height="20"
+					  NavigateUri="https://store.steampowered.com/search/?developer=Meteora%20Labs">
+					<TextBlock
+						HorizontalAlignment="Center"
+						Text="MeteoraLabs"
+						TextDecorations="Underline"
+						VerticalAlignment="Center" />
+				</HyperlinkButton>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal">
-				<TextBlock VerticalAlignment="Center">Support us on Ko-Fi:</TextBlock>
-				<HyperlinkButton NavigateUri="https://ko-fi.com/awas666">Ko-Fi</HyperlinkButton>
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<TextBlock VerticalAlignment="Center">Support us:</TextBlock>
+				<HyperlinkButton
+					  BorderThickness="1"
+					  Classes="WithIcon"
+					  Height="20"
+					  NavigateUri="https://ko-fi.com/awas666">
+					<TextBlock
+						HorizontalAlignment="Center"
+						Text="Ko-Fi"
+						TextDecorations="Underline"
+						VerticalAlignment="Center" />
+				</HyperlinkButton>
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
 			<TextBlock FontSize="24">Other Software/Games</TextBlock>
 
 
-			<StackPanel Orientation="Horizontal">
-				<TextBlock VerticalAlignment="Center">Meteora's Mystic Merge:</TextBlock>
-				<HyperlinkButton NavigateUri="https://store.steampowered.com/app/2751810/Meteoras_Mystic_Merge">Meteora's Mystic Merge</HyperlinkButton>
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<TextBlock VerticalAlignment="Center"></TextBlock>
+				<HyperlinkButton
+				  BorderThickness="1"
+				  Classes="WithIcon"
+				  Height="20"
+				  NavigateUri="https://store.steampowered.com/app/2751810/Meteoras_Mystic_Merge">
+					<TextBlock
+						HorizontalAlignment="Center"
+						Text="Meteora's Mystic Merge"
+						TextDecorations="Underline"
+						VerticalAlignment="Center" />
+				</HyperlinkButton>
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
 			<TextBlock FontSize="24">Art</TextBlock>
-			<StackPanel Orientation="Horizontal">
+
+			<StackPanel Orientation="Horizontal" Spacing="5">
 				<TextBlock VerticalAlignment="Center">Default Character by:</TextBlock>
-				<HyperlinkButton NavigateUri="https://x.com/Ztermidsy_"
-								 >Berry (x.com)</HyperlinkButton>
+				<HyperlinkButton
+				  BorderThickness="1"
+				  Classes="WithIcon"
+				  Height="20"
+				  NavigateUri="https://x.com/Ztermidsy_">
+					<TextBlock
+						HorizontalAlignment="Center"
+						Text="Berry (x.com)"
+						TextDecorations="Underline"
+						VerticalAlignment="Center" />
+				</HyperlinkButton>
 			</StackPanel>
 
-			<StackPanel Orientation="Horizontal">
+			<StackPanel Orientation="Horizontal" Spacing="5">
 				<TextBlock VerticalAlignment="Center">Logo by:</TextBlock>
-				<HyperlinkButton NavigateUri="https://www.reddit.com/user/123Thundernugget/"
-								 >Thundernugget</HyperlinkButton>
+				<HyperlinkButton
+			  BorderThickness="1"
+			  Classes="WithIcon"
+			  Height="20"
+			  NavigateUri="https://www.reddit.com/user/123Thundernugget/">
+					<TextBlock
+						HorizontalAlignment="Center"
+						Text="Thundernugget"
+						TextDecorations="Underline"
+						VerticalAlignment="Center" />
+				</HyperlinkButton>
 			</StackPanel>
 
 

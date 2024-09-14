@@ -1,7 +1,9 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
 using Avalonia.Platform.Storage;
+using DynamicData;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
@@ -20,16 +22,22 @@ public partial class ModeSelect : UserControl
     }
 
     private void Recolour()
-    {
+    {       
         switch (SettingsManager.Current.Profile.Active.Type)
         {
             case ProfileType.Human:
-                human.Background = Brushes.Green;
-                tts.Background = Brushes.LightSlateGray;
+                human.Classes.Clear();
+                human.Classes.Add(new Classes("Success"));
+
+                tts.Classes.Clear();
+                tts.Classes.Add(new Classes("Tertiary"));
                 break;
             case ProfileType.TTS:
-                tts.Background = Brushes.Green;
-                human.Background = Brushes.LightSlateGray;
+                tts.Classes.Clear();
+                tts.Classes.Add(new Classes("Success"));
+
+                human.Classes.Clear();
+                human.Classes.Add(new Classes("Tertiary"));
                 break;
         }
     }

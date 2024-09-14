@@ -19,13 +19,17 @@
 			<TextBlock TextWrapping="WrapWithOverflow" >Twitch Integrated Throwing System (TITS) allows you to throw items at your PngTuber.</TextBlock>
 			<CheckBox x:Name="activated">Activated</CheckBox>
 			<CheckBox x:Name="showHitbox">Show Hitboxes</CheckBox>
-			<Button Command="{Binding Trigger}" Content="Test Trigger" />
+			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+					HorizontalAlignment="Left"
+					Command="{Binding Trigger}" Content="Test Trigger" />
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<CheckBox IsChecked="{Binding Settings.EnableSound, Mode=TwoWay}">Sound Enabled</CheckBox>
-				<Button Command="{Binding ChangeSound}">ChangeSound</Button>
-				<Button Command="{Binding DefaultSound}">Default Sound</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ChangeSound}">ChangeSound</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding DefaultSound}">Default Sound</Button>
 				<TextBlock Text="{Binding Settings.HitSound}"></TextBlock>
 			</StackPanel>
 

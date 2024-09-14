@@ -7,6 +7,7 @@
         xmlns:vmh="clr-namespace:PngifyMe.Views.Helper"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
 		 xmlns:sett="clr-namespace:PngifyMe.Settings"
+		xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
         x:Class="PngifyMe.Views.MainWindow"
         Icon="/Assets/icon.ico"
 		Background="Transparent"
@@ -17,44 +18,117 @@
 		<Style Selector="TabItem">
 			<Setter Property="MinWidth" Value="100"/>
 			<Setter Property="MinHeight" Value="30"/>
+			<Setter Property="HorizontalAlignment" Value="Right"/>
 		</Style>
 	</Window.Styles>
 	<Grid x:Name="grid" >
 		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 						  DoubleTapped="DoubleClick"  />
-		<Grid x:Name="settings" Background="#AAFF5733"
+		<Grid x:Name="settings" Background="#DDFF5733"
 			  HorizontalAlignment="Right" RowDefinitions="Auto,*" Width="700">
 			<vmh:ModeSelect></vmh:ModeSelect>
 			<Button HorizontalAlignment="Right" Click="SaveSettings" Margin="5,5,5,5"
-					ToolTip.Tip="Only save, doesnt apply">Save settings</Button>
+					ToolTip.Tip="Only save, doesnt apply"
+					Classes="Primary" Theme="{DynamicResource SolidButton}"
+					>
+				<StackPanel Orientation="Horizontal" Spacing="5">
+					<TextBlock>Save Changes</TextBlock>
+					<lucideAvalonia:Lucide Icon="Save" StrokeBrush="White"
+										   StrokeThickness="2" Width="22" Height="22"/>
+				</StackPanel>
+
+			</Button>
 			<TabControl Grid.Row="1" WrapSelection="True"
-						TabStripPlacement="Right"
+						TabStripPlacement="Right" Padding="5"
 						>
-				<TabItem Header="Microphone" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">Microphone</TextBlock>
+							<lucideAvalonia:Lucide Icon="Mic" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:VolumeSlider />
 				</TabItem>
-				<TabItem Header="LayoutMenu" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">LayoutMenu</TextBlock>
+							<lucideAvalonia:Lucide Icon="LayoutGrid" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:LayoutMenu />
 				</TabItem>
-				<TabItem Header="LayerSetup" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">LayerSetup</TextBlock>
+							<lucideAvalonia:Lucide Icon="Layers" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:LayerSetup />
 				</TabItem>
-				<TabItem Header="Avatar States" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">Avatar</TextBlock>
+							<lucideAvalonia:Lucide Icon="User" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:MicStateSetup/>
 				</TabItem>
-				<TabItem Header="Throwing System" FontSize="12" Width="130">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">Throwing</TextBlock>
+							<lucideAvalonia:Lucide Icon="Anchor" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:TITSSetup/>
 				</TabItem>
-				<TabItem Header="TTSPet" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">TTSPet</TextBlock>
+							<lucideAvalonia:Lucide Icon="Squirrel" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:LLMSetup />
 				</TabItem>
-				<TabItem Header="Profiles" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">Profiles</TextBlock>
+							<lucideAvalonia:Lucide Icon="Users" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:ProfileSetup />
 				</TabItem>
-				<TabItem Header="General Settings" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">General</TextBlock>
+							<lucideAvalonia:Lucide Icon="Cog" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:GeneralSettings />
 				</TabItem>
-				<TabItem Header="Credits" FontSize="12" Width="125">
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock VerticalAlignment="Center">Credits</TextBlock>
+							<lucideAvalonia:Lucide Icon="Copyright" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
 					<views:CreditsAndInfo />
 				</TabItem>
 			</TabControl>

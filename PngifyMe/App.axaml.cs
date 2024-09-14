@@ -24,6 +24,7 @@ public partial class App : Application
     {
         SetupSerilog();
 
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
             WinHotkey.Start(desktop);

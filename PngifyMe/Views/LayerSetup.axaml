@@ -18,8 +18,10 @@
 			<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
-				<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus" />
-				<Button Command="{Binding Save}" Content="Apply and Save" />
+				<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus"
+						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
+				<Button Command="{Binding Save}" Content="Apply and Save"
+						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
 			</StackPanel>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1"
@@ -30,7 +32,7 @@
 						<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
 							<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
 							<Button Command="{Binding $parent[ListBox].((vm:LayerSetupViewModel)DataContext).RemoveCommand}"
-														CommandParameter="{Binding}"
+									CommandParameter="{Binding}" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 								Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left"  i:Attached.Icon="fa-solid fa-minus" />
 							<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
 
@@ -43,6 +45,7 @@
 										  SelectedItem="{Binding SelectedLayer}"
 										  Width="150"></ComboBox>
 								<Button ToolTip.Tip="Add Selected Layer"
+									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 									Command="{Binding AddNewLayer}">AddLayer</Button>
 							</StackPanel>
 
@@ -55,6 +58,7 @@
 												<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
 													<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
 													<Button Content="Remove"
+															Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 															Command="{Binding $parent[ListBox].((vmh:LayersettingViewModel)DataContext).RemoveCommand}"
 															CommandParameter="{Binding}"
 													></Button>

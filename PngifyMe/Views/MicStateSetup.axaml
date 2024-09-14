@@ -25,8 +25,10 @@
 			<TextBlock FontSize="24">Microphone State Setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">States</TextBlock>
-				<Button Command="{Binding Add}" i:Attached.Icon="fa-solid fa-plus" />
-				<Button Command="{Binding Apply}" Content="Apply and Save" />
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding Add}" i:Attached.Icon="fa-solid fa-plus" />
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding Apply}" Content="Apply and Save" />
 			</StackPanel>
 
 			<Grid ColumnDefinitions="150,100,100" RowDefinitions="30,30,30" Margin="5,5,5,5">
@@ -54,12 +56,14 @@
 							<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
 								<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
 								<Button
+									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 									Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
 									CommandParameter="{Binding}"
 									Margin="5,0,0,0" HorizontalAlignment="Left"
 									i:Attached.Icon="fa-solid fa-minus" />
 
 								<Button
+									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 									Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).SwitchState}"
 									CommandParameter="{Binding}"
 									Margin="5,0,0,0" HorizontalAlignment="Left"
@@ -85,8 +89,10 @@
 										   Source="{Binding State.Open.Bitmap.Preview}">
 									</siv:SKImageView>
 								</Button>
-								<Button Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
-										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
+								<Button 
+									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
+									Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 
 								<TextBlock VerticalAlignment="Center" Grid.Column="3">Closed Mouth</TextBlock>
 								<Button Command="{Binding LoadFile}" Grid.Column="4"
@@ -96,7 +102,8 @@
 													 Source="{Binding State.Closed.Bitmap.Preview}">
 									</siv:SKImageView>
 								</Button>
-								<Button Command="{Binding Delete}" CommandParameter="{Binding State.Closed}"
+								<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+										Command="{Binding Delete}" CommandParameter="{Binding State.Closed}"
 										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 							</Grid>
 
@@ -112,7 +119,8 @@
 													 Source="{Binding State.OpenBlink.Bitmap.Preview}">
 									</siv:SKImageView>
 								</Button>
-								<Button Command="{Binding Delete}" CommandParameter="{Binding State.OpenBlink}"
+								<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+										Command="{Binding Delete}" CommandParameter="{Binding State.OpenBlink}"
 										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 
 								<StackPanel VerticalAlignment="Center" Grid.Column="3">
@@ -127,7 +135,8 @@
 									</siv:SKImageView>
 								</Button>
 
-								<Button Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
+								<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+										Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
 										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
 							</Grid>
 

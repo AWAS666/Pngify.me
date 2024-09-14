@@ -34,30 +34,36 @@
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<Label VerticalAlignment="Center" ToolTip.Tip="for non OpenAI Models" >Custom Domain: </Label>
-							<TextBox Text="{Binding Settings.Domain}"></TextBox>
+							<TextBox MinWidth="100" Text="{Binding Settings.Domain}"></TextBox>
 							<TextBlock VerticalAlignment="Center">(optional)</TextBlock>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<Label VerticalAlignment="Center" >Model: </Label>
-							<TextBox Text="{Binding Settings.ModelName}"></TextBox>
+							<TextBox MinWidth="100" Text="{Binding Settings.ModelName}"></TextBox>
 						</StackPanel>
 
 						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBox MaxLines="100" Width="500" Height="200" AcceptsReturn="True" TextWrapping="Wrap"
+							<TextBox MaxLines="100" Width="500" Height="200" 
+									 VerticalContentAlignment="Top"
+									 Padding="5"
+									 AcceptsReturn="True" TextWrapping="Wrap"
 									 Text="{Binding Settings.SystemPrompt}"></TextBox>
 						</StackPanel>
+					</StackPanel>
+				</TabItem>
+				<TabItem Header="Twitch">
+					<StackPanel Spacing="10">					
 
-						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
-
-						<TextBlock FontSize="24">Twitch triggers</TextBlock>
+						<TextBlock Margin="0,5,0,5"  FontSize="24">Twitch triggers</TextBlock>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<Label VerticalAlignment="Center">Minimum Bits: </Label>
-							<helper:UintTextBox Text="{Binding Settings.MinBits}"></helper:UintTextBox>
+							<helper:UintTextBox MinWidth="100" Text="{Binding Settings.MinBits}"></helper:UintTextBox>
 						</StackPanel>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<Label VerticalAlignment="Center" >Twitch Redeem: </Label>
 							<TextBox ToolTip.Tip="Enter the name of any redeem that should trigger the ttspet"
+									 MinWidth="100"
 									 Text="{Binding Settings.Redeem}"></TextBox>
 						</StackPanel>
 						<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
@@ -99,11 +105,12 @@
 						<TextBlock Margin="0,5,0,5" FontSize="24">Filter</TextBlock>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<TextBlock VerticalAlignment="Center">Replacement:</TextBlock>
-							<TextBox Text="{Binding Settings.Replacement}"></TextBox>
+							<TextBox MinWidth="100" Text="{Binding Settings.Replacement}"></TextBox>
 						</StackPanel>
 						<StackPanel Spacing="5">
 							<TextBlock VerticalAlignment="Center">Filtered Words (separated with ";"):</TextBlock>
 							<TextBox Text="{Binding Settings.BannedPhrases ,Converter={StaticResource ListToStringConverter}, Mode=TwoWay}" 
+									 VerticalContentAlignment="Top"
 									 HorizontalAlignment="Left"
 									 MaxLines="100" Width="500" Height="200"
 									 AcceptsReturn="True" TextWrapping="Wrap">
@@ -118,8 +125,10 @@
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<Label VerticalAlignment="Center" >Input Text: </Label>
 							<TextBox x:Name="inputText" Width="250" >Hello, how are you?</TextBox>
-							<Button Click="TriggerTest">Respond</Button>
-							<Button Click="JustRead">Read</Button>
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Click="TriggerTest">Respond</Button>
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Click="JustRead">Read</Button>
 						</StackPanel>
 
 						<Rectangle Margin="0,5,0,5" Height="1" Fill="Black"></Rectangle>
@@ -128,7 +137,8 @@
 
 						<DataGrid ItemsSource="{Binding Messages}"
 								  AutoGenerateColumns="False" IsReadOnly="True"
-								  GridLinesVisibility="All"
+								  GridLinesVisibility="All" 
+								  MinHeight="300" MaxHeight="600"
 								  BorderThickness="1" BorderBrush="Gray">
 							<DataGrid.Columns>
 								<DataGridTextColumn IsReadOnly="True" Header="TimeStamp" Binding="{Binding Created}"/>

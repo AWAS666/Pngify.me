@@ -28,7 +28,8 @@
 			</ContentControl.DataTemplates>
 		</ContentControl>
 		<TextBlock IsVisible="{Binding !FilePicker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
-		<Button IsVisible="{Binding FilePicker}" Click="SelectFile" Content="Pick File"></Button>		
+		<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+				IsVisible="{Binding FilePicker}" Click="SelectFile" Content="Pick File"></Button>		
 	</StackPanel>
 	
 </UserControl>

@@ -1,4 +1,4 @@
-# PngifyMe
+# Pngify.Me
 The goal of this to build a funtional software for any pngtuber, 
 meaning a vtuber who just has a png/gif as their avatar.
 
@@ -16,6 +16,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] save all needed files into the profile folder instead of keeping a global reference
 	- [ ] show icon?
 	- [ ] import/export as zipped archive, custom extension
+	- [ ] delete profiles
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
@@ -41,6 +42,7 @@ Feel free to suggest features and submit code yourself
 	- [x] sound
 	- [ ] custom triggers
 	- [ ] throw emotes
+	- [ ] settings to change how loud collission sound plays
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff
@@ -74,7 +76,19 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 
 ## Todo better ui/ux
 - [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI)
-- [ ] fix number inputs, sorta wacky right now
+- [x] fix number inputs, sorta wacky right now
+- [ ] test the interface on a smaller scale, 1920x1080 monitor
+- [ ] use icons instead of text
+	- [ ] icon library or custom made?
+	- [ ] https://github.com/MarwanFr/LucideAvaloniaUI
+	- [ ] https://github.com/Splitwirez/avalonia-aero-theme -> no docs
+	- [ ] https://lucide.dev/icons/save
+- [ ] https://github.com/irihitech/Ursa.Avalonia
+- [ ] https://github.com/irihitech/Semi.Avalonia/
+ 
+## Ideas
+- [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
+- [ ] colourpicker in background select -> Semi
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, ko-fi and steam (if it sees some support as steam isn't free)

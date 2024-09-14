@@ -23,7 +23,8 @@
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBox Name="newProfile" Watermark="New Profile Name" Width="150"></TextBox>
-				<Button Click="CreateNewProfile">Add New Profile</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Click="CreateNewProfile">Add New Profile</Button>
 			</StackPanel>
 
 			<TextBlock >TTSPet is still in development and not working (yet)</TextBlock>
@@ -42,7 +43,8 @@
 							<ComboBox ItemsSource="{Binding ProfileTypes}"
 									  SelectedItem="{Binding Type}">
 							</ComboBox>
-							<Button Click="LoadProfile">Load</Button>
+							<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
+									Click="LoadProfile">Load</Button>
 						</StackPanel>
 					</DataTemplate>
 

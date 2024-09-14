@@ -18,7 +18,8 @@
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Twitch Enabled</Label>
 			<CheckBox x:Name="twitchEnabled"></CheckBox>
-			<Button Click="TwitchRetry">Retry Twitch Connection</Button>
+			<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
+				Click="TwitchRetry">Retry Twitch Connection</Button>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<TextBlock>Twitch Token lasts until: </TextBlock>
@@ -51,13 +52,20 @@
 		<StackPanel  Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Enable Spout2 (experimental)</Label>
 			<CheckBox x:Name="spout2"></CheckBox>
-			<HyperlinkButton NavigateUri="https://github.com/Off-World-Live/obs-spout2-plugin">Install in OBS</HyperlinkButton>
+			<HyperlinkButton
+						  BorderThickness="1"
+						  Classes="WithIcon"
+						  Height="20"
+						  NavigateUri="https://github.com/Off-World-Live/obs-spout2-plugin">
+				<TextBlock
+					HorizontalAlignment="Center"
+					Text="Install in OBS"
+					TextDecorations="Underline"
+					VerticalAlignment="Center" />
+			</HyperlinkButton>
+
 		</StackPanel>
 
-		<!--<StackPanel Orientation="Horizontal" Spacing="5">
-			<Label VerticalAlignment="Center">Target FPS</Label>
-			<helper:UintTextBox x:Name="targetFPS"></helper:UintTextBox>
-		</StackPanel>-->
 
 	</StackPanel>
 </UserControl>
