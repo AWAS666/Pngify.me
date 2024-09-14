@@ -6,6 +6,7 @@ using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
 using System;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -43,11 +44,15 @@ public partial class TITSSetupViewModel : ObservableObject
             AllowMultiple = false
         });
         if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+        {
             SettingsManager.Current.Tits.HitSound = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            SettingsManager.Current.Tits.HitSoundFileName = Path.GetFileName(SettingsManager.Current.Tits.HitSound);
+        }
     }
 
     public void DefaultSound()
     {
+        SettingsManager.Current.Tits.HitSound = string.Empty;
         SettingsManager.Current.Tits.HitSound = string.Empty;
     }
 

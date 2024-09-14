@@ -88,7 +88,7 @@ namespace PngifyMe.Services.ThrowingSystem
         {
             var settings = SettingsManager.Current.Tits;
 
-            if (cachedSound != settings.HitSound && audio == null)
+            if (cachedSound != settings.HitSound || audio == null)
                 if (string.IsNullOrEmpty(settings.HitSound))
                     audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
                 else

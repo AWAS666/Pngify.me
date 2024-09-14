@@ -30,7 +30,7 @@
 						Command="{Binding ChangeSound}">ChangeSound</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding DefaultSound}">Default Sound</Button>
-				<TextBlock Text="{Binding Settings.HitSound}"></TextBlock>
+				<TextBlock VerticalAlignment="Center" Text="{Binding Settings.HitSoundFileName}"></TextBlock>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">

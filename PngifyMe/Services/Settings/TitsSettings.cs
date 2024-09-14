@@ -14,6 +14,9 @@ namespace PngifyMe.Services.Settings
         private string hitSound = string.Empty;
 
         [ObservableProperty]
+        private string hitSoundFileName = string.Empty;
+
+        [ObservableProperty]
         private bool enableSound = true;
 
         [ObservableProperty]
