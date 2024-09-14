@@ -9,17 +9,10 @@
 		<semi:SemiTheme Locale="en-us" />
 		<u-semi:SemiTheme Locale="en-us"/>
 		<StyleInclude Source="avares://Semi.Avalonia.DataGrid/Index.axaml" />
+		  <StyleInclude Source="avares://Semi.Avalonia.ColorPicker/Index.axaml" />
+		<!--todo: make a style here-->
 		<Style Selector="Button">
 			<Setter Property="FontWeight" Value="Medium"/>
 		</Style>
-	</Application.Styles>
-	<Application.Resources>
-		<ResourceDictionary>
-			<ResourceDictionary.ThemeDictionaries>				
-				<ResourceDictionary x:Key="Dark">
-					<SolidColorBrush x:Key="Button" Color="#B553C2"/>
-				</ResourceDictionary>
-			</ResourceDictionary.ThemeDictionaries>
-		</ResourceDictionary>
-	</Application.Resources>
+	</Application.Styles>	
 </Application>

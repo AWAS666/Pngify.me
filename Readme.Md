@@ -75,7 +75,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] more usercontrols to avoid overnesting
 
 ## Todo better ui/ux
-- [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI)
+- [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI) -> still in beta
 - [x] fix number inputs, sorta wacky right now
 - [ ] test the interface on a smaller scale, 1920x1080 monitor
 - [ ] use icons instead of text
@@ -88,7 +88,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
  
 ## Ideas
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
-- [ ] colourpicker in background select -> Semi
+- [x] colourpicker in background select -> Semi
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, ko-fi and steam (if it sees some support as steam isn't free)

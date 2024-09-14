@@ -3,6 +3,8 @@ using Avalonia.Interactivity;
 using Avalonia.Media;
 using PngifyMe.Services;
 using PngifyMe.Settings;
+using PngifyMe.ViewModels;
+using System;
 using System.Linq;
 using System.Reflection;
 
@@ -13,53 +15,27 @@ public partial class LayoutMenu : UserControl
     public LayoutMenu()
     {
         InitializeComponent();
-        background.ItemsSource = typeof(Brushes)
-            .GetProperties(BindingFlags.Public | BindingFlags.Static)
-             .Where(p => typeof(IBrush).IsAssignableFrom(p.PropertyType))
-            .Select(p => (IBrush)p.GetValue(null));
+        //background.ItemsSource = typeof(Brushes)
+        //    .GetProperties(BindingFlags.Public | BindingFlags.Static)
+        //     .Where(p => typeof(IBrush).IsAssignableFrom(p.PropertyType))
+        //    .Select(p => (IBrush)p.GetValue(null));
 
-        background.SelectedValue = SettingsManager.Current.Background.Colour;
-        background.SelectionChanged += Background_SelectionChanged;
-        UpdateText();
-        backgroundHex.KeyUp += BackgroundHex_KeyUp;
+        DataContext = new LayoutViewModel();
     }
 
-    private void BackgroundHex_KeyUp(object? sender, Avalonia.Input.KeyEventArgs e)
+    private void ColorChanged(object sender, ColorChangedEventArgs e)
     {
-        if (backgroundHex.Text.Length > 7)
-        {
-            e.Handled = true;
-            return;
-        }
-        try
-        {
-            var color = BackgroundSettings.HexToBrush(backgroundHex.Text);
-            background.SelectedValue = null;
-            SettingsManager.Current.Background.Colour = color;
-        }
-        catch (System.Exception)
-        {
-
-        }
+        var vm = (LayoutViewModel)DataContext;
+        var color = e.NewColor;
+        vm.Settings.Colour = BackgroundSettings.HexToBrush($"#{color.A:X2}{color.R:X2}{color.G:X2}{color.B:X2}");
     }
 
-    private void UpdateText()
-    {
-        backgroundHex.Text = BackgroundSettings.BrushToHex(SettingsManager.Current.Background.Colour);
-    }
 
-    private void Background_SelectionChanged(object? sender, SelectionChangedEventArgs e)
-    {
-        if (e.AddedItems.Count != 1)
-            return;
-        SettingsManager.Current.Background.Colour = (IBrush)e.AddedItems[0];
-        UpdateText();
-    }
 
     private void SetToTransparant(object sender, RoutedEventArgs e)
     {
-        background.SelectedValue = Brushes.Transparent;
-        SettingsManager.Current.Background.Colour = Brushes.Transparent;
-        UpdateText();
+        var vm = (LayoutViewModel)DataContext;
+        vm.Settings.Colour = Brushes.Transparent;
+        colorPicker.Color = new Color(0, colorPicker.Color.R, colorPicker.Color.G, colorPicker.Color.B);
     }
 }
