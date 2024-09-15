@@ -66,6 +66,12 @@
 									 MinWidth="100"
 									 Text="{Binding Settings.Redeem}"></TextBox>
 						</StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label VerticalAlignment="Center" >Chat Trigger: </Label>
+							<TextBox ToolTip.Tip="TTSPet will respond to any chat message starting with this, leave empty to disable"
+									 MinWidth="100"
+									 Text="{Binding Settings.ChatTrigger}"></TextBox>
+						</StackPanel>
 						<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
 					</StackPanel>
 				</TabItem>

@@ -19,6 +19,9 @@ namespace PngifyMe.Services.Settings
         [ObservableProperty]
         private bool reactFollowers;
 
+        [ObservableProperty]
+        private string? chatTrigger;
+
         /// <summary>
         /// this should allow any openai compatible endpoint
         /// </summary>

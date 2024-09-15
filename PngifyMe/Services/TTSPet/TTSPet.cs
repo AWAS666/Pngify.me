@@ -29,10 +29,13 @@ namespace PngifyMe.Services.TTSPet
             TwitchEventSocket.BitsUsed += BitsUsed;
             TwitchEventSocket.RedeemFull += RedeemUsed;
             TwitchEventSocket.NewFollower += NewFollower;
+            TwitchEventSocket.NewChat += NewChat;
             SetupTTS();
             task = Task.Run(ProcessQueue);
             settings = SettingsManager.Current.LLM;
         }
+
+
 
         public static void SetupTTS()
         {
@@ -77,6 +80,23 @@ namespace PngifyMe.Services.TTSPet
             {
                 Input = string.IsNullOrEmpty(e.UserInput) ? $"{e.UserName} used the redeem: {e.Reward.Title}" : e.UserInput,
                 UserName = e.UserName,
+            };
+            QueueMsg(msg);
+        }
+
+        private static void NewChat(object? sender, ChannelChatMessage e)
+        {
+            string message = e.Message.Text;
+            if (string.IsNullOrEmpty(settings.ChatTrigger) || 
+                !message.StartsWith(settings.ChatTrigger))
+                return;
+
+            message = message.Replace(settings.ChatTrigger, string.Empty).Trim();
+
+            var msg = new LLMMessage()
+            {
+                Input = message,
+                UserName = e.ChatterUserName,
             };
             QueueMsg(msg);
         }

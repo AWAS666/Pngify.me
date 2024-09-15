@@ -7,6 +7,12 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TwitchLib.Api;
+using TwitchLib.Api.Helix;
+using TwitchLib.Client.Models;
+using TwitchLib.Client;
+using TwitchLib.Communication.Interfaces;
+using TwitchLib.Communication.Models;
+using TwitchLib.Communication.Clients;
 
 namespace PngifyMe.Services.Twitch
 {
@@ -16,11 +22,15 @@ namespace PngifyMe.Services.Twitch
         public string FilePath { get; }
         public string Redirect { get; } = "http://localhost:9797/";
         public string UserId { get; private set; }
+        public string UserName { get; private set; }
 
         //https://dev.twitch.tv/docs/pubsub/#introduction
         private static List<string> scopes = new List<string>
         {
             "chat:read",
+            "user:read:chat",
+            "user:bot",
+            "channel:bot",
             "user:read:follows",
             "moderator:read:followers",
             "channel:read:subscriptions",
@@ -64,8 +74,25 @@ namespace PngifyMe.Services.Twitch
             var validation = await Api.Auth.ValidateAccessTokenAsync();
             Auth.Expiration = DateTime.Now.AddSeconds(validation.ExpiresIn);
             UserId = validation.UserId;
+            UserName = validation.Login;
 
             Save();
+           
+        }
+
+        public TwitchClient ConnectClient()
+        {
+            ConnectionCredentials credentials = new ConnectionCredentials(UserName, Api.Settings.AccessToken);
+            var clientOptions = new ClientOptions
+            {
+                MessagesAllowedInPeriod = 750,
+                ThrottlingPeriod = TimeSpan.FromSeconds(30)
+            };
+            WebSocketClient customClient = new WebSocketClient(clientOptions);
+            var client = new TwitchClient(customClient);
+            client.Initialize(credentials, UserName);
+            client.Connect();
+            return client;
         }
 
         private void LoadAuth()

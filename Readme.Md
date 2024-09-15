@@ -66,6 +66,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 		- [ ] double check
 	- [ ] tik tok
 - [ ] max tokens, limit yapping 
+- [x] react to chat
 - [ ] STT to talk with your TTS pet
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 - [ ] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
