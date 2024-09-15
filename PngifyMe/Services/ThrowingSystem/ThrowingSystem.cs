@@ -69,7 +69,9 @@ namespace PngifyMe.Services.ThrowingSystem
                         PlaySound(obj);
 
                 }
-                if (obj.X > Specsmanager.Width + 200 || obj.X < -200 || obj.Y > Specsmanager.Height + 200 || obj.Y < -200)
+                if (obj.X > Specsmanager.Width + 200 || obj.X < -200 || obj.Y > Specsmanager.Height + 200 || obj.Y < -200
+                    // remove by age
+                    || obj.Created.AddSeconds(30) < DateTime.Now)
                 {
                     Objects.Remove(obj);
                 }

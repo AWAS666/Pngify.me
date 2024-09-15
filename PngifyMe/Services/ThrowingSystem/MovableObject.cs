@@ -1,5 +1,6 @@
 ﻿using PngifyMe.Layers;
 using SkiaSharp;
+using System;
 using System.Numerics;
 
 namespace PngifyMe.Services.ThrowingSystem
@@ -11,6 +12,8 @@ namespace PngifyMe.Services.ThrowingSystem
         private Vector2 speed;
         private float rotSpeed;
         private ThrowingSystem parent;
+
+        public DateTime Created { get; }
 
         public Vector2 CurrentSpeed => speed;
         public float X { get => Values.PosX; }
@@ -32,6 +35,7 @@ namespace PngifyMe.Services.ThrowingSystem
             this.speed = speed;
             this.rotSpeed = rotSpeed;
             this.parent = parent;
+            Created = DateTime.Now;
         }
 
         public void Update(float dt)
