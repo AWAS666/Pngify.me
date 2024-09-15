@@ -96,7 +96,7 @@ namespace PngifyMe.Services.Settings
         {
             foreach (var layer in Layers)
             {
-                LayerManager.AddLayer(layer.Clone());
+                LayerManager.AddLayer(layer.Clone(this), Trigger.IsToggleable);
             }
         }
 

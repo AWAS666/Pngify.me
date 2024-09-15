@@ -90,13 +90,23 @@ namespace PngifyMe.Layers
             }
         }
 
-        public static void AddLayer(BaseLayer layer)
+        public static void AddLayer(BaseLayer layer, bool isToggable)
         {
             // check if this is a unique layer
             if (layer.Unique)
             {
                 if (Layers.Any(x => x.GetType() == layer.GetType()))
                     return;
+            }
+            if (isToggable)
+            {
+                // check if any matches and have it exit instead of adding a new one
+                var exists = Layers.FirstOrDefault(x => x.GetType() == layer.GetType() && x.AddedBy == layer.AddedBy);
+                if (exists != null)
+                {
+                    exists.IsExiting = true;
+                    return;
+                }
             }
             Layers.Add(layer);
             layer.OnEnter();

@@ -10,6 +10,8 @@ namespace PngifyMe.Services.Settings
         [JsonIgnore]
         public Layersetting Parent { get; internal set; }
 
+        public bool IsToggleable { get; set; } = false;
+
     }
     public class AlwaysActive : Trigger
     {

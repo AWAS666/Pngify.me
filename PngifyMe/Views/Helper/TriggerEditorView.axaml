@@ -12,20 +12,20 @@
 	<Design.DataContext>
 		<vm:LayersettingViewModel/>
 	</Design.DataContext>
-	<Grid ColumnDefinitions="150,*" RowDefinitions="35,*">
+	<Grid ColumnDefinitions="150,*" RowDefinitions="35,35,*">
 
 		<TextBlock VerticalAlignment="Center" Grid.Row="0">Trigger:</TextBlock>
 
-		<!-- Left side: ComboBox for class selection -->
 		<ComboBox Grid.Column="0" Grid.Row="1"
                   ItemsSource="{Binding TriggerTypes}"
                   SelectedItem="{Binding SelectedTriggerType}"
 				  DisplayMemberBinding="{Binding Name}"
                   />
+		<CheckBox Grid.Row="2" IsChecked="{Binding SelectedTrigger.IsToggleable, Mode=TwoWay}" 
+				  >Toggleable</CheckBox>
 
-		<!-- Right side: List of properties for the selected class -->
 		<views:TriggerView DataContext="{Binding SelectedTriggerView}"
-						   Grid.Column="1" Grid.RowSpan="2" Grid.Row="0"></views:TriggerView>
+						   Grid.Column="1" Grid.RowSpan="3" Grid.Row="0"></views:TriggerView>
 
 	</Grid>
 
