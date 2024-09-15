@@ -29,12 +29,12 @@ Feel free to suggest features and submit code yourself
 	- [x] apply same effects as model 
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
-- [x] make audio smoothing changable 
+- [x] make audio smoothing changable
 
 ## Todo Advanced
 - [ ] Release aside from git
 	- [x] Ko-Fi
-	- [ ] itch.io
+	- [x] itch.io
 	- [ ] Steam
 - [x] Spout integration
 - [x] Twitch integration
@@ -82,17 +82,16 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 ## Todo better ui/ux
 - [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI) -> still in beta
 - [x] fix number inputs, sorta wacky right now
-- [ ] test the interface on a smaller scale, 1920x1080 monitor
+- [x] test the interface on a smaller scale, 1920x1080 monitor
 - [ ] use icons instead of text
 	- [ ] icon library or custom made?
-	- [ ] https://github.com/MarwanFr/LucideAvaloniaUI
-	- [ ] https://github.com/Splitwirez/avalonia-aero-theme -> no docs
-	- [ ] https://lucide.dev/icons/save
+	- [x] https://github.com/MarwanFr/LucideAvaloniaUI
+	- [x] https://lucide.dev/icons/save
 - [ ] https://github.com/irihitech/Ursa.Avalonia
 - [ ] https://github.com/irihitech/Semi.Avalonia/
 - [ ] splash screen or load json in bg
-- [ ] button to close settings
-- [ ] more tooltips
+- [x] button to close settings
+- [x] more tooltips
  
 ## Ideas
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox

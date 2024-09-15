@@ -19,8 +19,10 @@
 			<StackPanel Orientation="Horizontal"  Spacing="5">
 				<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
 				<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus"
+						ToolTip.Tip="Adds a new trigger group"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
 				<Button Command="{Binding Save}" Content="Apply and Save"
+						ToolTip.Tip="Apply all changed settings and save them"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
 			</StackPanel>
 		</StackPanel>
@@ -33,7 +35,8 @@
 						 Margin="0,5,0,0">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
-							<StackPanel Orientation="Horizontal" Spacing="20">
+							<StackPanel Orientation="Horizontal" Spacing="20"
+										ToolTip.Tip="Select me :)">
 								<TextBox MinWidth="100" Text="{Binding Name}"></TextBox>
 								<Button Command="{Binding Parent.RemoveCommand}" 
 										CommandParameter="{Binding}">Remove</Button>

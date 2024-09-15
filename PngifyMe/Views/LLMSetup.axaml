@@ -31,8 +31,10 @@
 									Click="ApplyLLMSettings">Apply and Reload</Button>
 						</StackPanel>
 
-						<CheckBox IsChecked="{Binding Settings.JustRead, Mode=TwoWay}">Just Read, no LLM</CheckBox>
-						<StackPanel Orientation="Horizontal" Spacing="5">
+						<CheckBox IsChecked="{Binding Settings.JustRead, Mode=TwoWay}"
+								  ToolTip.Tip="if checked: will just read all messages and not respond using the llm"
+								  >Just Read, no LLM</CheckBox>
+						<StackPanel Orientation="Horizontal" Spacing="5"  ToolTip.Tip="Insert your openai key or other provider">
 							<Label VerticalAlignment="Center" >OpenAI API Key: </Label>
 							<TextBox PasswordChar="*" Width="200" Text="{Binding Settings.OpenAIKey}"></TextBox>
 						</StackPanel>
@@ -41,7 +43,7 @@
 							<TextBox MinWidth="100" Text="{Binding Settings.Domain}"></TextBox>
 							<TextBlock VerticalAlignment="Center">(optional)</TextBlock>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal" Spacing="5">
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Input your api model name">
 							<Label VerticalAlignment="Center" >Model: </Label>
 							<TextBox MinWidth="100" Text="{Binding Settings.ModelName}"></TextBox>
 						</StackPanel>
@@ -60,32 +62,35 @@
 					<StackPanel Spacing="10">
 
 						<TextBlock Margin="0,5,0,5"  FontSize="24">Twitch triggers</TextBlock>
-						<StackPanel Orientation="Horizontal" Spacing="5">
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Minimum bits threshhold to react">
 							<Label VerticalAlignment="Center">Minimum Bits: </Label>
 							<helper:UintTextBox MinWidth="100" Text="{Binding Settings.MinBits}"></helper:UintTextBox>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal" Spacing="5">
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="the name of the twitch redeem which should trigger the ttspet">
 							<Label VerticalAlignment="Center" >Twitch Redeem: </Label>
 							<TextBox ToolTip.Tip="Enter the name of any redeem that should trigger the ttspet"
 									 MinWidth="100"
 									 Text="{Binding Settings.Redeem}"></TextBox>
 						</StackPanel>
-						<StackPanel Orientation="Horizontal" Spacing="5">
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="TTSPet will respond to any chat message starting with this, leave empty to disable">
 							<Label VerticalAlignment="Center" >Chat Trigger: </Label>
-							<TextBox ToolTip.Tip="TTSPet will respond to any chat message starting with this, leave empty to disable"
-									 MinWidth="100"
+							<TextBox MinWidth="100"
 									 Text="{Binding Settings.ChatTrigger}"></TextBox>
 						</StackPanel>
-						<CheckBox IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
+						<CheckBox ToolTip.Tip="Will read new followers if enabled"
+							IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
 					</StackPanel>
 				</TabItem>
 				<TabItem Header="TTS">
 					<StackPanel Spacing="10">
 						<TextBlock Margin="0,5,0,5" FontSize="24">Choose your TTS Provider</TextBlock>
 
-						<ComboBox SelectionChanged="UpdateTTSProvider"
-								  ItemsSource="{Binding TTSProviderKeys}"
-								  SelectedItem="{Binding Settings.TTSSystem}"/>
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Pick your TTS provider">
+							<Label VerticalAlignment="Center">TTS Provider:</Label>
+							<ComboBox SelectionChanged="UpdateTTSProvider"
+									  ItemsSource="{Binding TTSProviderKeys}"
+									  SelectedItem="{Binding Settings.TTSSystem}"/>
+						</StackPanel>
 						<ContentControl Content="{Binding TTSSettings}">
 							<ContentControl.DataTemplates>
 								<DataTemplate DataType="{x:Type ttssett:StreamElementsTTSSettings}">
@@ -113,11 +118,11 @@
 				<TabItem Header="Filter">
 					<StackPanel Spacing="10">
 						<TextBlock Margin="0,5,0,5" FontSize="24">Filter</TextBlock>
-						<StackPanel Orientation="Horizontal" Spacing="5">
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="This phrase will replace all filtered words found in the text the ttspet is about to speak">
 							<TextBlock VerticalAlignment="Center">Replacement:</TextBlock>
 							<TextBox MinWidth="100" Text="{Binding Settings.Replacement}"></TextBox>
 						</StackPanel>
-						<StackPanel Spacing="5">
+						<StackPanel Spacing="5" ToolTip.Tip="Enter all filtered words you want to add">
 							<TextBlock VerticalAlignment="Center">Filtered Words (separated with ";"):</TextBlock>
 							<TextBox Text="{Binding Settings.BannedPhrases ,Converter={StaticResource ListToStringConverter}, Mode=TwoWay}"
 									 VerticalContentAlignment="Top"
@@ -136,8 +141,10 @@
 							<Label VerticalAlignment="Center" >Input Text: </Label>
 							<TextBox x:Name="inputText" Width="250" >Hello, how are you?</TextBox>
 							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									ToolTip.Tip="Use this to respond to the input text"
 									Click="TriggerTest">Respond</Button>
 							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									ToolTip.Tip="Use this to read the input text (usefull to test tts voices)"
 									Click="JustRead">Read</Button>
 						</StackPanel>
 

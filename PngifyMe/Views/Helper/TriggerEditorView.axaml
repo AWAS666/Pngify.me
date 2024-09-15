@@ -20,8 +20,10 @@
                   ItemsSource="{Binding TriggerTypes}"
                   SelectedItem="{Binding SelectedTriggerType}"
 				  DisplayMemberBinding="{Binding Name}"
+				  ToolTip.Tip ="Select trigger type"
                   />
-		<CheckBox Grid.Row="2" IsChecked="{Binding SelectedTrigger.IsToggleable, Mode=TwoWay}" 
+		<CheckBox Grid.Row="2" IsChecked="{Binding SelectedTrigger.IsToggleable, Mode=TwoWay}"
+				  ToolTip.Tip="Makes it so trigger removes layers if already added"
 				  >Toggleable</CheckBox>
 
 		<views:TriggerView DataContext="{Binding SelectedTriggerView}"

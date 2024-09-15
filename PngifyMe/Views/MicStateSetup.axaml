@@ -31,19 +31,26 @@
 						Command="{Binding Apply}" Content="Apply and Save" />
 			</StackPanel>
 
-			<Grid ColumnDefinitions="150,100,100" RowDefinitions="30,30,30" Margin="5,5,5,5">
-				<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
-				<helper:FloatTextBox Min="0.1" Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}" />
-				<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+			<Grid RowDefinitions="30,30,30" Margin="5,5,5,5">
+				<Grid ColumnDefinitions="150,100,100" ToolTip.Tip="Time between blinks">
+					<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
+					<helper:FloatTextBox Min="0.1" Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}" />
+					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+				</Grid>
 
-				<TextBlock Grid.Row="1" VerticalAlignment="Center">Blink Time</TextBlock>
-				<helper:FloatTextBox Min="0.1"  Grid.Row="1" Grid.Column="1" Text="{Binding Settings.BlinkTime}" Watermark="Blink Time"/>
-				<TextBlock Grid.Row="1" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="1" ToolTip.Tip="How long character blinks">
+					<TextBlock VerticalAlignment="Center">Blink Time</TextBlock>
+					<helper:FloatTextBox Min="0.1" Grid.Column="1" Text="{Binding Settings.BlinkTime}" Watermark="Blink Time"/>
+					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+				</Grid>
 
-				<TextBlock Grid.Row="2" VerticalAlignment="Center">Blend Time</TextBlock>
-				<helper:FloatTextBox Min="0" Max="{Binding Settings.BlinkTime}"  Grid.Row="2" Grid.Column="1" 
-									 Text="{Binding Settings.TransitionTime}" Watermark="Blend Time"/>
-				<TextBlock Grid.Row="2" Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="2" 
+					  ToolTip.Tip="Blending of last image, set to 0 to disable all blending"> 
+					<TextBlock VerticalAlignment="Center">Blend Time</TextBlock>
+					<helper:FloatTextBox Min="0" Max="{Binding Settings.BlinkTime}" Grid.Column="1"
+										 Text="{Binding Settings.TransitionTime}" Watermark="Blend Time"/>
+					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+				</Grid>
 
 			</Grid>
 		</StackPanel>
@@ -89,7 +96,7 @@
 										   Source="{Binding State.Open.Bitmap.Preview}">
 									</siv:SKImageView>
 								</Button>
-								<Button 
+								<Button
 									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 									Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
 									Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />

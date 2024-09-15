@@ -42,9 +42,13 @@
 						HorizontalAlignment="Center"
 						Value="{Binding Settings.Smoothing}" Minimum="1" Maximum="100" />
 
-				<TextBlock Grid.Row="2" HorizontalAlignment="Center">Current</TextBlock>
-				<TextBlock Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">Treshhold</TextBlock>
-				<TextBlock Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">Smoothing</TextBlock>
+				<TextBlock Grid.Row="2" HorizontalAlignment="Center"
+						   ToolTip.Tip="Current speaking volume"
+						   >Current</TextBlock>
+				<TextBlock ToolTip.Tip="Threshhold to switch to speaking image"
+					Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">Treshhold</TextBlock>
+				<TextBlock ToolTip.Tip="How quickly current volume gains/loses"
+					Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">Smoothing</TextBlock>
 			</Grid>
 		</StackPanel>
 	</Grid>

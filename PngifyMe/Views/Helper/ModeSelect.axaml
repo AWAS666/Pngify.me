@@ -13,9 +13,9 @@
 
 	<StackPanel Orientation="Horizontal" Spacing="5">
 		<TextBlock VerticalAlignment="Center" FontSize="16">Mode Select:</TextBlock>
-		<Button Theme="{DynamicResource SolidButton}" 
+		<Button Theme="{DynamicResource SolidButton}"  ToolTip.Tip="Switch to human activated mode"
 				Click="SwitchToHuman" Name="human" Margin="15,0,15,0">Human Mode</Button>
-		<Button Theme="{DynamicResource SolidButton}" 
+		<Button Theme="{DynamicResource SolidButton}" ToolTip.Tip="Switch to TTS pet mode with ai integration"
 				Click="SwitchToTTS" Name="tts" Margin="15,0,15,0">TTS Pet Mode</Button>
 	</StackPanel>
 

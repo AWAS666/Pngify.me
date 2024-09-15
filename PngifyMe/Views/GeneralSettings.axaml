@@ -20,9 +20,10 @@
 			<Label VerticalAlignment="Center">Twitch Enabled</Label>
 			<CheckBox x:Name="twitchEnabled"></CheckBox>
 			<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
-				Click="TwitchRetry">Retry Twitch Connection</Button>
+					ToolTip.Tip="Use this to start twitch after enabling it, or restarting it after going offline"
+					Click="TwitchRetry">Retry Twitch Connection</Button>
 		</StackPanel>
-		<StackPanel Orientation="Horizontal" Spacing="5">
+		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="you will need to refresh this every now and then">
 			<TextBlock>Twitch Token lasts until: </TextBlock>
 			<TextBlock x:Name="tokenValid">Not Authenticated</TextBlock>
 		</StackPanel>

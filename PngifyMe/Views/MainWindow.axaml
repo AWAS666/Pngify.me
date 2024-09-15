@@ -24,7 +24,8 @@
 	<Grid x:Name="grid" >
 		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
 						  DoubleTapped="DoubleClick"  />
-		<DockPanel x:Name="settings" Background="#DDFF5733"
+		<DockPanel x:Name="settings" 
+				   Background="#DD000080"
 			  HorizontalAlignment="Right" Width="700">
 			<Grid DockPanel.Dock="Top" >
 

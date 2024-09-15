@@ -21,6 +21,7 @@
 							   Theme="{StaticResource SimpleColorView}"/>
 			<Button Click="SetToTransparant" Margin="5,5,5,5" 
 					Grid.Column="1" Grid.Row="1"
+					ToolTip.Tip="Set the background to transparent to capture it easier in obs"
 					VerticalAlignment="Top" HorizontalAlignment="Left"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 				>Transparent</Button>
