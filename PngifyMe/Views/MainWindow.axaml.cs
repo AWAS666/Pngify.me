@@ -56,12 +56,17 @@ public partial class MainWindow : Window
     private void TwitchPressed(object? sender, PointerPressedEventArgs e)
     {
         tabs.SelectedIndex = 7;
-    }   
+    }
 
     private void SaveSettings(object? sender, RoutedEventArgs e)
     {
         SettingsManager.Save();
         Specsmanager.Save();
+    }
+
+    private void CloseSettings(object? sender, RoutedEventArgs e)
+    {
+        DoubleClick(sender, null);
     }
 
 }

@@ -29,17 +29,30 @@
 			<Grid DockPanel.Dock="Top" >
 
 				<vmh:ModeSelect></vmh:ModeSelect>
-				<Button HorizontalAlignment="Right" Click="SaveSettings" Margin="5,5,5,5"
-						ToolTip.Tip="Only save, doesnt apply"
-						Classes="Primary" Theme="{DynamicResource SolidButton}"
+				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="5">
+					<Button  Click="SaveSettings" 
+							ToolTip.Tip="Only save, doesnt apply"
+							Classes="Primary" Theme="{DynamicResource SolidButton}"
 					>
-					<StackPanel Orientation="Horizontal" Spacing="5">
-						<TextBlock>Save Changes</TextBlock>
-						<lucideAvalonia:Lucide Icon="Save" StrokeBrush="White"
-											   StrokeThickness="2" Width="22" Height="22"/>
-					</StackPanel>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock>Save Changes</TextBlock>
+							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
 
-				</Button>
+					</Button>
+					<Button  Click="CloseSettings" 
+							ToolTip.Tip="Close settings"
+							Classes="Warning" Theme="{DynamicResource SolidButton}"
+					>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<!--<TextBlock>Close</TextBlock>-->
+							<lucideAvalonia:Lucide Icon="X" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+
+					</Button>
+				</StackPanel>
 			</Grid>
 			<StackPanel DockPanel.Dock="Bottom">
 				<Rectangle Fill="White" Height="1"></Rectangle>
