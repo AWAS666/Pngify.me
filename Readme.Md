@@ -58,7 +58,7 @@ Feel free to suggest features and submit code yourself
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration
-- [ ] Chatgpt/other llm 
+- [x] Chatgpt/other llm 
 - [ ] TTS like Elevenlabs/Openai/local
 	- [x] openai
 	- [ ] elevenlabs

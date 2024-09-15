@@ -1,6 +1,7 @@
 ﻿using PngifyMe.Services.Settings;
 using PngifyMe.Services.TTSPet.OpenAI;
 using PngifyMe.Services.TTSPet.StreamElements;
+using PngifyMe.Services.TTSPet.TikTok;
 using PngifyMe.Services.Twitch;
 using Serilog;
 using System;
@@ -52,6 +53,9 @@ namespace PngifyMe.Services.TTSPet
                     break;
                 case "OpenAI":
                     TTSProvider = new OpenAITTS();
+                    break;
+                case "TikTok":
+                    TTSProvider = new TikTokTTS();
                     break;
                 default:
                     break;

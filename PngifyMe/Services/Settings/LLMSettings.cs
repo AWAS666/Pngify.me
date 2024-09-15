@@ -53,5 +53,6 @@ namespace PngifyMe.Services.Settings
         // throwing away on switch might be a hbad idea...
         public OpenAITTSSettings OpenAITTS { get; set; } = new();
         public StreamElementsTTSSettings StreamElementsTTS { get; set; } = new();
+        public TikTokSettings TikTokSettings { get; set; } = new();
     }
 }

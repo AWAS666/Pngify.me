@@ -37,6 +37,7 @@ namespace PngifyMe.ViewModels
             {
                 {"StreamElements", Settings.StreamElementsTTS },
                 {"OpenAI", Settings.OpenAITTS },
+                {"TikTok", Settings.TikTokSettings },
             };
             SetTTS();
         }

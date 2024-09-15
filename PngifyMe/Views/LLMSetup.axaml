@@ -101,6 +101,21 @@
 									</StackPanel>
 								</DataTemplate>
 
+								<DataTemplate DataType="{x:Type ttssett:TikTokSettings}">
+									<StackPanel Spacing="10">
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<Label VerticalAlignment="Center">Endpoint: </Label>
+											<TextBox MinWidth="150" Text="{Binding Endpoint}"></TextBox>
+										</StackPanel>
+
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<Label VerticalAlignment="Center" >TTS Voice: </Label>
+											<ComboBox ItemsSource="{Binding VoiceList}" DisplayMemberBinding="{Binding Name}"
+													  SelectedItem="{Binding Voice}"/>
+										</StackPanel>
+									</StackPanel>
+								</DataTemplate>
+
 								<DataTemplate DataType="{x:Type ttssett:OpenAITTSSettings}">
 									<StackPanel Orientation="Horizontal" Spacing="5">
 										<Label VerticalAlignment="Center" >TTS Voice: </Label>
