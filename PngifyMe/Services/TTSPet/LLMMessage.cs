@@ -21,6 +21,9 @@ namespace PngifyMe.Services.TTSPet
         [ObservableProperty]
         private bool read;
 
+        [ObservableProperty]
+        private int retries;
+
         public bool ReadInput { get; set; }
         public DateTime Created { get; set; } = DateTime.Now;
 

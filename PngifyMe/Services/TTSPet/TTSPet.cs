@@ -135,9 +135,10 @@ namespace PngifyMe.Services.TTSPet
         {
             while (true)
             {
+                LLMMessage? item = null;
                 try
                 {
-                    var item = Queue.FirstOrDefault(x => !x.Read);
+                    item = Queue.FirstOrDefault(x => !x.Read && x.Retries < 3);
                     if (item == null)
                     {
                         continue;
@@ -154,6 +155,8 @@ namespace PngifyMe.Services.TTSPet
                 {
                     Log.Error("Error in LLM loop: " + e.Message, e);
                     await Task.Delay(1000);
+                    if (item != null)
+                        item.Retries += 1;
                 }
                 finally
                 {
