@@ -14,6 +14,7 @@
 	</Design.DataContext>
 	<StackPanel Spacing="5">
 		<TextBlock FontSize="24">General Settings</TextBlock>
+		<TextBlock FontSize="16">Twitch:</TextBlock>
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Twitch Enabled</Label>
@@ -25,6 +26,9 @@
 			<TextBlock>Twitch Token lasts until: </TextBlock>
 			<TextBlock x:Name="tokenValid">Not Authenticated</TextBlock>
 		</StackPanel>
+
+		<Rectangle Height="1" Fill="White"></Rectangle>
+		<TextBlock FontSize="16">Performance:</TextBlock>
 
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
