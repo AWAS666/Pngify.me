@@ -38,7 +38,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] Steam
 - [x] Spout integration
 - [x] Twitch integration
-	- [ ] show twitch status globally 
+	- [x] show twitch status globally 
 - [x] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
 	- [ ] custom assets
 	- [x] sound
@@ -77,6 +77,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] change to proper DI instead of static
 - [ ] use views and view models properly
 - [ ] more usercontrols to avoid overnesting
+- [ ] remove behaviours
 
 ## Todo better ui/ux
 - [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI) -> still in beta
@@ -89,6 +90,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [ ] https://lucide.dev/icons/save
 - [ ] https://github.com/irihitech/Ursa.Avalonia
 - [ ] https://github.com/irihitech/Semi.Avalonia/
+- [ ] splash screen or load json in bg
  
 ## Ideas
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
