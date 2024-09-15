@@ -25,7 +25,11 @@
 			<TabControl>
 				<TabItem Header="LLM">
 					<StackPanel Spacing="10">
-						<TextBlock Margin="0,5,0,5" FontSize="24">Settings</TextBlock>
+						<StackPanel Orientation="Horizontal" Spacing="20">
+							<TextBlock Margin="0,5,0,5" FontSize="24">Settings</TextBlock>
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Click="ApplyLLMSettings">Apply and Reload</Button>
+						</StackPanel>
 
 						<CheckBox IsChecked="{Binding Settings.JustRead, Mode=TwoWay}">Just Read, no LLM</CheckBox>
 						<StackPanel Orientation="Horizontal" Spacing="5">
@@ -44,7 +48,7 @@
 
 						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBox MaxLines="100" Width="500" Height="200" 
+							<TextBox MaxLines="100" Width="500" Height="200"
 									 VerticalContentAlignment="Top"
 									 Padding="5"
 									 AcceptsReturn="True" TextWrapping="Wrap"
@@ -53,7 +57,7 @@
 					</StackPanel>
 				</TabItem>
 				<TabItem Header="Twitch">
-					<StackPanel Spacing="10">					
+					<StackPanel Spacing="10">
 
 						<TextBlock Margin="0,5,0,5"  FontSize="24">Twitch triggers</TextBlock>
 						<StackPanel Orientation="Horizontal" Spacing="5">
@@ -115,7 +119,7 @@
 						</StackPanel>
 						<StackPanel Spacing="5">
 							<TextBlock VerticalAlignment="Center">Filtered Words (separated with ";"):</TextBlock>
-							<TextBox Text="{Binding Settings.BannedPhrases ,Converter={StaticResource ListToStringConverter}, Mode=TwoWay}" 
+							<TextBox Text="{Binding Settings.BannedPhrases ,Converter={StaticResource ListToStringConverter}, Mode=TwoWay}"
 									 VerticalContentAlignment="Top"
 									 HorizontalAlignment="Left"
 									 MaxLines="100" Width="500" Height="200"
@@ -143,7 +147,7 @@
 
 						<DataGrid ItemsSource="{Binding Messages}"
 								  AutoGenerateColumns="False" IsReadOnly="True"
-								  GridLinesVisibility="All" 
+								  GridLinesVisibility="All"
 								  MinHeight="300" MaxHeight="600"
 								  BorderThickness="1" BorderBrush="Gray">
 							<DataGrid.Columns>

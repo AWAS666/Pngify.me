@@ -38,5 +38,10 @@ public partial class LLMSetup : UserControl
         var vm = (LLMProviderViewModel)DataContext;
         vm.SetTTS();
         TTSPet.SetupTTS();
-    }    
+    }
+
+    private void ApplyLLMSettings(object sender, RoutedEventArgs e)
+    {
+        TTSPet.Reload();
+    }
 }

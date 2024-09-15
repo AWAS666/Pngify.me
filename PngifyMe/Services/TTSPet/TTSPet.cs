@@ -31,10 +31,16 @@ namespace PngifyMe.Services.TTSPet
             TwitchEventSocket.NewFollower += NewFollower;
             TwitchEventSocket.NewChat += NewChat;
             SetupTTS();
-            task = Task.Run(ProcessQueue);
             settings = SettingsManager.Current.LLM;
+            task = Task.Run(ProcessQueue);
         }
 
+
+        public static void Reload()
+        {
+            LLMProvider = new();
+            SetupTTS();
+        }
 
 
         public static void SetupTTS()
