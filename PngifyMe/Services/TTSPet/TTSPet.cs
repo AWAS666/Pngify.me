@@ -72,7 +72,6 @@ namespace PngifyMe.Services.TTSPet
         {
             if (SettingsManager.Current.Profile.Active.Type != ProfileType.TTS)
                 return;
-            msg.Input = ReplaceWithSafe(msg.Input);
             Queue.Add(msg);
             NewOrUpdated?.Invoke(null, msg);
         }
@@ -93,7 +92,7 @@ namespace PngifyMe.Services.TTSPet
         private static void NewChat(object? sender, ChannelChatMessage e)
         {
             string message = e.Message.Text;
-            if (string.IsNullOrEmpty(settings.ChatTrigger) || 
+            if (string.IsNullOrEmpty(settings.ChatTrigger) ||
                 !message.StartsWith(settings.ChatTrigger))
                 return;
 
@@ -143,7 +142,7 @@ namespace PngifyMe.Services.TTSPet
                     if (!item.ReadInput)
                         await GetResponse(item);
 
-                    await ReadText(item.ToRead);
+                    await ReadText(ReplaceWithSafe(item.ToRead));
 
                     item.Read = true;
                 }
