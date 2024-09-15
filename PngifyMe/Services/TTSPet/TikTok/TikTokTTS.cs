@@ -17,6 +17,11 @@ namespace PngifyMe.Services.TTSPet.TikTok
         private HttpClient client;
         private TikTokSettings settings;
 
+        /// <summary>
+        /// build using this as reference
+        /// https://github.com/mark-rez/TikTok-Voice-TTS/tree/main
+        /// voices: https://lazypy.ro/tts
+        /// </summary>
         public TikTokTTS()
         {
             var clientHandler = new HttpClientHandler();
