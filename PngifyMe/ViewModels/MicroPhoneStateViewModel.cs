@@ -5,6 +5,7 @@ using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
+using SharpHook.Native;
 using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
@@ -91,8 +92,8 @@ namespace PngifyMe.ViewModels
                 return;
             e.Handled = true;
             State.Trigger = new();
-            State.Trigger.VirtualKeyCode = (GlobalHotKeys.Native.Types.VirtualKeyCode)Avalonia.Win32.Input.KeyInterop.VirtualKeyFromKey(e.Key);
-            State.Trigger.Modifiers = (GlobalHotKeys.Native.Types.Modifiers)e.KeyModifiers;
+            State.Trigger.VirtualKeyCode = (KeyCode)Avalonia.Win32.Input.KeyInterop.VirtualKeyFromKey(e.Key);
+            State.Trigger.Modifiers = (ModifierMask)e.KeyModifiers;
             SetHotkey();
         }
 

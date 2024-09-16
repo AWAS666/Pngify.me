@@ -1,8 +1,8 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using GlobalHotKeys.Native.Types;
 using PngifyMe.Layers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
+using SharpHook.Native;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,7 +28,7 @@ namespace PngifyMe.Services.Settings
             {
                 Name = "Rotate",
                 Layers = [new RotateByRel()],
-                Trigger = new HotkeyTrigger() { VirtualKeyCode = VirtualKeyCode.KEY_1, Modifiers = Modifiers.Control },
+                Trigger = new HotkeyTrigger() { VirtualKeyCode = KeyCode.Vc1, Modifiers = ModifierMask.Ctrl },
             },
         };
 
@@ -45,7 +45,7 @@ namespace PngifyMe.Services.Settings
                         break;
                     case HotkeyTrigger hotKey:
                         var callback = () => item.AddLayers();
-                        WinHotkey.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
+                        HotkeyManager.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
                         callbacks.Add(callback);
                         break;
                     case TwitchRedeem redeem:
@@ -62,7 +62,7 @@ namespace PngifyMe.Services.Settings
 
         public void CleanUp()
         {
-            WinHotkey.RemoveCallbacks(callbacks);
+            HotkeyManager.RemoveCallbacks(callbacks);
             callbacks.Clear();
 
             foreach (var item in Layers.Where(x => x.Trigger is TwitchRedeem))

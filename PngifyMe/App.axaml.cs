@@ -27,7 +27,7 @@ public partial class App : Application
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
-            WinHotkey.Start(desktop);
+            HotkeyManager.Start(desktop);
             desktop.MainWindow = new MainWindow
             {
             };

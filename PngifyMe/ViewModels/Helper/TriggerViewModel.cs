@@ -1,7 +1,7 @@
 ﻿using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
-using GlobalHotKeys.Native.Types;
 using PngifyMe.Services.Settings;
+using SharpHook.Native;
 using System;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -14,10 +14,10 @@ namespace PngifyMe.ViewModels.Helper
         private Trigger trigger;
 
         [ObservableProperty]
-        private ObservableCollection<VirtualKeyCode> allKeys;
+        private ObservableCollection<KeyCode> allKeys;
 
         [ObservableProperty]
-        private ObservableCollection<Modifiers> allModifiers;
+        private ObservableCollection<ModifierMask> allModifiers;
 
         private string hotkey;
 
@@ -46,8 +46,8 @@ namespace PngifyMe.ViewModels.Helper
             switch (trigger)
             {
                 case HotkeyTrigger hotkey:
-                    AllKeys = new ObservableCollection<VirtualKeyCode>(Enum.GetValues(typeof(VirtualKeyCode)).Cast<VirtualKeyCode>());
-                    AllModifiers = new ObservableCollection<Modifiers>(Enum.GetValues(typeof(Modifiers)).Cast<Modifiers>());
+                    AllKeys = new ObservableCollection<KeyCode>(Enum.GetValues(typeof(KeyCode)).Cast<KeyCode>());
+                    AllModifiers = new ObservableCollection<ModifierMask>(Enum.GetValues(typeof(ModifierMask)).Cast<ModifierMask>());
                     AllModifiers.Insert(0, 0);
                     SetHotkey();
                     break;
@@ -63,8 +63,8 @@ namespace PngifyMe.ViewModels.Helper
                 return;
             e.Handled = true;
             var hot = (HotkeyTrigger)Trigger;
-            hot.VirtualKeyCode = (VirtualKeyCode)Avalonia.Win32.Input.KeyInterop.VirtualKeyFromKey(e.Key);
-            hot.Modifiers = (Modifiers)e.KeyModifiers;
+            hot.VirtualKeyCode = (KeyCode)Avalonia.Win32.Input.KeyInterop.VirtualKeyFromKey(e.Key);
+            hot.Modifiers = (ModifierMask)e.KeyModifiers;
             SetHotkey();
         }
 

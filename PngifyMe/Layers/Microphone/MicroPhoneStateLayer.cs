@@ -110,14 +110,14 @@ namespace PngifyMe.Layers.Microphone
 
         public void SetupHotKeys()
         {
-            WinHotkey.RemoveCallbacks(callbacks);
+            HotkeyManager.RemoveCallbacks(callbacks);
             callbacks.Clear();
             foreach (var state in micSettings.States)
             {
                 if (state.Trigger == null)
                     continue;
                 var callback = () => ToggleState(state);
-                WinHotkey.AddHotkey(state.Trigger.VirtualKeyCode, state.Trigger.Modifiers, callback);
+                HotkeyManager.AddHotkey(state.Trigger.VirtualKeyCode, state.Trigger.Modifiers, callback);
                 callbacks.Add(callback);
             }
             // also reloads current just in case
