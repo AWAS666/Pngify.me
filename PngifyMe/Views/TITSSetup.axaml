@@ -20,10 +20,18 @@
 			<CheckBox x:Name="activated">Activated</CheckBox>
 			<CheckBox ToolTip.Tip="Use this to test the hit box of your character"
 					  x:Name="showHitbox">Show Hitboxes</CheckBox>
-			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-					HorizontalAlignment="Left"
-					ToolTip.Tip="test the throwing system"
-					Command="{Binding Trigger}" Content="Test Trigger" />
+
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						HorizontalAlignment="Left"
+						ToolTip.Tip="test the throwing system"
+						Command="{Binding Trigger}" Content="Test Throw" />
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						HorizontalAlignment="Left"
+						ToolTip.Tip="test the throwing system"
+						Command="{Binding Rain}" Content="Test Rain" />
+			</StackPanel>
+
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
@@ -43,24 +51,21 @@
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
-				<TextBlock VerticalAlignment="Center">Minimum Object Speed:</TextBlock>
-				<helper:UintTextBox Text="{Binding Settings.ObjectSpeedMin}" Max="{Binding Settings.ObjectSpeedMax}">"</helper:UintTextBox>
-				<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
-			</StackPanel>
-
-			<StackPanel Orientation="Horizontal" Spacing="10">
-				<TextBlock VerticalAlignment="Center">Maximum Object Speed:</TextBlock>
-				<helper:UintTextBox Text="{Binding Settings.ObjectSpeedMax}" Min="{Binding Settings.ObjectSpeedMin}">"</helper:UintTextBox>
-				<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
-			</StackPanel>
-
-			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBlock VerticalAlignment="Center">Collission speed drop:</TextBlock>
 				<helper:UintTextBox Text="{Binding Settings.CollissionEnergyLossPercent}" Max="99"></helper:UintTextBox>
 				<TextBlock VerticalAlignment="Center">%</TextBlock>
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+
+			<TabControl>
+				<TabItem Header="Throwing">
+					<helper:ThrowSetup DataContext="{Binding Settings.ThrowSetup}"></helper:ThrowSetup>
+				</TabItem>
+				<TabItem Header="Rain">
+					<helper:ThrowSetup DataContext="{Binding Settings.RainSetup}"></helper:ThrowSetup>
+				</TabItem>
+			</TabControl>
 		</StackPanel>
 	</Grid>
 </UserControl>

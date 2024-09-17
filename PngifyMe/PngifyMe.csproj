@@ -107,6 +107,9 @@
     <Compile Update="Views\Helper\LayerView.axaml.cs">
       <DependentUpon>LayerView.axaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\Helper\ThrowSetup.axaml.cs">
+      <DependentUpon>ThrowSetup.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Helper\PropertyView.axaml.cs">
       <DependentUpon>PropertyView.axaml</DependentUpon>
     </Compile>

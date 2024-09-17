@@ -1,6 +1,7 @@
 ﻿using Avalonia.Platform;
 using NAudio.Wave;
 using PngifyMe.Layers;
+using PngifyMe.Services.Settings;
 using PngifyMe.Services.Twitch;
 using SkiaSharp;
 using System;
@@ -24,6 +25,7 @@ namespace PngifyMe.Services.ThrowingSystem
 
         private string cachedSound;
         private Stream audio;
+        private TitsSettings settings;
 
         public List<SKBitmap> Throwables { get; set; } = new()
         {
@@ -39,6 +41,7 @@ namespace PngifyMe.Services.ThrowingSystem
         {
             TwitchEventSocket.BitsUsed += TriggerBits;
             TwitchEventSocket.RedeemUsed += TriggerRedeem;
+            settings = SettingsManager.Current.Tits;
         }
 
         private void TriggerRedeem(object? sender, string e)
@@ -46,10 +49,20 @@ namespace PngifyMe.Services.ThrowingSystem
 
         }
 
-        private void TriggerBits(object? sender, ChannelCheer e)
+        private async void TriggerBits(object? sender, ChannelCheer e)
         {
             // dont do e.Bits here as that may (tm) crash it
-            Trigger(Math.Clamp(e.Bits / 10, 5, 50));
+            if (e.Bits > settings.ThrowSetup.MinBits && e.Bits < settings.ThrowSetup.MaxBits)
+                Trigger(Math.Clamp(e.Bits / 10, 5, 50));
+
+            if (e.Bits > settings.RainSetup.MinBits && e.Bits < settings.RainSetup.MaxBits)
+            {
+                for (var i = 0; i < Math.Clamp(e.Bits / 20, 5, 10); i++)
+                {
+                    Rain(Math.Clamp(e.Bits / 10, 10, 50));
+                    await Task.Delay(500);
+                }
+            }
         }
 
         public void Update(float dt, ref Layers.LayerValues layert)
@@ -65,7 +78,7 @@ namespace PngifyMe.Services.ThrowingSystem
                 {
                     RecoilMain(dt, obj, ref layert);
                     obj.SetCollision(dt);
-                    if (SettingsManager.Current.Tits.EnableSound)
+                    if (settings.EnableSound)
                         PlaySound(obj);
 
                 }
@@ -88,8 +101,6 @@ namespace PngifyMe.Services.ThrowingSystem
 
         private void PlaySound(MovableObject obj)
         {
-            var settings = SettingsManager.Current.Tits;
-
             if (cachedSound != settings.HitSound || audio == null)
                 if (string.IsNullOrEmpty(settings.HitSound))
                     audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
@@ -153,9 +164,29 @@ namespace PngifyMe.Services.ThrowingSystem
                 Objects.Add(new MovableObject(
                     this,
                     item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
-                   speed: new Vector2(Random.Shared.Next((int)SettingsManager.Current.Tits.ObjectSpeedMin, (int)SettingsManager.Current.Tits.ObjectSpeedMax), -300),
+                   speed: new Vector2(Random.Shared.Next((int)settings.ThrowSetup.ObjectSpeedMin, (int)settings.ThrowSetup.ObjectSpeedMax),
+                        -300),
                    rotSpeed: Random.Shared.Next(-20, 20)
                     , x: -100, y: Random.Shared.Next(offset, height), details: 10));
+            }
+        }
+
+        public void Rain(int amount)
+        {
+            int width = Specsmanager.Width / 4;
+            int offset = Specsmanager.Width / 8;
+            for (var i = 0; i < amount; i++)
+            {
+                Objects.Add(new MovableObject(
+                    this,
+                    details: 10,
+                    item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
+                   speed: new Vector2(Random.Shared.Next(-400, 400),
+                   Random.Shared.Next((int)settings.RainSetup.ObjectSpeedMin, (int)settings.RainSetup.ObjectSpeedMax)),
+                   rotSpeed: Random.Shared.Next(-20, 20),
+
+                    x: Random.Shared.Next(offset, Specsmanager.Width - offset),
+                   y: -Random.Shared.Next(0, 150)));
             }
         }
     }

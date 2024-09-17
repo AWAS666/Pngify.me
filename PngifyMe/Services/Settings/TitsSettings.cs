@@ -17,8 +17,19 @@ namespace PngifyMe.Services.Settings
         private string hitSoundFileName = string.Empty;
 
         [ObservableProperty]
-        private bool enableSound = true;
+        private bool enableSound = true;      
 
+        [ObservableProperty]
+        private uint collissionEnergyLossPercent = 20;
+
+        public TitsTriggerSetup ThrowSetup { get; set; } = new();
+        public TitsTriggerSetup RainSetup { get; set; } = new();
+
+        public bool ShowHitlines => Enabled && HitLinesVisible;
+    }
+
+    public partial class TitsTriggerSetup : ObservableObject
+    {
         [ObservableProperty]
         private uint objectSpeedMin = 2000;
 
@@ -26,8 +37,9 @@ namespace PngifyMe.Services.Settings
         private uint objectSpeedMax = 3000;
 
         [ObservableProperty]
-        private uint collissionEnergyLossPercent = 20;
+        private uint minBits = 0;
 
-        public bool ShowHitlines => Enabled && HitLinesVisible;
+        [ObservableProperty]
+        private uint maxBits = uint.MaxValue;
     }
 }

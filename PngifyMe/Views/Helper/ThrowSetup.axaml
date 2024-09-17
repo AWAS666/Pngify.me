@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 x:DataType="sett:TitsTriggerSetup"
+             x:Class="PngifyMe.Views.Helper.ThrowSetup"
+			 >
+
+	<Design.DataContext>
+		<sett:TitsTriggerSetup/>
+	</Design.DataContext>
+	<StackPanel Spacing="10">
+		<StackPanel Orientation="Horizontal" Spacing="10">
+			<TextBlock VerticalAlignment="Center">Minimum Object Speed:</TextBlock>
+			<helper:UintTextBox Text="{Binding ObjectSpeedMin}" Max="{Binding ObjectSpeedMax}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="10">
+			<TextBlock VerticalAlignment="Center">Maximum Object Speed:</TextBlock>
+			<helper:UintTextBox Text="{Binding ObjectSpeedMax}" Min="{Binding ObjectSpeedMin}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="10">
+			<TextBlock VerticalAlignment="Center">Minimum Bits:</TextBlock>
+			<helper:UintTextBox Text="{Binding MinBits}" Max="{Binding MaxBits}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center">bits</TextBlock>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="10">
+			<TextBlock VerticalAlignment="Center">Maximum Bits:</TextBlock>
+			<helper:UintTextBox Text="{Binding MaxBits}" Min="{Binding MinBits}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center">bits</TextBlock>
+		</StackPanel>
+	</StackPanel>
+	
+</UserControl>

@@ -35,6 +35,15 @@ public partial class TITSSetupViewModel : ObservableObject
         LayerManager.ThrowingSystem.Trigger(Random.Shared.Next(5, 10));
     }
 
+    public async void Rain()
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            LayerManager.ThrowingSystem.Rain(Random.Shared.Next(10, 15));
+            await Task.Delay(500);
+        }       
+    }
+
     public async Task ChangeSound()
     {
         var path = await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
