@@ -43,6 +43,8 @@
 							</ComboBox>
 							<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
 									Click="LoadProfile">Load</Button>
+							<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+									Click="DeleteProfile">Delete</Button>
 						</StackPanel>
 					</DataTemplate>
 

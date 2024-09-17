@@ -17,7 +17,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] save all needed files into the profile folder instead of keeping a global reference
 	- [ ] show icon?
 	- [ ] import/export as zipped archive, custom extension
-	- [ ] delete profiles
+	- [x] delete profiles
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
 	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
@@ -31,6 +31,8 @@ Feel free to suggest features and submit code yourself
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
 - [x] make audio smoothing changable
+- [ ] layers
+	- [ ] panic emote
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -46,6 +48,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] custom triggers
 	- [ ] throw emotes
 	- [ ] settings to change how loud collission sound plays
+	- [ ] bits shower
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff

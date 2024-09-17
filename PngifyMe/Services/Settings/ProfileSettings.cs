@@ -90,6 +90,14 @@ namespace PngifyMe.Services.Settings
                 names.Add(item.Name);
             }
         }
+
+        internal void Delete(Profile profile)
+        {
+            // active default if currently active
+            if(Active == profile)
+                Active = ProfileList.First(x => x.Default);
+            ProfileList.Remove(profile);
+        }
     }
 
     public class Profile

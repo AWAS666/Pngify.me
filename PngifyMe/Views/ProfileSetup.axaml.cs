@@ -23,6 +23,17 @@ public partial class ProfileSetup : UserControl
         SettingsManager.Current.Profile.LoadNewProfile(vm.Profile);
     }
 
+    public void DeleteProfile(object sender, RoutedEventArgs e)
+    {
+        var vmS = (ProfileViewModel)((Button)e.Source).DataContext;
+        var vm = (ProfileSettViewModel)DataContext;
+        if (!vmS.Profile.Default)
+        {
+            SettingsManager.Current.Profile.Delete(vmS.Profile);
+            vm.Profiles.Remove(vmS);
+        }
+    }
+
     public void CreateNewProfile(object sender, RoutedEventArgs e)
     {
         string text = newProfile.Text;
