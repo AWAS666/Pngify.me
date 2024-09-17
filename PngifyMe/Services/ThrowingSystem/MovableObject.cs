@@ -22,7 +22,7 @@ namespace PngifyMe.Services.ThrowingSystem
         public SKBitmap Image { get => Values.Image; }
 
         public CollisionDetector Collision { get; }
-
+        public bool AudioPlaying { get; internal set; }
 
         public MovableObject(ThrowingSystem parent, SKBitmap item, Vector2 speed, float rotSpeed, int x, int y, int details)
         {

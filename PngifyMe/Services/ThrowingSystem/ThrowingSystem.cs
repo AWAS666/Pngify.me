@@ -3,6 +3,7 @@ using NAudio.Wave;
 using PngifyMe.Layers;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.Twitch;
+using Serilog;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -81,8 +82,8 @@ namespace PngifyMe.Services.ThrowingSystem
             // dampend recoil
             recoilChange /= 1 + (dt * 4f);
             recoilChange -= dt * recoil / 2f;
-
-            foreach (var obj in Objects.ToList())
+            var list = Objects.ToList();
+            foreach (var obj in list)
             {
                 obj.Update(dt);
                 if (IsColliding(obj, MainBody))
@@ -112,35 +113,46 @@ namespace PngifyMe.Services.ThrowingSystem
 
         private void PlaySound(MovableObject obj)
         {
-            if (cachedSound != settings.HitSound || audio == null)
-                if (string.IsNullOrEmpty(settings.HitSound))
-                    audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
-                else
-                    audio = File.OpenRead(settings.HitSound);
-
-            cachedSound = settings.HitSound;
-
-            MemoryStream copy = new MemoryStream();
-            audio.CopyTo(copy);
-            audio.Seek(0, SeekOrigin.Begin);
-            copy.Seek(0, SeekOrigin.Begin);
-
-            var reader = new WaveFileReader(copy);
-            var player = new WaveOutEvent();
-
-            player.Init(reader);
-
-            // Subscribe to the PlaybackStopped event to dispose of resources when playback is done
-            player.PlaybackStopped += (sender, args) =>
+            try
             {
-                player.Dispose();
-                reader.Dispose();
-            };
-            _ = Task.Run(async () =>
+                if (obj.AudioPlaying) return;
+                obj.AudioPlaying = true;
+                if (cachedSound != settings.HitSound || audio == null)
+                    if (string.IsNullOrEmpty(settings.HitSound))
+                        audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
+                    else
+                        audio = File.OpenRead(settings.HitSound);
+
+                cachedSound = settings.HitSound;
+
+                MemoryStream copy = new MemoryStream();
+                audio.CopyTo(copy);
+                audio.Seek(0, SeekOrigin.Begin);
+                copy.Seek(0, SeekOrigin.Begin);
+
+                var reader = new WaveFileReader(copy);
+                var player = new WaveOutEvent();
+
+                player.Init(reader);
+
+                // Subscribe to the PlaybackStopped event to dispose of resources when playback is done
+                player.PlaybackStopped += (sender, args) =>
+                {
+                    copy.Dispose();
+                    player.Dispose();
+                    reader.Dispose();
+                    obj.AudioPlaying = false;
+                };
+                _ = Task.Run(async () =>
+                {
+                    await Task.Delay(Random.Shared.Next(1, 200));
+                    player.Play();
+                });
+            }
+            catch (Exception e)
             {
-                await Task.Delay(Random.Shared.Next(1, 200));
-                player.Play();
-            });
+                Log.Error("Audio error in tits: " + e.Message, e);
+            }
 
         }
 

@@ -25,6 +25,7 @@ Feel free to suggest features and submit code yourself
 		- [ ] https://opentk.net/
 		- [ ] https://www.ambiera.com/irrklang/
 		- [ ] libvlcsharp
+		- [ ] this might also fix crashes in tits
 	- [ ] disable spout on non windows
 - [x] stick on any png (redeem)
 	- [x] apply same effects as model 
@@ -51,6 +52,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] throw emotes
 	- [ ] settings to change how loud collission sound plays
 	- [x] bits shower
+	- [ ] spawn throw similar to rain, not all at once but one after another
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff
