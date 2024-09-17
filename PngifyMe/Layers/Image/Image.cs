@@ -61,7 +61,7 @@ namespace PngifyMe.Layers.Image
             if (IsExiting || image == null)
                 return;
             var img = GetImage();
-            canvas.DrawBitmap(img, PosX - img.Width / 2 + x, PosY - img.Height / 2 + y);
+            canvas.DrawBitmap(img, PosX - img.Width / 2, PosY - img.Height / 2);
         }
 
         public override SKBitmap GetImage()

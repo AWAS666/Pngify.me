@@ -167,10 +167,10 @@ namespace PngifyMe.Layers
             {
 
                 float rotationAngle = layert.Rotation;
-                float zoomFactor = layert.ZoomX;
                 float opacity = layert.Opacity;
 
                 canvas.Save();
+                canvas.Translate(layert.PosX, layert.PosY);
                 canvas.Translate(width / 2, height / 2);
                 canvas.RotateDegrees((float)rotationAngle);
                 canvas.Scale(layert.ZoomX, layert.ZoomY);
@@ -180,8 +180,8 @@ namespace PngifyMe.Layers
                 using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
                 {
                     canvas.DrawBitmap(baseImg,
-                        width / 2 - baseImg.Width / 2 + layert.PosX,
-                        height / 2 - baseImg.Height / 2 + layert.PosY,
+                        width / 2 - baseImg.Width / 2,
+                        height / 2 - baseImg.Height / 2,
                         paint);
                 }
 
@@ -192,8 +192,8 @@ namespace PngifyMe.Layers
                         using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })
                         {
                             canvas.DrawBitmap(MicroPhoneStateLayer.LastImage.GetImage(TimeSpan.FromSeconds(MicroPhoneStateLayer.CurrentTime)),
-                                width / 2 - baseImg.Width / 2 + layert.PosX,
-                                height / 2 - baseImg.Height / 2 + layert.PosY,
+                                width / 2 - baseImg.Width / 2,
+                                height / 2 - baseImg.Height / 2,
                                 paint);
                         }
                     }
