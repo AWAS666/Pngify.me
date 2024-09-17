@@ -17,7 +17,7 @@ namespace PngifyMe.Services.Settings
         private string hitSoundFileName = string.Empty;
 
         [ObservableProperty]
-        private bool enableSound = true;      
+        private bool enableSound = true;
 
         [ObservableProperty]
         private uint collissionEnergyLossPercent = 20;
@@ -41,5 +41,8 @@ namespace PngifyMe.Services.Settings
 
         [ObservableProperty]
         private uint maxBits = uint.MaxValue;
+
+        [ObservableProperty]
+        private string redeem = string.Empty;
     }
 }

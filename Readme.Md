@@ -46,9 +46,11 @@ Feel free to suggest features and submit code yourself
 	- [ ] custom assets
 	- [x] sound
 	- [ ] custom triggers
+	- [x] twitch redeems
+		- [ ] add text and parse amount?
 	- [ ] throw emotes
 	- [ ] settings to change how loud collission sound plays
-	- [ ] bits shower
+	- [x] bits shower
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff

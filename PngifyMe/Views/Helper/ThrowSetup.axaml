@@ -38,6 +38,11 @@
 			<helper:UintTextBox Text="{Binding MaxBits}" Min="{Binding MinBits}">"</helper:UintTextBox>
 			<TextBlock VerticalAlignment="Center">bits</TextBlock>
 		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="10">
+			<TextBlock VerticalAlignment="Center">Redeem:</TextBlock>
+			<TextBox MinWidth="150" Text="{Binding Redeem}"></TextBox>
+		</StackPanel>
 	</StackPanel>
-	
+
 </UserControl>

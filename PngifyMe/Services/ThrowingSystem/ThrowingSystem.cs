@@ -44,9 +44,20 @@ namespace PngifyMe.Services.ThrowingSystem
             settings = SettingsManager.Current.Tits;
         }
 
-        private void TriggerRedeem(object? sender, string e)
+        private async void TriggerRedeem(object? sender, string e)
         {
 
+            if (e.Equals(settings.ThrowSetup.Redeem, StringComparison.CurrentCultureIgnoreCase))
+                Trigger(20);
+
+            if (e.Equals(settings.RainSetup.Redeem, StringComparison.CurrentCultureIgnoreCase))
+            {
+                for (var i = 0; i < 10; i++)
+                {
+                    Rain(10);
+                    await Task.Delay(500);
+                }
+            }
         }
 
         private async void TriggerBits(object? sender, ChannelCheer e)
