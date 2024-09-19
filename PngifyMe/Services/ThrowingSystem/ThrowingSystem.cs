@@ -96,7 +96,7 @@ namespace PngifyMe.Services.ThrowingSystem
                 }
                 if (obj.X > Specsmanager.Width + 200 || obj.X < -200 || obj.Y > Specsmanager.Height + 200 || obj.Y < -200
                     // remove by age
-                    || obj.Created.AddSeconds(30) < DateTime.Now)
+                    || obj.Created.AddSeconds(15) < DateTime.Now)
                 {
                     Objects.Remove(obj);
                 }
@@ -132,7 +132,7 @@ namespace PngifyMe.Services.ThrowingSystem
 
                 _ = Task.Run(async () =>
                 {
-                    await AudioService.PlaySoundWav(copy, true);
+                    await AudioService.PlaySoundWav(copy, settings.Volume, true);
                     copy.Dispose();
                     obj.AudioPlaying = false;
                 });
