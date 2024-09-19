@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PortAudioSharp;
 using System.Collections.Generic;
 
 namespace PngifyMe.Services.Settings
@@ -6,13 +7,13 @@ namespace PngifyMe.Services.Settings
     public partial class MicroPhoneSettings : ObservableObject
     {
         [ObservableProperty]
-        private int threshHold = 50;
+        private int threshHold = 25;
 
         [ObservableProperty]
-        private int deviceIn = 0;
-
+        private int deviceIn = PortAudio.DefaultInputDevice;     
+           
         [ObservableProperty]
-        private int deviceOut = 0;
+        private int deviceOut = PortAudio.DefaultOutputDevice;
 
         [ObservableProperty]
         private int smoothing = 5;

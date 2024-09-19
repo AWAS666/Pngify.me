@@ -15,23 +15,26 @@
 			<TextBlock FontSize="24">Microphone Setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
 				<TextBlock Width="50" VerticalAlignment="Center">Input: </TextBlock>
-				<ComboBox ItemsSource="{Binding InputDevices }"
-						  SelectedIndex="{Binding Settings.DeviceIn}"
+				<ComboBox Name="inputAudio" ItemsSource="{Binding InputDevices }"
+						  DisplayMemberBinding="{ Binding Name}"
 						  SelectionChanged="InputDeviceChanged"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
 				<TextBlock Width="50" VerticalAlignment="Center">Output: </TextBlock>
-				<ComboBox ItemsSource="{Binding OutputDevices}"
-						  SelectedIndex="{Binding Settings.DeviceOut}"/>
+
+				<ComboBox Name="outputAudio" DisplayMemberBinding="{ Binding Name}"
+						  ItemsSource="{Binding OutputDevices}"
+						   SelectionChanged="OutputDeviceChanged"
+						  />
 			</StackPanel>
 
 			<Grid RowDefinitions="35,200,35" ColumnDefinitions="75,75,75" Margin="5,5,5,5">
 				<TextBlock Text="{Binding #current.Value}" HorizontalAlignment="Center"></TextBlock>
 				<TextBlock Text="{Binding Settings.ThreshHold}" HorizontalAlignment="Center" Grid.Column="1"></TextBlock>
 				<TextBlock Text="{Binding Settings.Smoothing}" HorizontalAlignment="Center" Grid.Column="2"></TextBlock>
-				
-				<Slider Grid.Row="1" Orientation="Vertical" Minimum="0" Maximum="100" x:Name="current" 
+
+				<Slider Grid.Row="1" Orientation="Vertical" Minimum="0" Maximum="100" x:Name="current"
 						HorizontalAlignment="Center" />
 				<Slider Value="{Binding Settings.ThreshHold}" Grid.Row="1"
 						Grid.Column="1" Orientation="Vertical"

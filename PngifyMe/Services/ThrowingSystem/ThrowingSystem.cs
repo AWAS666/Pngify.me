@@ -128,25 +128,13 @@ namespace PngifyMe.Services.ThrowingSystem
                 MemoryStream copy = new MemoryStream();
                 audio.CopyTo(copy);
                 audio.Seek(0, SeekOrigin.Begin);
-                copy.Seek(0, SeekOrigin.Begin);
+                copy.Seek(0, SeekOrigin.Begin);                
 
-                var reader = new WaveFileReader(copy);
-                var player = new WaveOutEvent();
-
-                player.Init(reader);
-
-                // Subscribe to the PlaybackStopped event to dispose of resources when playback is done
-                player.PlaybackStopped += (sender, args) =>
-                {
-                    copy.Dispose();
-                    player.Dispose();
-                    reader.Dispose();
-                    obj.AudioPlaying = false;
-                };
                 _ = Task.Run(async () =>
                 {
-                    await Task.Delay(Random.Shared.Next(1, 200));
-                    player.Play();
+                    await  AudioService.PlaySoundWav(copy);
+                    copy.Dispose();
+                    obj.AudioPlaying = false;
                 });
             }
             catch (Exception e)

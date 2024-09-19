@@ -13,8 +13,8 @@ namespace PngifyMe.ViewModels
     {
         public MicroPhoneSettings Settings => SettingsManager.Current.Profile.Active.MicroPhone;
 
-        public List<string> InputDevices => AudioService.GetAllInDevices();
-        public List<string> OutputDevices => AudioService.GetAllOutDevices();
+        public List<AudioDeviceConfig> InputDevices => AudioService.InputDevices;
+        public List<AudioDeviceConfig> OutputDevices => AudioService.OutputDevices;
 
         public AudioSetupViewModel()
         {
