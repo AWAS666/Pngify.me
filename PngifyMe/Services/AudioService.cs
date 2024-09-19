@@ -166,7 +166,7 @@ public static class AudioService
             await Task.Delay(50);
     }
 
-    public static async Task PlaySoundWav(System.IO.Stream wavstream)
+    public static async Task PlaySoundWav(System.IO.Stream wavstream, bool ignoreSpeech = false)
     {
         try
         {
@@ -207,10 +207,13 @@ public static class AudioService
                     }
                 }
 
-                float value = buffer.Max();
-                float current = Current(value);
-                Talking = current > Settings.ThreshHold;
-                LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
+                if (!ignoreSpeech)
+                {
+                    float value = buffer.Max();
+                    float current = Current(value);
+                    Talking = current > Settings.ThreshHold;
+                    LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
+                }
 
                 Marshal.Copy(buffer, 0, output, buffer.Length);
                 return StreamCallbackResult.Continue;

@@ -128,11 +128,11 @@ namespace PngifyMe.Services.ThrowingSystem
                 MemoryStream copy = new MemoryStream();
                 audio.CopyTo(copy);
                 audio.Seek(0, SeekOrigin.Begin);
-                copy.Seek(0, SeekOrigin.Begin);                
+                copy.Seek(0, SeekOrigin.Begin);
 
                 _ = Task.Run(async () =>
                 {
-                    await  AudioService.PlaySoundWav(copy);
+                    await AudioService.PlaySoundWav(copy, true);
                     copy.Dispose();
                     obj.AudioPlaying = false;
                 });
