@@ -62,7 +62,7 @@ public partial class TITSSetupViewModel : ObservableObject
     public void DefaultSound()
     {
         SettingsManager.Current.Tits.HitSound = string.Empty;
-        SettingsManager.Current.Tits.HitSound = string.Empty;
+        SettingsManager.Current.Tits.HitSoundFileName = string.Empty;
     }
 
   
