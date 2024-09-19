@@ -43,6 +43,11 @@
 						Command="{Binding DefaultSound}">Default Sound</Button>
 				<TextBlock VerticalAlignment="Center" Text="{Binding Settings.HitSoundFileName}"></TextBlock>
 			</StackPanel>
+			<StackPanel Orientation="Horizontal" Spacing="10">
+				<TextBlock>Volume</TextBlock>
+				<Slider MinWidth="200" Minimum="0" Maximum="1"  Value="{Binding Settings.Volume}"></Slider>
+				<TextBlock Text="{Binding Settings.Volume}"></TextBlock>
+			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<TextBlock VerticalAlignment="Center">Gravity</TextBlock>

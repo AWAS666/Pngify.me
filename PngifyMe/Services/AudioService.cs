@@ -171,7 +171,7 @@ public static class AudioService
             await Task.Delay(50);
     }
 
-    public static async Task PlaySoundWav(System.IO.Stream wavstream, bool ignoreSpeech = false)
+    public static async Task PlaySoundWav(System.IO.Stream wavstream, float volume, bool ignoreSpeech = false)
     {
         try
         {
@@ -208,7 +208,7 @@ public static class AudioService
 
                     for (int channel = 0; channel < channelCount; channel++)
                     {
-                        buffer[i * channelCount + channel] = sampleFrame[channel];
+                        buffer[i * channelCount + channel] = sampleFrame[channel] * volume;
                     }
                 }
 

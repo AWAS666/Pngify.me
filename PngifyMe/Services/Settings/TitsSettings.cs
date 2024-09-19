@@ -20,6 +20,9 @@ namespace PngifyMe.Services.Settings
         private bool enableSound = true;
 
         [ObservableProperty]
+        private float volume = 0.5f;
+
+        [ObservableProperty]
         private uint collissionEnergyLossPercent = 20;
 
         public TitsTriggerSetup ThrowSetup { get; set; } = new();
