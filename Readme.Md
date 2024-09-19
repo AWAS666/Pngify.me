@@ -20,20 +20,21 @@ Feel free to suggest features and submit code yourself
 	- [x] delete profiles
 - [x] Effect editor, allow layering of different effects and custom setup
 - [ ] Windows, Linux and MacOs build
-	- [ ] use dx11 for global hotkeys on linux (possibly mac too)
-	- [ ] cross plattform audio lib, naudio wont do
+	- [x] use dx11 for global hotkeys on linux (possibly mac too)
+	- [x] cross plattform audio lib, naudio wont do
 		- [ ] https://opentk.net/
 		- [ ] https://www.ambiera.com/irrklang/
 		- [ ] libvlcsharp
 		- [ ] this might also fix crashes in tits
+		- [x] portaudio
 	- [ ] disable spout on non windows
 - [x] stick on any png (redeem)
 	- [x] apply same effects as model 
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
 - [x] make audio smoothing changable
-- [ ] layers
-	- [ ] panic emote
+- [x] layers
+	- [x] panic emote
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -52,7 +53,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] throw emotes
 	- [ ] settings to change how loud collission sound plays
 	- [x] bits shower
-	- [ ] spawn throw similar to rain, not all at once but one after another
+	- [x] spawn throw similar to rain, not all at once but one after another
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] stream deck websocket to trigger stuff
