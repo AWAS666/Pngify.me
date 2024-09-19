@@ -23,7 +23,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         SetupSerilog();
-
+        AudioService.Init();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {

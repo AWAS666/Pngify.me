@@ -39,6 +39,11 @@ public static class AudioService
         ChangeMode(SettingsManager.Current.Profile.Active.Type);
     }
 
+    public static void Init()
+    {
+        // init stuff I guess
+    }
+
     public static void ChangeMode(ProfileType type)
     {
         switch (type)
@@ -63,7 +68,7 @@ public static class AudioService
         {
             DeviceInfo deviceInfo = PortAudio.GetDeviceInfo(i);
             if (deviceInfo.maxInputChannels > 0)
-                list.Add(new AudioDeviceConfig() { Id = i, Name = deviceInfo.name });
+                list.Add(new AudioDeviceConfig() { Id = i, Name = deviceInfo.name, });
         }
 
         return list;

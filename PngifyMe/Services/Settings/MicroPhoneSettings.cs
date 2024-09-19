@@ -16,7 +16,7 @@ namespace PngifyMe.Services.Settings
         private int deviceOut = PortAudio.DefaultOutputDevice;
 
         [ObservableProperty]
-        private int smoothing = 5;
+        private int smoothing = 20;
 
         [ObservableProperty]
         private double blinkInterval = 2f;
