@@ -1,5 +1,4 @@
-﻿using OpenGL;
-using PngifyMe.Layers;
+﻿using PngifyMe.Layers;
 using Serilog;
 using SkiaSharp;
 using Spout.Interop;
@@ -39,7 +38,8 @@ namespace PngifyMe.Services
                     // Send the byte array via Spout
                     fixed (byte* pData = pixelData)
                     {
-                        spoutSender.SendImage(pData, (uint)Specsmanager.Width, (uint)Specsmanager.Height, Gl.RGBA, false, 0);
+                        // gl.rgba == 6408
+                        spoutSender.SendImage(pData, (uint)Specsmanager.Width, (uint)Specsmanager.Height, 6408, false, 0);
                     }
                 }
                 catch (Exception er)
