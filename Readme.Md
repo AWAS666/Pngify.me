@@ -35,6 +35,10 @@ Feel free to suggest features and submit code yourself
 - [x] make audio smoothing changable
 - [x] layers
 	- [x] panic emote
+- [ ] size to 80-90% of canvas (settings)
+- [ ] transition layers
+	- [ ] entry and exit for each micstate with setable time for both directions
+	- [ ] order is: current -> current exist -> next entry -> next
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -63,6 +67,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] reuse canvases
 	- [ ] avoid drawing of unchanged objects
 	- [ ] switch out skia view component, triggers gc to much
+- [ ] plugio integration
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.

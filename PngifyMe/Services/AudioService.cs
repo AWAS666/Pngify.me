@@ -62,13 +62,24 @@ public static class AudioService
 
     private static List<AudioDeviceConfig> GetAllInDevices()
     {
+        int host = 0;
         var list = new List<AudioDeviceConfig>();
 
         for (int i = 0; i != PortAudio.DeviceCount; ++i)
         {
             DeviceInfo deviceInfo = PortAudio.GetDeviceInfo(i);
-            if (deviceInfo.maxInputChannels > 0)
-                list.Add(new AudioDeviceConfig() { Id = i, Name = deviceInfo.name, });
+            if (deviceInfo.maxInputChannels > 0 && deviceInfo.hostApi == host)
+            {
+                list.Add(new AudioDeviceConfig()
+                {
+                    Id = i,
+                    Name = deviceInfo.name,
+                    Channels = deviceInfo.maxInputChannels,
+                    Host = deviceInfo.hostApi,
+                    Struct = deviceInfo.structVersion,
+                });
+                host = deviceInfo.hostApi;
+            }
         }
 
         return list;
@@ -82,7 +93,14 @@ public static class AudioService
         {
             DeviceInfo deviceInfo = PortAudio.GetDeviceInfo(i);
             if (deviceInfo.maxOutputChannels > 0)
-                list.Add(new AudioDeviceConfig() { Id = i, Name = deviceInfo.name });
+                list.Add(new AudioDeviceConfig()
+                {
+                    Id = i,
+                    Name = deviceInfo.name,
+                    Channels = deviceInfo.maxOutputChannels,
+                    Host = deviceInfo.hostApi,
+                    Struct = deviceInfo.structVersion,
+                });
         }
 
         return list;
@@ -275,7 +293,7 @@ public static class AudioService
 
             Debug.WriteLine(samples.Max());
 
-            float current = Current(samples.Max());
+            float current = Current(samples.Max() * 2);
             Talking = current > Settings.ThreshHold;
             LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
 
@@ -328,4 +346,7 @@ public class AudioDeviceConfig
 {
     public int Id { get; set; }
     public string Name { get; set; }
+    public int Channels { get; internal set; }
+    public int Struct { get; internal set; }
+    public int Host { get; internal set; }
 }
