@@ -14,7 +14,7 @@ namespace PngifyMe.Services.Settings
 
         [property: JsonIgnore]
         [ObservableProperty]
-        private BaseImage bitmap = new StaticImage(PlaceHolder);  
+        private BaseImage bitmap = new StaticImage(PlaceHolder);
 
         public string? FilePath
         {
@@ -42,7 +42,8 @@ namespace PngifyMe.Services.Settings
             if (File.Exists(FilePath))
             {
                 Bitmap = LoadImage(FilePath);
-                Bitmap.Resize(Specsmanager.Width, Specsmanager.Height);
+                //todo: make this scaling here a setting
+                Bitmap.Resize((int)(Specsmanager.Width * 0.9f), (int)(Specsmanager.Height * 0.9f));
             }
         }
 

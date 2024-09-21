@@ -27,6 +27,6 @@ namespace PngifyMe.Services.Settings.Images
                 bitmap.Dispose();
                 return resizedBitmap.Copy();
             }
-        }
+        }      
     }
 }

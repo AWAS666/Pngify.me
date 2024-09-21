@@ -153,12 +153,13 @@ namespace PngifyMe.Services.ThrowingSystem
         public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert)
         {
             int posX = (int)((Specsmanager.Width - layert.Image.Width) / 2 + layert.PosX);
+            int posY = (int)(layert.PosY + Specsmanager.Height * 0.05f); // add 5% here as image is scaled to 90%, so this needs to be 10/2
             if (MainBody != null && MainBody.SameBitmap(bitmap))
             {
-                MainBody.Update(posX, (int)layert.PosY);
+                MainBody.Update(posX, posY);
                 return;
             }
-            MainBody = new MovableObject(this, bitmap, new(0, 0), 0, posX, (int)(0 + layert.PosY), 15);
+            MainBody = new MovableObject(this, bitmap, new(0, 0), 0, posX, posY, 15);
         }
 
         private bool IsColliding(MovableObject image1, MovableObject image2)
