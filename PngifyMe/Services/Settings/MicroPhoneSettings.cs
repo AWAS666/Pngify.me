@@ -61,8 +61,13 @@ namespace PngifyMe.Services.Settings
         public ImageSetting OpenBlink { get; set; } = new();
         public ImageSetting Closed { get; set; } = new();
         public ImageSetting ClosedBlink { get; set; } = new();
+        public ImageSetting EntryImage { get; set; } = new();
+        public ImageSetting ExitImage { get; set; } = new();
 
         public HotkeyTrigger? Trigger { get; set; } = null;
+
+        public float EntryTime { get; set; } = 0f;
+        public float ExitTime { get; set; } = 0f;
 
     }
 }
