@@ -99,19 +99,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="Views\Helper\LayerSettingsView.axaml.cs">
+    <Compile Update="Views\SubView\LayerSettingsView.axaml.cs">
       <DependentUpon>LayerSettingsView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helper\ModeSelect.axaml.cs">
+    <Compile Update="Views\SubView\ModeSelect.axaml.cs">
       <DependentUpon>ModeSelect.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helper\LayerView.axaml.cs">
+    <Compile Update="Views\SubView\LayerView.axaml.cs">
       <DependentUpon>LayerView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helper\ThrowSetup.axaml.cs">
+    <Compile Update="Views\SubView\ImageSelectView.axaml.cs">
+      <DependentUpon>ImageSelectView.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\SubView\ThrowSetup.axaml.cs">
       <DependentUpon>ThrowSetup.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helper\PropertyView.axaml.cs">
+    <Compile Update="Views\SubView\PropertyView.axaml.cs">
       <DependentUpon>PropertyView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LLMSetup.axaml.cs">
@@ -120,10 +123,10 @@
     <Compile Update="Views\ProfileSetup.axaml.cs">
       <DependentUpon>ProfileSetup.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helper\TriggerView.axaml.cs">
+    <Compile Update="Views\SubView\TriggerView.axaml.cs">
       <DependentUpon>TriggerView.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\Helper\TriggerEditorView.axaml.cs">
+    <Compile Update="Views\SubView\TriggerEditorView.axaml.cs">
       <DependentUpon>TriggerEditorView.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\CreditsAndInfo.axaml.cs">

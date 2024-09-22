@@ -44,8 +44,8 @@
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
-				<Grid ColumnDefinitions="150,100,100" Grid.Row="2" 
-					  ToolTip.Tip="Blending of last image, set to 0 to disable all blending"> 
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="2"
+					  ToolTip.Tip="Blending of last image, set to 0 to disable all blending">
 					<TextBlock VerticalAlignment="Center">Blend Time</TextBlock>
 					<helper:FloatTextBox Min="0" Max="{Binding Settings.BlinkTime}" Grid.Column="1"
 										 Text="{Binding Settings.TransitionTime}" Watermark="Blend Time"/>
@@ -87,67 +87,27 @@
 								</TextBox>
 							</StackPanel>
 
-							<Grid ColumnDefinitions="100,125,35,100,125,35">
+							<Grid ColumnDefinitions="100,160,100,160">
 								<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
-								<Button Command="{Binding LoadFile}" Grid.Column="1"
-										CommandParameter="{Binding State.Open}">
-									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
-													 MaxWidth="100" Stretch="Uniform"
-										   Source="{Binding State.Open.Bitmap.Preview}">
-									</siv:SKImageView>
-								</Button>
-								<Button
-									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-									Command="{Binding Delete}" CommandParameter="{Binding State.Open}"
-									Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
+								<helper:ImageSelectView DataContext="{ Binding State.Open }" Grid.Column="1"/>
 
-								<TextBlock VerticalAlignment="Center" Grid.Column="3">Closed Mouth</TextBlock>
-								<Button Command="{Binding LoadFile}" Grid.Column="4"
-										CommandParameter="{Binding State.Closed}">
-									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
-													 MaxWidth="100" Stretch="Uniform"
-													 Source="{Binding State.Closed.Bitmap.Preview}">
-									</siv:SKImageView>
-								</Button>
-								<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding Delete}" CommandParameter="{Binding State.Closed}"
-										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
+								<TextBlock VerticalAlignment="Center" Grid.Column="2">Closed Mouth</TextBlock>
+								<helper:ImageSelectView DataContext="{ Binding State.Closed }" Grid.Column="3"/>
 							</Grid>
 
-							<Grid ColumnDefinitions="100,125,35,100,125,35">
+							<Grid ColumnDefinitions="100,160,100,160">
 								<StackPanel VerticalAlignment="Center">
 									<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
 									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
 								</StackPanel>
-								<Button Command="{Binding LoadFile}" Grid.Column="1"
-										CommandParameter="{Binding State.OpenBlink}">
-									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
-													 MaxWidth="100" Stretch="Uniform"
-													 Source="{Binding State.OpenBlink.Bitmap.Preview}">
-									</siv:SKImageView>
-								</Button>
-								<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding Delete}" CommandParameter="{Binding State.OpenBlink}"
-										Grid.Column="2" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
-
-								<StackPanel VerticalAlignment="Center" Grid.Column="3">
+								<helper:ImageSelectView DataContext="{ Binding State.OpenBlink }" Grid.Column="1"/>
+								
+								<StackPanel VerticalAlignment="Center" Grid.Column="2">
 									<TextBlock VerticalAlignment="Center">Closed Mouth</TextBlock>
 									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
 								</StackPanel>
-								<Button Command="{Binding LoadFile}" Grid.Column="4"
-										CommandParameter="{Binding State.ClosedBlink}">
-									<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
-													 MaxWidth="100" Stretch="Uniform"
-													 Source="{Binding State.ClosedBlink.Bitmap.Preview}">
-									</siv:SKImageView>
-								</Button>
-
-								<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding Delete}" CommandParameter="{Binding State.ClosedBlink}"
-										Grid.Column="5" VerticalAlignment="Top"  i:Attached.Icon="fa-solid fa-trash" />
+								<helper:ImageSelectView DataContext="{ Binding State.ClosedBlink }" Grid.Column="3"/>
 							</Grid>
-
-
 						</StackPanel>
 					</DataTemplate>
 				</ListBox.ItemTemplate>

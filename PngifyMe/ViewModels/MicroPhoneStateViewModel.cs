@@ -1,14 +1,7 @@
-﻿using Avalonia.Controls;
-using Avalonia.Input;
-using Avalonia.Interactivity;
-using Avalonia.Platform.Storage;
+﻿using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.Settings;
-using PngifyMe.ViewModels.Helper;
 using SharpHook.Native;
-using System.Linq;
-using System.Net;
-using System.Threading.Tasks;
 
 
 namespace PngifyMe.ViewModels
@@ -65,26 +58,7 @@ namespace PngifyMe.ViewModels
             Name = state.Name;
             DefaultState = state.Default;
             SetHotkey();
-        }
-
-        public async Task LoadFile(ImageSetting set)
-        {
-            var path = await parent.GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
-            {
-                Title = "Select an Image",
-                FileTypeFilter = new[] { FilePickers.ImageAll },
-                AllowMultiple = false
-            });
-            if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
-            {
-                set.FilePath = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
-            }
-        }
-
-        public void Delete(ImageSetting set)
-        {
-            set.FilePath = string.Empty;
-        }
+        }       
 
         public void OnKeyDown(KeyEventArgs e)
         {
@@ -109,9 +83,6 @@ namespace PngifyMe.ViewModels
 
             hotkeyByTrigger = true;
             Hotkey = text;
-        }
-
-       
+        }       
     }
-
 }

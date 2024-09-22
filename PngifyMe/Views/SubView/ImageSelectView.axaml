@@ -1,0 +1,34 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 x:DataType="sett:ImageSetting"
+             x:Class="PngifyMe.Views.Helper.ImageSelectView"
+			 xmlns:siv="https://github.com/kekyo/SkiaImageView"			 
+			 >
+
+	<Design.DataContext>
+		<sett:ImageSetting/>
+	</Design.DataContext>
+	<Grid ColumnDefinitions="125,35">
+		<Button Click="LoadFile" VerticalAlignment="Top">
+			<siv:SKImageView VerticalAlignment="Center" HorizontalAlignment="Right"
+							 MaxWidth="100" Stretch="Uniform"
+							 Source="{Binding Bitmap.Preview}">
+			</siv:SKImageView>
+		</Button>
+		<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+				Click="Delete"
+				Grid.Column="1" VerticalAlignment="Top"  
+				i:Attached.Icon="fa-solid fa-trash" />
+
+	</Grid>
+	
+	
+	
+</UserControl>
