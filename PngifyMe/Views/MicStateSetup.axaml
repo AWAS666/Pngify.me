@@ -78,6 +78,8 @@
 										Margin="5,0,0,0" HorizontalAlignment="Left"
 										Content="Activate" />
 									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default"></CheckBox>
+									<CheckBox ToolTip.Tip="Will revert to default if already active."
+										IsChecked="{Binding ToggleAble, Mode=TwoWay}" >ToggleAble</CheckBox>
 
 								</StackPanel>
 								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">

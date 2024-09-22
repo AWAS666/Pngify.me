@@ -132,11 +132,11 @@ public class MicroPhoneStateLayer
 
     public void ToggleState(MicroPhoneState state)
     {
-        if (current == state)
+        if (current == state && current.ToggleAble)
         {
             SwitchState(micSettings.States.First(x => x.Default));
         }
-        else
+        else if (current != state)
         {
             SwitchState(state);
         }

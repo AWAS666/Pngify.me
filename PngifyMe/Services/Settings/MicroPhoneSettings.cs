@@ -68,6 +68,6 @@ namespace PngifyMe.Services.Settings
 
         public float EntryTime { get; set; } = 0f;
         public float ExitTime { get; set; } = 0f;
-
+        public bool ToggleAble { get; set; } = true;
     }
 }

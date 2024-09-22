@@ -70,6 +70,17 @@ namespace PngifyMe.ViewModels
             }
         }
 
+        private bool toggle;
+
+        public bool ToggleAble
+        {
+            get => toggle; set
+            {
+                SetProperty(ref toggle, value);
+                state.ToggleAble = value;
+            }
+        }
+
         bool hotkeyByTrigger;
 
 
@@ -82,6 +93,8 @@ namespace PngifyMe.ViewModels
 
             EntryTime = state.EntryTime;
             ExitTime = state.ExitTime;
+
+            ToggleAble = state.ToggleAble;
             SetHotkey();
         }
 

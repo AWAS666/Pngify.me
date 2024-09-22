@@ -37,8 +37,8 @@ Feel free to suggest features and submit code yourself
 	- [x] panic emote
 - [x] size to 80-90% of canvas (settings)
 - [ ] transition layers
-	- [ ] entry and exit for each micstate with setable time for both directions
-	- [ ] order is: current -> current exist -> next entry -> next
+	- [x] entry and exit for each micstate with setable time for both directions
+	- [x] order is: current -> current exist -> next entry -> next
 	- [ ] blending is working a little weird
 
 ## Todo Advanced
