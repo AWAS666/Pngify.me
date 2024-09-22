@@ -48,6 +48,28 @@ namespace PngifyMe.ViewModels
             }
         }
 
+        private float entryTime;
+
+        public float EntryTime
+        {
+            get => entryTime; set
+            {
+                SetProperty(ref entryTime, value);
+                state.EntryTime = value;
+            }
+        }
+
+        private float exitTime;
+
+        public float ExitTime
+        {
+            get => exitTime; set
+            {
+                SetProperty(ref exitTime, value);
+                state.ExitTime = value;
+            }
+        }
+
         bool hotkeyByTrigger;
 
 
@@ -57,8 +79,16 @@ namespace PngifyMe.ViewModels
             this.parent = parent;
             Name = state.Name;
             DefaultState = state.Default;
+
+            EntryTime = state.EntryTime;
+            ExitTime = state.ExitTime;
             SetHotkey();
-        }       
+        }
+
+        public MicroPhoneStateViewModel() : this(new MicroPhoneState(), new MicroPhoneSetupViewModel())
+        {
+
+        }
 
         public void OnKeyDown(KeyEventArgs e)
         {
@@ -83,6 +113,6 @@ namespace PngifyMe.ViewModels
 
             hotkeyByTrigger = true;
             Hotkey = text;
-        }       
+        }
     }
 }

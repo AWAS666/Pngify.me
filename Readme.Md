@@ -105,7 +105,8 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] https://github.com/irihitech/Semi.Avalonia/
 - [ ] splash screen or load json in bg
 - [x] button to close settings
-- [x] more tooltips
+- [x] more tooltip
+- [ ] add notifications
  
 ## Ideas
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox

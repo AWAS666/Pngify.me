@@ -99,6 +99,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\SubView\TransitionView.axaml.cs">
+      <DependentUpon>TransitionView.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SubView\LayerSettingsView.axaml.cs">
       <DependentUpon>LayerSettingsView.axaml</DependentUpon>
     </Compile>

@@ -8,6 +8,7 @@
 			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			  xmlns:u="https://irihi.tech/ursa"
 			 x:DataType="vm:MicroPhoneSetupViewModel"
              x:Class="PngifyMe.Views.MicStateSetup"
 			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
@@ -59,60 +60,68 @@
 			<ListBox ItemsSource="{Binding States}" Margin="0,5,0,0">
 				<ListBox.ItemTemplate>
 					<DataTemplate>
-						<StackPanel>
-							<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
-								<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
-								<Button
-									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-									Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
-									CommandParameter="{Binding}"
-									Margin="5,0,0,0" HorizontalAlignment="Left"
-									i:Attached.Icon="fa-solid fa-minus" />
+						<Grid>
+							<StackPanel Spacing="5">
+								<StackPanel Orientation="Horizontal" Spacing="5">
+									<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
+									<Button
+										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
+										CommandParameter="{Binding}"
+										Margin="5,0,0,0" HorizontalAlignment="Left"
+										i:Attached.Icon="fa-solid fa-minus" />
 
-								<Button
-									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-									Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).SwitchState}"
-									CommandParameter="{Binding}"
-									Margin="5,0,0,0" HorizontalAlignment="Left"
-									Content="Activate" />
-								<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default"></CheckBox>
-								<TextBox Name="Hotkeybox"
-										 Text="{Binding Hotkey}"
-										 Margin="15,0,0,0" Watermark="Hotkey" Width="150">
-									<int:Interaction.Behaviors>
-										<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="Hotkeybox">
-											<ia:InvokeCommandAction Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
-										</ia:EventTriggerBehavior>
-									</int:Interaction.Behaviors>
-								</TextBox>
-							</StackPanel>
+									<Button
+										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).SwitchState}"
+										CommandParameter="{Binding}"
+										Margin="5,0,0,0" HorizontalAlignment="Left"
+										Content="Activate" />
+									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default"></CheckBox>
+									
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
+									<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+										Click="ShowTransition">Transitions</Button>
+									<TextBox Name="Hotkeybox"
+											 Text="{Binding Hotkey}"
+											 Margin="15,0,0,0" Watermark="Hotkey" Width="150">
+										<int:Interaction.Behaviors>
+											<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="Hotkeybox">
+												<ia:InvokeCommandAction Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
+											</ia:EventTriggerBehavior>
+										</int:Interaction.Behaviors>
+									</TextBox>
+								</StackPanel>
 
-							<Grid ColumnDefinitions="100,160,100,160">
-								<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
-								<helper:ImageSelectView DataContext="{ Binding State.Open }" Grid.Column="1"/>
 
-								<TextBlock VerticalAlignment="Center" Grid.Column="2">Closed Mouth</TextBlock>
-								<helper:ImageSelectView DataContext="{ Binding State.Closed }" Grid.Column="3"/>
-							</Grid>
-
-							<Grid ColumnDefinitions="100,160,100,160">
-								<StackPanel VerticalAlignment="Center">
+								<Grid ColumnDefinitions="100,160,100,160">
 									<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
-									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
-								</StackPanel>
-								<helper:ImageSelectView DataContext="{ Binding State.OpenBlink }" Grid.Column="1"/>
-								
-								<StackPanel VerticalAlignment="Center" Grid.Column="2">
-									<TextBlock VerticalAlignment="Center">Closed Mouth</TextBlock>
-									<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
-								</StackPanel>
-								<helper:ImageSelectView DataContext="{ Binding State.ClosedBlink }" Grid.Column="3"/>
-							</Grid>
-						</StackPanel>
+									<helper:ImageSelectView DataContext="{ Binding State.Open }" Grid.Column="1"/>
+
+									<TextBlock VerticalAlignment="Center" Grid.Column="2">Closed Mouth</TextBlock>
+									<helper:ImageSelectView DataContext="{ Binding State.Closed }" Grid.Column="3"/>
+								</Grid>
+
+								<Grid ColumnDefinitions="100,160,100,160">
+									<StackPanel VerticalAlignment="Center">
+										<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
+										<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
+									</StackPanel>
+									<helper:ImageSelectView DataContext="{ Binding State.OpenBlink }" Grid.Column="1"/>
+
+									<StackPanel VerticalAlignment="Center" Grid.Column="2">
+										<TextBlock VerticalAlignment="Center">Closed Mouth</TextBlock>
+										<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
+									</StackPanel>
+									<helper:ImageSelectView DataContext="{ Binding State.ClosedBlink }" Grid.Column="3"/>
+								</Grid>
+							</StackPanel>
+							<u:OverlayDialogHost HostId="LocalHost"/>
+						</Grid>
 					</DataTemplate>
 				</ListBox.ItemTemplate>
 			</ListBox>
 		</ScrollViewer>
-
 	</Grid>
 </UserControl>
