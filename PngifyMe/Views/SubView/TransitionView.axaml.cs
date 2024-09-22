@@ -16,6 +16,6 @@ public partial class TransitionView : UserControl
     public TransitionView()
     {
         InitializeComponent();
-        DataContext = new MicroPhoneStateViewModel();
+        //DataContext = new MicroPhoneStateViewModel();
     }    
 }

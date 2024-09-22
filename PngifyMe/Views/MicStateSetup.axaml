@@ -57,10 +57,10 @@
 		</StackPanel>
 
 		<ScrollViewer Grid.Row="1">
-			<ListBox ItemsSource="{Binding States}" Margin="0,5,0,0">
-				<ListBox.ItemTemplate>
-					<DataTemplate>
-						<Grid>
+			<Grid>
+				<ListBox ItemsSource="{Binding States}" Margin="0,5,0,0">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
 							<StackPanel Spacing="5">
 								<StackPanel Orientation="Horizontal" Spacing="5">
 									<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
@@ -78,7 +78,7 @@
 										Margin="5,0,0,0" HorizontalAlignment="Left"
 										Content="Activate" />
 									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default"></CheckBox>
-									
+
 								</StackPanel>
 								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
 									<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
@@ -117,11 +117,11 @@
 									<helper:ImageSelectView DataContext="{ Binding State.ClosedBlink }" Grid.Column="3"/>
 								</Grid>
 							</StackPanel>
-							<u:OverlayDialogHost HostId="LocalHost"/>
-						</Grid>
-					</DataTemplate>
-				</ListBox.ItemTemplate>
-			</ListBox>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+				<u:OverlayDialogHost HostId="LocalHost"/>
+			</Grid>
 		</ScrollViewer>
 	</Grid>
 </UserControl>

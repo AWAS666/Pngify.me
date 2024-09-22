@@ -39,6 +39,7 @@ Feel free to suggest features and submit code yourself
 - [ ] transition layers
 	- [ ] entry and exit for each micstate with setable time for both directions
 	- [ ] order is: current -> current exist -> next entry -> next
+	- [ ] blending is working a little weird
 
 ## Todo Advanced
 - [ ] Release aside from git
