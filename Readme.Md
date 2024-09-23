@@ -40,6 +40,7 @@ Feel free to suggest features and submit code yourself
 	- [x] entry and exit for each micstate with setable time for both directions
 	- [x] order is: current -> current exist -> next entry -> next
 	- [ ] blending is working a little weird
+- [x] remember window position
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -69,6 +70,10 @@ Feel free to suggest features and submit code yourself
 	- [ ] avoid drawing of unchanged objects
 	- [ ] switch out skia view component, triggers gc to much
 - [ ] plugio integration
+	- [ ] https://github.com/buttplugio/buttplug-csharp
+- [ ] virtual webcam integration
+	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
+	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
@@ -86,7 +91,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
 - [ ] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
 	- [ ] possibly use openai moderation, but always need an openai api key for that... 
-- [ ] fix audio levels
+- [ ] fix audio levels -> make this changable with a slider?
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
