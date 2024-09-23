@@ -27,7 +27,7 @@ Feel free to suggest features and submit code yourself
 		- [ ] libvlcsharp
 		- [ ] this might also fix crashes in tits
 		- [x] portaudio
-	- [ ] disable spout on non windows
+	- [x] disable spout on non windows
 - [x] stick on any png (redeem)
 	- [x] apply same effects as model 
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
