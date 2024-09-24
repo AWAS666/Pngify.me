@@ -34,12 +34,16 @@ namespace PngifyMe.Layers
         public static float TotalRunTime { get; private set; }
 
         public static EventHandler<LayerValues> ValueUpdate;
+        /// <summary>
+        /// doesnt hold an image anymore as that has issues with gc/dispose
+        /// </summary>
         public static EventHandler<SKImage> ImageUpdate;
         public static EventHandler<BaseLayer> NewLayer;
         public static EventHandler<float> FPSUpdate;
 
         public static MicroPhoneStateLayer MicroPhoneStateLayer { get; private set; } = new MicroPhoneStateLayer();
         public static ThrowingSystem ThrowingSystem { get; private set; } = new ThrowingSystem();
+        public static SKBitmap CurrentFrame { get; private set; }
 
         static LayerManager()
         {
@@ -137,10 +141,10 @@ namespace PngifyMe.Layers
                     layer.OnCalculateParameters(dt, ref layert);
                 }
 
-                var draw = UpdateThrowingSystem(dt, ref layert);
+                UpdateThrowingSystem(dt, ref layert);
 
                 ValueUpdate?.Invoke(null, layert);
-                ImageUpdate?.Invoke(null, draw);
+                ImageUpdate?.Invoke(null, null);
             }
             catch (Exception e)
             {
@@ -148,7 +152,7 @@ namespace PngifyMe.Layers
             }
         }
 
-        private static SKImage UpdateThrowingSystem(float dt, ref LayerValues layert)
+        private static void UpdateThrowingSystem(float dt, ref LayerValues layert)
         {
             ThrowingSystem.SwapImage(layert.Image, layert);
             if (SettingsManager.Current.Tits.Enabled)
@@ -162,7 +166,7 @@ namespace PngifyMe.Layers
             var baseImg = layert.Image;
             int width = Specsmanager.Width;
             int height = Specsmanager.Height;
-            using var mainBitmap = new SKBitmap(width, height);
+            var mainBitmap = new SKBitmap(width, height);
             using (SKCanvas canvas = new SKCanvas(mainBitmap))
             {
 
@@ -261,7 +265,7 @@ namespace PngifyMe.Layers
                     img.RenderImage(canvas, 0, 0);
                 }
             }
-            return SKImage.FromBitmap(mainBitmap);
+            CurrentFrame = mainBitmap;
         }
     }
 }

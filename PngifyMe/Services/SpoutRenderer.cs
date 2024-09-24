@@ -33,7 +33,7 @@ namespace PngifyMe.Services
             {
                 try
                 {                  
-                    ConvertSKImageToRawByteArray(e);
+                    ConvertSKImageToRawByteArray(LayerManager.CurrentFrame);
                     //SwapChannels();
                     // Send the byte array via Spout
                     fixed (byte* pData = pixelData)
@@ -52,7 +52,7 @@ namespace PngifyMe.Services
         private unsafe static void SwapChannels()
         {
             if (swappedPixels == null)
-                swappedPixels = new byte[pixelData.Count()];
+                swappedPixels = new byte[pixelData.Length];
            
             fixed (byte* pSrc = pixelData)
             fixed (byte* pDst = swappedPixels)
@@ -71,17 +71,14 @@ namespace PngifyMe.Services
             }
         }
 
-        public static unsafe void ConvertSKImageToRawByteArray(SKImage image)
+        public static unsafe void ConvertSKImageToRawByteArray(SKBitmap bitmap)
         {
-            // Create a bitmap from the image
-            using var bitmap = SKBitmap.FromImage(image);
             // Ensure the bitmap has the correct configuration
             SKImageInfo imageInfo = bitmap.Info;
             imageInfo.ColorType = SKColorType.Rgba8888;
 
             // Allocate a byte array large enough to hold all the pixel data
-            if (pixelData == null)
-                pixelData = new byte[imageInfo.BytesSize];
+            pixelData ??= new byte[imageInfo.BytesSize];
 
             // Copy the raw pixel data into the byte array
             fixed (byte* ptr = pixelData)
@@ -91,8 +88,6 @@ namespace PngifyMe.Services
                 // Read pixel data into the byte array
                 pixmap.ReadPixels(imageInfo, (IntPtr)ptr, imageInfo.RowBytes, 0, 0);
             }
-
-            //return pixelData; // Return the raw pixel data as a byte array
         }
     }
 }

@@ -34,12 +34,12 @@ namespace PngifyMe.Views.Helper
         }
 
 
-        public static readonly StyledProperty<SKImage> SourceProperty =
-            AvaloniaProperty.Register<SKImageViewer, SKImage>(nameof(Source));
+        public static readonly StyledProperty<SKBitmap> SourceProperty =
+            AvaloniaProperty.Register<SKImageViewer, SKBitmap>(nameof(Source));
         private CustomDrawOp drawOp;
         private List<CustomDrawOp> oldFrame = new();
 
-        public SKImage Source
+        public SKBitmap Source
         {
             get => GetValue(SourceProperty);
             set => SetValue(SourceProperty, value);
@@ -61,9 +61,9 @@ namespace PngifyMe.Views.Helper
 
             public Rect Bounds { get; private set; }
 
-            private SKImage image;
+            private SKBitmap image;
 
-            public void Update(Rect bounds, SKImage image)
+            public void Update(Rect bounds, SKBitmap image)
             {
                 this.image = image;
                 Bounds = bounds;
@@ -78,9 +78,9 @@ namespace PngifyMe.Views.Helper
                 using var lease = leaseFeature.Lease();
                 var canvas = lease.SkCanvas;
 
-                if (image is SKImage bitmap)
+                if (image is SKBitmap bitmap)
                 {
-                    canvas.DrawImage(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
+                    canvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
                 }
             }
 

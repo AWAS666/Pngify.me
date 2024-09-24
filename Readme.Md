@@ -74,6 +74,10 @@ Feel free to suggest features and submit code yourself
 - [ ] virtual webcam integration
 	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
+- [ ] mouse tracking 
+- [ ] complex layers 
+	- [ ] explode into a variety of pixels
+	- [ ] shaders
 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
@@ -107,8 +111,8 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [ ] icon library or custom made?
 	- [x] https://github.com/MarwanFr/LucideAvaloniaUI
 	- [x] https://lucide.dev/icons/save
-- [ ] https://github.com/irihitech/Ursa.Avalonia
-- [ ] https://github.com/irihitech/Semi.Avalonia/
+- [x] https://github.com/irihitech/Ursa.Avalonia
+- [x] https://github.com/irihitech/Semi.Avalonia/
 - [ ] splash screen or load json in bg
 - [x] button to close settings
 - [x] more tooltip
