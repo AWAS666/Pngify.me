@@ -9,6 +9,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PngifyMe.Desktop", "PngifyM
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{53844997-A316-4D00-BA26-84C48333A63B}"
 	ProjectSection(SolutionItems) = preProject
+		deploy.bat = deploy.bat
 		Readme.Md = Readme.Md
 	EndProjectSection
 EndProject
@@ -18,7 +19,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotkeyTEst", "HotkeyTEst\Ho
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Spout.NETCore", "..\Spout.NETCore\Spout.NETCore\Spout.NETCore.csproj", "{56BD8776-2F16-4D24-BBA3-C2D3F42099C1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HotkeySelfTest", "HotkeySelfTest\HotkeySelfTest.csproj", "{AFC572DF-58EB-4C92-AEB8-F032DDE7D410}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HotkeySelfTest", "HotkeySelfTest\HotkeySelfTest.csproj", "{AFC572DF-58EB-4C92-AEB8-F032DDE7D410}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
