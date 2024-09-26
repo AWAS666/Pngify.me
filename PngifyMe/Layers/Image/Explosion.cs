@@ -89,12 +89,7 @@ public class Explosion : ImageLayer
     {
         CurrentStrength = 1.0f - Easings.CubicEaseOut(fraction);
         base.OnUpdateExit(dt, fraction);
-    }
-
-    public override SKBitmap GetImage()
-    {
-        return frame.GetImage(TimeSpan.FromSeconds(CurrentTime));
-    }
+    } 
 
     static List<Particle> CreateParticles(SKBitmap image, int particleSize)
     {

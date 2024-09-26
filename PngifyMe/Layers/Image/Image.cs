@@ -64,7 +64,7 @@ namespace PngifyMe.Layers.Image
             canvas.DrawBitmap(img, PosX - img.Width / 2, PosY - img.Height / 2);
         }
 
-        public override SKBitmap GetImage()
+        public SKBitmap GetImage()
         {
             return image.GetImage(TimeSpan.FromSeconds(CurrentTime));
         }
