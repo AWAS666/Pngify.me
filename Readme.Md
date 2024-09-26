@@ -76,7 +76,8 @@ Feel free to suggest features and submit code yourself
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
 - [ ] mouse tracking 
 - [ ] complex layers 
-	- [ ] explode into a variety of pixels
+	- [x] explode into a variety of pixels
+		- [ ] add sound effects	
 	- [ ] shaders
 	- [ ] https://x.com/MuRo_CG/status/1839337596549505274 <- similarish effects, maybe no drag/drop
 	- [ ] yeet away

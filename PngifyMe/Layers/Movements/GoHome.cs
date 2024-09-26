@@ -20,6 +20,12 @@ namespace PngifyMe.Layers
             ExitTime = 0;
         }
 
+        public override void OnEnter()
+        {
+            AutoRemoveTime = TotalTime;
+            base.OnEnter();
+        }
+
 
         public override void OnCalculateParameters(float dt, ref LayerValues values)
         {
