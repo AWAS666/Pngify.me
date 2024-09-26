@@ -19,13 +19,13 @@ public class MicroPhoneStateLayer
     private BaseImage enterImage;
     private BaseImage exitImage;
 
-    private MicroPhoneState current;
+    public MicroPhoneState CurrentState { get; private set; }
     private MicroPhoneState lastState;
     private float transTime;
     private MicroPhoneSettings micSettings;
     private bool blinking;
     private List<Action> callbacks = new();
-    private BaseImage currentImg;
+    public BaseImage CurrentImage { get; private set; }
 
     public double? BlendTime { get; private set; }
 
@@ -74,17 +74,17 @@ public class MicroPhoneStateLayer
         }
         else
         {
-            currentImg = Baseupdate(ref values);
+            CurrentImage = Baseupdate(ref values);
         }
 
 
-        if (LastImage != currentImg && BlendTime == null)
+        if (LastImage != CurrentImage && BlendTime == null)
         {
             BlendTime = CurrentTime + micSettings.TransitionTime;
         }
         else if (BlendTime < CurrentTime)
         {
-            LastImage = currentImg;
+            LastImage = CurrentImage;
             BlendTime = null;
         }
     }
@@ -113,30 +113,30 @@ public class MicroPhoneStateLayer
 
     public void SwitchState(MicroPhoneState state, bool reload = false)
     {
-        if (current == state && !reload) return;
+        if (CurrentState == state && !reload) return;
 
         openImage = state.Open.Bitmap;
         openBlinkImage = !string.IsNullOrEmpty(state.OpenBlink.FilePath) ? state.OpenBlink.Bitmap : state.Open.Bitmap;
         closedImage = state.Closed.Bitmap;
         closedBlinkImage = !string.IsNullOrEmpty(state.ClosedBlink.FilePath) ? state.ClosedBlink.Bitmap : state.Closed.Bitmap;
-        lastState = current;
-        current = state;
+        lastState = CurrentState;
+        CurrentState = state;
 
         enterImage = state.EntryImage.Bitmap;
         exitImage = state.ExitImage.Bitmap;
 
         if (lastState != null)
             ExitTime = CurrentTime + lastState.ExitTime;
-        EntryTime = ExitTime + current.EntryTime;
+        EntryTime = ExitTime + CurrentState.EntryTime;
     }
 
     public void ToggleState(MicroPhoneState state)
     {
-        if (current == state && current.ToggleAble)
+        if (CurrentState == state && CurrentState.ToggleAble)
         {
             SwitchState(micSettings.States.First(x => x.Default));
         }
-        else if (current != state)
+        else if (CurrentState != state)
         {
             SwitchState(state);
         }
@@ -155,6 +155,6 @@ public class MicroPhoneStateLayer
             callbacks.Add(callback);
         }
         // also reloads current just in case
-        SwitchState(current, reload: true);
+        SwitchState(CurrentState, reload: true);
     }
 }

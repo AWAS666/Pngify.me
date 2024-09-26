@@ -78,7 +78,9 @@ Feel free to suggest features and submit code yourself
 - [ ] complex layers 
 	- [ ] explode into a variety of pixels
 	- [ ] shaders
-
+	- [ ] https://x.com/MuRo_CG/status/1839337596549505274 <- similarish effects, maybe no drag/drop
+	- [ ] yeet away
+	- [ ] 
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration
