@@ -193,6 +193,8 @@ namespace PngifyMe.Layers
                     if (MicroPhoneStateLayer.BlendTime != null && MicroPhoneStateLayer.LastImage != null)
                     {
                         var blend = (MicroPhoneStateLayer.BlendTime - MicroPhoneStateLayer.CurrentTime) / SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime;
+                        // factor in blending of main layer
+                        blend *= opacity;
                         using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })
                         {
                             canvas.DrawBitmap(MicroPhoneStateLayer.LastImage.GetImage(TimeSpan.FromSeconds(MicroPhoneStateLayer.CurrentTime)),
