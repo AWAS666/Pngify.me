@@ -80,8 +80,11 @@ Feel free to suggest features and submit code yourself
 		- [ ] add sound effects	
 	- [ ] shaders
 	- [ ] https://x.com/MuRo_CG/status/1839337596549505274 <- similarish effects, maybe no drag/drop
-	- [ ] yeet away
-	- [ ] 
+	- [x] yeet away
+	- [ ] play sound layer -> use this instead of adding sounds to specific layers
+		- [ ] random sound from folder (.wav only ofc)
+- [ ] controller tracking
+- [ ] mouse tracking
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration

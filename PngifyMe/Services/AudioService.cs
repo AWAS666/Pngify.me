@@ -107,13 +107,13 @@ public static class AudioService
     }
 
 
-    public static async Task PlaySound(System.IO.Stream wavstream)
+    public static async Task PlaySound(System.IO.Stream mp3Stream)
     {
         int deviceIndex = Settings.DeviceOut;
 
         DeviceInfo info = PortAudio.GetDeviceInfo(deviceIndex);
 
-        using var waveFileReader = new Mp3FileReader(wavstream);
+        using var waveFileReader = new Mp3FileReader(mp3Stream);
         int sampleRate = waveFileReader.WaveFormat.SampleRate;
         int channelCount = waveFileReader.WaveFormat.Channels;
         var waveFormat = waveFileReader.WaveFormat;
