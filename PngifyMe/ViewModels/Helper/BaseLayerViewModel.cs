@@ -56,6 +56,8 @@ namespace PngifyMe.ViewModels.Helper
                     propertyViewModel.FilePicker = true;
                     propertyViewModel.PickFilter = filePickerAttribute.Type;
                 }
+                var folder = prop.GetCustomAttribute<FolderPickerAttribute>();
+                propertyViewModel.FolderPicker = folder != null;
 
                 PropertyList.Add(propertyViewModel);
             }

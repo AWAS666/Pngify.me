@@ -291,7 +291,7 @@ public static class AudioService
             float[] samples = new float[frameCount];
             Marshal.Copy(input, samples, 0, (Int32)frameCount);
 
-            Debug.WriteLine(samples.Max());
+            //Debug.WriteLine(samples.Max());
 
             float current = Current(samples.Max() * 2);
             Talking = current > Settings.ThreshHold;

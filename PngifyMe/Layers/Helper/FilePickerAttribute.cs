@@ -30,4 +30,12 @@ namespace PngifyMe.Layers.Helper
         {
         }
     }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class FolderPickerAttribute : Attribute
+    {
+        public FolderPickerAttribute()
+        {
+        }
+    }
 }

@@ -21,6 +21,11 @@ namespace PngifyMe.ViewModels.Helper
         [ObservableProperty]
         private bool filePicker;
 
+        [ObservableProperty]
+        private bool folderPicker;
+
+        public bool Picker => FilePicker || FolderPicker;
+
         public FilePickerFileType? PickFilter { get; internal set; }
     }
 }
