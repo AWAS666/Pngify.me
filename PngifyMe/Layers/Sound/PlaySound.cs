@@ -11,14 +11,13 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Layers.Sound
 {
-    public class PlaySoundOnce : PermaLayer
+    public class PlaySound : PermaLayer
     {
-
         [Unit("Path")]
         [WavPicker]
         public string FilePath { get; set; } = string.Empty;
 
-        public PlaySoundOnce()
+        public PlaySound()
         {
             EnterTime = 0f;
             ExitTime = 0f;
@@ -28,6 +27,7 @@ namespace PngifyMe.Layers.Sound
         {
             if (!File.Exists(FilePath))
             {
+                //todo: raise error here
                 IsExiting = true;
                 return;
             }

@@ -41,6 +41,8 @@ Feel free to suggest features and submit code yourself
 	- [x] order is: current -> current exist -> next entry -> next
 	- [ ] blending is working a little weird
 - [x] remember window position
+- [ ] add hints/layer descriptions
+	- [ ] rework this into a proper menu anyway, with different categories and stuff
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -81,8 +83,8 @@ Feel free to suggest features and submit code yourself
 	- [ ] shaders
 	- [ ] https://x.com/MuRo_CG/status/1839337596549505274 <- similarish effects, maybe no drag/drop
 	- [x] yeet away
-	- [ ] play sound layer -> use this instead of adding sounds to specific layers
-		- [ ] random sound from folder (.wav only ofc)
+	- [x] play sound layer -> use this instead of adding sounds to specific layers
+		- [x] random sound from folder (.wav only ofc)
 - [ ] controller tracking
 - [ ] mouse tracking
 ## Todo TTSPet
