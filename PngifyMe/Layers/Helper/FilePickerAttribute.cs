@@ -1,13 +1,32 @@
-﻿using System;
+﻿using Avalonia.Diagnostics.Screenshots;
+using Avalonia.Platform.Storage;
+using PngifyMe.ViewModels.Helper;
+using System;
 
 namespace PngifyMe.Layers.Helper
 {
     [AttributeUsage(AttributeTargets.Property)]
     public class FilePickerAttribute : Attribute
     {
-        public string Unit { get; }
+        public FilePickerFileType Type { get; }
+        public FilePickerAttribute(FilePickerFileType type)
+        {
+            Type = type;
+        }
+    }
 
-        public FilePickerAttribute()
+    [AttributeUsage(AttributeTargets.Property)]
+    public class ImagePickerAttribute : FilePickerAttribute
+    {
+        public ImagePickerAttribute() : base(FilePickers.ImageAll)
+        {
+        }
+    }
+
+    [AttributeUsage(AttributeTargets.Property)]
+    public class WavPickerAttribute : FilePickerAttribute
+    {
+        public WavPickerAttribute() : base(FilePickers.AudioAll)
         {
         }
     }

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Platform.Storage;
+using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 
 namespace PngifyMe.ViewModels.Helper
@@ -18,6 +19,8 @@ namespace PngifyMe.ViewModels.Helper
         private Type type;
 
         [ObservableProperty]
-        private bool filePicker;      
+        private bool filePicker;
+
+        public FilePickerFileType? PickFilter { get; internal set; }
     }
 }

@@ -23,7 +23,7 @@ public partial class PropertyView : UserControl
         var path = await storage.OpenFilePickerAsync(new FilePickerOpenOptions()
         {
             Title = "Select an Image",
-            FileTypeFilter = new[] { FilePickers.ImageAll },
+            FileTypeFilter = new[] { vm.PickFilter },
             AllowMultiple = false
         });
 

@@ -1,5 +1,7 @@
-﻿using PngifyMe.Layers.Helper;
+﻿using Avalonia.Platform.Storage;
+using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Settings.Images;
+using PngifyMe.ViewModels.Helper;
 using SkiaSharp;
 using System;
 using System.IO;
@@ -15,7 +17,7 @@ namespace PngifyMe.Layers.Image
         public float PosY { get; set; } = 540;
 
         [Unit("Path")]
-        [FilePicker]
+        [ImagePicker]
         public string FilePath { get; set; } = string.Empty;
 
         [Unit("seconds")]
