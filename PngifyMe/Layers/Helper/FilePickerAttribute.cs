@@ -1,5 +1,4 @@
-﻿using Avalonia.Diagnostics.Screenshots;
-using Avalonia.Platform.Storage;
+﻿using Avalonia.Platform.Storage;
 using PngifyMe.ViewModels.Helper;
 using System;
 
