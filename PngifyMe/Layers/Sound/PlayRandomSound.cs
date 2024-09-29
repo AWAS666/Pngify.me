@@ -2,6 +2,7 @@
 using PngifyMe.Layers.Helper;
 using PngifyMe.Layers.Movements;
 using PngifyMe.Services;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +28,7 @@ namespace PngifyMe.Layers.Sound
         {
             if (!Directory.Exists(Folder))
             {
-                //todo: raise error here
+                Log.Error($"PlayRandomSound: Directory {Folder} not found");
                 IsExiting = true;
                 return;
             }
@@ -35,7 +36,7 @@ namespace PngifyMe.Layers.Sound
 
             if (files.Count() < 1)
             {
-                //todo: raise error here
+                Log.Error($"PlayRandomSound: no files found in folder: {Folder}");
                 IsExiting = true;
                 return;
             }

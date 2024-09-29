@@ -2,6 +2,7 @@
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Settings.Images;
 using PngifyMe.ViewModels.Helper;
+using Serilog;
 using SkiaSharp;
 using System;
 using System.IO;
@@ -29,6 +30,7 @@ namespace PngifyMe.Layers.Image
         {
             if (!File.Exists(FilePath))
             {
+                Log.Error($"Image: File {FilePath} not found");
                 IsExiting = true;
                 return;
             }

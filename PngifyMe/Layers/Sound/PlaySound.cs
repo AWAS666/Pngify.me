@@ -1,7 +1,9 @@
-﻿using Avalonia.Platform;
+﻿using Avalonia.Controls;
+using Avalonia.Platform;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Layers.Movements;
 using PngifyMe.Services;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +29,7 @@ namespace PngifyMe.Layers.Sound
         {
             if (!File.Exists(FilePath))
             {
-                //todo: raise error here
+                Log.Error($"PlaySound: File {FilePath} not found");
                 IsExiting = true;
                 return;
             }
