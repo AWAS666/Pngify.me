@@ -76,7 +76,6 @@ Feel free to suggest features and submit code yourself
 - [ ] virtual webcam integration
 	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
-- [ ] mouse tracking 
 - [ ] complex layers 
 	- [x] explode into a variety of pixels
 		- [x] add sound effects	
@@ -101,7 +100,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [x] react to chat
 - [ ] STT to talk with your TTS pet
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
-- [ ] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
+- [x] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
 	- [ ] possibly use openai moderation, but always need an openai api key for that... 
 - [ ] fix audio levels -> make this changable with a slider?
 

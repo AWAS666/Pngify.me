@@ -1,0 +1,55 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 x:DataType="vm:LayerSelectorViewModel"
+             x:Class="PngifyMe.Views.Helper.LayerSelectorView"
+			 >
+	<UserControl.Background>
+		<LinearGradientBrush StartPoint="5%, 5%" EndPoint="80%, 80%">
+			<GradientStop Offset="0.0" Color="{DynamicResource SemiLightBlue0Color}" />
+			<GradientStop Offset="0.4" Color="{DynamicResource SemiLightBlue2Color}" />
+			<GradientStop Offset="0.9" Color="{DynamicResource SemiLightBlue1Color}" />
+		</LinearGradientBrush>
+	</UserControl.Background>
+
+	<Design.DataContext>
+		<vm:LayerSelectorViewModel/>
+	</Design.DataContext>
+	<Grid Margin="10" RowDefinitions="40,300*,50">
+		<Grid ColumnDefinitions="200*,300">
+			<TextBlock FontSize="28">Select a new layer</TextBlock>
+			<TextBox TextChanged="SearchTextChanged" Grid.Column="1" Watermark="Search"></TextBox>
+		</Grid>
+		<ListBox ItemsSource="{Binding AllLayers}" 
+				 SelectedValue="{Binding Selected, Mode=TwoWay}"
+				 Height="300"
+				  Grid.Row="1">
+			<ListBox.ItemTemplate>
+				<DataTemplate>
+					<StackPanel  Spacing="5">
+						<TextBlock FontSize="20" Text="{Binding Name}"></TextBlock>
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<Label>Description</Label>
+							<TextBlock>This is a sample layer description</TextBlock>
+						</StackPanel>
+
+					</StackPanel>
+				</DataTemplate>
+			</ListBox.ItemTemplate>
+		</ListBox>
+		<StackPanel Orientation="Horizontal" Spacing="25" HorizontalAlignment="Right" Grid.Row="2">
+			<Button Command="{Binding CancelCommand}"
+					Classes="Warning" Theme="{DynamicResource OutlineButton}">Cancel</Button>
+			<Button Command="{Binding SubmitCommand}"
+					Classes="Success" Theme="{DynamicResource OutlineButton}">Submit</Button>
+		</StackPanel>
+	</Grid>
+
+
+</UserControl>

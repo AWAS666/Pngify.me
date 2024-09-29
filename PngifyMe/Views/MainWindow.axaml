@@ -4,15 +4,15 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:views="clr-namespace:PngifyMe.Views"
+		xmlns:u="https://irihi.tech/ursa"		
         xmlns:vmh="clr-namespace:PngifyMe.Views.Helper"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
-		 xmlns:sett="clr-namespace:PngifyMe.Settings"
+		xmlns:sett="clr-namespace:PngifyMe.Settings"
 		xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
         x:Class="PngifyMe.Views.MainWindow"
         Icon="/Assets/icon.ico"
 		Background="Transparent"
-		  MinWidth="768"
-        MinHeight="432"
+		MinWidth="768"     MinHeight="432"
         Title="PngifyMe">
 	<Window.Styles>
 		<Style Selector="TabItem">
@@ -159,6 +159,7 @@
 				</TabItem>
 			</TabControl>
 		</DockPanel>
+		<u:OverlayDialogHost/>
 	</Grid>
 
 </Window>

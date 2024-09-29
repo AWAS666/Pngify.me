@@ -105,17 +105,21 @@ namespace PngifyMe.ViewModels.Helper
                     PropertyList.Add(propertyViewModel);
                 }
             }
-        }
-
+        }       
 
         public void AddNewLayer()
         {
             if (SelectedLayer == null)
                 return;
-            var newLayer = (BaseLayer)Activator.CreateInstance(SelectedLayer);
+            AddNewLayer(SelectedLayer);
+            SelectedLayer = null;
+        }
+
+        public void AddNewLayer(Type selected)
+        {
+            var newLayer = (BaseLayer)Activator.CreateInstance(selected);
             Layers.Add(new BaseLayerViewModel(newLayer, this));
             LayerSettModel.Layers.Add(newLayer);
-            SelectedLayer = null;
         }
 
         public void RemoveCommand(BaseLayerViewModel vm)

@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			  xmlns:u="https://irihi.tech/ursa"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
@@ -15,6 +16,7 @@
 		<vm:LayersettingViewModel/>
 	</Design.DataContext>
 	<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
+
 		<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
 		<Button Command="{Binding Parent.RemoveCommand}"
 				CommandParameter="{Binding}" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
@@ -32,6 +34,8 @@
 			<Button ToolTip.Tip="Add Selected Layer"
 				Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 				Command="{Binding AddNewLayer}">AddLayer</Button>
+			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+					Click="ShowSelector">Layer Menu</Button>
 		</StackPanel>
 
 		<Expander Grid.Row="3" Grid.ColumnSpan="3" IsExpanded="true"
@@ -44,5 +48,6 @@
 				</ListBox.ItemTemplate>
 			</ListBox>
 		</Expander>
+		<u:OverlayDialogHost Grid.RowSpan="4" Grid.ColumnSpan="4" HostId="LocalHost" ClipToBounds="True"/>
 	</Grid>
 </UserControl>
