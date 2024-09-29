@@ -79,7 +79,7 @@ Feel free to suggest features and submit code yourself
 - [ ] mouse tracking 
 - [ ] complex layers 
 	- [x] explode into a variety of pixels
-		- [ ] add sound effects	
+		- [x] add sound effects	
 	- [ ] shaders
 	- [ ] https://x.com/MuRo_CG/status/1839337596549505274 <- similarish effects, maybe no drag/drop
 	- [x] yeet away
