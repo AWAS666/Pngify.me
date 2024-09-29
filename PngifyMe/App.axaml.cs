@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using PngifyMe.Helpers;
 using PngifyMe.Services;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
@@ -68,6 +69,8 @@ public partial class App : Application
         Log.Logger = new LoggerConfiguration()
             .WriteTo.File(localAppDataPath, rollingInterval: RollingInterval.Day)
             .MinimumLevel.Warning()
+            .WriteTo.Sink(ErrorForwarder.Sink)
+            .MinimumLevel.Information()
             .CreateLogger();
     }
 }

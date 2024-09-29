@@ -4,20 +4,24 @@ using Avalonia.Data;
 using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Threading;
+using PngifyMe.Helpers;
 using PngifyMe.Services;
 using PngifyMe.Services.Twitch;
 using PngifyMe.Views.Helper;
+using Serilog;
 using System;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using TwitchLib.Api.Core.HttpCallHandlers;
 using TwitchLib.Api.ThirdParty.ModLookup;
+using Ursa.Controls;
 
 namespace PngifyMe.Views;
 
 public partial class MainWindow : Window
 {
+
     public MainWindow()
     {
         InitializeComponent();
@@ -35,7 +39,11 @@ public partial class MainWindow : Window
         TwitchEventSocket.Authenticated += Authenticated;
         if (SettingsManager.Current.Twitch.Enabled == true)
             twitchStatus.Text = "Connecting";
-    }
+
+        var topLevel = TopLevel.GetTopLevel(this);
+        ErrorForwarder.Sink.SetNotificationHandler(new WindowNotificationManager(topLevel) { MaxItems = 3 });
+        Log.Information("Double Click your avatar to hide the settings");
+    }  
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
@@ -91,15 +99,10 @@ public partial class MainWindow : Window
     private void DoubleClick(object? sender, TappedEventArgs e)
     {
         settings.IsVisible = !settings.IsVisible;
-        hintBox.IsVisible = false;
+        ErrorForwarder.Sink.SetActive(settings.IsVisible);
     }
 
-    private void HintPressed(object? sender, PointerPressedEventArgs e)
-    {
-        hintBox.IsVisible = false;
-    }
-
-    private void TwitchPressed(object? sender, PointerPressedEventArgs e)
+   private void TwitchPressed(object? sender, PointerPressedEventArgs e)
     {
         tabs.SelectedIndex = 7;
     }
