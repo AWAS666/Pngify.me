@@ -41,8 +41,8 @@ Feel free to suggest features and submit code yourself
 	- [x] order is: current -> current exist -> next entry -> next
 	- [ ] blending is working a little weird
 - [x] remember window position
-- [ ] add hints/layer descriptions
-	- [ ] rework this into a proper menu anyway, with different categories and stuff
+- [x] add hints/layer descriptions
+	- [x] rework this into a proper menu anyway, with different categories and stuff
 
 ## Todo Advanced
 - [ ] Release aside from git
@@ -108,7 +108,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] change to proper DI instead of static
 - [ ] use views and view models properly
 - [ ] more usercontrols to avoid overnesting
-- [ ] remove behaviours
+- [x] remove behaviours
 
 ## Todo better ui/ux
 - [ ] [UI Toolkit for more styled elements](https://github.com/kikipoulet/SukiUI) -> still in beta

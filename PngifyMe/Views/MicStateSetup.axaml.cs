@@ -1,8 +1,10 @@
 using Avalonia.Controls;
+using Avalonia.Input;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
 using PngifyMe.Services;
 using PngifyMe.ViewModels;
+using PngifyMe.ViewModels.Helper;
 using PngifyMe.Views.Helper;
 using System.ComponentModel;
 using System.Linq;
@@ -64,5 +66,11 @@ public partial class MicStateSetup : UserControl
 
         };
         await Drawer.ShowCustomModal<TransitionView, MicroPhoneStateViewModel, object?>(vm, "LocalHost", options);
+    }
+
+    private void HotkeyDown(object sender, KeyEventArgs e)
+    {
+        var vm = ((TextBox)sender).DataContext as MicroPhoneStateViewModel;
+        vm.OnKeyDown(e);
     }
 }

@@ -4,6 +4,7 @@ using PngifyMe.Services.Settings.Images;
 using SkiaSharp;
 using System;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.Settings
 {

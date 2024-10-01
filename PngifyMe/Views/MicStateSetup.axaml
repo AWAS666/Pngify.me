@@ -12,8 +12,6 @@
 			 x:DataType="vm:MicroPhoneSetupViewModel"
              x:Class="PngifyMe.Views.MicStateSetup"
 			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
-			   xmlns:int="clr-namespace:Avalonia.Xaml.Interactivity;assembly=Avalonia.Xaml.Interactivity"
-				xmlns:ia="clr-namespace:Avalonia.Xaml.Interactions.Core;assembly=Avalonia.Xaml.Interactions"
 			 >
 	<Design.DataContext>
 		<vm:MicroPhoneSetupViewModel/>
@@ -87,12 +85,8 @@
 										Click="ShowTransition">Transitions</Button>
 									<TextBox Name="Hotkeybox"
 											 Text="{Binding Hotkey}"
-											 Margin="15,0,0,0" Watermark="Hotkey" Width="150">
-										<int:Interaction.Behaviors>
-											<ia:EventTriggerBehavior EventName="KeyDown" SourceObject="Hotkeybox">
-												<ia:InvokeCommandAction Command="{Binding OnKeyDown}" PassEventArgsToCommand="True" />
-											</ia:EventTriggerBehavior>
-										</int:Interaction.Behaviors>
+											 Margin="15,0,0,0" Watermark="Hotkey" Width="150" 
+											 KeyDown="HotkeyDown">
 									</TextBox>
 								</StackPanel>
 
