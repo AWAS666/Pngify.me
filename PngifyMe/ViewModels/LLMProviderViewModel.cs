@@ -2,14 +2,8 @@
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.TTSPet;
-using PngifyMe.Services.TTSPet.OpenAI;
-using PngifyMe.Services.TTSPet.StreamElements;
-using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PngifyMe.ViewModels
 {

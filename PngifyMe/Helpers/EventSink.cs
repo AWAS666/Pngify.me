@@ -1,6 +1,5 @@
 ﻿using Serilog.Core;
 using Serilog.Events;
-using System;
 using Ursa.Controls;
 
 namespace PngifyMe.Helpers

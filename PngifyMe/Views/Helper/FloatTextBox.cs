@@ -71,7 +71,7 @@ namespace PngifyMe.Views.Helper
             float newValue = float.Parse(Text);
             float? fixedVal = CheckBounds(newValue);
             if (fixedVal != null)
-                SetValue((float)fixedVal);              
+                SetValue((float)fixedVal);
         }
 
         private void SetValue(float fixedVal)

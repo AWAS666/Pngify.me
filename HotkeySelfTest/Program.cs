@@ -1,12 +1,7 @@
-﻿using System.Runtime.InteropServices;
-
-namespace HotkeySelfTest
+﻿namespace HotkeySelfTest
 {
     using SharpHook;
-    using SharpHook.Native;
     using System;
-    using System.Runtime.InteropServices;
-    using System.Threading;
 
     class Program
     {
@@ -23,7 +18,7 @@ namespace HotkeySelfTest
             hook.KeyReleased += Hook_KeyReleased;
 
             hook.Run();
-        }       
+        }
         private static void Hook_KeyReleased(object? sender, KeyboardHookEventArgs e)
         {
         }

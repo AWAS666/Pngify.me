@@ -1,15 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PngifyMe.Layers.Helper;
-using PngifyMe.Services.Settings;
-using PngifyMe.Services.TTSPet.Settings;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace PngifyMe.Services
 {
@@ -57,7 +52,7 @@ namespace PngifyMe.Services
                     break;
                 default:
                     break;
-            }           
+            }
         }
 
         public static void Load()

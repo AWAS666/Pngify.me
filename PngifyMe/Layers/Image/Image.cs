@@ -1,7 +1,5 @@
-﻿using Avalonia.Platform.Storage;
-using PngifyMe.Layers.Helper;
+﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Settings.Images;
-using PngifyMe.ViewModels.Helper;
 using Serilog;
 using SkiaSharp;
 using System;

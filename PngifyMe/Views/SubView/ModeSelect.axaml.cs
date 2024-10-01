@@ -1,15 +1,8 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Media;
-using Avalonia.Platform.Storage;
 using DynamicData;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
-using PngifyMe.ViewModels.Helper;
-using System.Linq;
-using System.Net;
-using System.Security.Cryptography;
 
 namespace PngifyMe.Views.Helper;
 
@@ -22,7 +15,7 @@ public partial class ModeSelect : UserControl
     }
 
     private void Recolour()
-    {       
+    {
         switch (SettingsManager.Current.Profile.Active.Type)
         {
             case ProfileType.Human:

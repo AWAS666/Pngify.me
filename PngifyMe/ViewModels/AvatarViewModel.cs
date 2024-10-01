@@ -1,8 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using SkiaSharp;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace PngifyMe.ViewModels;
 
@@ -27,7 +25,7 @@ public partial class AvatarViewModel : ObservableObject
     private double opacity;
 
     [ObservableProperty]
-    private float fps;   
+    private float fps;
 
     [ObservableProperty]
     private SKBitmap skImage;
@@ -40,11 +38,11 @@ public partial class AvatarViewModel : ObservableObject
 
     private void UpdateImage(object? sender, SKImage e)
     {
-        SkImage = LayerManager.CurrentFrame;       
+        SkImage = LayerManager.CurrentFrame;
     }
 
     private void UpdateFPS(object? sender, float e)
     {
         Fps = e;
-    }    
+    }
 }

@@ -5,7 +5,6 @@ using PngifyMe.Services.Settings.Images;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Runtime;
 
 namespace PngifyMe.Layers.Microphone;
 

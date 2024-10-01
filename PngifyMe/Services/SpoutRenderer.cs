@@ -3,11 +3,7 @@ using Serilog;
 using SkiaSharp;
 using Spout.Interop;
 using System;
-using System.Linq;
-using System.Numerics;
-using System.Threading;
 using System.Threading.Tasks;
-using TwitchLib.PubSub.Models.Responses.Messages.AutomodCaughtMessage;
 
 namespace PngifyMe.Services
 {
@@ -32,7 +28,7 @@ namespace PngifyMe.Services
             _ = Task.Run(() =>
             {
                 try
-                {                  
+                {
                     ConvertSKImageToRawByteArray(LayerManager.CurrentFrame);
                     //SwapChannels();
                     // Send the byte array via Spout
@@ -53,7 +49,7 @@ namespace PngifyMe.Services
         {
             if (swappedPixels == null)
                 swappedPixels = new byte[pixelData.Length];
-           
+
             fixed (byte* pSrc = pixelData)
             fixed (byte* pDst = swappedPixels)
             {

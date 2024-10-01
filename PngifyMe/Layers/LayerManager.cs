@@ -1,7 +1,5 @@
-﻿using Newtonsoft.Json.Linq;
-using PngifyMe.Layers.Microphone;
+﻿using PngifyMe.Layers.Microphone;
 using PngifyMe.Services;
-using PngifyMe.Services.Settings.Images;
 using PngifyMe.Services.ThrowingSystem;
 using Serilog;
 using SkiaSharp;
@@ -9,8 +7,6 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using System.Reflection.Metadata;
-using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
 

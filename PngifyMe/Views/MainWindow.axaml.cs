@@ -9,12 +9,8 @@ using PngifyMe.Services;
 using PngifyMe.Services.Twitch;
 using PngifyMe.Views.Helper;
 using Serilog;
-using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.CompilerServices;
-using TwitchLib.Api.Core.HttpCallHandlers;
-using TwitchLib.Api.ThirdParty.ModLookup;
 using Ursa.Controls;
 
 namespace PngifyMe.Views;
@@ -43,7 +39,7 @@ public partial class MainWindow : Window
         var topLevel = TopLevel.GetTopLevel(this);
         ErrorForwarder.Sink.SetNotificationHandler(new WindowNotificationManager(topLevel) { MaxItems = 3 });
         Log.Information("Double Click your avatar to hide the settings");
-    }  
+    }
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
@@ -102,7 +98,7 @@ public partial class MainWindow : Window
         ErrorForwarder.Sink.SetActive(settings.IsVisible);
     }
 
-   private void TwitchPressed(object? sender, PointerPressedEventArgs e)
+    private void TwitchPressed(object? sender, PointerPressedEventArgs e)
     {
         tabs.SelectedIndex = 7;
     }

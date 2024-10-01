@@ -1,9 +1,7 @@
 using Avalonia.Controls;
-using Avalonia.Interactivity;
 using Avalonia.Threading;
 using PngifyMe.Services;
 using PngifyMe.ViewModels;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace PngifyMe.Views;
@@ -33,7 +31,7 @@ public partial class VolumeSlider : UserControl
 
     private void OutputDeviceChanged(object? sender, SelectionChangedEventArgs e)
     {
-        var vm = (AudioSetupViewModel) DataContext;
+        var vm = (AudioSetupViewModel)DataContext;
         if (e.AddedItems.Count == 1)
         {
             vm.Settings.DeviceOut = ((AudioDeviceConfig)e.AddedItems[0]).Id;

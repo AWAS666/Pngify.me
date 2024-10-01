@@ -105,7 +105,7 @@ namespace PngifyMe.ViewModels.Helper
                     PropertyList.Add(propertyViewModel);
                 }
             }
-        }       
+        }
 
         public void AddNewLayer()
         {

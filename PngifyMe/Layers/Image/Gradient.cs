@@ -1,11 +1,6 @@
-﻿using Avalonia.Platform.Storage;
-using PngifyMe.Layers.Helper;
+﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
-using PngifyMe.Services.Settings.Images;
-using PngifyMe.ViewModels.Helper;
 using SkiaSharp;
-using System;
-using System.IO;
 
 namespace PngifyMe.Layers.Image
 {

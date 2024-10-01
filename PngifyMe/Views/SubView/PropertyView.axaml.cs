@@ -1,7 +1,6 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
 using System.Linq;
 using System.Net;
@@ -42,7 +41,7 @@ public partial class PropertyView : UserControl
         var path = await storage.OpenFolderPickerAsync(new FolderPickerOpenOptions()
         {
             Title = " Select a Folder"
-        });      
+        });
 
         if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
         {

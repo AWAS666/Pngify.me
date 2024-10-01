@@ -1,18 +1,13 @@
-﻿using OpenAI.Managers;
-using OpenAI;
+﻿using OpenAI;
+using OpenAI.Managers;
+using OpenAI.ObjectModels.RequestModels;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using DynamicData;
-using OpenAI.Interfaces;
-using OpenAI.ObjectModels.RequestModels;
-using OpenAI.ObjectModels;
-using Serilog;
-using System.IO;
 using System.Text.RegularExpressions;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Services.TTSPet
 {

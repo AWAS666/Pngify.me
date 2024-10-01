@@ -1,7 +1,6 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Input;
-using Newtonsoft.Json.Linq;
 using System;
 using System.Text.RegularExpressions;
 

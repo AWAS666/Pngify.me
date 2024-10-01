@@ -1,12 +1,8 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
-using PngifyMe.Services;
 using PngifyMe.Settings;
 using PngifyMe.ViewModels;
-using System;
-using System.Linq;
-using System.Reflection;
 
 namespace PngifyMe.Views;
 

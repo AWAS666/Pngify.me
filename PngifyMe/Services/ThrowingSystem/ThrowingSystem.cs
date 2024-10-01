@@ -1,5 +1,4 @@
 ﻿using Avalonia.Platform;
-using NAudio.Wave;
 using PngifyMe.Layers;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.Twitch;

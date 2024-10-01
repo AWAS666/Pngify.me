@@ -1,5 +1,4 @@
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Interactivity;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;

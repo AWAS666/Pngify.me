@@ -1,12 +1,7 @@
 using Avalonia.Controls;
-using Avalonia.Data;
 using Avalonia.Interactivity;
-using PngifyMe.Services;
-using PngifyMe.Services.Settings;
 using PngifyMe.Services.TTSPet;
 using PngifyMe.ViewModels;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace PngifyMe.Views;
 
@@ -31,7 +26,7 @@ public partial class LLMSetup : UserControl
             Input = inputText.Text,
             Output = inputText.Text
         });
-    }    
+    }
 
     private void UpdateTTSProvider(object sender, SelectionChangedEventArgs e)
     {

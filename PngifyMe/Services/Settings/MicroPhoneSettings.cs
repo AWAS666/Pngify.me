@@ -10,8 +10,8 @@ namespace PngifyMe.Services.Settings
         private int threshHold = 25;
 
         [ObservableProperty]
-        private int deviceIn = PortAudio.DefaultInputDevice;     
-           
+        private int deviceIn = PortAudio.DefaultInputDevice;
+
         [ObservableProperty]
         private int deviceOut = PortAudio.DefaultOutputDevice;
 

@@ -14,7 +14,7 @@ namespace PngifyMe.Services.Settings
         private List<Action> callbacks = new();
 
         [ObservableProperty]
-        private bool showFPS = false;      
+        private bool showFPS = false;
 
         public List<Layersetting> Layers { get; set; } = new()
         {

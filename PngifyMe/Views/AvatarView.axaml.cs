@@ -1,9 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Data;
-using Avalonia.Threading;
 using PngifyMe.Services;
 using PngifyMe.ViewModels;
-using System;
 
 namespace PngifyMe.Views;
 
@@ -24,5 +22,5 @@ public partial class AvatarView : UserControl
 
         var vm = new AvatarViewModel();
         DataContext = vm;
-    }    
+    }
 }

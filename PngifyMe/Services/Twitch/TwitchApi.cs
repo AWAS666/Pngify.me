@@ -7,12 +7,10 @@ using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 using TwitchLib.Api;
-using TwitchLib.Api.Helix;
-using TwitchLib.Client.Models;
 using TwitchLib.Client;
-using TwitchLib.Communication.Interfaces;
-using TwitchLib.Communication.Models;
+using TwitchLib.Client.Models;
 using TwitchLib.Communication.Clients;
+using TwitchLib.Communication.Models;
 
 namespace PngifyMe.Services.Twitch
 {
@@ -77,7 +75,7 @@ namespace PngifyMe.Services.Twitch
             UserName = validation.Login;
 
             Save();
-           
+
         }
 
         public TwitchClient ConnectClient()

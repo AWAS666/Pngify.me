@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json.Serialization;
-using static System.Net.WebRequestMethods;
 
 namespace PngifyMe.Services.TTSPet.Settings
 {

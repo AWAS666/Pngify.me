@@ -1,11 +1,9 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers.Helper;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.Settings
 {
@@ -96,7 +94,7 @@ namespace PngifyMe.Services.Settings
         internal void Delete(Profile profile)
         {
             // active default if currently active
-            if(Active == profile)
+            if (Active == profile)
                 Active = ProfileList.First(x => x.Default);
             ProfileList.Remove(profile);
         }

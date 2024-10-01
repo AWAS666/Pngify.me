@@ -49,7 +49,7 @@ public partial class GeneralSettings : UserControl
         };
 
         spout2.Bind(CheckBox.IsCheckedProperty, spout);
-      
+
 
         TwitchEventSocket.Authenticated += UpdateText;
 

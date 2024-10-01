@@ -1,14 +1,11 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
-using Microsoft.Extensions.Options;
 using PngifyMe.Services;
 using PngifyMe.ViewModels;
 using PngifyMe.Views.Helper;
-using System;
 using System.ComponentModel;
 using System.Linq;
-using TwitchLib.Api.Helix.Models.Soundtrack;
 using Ursa.Common;
 using Ursa.Controls;
 using Ursa.Controls.Options;
@@ -64,7 +61,7 @@ public partial class MicStateSetup : UserControl
             CanLightDismiss = true,
             IsCloseButtonVisible = false,
             Title = "Setup Transitions",
-            
+
         };
         await Drawer.ShowCustomModal<TransitionView, MicroPhoneStateViewModel, object?>(vm, "LocalHost", options);
     }

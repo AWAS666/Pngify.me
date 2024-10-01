@@ -1,17 +1,10 @@
-﻿using OpenAI.Managers;
-using OpenAI;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
-using DynamicData;
-using OpenAI.Interfaces;
+﻿using OpenAI;
+using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
-using OpenAI.ObjectModels;
-using Serilog;
+using System;
 using System.IO;
+using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Services.TTSPet.OpenAI
 {
@@ -39,7 +32,7 @@ namespace PngifyMe.Services.TTSPet.OpenAI
 
         public async Task<Stream?> GenerateSpeech(string input)
         {
-            if(LLMService == null)
+            if (LLMService == null)
                 Init();
             var speech = await LLMService.CreateSpeech<Stream>(new AudioCreateSpeechRequest()
             {

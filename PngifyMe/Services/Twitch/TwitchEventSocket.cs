@@ -1,7 +1,6 @@
 ﻿using Serilog;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using TwitchLib.Api.Core.Enums;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
@@ -18,7 +17,7 @@ namespace PngifyMe.Services.Twitch
         public static EventHandler<ChannelCheer> BitsUsed;
         public static EventHandler<string> NewFollower;
         public static EventHandler<TwitchAuth> Authenticated;
-        public static EventHandler<ChannelChatMessage> NewChat; 
+        public static EventHandler<ChannelChatMessage> NewChat;
 
         private static EventSubWebsocketClient _eventSubWebsocketClient;
 
@@ -44,7 +43,7 @@ namespace PngifyMe.Services.Twitch
             _eventSubWebsocketClient.ChannelChatMessage += ChatMessage;
 
             await _eventSubWebsocketClient.ConnectAsync(new Uri(ws));
-        }       
+        }
 
         private static async Task WebsocketConnected(object sender, TwitchLib.EventSub.Websockets.Core.EventArgs.WebsocketConnectedArgs args)
         {
@@ -96,7 +95,7 @@ namespace PngifyMe.Services.Twitch
 
                 //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelchatmessage
                 await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.chat.message", "1",
-                   new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }, 
+                   new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId },
                        { "user_id", Api.UserId } },
                    EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 

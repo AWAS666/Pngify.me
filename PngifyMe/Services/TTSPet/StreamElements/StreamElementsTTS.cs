@@ -1,10 +1,7 @@
 ﻿using PngifyMe.Services.TTSPet.Settings;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PngifyMe.Services.TTSPet.StreamElements
@@ -22,7 +19,7 @@ namespace PngifyMe.Services.TTSPet.StreamElements
         }
 
         public async Task<Stream?> GenerateSpeech(string input)
-        {          
+        {
             var request = new HttpRequestMessage
             {
                 Method = HttpMethod.Get,
@@ -31,6 +28,6 @@ namespace PngifyMe.Services.TTSPet.StreamElements
             var response = await client.SendAsync(request);
             response.EnsureSuccessStatusCode();
             return await response.Content.ReadAsStreamAsync();
-        }   
+        }
     }
 }

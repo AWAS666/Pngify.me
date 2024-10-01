@@ -1,6 +1,5 @@
 ﻿using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
-using NAudio.CoreAudioApi;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
@@ -41,7 +40,7 @@ public partial class TITSSetupViewModel : ObservableObject
         {
             LayerManager.ThrowingSystem.Rain(Random.Shared.Next(10, 15));
             await Task.Delay(500);
-        }       
+        }
     }
 
     public async Task ChangeSound()
@@ -65,5 +64,5 @@ public partial class TITSSetupViewModel : ObservableObject
         SettingsManager.Current.Tits.HitSoundFileName = string.Empty;
     }
 
-  
+
 }

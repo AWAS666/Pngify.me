@@ -1,14 +1,7 @@
-﻿using Avalonia.Controls;
-using Avalonia.Platform;
-using PngifyMe.Layers.Helper;
-using PngifyMe.Layers.Movements;
+﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
 using Serilog;
-using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace PngifyMe.Layers.Sound

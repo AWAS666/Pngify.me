@@ -1,7 +1,5 @@
 ﻿using PngifyMe.Layers.Helper;
 using SkiaSharp;
-using System;
-using System.Security;
 
 namespace PngifyMe.Layers
 {

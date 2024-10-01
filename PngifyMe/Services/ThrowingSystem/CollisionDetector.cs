@@ -22,7 +22,7 @@ namespace PngifyMe.Services.ThrowingSystem
             GenerateOutlines();
         }
 
-        public CollisionDetector(SKBitmap bitmap, List<SKPoint> left, List<SKPoint> right,  int details)
+        public CollisionDetector(SKBitmap bitmap, List<SKPoint> left, List<SKPoint> right, int details)
         {
             this.bitmap = bitmap;
             this.leftOutline = left.ToList();

@@ -1,6 +1,5 @@
 ﻿using SkiaSharp;
 using System;
-using TwitchLib.Api.Helix;
 
 namespace PngifyMe.Services.Settings.Images
 {

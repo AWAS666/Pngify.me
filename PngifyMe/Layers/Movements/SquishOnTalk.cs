@@ -1,5 +1,4 @@
 ﻿using PngifyMe.Layers.Helper;
-using PngifyMe.Layers.Movements;
 using PngifyMe.Services;
 
 namespace PngifyMe.Layers

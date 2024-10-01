@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.TTSPet.Settings;
-using PngifyMe.Services.TTSPet.StreamElements;
 using System.Collections.Generic;
 
 namespace PngifyMe.Services.Settings
@@ -27,16 +26,16 @@ namespace PngifyMe.Services.Settings
         /// </summary>
         [ObservableProperty]
         private string domain;
-        
+
         /// <summary>
         /// todo: move this somewhere else??
         /// </summary>
         [ObservableProperty]
         private string openAIKey;
-        
+
         [ObservableProperty]
         private string systemPrompt = "You are a streamers TTSPet reading their donations whilst trying to be as sassy about it as possible.";
-        
+
         [ObservableProperty]
         private string modelName = "gpt-4o-mini";
 

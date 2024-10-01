@@ -1,10 +1,8 @@
-﻿using Serilog;
-using SharpHook;
+﻿using SharpHook;
 using SharpHook.Native;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
 using System.Reactive.Linq;
 
@@ -43,7 +41,7 @@ namespace PngifyMe.Services.Hotkey
                     action();
                 }
             }
-        }       
+        }
 
         private static void Desktop_Exit(object? sender, Avalonia.Controls.ApplicationLifetimes.ControlledApplicationLifetimeExitEventArgs e)
         {
@@ -70,7 +68,7 @@ namespace PngifyMe.Services.Hotkey
                 foreach (var action in actions)
                 {
                     item.Value.Remove(action);
-                }               
+                }
             }
         }
     }
