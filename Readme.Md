@@ -123,7 +123,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] splash screen or load json in bg
 - [x] button to close settings
 - [x] more tooltip
-- [ ] add notifications
+- [x] add notifications
  
 ## Ideas
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
