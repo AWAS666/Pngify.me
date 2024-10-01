@@ -4,6 +4,7 @@ using System;
 
 namespace PngifyMe.Layers
 {
+    [LayerDescription("Wiggle whenever talking (x/y movement)")]
     public class WiggleOnTalk : RampOnConditionLayer
     {
         [Unit("pixels")]

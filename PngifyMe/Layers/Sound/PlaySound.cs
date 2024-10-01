@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Layers.Sound
 {
+    [LayerDescription("Play once specific sound")]
     public class PlaySound : PermaLayer
     {
         [Unit("Path")]

@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Layers.Sound
 {
+    [LayerDescription("Play random sound from a folder")]
     public class PlayRandomSound : PermaLayer
     {
         [Unit("Path")]

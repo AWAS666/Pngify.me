@@ -4,6 +4,7 @@ using System;
 
 namespace PngifyMe.Layers
 {
+    [LayerDescription("Run away and go back home...")]
     public class GoHome : MovementBaseLayer
     {
         [Unit("pixels/s")]

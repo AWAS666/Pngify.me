@@ -9,11 +9,14 @@ using System.IO;
 
 namespace PngifyMe.Layers.Image
 {
+    [LayerDescription("Add noise on top of your model")]
+
     public class FilmGrain : ImageLayer
     {
         private SKBitmap cachedNoiseBitmap;
         private int frameCounter;
 
+        [Unit("% from 0-1")]
         public float Intensity { get; set; } = 0.2f;
 
 

@@ -3,6 +3,7 @@ using PngifyMe.Layers.Movements;
 
 namespace PngifyMe.Layers
 {
+    [LayerDescription("Rotate by amount, great for a spin effect")]
     public class RotateByRel : MovementBaseLayer
     {
 

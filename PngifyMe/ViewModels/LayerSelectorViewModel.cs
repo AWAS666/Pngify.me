@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Irihi.Avalonia.Shared.Contracts;
+using PngifyMe.Layers.Helper;
 using PngifyMe.ViewModels.Helper;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,11 @@ namespace PngifyMe.ViewModels
         public LayersettingViewModel Parent { get; }
 
         [ObservableProperty]
-        private ObservableCollection<Type> allLayers;
-        public Type Selected { get; set; }
+        private ObservableCollection<LayerClass> allLayers;
+
+        [ObservableProperty]
+        private ObservableCollection<LayerClass> viewLayers;
+        public LayerClass Selected { get; set; }
 
         public LayerSelectorViewModel() : this(new LayersettingViewModel())
         {
@@ -26,7 +30,8 @@ namespace PngifyMe.ViewModels
         public LayerSelectorViewModel(LayersettingViewModel parent)
         {
             Parent = parent;
-            AllLayers = parent.AllLayers;
+            AllLayers = new ObservableCollection<LayerClass>(parent.AllLayers.Select(LayerClass.CreateFromBaseLayer));
+            ViewLayers = AllLayers;
         }
 
         public event EventHandler<object?>? RequestClose;
@@ -34,7 +39,8 @@ namespace PngifyMe.ViewModels
         [RelayCommand]
         public void Submit()
         {
-            Parent.AddNewLayer(Selected);
+            if (Selected != null)
+                Parent.AddNewLayer(Selected.Type);
             Close();
         }
 
@@ -46,12 +52,30 @@ namespace PngifyMe.ViewModels
 
         internal void ChangeFilter(string v)
         {
-            AllLayers = new ObservableCollection<Type>(Parent.AllLayers.Where(x => x.Name.Contains(v, StringComparison.CurrentCultureIgnoreCase)));
+            ViewLayers = new ObservableCollection<LayerClass>(AllLayers.Where(x => x.Name.Contains(v, StringComparison.CurrentCultureIgnoreCase)));
         }
 
         public void Close()
         {
             RequestClose?.Invoke(this, null);
+        }
+    }
+
+    public class LayerClass
+    {
+        public string Name { get; set; } = string.Empty;
+        public string Description { get; set; } = string.Empty;
+        public Type Type { get; set; }
+
+        public static LayerClass CreateFromBaseLayer(Type Type)
+        {
+            var attribute = (LayerDescriptionAttribute)Attribute.GetCustomAttribute(Type, typeof(LayerDescriptionAttribute));
+            return new LayerClass()
+            {
+                Name = Type.Name,
+                Type = Type,
+                Description = attribute?.Description ?? "??"
+            };
         }
     }
 }

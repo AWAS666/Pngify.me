@@ -5,6 +5,7 @@ using System;
 
 namespace PngifyMe.Layers
 {
+    [LayerDescription("Little bit of a wiggle")]
     public class Wiggle : MovementBaseLayer
     {
         [Unit("pixels")]

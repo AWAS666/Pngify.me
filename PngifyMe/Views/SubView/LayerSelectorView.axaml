@@ -26,7 +26,7 @@
 			<TextBlock FontSize="28">Select a new layer</TextBlock>
 			<TextBox TextChanged="SearchTextChanged" Grid.Column="1" Watermark="Search"></TextBox>
 		</Grid>
-		<ListBox ItemsSource="{Binding AllLayers}" 
+		<ListBox ItemsSource="{Binding AllLayers}"
 				 SelectedValue="{Binding Selected, Mode=TwoWay}"
 				 Height="300"
 				  Grid.Row="1">
@@ -35,10 +35,8 @@
 					<StackPanel  Spacing="5">
 						<TextBlock FontSize="20" Text="{Binding Name}"></TextBlock>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<Label>Description</Label>
-							<TextBlock>This is a sample layer description</TextBlock>
+							<TextBlock Text="{Binding Description}"></TextBlock>
 						</StackPanel>
-
 					</StackPanel>
 				</DataTemplate>
 			</ListBox.ItemTemplate>

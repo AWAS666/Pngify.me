@@ -9,6 +9,7 @@ using System.IO;
 
 namespace PngifyMe.Layers.Image
 {
+    [LayerDescription("Add a gradient")]
     public class Gradient : ImageLayer
     {
 

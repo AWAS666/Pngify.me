@@ -7,10 +7,10 @@ using SkiaSharp;
 using System;
 using System.IO;
 using System.Net.NetworkInformation;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PngifyMe.Layers.Image
 {
+    [LayerDescription("Scrolling text, maybe an ad?")]
     public class ScrollingText : ImageLayer
     {
         private float currentOffset;

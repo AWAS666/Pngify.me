@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Layers.Image;
 
+[LayerDescription("Explode your png")]
 public class Explosion : ImageLayer
 {
 
