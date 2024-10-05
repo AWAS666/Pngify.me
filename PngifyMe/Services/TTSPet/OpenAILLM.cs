@@ -53,7 +53,7 @@ Current Date and time: {DateTime.Now}"),
                     Model = SettingsManager.Current.LLM.ModelName,
                     FrequencyPenalty = 1f,
                     PresencePenalty = 1f,
-                    MaxTokens = 256,
+                    MaxTokens = SettingsManager.Current.LLM.MaxTokens,
                     Temperature = 0.8f
                 });
                 return completionResult.Choices.First().Message.Content;

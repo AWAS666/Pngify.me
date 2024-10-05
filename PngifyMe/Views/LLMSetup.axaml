@@ -48,6 +48,11 @@
 							<TextBox MinWidth="100" Text="{Binding Settings.ModelName}"></TextBox>
 						</StackPanel>
 
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="How many tokens the model should be allowed to respond with (1 token is roughly 1 word)">
+							<Label VerticalAlignment="Center" >Max Tokens: </Label>
+							<helper:UintTextBox MinWidth="100" Text="{Binding Settings.MaxTokens}" Min="10" Max="2048"/>
+						</StackPanel>
+
 						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<TextBox MaxLines="100" Width="500" Height="200"

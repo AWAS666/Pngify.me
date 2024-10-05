@@ -42,6 +42,9 @@ namespace PngifyMe.Services.Settings
         [ObservableProperty]
         private string tTSSystem = "StreamElements";
 
+        [ObservableProperty]
+        private int maxTokens = 512;
+
         public List<string> BannedPhrases { get; set; } = new List<string>();
 
         [ObservableProperty]

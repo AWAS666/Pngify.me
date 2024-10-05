@@ -59,7 +59,7 @@ Feel free to suggest features and submit code yourself
 	- [x] twitch redeems
 		- [ ] add text and parse amount?
 	- [ ] throw emotes
-	- [ ] settings to change how loud collission sound plays
+	- [x] settings to change how loud collission sound plays
 	- [x] bits shower
 	- [x] spawn throw similar to rain, not all at once but one after another
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
@@ -95,8 +95,8 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 	- [ ] elevenlabs
 	- [x] stream elements
 		- [ ] double check
-	- [ ] tik tok
-- [ ] max tokens, limit yapping 
+	- [x] tik tok
+- [x] max tokens, limit yapping 
 - [x] react to chat
 - [ ] STT to talk with your TTS pet
 - [x] change to use profile parameter, enabled has to switch current profile from human -> ttspet
