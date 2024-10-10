@@ -93,6 +93,12 @@ namespace PngifyMe.Services.Twitch
             return client;
         }
 
+        public async Task<TwitchLib.Api.Helix.Models.Chat.Emotes.ChannelEmote[]> GetEmotes()
+        {
+            var resp = await Api.Helix.Chat.GetChannelEmotesAsync(UserId);
+            return resp.ChannelEmotes;
+        }
+
         private void LoadAuth()
         {
             if (File.Exists(FilePath))

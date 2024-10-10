@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using System;
 
 namespace PngifyMe.Services.Settings
 {
@@ -24,6 +25,16 @@ namespace PngifyMe.Services.Settings
 
         [ObservableProperty]
         private uint collissionEnergyLossPercent = 20;
+
+        [ObservableProperty]
+        private bool useTwitchEmotes = false;
+
+        partial void OnUseTwitchEmotesChanged(bool oldValue, bool newValue)
+        {
+            UseTwitchEmotesChanged?.Invoke(oldValue, newValue);
+        }
+
+        public EventHandler<bool> UseTwitchEmotesChanged;
 
         public TitsTriggerSetup ThrowSetup { get; set; } = new();
         public TitsTriggerSetup RainSetup { get; set; } = new();

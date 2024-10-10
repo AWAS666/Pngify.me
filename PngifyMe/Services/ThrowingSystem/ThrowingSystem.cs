@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Numerics;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
@@ -27,21 +28,73 @@ namespace PngifyMe.Services.ThrowingSystem
         private Stream audio;
         private TitsSettings settings;
 
-        public List<SKBitmap> Throwables { get; set; } = new()
-        {
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit100.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit5000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit10000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit20000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-        };
+        public List<SKBitmap> Throwables { get; set; }
 
         public ThrowingSystem()
         {
             TwitchEventSocket.BitsUsed += TriggerBits;
             TwitchEventSocket.RedeemUsed += TriggerRedeem;
             settings = SettingsManager.Current.Tits;
+            settings.UseTwitchEmotesChanged += ReloadEmotes;
+            ReloadEmotes(this, settings.UseTwitchEmotes);
+        }
+
+        private void ReloadEmotes(object? sender, bool useTwitch)
+        {
+            if (useTwitch)
+            {
+                if (TwitchEventSocket.Api != null)
+                {
+                    LoadTwitchEmotesAsync(null, null);
+                }
+                else
+                {
+                    TwitchEventSocket.Authenticated += LoadTwitchEmotesAsync;
+                }
+            }
+            else
+            {
+                Throwables = LoadBits();
+            }
+        }
+
+        private List<SKBitmap> LoadBits()
+        {
+            return
+            [
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit100.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit5000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit10000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit20000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+            ];
+        }
+
+        private async void LoadTwitchEmotesAsync(object? sender, TwitchAuth e)
+        {
+            Throwables.Clear();
+            var emotes = await TwitchEventSocket.Api.GetEmotes();
+            using var httpClient = new HttpClient();
+            string baseDir = Path.Combine(Specsmanager.BasePath, "emotecache");
+            Directory.CreateDirectory(baseDir);
+            foreach (var emote in emotes)
+            {
+                string fileName = Path.Combine(baseDir, $"{emote.Name}.png");
+                if (File.Exists(fileName))
+                {
+                    var imageBytes = await File.ReadAllBytesAsync(fileName);
+                    using var stream = new SKMemoryStream(imageBytes);
+                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                }
+                else
+                {
+                    var imageBytes = await httpClient.GetByteArrayAsync(emote.Images.Url4X);
+                    await File.WriteAllBytesAsync(fileName, imageBytes);
+                    using var stream = new SKMemoryStream(imageBytes);
+                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                }
+            }
         }
 
         private async void TriggerRedeem(object? sender, string e)
@@ -168,6 +221,7 @@ namespace PngifyMe.Services.ThrowingSystem
 
         public void Trigger(int amount)
         {
+            if (Throwables.Count == 0) return;
             int height = Specsmanager.Height / 4;
             int offset = Specsmanager.Height / 8;
             for (var i = 0; i < amount; i++)
@@ -184,6 +238,7 @@ namespace PngifyMe.Services.ThrowingSystem
 
         public void Rain(int amount)
         {
+            if (Throwables.Count == 0) return;
             int width = Specsmanager.Width / 4;
             int offset = Specsmanager.Width / 8;
             for (var i = 0; i < amount; i++)

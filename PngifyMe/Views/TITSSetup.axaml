@@ -17,9 +17,13 @@
 		<StackPanel Spacing="5">
 			<TextBlock FontSize="24">TITS Setup</TextBlock>
 			<TextBlock TextWrapping="WrapWithOverflow" >Twitch Integrated Throwing System (TITS) allows you to throw items at your PngTuber.</TextBlock>
-			<CheckBox x:Name="activated">Activated</CheckBox>
+			<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}" >Activated</CheckBox>
 			<CheckBox ToolTip.Tip="Use this to test the hit box of your character"
-					  x:Name="showHitbox">Show Hitboxes</CheckBox>
+					  IsChecked="{Binding Settings.HitLinesVisible, Mode=TwoWay}"
+					 >Show Hitboxes</CheckBox>
+			<CheckBox IsChecked="{Binding Settings.UseTwitchEmotes, Mode=TwoWay}"
+					  ToolTip.Tip="Use your channels twitch emotes, need to connect twitch to enable this"
+					  >Use Twitch Emotes</CheckBox>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
