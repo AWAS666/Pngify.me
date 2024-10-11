@@ -43,6 +43,7 @@ namespace PngifyMe.Services.ThrowingSystem
         {
             if (useTwitch)
             {
+                Throwables = new List<SKBitmap>();
                 if (TwitchEventSocket.Api != null)
                 {
                     LoadTwitchEmotesAsync(null, null);

@@ -55,10 +55,11 @@ Feel free to suggest features and submit code yourself
 - [x] TITS (Twitch Integrated Throwing System) like system, throw pngs at your vtuber
 	- [ ] custom assets
 	- [x] sound
-	- [ ] custom triggers
+	- [x] custom triggers
 	- [x] twitch redeems
 		- [ ] add text and parse amount?
-	- [ ] throw emotes
+	- [x] throw emotes
+		- [ ] make these load from cache always and refresh once twitch is connected?
 	- [x] settings to change how loud collission sound plays
 	- [x] bits shower
 	- [x] spawn throw similar to rain, not all at once but one after another
@@ -84,6 +85,7 @@ Feel free to suggest features and submit code yourself
 	- [x] yeet away
 	- [x] play sound layer -> use this instead of adding sounds to specific layers
 		- [x] random sound from folder (.wav only ofc)
+	- [ ] emotes explosion like streamelements?
 - [ ] controller tracking
 - [ ] mouse tracking
 ## Todo TTSPet
