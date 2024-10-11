@@ -15,6 +15,8 @@ namespace PngifyMe.Services.Twitch
         public static EventHandler<string> RedeemUsed;
         public static EventHandler<ChannelPointsCustomRewardRedemption> RedeemFull;
         public static EventHandler<ChannelCheer> BitsUsed;
+        public static EventHandler<ChannelSubscribe> Subscription;
+        public static EventHandler<ChannelSubscriptionGift> SubGift;
         public static EventHandler<string> NewFollower;
         public static EventHandler<TwitchAuth> Authenticated;
         public static EventHandler<ChannelChatMessage> NewChat;
@@ -42,7 +44,22 @@ namespace PngifyMe.Services.Twitch
             _eventSubWebsocketClient.ChannelCheer += Cheer;
             _eventSubWebsocketClient.ChannelChatMessage += ChatMessage;
 
+            _eventSubWebsocketClient.ChannelSubscribe += ChannelSubscription;
+            _eventSubWebsocketClient.ChannelSubscriptionGift += ChannelSubGift;
+
             await _eventSubWebsocketClient.ConnectAsync(new Uri(ws));
+        }
+
+        private static async Task ChannelSubGift(object sender, ChannelSubscriptionGiftArgs e)
+        {
+            var eventData = e.Notification.Payload.Event;
+            SubGift?.Invoke(null, eventData);
+        }
+
+        private static async Task ChannelSubscription(object sender, ChannelSubscribeArgs e)
+        {
+            var eventData = e.Notification.Payload.Event;
+            Subscription?.Invoke(null, eventData);
         }
 
         private static async Task WebsocketConnected(object sender, TwitchLib.EventSub.Websockets.Core.EventArgs.WebsocketConnectedArgs args)
@@ -98,6 +115,15 @@ namespace PngifyMe.Services.Twitch
                    new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId },
                        { "user_id", Api.UserId } },
                    EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
+
+                //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe
+                await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.subscribe", "1",
+                  new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }},
+                  EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
+
+                await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.subscription.gift", "1",
+                  new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
+                  EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
                 Authenticated?.Invoke(Api, Api.Auth);
             }
