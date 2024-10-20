@@ -14,6 +14,8 @@
 	<UserControl.DataTemplates>
 		<DataTemplate DataType="{x:Type sett:AlwaysActive}">
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type sett:TwitchSub}">
+		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:HotkeyTrigger}">
 			<StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">

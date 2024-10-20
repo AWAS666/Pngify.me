@@ -54,6 +54,9 @@ namespace PngifyMe.Services.Settings
                     case TwitchBits bits:
                         TwitchEventSocket.BitsUsed += bits.Triggered;
                         break;
+                    case TwitchSub subs:
+                        TwitchEventSocket.AnySub += subs.Triggered;
+                        break;
                     default:
                         break;
                 }
@@ -73,6 +76,11 @@ namespace PngifyMe.Services.Settings
             foreach (var item in Layers.Where(x => x.Trigger is TwitchBits))
             {
                 TwitchEventSocket.BitsUsed -= ((TwitchBits)item.Trigger).Triggered;
+            }
+
+            foreach (var item in Layers.Where(x => x.Trigger is TwitchSub))
+            {
+                TwitchEventSocket.AnySub -= ((TwitchSub)item.Trigger).Triggered;
             }
         }
     }
@@ -109,6 +117,9 @@ namespace PngifyMe.Services.Settings
                     break;
                 case TwitchBits redeem:
                     TwitchEventSocket.BitsUsed -= redeem.Triggered;
+                    break;
+                case TwitchSub sub:
+                    TwitchEventSocket.AnySub -= sub.Triggered;
                     break;
                 default:
                     break;

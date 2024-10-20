@@ -42,12 +42,20 @@ namespace PngifyMe.Services.Settings
         public uint MinAmount { get; set; }
         public uint MaxAmount { get; set; } = uint.MaxValue;
 
-        internal void Triggered(object? sender, ChannelCheer e)
+        public void Triggered(object? sender, ChannelCheer e)
         {
             if (e.Bits >= MinAmount && e.Bits < MaxAmount)
             {
                 Parent.AddLayers();
             }
+        }
+    }
+
+    public class TwitchSub : Trigger
+    {
+        public void Triggered(object? sender, string name)
+        {
+            Parent.AddLayers();
         }
     }
 }

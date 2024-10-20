@@ -43,6 +43,7 @@ Feel free to suggest features and submit code yourself
 - [x] remember window position
 - [x] add hints/layer descriptions
 	- [x] rework this into a proper menu anyway, with different categories and stuff
+- [x] new trigger variant: sub
 
 ## Todo Advanced
 - [ ] Release aside from git

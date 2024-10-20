@@ -17,6 +17,7 @@ namespace PngifyMe.Services.Twitch
         public static EventHandler<ChannelCheer> BitsUsed;
         public static EventHandler<ChannelSubscribe> Subscription;
         public static EventHandler<ChannelSubscriptionGift> SubGift;
+        public static EventHandler<string> AnySub;
         public static EventHandler<string> NewFollower;
         public static EventHandler<TwitchAuth> Authenticated;
         public static EventHandler<ChannelChatMessage> NewChat;
@@ -54,12 +55,14 @@ namespace PngifyMe.Services.Twitch
         {
             var eventData = e.Notification.Payload.Event;
             SubGift?.Invoke(null, eventData);
+            AnySub?.Invoke(null, eventData.UserName);
         }
 
         private static async Task ChannelSubscription(object sender, ChannelSubscribeArgs e)
         {
             var eventData = e.Notification.Payload.Event;
             Subscription?.Invoke(null, eventData);
+            AnySub?.Invoke(null, eventData.UserName);
         }
 
         private static async Task WebsocketConnected(object sender, TwitchLib.EventSub.Websockets.Core.EventArgs.WebsocketConnectedArgs args)
