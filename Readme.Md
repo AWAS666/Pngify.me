@@ -44,6 +44,7 @@ Feel free to suggest features and submit code yourself
 - [x] add hints/layer descriptions
 	- [x] rework this into a proper menu anyway, with different categories and stuff
 - [x] new trigger variant: sub
+- [ ] web view -> just display current image on web, need ws connection of some sort prolly
 
 ## Todo Advanced
 - [ ] Release aside from git
