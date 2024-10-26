@@ -22,6 +22,7 @@ namespace PngifyMe.Services.TTSPet
         public static ITTSProvider TTSProvider { get; set; }
 
         public static List<LLMMessage> Queue { get; set; } = new();
+        public static List<LLMMessage> History { get; set; } = new();
 
         public static EventHandler<LLMMessage> NewOrUpdated;
 
@@ -167,8 +168,15 @@ namespace PngifyMe.Services.TTSPet
 
         private static async Task GetResponse(LLMMessage item)
         {
-            if (string.IsNullOrEmpty(item.Output))
-                item.Output = await LLMProvider.GetResponse(item.Input, item.UserName);
+            if (!string.IsNullOrEmpty(item.Output)) return;
+            item.Output = await LLMProvider.GetResponse(item.Input, item.UserName, History);
+
+            History.Add(item);
+
+            while (History.Count > 4)
+            {
+                History.RemoveAt(0);
+            }
         }
 
         public static async Task ReadText(string input)

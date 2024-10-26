@@ -34,22 +34,27 @@ namespace PngifyMe.Services.TTSPet
             LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(3) });
         }
 
-        public async Task<string> GetResponse(string input, string userName)
+        public async Task<string> GetResponse(string input, string userName, List<LLMMessage> history)
         {
             try
             {
                 if (LLMService == null)
                     Init();
                 string? user = userName != null ? Regex.Replace(userName, @"[^a-zA-Z\d_-]", "") : null;
-                var completionResult = await LLMService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
-                {
-                    Messages = new List<ChatMessage>
+                var messages = new List<ChatMessage>
                 {
                     ChatMessage.FromSystem($@"{SettingsManager.Current.LLM.SystemPrompt}
 ### Additional Info:
 Current Date and time: {DateTime.Now}"),
-                    ChatMessage.FromUser(input, user)
-                },
+
+                };
+                // add history
+                history.ForEach(x => messages.AddRange(x.ToChatMessage()));
+                messages.Add(ChatMessage.FromUser(input, user));
+
+                var completionResult = await LLMService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
+                {
+                    Messages = messages,
                     Model = SettingsManager.Current.LLM.ModelName,
                     FrequencyPenalty = 1f,
                     PresencePenalty = 1f,

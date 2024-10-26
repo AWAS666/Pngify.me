@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using OpenAI.ObjectModels.RequestModels;
 using System;
+using System.Collections.Generic;
 
 namespace PngifyMe.Services.TTSPet
 {
@@ -24,5 +26,14 @@ namespace PngifyMe.Services.TTSPet
         public DateTime Created { get; set; } = DateTime.Now;
 
         public string ToRead => ReadInput ? Input : Output;
+
+        public IEnumerable<ChatMessage> ToChatMessage()
+        {
+            return new List<ChatMessage>()
+            {
+                ChatMessage.FromUser(Input,UserName),
+                ChatMessage.FromAssistant(Output),
+            };
+        }
     }
 }
