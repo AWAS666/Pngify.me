@@ -10,14 +10,14 @@
              x:Class="PngifyMe.Views.AvatarView">
 	<Grid  HorizontalAlignment="Stretch"
 	   VerticalAlignment="Stretch" >
-		<siv:SKImageView
+		<!--<siv:SKImageView
 			HorizontalAlignment="Center"
 				VerticalAlignment="Center"
 				Source="{Binding SkImage}"
 				RenderMode="AsynchronouslyForFetching"
-				Stretch="Uniform" />
-		<!--<vh:SKImageViewer Source="{Binding SkImage}"
-				></vh:SKImageViewer>-->
+				Stretch="Uniform" />-->
+		<vh:SKImageViewer Source="{Binding SkImage}"
+				></vh:SKImageViewer>
 		<TextBlock x:Name="fpsCounter" Text="{Binding Fps}"></TextBlock>
 	</Grid>
 </UserControl>

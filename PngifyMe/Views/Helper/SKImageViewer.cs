@@ -1,22 +1,21 @@
 ﻿using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
+using Avalonia.Media.Imaging;
 using Avalonia.Platform;
-using Avalonia.Rendering.SceneGraph;
-using Avalonia.Skia;
+using Avalonia.Reactive;
 using SkiaSharp;
-using System.Collections.Generic;
 
 namespace PngifyMe.Views.Helper
 {
     /// <summary>
-    /// this has a couple of issues:
-    /// - doesnt auto fit to the parent size and keep proportions like an image does
-    /// - double click onto this doesnt work
-    /// - 
+    /// need to dispose bitmaps outside if updated regularly
     /// </summary>
     public class SKImageViewer : UserControl
     {
+
+        public static readonly StyledProperty<SKBitmap> SourceProperty =
+            AvaloniaProperty.Register<SKImageViewer, SKBitmap>(nameof(Source));
 
         static SKImageViewer()
         {
@@ -26,13 +25,45 @@ namespace PngifyMe.Views.Helper
         public SKImageViewer()
         {
             ClipToBounds = true;
+
+            SourceProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<SKBitmap>>(
+               e =>
+               {
+                   base.InvalidateMeasure();
+                   base.InvalidateVisual();
+               })
+            );
         }
 
+        private Size RenderSize =>
+          this.Bounds.Size;
+        private WriteableBitmap writableBitmap;
 
-        public static readonly StyledProperty<SKBitmap> SourceProperty =
-            AvaloniaProperty.Register<SKImageViewer, SKBitmap>(nameof(Source));
-        private CustomDrawOp drawOp;
-        private List<CustomDrawOp> oldFrame = new();
+        protected override Size MeasureOverride(Size constraint) =>
+           this.InternalMeasureArrangeOverride(constraint);
+
+        protected override Size ArrangeOverride(Size arrangeSize) =>
+            this.InternalMeasureArrangeOverride(arrangeSize);
+
+        private Size InternalMeasureArrangeOverride(Size targetSize)
+        {
+            if (Source != null)
+            {
+                var self = new Size(Source.Width, Source.Height);
+                var scaleFactor = ComputeScaleFactor(
+                    targetSize,
+                    self)
+                  ;
+                return new(
+                   self.Width * scaleFactor.Width,
+                   self.Height * scaleFactor.Height);
+            }
+            else
+            {
+                return default;
+            }
+        }
+
 
         public SKBitmap Source
         {
@@ -40,45 +71,42 @@ namespace PngifyMe.Views.Helper
             set => SetValue(SourceProperty, value);
         }
 
-        public override void Render(DrawingContext context)
+        public override void Render(DrawingContext drawingContext)
         {
-            drawOp = new CustomDrawOp();
-            drawOp.Update(new Rect(Bounds.X, Bounds.Y, Bounds.Width, Bounds.Height), Source);
-            context.Custom(drawOp);
+            base.Render(drawingContext);
+            if (Source == null) return;
+
+            int width = Source.Width;
+            int height = Source.Height;
+
+            var info = new SKImageInfo(
+                width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
+
+            writableBitmap = writableBitmap ?? new WriteableBitmap(
+                 new(info.Width, info.Height), new(96.0, 96.0), PixelFormat.Bgra8888, AlphaFormat.Premul);
+            using var locker = writableBitmap.Lock();
+            using var surface = SKSurface.Create(info, locker.Address, locker.RowBytes);
+            surface.Canvas.DrawBitmap(Source, default(SKPoint));
+            drawingContext.DrawImage(writableBitmap, new(new(), this.RenderSize));
         }
 
-        class CustomDrawOp : ICustomDrawOperation
+        private Size ComputeScaleFactor(Size availableSize, Size contentSize)
         {
-            public void Dispose()
-            {
-                image?.Dispose();
-            }
+            // Compute scaling factors to use for axes
+            double scaleX = 1.0;
+            double scaleY = 1.0;
 
-            public Rect Bounds { get; private set; }
+            // Compute scaling factors for both axes
+            scaleX = availableSize.Width / contentSize.Width;
+            scaleY = availableSize.Height / contentSize.Height;
 
-            private SKBitmap image;
+            //Find maximum scale that we use for both axes
+            double minscale = scaleX < scaleY ? scaleX : scaleY;
+            scaleX = scaleY = minscale;
 
-            public void Update(Rect bounds, SKBitmap image)
-            {
-                this.image = image;
-                Bounds = bounds;
-            }
-
-            public bool HitTest(Point p) => false;
-            public bool Equals(ICustomDrawOperation other) => false;
-            public void Render(ImmediateDrawingContext context)
-            {
-                var leaseFeature = context.TryGetFeature<ISkiaSharpApiLeaseFeature>();
-
-                using var lease = leaseFeature.Lease();
-                var canvas = lease.SkCanvas;
-
-                if (image is SKBitmap bitmap)
-                {
-                    canvas.DrawBitmap(bitmap, SKRect.Create((float)Bounds.X, (float)Bounds.Y, (float)Bounds.Width, (float)Bounds.Height));
-                }
-            }
-
+            //Return this as a size now
+            return new Size(scaleX, scaleY);
         }
+
     }
 }

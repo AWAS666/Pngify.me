@@ -41,6 +41,12 @@ namespace PngifyMe.Layers
         public static ThrowingSystem ThrowingSystem { get; private set; } = new ThrowingSystem();
         public static SKBitmap CurrentFrame { get; private set; }
 
+        /// <summary>
+        /// need to buffer frames, as if they are disposed immediatly, there will be access violations
+        /// set to 10
+        /// </summary>
+        public static List<SKBitmap> FrameBuffer { get; private set; } = new();
+
         static LayerManager()
         {
             tickLoop = Task.Run(TickLoop);
@@ -264,6 +270,12 @@ namespace PngifyMe.Layers
                 }
             }
             CurrentFrame = mainBitmap;
+            FrameBuffer.Add(CurrentFrame);
+            foreach (var item in FrameBuffer.SkipLast(10))
+            {
+                item.Dispose();
+                FrameBuffer.Remove(item);
+            }
         }
     }
 }
