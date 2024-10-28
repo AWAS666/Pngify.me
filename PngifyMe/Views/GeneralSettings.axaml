@@ -47,7 +47,7 @@
 				<TextBlock VerticalAlignment="Center">Requires save and restart to apply</TextBlock>
 			</StackPanel>
 			<StackPanel Margin="20,0,0,0" Spacing="10">
-				<TextBlock>Very Low is 960x540 30fps</TextBlock>
+				<TextBlock>Very Low is 960x540 60fps</TextBlock>
 				<TextBlock>Low is 1280x720 60fps</TextBlock>
 				<TextBlock>Normal is 1920x1080 60fps</TextBlock>
 				<TextBlock>Ultra is 3840x2160 60fps</TextBlock>

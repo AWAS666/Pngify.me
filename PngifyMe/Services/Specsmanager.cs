@@ -33,7 +33,7 @@ namespace PngifyMe.Services
                 case SpecMode.VeryLow:
                     Width = 960;
                     Height = 540;
-                    FPS = 30;
+                    FPS = 60;
                     break;
                 case SpecMode.Low:
                     Width = 1280;
