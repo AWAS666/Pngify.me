@@ -111,7 +111,8 @@ public partial class MainWindow : Window
 
     private void CloseSettings(object? sender, RoutedEventArgs e)
     {
-        DoubleClick(sender, null);
+        settings.IsVisible = false;
+        ErrorForwarder.Sink.SetActive(false);
     }
 
 }
