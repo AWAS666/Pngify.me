@@ -7,7 +7,7 @@ namespace PngifyMe.Helpers
     public class EventSink : ILogEventSink
     {
         public WindowNotificationManager NotificationManager { get; private set; }
-        public bool ShowErrors { get; private set; }
+        public bool ShowErrors { get; private set; } = true;
 
         public void Emit(LogEvent logEvent)
         {
