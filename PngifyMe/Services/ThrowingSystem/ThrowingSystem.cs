@@ -10,6 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Numerics;
+using System.Threading;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
@@ -29,6 +30,10 @@ namespace PngifyMe.Services.ThrowingSystem
         private TitsSettings settings;
 
         public List<SKBitmap> Throwables { get; set; }
+
+        private int _activeThreads = 0;
+
+        public int ActiveThreads => _activeThreads;
 
         public ThrowingSystem()
         {
@@ -168,7 +173,7 @@ namespace PngifyMe.Services.ThrowingSystem
         {
             try
             {
-                if (obj.AudioPlaying) return;
+                if (obj.AudioPlaying || _activeThreads > 10) return;
                 obj.AudioPlaying = true;
                 if (cachedSound != settings.HitSound || audio == null)
                     if (string.IsNullOrEmpty(settings.HitSound))
@@ -185,9 +190,11 @@ namespace PngifyMe.Services.ThrowingSystem
 
                 _ = Task.Run(async () =>
                 {
+                    Interlocked.Increment(ref _activeThreads);
                     await AudioService.PlaySoundWav(copy, settings.Volume, true);
                     copy.Dispose();
                     obj.AudioPlaying = false;
+                    Interlocked.Decrement(ref _activeThreads);
                 });
             }
             catch (Exception e)
