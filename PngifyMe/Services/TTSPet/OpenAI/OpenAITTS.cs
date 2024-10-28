@@ -1,6 +1,7 @@
 ﻿using OpenAI;
 using OpenAI.Managers;
 using OpenAI.ObjectModels.RequestModels;
+using Serilog;
 using System;
 using System.IO;
 using System.Net.Http;
@@ -20,7 +21,10 @@ namespace PngifyMe.Services.TTSPet.OpenAI
         public void Init()
         {
             if (string.IsNullOrEmpty(SettingsManager.Current.LLM.OpenAIKey))
+            {
+                Log.Error("Missing openai key");
                 return;
+            }
             var options = new OpenAiOptions()
             {
                 ApiKey = SettingsManager.Current.LLM.OpenAIKey

@@ -23,7 +23,10 @@ namespace PngifyMe.Services.TTSPet
         public void Init()
         {
             if (string.IsNullOrEmpty(SettingsManager.Current.LLM.OpenAIKey))
+            {
+                Log.Error("Missing openai key");
                 return;
+            }
 
             var options = new OpenAiOptions()
             {
