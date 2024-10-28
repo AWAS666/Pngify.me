@@ -4,6 +4,7 @@ using Avalonia.Media;
 using Avalonia.Media.Imaging;
 using Avalonia.Platform;
 using Avalonia.Reactive;
+using PngifyMe.Helpers;
 using SkiaSharp;
 
 namespace PngifyMe.Views.Helper
@@ -14,8 +15,8 @@ namespace PngifyMe.Views.Helper
     public class SKImageViewer : UserControl
     {
 
-        public static readonly StyledProperty<SKBitmap> SourceProperty =
-            AvaloniaProperty.Register<SKImageViewer, SKBitmap>(nameof(Source));
+        public static readonly StyledProperty<SaveDispose<SKBitmap>> SourceProperty =
+            AvaloniaProperty.Register<SKImageViewer, SaveDispose<SKBitmap>>(nameof(Source));
 
         static SKImageViewer()
         {
@@ -26,7 +27,7 @@ namespace PngifyMe.Views.Helper
         {
             ClipToBounds = true;
 
-            SourceProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<SKBitmap>>(
+            SourceProperty.Changed.Subscribe(new AnonymousObserver<AvaloniaPropertyChangedEventArgs<SaveDispose<SKBitmap>>>(
                e =>
                {
                    base.InvalidateMeasure();
@@ -47,9 +48,9 @@ namespace PngifyMe.Views.Helper
 
         private Size InternalMeasureArrangeOverride(Size targetSize)
         {
-            if (Source != null)
+            if (Source != null && !Source.Disposed)
             {
-                var self = new Size(Source.Width, Source.Height);
+                var self = new Size(Source.Value.Width, Source.Value.Height);
                 var scaleFactor = ComputeScaleFactor(
                     targetSize,
                     self)
@@ -65,7 +66,7 @@ namespace PngifyMe.Views.Helper
         }
 
 
-        public SKBitmap Source
+        public SaveDispose<SKBitmap> Source
         {
             get => GetValue(SourceProperty);
             set => SetValue(SourceProperty, value);
@@ -74,10 +75,11 @@ namespace PngifyMe.Views.Helper
         public override void Render(DrawingContext drawingContext)
         {
             base.Render(drawingContext);
-            if (Source == null) return;
+            if (Source == null || Source.Disposed) return;
 
-            int width = Source.Width;
-            int height = Source.Height;
+            Source.Rendering = true;
+            int width = Source.Value.Width;
+            int height = Source.Value.Height;
 
             var info = new SKImageInfo(
                 width, height, SKImageInfo.PlatformColorType, SKAlphaType.Premul);
@@ -87,8 +89,10 @@ namespace PngifyMe.Views.Helper
             using var locker = writableBitmap.Lock();
             using var surface = SKSurface.Create(info, locker.Address, locker.RowBytes);
             surface.Canvas.Clear();
-            surface.Canvas.DrawBitmap(Source, default(SKPoint));
+            if (Source.Disposed) return;
+            surface.Canvas.DrawBitmap(Source.Value, default(SKPoint));
             drawingContext.DrawImage(writableBitmap, new(new(), this.RenderSize));
+            Source.Rendering = false;
         }
 
         private Size ComputeScaleFactor(Size availableSize, Size contentSize)

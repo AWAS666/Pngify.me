@@ -1,4 +1,5 @@
-﻿using PngifyMe.Layers.Microphone;
+﻿using PngifyMe.Helpers;
+using PngifyMe.Layers.Microphone;
 using PngifyMe.Services;
 using PngifyMe.Services.ThrowingSystem;
 using Serilog;
@@ -33,19 +34,19 @@ namespace PngifyMe.Layers
         /// <summary>
         /// doesnt hold an image anymore as that has issues with gc/dispose
         /// </summary>
-        public static EventHandler<SKImage> ImageUpdate;
+        public static EventHandler<SaveDispose<SKBitmap>> ImageUpdate;
         public static EventHandler<BaseLayer> NewLayer;
         public static EventHandler<float> FPSUpdate;
 
         public static MicroPhoneStateLayer MicroPhoneStateLayer { get; private set; } = new MicroPhoneStateLayer();
         public static ThrowingSystem ThrowingSystem { get; private set; } = new ThrowingSystem();
-        public static SKBitmap CurrentFrame { get; private set; }
+        public static SaveDispose<SKBitmap> CurrentFrame { get; private set; }
 
         /// <summary>
         /// need to buffer frames, as if they are disposed immediatly, there will be access violations
         /// set to 10
         /// </summary>
-        public static List<SKBitmap> FrameBuffer { get; private set; } = new();
+        public static List<SaveDispose<SKBitmap>> FrameBuffer { get; private set; } = new();
 
         static LayerManager()
         {
@@ -269,10 +270,11 @@ namespace PngifyMe.Layers
                     img.RenderImage(canvas, 0, 0);
                 }
             }
-            CurrentFrame = mainBitmap;
+            CurrentFrame = new SaveDispose<SKBitmap>(mainBitmap);
             FrameBuffer.Add(CurrentFrame);
             foreach (var item in FrameBuffer.SkipLast(10))
             {
+                if (item.Rendering) continue;
                 item.Dispose();
                 FrameBuffer.Remove(item);
             }

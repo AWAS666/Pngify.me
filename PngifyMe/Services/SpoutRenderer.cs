@@ -1,4 +1,5 @@
-﻿using PngifyMe.Layers;
+﻿using PngifyMe.Helpers;
+using PngifyMe.Layers;
 using Serilog;
 using SkiaSharp;
 using Spout.Interop;
@@ -20,7 +21,7 @@ namespace PngifyMe.Services
             LayerManager.ImageUpdate += NewImage;
         }
 
-        private unsafe static void NewImage(object? sender, SKImage e)
+        private unsafe static void NewImage(object? sender, SaveDispose<SKBitmap> e)
         {
             if (SettingsManager.Current.General.EnableSpout != true)
                 return;
@@ -29,7 +30,7 @@ namespace PngifyMe.Services
             {
                 try
                 {
-                    ConvertSKImageToRawByteArray(LayerManager.CurrentFrame);
+                    ConvertSKImageToRawByteArray(LayerManager.CurrentFrame.Value);
                     //SwapChannels();
                     // Send the byte array via Spout
                     fixed (byte* pData = pixelData)
