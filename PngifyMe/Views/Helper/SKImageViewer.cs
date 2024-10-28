@@ -86,6 +86,7 @@ namespace PngifyMe.Views.Helper
                  new(info.Width, info.Height), new(96.0, 96.0), PixelFormat.Bgra8888, AlphaFormat.Premul);
             using var locker = writableBitmap.Lock();
             using var surface = SKSurface.Create(info, locker.Address, locker.RowBytes);
+            surface.Canvas.Clear();
             surface.Canvas.DrawBitmap(Source, default(SKPoint));
             drawingContext.DrawImage(writableBitmap, new(new(), this.RenderSize));
         }
