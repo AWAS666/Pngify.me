@@ -41,6 +41,7 @@ public partial class MainWindow : Window
         Log.Information("Double Click your avatar to hide the settings");
     }
 
+
     protected override void OnClosing(WindowClosingEventArgs e)
     {
         ScreenPosition.Save(new ScreenPosition()
@@ -96,6 +97,12 @@ public partial class MainWindow : Window
     {
         settings.IsVisible = !settings.IsVisible;
         ErrorForwarder.Sink.SetActive(settings.IsVisible);
+    }
+
+    private void EscDown(object? sender, KeyEventArgs e)
+    {
+         if (e.Key == Key.Escape)
+            DoubleClick(null, null);
     }
 
     private void TwitchPressed(object? sender, PointerPressedEventArgs e)

@@ -21,9 +21,11 @@
 			<Setter Property="HorizontalAlignment" Value="Right"/>
 		</Style>
 	</Window.Styles>
-	<Grid x:Name="grid" >
+	<Grid x:Name="grid" KeyDown="EscDown" Focusable="True">
 		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-						  DoubleTapped="DoubleClick"  />
+						  DoubleTapped="DoubleClick">
+
+		</views:AvatarView>
 		<DockPanel x:Name="settings" 
 				   Background="#DD000080"
 			  HorizontalAlignment="Right" Width="700">
