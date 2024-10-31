@@ -90,6 +90,7 @@ Feel free to suggest features and submit code yourself
 	- [ ] emotes explosion like streamelements?
 - [ ] controller tracking
 - [ ] mouse tracking
+- [ ] LCOLONQ mode
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration

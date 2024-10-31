@@ -110,6 +110,7 @@ namespace PngifyMe.Services.Settings
 
         public void SwitchType(ProfileType type)
         {
+            if (Type == type) return;
             Type = type;
             AudioService.ChangeMode(type);
         }
