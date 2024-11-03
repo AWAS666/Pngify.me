@@ -82,6 +82,9 @@
 							<TextBox MinWidth="100"
 									 Text="{Binding Settings.ChatTrigger}"></TextBox>
 						</StackPanel>
+						<CheckBox IsChecked="{Binding Settings.ChatTriggerEverything, Mode=TwoWay}"
+								  ToolTip.Tip="will react to any chat message"
+								  >React to all chat messages</CheckBox>
 						<CheckBox ToolTip.Tip="Will read new followers if enabled"
 							IsChecked="{Binding Settings.ReactFollowers, Mode=TwoWay}">React to followers</CheckBox>
 					</StackPanel>

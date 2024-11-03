@@ -21,6 +21,9 @@ namespace PngifyMe.Services.Settings
         [ObservableProperty]
         private string? chatTrigger;
 
+        [ObservableProperty]
+        private bool chatTriggerEverything;
+
         /// <summary>
         /// this should allow any openai compatible endpoint
         /// </summary>

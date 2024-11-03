@@ -97,6 +97,17 @@ namespace PngifyMe.Services.TTSPet
         private static void NewChat(object? sender, ChannelChatMessage e)
         {
             string message = e.Message.Text;
+            // trigger on everything
+            if (settings.ChatTriggerEverything)
+            {
+                var msg1 = new LLMMessage()
+                {
+                    Input = message,
+                    UserName = e.ChatterUserName,
+                };
+                QueueMsg(msg1);
+                return;
+            }
             if (string.IsNullOrEmpty(settings.ChatTrigger) ||
                 !message.StartsWith(settings.ChatTrigger))
                 return;
