@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Threading;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.TTSPet;
@@ -43,8 +44,11 @@ namespace PngifyMe.ViewModels
 
         private void UpdateMessages(object? sender, LLMMessage e)
         {
-            if (!Messages.Contains(e))
-                Messages.Add(e);
+            Dispatcher.UIThread.Invoke(() =>
+            {
+                if (!Messages.Contains(e))
+                    Messages.Add(e);
+            });            
         }
     }
 }
