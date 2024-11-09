@@ -11,6 +11,9 @@ namespace PngifyMe.Layers
 
         public float PosX { get; set; }
         public float PosY { get; set; }
+
+        public float OriginOffsetX { get; set; }
+        public float OriginOffsetY { get; set; }
         public float Rotation { get; set; }
         public float Zoom
         {

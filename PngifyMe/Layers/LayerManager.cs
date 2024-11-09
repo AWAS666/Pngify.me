@@ -184,10 +184,10 @@ namespace PngifyMe.Layers
                 }
 
                 canvas.Translate(layert.PosX, layert.PosY);
-                canvas.Translate(width / 2, height / 2);
+                canvas.Translate(width / 2 + layert.OriginOffsetX, height / 2 + layert.OriginOffsetY);
                 canvas.RotateDegrees((float)rotationAngle);
                 canvas.Scale(layert.ZoomX, layert.ZoomY);
-                canvas.Translate(-width / 2, -height / 2);
+                canvas.Translate(-width / 2 - layert.OriginOffsetX, -height / 2 - layert.OriginOffsetY);
 
                 foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.BehindModel && x.ApplyOtherEffects))
                 {
@@ -224,57 +224,7 @@ namespace PngifyMe.Layers
                 }
 
                 canvas.Restore();
-
-                if (SettingsManager.Current.Tits.HitLinesVisible)
-                {
-                    using (var paint = new SKPaint
-                    {
-                        Color = SKColors.Red,
-                        StrokeWidth = 2,
-                        IsAntialias = true,
-                        Style = SKPaintStyle.Stroke,
-                    })
-                    {
-                        ThrowingSystem.MainBody.Collision.DrawOutlines(canvas, paint);
-                    }
-                }
-
-                // Draw moving objects from ThrowingSystem.Objects
-                if (SettingsManager.Current.Tits.Enabled)
-                {
-                    foreach (var obj in ThrowingSystem.Objects.ToList())
-                    {
-                        // Create a new SKBitmap for the rotated, zoomed, and opaque image
-                        using var rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
-
-                        using (SKCanvas rotatedCanvas = new SKCanvas(rotobj))
-                        {
-                            // Set the pivot point for rotation and zoom to the center of the image
-                            rotatedCanvas.Translate(obj.Image.Width / 2, obj.Image.Height / 2);
-                            rotatedCanvas.RotateDegrees(obj.Rotation);
-                            rotatedCanvas.Translate(-obj.Image.Width / 2, -obj.Image.Height / 2);
-
-                            rotatedCanvas.DrawBitmap(obj.Image, 0, 0);
-                        }
-
-                        canvas.DrawBitmap(rotobj, obj.X, obj.Y);
-
-                        if (SettingsManager.Current.Tits.HitLinesVisible)
-                        {
-                            using (var paint = new SKPaint
-                            {
-                                Color = SKColors.Blue,
-                                StrokeWidth = 2,
-                                IsAntialias = true,
-                                Style = SKPaintStyle.Stroke,
-
-                            })
-                            {
-                                obj.Collision.DrawOutlines(canvas, paint);
-                            }
-                        }
-                    }
-                }
+                DrawTits(canvas);
 
                 foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects && !x.BehindModel))
                 {
@@ -288,6 +238,60 @@ namespace PngifyMe.Layers
                 if (item.Rendering) continue;
                 item.Dispose();
                 FrameBuffer.Remove(item);
+            }
+        }
+
+        private static void DrawTits(SKCanvas canvas)
+        {
+            if (SettingsManager.Current.Tits.HitLinesVisible)
+            {
+                using (var paint = new SKPaint
+                {
+                    Color = SKColors.Red,
+                    StrokeWidth = 2,
+                    IsAntialias = true,
+                    Style = SKPaintStyle.Stroke,
+                })
+                {
+                    ThrowingSystem.MainBody.Collision.DrawOutlines(canvas, paint);
+                }
+            }
+
+            // Draw moving objects from ThrowingSystem.Objects
+            if (SettingsManager.Current.Tits.Enabled)
+            {
+                foreach (var obj in ThrowingSystem.Objects.ToList())
+                {
+                    // Create a new SKBitmap for the rotated, zoomed, and opaque image
+                    using var rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
+
+                    using (SKCanvas rotatedCanvas = new SKCanvas(rotobj))
+                    {
+                        // Set the pivot point for rotation and zoom to the center of the image
+                        rotatedCanvas.Translate(obj.Image.Width / 2, obj.Image.Height / 2);
+                        rotatedCanvas.RotateDegrees(obj.Rotation);
+                        rotatedCanvas.Translate(-obj.Image.Width / 2, -obj.Image.Height / 2);
+
+                        rotatedCanvas.DrawBitmap(obj.Image, 0, 0);
+                    }
+
+                    canvas.DrawBitmap(rotobj, obj.X, obj.Y);
+
+                    if (SettingsManager.Current.Tits.HitLinesVisible)
+                    {
+                        using (var paint = new SKPaint
+                        {
+                            Color = SKColors.Blue,
+                            StrokeWidth = 2,
+                            IsAntialias = true,
+                            Style = SKPaintStyle.Stroke,
+
+                        })
+                        {
+                            obj.Collision.DrawOutlines(canvas, paint);
+                        }
+                    }
+                }
             }
         }
     }
