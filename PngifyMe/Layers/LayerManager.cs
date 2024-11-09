@@ -177,11 +177,22 @@ namespace PngifyMe.Layers
                 float opacity = layert.Opacity;
 
                 canvas.Save();
+
+                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.BehindModel && !x.ApplyOtherEffects))
+                {
+                    img.RenderImage(canvas, 0, 0);
+                }
+
                 canvas.Translate(layert.PosX, layert.PosY);
                 canvas.Translate(width / 2, height / 2);
                 canvas.RotateDegrees((float)rotationAngle);
                 canvas.Scale(layert.ZoomX, layert.ZoomY);
                 canvas.Translate(-width / 2, -height / 2);
+
+                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.BehindModel && x.ApplyOtherEffects))
+                {
+                    img.RenderImage(canvas, layert.PosX, layert.PosY);
+                }
 
                 // Apply transformations directly to the main canvas
                 using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) })
@@ -207,7 +218,7 @@ namespace PngifyMe.Layers
                         }
                     }
 
-                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects))
+                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects && !x.BehindModel))
                 {
                     img.RenderImage(canvas, layert.PosX, layert.PosY);
                 }
@@ -265,7 +276,7 @@ namespace PngifyMe.Layers
                     }
                 }
 
-                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects))
+                foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects && !x.BehindModel))
                 {
                     img.RenderImage(canvas, 0, 0);
                 }

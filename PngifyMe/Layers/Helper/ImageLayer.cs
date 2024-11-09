@@ -8,6 +8,9 @@ namespace PngifyMe.Layers
         [Unit("bool")]
         public bool ApplyOtherEffects { get; set; } = false;
 
+        [Unit("bool")]
+        public bool BehindModel { get; set; } = false;
+
         public abstract void RenderImage(SKCanvas canvas, float x, float y);
 
         public ImageLayer()
