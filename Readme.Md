@@ -135,10 +135,11 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 ## Ideas
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
 - [x] colourpicker in background select -> Semi
+- [ ] visualize location -> press button that draws a point
 
 ## Suggestions
-- [ ] image behind model
-- [ ] zoom in single direction (change anchor point)
+- [x] image behind model
+- [x] zoom in single direction (change anchor point)
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, ko-fi and steam (if it sees some support as steam isn't free)
