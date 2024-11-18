@@ -110,6 +110,7 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] fix audio levels -> make this changable with a slider?
 - [ ] Change history size
 - [ ] clear history
+- [ ] !feed command
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
