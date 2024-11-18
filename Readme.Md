@@ -136,6 +136,8 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
 - [x] colourpicker in background select -> Semi
 - [ ] visualize location -> press button that draws a point
+- [ ] dropdown in layers -> for example for tits trigger layer
+- [ ] single hop on start talk
 
 ## Suggestions
 - [x] image behind model

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace PngifyMe.Services.TTSPet
 {
@@ -192,8 +193,18 @@ namespace PngifyMe.Services.TTSPet
 
         public static async Task ReadText(string input)
         {
-            var audio = await TTSProvider.GenerateSpeech(input);
-            await AudioService.PlaySound(audio);
+            foreach (var item in Regex.Split(input, @"(?<=[.!?])\s+"))
+            {
+                try
+                {
+                    var audio = await TTSProvider.GenerateSpeech(item);
+                    await AudioService.PlaySound(audio);
+                }
+                catch (Exception e)
+                {
+                    Log.Error($"Skipped text: {item} because of error {e.Message}");
+                }
+            }
         }
 
         public static void QueueText(string text, bool readOnly = false)
