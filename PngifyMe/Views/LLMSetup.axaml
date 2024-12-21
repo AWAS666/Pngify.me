@@ -56,6 +56,8 @@
 						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="How many messages should be kept in memory">
 							<Label VerticalAlignment="Center" >Max Context: </Label>
 							<helper:UintTextBox MinWidth="100" Text="{Binding Settings.MaxContext}" Min="2" Max="16"/>
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Click="ClearContext">Clear</Button>
 						</StackPanel>
 
 						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
@@ -178,7 +180,12 @@
 
 						<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
-						<TextBlock FontSize="24">History</TextBlock>
+
+						<StackPanel Orientation="Horizontal" Spacing="5">
+							<TextBlock FontSize="24">History</TextBlock>
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Click="ClearContext">Clear</Button>
+						</StackPanel>
 
 						<DataGrid ItemsSource="{Binding Messages}"
 								  AutoGenerateColumns="False" IsReadOnly="True"

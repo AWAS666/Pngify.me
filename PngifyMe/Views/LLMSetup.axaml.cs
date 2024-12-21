@@ -39,4 +39,9 @@ public partial class LLMSetup : UserControl
     {
         TTSPet.Reload();
     }
+
+    private void ClearContext(object sender, RoutedEventArgs e)
+    {
+        TTSPet.ClearContext();
+    }
 }

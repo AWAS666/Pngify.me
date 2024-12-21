@@ -239,5 +239,10 @@ namespace PngifyMe.Services.TTSPet
             }
             return text;
         }
+
+        public static void ClearContext()
+        {
+            History.Clear();
+        }
     }
 }
