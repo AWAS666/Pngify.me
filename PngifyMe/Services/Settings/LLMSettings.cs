@@ -48,6 +48,9 @@ namespace PngifyMe.Services.Settings
         [ObservableProperty]
         private int maxTokens = 512;
 
+        [ObservableProperty]
+        private int maxContext = 6;
+
         public List<string> BannedPhrases { get; set; } = new List<string>();
 
         [ObservableProperty]

@@ -185,7 +185,7 @@ namespace PngifyMe.Services.TTSPet
 
             History.Add(item);
 
-            while (History.Count > 4)
+            while (History.Count > settings.MaxContext)
             {
                 History.RemoveAt(0);
             }

@@ -53,6 +53,11 @@
 							<helper:UintTextBox MinWidth="100" Text="{Binding Settings.MaxTokens}" Min="10" Max="2048"/>
 						</StackPanel>
 
+						<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="How many messages should be kept in memory">
+							<Label VerticalAlignment="Center" >Max Context: </Label>
+							<helper:UintTextBox MinWidth="100" Text="{Binding Settings.MaxContext}" Min="2" Max="16"/>
+						</StackPanel>
+
 						<Label VerticalAlignment="Center" >System Message (Base instructions):</Label>
 						<StackPanel Orientation="Horizontal" Spacing="5">
 							<TextBox MaxLines="100" Width="500" Height="200"
