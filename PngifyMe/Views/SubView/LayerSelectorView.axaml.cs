@@ -14,5 +14,4 @@ public partial class LayerSelectorView : UserControl
     {
         var vm = (LayerSelectorViewModel)DataContext;
         vm.ChangeFilter(((TextBox)e.Source).Text);
-    }
-}
+    }}
