@@ -73,7 +73,7 @@ Feel free to suggest features and submit code yourself
 	- [x] remove .tolist of layer all the time, use one copy
 	- [ ] reuse canvases
 	- [ ] avoid drawing of unchanged objects
-	- [ ] switch out skia view component, triggers gc to much
+	- [x] switch out skia view component, triggers gc to much
 - [ ] plugio integration
 	- [ ] https://github.com/buttplugio/buttplug-csharp
 - [ ] virtual webcam integration
@@ -91,6 +91,9 @@ Feel free to suggest features and submit code yourself
 - [ ] controller tracking
 - [ ] mouse tracking
 - [ ] LCOLONQ mode
+- [x] fix search
+	- [ ] works with keyboard not mouse 
+
 ## Todo TTSPet
 Allow integration of Chatgpt/TTS system to use this as a reaction pet software aswell.
 - [x] full Twitch integration
@@ -108,9 +111,9 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [x] list of filtered words to be replaced by a filtered phrase, possibly also dictionary
 	- [ ] possibly use openai moderation, but always need an openai api key for that... 
 - [ ] fix audio levels -> make this changable with a slider?
-- [ ] Change history size
-- [ ] clear history
-- [ ] !feed command
+- [x] Change history size
+- [x] clear history
+- [ ] !feed command -> no idea what this is xddd
 
 ## Todo Refactors
 - [ ] change to proper DI instead of static
@@ -134,11 +137,16 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [x] add notifications
  
 ## Ideas
-- [ ] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
+- [x] The timer (gets modified by twitch subs, follows, bits etc.) -> ursa timebox
 - [x] colourpicker in background select -> Semi
 - [ ] visualize location -> press button that draws a point
 - [ ] dropdown in layers -> for example for tits trigger layer
-- [ ] single hop on start talk
+- [x] single hop on start talk
+- [x] visual effects (on speech/nospeech) like darken
+	- [ ] need to change image layer to interface here so this can inherit from something else...
+- [x] profile export/import
+	- [ ] add file filter
+	- [ ] move all profiles into appdata?
 
 ## Suggestions
 - [x] image behind model
