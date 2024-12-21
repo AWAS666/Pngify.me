@@ -25,6 +25,8 @@
 				<TextBox Name="newProfile" Watermark="New Profile Name" Width="150"></TextBox>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Click="CreateNewProfile">Add New Profile</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Click="Import">Import Profile</Button>
 			</StackPanel>
 
 
@@ -37,7 +39,9 @@
 					<DataTemplate>
 						<StackPanel Orientation="Horizontal" Spacing="10">
 							<TextBox Padding="10,5,10,5" VerticalAlignment="Center" Text="{Binding Profile.Name, Mode=TwoWay}" ></TextBox>
-							<CheckBox IsChecked="{Binding DefaultValue, Mode=TwoWay}" Click="CheckChanged">Default</CheckBox>
+							<CheckBox VerticalAlignment="Center" 
+									  IsChecked="{Binding DefaultValue, Mode=TwoWay}" 
+									  Click="CheckChanged">Default</CheckBox>
 							<ComboBox ItemsSource="{Binding ProfileTypes}"
 									  SelectedItem="{Binding Type}">
 							</ComboBox>
@@ -45,9 +49,10 @@
 									Click="LoadProfile">Load</Button>
 							<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
 									Click="DeleteProfile">Delete</Button>
+							<Button Classes="Success" Theme="{DynamicResource OutlineButton}"
+									Click="Export">Export</Button>
 						</StackPanel>
 					</DataTemplate>
-
 				</ListBox.ItemTemplate>
 			</ListBox>
 		</StackPanel>

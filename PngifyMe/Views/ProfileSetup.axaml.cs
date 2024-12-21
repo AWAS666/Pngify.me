@@ -66,4 +66,36 @@ public partial class ProfileSetup : UserControl
         }
         e.Handled = true;
     }
+
+
+    public async void Export(object sender, RoutedEventArgs e)
+    {
+        var vmS = (ProfileViewModel)((Button)e.Source).DataContext;
+        var vm = (ProfileSettViewModel)DataContext;
+        var top = TopLevel.GetTopLevel(this);
+
+        var path = await top.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions()
+        {
+            SuggestedFileName = $"{vmS.Profile.Name}.zip"
+        });
+
+        SettingsManager.Current.Profile.ExportProfile(vmS.Profile, path.Path.AbsolutePath);
+    }
+
+    public async void Import(object sender, RoutedEventArgs e)
+    {
+        var vm = (ProfileSettViewModel)DataContext;
+        var top = TopLevel.GetTopLevel(this);
+
+        var path = await top.StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions()
+        {
+            // todo: add file filter
+        });
+
+        foreach (var item in path)
+        {
+            var prof = SettingsManager.Current.Profile.ImportProfile(item.Path.AbsolutePath);
+            vm.Profiles.Add(new ProfileViewModel(prof));
+        }
+    }
 }

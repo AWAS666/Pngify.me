@@ -10,7 +10,7 @@ namespace PngifyMe.Services
     public static class SettingsManager
     {
         public static string FilePath { get; }
-        public static string BasePath { get; }
+        public static string BasePath => Specsmanager.BasePath;
 
         public static AppSettings Current { get; private set; }
 
