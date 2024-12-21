@@ -31,7 +31,7 @@ public partial class MainWindow : Window
 
         grid.Bind(Grid.BackgroundProperty, binding);
 
-        this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}-beta";
+        this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}";
         TwitchEventSocket.Authenticated += Authenticated;
         if (SettingsManager.Current.Twitch.Enabled == true)
             twitchStatus.Text = "Connecting";
