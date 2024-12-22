@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels;
+using PngifyMe.ViewModels.Helper;
 using System.Linq;
 
 namespace PngifyMe.Views;
@@ -76,8 +77,11 @@ public partial class ProfileSetup : UserControl
 
         var path = await top.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions()
         {
+            Title = "Save profile where?",
             SuggestedFileName = $"{vmS.Profile.Name}.zip"
         });
+
+        if (path == null) return;
 
         SettingsManager.Current.Profile.ExportProfile(vmS.Profile, path.Path.AbsolutePath);
     }
@@ -90,6 +94,9 @@ public partial class ProfileSetup : UserControl
         var path = await top.StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions()
         {
             // todo: add file filter
+            Title = "Open profiles to import",
+            AllowMultiple = true,
+            FileTypeFilter = new[] { FilePickers.Zip },
         });
 
         foreach (var item in path)

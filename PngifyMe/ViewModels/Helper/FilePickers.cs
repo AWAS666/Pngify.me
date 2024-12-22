@@ -16,5 +16,11 @@ namespace PngifyMe.ViewModels.Helper
             Patterns = new[] { "*.wav", },
             AppleUniformTypeIdentifiers = new[] { "public.audio" },
         };
+
+        public static FilePickerFileType Zip { get; } = new("zip")
+        {
+            Patterns = new[] { "*.zip", },
+            AppleUniformTypeIdentifiers = new[] { "public.archive" },
+        };
     }
 }
