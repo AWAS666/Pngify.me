@@ -31,7 +31,7 @@ namespace PngifyMe.Services.Settings
         }
 
         public void Load()
-        {           
+        {
             Active = ProfileList.First(x => x.Default);
         }
 
@@ -112,6 +112,7 @@ namespace PngifyMe.Services.Settings
             File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, options));
 
             // make it a zip file
+            if (File.Exists(exportTo)) File.Delete(exportTo);
             ZipFile.CreateFromDirectory(newFolder, exportTo);
         }
 
