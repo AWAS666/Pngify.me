@@ -127,13 +127,13 @@ namespace PngifyMe.Services.Settings
             // fix any broken image references
             foreach (var item in profile.MicroPhone.States)
             {
-                item.Open.FilePath = Path.Combine(output, Path.GetFileNameWithoutExtension(item.Open.FilePath));
-                item.Closed.FilePath = Path.Combine(output, Path.GetFileNameWithoutExtension(item.Closed.FilePath));
+                item.Open.FilePath = Path.Combine(output, Path.GetFileName(item.Open.FilePath));
+                item.Closed.FilePath = Path.Combine(output, Path.GetFileName(item.Closed.FilePath));
 
                 if (item.ClosedBlink.FilePath != null)
-                    item.ClosedBlink.FilePath = Path.Combine(output, Path.GetFileNameWithoutExtension(item.ClosedBlink.FilePath));
+                    item.ClosedBlink.FilePath = Path.Combine(output, Path.GetFileName(item.ClosedBlink.FilePath));
                 if (item.OpenBlink.FilePath != null)
-                    item.OpenBlink.FilePath = Path.Combine(output, Path.GetFileNameWithoutExtension(item.OpenBlink.FilePath));
+                    item.OpenBlink.FilePath = Path.Combine(output, Path.GetFileName(item.OpenBlink.FilePath));
             }
             profile.Default = false;
 
