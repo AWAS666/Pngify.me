@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Media;
+using Avalonia.Media.Immutable;
 using PngifyMe.Settings;
 using PngifyMe.ViewModels;
 
@@ -11,12 +12,14 @@ public partial class LayoutMenu : UserControl
     public LayoutMenu()
     {
         InitializeComponent();
-        //background.ItemsSource = typeof(Brushes)
-        //    .GetProperties(BindingFlags.Public | BindingFlags.Static)
-        //     .Where(p => typeof(IBrush).IsAssignableFrom(p.PropertyType))
-        //    .Select(p => (IBrush)p.GetValue(null));
 
-        DataContext = new LayoutViewModel();
+        var vm = new LayoutViewModel();
+        DataContext = vm;
+        if (vm.Settings.Colour is ImmutableSolidColorBrush solidColorBrush)
+        {
+            var color = solidColorBrush.Color;
+            colorPicker.Color = new Color(color.A, color.R,color.G, color.B);
+        }
     }
 
     private void ColorChanged(object sender, ColorChangedEventArgs e)
