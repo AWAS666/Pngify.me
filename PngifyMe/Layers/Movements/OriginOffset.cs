@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers
 {
-    [LayerDescription("Y movement whenever talking")]
+    [LayerDescription("offsets effect origin, useful for rotation, stretch from bottom")]
     public class OriginOffset : PermaLayer
     {
         [Unit("Pixels")]
