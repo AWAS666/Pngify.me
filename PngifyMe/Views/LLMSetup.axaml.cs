@@ -42,6 +42,8 @@ public partial class LLMSetup : UserControl
 
     private void ClearContext(object sender, RoutedEventArgs e)
     {
+        var vm = (LLMProviderViewModel)DataContext;
+        vm.Messages.Clear();
         TTSPet.ClearContext();
     }
 }
