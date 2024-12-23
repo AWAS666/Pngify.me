@@ -145,8 +145,9 @@ Allow integration of Chatgpt/TTS system to use this as a reaction pet software a
 - [x] visual effects (on speech/nospeech) like darken
 	- [ ] need to change image layer to interface here so this can inherit from something else...
 - [x] profile export/import
-	- [ ] add file filter
+	- [x] add file filter
 	- [ ] move all profiles into appdata?
+- [ ] include layer setup in profile 
 
 ## Suggestions
 - [x] image behind model
