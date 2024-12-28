@@ -2,6 +2,8 @@ using Avalonia.Controls;
 using Avalonia.Threading;
 using PngifyMe.Services;
 using PngifyMe.ViewModels;
+using System;
+using System.ComponentModel;
 using System.Linq;
 
 namespace PngifyMe.Views;
@@ -12,7 +14,18 @@ public partial class VolumeSlider : UserControl
     {
         InitializeComponent();
         AudioService.LevelChanged += MicrophoneService_LevelChanged;
+        SettingsManager.Current.Profile.PropertyChanged += Profile_PropertyChanged;
 
+        RefreshContext();
+    }
+
+    private void Profile_PropertyChanged(object? sender, PropertyChangedEventArgs e)
+    {
+        RefreshContext();
+    }
+
+    private void RefreshContext()
+    {
         var vm = new AudioSetupViewModel();
         DataContext = vm;
         inputAudio.SelectedValue = AudioService.InputDevices.FirstOrDefault(x => x.Id == vm.Settings.DeviceIn);
