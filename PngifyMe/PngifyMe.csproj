@@ -8,6 +8,7 @@
     <Version>$(VersionPrefix)</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <FileVersion>1.0.0.1</FileVersion>
+    <AssemblyName>PngifyMeCode</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DebugType>embedded</DebugType>

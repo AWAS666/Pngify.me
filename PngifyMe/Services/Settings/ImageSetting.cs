@@ -10,7 +10,7 @@ namespace PngifyMe.Services.Settings
 {
     public partial class ImageSetting : ObservableObject
     {
-        public static SKBitmap PlaceHolder = SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/placeholder.png")));
+        public static SKBitmap PlaceHolder = SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/placeholder.png")));
 
         [property: JsonIgnore]
         [ObservableProperty]

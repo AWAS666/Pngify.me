@@ -68,12 +68,12 @@ namespace PngifyMe.Services.ThrowingSystem
         {
             return
             [
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit100.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit1000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit5000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit10000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMe/Assets/bit20000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit100.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit5000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit10000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit20000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
             ];
         }
 
@@ -177,7 +177,7 @@ namespace PngifyMe.Services.ThrowingSystem
                 obj.AudioPlaying = true;
                 if (cachedSound != settings.HitSound || audio == null)
                     if (string.IsNullOrEmpty(settings.HitSound))
-                        audio = AssetLoader.Open(new Uri("avares://PngifyMe/Assets/oof.wav"));
+                        audio = AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/oof.wav"));
                     else
                         audio = File.OpenRead(settings.HitSound);
 
