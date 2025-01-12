@@ -23,6 +23,7 @@ class Program
         catch (Exception e)
         {
             Log.Fatal(e, $"Something very bad happened: {e.Message}");
+            Log.Fatal(e, "Something very bad happened: {Message}, Stack Trace: {@StackTrace}", e.Message, e.StackTrace);
         }
         finally
         {
