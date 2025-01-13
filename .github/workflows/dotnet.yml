@@ -67,6 +67,6 @@ jobs:
           id: create_release
           uses: softprops/action-gh-release@v1
           with:
-            files: pngify.me.zip.zip
+            files: pngify.me.zip
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
