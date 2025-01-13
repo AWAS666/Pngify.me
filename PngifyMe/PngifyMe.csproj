@@ -4,10 +4,10 @@
     <Nullable>enable</Nullable>
     <LangVersion>latest</LangVersion>
     <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
-    <AssemblyVersion>1.0.0.3</AssemblyVersion>
+    <AssemblyVersion>1.0.0.4</AssemblyVersion>
     <Version>$(VersionPrefix)</Version>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <FileVersion>1.0.0.1</FileVersion>
+    <FileVersion>1.0.0.4</FileVersion>
     <AssemblyName>PngifyMeCode</AssemblyName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
@@ -51,7 +51,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include=".env"/>
+    <EmbeddedResource Include=".env" />
   </ItemGroup>
 
   <ItemGroup>
