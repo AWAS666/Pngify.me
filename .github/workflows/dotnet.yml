@@ -17,6 +17,11 @@ jobs:
       # Checkout the code
       - name: Checkout repository
         uses: actions/checkout@v4
+        
+      # Create env file
+      - name: Create .env File
+        run: |
+          echo "TWITCHCLIENTID=${{ secrets.TWITCHCLIENTID }}" >> .env
 
       # Set up .NET SDK
       - name: Setup .NET
@@ -30,8 +35,6 @@ jobs:
 
       # Build the project
       - name: Build project
-        env:
-          TWITCHCLIENTID: ${{ secrets.TWITCHCLIENTID }}
         run: dotnet build --configuration Release --no-restore
 
       # Publish the app

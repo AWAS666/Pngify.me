@@ -1,59 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
-using System.Text.Json;
 
-namespace PngifyMe.Services.Secrets
-{
-    public static class SecretsManager
+namespace PngifyMe.Services.Secrets;
+
+public static class SecretsManager
+{    
+    public static string TwitchClientId => GetSecret("TWITCHCLIENTID");
+
+    private static readonly Dictionary<string, string> EnvVariables = new();
+
+    static SecretsManager()
     {
-        private static Dictionary<string, string>? keys;
+        LoadEmbeddedEnvFile();
+    }
 
-        public static string TwitchClientId => GetSecret("TwitchClientId");
+    private static void LoadEmbeddedEnvFile()
+    {
+        var assembly = Assembly.GetExecutingAssembly();
+        var resourceName = assembly.GetManifestResourceNames().FirstOrDefault(name => name.EndsWith(".env"));
 
-        private static string GetSecret(string v)
+        if (resourceName == null)
         {
-            return keys[v];
+            // No embedded .env resource found
+            Console.WriteLine("No embedded .env file found.");
+            return;
         }
 
-        static SecretsManager()
+        using var stream = assembly.GetManifestResourceStream(resourceName);
+        if (stream == null)
         {
-            var file = LoadFile("secrets.json");
-            keys = JsonSerializer.Deserialize<Dictionary<string, string>>(file);
+            Console.WriteLine("Failed to load embedded .env file.");
+            return;
         }
 
-        public static string LoadFile(string embeddedFileName)
+        using var reader = new StreamReader(stream);
+        var lines = reader.ReadToEnd()
+            .Split(new[] { '\n', '\r' }, StringSplitOptions.RemoveEmptyEntries)
+            .Where(line => !string.IsNullOrWhiteSpace(line) && !line.TrimStart().StartsWith("#"));
+
+        foreach (var line in lines)
         {
-            var assembly = Assembly.GetExecutingAssembly();
-            string resourceName = GetFullyQualifiedResourceName(assembly, embeddedFileName);
-
-            if (string.IsNullOrEmpty(resourceName))
+            var parts = line.Split('=', 2, StringSplitOptions.TrimEntries);
+            if (parts.Length == 2)
             {
-                throw new InvalidOperationException($"Resource '{embeddedFileName}' not found in the assembly.");
+                EnvVariables[parts[0]] = parts[1];
             }
-
-            using (Stream stream = assembly.GetManifestResourceStream(resourceName))
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
-        }
-
-        private static string GetFullyQualifiedResourceName(Assembly assembly, string embeddedFileName)
-        {
-            // Get all resource names and find the matching one
-            var resourceNames = assembly.GetManifestResourceNames();
-            foreach (var resourceName in resourceNames)
-            {
-                if (resourceName.EndsWith(embeddedFileName, StringComparison.OrdinalIgnoreCase))
-                {
-                    return resourceName;
-                }
-            }
-
-            return null; // Resource not found
         }
     }
-}
 
+    public static string GetSecret(string key, string defaultValue = null)
+    {
+        return EnvVariables.GetValueOrDefault(key, defaultValue);
+    }
+}

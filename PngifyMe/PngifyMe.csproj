@@ -30,7 +30,6 @@
 
   <ItemGroup>
     <None Remove="Assets\logo_full.png" />
-    <None Remove="secrets.json" />
   </ItemGroup>
 
   <ItemGroup>
@@ -52,7 +51,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="secrets.json" />
+    <EmbeddedResource Include=".env"/>
   </ItemGroup>
 
   <ItemGroup>
