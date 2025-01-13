@@ -83,13 +83,10 @@
     <PackageReference Include="SharpHook" Version="5.3.8" />
     <PackageReference Include="SkiaImageView.Avalonia11" Version="1.5.0" />
     <PackageReference Include="SkiaSharp" Version="3.116.1" />
+    <PackageReference Include="Spout.NETCore" Version="1.0.0" />
     <PackageReference Include="System.Drawing.Common" Version="9.0.0" />
     <PackageReference Include="TwitchLib" Version="3.5.3" />
     <PackageReference Include="TwitchLib.EventSub.Websockets" Version="0.5.0" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\..\Spout.NETCore\Spout.NETCore\Spout.NETCore.csproj" />
   </ItemGroup>
 
   <ItemGroup>
