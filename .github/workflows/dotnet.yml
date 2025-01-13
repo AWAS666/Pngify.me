@@ -30,6 +30,8 @@ jobs:
 
       # Build the project
       - name: Build project
+        env:
+          TWITCHCLIENTID: ${{ secrets.TWITCHCLIENTID }}
         run: dotnet build --configuration Release --no-restore
 
       # Publish the app
