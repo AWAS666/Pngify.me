@@ -21,14 +21,14 @@ jobs:
       # Create env file
       - name: Create .env File
         run: |
-          echo "TWITCHCLIENTID=${{ secrets.TWITCHCLIENTID }}" >> .env
+          echo "TWITCHCLIENTID=${{ secrets.TWITCHCLIENTID }}" >> PngifyMe/.env
 
       # Set up .NET SDK
       - name: Setup .NET
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: '9.0.x'
-
+          
       # Install dependencies
       - name: Restore dependencies
         run: dotnet restore
@@ -39,7 +39,7 @@ jobs:
 
       # Publish the app
       - name: Publish app
-        run: dotnet publish --configuration Release --output ./publish
+        run: dotnet publish ./PngifyMe.Desktop/PngifyMe.Desktop.csproj --output ./publish --configuration Release --runtime win-x64 --self-contained true -p:PublishSingleFile=true -p:PublishTrimmed=false -p:PublishReadyToRun=false 
 
       # Archive the build artifacts
       - name: Archive build output
