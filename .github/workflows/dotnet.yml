@@ -1,13 +1,10 @@
 name: Build Windows Avalonia UI App
 
 on:
-  push:
-    branches:
-      - master
-  pull_request:
-    branches:
-      - master
   workflow_dispatch:
+  push:
+    tags:
+      - '*'
 
 jobs:
   build:
@@ -43,7 +40,16 @@ jobs:
 
       # Archive the build artifacts
       - name: Archive build output
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: published-app
           path: ./publish
+
+      # Create a GitHub Release    
+      - name: Create GitHub Release
+        id: create_release
+        uses: softprops/action-gh-release@v1
+        with:
+            files: ./publish/**
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
