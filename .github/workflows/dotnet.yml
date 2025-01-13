@@ -1,0 +1,43 @@
+name: Build Windows Avalonia UI App
+
+on:
+  push:
+    branches:
+      - master
+  pull_request:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: windows-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # Set up .NET SDK
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '9.0.x'
+
+      # Install dependencies
+      - name: Restore dependencies
+        run: dotnet restore
+
+      # Build the project
+      - name: Build project
+        run: dotnet build --configuration Release --no-restore
+
+      # Publish the app
+      - name: Publish app
+        run: dotnet publish --configuration Release --output ./publish
+
+      # Archive the build artifacts
+      - name: Archive build output
+        uses: actions/upload-artifact@v3
+        with:
+          name: published-app
+          path: ./publish
