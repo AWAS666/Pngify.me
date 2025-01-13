@@ -45,11 +45,28 @@ jobs:
           name: published-app
           path: ./publish
 
-      # Create a GitHub Release    
+release:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      # Download build artifact
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: published-app
+          path: ./artifact
+
+      # Zip the artifact
+      - name: Create ZIP file
+        run: |
+          zip -r pngify.me.zip ./artifact
+
+      # Create GitHub Release
       - name: Create GitHub Release
         id: create_release
         uses: softprops/action-gh-release@v1
         with:
-            files: ./publish/**
+          files: pngify.me.zip.zip
         env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

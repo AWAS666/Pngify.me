@@ -1,5 +1,5 @@
 # Pngify.Me
-The goal of this to build a funtional software for any pngtuber, 
+The goal of this to build a functional software for any pngtuber, 
 meaning a vtuber who just has a png/gif as their avatar.
 
 Feel free to suggest features and submit code yourself
