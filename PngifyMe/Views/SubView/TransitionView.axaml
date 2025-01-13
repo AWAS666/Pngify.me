@@ -28,7 +28,7 @@
 			<StackPanel Spacing="10">
 				<StackPanel Orientation="Horizontal">
 					<Label VerticalAlignment="Center">Entry Time:</Label>
-					<helper:FloatTextBox Text="{Binding EntryTime}" Width="75"/>
+					<NumericUpDown Minimum="0.0" Increment="0.1" Width="75" Value="{Binding EntryTime}"/>
 					<TextBlock VerticalAlignment="Center">seconds</TextBlock>
 				</StackPanel>
 				<helper:ImageSelectView DataContext="{Binding State.EntryImage}"></helper:ImageSelectView>
@@ -37,7 +37,7 @@
 
 				<StackPanel Orientation="Horizontal">
 					<Label VerticalAlignment="Center">Exit Time:</Label>
-					<helper:FloatTextBox Text="{Binding ExitTime}" Width="75"/>
+					<NumericUpDown Minimum="0.0" Increment="0.1" Width="75" Value="{Binding ExitTime}"/>
 					<TextBlock VerticalAlignment="Center">seconds</TextBlock>
 				</StackPanel>
 				<helper:ImageSelectView DataContext="{Binding State.ExitImage}"></helper:ImageSelectView>

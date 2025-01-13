@@ -33,21 +33,20 @@
 			<Grid RowDefinitions="30,30,30" Margin="5,5,5,5">
 				<Grid ColumnDefinitions="150,100,100" ToolTip.Tip="Time between blinks">
 					<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
-					<helper:FloatTextBox Min="0.1" Grid.Column="1" Watermark="Interval" Text="{Binding Settings.BlinkInterval}" />
+					<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkInterval}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
 				<Grid ColumnDefinitions="150,100,100" Grid.Row="1" ToolTip.Tip="How long character blinks">
 					<TextBlock VerticalAlignment="Center">Blink Time</TextBlock>
-					<helper:FloatTextBox Min="0.1" Grid.Column="1" Text="{Binding Settings.BlinkTime}" Watermark="Blink Time"/>
+					<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkTime}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
 				<Grid ColumnDefinitions="150,100,100" Grid.Row="2"
 					  ToolTip.Tip="Blending of last image, set to 0 to disable all blending">
 					<TextBlock VerticalAlignment="Center">Blend Time</TextBlock>
-					<helper:FloatTextBox Min="0" Max="{Binding Settings.BlinkTime}" Grid.Column="1"
-										 Text="{Binding Settings.TransitionTime}" Watermark="Blend Time"/>
+					<NumericUpDown Minimum="0" Maximum="{Binding Settings.BlinkTime}" Increment="0.1" Grid.Column="1" Value="{Binding Settings.TransitionTime}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
