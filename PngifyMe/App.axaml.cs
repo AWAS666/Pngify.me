@@ -5,6 +5,7 @@ using PngifyMe.Helpers;
 using PngifyMe.Services;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
+using PngifyMe.Services.WebSocket;
 using PngifyMe.Views;
 using Serilog;
 using System;
@@ -24,6 +25,7 @@ public partial class App : Application
     {
         SetupSerilog();
         AudioService.Init();
+        WebSocketServer.Start();
 
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
         {
