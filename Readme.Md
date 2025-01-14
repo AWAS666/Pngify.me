@@ -27,11 +27,6 @@ Feel free to suggest features and submit code yourself
 - [ ] mouse tracking
 - [ ] LCOLONQ mode
 
-## Todo Refactors
-- [ ] change to proper DI instead of static
-- [ ] use views and view models better
-- [ ] more usercontrols to avoid overnesting
-
 ## Support
 The goal is to have this be usuable for free, downloadable from git, itch.io and steam.
 Also it should integrate a ton of features whilst remaining lightweight.
