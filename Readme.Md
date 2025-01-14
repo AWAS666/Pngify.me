@@ -6,6 +6,8 @@ Feel free to suggest features and submit code yourself
 
 [Download on Steam](https://store.steampowered.com/app/3337800/Pngifyme)
 
+![Logo](./PngifyMe/Assets/logo_full.png?raw=true)
+
 ## Todo
 - [x] stick on any png (redeem)
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
