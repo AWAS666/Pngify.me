@@ -1,4 +1,5 @@
-﻿using Serilog.Core;
+﻿using Avalonia.Threading;
+using Serilog.Core;
 using Serilog.Events;
 using Ursa.Controls;
 
@@ -12,13 +13,17 @@ namespace PngifyMe.Helpers
         public void Emit(LogEvent logEvent)
         {
             if (!ShowErrors) return;
-            NotificationManager?.Show(
-                new Notification(null, logEvent.MessageTemplate.Text),
-                showIcon: true,
-                showClose: true,
-                type: Convert(logEvent.Level),
-                classes: ["Light"]
-                );
+            Dispatcher.UIThread.Post(() =>
+            {
+                NotificationManager?.Show(
+                    new Notification(null, logEvent.MessageTemplate.Text),
+                    showIcon: true,
+                    showClose: true,
+                    type: Convert(logEvent.Level),
+                    classes: ["Light"]
+                    );
+            }
+            );
         }
 
         public void SetNotificationHandler(WindowNotificationManager handler)
