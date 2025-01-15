@@ -1,0 +1,54 @@
+{
+  "Actions": [
+    {
+      "Icon": "imgs/logo",
+      "Name": "Trigger Layer",
+      "States": [
+        {
+          "Image": "imgs/logo",
+          "TitleAlignment": "middle",
+          "FontSize": 12
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "This will trigger a layer in PNGify.me, just make sure the name matches the name of the layer.",
+      "UUID": "me.pngify.streamdeck.switchlayeraction",
+      "PropertyInspectorPath": "ui/layerPI.html"
+    },
+    {
+      "Icon": "imgs/logo",
+      "Name": "Trigger State",
+      "States": [
+        {
+          "Image": "imgs/logo",
+          "TitleAlignment": "middle",
+          "FontSize": 12
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "This will trigger a switch state in PNGify.me, switching to a different model setup.",
+      "UUID": "me.pngify.streamdeck.switchstateaction",
+      "PropertyInspectorPath": "ui/statePI.html"
+    }
+  ],
+  "Author": "Meteora Labs",
+  "Name": "Pngify.Me",
+  "UUID": "me.pngify.streamdeck",
+  "Description": "Stream deck integration for PNGify.me",
+  "Icon": "imgs/logo",
+  "URL": "https://pngify.me",
+  "Version": "1.0.0.0",
+  "CodePath": "me.Pngify.Streamdeck.exe",
+  "Category": "Pngify.Me",
+  "CategoryIcon": "imgs/logo",
+  "OS": [
+    {
+      "Platform": "windows",
+      "MinimumVersion": "10"
+    }
+  ],
+  "SDKVersion": 2,
+  "Software": {
+    "MinimumVersion": "6.4"
+  }
+}

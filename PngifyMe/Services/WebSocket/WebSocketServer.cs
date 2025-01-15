@@ -16,7 +16,8 @@ public static class WebSocketServer
 
     public static void Start()
     {
-        Server = new Server(IPAddress.Any, 6666);
+        Server = new Server(IPAddress.Loopback, 6666);
+        Server.Start();
     }
 }
 
@@ -53,24 +54,31 @@ public class Session : WsSession
     {
         string message = Encoding.UTF8.GetString(buffer, (int)offset, (int)size);
         Log.Debug("Incoming: " + message);
-        var data = JsonSerializer.Deserialize<WebsocketCommand>(message);
-        switch (data.Command)
+        try
         {
-            case "SwitchLayer":
-                //check layer name, call this if match:
-                SettingsManager.Current.LayerSetup.Layers
-                    .FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase))?.AddLayers();
-                break;
-            case "SwitchState":
-                //check mic states, add those if match:
-                var match = SettingsManager.Current.Profile.Active.MicroPhone.States
-                            .FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase));
-                if (match != null)
-                    LayerManager.MicroPhoneStateLayer.ToggleState(match);
-                break;
-            default:
-                break;
+            var data = JsonSerializer.Deserialize<WebsocketCommand>(message);
+            switch (data?.Command)
+            {
+                case "SwitchLayer":
+                    //check layer name, call this if match:
+                    SettingsManager.Current.LayerSetup.Layers
+                        .FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase))?.AddLayers();
+                    break;
+                case "SwitchState":
+                    //check mic states, add those if match:
+                    var match = SettingsManager.Current.Profile.Active.MicroPhone.States
+                                .FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase));
+                    if (match != null)
+                        LayerManager.MicroPhoneStateLayer.ToggleState(match);
+                    break;
+                default:
+                    break;
+            }
         }
+        catch (Exception e)
+        {
+            Log.Error(e, "Websocket error");
+        }        
     }
 
     protected override void OnError(SocketError error)
