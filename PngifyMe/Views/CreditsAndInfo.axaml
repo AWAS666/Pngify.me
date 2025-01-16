@@ -89,7 +89,7 @@
 			  BorderThickness="1"
 			  Classes="WithIcon"
 			  Height="20"
-			  NavigateUri="https://www.reddit.com/user/123Thundernugget/">
+			  NavigateUri="https://ko-fi.com/thundernuggettheterrible">
 					<TextBlock
 						HorizontalAlignment="Center"
 						Text="Thundernugget"
