@@ -1,11 +1,8 @@
-﻿using NetCoreServer;
+﻿using BarRaider.SdTools;
+using NetCoreServer;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Sockets;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace me.Pngify.Streamdeck
 {
@@ -65,24 +62,24 @@ namespace me.Pngify.Streamdeck
 
         public override void OnWsConnected(HttpResponse response)
         {
-            Console.WriteLine($"WebSocket client connected a new session with Id {Id}");
+            Logger.Instance.LogMessage(TracingLevel.INFO, $"WebSocket client connected a new session with Id {Id}");
         }
 
         public override void OnWsDisconnected()
         {
-            Console.WriteLine($"WebSocket client disconnected a session with Id {Id}");
+            Logger.Instance.LogMessage(TracingLevel.INFO, $"WebSocket client disconnected a session with Id {Id}");
         }
 
         public override void OnWsReceived(byte[] buffer, long offset, long size)
         {
-            Console.WriteLine($"Incoming: {Encoding.UTF8.GetString(buffer, (int)offset, (int)size)}");
+            //Console.WriteLine($"Incoming: {Encoding.UTF8.GetString(buffer, (int)offset, (int)size)}");
         }
 
         protected override void OnDisconnected()
         {
             base.OnDisconnected();
 
-            Console.WriteLine($"Chat WebSocket client disconnected a session with Id {Id}");
+            Logger.Instance.LogMessage(TracingLevel.INFO, $"Chat WebSocket client disconnected a session with Id {Id}");
 
             // Wait for a while...
             Thread.Sleep(1000);
@@ -94,7 +91,7 @@ namespace me.Pngify.Streamdeck
 
         protected override void OnError(SocketError error)
         {
-            Console.WriteLine($"Chat WebSocket client caught an error with code {error}");
+            Logger.Instance.LogMessage(TracingLevel.ERROR, $"Chat WebSocket client caught an error with code {error}");
         }
 
         private bool _stop;

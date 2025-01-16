@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Reflection;
 namespace PngifyMe.Services.Secrets;
 
 public static class SecretsManager
-{    
+{
     public static string TwitchClientId => GetSecret("TWITCHCLIENTID");
 
     private static readonly Dictionary<string, string> EnvVariables = new();
@@ -25,14 +26,14 @@ public static class SecretsManager
         if (resourceName == null)
         {
             // No embedded .env resource found
-            Console.WriteLine("No embedded .env file found.");
+            Log.Fatal("No embedded .env file found.");
             return;
         }
 
         using var stream = assembly.GetManifestResourceStream(resourceName);
         if (stream == null)
         {
-            Console.WriteLine("Failed to load embedded .env file.");
+            Log.Fatal("Failed to load embedded .env file.");
             return;
         }
 
