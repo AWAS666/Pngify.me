@@ -1,11 +1,11 @@
 {
   "Actions": [
     {
-      "Icon": "imgs/logo",
+      "Icon": "imgs/layer",
       "Name": "Trigger Layer",
       "States": [
         {
-          "Image": "imgs/logo",
+          "Image": "imgs/layer",
           "TitleAlignment": "middle",
           "FontSize": 12
         }
@@ -16,11 +16,11 @@
       "PropertyInspectorPath": "ui/layerPI.html"
     },
     {
-      "Icon": "imgs/logo",
+      "Icon": "imgs/state",
       "Name": "Trigger State",
       "States": [
         {
-          "Image": "imgs/logo",
+          "Image": "imgs/state",
           "TitleAlignment": "middle",
           "FontSize": 12
         }
