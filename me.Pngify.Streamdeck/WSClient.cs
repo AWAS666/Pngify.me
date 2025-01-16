@@ -19,7 +19,7 @@ namespace me.Pngify.Streamdeck
         public static void Start()
         {
             string address = "127.0.0.1";           
-            int port = 6666;           
+            int port = 7666;           
 
             // Create a new TCP chat client
             client = new Websocket(address, port);

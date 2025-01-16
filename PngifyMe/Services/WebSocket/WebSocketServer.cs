@@ -16,7 +16,7 @@ public static class WebSocketServer
 
     public static void Start()
     {
-        Server = new Server(IPAddress.Loopback, 6666);
+        Server = new Server(IPAddress.Loopback, 7666);
         Server.Start();
     }
 }
