@@ -71,6 +71,7 @@
     <PackageReference Include="LucideAvalonia" Version="1.6.1" />
     <PackageReference Include="NAudio" Version="2.2.1" />
     <PackageReference Include="NAudio.Core" Version="2.2.1" />
+    <PackageReference Include="NetCoreServer" Version="8.0.7" />
     <PackageReference Include="PortAudioSharp2" Version="1.0.4" />
     <PackageReference Include="Projektanker.Icons.Avalonia" Version="9.5.0" />
     <PackageReference Include="Projektanker.Icons.Avalonia.FontAwesome" Version="9.5.0" />
