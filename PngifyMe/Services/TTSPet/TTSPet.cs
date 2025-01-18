@@ -10,7 +10,6 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace PngifyMe.Services.TTSPet
 {
@@ -86,12 +85,26 @@ namespace PngifyMe.Services.TTSPet
         {
             if (!e.Reward.Title.Equals(SettingsManager.Current.LLM.Redeem, StringComparison.CurrentCultureIgnoreCase))
                 return;
-            if (settings.JustRead) return;
-            var msg = new LLMMessage()
+            LLMMessage msg;
+            if (settings.JustRead)
             {
-                Input = string.IsNullOrEmpty(e.UserInput) ? $"{e.UserName} used the redeem: {e.Reward.Title}" : e.UserInput,
-                UserName = e.UserName,
-            };
+                if (string.IsNullOrEmpty(e.UserInput)) return;
+                msg = new LLMMessage()
+                {
+                    Input = e.UserInput,
+                    UserName = e.UserName,
+                    ReadInput = true,
+                };
+            }
+            else
+            {
+
+                msg = new LLMMessage()
+                {
+                    Input = string.IsNullOrEmpty(e.UserInput) ? $"{e.UserName} used the redeem: {e.Reward.Title}" : e.UserInput,
+                    UserName = e.UserName,
+                };
+            }
             QueueMsg(msg);
         }
 
@@ -101,11 +114,20 @@ namespace PngifyMe.Services.TTSPet
             // trigger on everything
             if (settings.ChatTriggerEverything)
             {
-                var msg1 = new LLMMessage()
-                {
-                    Input = message,
-                    UserName = e.ChatterUserName,
-                };
+                LLMMessage msg1;
+                if (settings.JustRead)
+                    msg1 = new LLMMessage()
+                    {
+                        Input = message,
+                        UserName = e.ChatterUserName,
+                        ReadInput = true,
+                    };
+                else
+                    msg1 = new LLMMessage()
+                    {
+                        Input = message,
+                        UserName = e.ChatterUserName,
+                    };
                 QueueMsg(msg1);
                 return;
             }
@@ -115,11 +137,20 @@ namespace PngifyMe.Services.TTSPet
 
             message = message.Replace(settings.ChatTrigger, string.Empty).Trim();
 
-            var msg = new LLMMessage()
-            {
-                Input = message,
-                UserName = e.ChatterUserName,
-            };
+            LLMMessage msg;
+            if (settings.JustRead)
+                msg = new LLMMessage()
+                {
+                    Input = message,
+                    UserName = e.ChatterUserName,
+                    ReadInput = true,
+                };
+            else
+                msg = new LLMMessage()
+                {
+                    Input = message,
+                    UserName = e.ChatterUserName,
+                };
             QueueMsg(msg);
         }
 
