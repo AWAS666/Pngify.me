@@ -233,7 +233,7 @@ namespace PngifyMe.Services.TTSPet
                 }
                 catch (Exception e)
                 {
-                    Log.Error($"Skipped text: {item} because of error {e.Message}");
+                    Log.Error($"Skipped text because of error {e.Message} -> Text:{item} ");
                 }
             }
         }
