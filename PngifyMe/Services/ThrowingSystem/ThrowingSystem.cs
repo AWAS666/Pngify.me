@@ -104,6 +104,22 @@ namespace PngifyMe.Services.ThrowingSystem
                         Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
                     }
                 }
+
+                // load existing png in folder
+                int count = 0;
+                foreach (string filePath in Directory.GetFiles(baseDir, "*.png", SearchOption.TopDirectoryOnly))
+                {
+                    string fileName = Path.GetFileNameWithoutExtension(filePath);
+                    if (emotes.Any(x => x.Name == fileName)) continue;
+
+                    var imageBytes = await File.ReadAllBytesAsync(filePath);
+                    using var stream = new SKMemoryStream(imageBytes);
+                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                    count++;
+                }
+                if (count > 0)
+                    Log.Information($"{count} extra emotes found and loaded");
+
             }
             catch (Exception er)
             {
