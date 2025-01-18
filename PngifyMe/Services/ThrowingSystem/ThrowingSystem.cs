@@ -79,27 +79,35 @@ namespace PngifyMe.Services.ThrowingSystem
 
         private async void LoadTwitchEmotesAsync(object? sender, TwitchAuth e)
         {
-            Throwables.Clear();
-            var emotes = await TwitchEventSocket.Api.GetEmotes();
-            using var httpClient = new HttpClient();
-            string baseDir = Path.Combine(Specsmanager.BasePath, "emotecache");
-            Directory.CreateDirectory(baseDir);
-            foreach (var emote in emotes)
+            try
             {
-                string fileName = Path.Combine(baseDir, $"{emote.Name}.png");
-                if (File.Exists(fileName))
+                Throwables.Clear();
+                var emotes = await TwitchEventSocket.Api.GetEmotes();
+                Log.Information($"Checking {emotes.Length} emotes to be downloaded");
+                using var httpClient = new HttpClient();
+                string baseDir = Path.Combine(Specsmanager.BasePath, "emotecache");
+                Directory.CreateDirectory(baseDir);
+                foreach (var emote in emotes)
                 {
-                    var imageBytes = await File.ReadAllBytesAsync(fileName);
-                    using var stream = new SKMemoryStream(imageBytes);
-                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                    string fileName = Path.Combine(baseDir, $"{emote.Name}.png");
+                    if (File.Exists(fileName))
+                    {
+                        var imageBytes = await File.ReadAllBytesAsync(fileName);
+                        using var stream = new SKMemoryStream(imageBytes);
+                        Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                    }
+                    else
+                    {
+                        var imageBytes = await httpClient.GetByteArrayAsync(emote.Images.Url4X);
+                        await File.WriteAllBytesAsync(fileName, imageBytes);
+                        using var stream = new SKMemoryStream(imageBytes);
+                        Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                    }
                 }
-                else
-                {
-                    var imageBytes = await httpClient.GetByteArrayAsync(emote.Images.Url4X);
-                    await File.WriteAllBytesAsync(fileName, imageBytes);
-                    using var stream = new SKMemoryStream(imageBytes);
-                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
-                }
+            }
+            catch (Exception er)
+            {
+                Log.Error(er, $"Emote download failed with error: {er.Message}");
             }
         }
 
