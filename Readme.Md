@@ -12,10 +12,12 @@ Feel free to suggest features and submit code yourself
 - [x] stick on any png (redeem)
 	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
 	- [ ] visualize location
-- [ ] git build chain triggered by tags 
+- [x] git build chain triggered by tags 
 - [ ] web view -> just display current image on web, need ws connection of some sort probably
-- [ ] stream deck websocket to trigger stuff
+- [x] stream deck websocket to trigger stuff
 - [ ] splash screen or load json in bg
+- [ ] layers
+	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 
 ## Roadmap (future stuff)
 - [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
