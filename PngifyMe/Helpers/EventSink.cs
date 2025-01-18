@@ -1,6 +1,7 @@
 ﻿using Avalonia.Threading;
 using Serilog.Core;
 using Serilog.Events;
+using System;
 using Ursa.Controls;
 
 namespace PngifyMe.Helpers
@@ -19,6 +20,7 @@ namespace PngifyMe.Helpers
                     new Notification(null, logEvent.MessageTemplate.Text),
                     showIcon: true,
                     showClose: true,
+                    expiration: TimeSpan.FromSeconds(5),
                     type: Convert(logEvent.Level),
                     classes: ["Light"]
                     );
