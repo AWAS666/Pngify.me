@@ -8,6 +8,7 @@ using PngifyMe.Services.Twitch;
 using PngifyMe.Services.WebSocket;
 using PngifyMe.Views;
 using Serilog;
+using Serilog.Events;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -67,11 +68,13 @@ public partial class App : Application
         // Ensure the directory exists
         Directory.CreateDirectory(Path.GetDirectoryName(localAppDataPath));
         // Configure Serilog to write to a file
+        //https://github.com/serilog/serilog/wiki/configuration-basics
         Log.Logger = new LoggerConfiguration()
-            .WriteTo.File(localAppDataPath, rollingInterval: RollingInterval.Day)
-            .MinimumLevel.Warning()
-            .WriteTo.Sink(ErrorForwarder.Sink)
-            .MinimumLevel.Information()
+            .WriteTo.File(localAppDataPath,
+                rollingInterval: RollingInterval.Day,
+                restrictedToMinimumLevel: LogEventLevel.Debug)
+            .WriteTo.Sink(ErrorForwarder.Sink, restrictedToMinimumLevel: LogEventLevel.Information)
+            .MinimumLevel.Debug()
             .CreateLogger();
     }
 }

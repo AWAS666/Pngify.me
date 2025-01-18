@@ -1,4 +1,5 @@
 ﻿using PngifyMe.Services.Secrets;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -73,9 +74,9 @@ namespace PngifyMe.Services.Twitch
             Auth.Expiration = DateTime.Now.AddSeconds(validation.ExpiresIn);
             UserId = validation.UserId;
             UserName = validation.Login;
+            Log.Debug($"Twitch id: {UserId}, Name: {UserName}");
 
             Save();
-
         }
 
         public TwitchClient ConnectClient()
