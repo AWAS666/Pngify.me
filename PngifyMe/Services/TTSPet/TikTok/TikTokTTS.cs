@@ -23,6 +23,7 @@ namespace PngifyMe.Services.TTSPet.TikTok
         {
             var clientHandler = new HttpClientHandler();
             client = new HttpClient(clientHandler);
+            client.Timeout = TimeSpan.FromSeconds(10);
             settings = SettingsManager.Current.LLM.TikTokSettings;
         }
 

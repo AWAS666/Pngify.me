@@ -34,7 +34,7 @@ namespace PngifyMe.Services.TTSPet
             };
             if (!string.IsNullOrEmpty(SettingsManager.Current.LLM.Domain))
                 options.BaseDomain = SettingsManager.Current.LLM.Domain;
-            LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(6) });
+            LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(10) });
         }
 
         public async Task<string> GetResponse(string input, string userName, List<LLMMessage> history)

@@ -31,7 +31,7 @@ namespace PngifyMe.Services.TTSPet.OpenAI
             };
             if (!string.IsNullOrEmpty(SettingsManager.Current.LLM.Domain))
                 options.BaseDomain = SettingsManager.Current.LLM.Domain;
-            LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(3) });
+            LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(10) });
         }
 
         public async Task<Stream?> GenerateSpeech(string input)
