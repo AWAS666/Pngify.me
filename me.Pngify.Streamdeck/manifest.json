@@ -37,7 +37,7 @@
   "Description": "Stream deck integration for PNGify.me",
   "Icon": "imgs/logo",
   "URL": "https://pngify.me",
-  "Version": "1.0.0.0",
+  "Version": "1.0.1.0",
   "CodePath": "me.Pngify.Streamdeck.exe",
   "Category": "Pngify.Me",
   "CategoryIcon": "imgs/logo",
