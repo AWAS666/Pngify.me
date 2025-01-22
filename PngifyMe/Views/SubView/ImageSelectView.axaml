@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
-			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
@@ -24,8 +24,10 @@
 		</Button>
 		<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 				Click="Delete"
-				Grid.Column="1" VerticalAlignment="Top"  
-				i:Attached.Icon="fa-solid fa-trash" />
+				Grid.Column="1" VerticalAlignment="Top">
+			<lucideAvalonia:Lucide Icon="Trash2" StrokeBrush="DodgerBlue"
+									StrokeThickness="2" Width="18" Height="18"/>
+			</Button>
 
 	</Grid>
 	

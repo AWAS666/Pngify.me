@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
-			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"			 
 			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
 			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
@@ -18,9 +18,12 @@
 			<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
 			<StackPanel Orientation="Horizontal"  Spacing="5">
 				<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
-				<Button Command="{Binding AddNewSettings}" i:Attached.Icon="fa-solid fa-plus"
+				<Button Command="{Binding AddNewSettings}"
 						ToolTip.Tip="Adds a new trigger group"
-						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
+						Classes="Secondary" Theme="{DynamicResource OutlineButton}">
+					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
+												   StrokeThickness="2" Width="18" Height="18"/>
+					</Button>
 				<Button Command="{Binding Save}" Content="Apply and Save"
 						ToolTip.Tip="Apply all changed settings and save them"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>

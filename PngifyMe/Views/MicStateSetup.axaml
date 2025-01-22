@@ -3,7 +3,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
-			 xmlns:i="https://github.com/projektanker/icons.avalonia"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
 			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
 			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
@@ -25,7 +25,10 @@
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">States</TextBlock>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Command="{Binding Add}" i:Attached.Icon="fa-solid fa-plus" />
+						Command="{Binding Add}">
+					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
+												   StrokeThickness="2" Width="18" Height="18"/>
+					</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding Apply}" Content="Apply and Save" />
 			</StackPanel>
@@ -66,7 +69,10 @@
 										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left"
-										i:Attached.Icon="fa-solid fa-minus" />
+										>
+										<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
+												   StrokeThickness="2" Width="18" Height="18"/>
+										</Button>
 
 									<Button
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
