@@ -18,7 +18,7 @@
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Twitch Enabled</Label>
-			<CheckBox x:Name="twitchEnabled"></CheckBox>
+			<CheckBox x:Name="twitchEnabled"  VerticalAlignment="Center"></CheckBox>
 			<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
 					ToolTip.Tip="Use this to start twitch after enabling it, or restarting it after going offline"
 					Click="TwitchRetry">Retry Twitch Connection</Button>

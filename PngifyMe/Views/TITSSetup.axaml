@@ -39,7 +39,7 @@
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
-				<CheckBox IsChecked="{Binding Settings.EnableSound, Mode=TwoWay}">Sound Enabled</CheckBox>
+				<CheckBox IsChecked="{Binding Settings.EnableSound, Mode=TwoWay}" VerticalAlignment="Center">Sound Enabled</CheckBox>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding ChangeSound}">ChangeSound</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"

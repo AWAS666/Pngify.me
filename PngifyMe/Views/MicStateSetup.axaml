@@ -68,8 +68,7 @@
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
 										CommandParameter="{Binding}"
-										Margin="5,0,0,0" HorizontalAlignment="Left"
-										>
+										Margin="5,0,0,0" HorizontalAlignment="Left">
 										<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
 												   StrokeThickness="2" Width="18" Height="18"/>
 										</Button>
@@ -80,9 +79,9 @@
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left"
 										Content="Activate" />
-									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default"></CheckBox>
+									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default" VerticalAlignment="Center"/>
 									<CheckBox ToolTip.Tip="Will revert to default if already active."
-										IsChecked="{Binding ToggleAble, Mode=TwoWay}" >ToggleAble</CheckBox>
+										IsChecked="{Binding ToggleAble, Mode=TwoWay}" VerticalAlignment="Center" Content="ToggleAble"/>
 
 								</StackPanel>
 								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
