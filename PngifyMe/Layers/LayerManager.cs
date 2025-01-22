@@ -1,6 +1,7 @@
 ﻿using PngifyMe.Helpers;
 using PngifyMe.Layers.Microphone;
 using PngifyMe.Services;
+using PngifyMe.Services.Settings;
 using PngifyMe.Services.ThrowingSystem;
 using Serilog;
 using SkiaSharp;
@@ -47,6 +48,7 @@ namespace PngifyMe.Layers
         /// set to 10
         /// </summary>
         public static List<SaveDispose<SKBitmap>> FrameBuffer { get; private set; } = new();
+        public static EventHandler<Layersetting> LayerTriggered;
 
         static LayerManager()
         {

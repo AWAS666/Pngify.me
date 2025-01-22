@@ -33,6 +33,8 @@ public class MicroPhoneStateLayer
     public float ExitTime { get; private set; }
     public BaseImage LastImage { get; private set; }
 
+    public EventHandler<MicroPhoneState> StateChanged;
+
     public MicroPhoneStateLayer()
     {
         RefreshMicSettings();
@@ -127,6 +129,8 @@ public class MicroPhoneStateLayer
         if (lastState != null)
             ExitTime = CurrentTime + lastState.ExitTime;
         EntryTime = ExitTime + CurrentState.EntryTime;
+
+        StateChanged?.Invoke(this, state);
     }
 
     public void ToggleState(MicroPhoneState state)

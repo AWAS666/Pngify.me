@@ -7,6 +7,7 @@ using System.Linq;
 using PngifyMe.Layers;
 using System.Text.Json;
 using System;
+using PngifyMe.Services.Settings;
 
 namespace PngifyMe.Services.WebSocket;
 
@@ -26,7 +27,29 @@ public static class WebSocketServer
 /// </summary>
 public class Server : WsServer
 {
-    public Server(IPAddress address, int port) : base(address, port) { }
+    public Server(IPAddress address, int port) : base(address, port)
+    {
+        LayerManager.MicroPhoneStateLayer.StateChanged += MicStateChanged;
+        LayerManager.LayerTriggered += LayerTriggered;
+    }
+
+    private void LayerTriggered(object? sender, Layersetting e)
+    {
+        MulticastText(JsonSerializer.Serialize(new WebSocketStatus()
+        {
+            Type = "LayerTrigger",
+            Status = e.Name,
+        }));
+    }
+
+    private void MicStateChanged(object? sender, MicroPhoneState e)
+    {
+        MulticastText(JsonSerializer.Serialize(new WebSocketStatus()
+        {
+            Type = "MicState",
+            Status = e.Name,
+        }));
+    }
 
     protected override TcpSession CreateSession() { return new Session(this); }
 
@@ -78,7 +101,7 @@ public class Session : WsSession
         catch (Exception e)
         {
             Log.Error(e, "Websocket error");
-        }        
+        }
     }
 
     protected override void OnError(SocketError error)
@@ -91,4 +114,10 @@ public class WebsocketCommand
 {
     public string Command { get; set; } = "SwitchLayer";
     public string Parameter { get; set; }
+}
+
+public class WebSocketStatus
+{
+    public string Type { get; set; } = "SwitchLayer";
+    public string Status { get; set; }
 }

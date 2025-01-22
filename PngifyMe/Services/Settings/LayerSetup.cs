@@ -106,6 +106,7 @@ namespace PngifyMe.Services.Settings
             {
                 LayerManager.AddLayer(layer.Clone(this), Trigger.IsToggleable);
             }
+            LayerManager.LayerTriggered?.Invoke(this, this);
         }
 
         public void Cleanup()
