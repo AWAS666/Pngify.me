@@ -11,6 +11,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using TwitchLib.Client.Models;
 
 namespace PngifyMe.Layers
 {
@@ -141,6 +142,7 @@ namespace PngifyMe.Layers
 
                 var layert = new LayerValues();
                 CharacterStateHandler.Update(dt, ref layert);
+                if (layert.Image == null) return;
                 foreach (BaseLayer layer in RenderedLayers)
                 {
                     layer.OnCalculateParameters(dt, ref layert);

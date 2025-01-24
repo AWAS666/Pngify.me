@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Services.CharacterSetup.Basic;
 
-public partial class BasicCharSettings : ObservableObject
+public partial class BasicCharSettings : ObservableObject, IAvatarSettings
 {
     [ObservableProperty]
     private double blinkInterval = 2f;

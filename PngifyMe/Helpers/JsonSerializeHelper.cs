@@ -17,6 +17,7 @@ public static class JsonSerializeHelper
         options.Converters.Add(new BaseLayerJsonConverter());
         options.Converters.Add(new TriggerJsonConverter());
         options.Converters.Add(new CharacterSetupJsonConv());
+        options.Converters.Add(new CharacterSettingJsonConv());
 #if DEBUG
         options.WriteIndented = true;
 #endif

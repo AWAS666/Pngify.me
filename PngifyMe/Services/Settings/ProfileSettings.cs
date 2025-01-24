@@ -156,7 +156,7 @@ namespace PngifyMe.Services.Settings
         public bool Default { get; set; }
         public ProfileType Type { get; set; } = ProfileType.Human;
         public MicSettings MicSettings { get; set; } = new MicSettings();
-        public BasicCharSettings CharacterSetup { get; set; } = new BasicCharSettings();
+        public IAvatarSettings CharacterSetup { get; set; } = new BasicCharSettings();
 
         public void SwitchType(ProfileType type)
         {

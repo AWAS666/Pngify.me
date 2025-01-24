@@ -34,7 +34,8 @@ public class BasicCharacterSetup : ICharacterSetup
     public float EntryTime { get; private set; }
     public float ExitTime { get; private set; }
     public BaseImage LastImage { get; private set; }
-    public BasicCharSettings Settings { get; set; }
+    public IAvatarSettings Settings { get; set; }
+    private BasicCharSettings settings => (BasicCharSettings)Settings;
 
     public EventHandler<CharacterState> StateChanged;
 
@@ -121,7 +122,7 @@ public class BasicCharacterSetup : ICharacterSetup
 
         if (LastImage != CurrentImage && BlendTime == null)
         {
-            BlendTime = CurrentTime + Settings.TransitionTime;
+            BlendTime = CurrentTime + settings.TransitionTime;
         }
         else if (BlendTime < CurrentTime)
         {
@@ -134,12 +135,12 @@ public class BasicCharacterSetup : ICharacterSetup
     {
         if (!blinking && CurrentTime > transTime)
         {
-            transTime += Settings.BlinkTime;
+            transTime += settings.BlinkTime;
             blinking = true;
         }
         else if (blinking && CurrentTime > transTime)
         {
-            transTime += Settings.BlinkInterval;
+            transTime += settings.BlinkInterval;
             blinking = false;
         }
 
@@ -154,10 +155,10 @@ public class BasicCharacterSetup : ICharacterSetup
 
     public void DrawTransition(SKBitmap baseImg, int width, int height, SKCanvas canvas, float opacity)
     {
-        if (Settings.TransitionTime == 0f) return;
+        if (settings.TransitionTime == 0f) return;
         if (BlendTime == null || LastImage == null) return;
 
-        var blend = (BlendTime - CurrentTime) / Settings.TransitionTime;
+        var blend = (BlendTime - CurrentTime) / settings.TransitionTime;
         // factor in blending of main layer
         blend *= opacity;
         using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })

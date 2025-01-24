@@ -8,7 +8,7 @@ namespace PngifyMe.Services.CharacterSetup
     public interface ICharacterSetup
     {
         BaseImage CurrentImage { get; }
-        BasicCharSettings Settings { get; set; }
+        IAvatarSettings Settings { get; set; }
 
         void DrawTransition(SKBitmap baseImg, int width, int height, SKCanvas canvas, float opacity);
         void RefreshCharacterSettings();
