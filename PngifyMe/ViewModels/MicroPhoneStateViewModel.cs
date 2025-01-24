@@ -7,11 +7,11 @@ using SharpHook.Native;
 
 namespace PngifyMe.ViewModels
 {
-    public partial class MicroPhoneStateViewModel : ObservableObject
+    public partial class BasicStateViewModel : ObservableObject
     {
         [ObservableProperty]
         private CharacterState state;
-        private MicroPhoneSetupViewModel parent;
+        private BasicSetupViewModel parent;
 
         private string hotkey;
 
@@ -85,7 +85,7 @@ namespace PngifyMe.ViewModels
         bool hotkeyByTrigger;
 
 
-        public MicroPhoneStateViewModel(CharacterState state, MicroPhoneSetupViewModel parent)
+        public BasicStateViewModel(CharacterState state, BasicSetupViewModel parent)
         {
             this.state = state;
             this.parent = parent;
@@ -99,7 +99,7 @@ namespace PngifyMe.ViewModels
             SetHotkey();
         }
 
-        public MicroPhoneStateViewModel() : this(new CharacterState(), new MicroPhoneSetupViewModel())
+        public BasicStateViewModel() : this(new CharacterState(), new BasicSetupViewModel())
         {
 
         }

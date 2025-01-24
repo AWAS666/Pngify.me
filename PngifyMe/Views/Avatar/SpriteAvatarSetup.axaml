@@ -1,0 +1,26 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			  xmlns:u="https://irihi.tech/ursa"
+			 x:DataType="vm:SpriteSetupViewModel"
+             x:Class="PngifyMe.Views.Avatar.SpriteAvatarSetup"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 >
+	<Design.DataContext>
+		<vm:SpriteSetupViewModel/>
+	</Design.DataContext>
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel>
+			<TextBlock FontSize="24">Sprite Avatar State Setup</TextBlock>
+			<Button>Import from PngTuber Plus</Button>
+		</StackPanel>
+
+	</Grid>
+</UserControl>

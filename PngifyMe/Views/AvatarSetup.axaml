@@ -1,0 +1,42 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			 xmlns:a="clr-namespace:PngifyMe.Views.Avatar"
+			  xmlns:u="https://irihi.tech/ursa"
+			 x:DataType="vm:AvatarSetupViewModel"
+             x:Class="PngifyMe.Views.AvatarSetup"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 >
+	<Design.DataContext>
+		<vm:AvatarSetupViewModel/>
+	</Design.DataContext>
+	<UserControl.Resources>
+		<conv:FloatConverter x:Key="FloatConverter" />
+	</UserControl.Resources>
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel>
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<TextBlock VerticalAlignment="Center" FontSize="24">Avatar Mode:</TextBlock>
+				<ComboBox ItemsSource="{Binding Options}" SelectedItem="{Binding SelectedMode}" SelectedIndex="0"/>
+			</StackPanel>
+			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+			<ContentControl Content="{Binding SelectedView}">
+				<ContentControl.DataTemplates>
+					<DataTemplate DataType="{x:Type vm:BasicSetupViewModel}">
+						<a:BasicAvatarSetup DataContext="{Binding}"/>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vm:SpriteSetupViewModel}">
+						<a:SpriteAvatarSetup DataContext="{Binding}"/>
+					</DataTemplate>
+				</ContentControl.DataTemplates>
+			</ContentControl>
+		</StackPanel>
+	</Grid>
+</UserControl>

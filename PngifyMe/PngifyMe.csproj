@@ -94,6 +94,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Avatar\SpriteAvatarSetup.axaml.cs">
+      <DependentUpon>SpriteAvatarSetup.axaml</DependentUpon>
+    </Compile>
+    <Compile Update="Views\Avatar\BasicAvatarSetup.axaml.cs">
+      <DependentUpon>BasicAvatarSetup.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\SubView\LayerSelectorView.axaml.cs">
       <DependentUpon>LayerSelectorView.axaml</DependentUpon>
     </Compile>
@@ -136,8 +142,8 @@
     <Compile Update="Views\TITSSetup.axaml.cs">
       <DependentUpon>TITSSetup.axaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\MicStateSetup.axaml.cs">
-      <DependentUpon>MicStateSetup.axaml</DependentUpon>
+    <Compile Update="Views\AvatarSetup.axaml.cs">
+      <DependentUpon>AvatarSetup.axaml</DependentUpon>
     </Compile>
     <Compile Update="Views\LayerSetup.axaml.cs">
       <SubType>Code</SubType>

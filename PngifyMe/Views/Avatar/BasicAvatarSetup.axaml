@@ -9,23 +9,18 @@
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
 			  xmlns:u="https://irihi.tech/ursa"
-			 x:DataType="vm:MicroPhoneSetupViewModel"
-             x:Class="PngifyMe.Views.MicStateSetup"
+			 x:DataType="vm:BasicSetupViewModel"
+             x:Class="PngifyMe.Views.Avatar.BasicAvatarSetup"
 			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
 			 >
 	<Design.DataContext>
-		<vm:MicroPhoneSetupViewModel/>
+		<vm:BasicSetupViewModel/>
 	</Design.DataContext>
 	<UserControl.Resources>
 		<conv:FloatConverter x:Key="FloatConverter" />
 	</UserControl.Resources>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
-			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBlock VerticalAlignment="Center" FontSize="24">Avatar Mode:</TextBlock>
-				<ComboBox ItemsSource="{Binding Options}" SelectedItem="{Binding SelectedMode}" SelectedIndex="0"/>
-			</StackPanel>
-			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 			<TextBlock FontSize="24">Basic Avatar State Setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">States</TextBlock>
@@ -71,7 +66,7 @@
 									<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
 									<Button
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
+										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).Remove}"
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left">
 										<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
@@ -80,7 +75,7 @@
 
 									<Button
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).SwitchState}"
+										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).SwitchState}"
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left"
 										Content="Activate" />

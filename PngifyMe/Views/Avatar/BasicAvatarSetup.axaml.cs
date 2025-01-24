@@ -12,21 +12,15 @@ using Ursa.Common;
 using Ursa.Controls;
 using Ursa.Controls.Options;
 
-namespace PngifyMe.Views;
+namespace PngifyMe.Views.Avatar;
 
-public partial class MicStateSetup : UserControl
+public partial class BasicAvatarSetup : UserControl
 {
-    public MicStateSetup()
+    public BasicAvatarSetup()
     {
         InitializeComponent();
-        DataContext = new MicroPhoneSetupViewModel(GetStorage);
-        SettingsManager.Current.Profile.PropertyChanged += Profile_PropertyChanged;
-    }
-
-    private void Profile_PropertyChanged(object? sender, PropertyChangedEventArgs e)
-    {
-        DataContext = new MicroPhoneSetupViewModel(GetStorage);
-    }
+        DataContext = new BasicSetupViewModel(GetStorage);
+    }   
 
     private IStorageProvider GetStorage()
     {
@@ -36,9 +30,9 @@ public partial class MicStateSetup : UserControl
 
     private void CheckChanged(object? sender, RoutedEventArgs e)
     {
-        MicroPhoneStateViewModel changed = (MicroPhoneStateViewModel)((CheckBox)e.Source).DataContext;
+        BasicStateViewModel changed = (BasicStateViewModel)((CheckBox)e.Source).DataContext;
         //changed.DefaultState = !changed.DefaultState;
-        var context = (MicroPhoneSetupViewModel)DataContext;
+        var context = (BasicSetupViewModel)DataContext;
         if (changed.DefaultState)
         {
             foreach (var item in context.States.Where(x => x != changed))
@@ -55,7 +49,7 @@ public partial class MicStateSetup : UserControl
 
     private async void ShowTransition(object sender, RoutedEventArgs e)
     {
-        var vm = (MicroPhoneStateViewModel)((Button)sender).DataContext;
+        var vm = (BasicStateViewModel)((Button)sender).DataContext;
         var options = new DrawerOptions()
         {
             Position = Position.Right,
@@ -65,12 +59,12 @@ public partial class MicStateSetup : UserControl
             Title = "Setup Transitions",
 
         };
-        await Drawer.ShowCustomModal<TransitionView, MicroPhoneStateViewModel, object?>(vm, "LocalHost", options);
+        await Drawer.ShowCustomModal<TransitionView, BasicStateViewModel, object?>(vm, "LocalHost", options);
     }
 
     private void HotkeyDown(object sender, KeyEventArgs e)
     {
-        var vm = ((TextBox)sender).DataContext as MicroPhoneStateViewModel;
+        var vm = ((TextBox)sender).DataContext as BasicStateViewModel;
         vm.OnKeyDown(e);
     }
 }
