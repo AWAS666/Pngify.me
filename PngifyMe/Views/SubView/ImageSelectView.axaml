@@ -6,7 +6,7 @@
 			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
-			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 xmlns:sett="clr-namespace:PngifyMe.Services.CharacterSetup.Images"
 			 x:DataType="sett:ImageSetting"
              x:Class="PngifyMe.Views.Helper.ImageSelectView"
 			 xmlns:siv="https://github.com/kekyo/SkiaImageView"			 

@@ -1,5 +1,6 @@
 ﻿using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
 using SharpHook.Native;
 
@@ -9,7 +10,7 @@ namespace PngifyMe.ViewModels
     public partial class MicroPhoneStateViewModel : ObservableObject
     {
         [ObservableProperty]
-        private MicroPhoneState state;
+        private CharacterState state;
         private MicroPhoneSetupViewModel parent;
 
         private string hotkey;
@@ -84,7 +85,7 @@ namespace PngifyMe.ViewModels
         bool hotkeyByTrigger;
 
 
-        public MicroPhoneStateViewModel(MicroPhoneState state, MicroPhoneSetupViewModel parent)
+        public MicroPhoneStateViewModel(CharacterState state, MicroPhoneSetupViewModel parent)
         {
             this.state = state;
             this.parent = parent;
@@ -98,7 +99,7 @@ namespace PngifyMe.ViewModels
             SetHotkey();
         }
 
-        public MicroPhoneStateViewModel() : this(new MicroPhoneState(), new MicroPhoneSetupViewModel())
+        public MicroPhoneStateViewModel() : this(new CharacterState(), new MicroPhoneSetupViewModel())
         {
 
         }

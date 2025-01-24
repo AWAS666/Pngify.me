@@ -39,7 +39,7 @@ namespace PngifyMe.Layers
         public static EventHandler<BaseLayer> NewLayer;
         public static EventHandler<float> FPSUpdate;
 
-        public static MicroPhoneStateLayer MicroPhoneStateLayer { get; private set; } = new MicroPhoneStateLayer();
+        public static CharacterStateHandler CharacterStateHandler { get; private set; } = new CharacterStateHandler();
         public static ThrowingSystem ThrowingSystem { get; private set; } = new ThrowingSystem();
         public static SaveDispose<SKBitmap> CurrentFrame { get; private set; }
 
@@ -140,7 +140,7 @@ namespace PngifyMe.Layers
                 RenderedLayers = Layers.ToList();
 
                 var layert = new LayerValues();
-                MicroPhoneStateLayer.Update(dt, ref layert);
+                CharacterStateHandler.Update(dt, ref layert);
                 foreach (BaseLayer layer in RenderedLayers)
                 {
                     layer.OnCalculateParameters(dt, ref layert);
@@ -205,20 +205,7 @@ namespace PngifyMe.Layers
                         paint);
                 }
 
-                if (SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime != 0f)
-                    if (MicroPhoneStateLayer.BlendTime != null && MicroPhoneStateLayer.LastImage != null)
-                    {
-                        var blend = (MicroPhoneStateLayer.BlendTime - MicroPhoneStateLayer.CurrentTime) / SettingsManager.Current.Profile.Active.MicroPhone.TransitionTime;
-                        // factor in blending of main layer
-                        blend *= opacity;
-                        using (SKPaint paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(blend * 255)) })
-                        {
-                            canvas.DrawBitmap(MicroPhoneStateLayer.LastImage.GetImage(TimeSpan.FromSeconds(MicroPhoneStateLayer.CurrentTime)),
-                                width / 2 - baseImg.Width / 2,
-                                height / 2 - baseImg.Height / 2,
-                                paint);
-                        }
-                    }
+                LayerManager.CharacterStateHandler.CharacterSetup.DrawTransition(baseImg, width, height, canvas, opacity);
 
                 foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects && !x.BehindModel))
                 {
@@ -242,6 +229,8 @@ namespace PngifyMe.Layers
                 FrameBuffer.Remove(item);
             }
         }
+
+
 
         private static void DrawTits(SKCanvas canvas)
         {

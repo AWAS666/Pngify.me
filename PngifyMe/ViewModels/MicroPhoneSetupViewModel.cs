@@ -2,6 +2,8 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using PngifyMe.Services;
+using PngifyMe.Services.CharacterSetup;
+using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
 using System;
 using System.Collections.Generic;
@@ -15,9 +17,10 @@ namespace PngifyMe.ViewModels
     {
         public Func<IStorageProvider> GetStorageProvider { get; }
 
-        private List<MicroPhoneState> baseStates;
+        private List<CharacterState> baseStates;
 
-        public MicroPhoneSettings Settings { get; }
+        public BasicCharSettings Settings { get; }
+        public MicSettings MicSettings { get; }
 
         [ObservableProperty]
         private ObservableCollection<MicroPhoneStateViewModel> states;
@@ -30,14 +33,15 @@ namespace PngifyMe.ViewModels
         public MicroPhoneSetupViewModel(Func<IStorageProvider> getStorage)
         {
             GetStorageProvider = getStorage;
-            baseStates = SettingsManager.Current.Profile.Active.MicroPhone.States;
-            Settings = SettingsManager.Current.Profile.Active.MicroPhone;
+            baseStates = SettingsManager.Current.Profile.Active.CharacterSetup.States;
+            Settings = SettingsManager.Current.Profile.Active.CharacterSetup;
+            MicSettings = SettingsManager.Current.Profile.Active.MicSettings;
             states = new ObservableCollection<MicroPhoneStateViewModel>(baseStates.Select(x => new MicroPhoneStateViewModel(x, this)));
         }
 
         public void Add()
         {
-            var set = new MicroPhoneState();
+            var set = new CharacterState();
             States.Add(new MicroPhoneStateViewModel(set, this));
             baseStates.Add(set);
         }
@@ -53,13 +57,13 @@ namespace PngifyMe.ViewModels
 
         public void SwitchState(MicroPhoneStateViewModel vm)
         {
-            LayerManager.MicroPhoneStateLayer.ToggleState(vm.State);
+            LayerManager.CharacterStateHandler.ToggleState(vm.State);
         }
 
         public void Apply()
         {
             SettingsManager.Save();
-            LayerManager.MicroPhoneStateLayer.SetupHotKeys();
+            LayerManager.CharacterStateHandler.SetupHotKeys();
         }
     }
 }

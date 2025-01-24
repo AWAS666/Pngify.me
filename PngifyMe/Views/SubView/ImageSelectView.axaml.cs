@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using PngifyMe.Services.CharacterSetup.Images;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
 using System.Linq;

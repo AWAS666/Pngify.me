@@ -8,6 +8,7 @@ using PngifyMe.Layers;
 using System.Text.Json;
 using System;
 using PngifyMe.Services.Settings;
+using PngifyMe.Services.CharacterSetup.Basic;
 
 namespace PngifyMe.Services.WebSocket;
 
@@ -29,7 +30,7 @@ public class Server : WsServer
 {
     public Server(IPAddress address, int port) : base(address, port)
     {
-        LayerManager.MicroPhoneStateLayer.StateChanged += MicStateChanged;
+        LayerManager.CharacterStateHandler.StateChanged += MicStateChanged;
         LayerManager.LayerTriggered += LayerTriggered;
     }
 
@@ -42,7 +43,7 @@ public class Server : WsServer
         }));
     }
 
-    private void MicStateChanged(object? sender, MicroPhoneState e)
+    private void MicStateChanged(object? sender, CharacterState e)
     {
         MulticastText(JsonSerializer.Serialize(new WebSocketStatus()
         {
@@ -89,10 +90,10 @@ public class Session : WsSession
                     break;
                 case "SwitchState":
                     //check mic states, add those if match:
-                    var match = SettingsManager.Current.Profile.Active.MicroPhone.States
+                    var match = SettingsManager.Current.Profile.Active.CharacterSetup.States
                                 .FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase));
                     if (match != null)
-                        LayerManager.MicroPhoneStateLayer.ToggleState(match);
+                        LayerManager.CharacterStateHandler.ToggleState(match);
                     break;
                 default:
                     break;

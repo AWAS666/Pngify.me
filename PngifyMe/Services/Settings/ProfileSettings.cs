@@ -1,5 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers.Helper;
+using PngifyMe.Services.CharacterSetup;
+using PngifyMe.Services.CharacterSetup.Basic;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -102,7 +104,7 @@ namespace PngifyMe.Services.Settings
             Directory.CreateDirectory(newFolder);
 
             // move and save all images
-            foreach (var item in profile.MicroPhone.States)
+            foreach (var item in profile.CharacterSetup.States)
             {
                 item.Open.FilePath = MoveFile(item.Open.FilePath, newFolder);
                 item.Closed.FilePath = MoveFile(item.Closed.FilePath, newFolder);
@@ -126,7 +128,7 @@ namespace PngifyMe.Services.Settings
             var profile = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(output, "setup.json")));
 
             // fix any broken image references
-            foreach (var item in profile.MicroPhone.States)
+            foreach (var item in profile.CharacterSetup.States)
             {
                 item.Open.FilePath = Path.Combine(output, Path.GetFileName(item.Open.FilePath));
                 item.Closed.FilePath = Path.Combine(output, Path.GetFileName(item.Closed.FilePath));
@@ -160,7 +162,8 @@ namespace PngifyMe.Services.Settings
         public string Name { get; set; } = "Profile1";
         public bool Default { get; set; }
         public ProfileType Type { get; set; } = ProfileType.Human;
-        public MicroPhoneSettings MicroPhone { get; set; } = new();
+        public MicSettings MicSettings { get; set; } = new MicSettings();
+        public BasicCharSettings CharacterSetup { get; set; } = new BasicCharSettings();
 
         public void SwitchType(ProfileType type)
         {
