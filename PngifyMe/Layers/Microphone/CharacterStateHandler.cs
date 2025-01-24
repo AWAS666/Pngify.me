@@ -2,12 +2,7 @@
 using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.CharacterSetup.Images;
-using PngifyMe.Services.Hotkey;
-using PngifyMe.Services.Settings;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime;
 
 namespace PngifyMe.Layers.Microphone;
 

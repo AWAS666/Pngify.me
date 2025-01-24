@@ -1,4 +1,5 @@
-﻿using PngifyMe.Layers.Helper;
+﻿using PngifyMe.Helpers;
+using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Settings;
 using Serilog;
 using System;
@@ -31,11 +32,7 @@ namespace PngifyMe.Services
             {
                 try
                 {
-
-                    var options = new JsonSerializerOptions();
-                    options.Converters.Add(new BaseLayerJsonConverter());
-                    options.Converters.Add(new TriggerJsonConverter());
-                    Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath), options);
+                    Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath), JsonSerializeHelper.GetDefault());
                 }
                 catch (Exception e)
                 {
@@ -54,13 +51,7 @@ namespace PngifyMe.Services
 
         public static void Save()
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new BaseLayerJsonConverter());
-            options.Converters.Add(new TriggerJsonConverter());
-#if DEBUG
-            options.WriteIndented = true;
-#endif
-            File.WriteAllText(FilePath, JsonSerializer.Serialize(Current, options));
+            File.WriteAllText(FilePath, JsonSerializer.Serialize(Current, JsonSerializeHelper.GetDefault()));
         }
     }
 }

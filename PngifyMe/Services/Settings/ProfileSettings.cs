@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Helpers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Basic;
@@ -39,10 +40,6 @@ namespace PngifyMe.Services.Settings
 
         public void Save()
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new BaseLayerJsonConverter());
-            options.Converters.Add(new TriggerJsonConverter());
-
             FixNames();
             string path = Path.Combine(SettingsManager.BasePath, "Profiles");
             // clear and create new
@@ -51,7 +48,7 @@ namespace PngifyMe.Services.Settings
             foreach (var prof in ProfileList)
             {
                 Directory.CreateDirectory(Path.Combine(path, prof.Name));
-                File.WriteAllText(Path.Combine(path, prof.Name, "setup.json"), JsonSerializer.Serialize(prof, options));
+                File.WriteAllText(Path.Combine(path, prof.Name, "setup.json"), JsonSerializer.Serialize(prof, JsonSerializeHelper.GetDefault()));
                 // move and save all images
                 // make it a zip file
             }
@@ -91,10 +88,6 @@ namespace PngifyMe.Services.Settings
 
         public void ExportProfile(Profile profile, string exportTo)
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new BaseLayerJsonConverter());
-            options.Converters.Add(new TriggerJsonConverter());
-
             FixNames();
             string path = Path.Combine(SettingsManager.BasePath, "Profiles");
             // clear and create new
@@ -111,7 +104,7 @@ namespace PngifyMe.Services.Settings
                 item.OpenBlink.FilePath = MoveFile(item.OpenBlink.FilePath, newFolder);
                 item.ClosedBlink.FilePath = MoveFile(item.ClosedBlink.FilePath, newFolder);
             }
-            File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, options));
+            File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, JsonSerializeHelper.GetDefault()));
 
             // make it a zip file
             if (File.Exists(exportTo)) File.Delete(exportTo);
