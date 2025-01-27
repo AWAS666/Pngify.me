@@ -1,16 +1,22 @@
 ﻿using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Advanced;
 using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
+using PngifyMe.ViewModels.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
+using System.Net;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 
 namespace PngifyMe.ViewModels;
@@ -42,7 +48,17 @@ public partial class AvatarSetupViewModel : ObservableObject
     public AvatarSetupViewModel(Func<IStorageProvider> getStorage)
     {
         GetStorageProvider = getStorage;
-        SelectedMode = Options.First();
+        switch (SettingsManager.Current.Profile.Active.CharacterSetup)
+        {
+            case BasicCharSettings:
+                SelectedMode = Options.First();
+                break;
+            case SpriteCharacterSettings:
+                SelectedMode = Options.Last();
+                break;
+            default:
+                break;
+        }
         SettingsManager.Current.Profile.PropertyChanged += Profile_PropertyChanged;
     }
 
@@ -53,7 +69,8 @@ public partial class AvatarSetupViewModel : ObservableObject
 
     partial void OnSelectedModeChanged(string? oldValue, string newValue)
     {
-        LayerManager.CharacterStateHandler.ChangeSetup(newValue);
+        if (oldValue != null)
+            LayerManager.CharacterStateHandler.ChangeSetup(newValue);
         CheckSettings();
     }
 
@@ -140,5 +157,34 @@ public partial class SpriteSetupViewModel : ObservableObject
     {
         GetStorageProvider = getStorage;
         Settings = (SpriteCharacterSettings)SettingsManager.Current.Profile.Active.CharacterSetup;
-    }   
+    }
+
+    [RelayCommand]
+    public async Task ImportPngtuberPlus()
+    {
+        var path = await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
+        {
+            Title = "Select a Pngtuber Plus save file",
+            FileTypeFilter = new[] { FilePickers.PngTuberPlus },
+            AllowMultiple = false
+        });
+        var filePath = path.FirstOrDefault()?.Path?.AbsolutePath;
+        if (string.IsNullOrEmpty(filePath)) return;
+
+        var file = await File.ReadAllTextAsync(filePath);
+        var obj = JsonSerializer.Deserialize<Dictionary<string, PngTuberPlusObject>>(file);
+        var items = obj.Values.ToList();
+        var parent = items.First(x => x.parentId == null);
+        items.Remove(parent);
+
+        var spriteParent = new SpriteImage();
+        await Task.Run(async () =>
+        {
+            // takes some time, maybe show progress
+            spriteParent.MigratePngtuberPlus(parent, items);
+        });
+        Settings.Parent = spriteParent;
+
+        LayerManager.CharacterStateHandler.CharacterSetup.RefreshCharacterSettings();
+    }
 }

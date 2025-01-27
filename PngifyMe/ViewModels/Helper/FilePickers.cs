@@ -22,5 +22,10 @@ namespace PngifyMe.ViewModels.Helper
             Patterns = new[] { "*.zip", },
             AppleUniformTypeIdentifiers = new[] { "public.archive" },
         };
+
+        public static FilePickerFileType PngTuberPlus { get; } = new("Save")
+        {
+            Patterns = new[] { "*.save", },
+        };
     }
 }

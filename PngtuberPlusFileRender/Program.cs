@@ -1,6 +1,5 @@
 ﻿using ImageMagick;
 using SkiaSharp;
-using System;
 using System.Diagnostics;
 using System.Numerics;
 using System.Text.Json;

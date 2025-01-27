@@ -9,14 +9,26 @@ namespace PngifyMe.Layers.Microphone;
 
 public class CharacterStateHandler
 {
-    public ICharacterSetup CharacterSetup { get; private set; } = new BasicCharacterSetup();
+    public ICharacterSetup CharacterSetup { get; private set; }
 
     public BaseImage CurrentImage => CharacterSetup.CurrentImage;
 
     public EventHandler<CharacterState> StateChanged; // dead for now, todo
 
     public CharacterStateHandler()
-    {
+    {      
+        switch (SettingsManager.Current.Profile.Active.CharacterSetup)
+        {
+            case BasicCharSettings:
+                CharacterSetup = new BasicCharacterSetup();
+                break;
+            case SpriteCharacterSettings:
+                CharacterSetup = new SpriteCharacterSetup();
+                break;
+            default:
+                break;
+        }
+
         RefreshCharacterSettings();
         SettingsManager.Current.Profile.PropertyChanged += Profile_PropertyChanged;
     }

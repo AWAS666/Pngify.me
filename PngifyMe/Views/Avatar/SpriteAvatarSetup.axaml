@@ -19,7 +19,7 @@
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
 			<TextBlock FontSize="24">Sprite Avatar State Setup</TextBlock>
-			<Button>Import from PngTuber Plus</Button>
+			<Button Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
 		</StackPanel>
 
 	</Grid>

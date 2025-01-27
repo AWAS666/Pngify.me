@@ -1,9 +1,14 @@
 ﻿using SkiaSharp;
+using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Text.Json.Serialization;
 
+namespace PngifyMe.Services.CharacterSetup.Advanced;
 public class SpriteImage
 {
     private Vector2 lastOffset = Vector2.Zero;
@@ -58,7 +63,7 @@ public class SpriteImage
     public int RotMovement { get; set; }
     public BlinkState ShowBlink { get; set; }
     public MouthState ShowMouth { get; set; }
-    public List<int> LayerStates { get; set; }
+    public List<int> LayerStates { get; set; } = new List<int>(10);
     public int Drag { get; set; }
     public float Stretch { get; set; }
 
@@ -147,7 +152,7 @@ public class SpriteImage
         using var skStream = new SKManagedStream(memoryStream);
         using var bitmap = SKBitmap.Decode(skStream);
 
-        using var scaled = Resize(bitmap, (int)(1920 * 0.9f), (int)(1080 * 0.9f));
+        using var scaled = Resize(bitmap, (int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
         scaleImportFactor = (float)scaled.Width / bitmap.Width;
         scaleMidOffset = scaleImportFactor * bitmap.Width / 2;
         var cropped = CropAndGetOffset(scaled);
@@ -288,13 +293,13 @@ public class SpriteImage
 public enum BlinkState
 {
     Ignore = 0,
-    Open = 1,
-    Closed = 2,
+    Closed = 1,
+    Open = 2,
 }
 
 public enum MouthState
 {
     Ignore = 0,
-    Open = 1,
-    Closed = 2,
+    Closed = 1,
+    Open = 2,
 }

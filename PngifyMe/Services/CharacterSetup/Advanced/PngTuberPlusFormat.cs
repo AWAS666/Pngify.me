@@ -6,10 +6,6 @@ using System.Threading.Tasks;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 
-public class PngTuberPlusFormat
-{
-    public Dictionary<string, PngTuberPlusFormat> Images { get; set; } = new();
-}
 
 public class PngTuberPlusObject
 {
@@ -18,11 +14,11 @@ public class PngTuberPlusObject
     public string costumeLayers { get; set; }
     public int drag { get; set; }
     public int frames { get; set; }
-    public int identification { get; set; }
+    public long identification { get; set; }
     public bool ignoreBounce { get; set; }
     public string imageData { get; set; }
     public string offset { get; set; }
-    public object parentId { get; set; }
+    public long? parentId { get; set; }
     public string path { get; set; }
     public string pos { get; set; }
     public int rLimitMax { get; set; }
@@ -30,7 +26,7 @@ public class PngTuberPlusObject
     public int rotDrag { get; set; }
     public int showBlink { get; set; }
     public int showTalk { get; set; }
-    public int stretchAmount { get; set; }
+    public float stretchAmount { get; set; }
     public string toggle { get; set; }
     public string type { get; set; }
     public int xAmp { get; set; }

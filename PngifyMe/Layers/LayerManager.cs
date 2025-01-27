@@ -78,7 +78,7 @@ namespace PngifyMe.Layers
                 FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
                 delay = (float)(watch.Elapsed.TotalMilliseconds / 1000f - UpdateInterval);
                 TotalRunTime += delay;
-                //Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
+                Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
             }
         }
 
@@ -140,13 +140,13 @@ namespace PngifyMe.Layers
 
                 RenderedLayers = Layers.ToList();
 
-                var layert = new LayerValues();
-                CharacterStateHandler.Update(dt, ref layert);
-                if (layert.Image == null) return;
+                var layert = new LayerValues();               
                 foreach (BaseLayer layer in RenderedLayers)
                 {
                     layer.OnCalculateParameters(dt, ref layert);
                 }
+                CharacterStateHandler.Update(dt, ref layert);
+                if (layert.Image == null) return;
 
                 UpdateThrowingSystem(dt, ref layert);
 
@@ -161,7 +161,7 @@ namespace PngifyMe.Layers
 
         private static void UpdateThrowingSystem(float dt, ref LayerValues layert)
         {
-            ThrowingSystem.SwapImage(layert.Image, layert);
+            //ThrowingSystem.SwapImage(layert.Image, layert);
             if (SettingsManager.Current.Tits.Enabled)
             {
                 var watch = new Stopwatch();
@@ -187,7 +187,7 @@ namespace PngifyMe.Layers
                     img.RenderImage(canvas, 0, 0);
                 }
 
-                canvas.Translate(layert.PosX, layert.PosY);
+                //canvas.Translate(layert.PosX, layert.PosY); // todo add check if x/y has already been applied by renderer
                 canvas.Translate(width / 2 + layert.OriginOffsetX, height / 2 + layert.OriginOffsetY);
                 canvas.RotateDegrees((float)rotationAngle);
                 canvas.Scale(layert.ZoomX, layert.ZoomY);
