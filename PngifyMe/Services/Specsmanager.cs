@@ -12,6 +12,7 @@ namespace PngifyMe.Services
     {
         public static int Width { get; }
         public static int Height { get; }
+        public static float ScaleFactor { get; } = 0.9f;
         public static int FPS { get; }
 
         public static SpecsSettings Settings { get; private set; }

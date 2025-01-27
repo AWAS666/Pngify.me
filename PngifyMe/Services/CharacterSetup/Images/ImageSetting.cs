@@ -42,8 +42,7 @@ public partial class ImageSetting : ObservableObject
         if (File.Exists(FilePath))
         {
             Bitmap = LoadImage(FilePath);
-            //todo: make this scaling here a setting
-            Bitmap.Resize((int)(Specsmanager.Width * 0.9f), (int)(Specsmanager.Height * 0.9f));
+            Bitmap.Resize((int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
         }
     }
 
