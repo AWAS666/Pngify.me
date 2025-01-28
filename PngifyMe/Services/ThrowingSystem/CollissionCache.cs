@@ -1,4 +1,5 @@
 ﻿using SkiaSharp;
+using System;
 using System.Collections.Generic;
 
 namespace PngifyMe.Services.ThrowingSystem
@@ -16,6 +17,15 @@ namespace PngifyMe.Services.ThrowingSystem
                 var newValue = new CollisionDetector(bitmap, details);
                 cache.Add(bitmap, newValue);
                 return newValue;
+            }
+        }
+
+        public static void Remove(SKBitmap bitmap)
+        {
+            if (cache.TryGetValue(bitmap, out CollisionDetector? detector))
+            {
+                cache.Remove(bitmap);
+                detector.Dispose();
             }
         }
     }

@@ -256,8 +256,12 @@ namespace PngifyMe.Services.ThrowingSystem
                     // compute in bg?
                     _ = Task.Run(() =>
                     {
+                        var old = MainBody;                       
                         // copy bitmap to avoid dispose
                         MainBody = new MovableObject(this, bitmap.Copy(), new(0, 0), 0, posX, posY, 15);
+
+                        if (old != null)
+                            old.Dispose();
                     });
                 }
             }
