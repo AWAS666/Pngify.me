@@ -14,12 +14,36 @@ namespace PngifyMe.Services.WebSocket;
 
 public static class WebSocketServer
 {
+    private static int port = 7666;
     public static Server Server { get; private set; }
 
     public static void Start()
     {
-        Server = new Server(IPAddress.Loopback, 8666);
-        Server.Start();
+        if (IsPortInUse(port))
+        {
+            Log.Error($"Websocket not started, port in use");
+        }
+        else
+        {
+            Server = new Server(IPAddress.Loopback, port);
+            Server.Start();
+        }
+    }
+
+    static bool IsPortInUse(int port)
+    {
+        using (Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp))
+        {
+            try
+            {
+                socket.Bind(new IPEndPoint(IPAddress.Loopback, port));
+                return false; // Port is not in use
+            }
+            catch (SocketException)
+            {
+                return true; // Port is in use
+            }
+        }
     }
 }
 
