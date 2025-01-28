@@ -177,11 +177,11 @@ public partial class SpriteSetupViewModel : ObservableObject
         var parent = items.First(x => x.parentId == null);
         items.Remove(parent);
 
-        var spriteParent = new SpriteImage();
+        SpriteImage spriteParent = null;
         await Task.Run(async () =>
         {
             // takes some time, maybe show progress
-            spriteParent.MigratePngtuberPlus(parent, items);
+            spriteParent = PngTuberPlusMigrator.MigratePngtuberPlus(parent, items);
         });
         Settings.Parent = spriteParent;
 

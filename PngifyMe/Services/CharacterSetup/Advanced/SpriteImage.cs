@@ -1,4 +1,6 @@
-﻿using SkiaSharp;
+﻿using Avalonia.Animation.Easings;
+using PngifyMe.Layers.Helper;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,8 +14,7 @@ namespace PngifyMe.Services.CharacterSetup.Advanced;
 public class SpriteImage
 {
     private Vector2 lastOffset = Vector2.Zero;
-    private float scaleImportFactor;
-    private float scaleMidOffset;
+
 
     /// <summary>
     /// todo:
@@ -88,7 +89,7 @@ public class SpriteImage
 
             // Reduce the velocity based on the eased drag
             velocity *= (1 - easedDrag);
-            }
+        }
 
         // Update the offset based on the smoothed velocity
         Offset = lastOffset + velocity * deltaTime;
@@ -102,46 +103,14 @@ public class SpriteImage
 
         // Update all child elements
         foreach (var child in Children)
-    {
+        {
             child.Update(deltaTime, Offset);
         }
 
         // Store the current offset for the next frame
         lastOffset = Offset;
-        }
-
-        // Define the bounds of the cropped image
-        var width = maxX - minX + 1;
-        var height = maxY - minY + 1;
-
-        // Create the cropped bitmap
-        var croppedBitmap = new SKBitmap(width, height);
-
-        // Copy the relevant pixels into the new bitmap
-        using var canvas = new SKCanvas(croppedBitmap);
-        canvas.DrawBitmap(original, new SKRectI(minX, minY, maxX + 1, maxY + 1), new SKRect(0, 0, width, height));
-
-        // The offset is the position where the cropped image will be placed (minX, minY)
-        var offset = new SKPoint(minX, minY);
-
-        return (croppedBitmap, offset);
     }
-    public static SKBitmap Resize(SKBitmap bitmap, int maxWidth, int maxHeight)
-    {
-        float widthRatio = (float)maxWidth / bitmap.Width;
-        float heightRatio = (float)maxHeight / bitmap.Height;
-        float scaleRatio = Math.Min(widthRatio, heightRatio);
 
-        int newWidth = (int)(bitmap.Width * scaleRatio);
-        int newHeight = (int)(bitmap.Height * scaleRatio);
-
-        using (var resizedBitmap = new SKBitmap(newWidth, newHeight))
-        using (var canvas = new SKCanvas(resizedBitmap))
-        {
-            canvas.DrawBitmap(bitmap, new SKRect(0, 0, newWidth, newHeight));
-            return resizedBitmap.Copy();
-        }
-    }
     public List<SpriteImage> GetAllSprites()
     {
         var sprites = new List<SpriteImage>
