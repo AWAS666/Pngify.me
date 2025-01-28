@@ -15,5 +15,8 @@ namespace PngifyMe.Services.CharacterSetup
         void SetupHotKeys();
         void ToggleState(CharacterState state);
         void Update(float dt, ref LayerValues values);
+
+        bool RenderPosition { get; }
+        bool RefreshCollisionOnChange { get; }
     }
 }

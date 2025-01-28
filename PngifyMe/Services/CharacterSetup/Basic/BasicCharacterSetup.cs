@@ -36,6 +36,8 @@ public class BasicCharacterSetup : ICharacterSetup
     public BaseImage LastImage { get; private set; }
     public IAvatarSettings Settings { get; set; }
     private BasicCharSettings settings => (BasicCharSettings)Settings;
+    public bool RenderPosition => true;
+    public bool RefreshCollisionOnChange => true;
 
     public EventHandler<CharacterState> StateChanged;
 

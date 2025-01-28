@@ -32,6 +32,9 @@ public class SpriteCharacterSetup : ICharacterSetup
 
     public float CurrentTime { get; private set; }
 
+    public bool RenderPosition => false;
+    public bool RefreshCollisionOnChange => false;
+
     public void DrawTransition(SKBitmap baseImg, int width, int height, SKCanvas canvas, float opacity)
     {
         // do nothing

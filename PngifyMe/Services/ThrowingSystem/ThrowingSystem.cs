@@ -32,6 +32,7 @@ namespace PngifyMe.Services.ThrowingSystem
         public List<SKBitmap> Throwables { get; set; }
 
         private int _activeThreads = 0;
+        private int frame;
 
         public int ActiveThreads => _activeThreads;
 
@@ -234,16 +235,32 @@ namespace PngifyMe.Services.ThrowingSystem
             recoilChange += new Vector2(obj.CurrentSpeed.X * dt / 10, obj.CurrentSpeed.Y * dt / 10);
         }
 
-        public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert)
+        public void SwapImage(SKBitmap bitmap, Layers.LayerValues layert, bool everyChange)
         {
             int posX = (int)((Specsmanager.Width - layert.Image.Width) / 2 + layert.PosX);
             int posY = (int)(layert.PosY + Specsmanager.Height * 0.05f); // add 5% here as image is scaled to 90%, so this needs to be 10/2
-            if (MainBody != null && MainBody.SameBitmap(bitmap))
+            if (everyChange)
             {
-                MainBody.Update(posX, posY);
-                return;
+                if (MainBody != null && MainBody.SameBitmap(bitmap))
+                {
+                    MainBody.Update(posX, posY);
+                    return;
+                }
+                MainBody = new MovableObject(this, bitmap, new(0, 0), 0, posX, posY, 15);
             }
-            MainBody = new MovableObject(this, bitmap, new(0, 0), 0, posX, posY, 15);
+            else
+            {
+                frame++;
+                if (frame % 30 == 0)
+                {
+                    // compute in bg?
+                    _ = Task.Run(() =>
+                    {
+                        // copy bitmap to avoid dispose
+                        MainBody = new MovableObject(this, bitmap.Copy(), new(0, 0), 0, posX, posY, 15);
+                    });
+                }
+            }
         }
 
         private bool IsColliding(MovableObject image1, MovableObject image2)

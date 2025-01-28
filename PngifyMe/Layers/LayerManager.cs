@@ -167,7 +167,7 @@ namespace PngifyMe.Layers
 
         private static void UpdateThrowingSystem(float dt, ref LayerValues layert)
         {
-            //ThrowingSystem.SwapImage(layert.Image, layert);
+            ThrowingSystem.SwapImage(layert.Image, layert, CharacterStateHandler.CharacterSetup.RefreshCollisionOnChange);
             if (SettingsManager.Current.Tits.Enabled)
             {
                 var watch = new Stopwatch();
@@ -193,7 +193,8 @@ namespace PngifyMe.Layers
                     img.RenderImage(canvas, 0, 0);
                 }
 
-                //canvas.Translate(layert.PosX, layert.PosY); // todo add check if x/y has already been applied by renderer
+                if (CharacterStateHandler.CharacterSetup.RenderPosition)
+                    canvas.Translate(layert.PosX, layert.PosY);
                 canvas.Translate(width / 2 + layert.OriginOffsetX, height / 2 + layert.OriginOffsetY);
                 canvas.RotateDegrees((float)rotationAngle);
                 canvas.Scale(layert.ZoomX, layert.ZoomY);
@@ -213,7 +214,7 @@ namespace PngifyMe.Layers
                         paint);
                 }
 
-                LayerManager.CharacterStateHandler.CharacterSetup.DrawTransition(baseImg, width, height, canvas, opacity);
+                CharacterStateHandler.CharacterSetup.DrawTransition(baseImg, width, height, canvas, opacity);
 
                 foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects && !x.BehindModel))
                 {
@@ -257,38 +258,36 @@ namespace PngifyMe.Layers
             }
 
             // Draw moving objects from ThrowingSystem.Objects
-            if (SettingsManager.Current.Tits.Enabled)
+            if (!SettingsManager.Current.Tits.Enabled) return;
+            foreach (var obj in ThrowingSystem.Objects.ToList())
             {
-                foreach (var obj in ThrowingSystem.Objects.ToList())
+                // Create a new SKBitmap for the rotated, zoomed, and opaque image
+                using var rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
+
+                using (SKCanvas rotatedCanvas = new SKCanvas(rotobj))
                 {
-                    // Create a new SKBitmap for the rotated, zoomed, and opaque image
-                    using var rotobj = new SKBitmap(obj.Image.Width, obj.Image.Height);
+                    // Set the pivot point for rotation and zoom to the center of the image
+                    rotatedCanvas.Translate(obj.Image.Width / 2, obj.Image.Height / 2);
+                    rotatedCanvas.RotateDegrees(obj.Rotation);
+                    rotatedCanvas.Translate(-obj.Image.Width / 2, -obj.Image.Height / 2);
 
-                    using (SKCanvas rotatedCanvas = new SKCanvas(rotobj))
+                    rotatedCanvas.DrawBitmap(obj.Image, 0, 0);
+                }
+
+                canvas.DrawBitmap(rotobj, obj.X, obj.Y);
+
+                if (SettingsManager.Current.Tits.HitLinesVisible)
+                {
+                    using (var paint = new SKPaint
                     {
-                        // Set the pivot point for rotation and zoom to the center of the image
-                        rotatedCanvas.Translate(obj.Image.Width / 2, obj.Image.Height / 2);
-                        rotatedCanvas.RotateDegrees(obj.Rotation);
-                        rotatedCanvas.Translate(-obj.Image.Width / 2, -obj.Image.Height / 2);
+                        Color = SKColors.Blue,
+                        StrokeWidth = 2,
+                        IsAntialias = true,
+                        Style = SKPaintStyle.Stroke,
 
-                        rotatedCanvas.DrawBitmap(obj.Image, 0, 0);
-                    }
-
-                    canvas.DrawBitmap(rotobj, obj.X, obj.Y);
-
-                    if (SettingsManager.Current.Tits.HitLinesVisible)
+                    })
                     {
-                        using (var paint = new SKPaint
-                        {
-                            Color = SKColors.Blue,
-                            StrokeWidth = 2,
-                            IsAntialias = true,
-                            Style = SKPaintStyle.Stroke,
-
-                        })
-                        {
-                            obj.Collision.DrawOutlines(canvas, paint);
-                        }
+                        obj.Collision.DrawOutlines(canvas, paint);
                     }
                 }
             }
