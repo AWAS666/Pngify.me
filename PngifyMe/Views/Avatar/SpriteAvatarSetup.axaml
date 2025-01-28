@@ -8,6 +8,8 @@
 			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			 xmlns:local="clr-namespace:PngifyMe.Views.Avatar"
+			 xmlns:setup="clr-namespace:PngifyMe.Services.CharacterSetup.Advanced"
 			  xmlns:u="https://irihi.tech/ursa"
 			 x:DataType="vm:SpriteSetupViewModel"
              x:Class="PngifyMe.Views.Avatar.SpriteAvatarSetup"
@@ -18,9 +20,41 @@
 	</Design.DataContext>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
-			<TextBlock FontSize="24">Sprite Avatar State Setup</TextBlock>
-			<Button Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
+			<TextBlock FontSize="24" Margin="0,0,0,5">Sprite Avatar State Setup</TextBlock>
+			<StackPanel Margin="5,0,5,6" Orientation="Horizontal" Spacing="5">
+				<Button Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
+				<Button>Import</Button>
+				<Button>Export</Button>
+			</StackPanel>
+			<TabControl>
+				<TabItem Header="Layers">
+					<Grid RowDefinitions="200,500">
+						<local:SpriteSingleSettings DataContext="{Binding Settings.Selected}"></local:SpriteSingleSettings>
+						<ScrollViewer Grid.Row="1">
+							<TreeView ItemsSource="{ Binding Settings.SpriteImages}" 
+									  SelectionMode="Single"
+									  SelectedItem="{Binding Settings.Selected}">
+								<TreeView.ItemTemplate>
+									<TreeDataTemplate DataType="setup:SpriteImage"
+													  ItemsSource="{Binding Children}">
+										<Grid ColumnDefinitions="250,50,75">
+											<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+											<Button Grid.Column="1">Edit</Button>
+											<Button Command="{Binding RemoveCommand }" Grid.Column="2">Delete</Button>
+										</Grid>
+									</TreeDataTemplate>
+								</TreeView.ItemTemplate>
+							</TreeView>
+						</ScrollViewer>
+					</Grid>
+				</TabItem>
+				<TabItem Header="Layer Settings">
+					show settings for the selected layer here, auto change to this if selected?
+				</TabItem>
+				<TabItem Header="Trigger Setup">
+					Trigger names + trigger button (which can be anything again, twitch etc)
+				</TabItem>
+			</TabControl>
 		</StackPanel>
-
 	</Grid>
 </UserControl>

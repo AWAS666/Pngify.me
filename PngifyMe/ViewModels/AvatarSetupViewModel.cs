@@ -1,22 +1,15 @@
 ﻿using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Advanced;
 using PngifyMe.Services.CharacterSetup.Basic;
-using PngifyMe.Services.Settings;
-using PngifyMe.ViewModels.Helper;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Text.Json;
-using System.Threading.Tasks;
 
 
 namespace PngifyMe.ViewModels;
@@ -87,113 +80,5 @@ public partial class AvatarSetupViewModel : ObservableObject
             default:
                 break;
         }
-    }
-}
-
-public partial class BasicSetupViewModel : ObservableObject
-{
-    public Func<IStorageProvider> GetStorageProvider { get; }
-
-    private List<CharacterState> baseStates;
-    public BasicCharSettings Settings { get; }
-    public MicSettings MicSettings { get; }
-
-    [ObservableProperty]
-    private ObservableCollection<BasicStateViewModel> states;
-
-    public BasicSetupViewModel() : this(null)
-    {
-
-    }
-
-    public BasicSetupViewModel(Func<IStorageProvider> getStorage)
-    {
-        GetStorageProvider = getStorage;
-        Settings = (BasicCharSettings)SettingsManager.Current.Profile.Active.AvatarSettings;
-        baseStates = Settings.States;
-        MicSettings = SettingsManager.Current.Profile.Active.MicSettings;
-        states = new ObservableCollection<BasicStateViewModel>(baseStates.Select(x => new BasicStateViewModel(x, this)));
-    }
-
-    public void Add()
-    {
-        var set = new CharacterState();
-        States.Add(new BasicStateViewModel(set, this));
-        baseStates.Add(set);
-    }
-
-    public void Remove(BasicStateViewModel vm)
-    {
-        // dont allow removal of final state
-        if (States.Count <= 1)
-            return;
-        States.Remove(vm);
-        baseStates.Remove(vm.State);
-    }
-
-    public void SwitchState(BasicStateViewModel vm)
-    {
-        LayerManager.CharacterStateHandler.ToggleState(vm.State.Name);
-    }
-
-    public void Apply()
-    {
-        SettingsManager.Save();
-        LayerManager.CharacterStateHandler.SetupHotKeys();
-    }
-}
-
-public partial class SpriteSetupViewModel : ObservableObject
-{
-    public Func<IStorageProvider> GetStorageProvider { get; }
-    public SpriteCharacterSettings Settings { get; }
-
-    public SpriteSetupViewModel() : this(null)
-    {
-
-    }
-
-    public SpriteSetupViewModel(Func<IStorageProvider> getStorage)
-    {
-        GetStorageProvider = getStorage;
-        Settings = (SpriteCharacterSettings)SettingsManager.Current.Profile.Active.AvatarSettings;
-    }
-
-    [RelayCommand]
-    public async Task ImportPngtuberPlus()
-    {
-        var path = await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
-        {
-            Title = "Select a Pngtuber Plus save file",
-            FileTypeFilter = new[] { FilePickers.PngTuberPlus },
-            AllowMultiple = false
-        });
-        var filePath = path.FirstOrDefault()?.Path?.AbsolutePath;
-        if (string.IsNullOrEmpty(filePath)) return;
-
-        var file = await File.ReadAllTextAsync(filePath);
-        var obj = JsonSerializer.Deserialize<Dictionary<string, PngTuberPlusObject>>(file);
-        var items = obj.Values.ToList();
-        var parent = items.First(x => x.parentId == null);
-        items.Remove(parent);
-
-        SpriteImage spriteParent = null;
-        await Task.Run(async () =>
-        {
-            // takes some time, maybe show progress
-            spriteParent = PngTuberPlusMigrator.MigratePngtuberPlus(parent, items);
-        });
-        Settings.Parent = spriteParent;
-
-        // set states to same amount as parent list, should always be 10 though
-        Settings.States = new List<SpriteStates>(spriteParent.LayerStates.Count);
-        // init state data
-        foreach (var state in Settings.States)
-        {
-            state.Index = Settings.States.IndexOf(state);
-            state.Name = $"Layer {state.Index}";
-        }
-
-        LayerManager.CharacterStateHandler.CharacterSetup.RefreshCharacterSettings();
     }
 }

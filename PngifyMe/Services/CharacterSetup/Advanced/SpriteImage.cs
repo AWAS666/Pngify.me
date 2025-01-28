@@ -1,28 +1,23 @@
-﻿using Avalonia.Animation.Easings;
+﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Globalization;
+using System.Collections.ObjectModel;
 using System.IO;
-using System.Linq;
 using System.Numerics;
 using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
-public class SpriteImage
+public partial class SpriteImage : ObservableObject
 {
     private Vector2 lastOffset = Vector2.Zero;
-
-
-    /// <summary>
-    /// todo:
-    /// refactor resize and crop code to a common class as this is also used elsewhere
-    /// scaling, always scale to 1920x1080 when migrating?
-    /// </summary>
     public long Id { get; set; }
-    public string Name { get; set; }
+
+    [ObservableProperty]
+    private string name;
     public string ImageBase64 { get; set; }
 
     [JsonIgnore]
@@ -65,14 +60,16 @@ public class SpriteImage
     public BlinkState ShowBlink { get; set; }
     public MouthState ShowMouth { get; set; }
     public List<int> LayerStates { get; set; } = new List<int>(10);
-    public int Drag { get; set; }
+
+    [ObservableProperty]
+    private int drag;
     public float Stretch { get; set; }
 
-    [JsonIgnore]
-    public SpriteImage? Parent { get; set; }
+    [property: JsonIgnore]
+    [ObservableProperty]
+    private SpriteImage? parent;
     public float CurrentRotation { get; internal set; }
-    public List<SpriteImage> Children { get; set; } = new List<SpriteImage>();
-
+    public ObservableCollection<SpriteImage> Children { get; set; } = new();   
     public void Update(float deltaTime, Vector2 offset)
     {
         // Calculate the velocity based on the offset difference
@@ -129,6 +126,7 @@ public class SpriteImage
         using var memoryStream = new MemoryStream(imageBytes);
         using var skStream = new SKManagedStream(memoryStream);
         Bitmap = SKBitmap.Decode(skStream);
+        Bitmap.SetImmutable();
 
         Parent = parent;
 
@@ -175,6 +173,22 @@ public class SpriteImage
             return new SKPoint(closestX, closestY);
         }
     }
+
+    public void SwitchImage(string path)
+    {
+        Bitmap = SKBitmap.Decode(path);
+        Bitmap.SetImmutable();
+        using var imageData = Bitmap.Encode(SKEncodedImageFormat.Png, 100);
+        ImageBase64 = Convert.ToBase64String(imageData.ToArray());
+    }
+
+    [RelayCommand]
+    public void Remove()
+    {
+        Parent?.Children.Remove(this);
+        ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
+    }
+
 }
 
 public enum BlinkState

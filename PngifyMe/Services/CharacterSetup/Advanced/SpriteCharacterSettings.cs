@@ -1,22 +1,33 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
-using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 {
-    public SpriteImage Parent { get; set; } = new();
-    public double BlinkTime { get; set; } = 0.25f;
-    public double BlinkInterval { get; set; } = 3f;
-    public int ActiveLayer { get; set; } = 0;
-    public List<SpriteStates> States { get; set; } = new();
+    [ObservableProperty]
+    private List<SpriteImage> spriteImages;
 
+    [ObservableProperty]
+    private SpriteImage parent = new();
+
+    [ObservableProperty]
+    private SpriteImage selected = new();
+
+    [ObservableProperty]
+    private double blinkTime = 0.25f;
+
+    [ObservableProperty]
+    private double blinkInterval = 0.25f;
+    public ObservableCollection<SpriteStates> States { get; set; } = new();
     public List<string> AvailableStates() => States.Select(s => s.Name).ToList();
+
+    public SpriteCharacterSettings()
+    {
+        spriteImages = [parent];
+    }
 }
 
 

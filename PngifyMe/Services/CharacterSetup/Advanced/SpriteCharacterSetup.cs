@@ -9,6 +9,7 @@ using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
 
@@ -24,6 +25,7 @@ public class SpriteCharacterSetup : ICharacterSetup
     private static BlinkState blinkState = BlinkState.Open;
     private double transTime;
     private SKBitmap mainBitmap;
+    private SKPaint highlightPaint;
 
     public BaseImage CurrentImage { get; set; } = new StaticImage(ImageSetting.PlaceHolder);
 
@@ -35,6 +37,15 @@ public class SpriteCharacterSetup : ICharacterSetup
     public bool RenderPosition => false;
     public bool RefreshCollisionOnChange => false;
 
+    public SpriteCharacterSetup()
+    {
+        highlightPaint = new SKPaint
+        {
+            ColorFilter = SKColorFilter.CreateBlendMode(new SKColor(255, 0, 0, 128), SKBlendMode.Screen)
+            //Color = SKColors.Red.WithAlpha(128)
+        };
+    }
+
     public void DrawTransition(SKBitmap baseImg, int width, int height, SKCanvas canvas, float opacity)
     {
         // do nothing
@@ -43,8 +54,14 @@ public class SpriteCharacterSetup : ICharacterSetup
     public void RefreshCharacterSettings()
     {
         parent = settings.Parent;
+        settings.SpriteImages = [parent];
         if (!string.IsNullOrEmpty(parent.ImageBase64))
             parent.Load();
+        ReloadLayerList();
+    }
+
+    public void ReloadLayerList()
+    {
         layers = [.. parent.GetAllSprites().OrderBy(x => x.Zindex)];
     }
 
@@ -93,7 +110,10 @@ public class SpriteCharacterSetup : ICharacterSetup
 
             // Draw the rotated bitmap
             //canvas.DrawBitmap(item.Bitmap, 0, 0);
-            canvas.DrawBitmap(item.Bitmap, item.CurrentPosition.X, item.CurrentPosition.Y);
+            if (item == settings.Selected)
+                canvas.DrawBitmap(item.Bitmap, item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
+            else
+                canvas.DrawBitmap(item.Bitmap, item.CurrentPosition.X, item.CurrentPosition.Y);
             // Restore the canvas to the original state
             canvas.Restore();
         }

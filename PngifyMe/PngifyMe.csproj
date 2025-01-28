@@ -94,6 +94,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="Views\Avatar\SpriteSingleSettings.axaml.cs">
+      <DependentUpon>SpriteSingleSettings.axaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\Avatar\SpriteAvatarSetup.axaml.cs">
       <DependentUpon>SpriteAvatarSetup.axaml</DependentUpon>
     </Compile>

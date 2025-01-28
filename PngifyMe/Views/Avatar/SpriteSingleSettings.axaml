@@ -1,0 +1,36 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			 xmlns:setup="clr-namespace:PngifyMe.Services.CharacterSetup.Advanced"
+			  xmlns:u="https://irihi.tech/ursa"
+			 x:DataType="setup:SpriteImage"
+             x:Class="PngifyMe.Views.Avatar.SpriteSingleSettings"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 >
+	<Design.DataContext>
+		<setup:SpriteImage/>
+	</Design.DataContext>
+	<StackPanel Margin="5,5,5,5" Spacing="10">
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Button Click="SwapImage">SwapImage</Button>
+			<Button Command="{Binding RemoveCommand}">Remove</Button>
+		</StackPanel>
+		<TextBox Text="{Binding Name}"/>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock>Drag</TextBlock>
+			<Slider Value="{Binding Drag}"
+					VerticalAlignment="Center"
+					Width="150"
+					Minimum="0" Maximum="10"/>
+			<TextBlock Text="{Binding Drag}"/>
+		</StackPanel>
+	</StackPanel>
+
+</UserControl>
