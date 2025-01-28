@@ -74,122 +74,40 @@ public class SpriteImage
 
     public void Update(float deltaTime, Vector2 offset)
     {
-        if (Parent != null)
+        // Calculate the velocity based on the offset difference
+        Vector2 velocity = (offset - lastOffset) / deltaTime;
+
+        // Apply drag using an easing function
+        if (Drag > 0)
         {
-            if (Drag == 0)
-                Offset = offset;
-            else
-            {
-                Offset = offset * (0.5f / Drag + 0.5f);
-                Offset = (1 * Parent.Offset + 3 * Offset) / 4;
+            // Normalize the drag effect (range [0, 1])
+            float dragProgress = Math.Clamp(Drag * deltaTime, 0f, 1f);
+
+            // Apply an easing function to the drag progress
+            float easedDrag = Easings.QuadraticEaseOut(dragProgress);
+
+            // Reduce the velocity based on the eased drag
+            velocity *= (1 - easedDrag);
             }
-        }
-        else
-            Offset = offset;
 
-        CurrentRotation = (Offset - lastOffset).Length() * RotMovement * 3;
+        // Update the offset based on the smoothed velocity
+        Offset = lastOffset + velocity * deltaTime;
 
+        // Calculate the rotation change based on the velocity
+        float targetRotation = velocity.Length() * RotMovement * 3;
+
+        // Smoothly interpolate the current rotation towards the target rotation
+        float rotationSmoothingFactor = 0.1f; // Adjust this value for smoother or sharper transitions
+        CurrentRotation = Easings.Lerp(CurrentRotation, targetRotation, rotationSmoothingFactor);
+
+        // Update all child elements
         foreach (var child in Children)
-        {
+    {
             child.Update(deltaTime, Offset);
         }
+
+        // Store the current offset for the next frame
         lastOffset = Offset;
-    }
-
-    public void MigratePngtuberPlus(PngTuberPlusObject self, List<PngTuberPlusObject> items, SpriteImage parent = null)
-    {
-        Id = self.identification;
-        ImageBase64 = self.imageData;
-        ParentId = self.parentId;
-        Zindex = self.zindex;
-        Parent = parent;
-        RotMovement = self.rotDrag;
-        Drag = self.drag;
-        Stretch = self.stretchAmount;
-        ShowBlink = (BlinkState)self.showBlink;
-        ShowMouth = (MouthState)self.showTalk;
-        Name = self.path.Replace("user://", string.Empty);
-
-        LayerStates = self.costumeLayers.Trim('[', ']') // Remove brackets
-                                 .Split(',')    // Split by comma
-                                 .Select(int.Parse) // Convert each part to an integer
-                                 .ToList();
-        MigrateBase64();
-        if (parent != null)
-        {
-            var pos = self.offset;
-            if (pos == "Vector2(0, 0)")
-            {
-                //var anchor = FindAnchorPoint(Parent.Bitmap, new SKPoint(Parent.Position.X, Parent.Position.Y), Bitmap, new SKPoint(Position.X, Position.Y));
-                //Anchor = new Vector2(anchor.X, anchor.Y);
-                Anchor = new Vector2(Position.X + Bitmap.Width / 2, Position.Y + Bitmap.Height / 2);
-            }
-            else
-            {
-                string trimmedInput = pos.Replace("Vector2(", "").Replace(")", "");
-                string[] parts = trimmedInput.Split(',');
-
-                Anchor = new Vector2(
-                   float.Parse(parts[0].Trim(), CultureInfo.InvariantCulture) * -scaleImportFactor + scaleMidOffset,
-                    float.Parse(parts[1].Trim(), CultureInfo.InvariantCulture) * -scaleImportFactor + scaleMidOffset
-                );
-            }
-        }
-        foreach (var item in items.ToList())
-        {
-            if (item.parentId != Id) continue;
-            var child = new SpriteImage();
-            items.Remove(item);
-            child.MigratePngtuberPlus(item, items, this);
-            Children.Add(child);
-        }
-    }
-    private void MigrateBase64()
-    {
-        byte[] imageBytes = Convert.FromBase64String(ImageBase64);
-
-        using var memoryStream = new MemoryStream(imageBytes);
-        using var skStream = new SKManagedStream(memoryStream);
-        using var bitmap = SKBitmap.Decode(skStream);
-
-        using var scaled = Resize(bitmap, (int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
-        scaleImportFactor = (float)scaled.Width / bitmap.Width;
-        scaleMidOffset = scaleImportFactor * bitmap.Width / 2;
-        var cropped = CropAndGetOffset(scaled);
-        Bitmap = cropped.croppedBitmap;
-        //https://github.com/mono/SkiaSharp/issues/2188 -> this is a big performance improvment
-        Bitmap.SetImmutable();
-        Position = new Vector2(cropped.offset.X, cropped.offset.Y);
-
-        // save back to base 64
-        using var imageData = Bitmap.Encode(SKEncodedImageFormat.Png, 100);
-        ImageBase64 = Convert.ToBase64String(imageData.ToArray());
-    }
-    public static (SKBitmap croppedBitmap, SKPoint offset) CropAndGetOffset(SKBitmap original)
-    {
-        // Variables to track the bounds of non-transparent pixels
-        int minX = original.Width, minY = original.Height, maxX = 0, maxY = 0;
-
-        // Iterate over each pixel to find the non-transparent area
-        for (int y = 0; y < original.Height; y++)
-        {
-            for (int x = 0; x < original.Width; x++)
-            {
-                SKColor pixelColor = original.GetPixel(x, y);
-                if (pixelColor.Alpha > 0) // If alpha is greater than 0 (non-transparent)
-                {
-                    minX = Math.Min(minX, x);
-                    minY = Math.Min(minY, y);
-                    maxX = Math.Max(maxX, x);
-                    maxY = Math.Max(maxY, y);
-                }
-            }
-        }
-
-        // If no non-transparent pixels were found, return an empty bitmap
-        if (minX == original.Width || minY == original.Height)
-        {
-            return (null, new SKPoint(0, 0));
         }
 
         // Define the bounds of the cropped image

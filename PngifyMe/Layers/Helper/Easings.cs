@@ -447,4 +447,13 @@ public static class Easings
         }
         return 0.5f * BounceEaseOut(p * 2 - 1) + 0.5f;
     }
+
+    public static float Lerp(float start, float end, float amount)
+    {
+        // Ensure amount is clamped between 0 and 1
+        amount = Math.Max(0, Math.Min(1, amount));
+
+        // Perform linear interpolation
+        return start + (end - start) * amount;
+    }
 }
