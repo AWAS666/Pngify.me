@@ -63,6 +63,7 @@ public class CharacterStateHandler
 
     internal void ChangeSetup(string newValue)
     {
+        LayerManager.Pause();
         switch (newValue)
         {
             case "Basic":
@@ -77,5 +78,6 @@ public class CharacterStateHandler
                 break;
         }
         RefreshCharacterSettings();
+        LayerManager.UnPause();
     }
 }

@@ -21,6 +21,7 @@ namespace PngifyMe.Layers
         public static List<BaseLayer> Layers { get; set; } = new List<BaseLayer>();
         public static List<BaseLayer> RenderedLayers { get; set; } = new List<BaseLayer>();
         public static float Time { get; private set; }
+        public static bool Paused { get; private set; }
 
         public static float UpdateInterval
         {
@@ -49,6 +50,8 @@ namespace PngifyMe.Layers
         /// set to 10
         /// </summary>
         public static List<SaveDispose<SKBitmap>> FrameBuffer { get; private set; } = new();
+        public static bool RequestPause { get; private set; }
+
         public static EventHandler<Layersetting> LayerTriggered;
 
         static LayerManager()
@@ -65,7 +68,8 @@ namespace PngifyMe.Layers
             {
                 var watch = new Stopwatch();
                 watch.Start();
-                Update(UpdateInterval + delay);
+                if (!Paused) // skip if paused
+                    Update(UpdateInterval + delay);
 
                 //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
                 double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
@@ -79,6 +83,8 @@ namespace PngifyMe.Layers
                 delay = (float)(watch.Elapsed.TotalMilliseconds / 1000f - UpdateInterval);
                 TotalRunTime += delay;
                 Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
+                if (RequestPause)
+                    Paused = true;
             }
         }
 
@@ -140,7 +146,7 @@ namespace PngifyMe.Layers
 
                 RenderedLayers = Layers.ToList();
 
-                var layert = new LayerValues();               
+                var layert = new LayerValues();
                 foreach (BaseLayer layer in RenderedLayers)
                 {
                     layer.OnCalculateParameters(dt, ref layert);
@@ -286,6 +292,22 @@ namespace PngifyMe.Layers
                     }
                 }
             }
+        }
+
+        public static void Pause()
+        {
+            RequestPause = true;
+
+            while (!Paused)
+            {
+                Thread.Sleep(100);
+            }
+            RequestPause = false;
+        }
+
+        public static void UnPause()
+        {
+            Paused = false;
         }
     }
 }
