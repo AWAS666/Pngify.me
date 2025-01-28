@@ -43,10 +43,10 @@ public class BasicCharacterSetup : ICharacterSetup
 
     public void RefreshCharacterSettings()
     {
-        var def = Settings.States.FirstOrDefault(x => x.Default);
+        var def = settings.States.FirstOrDefault(x => x.Default);
         if (def == null)
         {
-            def = Settings.States.First();
+            def = settings.States.First();
             def.Default = true;
         }
         SwitchState(def);
@@ -78,7 +78,7 @@ public class BasicCharacterSetup : ICharacterSetup
     {
         HotkeyManager.RemoveCallbacks(callbacks);
         callbacks.Clear();
-        foreach (var state in Settings.States)
+        foreach (var state in settings.States)
         {
             if (state.Trigger == null)
                 continue;
@@ -90,11 +90,17 @@ public class BasicCharacterSetup : ICharacterSetup
         SwitchState(CurrentState, reload: true);
     }
 
+    public void ToggleState(string name)
+    {
+        var state = settings.States.First(x => x.Name == name);
+        ToggleState(state);
+    }
+
     public void ToggleState(CharacterState state)
     {
         if (CurrentState == state && CurrentState.ToggleAble)
         {
-            SwitchState(Settings.States.First(x => x.Default));
+            SwitchState(settings.States.First(x => x.Default));
         }
         else if (CurrentState != state)
         {

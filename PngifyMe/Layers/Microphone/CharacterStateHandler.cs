@@ -16,8 +16,8 @@ public class CharacterStateHandler
     public EventHandler<CharacterState> StateChanged; // dead for now, todo
 
     public CharacterStateHandler()
-    {      
-        switch (SettingsManager.Current.Profile.Active.CharacterSetup)
+    {
+        switch (SettingsManager.Current.Profile.Active.AvatarSettings)
         {
             case BasicCharSettings:
                 CharacterSetup = new BasicCharacterSetup();
@@ -41,7 +41,7 @@ public class CharacterStateHandler
     private void RefreshCharacterSettings()
     {
         //micSettings = SettingsManager.Current.Profile.Active.CharacterSetup;
-        CharacterSetup.Settings = SettingsManager.Current.Profile.Active.CharacterSetup;
+        CharacterSetup.Settings = SettingsManager.Current.Profile.Active.AvatarSettings;
         CharacterSetup.RefreshCharacterSettings();
     }
 
@@ -51,9 +51,9 @@ public class CharacterStateHandler
         CharacterSetup.Update(dt, ref values);
     }
 
-    public void ToggleState(CharacterState state)
+    public void ToggleState(string stateName)
     {
-        CharacterSetup.ToggleState(state);
+        CharacterSetup.ToggleState(stateName);
     }
 
     internal void SetupHotKeys()
@@ -68,11 +68,11 @@ public class CharacterStateHandler
         {
             case "Basic":
                 CharacterSetup = new BasicCharacterSetup();
-                SettingsManager.Current.Profile.Active.CharacterSetup = new BasicCharSettings();
+                SettingsManager.Current.Profile.Active.AvatarSettings = new BasicCharSettings();
                 break;
             case "Sprite (Advanced)":
                 CharacterSetup = new SpriteCharacterSetup();
-                SettingsManager.Current.Profile.Active.CharacterSetup = new SpriteCharacterSettings();
+                SettingsManager.Current.Profile.Active.AvatarSettings = new SpriteCharacterSettings();
                 break;
             default:
                 break;

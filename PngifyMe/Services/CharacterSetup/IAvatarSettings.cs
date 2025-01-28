@@ -5,6 +5,6 @@ namespace PngifyMe.Services.CharacterSetup
 {
     public interface IAvatarSettings
     {
-        List<CharacterState> States { get; set; }
+        List<string> AvailableStates();
     }
 }

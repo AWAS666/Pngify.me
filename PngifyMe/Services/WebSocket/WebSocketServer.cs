@@ -114,8 +114,8 @@ public class Session : WsSession
                     break;
                 case "SwitchState":
                     //check mic states, add those if match:
-                    var match = SettingsManager.Current.Profile.Active.CharacterSetup.States
-                                .FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase));
+                    var match = SettingsManager.Current.Profile.Active.AvatarSettings.AvailableStates()
+                                .FirstOrDefault(x => string.Equals(x, data.Parameter, StringComparison.OrdinalIgnoreCase));
                     if (match != null)
                         LayerManager.CharacterStateHandler.ToggleState(match);
                     break;

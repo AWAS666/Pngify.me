@@ -97,12 +97,15 @@ namespace PngifyMe.Services.Settings
             Directory.CreateDirectory(newFolder);
 
             // move and save all images
-            foreach (var item in profile.CharacterSetup.States)
+            if (profile.AvatarSettings is BasicCharSettings basic)
             {
-                item.Open.FilePath = MoveFile(item.Open.FilePath, newFolder);
-                item.Closed.FilePath = MoveFile(item.Closed.FilePath, newFolder);
-                item.OpenBlink.FilePath = MoveFile(item.OpenBlink.FilePath, newFolder);
-                item.ClosedBlink.FilePath = MoveFile(item.ClosedBlink.FilePath, newFolder);
+                foreach (var item in basic.States)
+                {
+                    item.Open.FilePath = MoveFile(item.Open.FilePath, newFolder);
+                    item.Closed.FilePath = MoveFile(item.Closed.FilePath, newFolder);
+                    item.OpenBlink.FilePath = MoveFile(item.OpenBlink.FilePath, newFolder);
+                    item.ClosedBlink.FilePath = MoveFile(item.ClosedBlink.FilePath, newFolder);
+                }
             }
             File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, JsonSerializeHelper.GetDefault()));
 
@@ -121,15 +124,18 @@ namespace PngifyMe.Services.Settings
             var profile = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(output, "setup.json")));
 
             // fix any broken image references
-            foreach (var item in profile.CharacterSetup.States)
+            if (profile.AvatarSettings is BasicCharSettings basic)
             {
-                item.Open.FilePath = Path.Combine(output, Path.GetFileName(item.Open.FilePath));
-                item.Closed.FilePath = Path.Combine(output, Path.GetFileName(item.Closed.FilePath));
+                foreach (var item in basic.States)
+                {
+                    item.Open.FilePath = Path.Combine(output, Path.GetFileName(item.Open.FilePath));
+                    item.Closed.FilePath = Path.Combine(output, Path.GetFileName(item.Closed.FilePath));
 
-                if (item.ClosedBlink.FilePath != null)
-                    item.ClosedBlink.FilePath = Path.Combine(output, Path.GetFileName(item.ClosedBlink.FilePath));
-                if (item.OpenBlink.FilePath != null)
-                    item.OpenBlink.FilePath = Path.Combine(output, Path.GetFileName(item.OpenBlink.FilePath));
+                    if (item.ClosedBlink.FilePath != null)
+                        item.ClosedBlink.FilePath = Path.Combine(output, Path.GetFileName(item.ClosedBlink.FilePath));
+                    if (item.OpenBlink.FilePath != null)
+                        item.OpenBlink.FilePath = Path.Combine(output, Path.GetFileName(item.OpenBlink.FilePath));
+                }
             }
             profile.Default = false;
 
@@ -156,7 +162,7 @@ namespace PngifyMe.Services.Settings
         public bool Default { get; set; }
         public ProfileType Type { get; set; } = ProfileType.Human;
         public MicSettings MicSettings { get; set; } = new MicSettings();
-        public IAvatarSettings CharacterSetup { get; set; } = new BasicCharSettings();
+        public IAvatarSettings AvatarSettings { get; set; } = new BasicCharSettings();
 
         public void SwitchType(ProfileType type)
         {

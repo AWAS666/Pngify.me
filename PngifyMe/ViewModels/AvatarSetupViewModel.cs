@@ -48,7 +48,7 @@ public partial class AvatarSetupViewModel : ObservableObject
     public AvatarSetupViewModel(Func<IStorageProvider> getStorage)
     {
         GetStorageProvider = getStorage;
-        switch (SettingsManager.Current.Profile.Active.CharacterSetup)
+        switch (SettingsManager.Current.Profile.Active.AvatarSettings)
         {
             case BasicCharSettings:
                 SelectedMode = Options.First();
@@ -76,7 +76,7 @@ public partial class AvatarSetupViewModel : ObservableObject
 
     private void CheckSettings()
     {
-        switch (SettingsManager.Current.Profile.Active.CharacterSetup)
+        switch (SettingsManager.Current.Profile.Active.AvatarSettings)
         {
             case BasicCharSettings:
                 SelectedView = new BasicSetupViewModel(GetStorageProvider);
@@ -109,8 +109,8 @@ public partial class BasicSetupViewModel : ObservableObject
     public BasicSetupViewModel(Func<IStorageProvider> getStorage)
     {
         GetStorageProvider = getStorage;
-        baseStates = SettingsManager.Current.Profile.Active.CharacterSetup.States;
-        Settings = (BasicCharSettings)SettingsManager.Current.Profile.Active.CharacterSetup;
+        Settings = (BasicCharSettings)SettingsManager.Current.Profile.Active.AvatarSettings;
+        baseStates = Settings.States;
         MicSettings = SettingsManager.Current.Profile.Active.MicSettings;
         states = new ObservableCollection<BasicStateViewModel>(baseStates.Select(x => new BasicStateViewModel(x, this)));
     }
@@ -133,7 +133,7 @@ public partial class BasicSetupViewModel : ObservableObject
 
     public void SwitchState(BasicStateViewModel vm)
     {
-        LayerManager.CharacterStateHandler.ToggleState(vm.State);
+        LayerManager.CharacterStateHandler.ToggleState(vm.State.Name);
     }
 
     public void Apply()
@@ -156,7 +156,7 @@ public partial class SpriteSetupViewModel : ObservableObject
     public SpriteSetupViewModel(Func<IStorageProvider> getStorage)
     {
         GetStorageProvider = getStorage;
-        Settings = (SpriteCharacterSettings)SettingsManager.Current.Profile.Active.CharacterSetup;
+        Settings = (SpriteCharacterSettings)SettingsManager.Current.Profile.Active.AvatarSettings;
     }
 
     [RelayCommand]
@@ -184,6 +184,15 @@ public partial class SpriteSetupViewModel : ObservableObject
             spriteParent = PngTuberPlusMigrator.MigratePngtuberPlus(parent, items);
         });
         Settings.Parent = spriteParent;
+
+        // set states to same amount as parent list, should always be 10 though
+        Settings.States = new List<SpriteStates>(spriteParent.LayerStates.Count);
+        // init state data
+        foreach (var state in Settings.States)
+        {
+            state.Index = Settings.States.IndexOf(state);
+            state.Name = $"Layer {state.Index}";
+        }
 
         LayerManager.CharacterStateHandler.CharacterSetup.RefreshCharacterSettings();
     }

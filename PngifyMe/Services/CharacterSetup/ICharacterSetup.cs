@@ -13,7 +13,7 @@ namespace PngifyMe.Services.CharacterSetup
         void DrawTransition(SKBitmap baseImg, int width, int height, SKCanvas canvas, float opacity);
         void RefreshCharacterSettings();
         void SetupHotKeys();
-        void ToggleState(CharacterState state);
+        void ToggleState(string state);
         void Update(float dt, ref LayerValues values);
 
         bool RenderPosition { get; }

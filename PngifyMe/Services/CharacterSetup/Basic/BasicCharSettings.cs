@@ -42,4 +42,6 @@ public partial class BasicCharSettings : ObservableObject, IAvatarSettings
              }
         }
     };
+
+    public List<string> AvailableStates() => States.Select(s => s.Name).ToList();
 }
