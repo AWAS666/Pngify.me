@@ -256,9 +256,11 @@ namespace PngifyMe.Services.ThrowingSystem
                     // compute in bg?
                     _ = Task.Run(() =>
                     {
-                        var old = MainBody;                       
                         // copy bitmap to avoid dispose
-                        MainBody = new MovableObject(this, bitmap.Copy(), new(0, 0), 0, posX, posY, 15);
+                        var old = MainBody;            
+                        // set to pos 0/0 for now as this technically computes on the already moved frame
+                        // this is only true for sprite render, might break future ones
+                        MainBody = new MovableObject(this, bitmap.Copy(), new(0, 0), 0, 0, 0, 15);
 
                         if (old != null)
                             old.Dispose();
