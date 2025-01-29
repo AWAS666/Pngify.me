@@ -2,11 +2,13 @@
 using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
+using PngifyMe.Services.CharacterSetup.Images;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
+using System.Linq;
 using System.Numerics;
 using System.Text.Json.Serialization;
 
@@ -18,10 +20,20 @@ public partial class SpriteImage : ObservableObject
 
     [ObservableProperty]
     private string name;
-    public string ImageBase64 { get; set; }
+
+    /// <summary>
+    /// this can be multiple if gif
+    /// </summary>
+    public List<string> ImageBase64 { get; set; } = new();
+
+    /// <summary>
+    /// frame time span
+    /// might have to set these for each frame, but most gifs don't do that....
+    /// </summary>
+    public TimeSpan FrameTimeSpan { get; set; }
 
     [JsonIgnore]
-    public SKBitmap Bitmap { get; set; }
+    public BaseImage Bitmap { get; set; }
     public long? ParentId { get; set; }
 
     [JsonIgnore]
@@ -120,13 +132,13 @@ public partial class SpriteImage : ObservableObject
         }
         return sprites;
     }
+
     public void Load(SpriteImage parent = null)
     {
-        byte[] imageBytes = Convert.FromBase64String(ImageBase64);
-        using var memoryStream = new MemoryStream(imageBytes);
-        using var skStream = new SKManagedStream(memoryStream);
-        Bitmap = SKBitmap.Decode(skStream);
-        Bitmap.SetImmutable();
+        if (ImageBase64.Count == 1)
+            Bitmap = new StaticImage(ImageBase64.First(), true);
+        else
+            Bitmap = new GifImage(ImageBase64, FrameTimeSpan);
 
         Parent = parent;
 
@@ -176,10 +188,12 @@ public partial class SpriteImage : ObservableObject
 
     public void SwitchImage(string path)
     {
-        Bitmap = SKBitmap.Decode(path);
-        Bitmap.SetImmutable();
-        using var imageData = Bitmap.Encode(SKEncodedImageFormat.Png, 100);
-        ImageBase64 = Convert.ToBase64String(imageData.ToArray());
+        Bitmap = BaseImage.LoadFromPath(path);
+        Bitmap.ConvertToBase64();
+        ImageBase64 = Bitmap.ConvertToBase64();
+        // set duration to first frame
+        if (Bitmap is GifImage gif)
+            FrameTimeSpan = gif.Frames.First().Duration;
     }
 
     [RelayCommand]

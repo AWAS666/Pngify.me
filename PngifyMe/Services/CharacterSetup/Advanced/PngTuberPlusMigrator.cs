@@ -1,5 +1,6 @@
 ﻿using Avalonia.Media;
 using NAudio.CoreAudioApi;
+using PngifyMe.Services.CharacterSetup.Images;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,8 @@ public static class PngTuberPlusMigrator
     {
         var sprite = new SpriteImage();
         sprite.Id = self.identification;
-        sprite.ImageBase64 = self.imageData;
+        sprite.ImageBase64 = [self.imageData];
+        sprite.FrameTimeSpan = TimeSpan.Zero;
         sprite.ParentId = self.parentId;
         sprite.Zindex = self.zindex;
         sprite.Parent = parent;
@@ -68,7 +70,7 @@ public static class PngTuberPlusMigrator
     }
     public static (float scaleImportFactor, float scaleMidOffset) MigrateBase64(SpriteImage sprite)
     {
-        byte[] imageBytes = Convert.FromBase64String(sprite.ImageBase64);
+        byte[] imageBytes = Convert.FromBase64String(sprite.ImageBase64.First());
 
         using var memoryStream = new MemoryStream(imageBytes);
         using var skStream = new SKManagedStream(memoryStream);
@@ -78,14 +80,13 @@ public static class PngTuberPlusMigrator
         var scaleImportFactor = (float)scaled.Width / bitmap.Width;
         var scaleMidOffset = scaleImportFactor * bitmap.Width / 2;
         var cropped = CropAndGetOffset(scaled);
-        sprite.Bitmap = cropped.croppedBitmap;
-        //https://github.com/mono/SkiaSharp/issues/2188 -> this is a big performance improvment
-        sprite.Bitmap.SetImmutable();
+        sprite.Bitmap = new StaticImage(cropped.croppedBitmap);
+        
         sprite.Position = new Vector2(cropped.offset.X, cropped.offset.Y);
 
         // save back to base 64
-        using var imageData = sprite.Bitmap.Encode(SKEncodedImageFormat.Png, 100);
-        sprite.ImageBase64 = Convert.ToBase64String(imageData.ToArray());
+        using var imageData = cropped.croppedBitmap.Encode(SKEncodedImageFormat.Png, 100);
+        sprite.ImageBase64 = [Convert.ToBase64String(imageData.ToArray())];
         return (scaleImportFactor, scaleMidOffset);
     }
     public static (SKBitmap croppedBitmap, SKPoint offset) CropAndGetOffset(SKBitmap original)

@@ -55,7 +55,7 @@ public class SpriteCharacterSetup : ICharacterSetup
     {
         parent = settings.Parent;
         settings.SpriteImages = [parent];
-        if (!string.IsNullOrEmpty(parent.ImageBase64))
+        if (parent.ImageBase64.Count > 0)
             parent.Load();
         ReloadLayerList();
     }
@@ -100,6 +100,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
         //todo: save rescaled dimension and translate by that
         canvas.Translate((canvasWidth - canvasHeight) / 2, 0);
+        var timespan = TimeSpan.FromSeconds(CurrentTime);
         foreach (var item in rel)
         {
             // Save the current canvas state
@@ -111,9 +112,9 @@ public class SpriteCharacterSetup : ICharacterSetup
             // Draw the rotated bitmap
             //canvas.DrawBitmap(item.Bitmap, 0, 0);
             if (item == settings.Selected)
-                canvas.DrawBitmap(item.Bitmap, item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
+                canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
             else
-                canvas.DrawBitmap(item.Bitmap, item.CurrentPosition.X, item.CurrentPosition.Y);
+                canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y);
             // Restore the canvas to the original state
             canvas.Restore();
         }

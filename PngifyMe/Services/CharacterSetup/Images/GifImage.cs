@@ -1,7 +1,9 @@
 ﻿using SkiaSharp;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 
 namespace PngifyMe.Services.CharacterSetup.Images;
 
@@ -12,9 +14,26 @@ public class GifImage : BaseImage
 
     public override SKBitmap Preview => GetImage(TimeSpan.FromSeconds(0));
 
+    public override int Width => Frames.FirstOrDefault()?.Bitmap.Width ?? 0;
+
+    public override int Height => Frames.FirstOrDefault()?.Bitmap.Height ?? 0;
+
     public GifImage(string filePath)
     {
         LoadGif(filePath);
+    }
+
+    public GifImage(List<string> imageBase64, TimeSpan duration)
+    {
+        foreach (var frame in imageBase64)
+        {
+            byte[] imageBytes = Convert.FromBase64String(frame);
+            using var memoryStream = new MemoryStream(imageBytes);
+            using var skStream = new SKManagedStream(memoryStream);
+            var bitmap = SKBitmap.Decode(skStream);
+            bitmap.SetImmutable();
+            Frames.Add(new GifFrame() { Bitmap = bitmap, Duration = duration });
+        }
     }
 
     private void LoadGif(string filePath)
@@ -40,9 +59,11 @@ public class GifImage : BaseImage
 
                     codec.GetPixels(imageInfo, pixels, options);
 
+                    var bit = bitmap.Copy(); // Make a copy to store in the list
+                    bit.SetImmutable();
                     var gifFrame = new GifFrame
                     {
-                        Bitmap = bitmap.Copy(), // Make a copy to store in the list
+                        Bitmap = bit,
                         Duration = TimeSpan.FromMilliseconds(frameInfo.Duration)
                     };
 
@@ -83,6 +104,7 @@ public class GifImage : BaseImage
         foreach (var frame in Frames)
         {
             frame.Bitmap = base.Resize(frame.Bitmap, maxWidth, maxHeight);
+            frame.Bitmap.SetImmutable();
         }
     }
 
@@ -92,6 +114,17 @@ public class GifImage : BaseImage
         {
             item.Bitmap.Dispose();
         }
+    }
+
+    public override List<string> ConvertToBase64()
+    {
+        var ret = new List<string>();
+        foreach (var item in Frames)
+        {
+            using var imageData = item.Bitmap.Encode(SKEncodedImageFormat.Png, 100);
+            ret.Add(Convert.ToBase64String(imageData.ToArray()));
+        }
+        return ret;
     }
 }
 

@@ -48,19 +48,6 @@ public partial class ImageSetting : ObservableObject
 
     public static BaseImage LoadImage(string filePath)
     {
-        string extension = Path.GetExtension(filePath).ToLower();
-
-        if (extension == ".gif")
-        {
-            return new GifImage(filePath);
-        }
-        else if (extension == ".png" || extension == ".jpg" || extension == ".jpeg" || extension == ".bmp")
-        {
-            return new StaticImage(filePath);
-        }
-        else
-        {
-            throw new NotSupportedException("Unsupported image format.");
-        }
+        return BaseImage.LoadFromPath(filePath);
     }
 }
