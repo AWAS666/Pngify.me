@@ -31,6 +31,14 @@
 					Minimum="0" Maximum="10"/>
 			<TextBlock Text="{Binding Drag}"/>
 		</StackPanel>
+
+		<ComboBox ItemsSource="{Binding BlinkStates }"
+				 SelectedItem="{Binding ShowBlink }"
+				 DisplayMemberBinding="{Binding}" />
+
+		<ComboBox ItemsSource="{Binding MouthStates }"
+				 SelectedItem="{Binding ShowMouth }"
+				 DisplayMemberBinding="{Binding}" />
 	</StackPanel>
 
 </UserControl>

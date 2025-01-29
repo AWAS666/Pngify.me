@@ -31,7 +31,7 @@
 					<Grid RowDefinitions="200,500">
 						<local:SpriteSingleSettings DataContext="{Binding Settings.Selected}"></local:SpriteSingleSettings>
 						<ScrollViewer Grid.Row="1">
-							<TreeView ItemsSource="{ Binding Settings.SpriteImages}" 
+							<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
 									  SelectionMode="Single"
 									  SelectedItem="{Binding Settings.Selected}">
 								<TreeView.ItemTemplate>
@@ -48,11 +48,18 @@
 						</ScrollViewer>
 					</Grid>
 				</TabItem>
-				<TabItem Header="Layer Settings">
-					show settings for the selected layer here, auto change to this if selected?
-				</TabItem>
 				<TabItem Header="Trigger Setup">
-					Trigger names + trigger button (which can be anything again, twitch etc)
+					<ListBox ItemsSource="{Binding Settings.States}" Margin="0,5,0,0">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Spacing="5">
+									<TextBox Text="{Binding Name}"/>
+									<NumericUpDown Value="{Binding Index}"/>
+									<TextBlock>add trigger here</TextBlock>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
 				</TabItem>
 			</TabControl>
 		</StackPanel>

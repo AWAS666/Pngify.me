@@ -1,8 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.Settings;
+using PngifyMe.ViewModels.Helper;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
+using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
@@ -31,9 +33,12 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 }
 
 
-public class SpriteStates
+public partial class SpriteStates : ObservableObject
 {
     public string Name { get; set; }
     public int Index { get; set; }
-    public HotkeyTrigger? Trigger { get; set; } = null;
+
+    [ObservableProperty]
+    private Trigger trigger = new HotkeyTrigger();
+
 }

@@ -1,4 +1,5 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Avalonia.Controls;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
@@ -15,6 +16,15 @@ using System.Text.Json.Serialization;
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteImage : ObservableObject
 {
+    public static List<BlinkState> BlinkStates { get; }
+    public static List<MouthState> MouthStates { get; }
+
+    static SpriteImage()
+    {
+        BlinkStates = new List<BlinkState>(Enum.GetValues(typeof(BlinkState)).Cast<BlinkState>());
+        MouthStates = new List<MouthState>(Enum.GetValues(typeof(MouthState)).Cast<MouthState>());
+    }
+
     private Vector2 lastOffset = Vector2.Zero;
     public long Id { get; set; }
 
@@ -82,6 +92,7 @@ public partial class SpriteImage : ObservableObject
     private SpriteImage? parent;
     public float CurrentRotation { get; internal set; }
     public ObservableCollection<SpriteImage> Children { get; set; } = new();
+
     public void Update(float deltaTime, Vector2 offset)
     {
         // Calculate the velocity based on the offset difference
