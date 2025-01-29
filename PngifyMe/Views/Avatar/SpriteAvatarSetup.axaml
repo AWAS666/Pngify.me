@@ -23,65 +23,65 @@
 			<TextBlock FontSize="24" Margin="0,0,0,5">Sprite Avatar State Setup</TextBlock>
 			<StackPanel Margin="5,0,5,6" Orientation="Horizontal" Spacing="5">
 				<Button Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
-				<Button>Import</Button>
-				<Button>Export</Button>
+				<Button IsEnabled="False">Import</Button>
+				<Button IsEnabled="False">Export</Button>
 			</StackPanel>
-			<TabControl>
-				<TabItem Header="Layers">
-					<Grid RowDefinitions="200,500">
-						<local:SpriteSingleSettings DataContext="{Binding Settings.Selected}"></local:SpriteSingleSettings>
-						<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
-						<ScrollViewer Grid.Row="1">
-							<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
-									  SelectionMode="Single"
-									  SelectedItem="{Binding Settings.Selected}">
-								<TreeView.ItemTemplate>
-									<TreeDataTemplate DataType="setup:SpriteImage"
-													  ItemsSource="{Binding Children}">
-										<Grid ColumnDefinitions="250,50,75">
-											<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
-											<Button Grid.Column="1">Edit</Button>
-											<Button Command="{Binding RemoveCommand }" Grid.Column="2">Delete</Button>
-										</Grid>
-									</TreeDataTemplate>
-								</TreeView.ItemTemplate>
-							</TreeView>
-						</ScrollViewer>
-					</Grid>
-				</TabItem>
-				<TabItem Header="Trigger Setup">
-					<ListBox ItemsSource="{Binding Settings.States}" Margin="0,5,0,0">
-						<ListBox.ItemTemplate>
-							<DataTemplate>
-								<StackPanel Orientation="Horizontal" Spacing="10">
-									<StackPanel Spacing="5" Width="300">
-										<TextBox Text="{Binding Name}"/>
-										<NumericUpDown Value="{Binding Index}"/>
-										<TextBlock>add trigger here</TextBlock>
-									</StackPanel>
-									<Button Click="ActivateState">Activate</Button>
-								</StackPanel>
-							</DataTemplate>
-						</ListBox.ItemTemplate>
-					</ListBox>
-				</TabItem>
-				<TabItem Header="Global Settings">
-
-					<Grid RowDefinitions="30,30" Margin="5,5,5,5">
-						<Grid ColumnDefinitions="100,100,100" ToolTip.Tip="Time between blinks">
-							<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
-							<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkInterval}"/>
-							<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
-						</Grid>
-
-						<Grid ColumnDefinitions="100,100,100" Grid.Row="1" ToolTip.Tip="How long character blinks">
-							<TextBlock VerticalAlignment="Center">Blink Time</TextBlock>
-							<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkTime}"/>
-							<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
-						</Grid>
-					</Grid>
-				</TabItem>
-			</TabControl>
 		</StackPanel>
+		<TabControl Grid.Row="1">
+			<TabItem Header="Layers">
+				<Grid RowDefinitions="Auto,Auto,*">
+					<local:SpriteSingleSettings DataContext="{Binding Settings.Selected}"></local:SpriteSingleSettings>
+					<Rectangle Grid.Row="1" Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+					<ScrollViewer Grid.Row="2">
+						<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
+								  SelectionMode="Single"
+								  SelectedItem="{Binding Settings.Selected}">
+							<TreeView.ItemTemplate>
+								<TreeDataTemplate DataType="setup:SpriteImage"
+												  ItemsSource="{Binding Children}">
+									<Grid ColumnDefinitions="250,50,75">
+										<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+										<Button Grid.Column="1">Edit</Button>
+										<Button Command="{Binding RemoveCommand }" Grid.Column="2">Delete</Button>
+									</Grid>
+								</TreeDataTemplate>
+							</TreeView.ItemTemplate>
+						</TreeView>
+					</ScrollViewer>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Trigger Setup">
+				<ListBox ItemsSource="{Binding Settings.States}" Margin="0,5,0,0">
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel Orientation="Horizontal" Spacing="10">
+								<StackPanel Spacing="5" Width="300">
+									<TextBox Text="{Binding Name}"/>
+									<NumericUpDown Value="{Binding Index}"/>
+									<TextBlock>add trigger here</TextBlock>
+								</StackPanel>
+								<Button Click="ActivateState">Activate</Button>
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</TabItem>
+			<TabItem Header="Global Settings">
+
+				<Grid RowDefinitions="30,30" Margin="5,5,5,5">
+					<Grid ColumnDefinitions="100,100,100" ToolTip.Tip="Time between blinks">
+						<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
+						<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkInterval}"/>
+						<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+					</Grid>
+
+					<Grid ColumnDefinitions="100,100,100" Grid.Row="1" ToolTip.Tip="How long character blinks">
+						<TextBlock VerticalAlignment="Center">Blink Time</TextBlock>
+						<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkTime}"/>
+						<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+					</Grid>
+				</Grid>
+			</TabItem>
+		</TabControl>
 	</Grid>
 </UserControl>

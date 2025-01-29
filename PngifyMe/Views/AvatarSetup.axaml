@@ -27,16 +27,16 @@
 				<ComboBox ItemsSource="{Binding Options}" SelectedItem="{Binding SelectedMode}" SelectedIndex="0"/>
 			</StackPanel>
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
-			<ContentControl Content="{Binding SelectedView}">
-				<ContentControl.DataTemplates>
-					<DataTemplate DataType="{x:Type vm:BasicSetupViewModel}">
-						<a:BasicAvatarSetup DataContext="{Binding}"/>
-					</DataTemplate>
-					<DataTemplate DataType="{x:Type vm:SpriteSetupViewModel}">
-						<a:SpriteAvatarSetup DataContext="{Binding}"/>
-					</DataTemplate>
-				</ContentControl.DataTemplates>
-			</ContentControl>
 		</StackPanel>
+		<ContentControl Grid.Row="1" Content="{Binding SelectedView}">
+			<ContentControl.DataTemplates>
+				<DataTemplate DataType="{x:Type vm:BasicSetupViewModel}">
+					<a:BasicAvatarSetup DataContext="{Binding}"/>
+				</DataTemplate>
+				<DataTemplate DataType="{x:Type vm:SpriteSetupViewModel}">
+					<a:SpriteAvatarSetup DataContext="{Binding}"/>
+				</DataTemplate>
+			</ContentControl.DataTemplates>
+		</ContentControl>
 	</Grid>
 </UserControl>
