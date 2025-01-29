@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
+using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 
@@ -17,6 +18,8 @@ public partial class SpriteStates : ObservableObject
 
     [ObservableProperty]
     private Trigger trigger;
+
+    [property: JsonIgnore]
     [ObservableProperty]
     private TriggerViewModel triggerVm;
 
@@ -47,6 +50,7 @@ public partial class SpriteStates : ObservableObject
         }
     }
 
+    [property: JsonIgnore]
     [ObservableProperty]
     private TriggerTypeInfo _selectedTriggerType;
 
