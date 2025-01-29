@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -43,6 +44,7 @@ public partial class SpriteSetupViewModel : ObservableObject
         });
         var filePath = path.FirstOrDefault()?.Path?.AbsolutePath;
         if (string.IsNullOrEmpty(filePath)) return;
+        filePath = WebUtility.UrlDecode(filePath);
 
         var file = await File.ReadAllTextAsync(filePath);
         var obj = JsonSerializer.Deserialize<Dictionary<string, PngTuberPlusObject>>(file);
