@@ -96,7 +96,7 @@ public partial class SpriteImage : ObservableObject
     public void Update(float deltaTime, Vector2 offset)
     {
         // Calculate the velocity based on the offset difference
-        Vector2 velocity = (offset - lastOffset) / deltaTime;
+        Vector2 velocity = offset - lastOffset;
 
         // Apply drag using an easing function
         if (Drag > 0)
@@ -112,7 +112,7 @@ public partial class SpriteImage : ObservableObject
         }
 
         // Update the offset based on the smoothed velocity
-        Offset = lastOffset + velocity * deltaTime;
+        Offset = lastOffset + velocity;
 
         // Calculate the rotation change based on the velocity
         float targetRotation = Math.Min(velocity.Length() * RotMovement, RotMovement);

@@ -1,0 +1,18 @@
+- integrate into pngify.me	
+	- import progress
+	- use stretch (y zoom)
+	- editor
+		- hotkeys
+		- layers
+		- blink/mouth
+	- streamdeck integration, might be something new, todo
+	- change position of all by mouse drag/drop
+	- zoom with crtl+mousewheel
+	- position change
+	- canvas
+		- select
+		- drag/drop
+		- 
+- button style/icons
+- solution cleanup
+- make trigger views more reusable
