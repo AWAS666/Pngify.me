@@ -73,7 +73,13 @@ public class SpriteCharacterSetup : ICharacterSetup
     public void ToggleState(string state)
     {
         var newState = settings.States.First(x => x.Name == state);
-        layer = newState.Index;
+        ToggleState(newState);
+    }
+
+    public void ToggleState(SpriteStates state)
+    {
+        layer = state.Index;
+        settings.ActivateState = state;
     }
 
     public void Update(float dt, ref LayerValues values)

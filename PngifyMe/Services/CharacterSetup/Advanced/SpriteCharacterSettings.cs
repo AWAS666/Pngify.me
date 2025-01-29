@@ -22,7 +22,10 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
     private double blinkTime = 0.25f;
 
     [ObservableProperty]
-    private double blinkInterval = 0.25f;
+    private double blinkInterval = 3f;
+
+    [ObservableProperty]
+    private SpriteStates activateState;
     public ObservableCollection<SpriteStates> States { get; set; } = new();
     public List<string> AvailableStates() => States.Select(s => s.Name).ToList();
 
