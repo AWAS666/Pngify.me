@@ -10,6 +10,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Services.Settings
 {
@@ -86,32 +87,16 @@ namespace PngifyMe.Services.Settings
             ProfileList.Remove(profile);
         }
 
-        public void ExportProfile(Profile profile, string exportTo)
+        public async Task ExportProfile(Profile profile, string exportTo)
         {
             FixNames();
-            string path = Path.Combine(SettingsManager.BasePath, "Profiles");
-            // clear and create new
-            Directory.CreateDirectory(path);
-
-            var newFolder = Path.Combine(path, profile.Name);
-            Directory.CreateDirectory(newFolder);
-           
-            File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, JsonSerializeHelper.GetDefault()));
-
-            // make it a zip file
-            if (File.Exists(exportTo)) File.Delete(exportTo);
-            ZipFile.CreateFromDirectory(newFolder, exportTo);
+            await File.WriteAllTextAsync(exportTo, JsonSerializer.Serialize(profile, JsonSerializeHelper.GetDefault()));
         }
 
-        public Profile ImportProfile(string fromFile)
+        public async Task<Profile> ImportProfile(string fromFile)
         {
-            string path = Path.Combine(SettingsManager.BasePath, "Profiles");
+            var profile = JsonSerializer.Deserialize<Profile>(await File.ReadAllTextAsync(fromFile), JsonSerializeHelper.GetDefault());
 
-            string output = Path.Combine(path, Path.GetFileNameWithoutExtension(fromFile));
-            Directory.CreateDirectory(output);
-            ZipFile.ExtractToDirectory(fromFile, output, true);
-            var profile = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(output, "setup.json")));
-           
             profile.Default = false;
 
             ProfileList.Add(profile);

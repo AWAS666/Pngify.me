@@ -23,6 +23,11 @@ namespace PngifyMe.ViewModels.Helper
             AppleUniformTypeIdentifiers = new[] { "public.archive" },
         };
 
+        public static FilePickerFileType Pngifyme { get; } = new("Profile")
+        {
+            Patterns = new[] { "*.pngprofile", },
+        };
+
         public static FilePickerFileType PngTuberPlus { get; } = new("Save")
         {
             Patterns = new[] { "*.save", },
