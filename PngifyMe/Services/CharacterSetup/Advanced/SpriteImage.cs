@@ -69,7 +69,7 @@ public partial class SpriteImage : ObservableObject
     [ObservableProperty]
     private SpriteImage? parent;
     public float CurrentRotation { get; internal set; }
-    public ObservableCollection<SpriteImage> Children { get; set; } = new();   
+    public ObservableCollection<SpriteImage> Children { get; set; } = new();
     public void Update(float deltaTime, Vector2 offset)
     {
         // Calculate the velocity based on the offset difference
@@ -92,7 +92,7 @@ public partial class SpriteImage : ObservableObject
         Offset = lastOffset + velocity * deltaTime;
 
         // Calculate the rotation change based on the velocity
-        float targetRotation = velocity.Length() * RotMovement * 3;
+        float targetRotation = Math.Min(velocity.Length() * RotMovement, RotMovement);
 
         // Smoothly interpolate the current rotation towards the target rotation
         float rotationSmoothingFactor = 0.1f; // Adjust this value for smoother or sharper transitions
