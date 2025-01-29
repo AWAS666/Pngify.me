@@ -118,7 +118,7 @@ public partial class SpriteImage : ObservableObject
         Offset = lastOffset + velocity;
 
         // Calculate the rotation change based on the velocity
-        float targetRotation = Math.Min(velocity.Length() * RotMovement, RotMovement);
+        float targetRotation = Math.Min(velocity.Length(), 1) * RotMovement;
 
         // Smoothly interpolate the current rotation towards the target rotation
         float rotationSmoothingFactor = 0.1f; // Adjust this value for smoother or sharper transitions
