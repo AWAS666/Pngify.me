@@ -78,7 +78,8 @@ public partial class SpriteImage : ObservableObject
 
     public int Zindex { get; set; }
 
-    public int RotMovement { get; set; }
+    [ObservableProperty]
+    private int rotMovement;
     public BlinkState ShowBlink { get; set; }
     public MouthState ShowMouth { get; set; }
     public List<int> LayerStates { get; set; } = new List<int>(10);
@@ -90,6 +91,8 @@ public partial class SpriteImage : ObservableObject
     [property: JsonIgnore]
     [ObservableProperty]
     private SpriteImage? parent;
+
+    [JsonIgnore]
     public float CurrentRotation { get; internal set; }
     public ObservableCollection<SpriteImage> Children { get; set; } = new();
 
