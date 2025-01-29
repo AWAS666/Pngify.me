@@ -1,5 +1,4 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -33,15 +32,4 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
     {
         spriteImages = [parent];
     }
-}
-
-
-public partial class SpriteStates : ObservableObject
-{
-    public string Name { get; set; }
-    public int Index { get; set; }
-
-    [ObservableProperty]
-    private Trigger trigger = new HotkeyTrigger();
-
 }

@@ -55,12 +55,19 @@
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal" Spacing="10">
-								<StackPanel Spacing="5" Width="300">
-									<TextBox Text="{Binding Name}"/>
-									<NumericUpDown Value="{Binding Index}"/>
-									<TextBlock>add trigger here</TextBlock>
+								<StackPanel Spacing="5">
+									<StackPanel Orientation="Horizontal" Spacing="5">
+										<TextBox Width="200" Text="{Binding Name}"/>
+										<NumericUpDown Width="50" Value="{Binding Index}"/>
+										<Button Click="ActivateState">Activate</Button>
+									</StackPanel>
+									<StackPanel Orientation="Horizontal" Spacing="5">
+										<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
+												  SelectedItem="{Binding SelectedTriggerType}"
+												  DisplayMemberBinding="{Binding DisplayName}"/>
+										<helper:TriggerView DataContext="{Binding TriggerVm}"/>
+									</StackPanel>
 								</StackPanel>
-								<Button Click="ActivateState">Activate</Button>
 							</StackPanel>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
