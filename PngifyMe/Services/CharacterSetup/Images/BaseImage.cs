@@ -44,7 +44,7 @@ public abstract class BaseImage : IDisposable
         }
         else if (extension == ".png" || extension == ".jpg" || extension == ".jpeg" || extension == ".bmp")
         {
-            return new StaticImage(path);
+            return new StaticImage(path, false);
         }
         else
         {

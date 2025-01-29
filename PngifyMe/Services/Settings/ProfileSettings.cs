@@ -95,18 +95,7 @@ namespace PngifyMe.Services.Settings
 
             var newFolder = Path.Combine(path, profile.Name);
             Directory.CreateDirectory(newFolder);
-
-            // move and save all images
-            if (profile.AvatarSettings is BasicCharSettings basic)
-            {
-                foreach (var item in basic.States)
-                {
-                    item.Open.FilePath = MoveFile(item.Open.FilePath, newFolder);
-                    item.Closed.FilePath = MoveFile(item.Closed.FilePath, newFolder);
-                    item.OpenBlink.FilePath = MoveFile(item.OpenBlink.FilePath, newFolder);
-                    item.ClosedBlink.FilePath = MoveFile(item.ClosedBlink.FilePath, newFolder);
-                }
-            }
+           
             File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, JsonSerializeHelper.GetDefault()));
 
             // make it a zip file
@@ -122,21 +111,7 @@ namespace PngifyMe.Services.Settings
             Directory.CreateDirectory(output);
             ZipFile.ExtractToDirectory(fromFile, output, true);
             var profile = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(output, "setup.json")));
-
-            // fix any broken image references
-            if (profile.AvatarSettings is BasicCharSettings basic)
-            {
-                foreach (var item in basic.States)
-                {
-                    item.Open.FilePath = Path.Combine(output, Path.GetFileName(item.Open.FilePath));
-                    item.Closed.FilePath = Path.Combine(output, Path.GetFileName(item.Closed.FilePath));
-
-                    if (item.ClosedBlink.FilePath != null)
-                        item.ClosedBlink.FilePath = Path.Combine(output, Path.GetFileName(item.ClosedBlink.FilePath));
-                    if (item.OpenBlink.FilePath != null)
-                        item.OpenBlink.FilePath = Path.Combine(output, Path.GetFileName(item.OpenBlink.FilePath));
-                }
-            }
+           
             profile.Default = false;
 
             ProfileList.Add(profile);

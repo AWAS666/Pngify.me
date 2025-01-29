@@ -3,7 +3,10 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.CharacterSetup.Images;
 using SkiaSharp;
 using System;
+using System.Buffers.Text;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.Json.Serialization;
 
 namespace PngifyMe.Services.CharacterSetup.Images;
@@ -16,38 +19,51 @@ public partial class ImageSetting : ObservableObject
     [ObservableProperty]
     private BaseImage bitmap = new StaticImage(PlaceHolder);
 
-    public string? FilePath
+    public List<string> Base64
     {
-        get => path; set
+        get => base64; set
         {
-            path = value;
-            ApplyPath();
+            base64 = value;
+            LoadBase64();
         }
     }
-    private string? path { get; set; }
-    public string? FileName => Path.GetFileName(path);
+    private List<string> base64 { get; set; } = new();
+
+    public TimeSpan TimeSpan { get; set; } = TimeSpan.Zero;
 
     public ImageSetting()
     {
-        ApplyPath();
+        LoadBase64();
     }
 
-    public void ApplyPath()
+    public void LoadBase64()
     {
-        if (string.IsNullOrEmpty(FilePath))
+        if (base64.Count == 0)
         {
             Bitmap = new StaticImage(PlaceHolder);
             return;
         }
-        if (File.Exists(FilePath))
-        {
-            Bitmap = LoadImage(FilePath);
-            Bitmap.Resize((int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
-        }
+        if (base64.Count == 1)
+            Bitmap = new StaticImage(base64[0], true);
+        else
+            Bitmap = new GifImage(base64, TimeSpan);
+
+        Bitmap.Resize((int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
     }
 
-    public static BaseImage LoadImage(string filePath)
+    public ImageSetting LoadFromFile(string filePath)
     {
-        return BaseImage.LoadFromPath(filePath);
+        Bitmap = BaseImage.LoadFromPath(filePath);
+        base64 = Bitmap.ConvertToBase64();
+        if (Bitmap is GifImage gif)
+            TimeSpan = gif.Frames.First().Duration;
+        Bitmap.Resize((int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
+        return this;
+    }
+
+    public void Delete()
+    {
+        Base64.Clear();
+        LoadBase64();
     }
 }

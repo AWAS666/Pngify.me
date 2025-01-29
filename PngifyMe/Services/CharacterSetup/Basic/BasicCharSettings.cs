@@ -24,22 +24,11 @@ public partial class BasicCharSettings : ObservableObject, IAvatarSettings
         {
             Name = "Basic",
             Default = true,
-            Open = new ImageSetting()
-            {
-                FilePath = "Assets/openMouthopenEyes.png",
-            },
-             Closed = new ImageSetting()
-            {
-                FilePath = "Assets/closedMouthopenEyes.png",
-            },
-             ClosedBlink = new ImageSetting()
-             {
-                 FilePath = "Assets/closedMouthclosedEyes.png"
-             },
-             OpenBlink = new ImageSetting()
-             {
-                 FilePath = "Assets/openMouthclosedEyes.png"
-             }
+            Open = new ImageSetting().LoadFromFile("Assets/openMouthopenEyes.png"),
+            Closed = new ImageSetting().LoadFromFile("Assets/closedMouthopenEyes.png"),
+            ClosedBlink = new ImageSetting().LoadFromFile("Assets/closedMouthclosedEyes.png"),
+            OpenBlink = new ImageSetting().LoadFromFile("Assets/openMouthclosedEyes.png")
+           
         }
     };
 

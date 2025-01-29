@@ -4,6 +4,7 @@ using PngifyMe.Services.CharacterSetup.Images;
 using PngifyMe.Services.Hotkey;
 using SkiaSharp;
 using System;
+using System.Buffers.Text;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -58,9 +59,9 @@ public class BasicCharacterSetup : ICharacterSetup
         if (CurrentState == state && !reload) return;
 
         openImage = state.Open.Bitmap;
-        openBlinkImage = !string.IsNullOrEmpty(state.OpenBlink.FilePath) ? state.OpenBlink.Bitmap : state.Open.Bitmap;
+        openBlinkImage = state.OpenBlink.Base64.Count > 0 ? state.OpenBlink.Bitmap : state.Open.Bitmap;
         closedImage = state.Closed.Bitmap;
-        closedBlinkImage = !string.IsNullOrEmpty(state.ClosedBlink.FilePath) ? state.ClosedBlink.Bitmap : state.Closed.Bitmap;
+        closedBlinkImage = state.ClosedBlink.Base64.Count > 0 ? state.ClosedBlink.Bitmap : state.Closed.Bitmap;
         lastState = CurrentState;
         CurrentState = state;
 

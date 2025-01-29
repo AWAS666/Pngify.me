@@ -16,20 +16,21 @@ public class StaticImage : BaseImage
 
     public override int Height => Bitmap.Height;
 
-    public StaticImage(string filePath)
+    public StaticImage(string input, bool loadfromBase64)
     {
-        Bitmap = SKBitmap.Decode(filePath);
-        if (Bitmap == null)
-            throw new Exception("Failed to load image.");
-        Bitmap.SetImmutable();
-    }
-
-    public StaticImage(string base64, bool placeholder)
-    {
-        byte[] imageBytes = Convert.FromBase64String(base64);
-        using var memoryStream = new MemoryStream(imageBytes);
-        using var skStream = new SKManagedStream(memoryStream);
-        Bitmap = SKBitmap.Decode(skStream);
+        if (loadfromBase64)
+        {
+            byte[] imageBytes = Convert.FromBase64String(input);
+            using var memoryStream = new MemoryStream(imageBytes);
+            using var skStream = new SKManagedStream(memoryStream);
+            Bitmap = SKBitmap.Decode(skStream);
+        }
+        else
+        {
+            Bitmap = SKBitmap.Decode(input);
+            if (Bitmap == null)
+                throw new Exception("Failed to load image.");
+        }
         Bitmap.SetImmutable();
     }
 
