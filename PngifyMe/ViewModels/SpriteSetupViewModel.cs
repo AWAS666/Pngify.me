@@ -62,7 +62,7 @@ public partial class SpriteSetupViewModel : ObservableObject
         Settings.SpriteImages = [spriteParent];
 
         // set states to same amount as parent list, should always be 10 though
-        Settings.States = new ObservableCollection<SpriteStates>();
+        Settings.States.Clear();
         // init state data
         for (int i = 0; i < spriteParent.LayerStates.Count; i++)
         {
