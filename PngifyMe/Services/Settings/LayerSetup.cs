@@ -38,6 +38,7 @@ namespace PngifyMe.Services.Settings
             LayerManager.Layers.Clear();
             foreach (var item in Layers)
             {
+                item.Trigger.Callback = item.AddLayers;
                 switch (item.Trigger)
                 {
                     case AlwaysActive:
@@ -95,7 +96,6 @@ namespace PngifyMe.Services.Settings
             set
             {
                 trigger = value;
-                trigger.Parent = this;
             }
         }
         private Trigger trigger = new AlwaysActive();

@@ -12,7 +12,7 @@ namespace PngifyMe.Services.CharacterSetup.Advanced;
 
 public partial class SpriteStates : ObservableObject
 {
-   
+
     public string Name { get; set; }
     public int Index { get; set; }
 
@@ -40,8 +40,10 @@ public partial class SpriteStates : ObservableObject
         var triggerTypes = typeof(Trigger).Assembly.GetTypes()
             .Where(t => t.IsSubclassOf(typeof(Trigger)) && !t.IsAbstract);
 
+
         foreach (var type in triggerTypes)
         {
+            if (type == typeof(AlwaysActive)) continue;
             AvailableTriggers.Add(new TriggerTypeInfo
             {
                 Type = type,
@@ -68,7 +70,7 @@ public partial class SpriteStates : ObservableObject
         SelectedTriggerType = AvailableTriggers.FirstOrDefault(t => t.Type == newValue?.GetType());
     }
 
-    
+
 }
 
 public class TriggerTypeInfo

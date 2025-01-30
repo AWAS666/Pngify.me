@@ -8,7 +8,7 @@ namespace PngifyMe.Services.Settings
     public abstract class Trigger
     {
         [JsonIgnore]
-        public Layersetting Parent { get; internal set; }
+        public Action Callback { get; set; }
 
         public bool IsToggleable { get; set; } = false;
 
@@ -32,7 +32,7 @@ namespace PngifyMe.Services.Settings
         {
             if (string.Compare(Redeem, e, StringComparison.OrdinalIgnoreCase) == 0)
             {
-                Parent.AddLayers();
+                Callback();
             }
         }
     }
@@ -46,7 +46,7 @@ namespace PngifyMe.Services.Settings
         {
             if (e.Bits >= MinAmount && e.Bits < MaxAmount)
             {
-                Parent.AddLayers();
+                Callback();
             }
         }
     }
@@ -55,7 +55,7 @@ namespace PngifyMe.Services.Settings
     {
         public void Triggered(object? sender, string name)
         {
-            Parent.AddLayers();
+            Callback();
         }
     }
 }

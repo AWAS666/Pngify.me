@@ -1,19 +1,28 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Layers;
+using PngifyMe.Services.Hotkey;
+using PngifyMe.Services.Settings;
+using PngifyMe.Services.Twitch;
 using PngifyMe.ViewModels.Helper;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.Json.Serialization;
+using static PortAudioSharp.Stream;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 {
+    private List<Action> callbacks = new();
+
     [ObservableProperty]
     private List<SpriteImage> spriteImages;
 
     [ObservableProperty]
     private SpriteImage parent = new();
 
+    [property: JsonIgnore]
     [ObservableProperty]
     private SpriteImage selected = new();
 
@@ -23,6 +32,7 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
     [ObservableProperty]
     private double blinkInterval = 3f;
 
+    [property: JsonIgnore]
     [ObservableProperty]
     private SpriteStates activateState;
     public ObservableCollection<SpriteStates> States { get; set; } = new();
@@ -30,6 +40,65 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 
     public SpriteCharacterSettings()
     {
-        spriteImages = [parent];
+        SpriteImages = [parent];
+        if (States.Count > 0)
+            ActivateState = States.First();
+        else
+            ActivateState = new();
     }
+
+    public void SetupTriggers()
+    {
+        CleanUp();
+        foreach (var item in States)
+        {
+            void callback()
+            {
+                ActivateState = item;
+            }
+            item.Trigger.Callback = callback;
+            switch (item.Trigger)
+            {
+                case HotkeyTrigger hotKey:
+                    HotkeyManager.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
+                    callbacks.Add(callback);
+                    break;
+                case TwitchRedeem redeem:
+                    TwitchEventSocket.RedeemUsed += redeem.Triggered;
+                    break;
+                case TwitchBits bits:
+                    TwitchEventSocket.BitsUsed += bits.Triggered;
+                    break;
+                case TwitchSub subs:
+                    TwitchEventSocket.AnySub += subs.Triggered;
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    private void CleanUp()
+    {
+        HotkeyManager.RemoveCallbacks(callbacks);
+        callbacks.Clear();
+
+        foreach (var item in States)
+        {
+            switch (item.Trigger)
+            {
+                case TwitchRedeem redeem:
+                    TwitchEventSocket.RedeemUsed -= redeem.Triggered;
+                    break;
+                case TwitchBits bits:
+                    TwitchEventSocket.BitsUsed -= bits.Triggered;
+                    break;
+                case TwitchSub subs:
+                    TwitchEventSocket.AnySub -= subs.Triggered;
+                    break;
+            }
+        }
+    }
+
+
 }

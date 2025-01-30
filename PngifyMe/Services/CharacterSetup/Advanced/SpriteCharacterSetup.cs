@@ -20,7 +20,6 @@ public class SpriteCharacterSetup : ICharacterSetup
     private SpriteImage parent;
     private List<SpriteImage> layers;
 
-    private static int layer = 0;
     private static MouthState mouthState = MouthState.Closed;
     private static BlinkState blinkState = BlinkState.Open;
     private double transTime;
@@ -78,7 +77,6 @@ public class SpriteCharacterSetup : ICharacterSetup
 
     public void ToggleState(SpriteStates state)
     {
-        layer = state.Index;
         settings.ActivateState = state;
     }
 
@@ -100,7 +98,7 @@ public class SpriteCharacterSetup : ICharacterSetup
         using var canvas = new SKCanvas(mainBitmap);
         var rel = layers
            .Where(x => x.Bitmap != null)
-           .Where(x => x.LayerStates[layer] == 1)
+           .Where(x => x.LayerStates[settings.ActivateState.Index] == 1)
            .Where(x => x.ShowMouth == MouthState.Ignore || x.ShowMouth == mouthState)
            .Where(x => x.ShowBlink == BlinkState.Ignore || x.ShowBlink == blinkState);
 
