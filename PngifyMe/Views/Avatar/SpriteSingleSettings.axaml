@@ -30,8 +30,7 @@
 					VerticalAlignment="Center"
 					Width="150"
 					Minimum="0" Maximum="10"/>
-			<TextBlock Text="{Binding Drag}"/>
-			
+			<NumericUpDown Value="{Binding Drag}"/>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
@@ -40,9 +39,17 @@
 					VerticalAlignment="Center"
 					Width="150"
 					Minimum="-20" Maximum="20"/>
-			<TextBlock Text="{Binding RotMovement}"/>
+			<NumericUpDown Value="{Binding RotMovement}"/>
 		</StackPanel>
 
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock>Stretch</TextBlock>
+			<Slider Value="{Binding Stretch}"
+					VerticalAlignment="Center"
+					Width="150"
+					Minimum="-5" Maximum="5"/>
+			<NumericUpDown Value="{Binding Stretch}"/>
+		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
 			<ComboBox ItemsSource="{Binding BlinkStates }"

@@ -115,6 +115,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
             // Apply transformations
             canvas.RotateDegrees(item.CurrentRotation, item.Anchor.X, item.Anchor.Y);
+            canvas.Scale(1f, 1f + item.CurrentStretch, item.Anchor.X, item.Anchor.Y);
 
             // Draw the rotated bitmap
             //canvas.DrawBitmap(item.Bitmap, 0, 0);

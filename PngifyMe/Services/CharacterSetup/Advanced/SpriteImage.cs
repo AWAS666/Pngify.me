@@ -86,7 +86,9 @@ public partial class SpriteImage : ObservableObject
 
     [ObservableProperty]
     private int drag;
-    public float Stretch { get; set; }
+
+    [ObservableProperty]
+    private float stretch;
 
     [property: JsonIgnore]
     [ObservableProperty]
@@ -95,6 +97,7 @@ public partial class SpriteImage : ObservableObject
     [JsonIgnore]
     public float CurrentRotation { get; internal set; }
     public ObservableCollection<SpriteImage> Children { get; set; } = new();
+    public float CurrentStretch { get; private set; }
 
     public void Update(float deltaTime, Vector2 offset)
     {
@@ -121,8 +124,15 @@ public partial class SpriteImage : ObservableObject
         float targetRotation = Math.Min(velocity.Length(), 1) * RotMovement;
 
         // Smoothly interpolate the current rotation towards the target rotation
-        float rotationSmoothingFactor = 0.1f; // Adjust this value for smoother or sharper transitions
+        float rotationSmoothingFactor = 0.05f; // Adjust this value for smoother or sharper transitions
         CurrentRotation = Easings.Lerp(CurrentRotation, targetRotation, rotationSmoothingFactor);
+
+        // Calculate the rotation change based on the velocity
+        float targetStrech = Math.Min(velocity.Length(), 1) * Stretch/10f;
+
+        // Smoothly interpolate the current rotation towards the target rotation
+        CurrentStretch = Easings.Lerp(CurrentStretch, targetStrech, rotationSmoothingFactor);
+
 
         // Update all child elements
         foreach (var child in Children)
