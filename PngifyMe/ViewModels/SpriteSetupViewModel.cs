@@ -72,7 +72,30 @@ public partial class SpriteSetupViewModel : ObservableObject
                 Name = $"Layer {i}"
             });
         }
+        Settings.SetupTriggers();
 
         LayerManager.CharacterStateHandler.CharacterSetup.RefreshCharacterSettings();
+    }
+
+
+    [RelayCommand]
+    public void SetupTriggers()
+    {
+        Settings.SetupTriggers();
+    }
+
+    [RelayCommand]
+    public void AddTrigger()
+    {
+        Settings.States.Add(new()
+        {
+            Index = Settings.States.Count,
+        });
+    }
+
+    [RelayCommand]
+    public void RemoveTrigger(SpriteStates state)
+    {
+        Settings.States.Remove(state);
     }
 }

@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Settings;
@@ -52,10 +53,10 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
         CleanUp();
         foreach (var item in States)
         {
-            void callback()
+            var callback = () =>
             {
                 ActivateState = item;
-            }
+            };
             item.Trigger.Callback = callback;
             switch (item.Trigger)
             {

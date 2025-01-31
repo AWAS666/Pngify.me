@@ -243,7 +243,7 @@ namespace PngifyMe.Layers
 
         private static void DrawTits(SKCanvas canvas)
         {
-            if (SettingsManager.Current.Tits.HitLinesVisible)
+            if (SettingsManager.Current.Tits.HitLinesVisible && ThrowingSystem.MainBody != null)
             {
                 using (var paint = new SKPaint
                 {

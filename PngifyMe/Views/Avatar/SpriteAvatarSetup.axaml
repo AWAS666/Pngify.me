@@ -51,27 +51,35 @@
 				</Grid>
 			</TabItem>
 			<TabItem Header="Trigger Setup">
-				<ListBox ItemsSource="{Binding Settings.States}" Margin="0,5,0,0">
-					<ListBox.ItemTemplate>
-						<DataTemplate>
-							<StackPanel Orientation="Horizontal" Spacing="10">
-								<StackPanel Spacing="5">
-									<StackPanel Orientation="Horizontal" Spacing="5">
-										<TextBox Width="200" Text="{Binding Name}"/>
-										<NumericUpDown Width="50" Value="{Binding Index}"/>
-										<Button Click="ActivateState">Activate</Button>
-									</StackPanel>
-									<StackPanel Orientation="Horizontal" Spacing="5">
-										<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
-												  SelectedItem="{Binding SelectedTriggerType}"
-												  DisplayMemberBinding="{Binding DisplayName}"/>
-										<helper:TriggerView DataContext="{Binding TriggerVm}"/>
+				<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
+					<StackPanel Orientation="Horizontal" Spacing="10">
+						<Button Command="{Binding SetupTriggersCommand}">Apply</Button>
+						<Button Command="{Binding AddTriggerCommand}">Add</Button>
+					</StackPanel>
+					<ListBox Grid.Row="1" ItemsSource="{Binding Settings.States}" >
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal" Spacing="10">
+									<StackPanel Spacing="5">
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<TextBox Width="200" Text="{Binding Name}"/>
+											<NumericUpDown Width="75" Value="{Binding Index}"/>
+											<Button Click="ActivateState">Activate</Button>
+											<Button Command="{Binding $parent[ListBox].((vm:SpriteSetupViewModel)DataContext).RemoveTriggerCommand}"
+													CommandParameter="{Binding}">Delete</Button>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
+													  SelectedItem="{Binding SelectedTriggerType}"
+													  DisplayMemberBinding="{Binding DisplayName}"/>
+											<helper:TriggerView DataContext="{Binding TriggerVm}"/>
+										</StackPanel>
 									</StackPanel>
 								</StackPanel>
-							</StackPanel>
-						</DataTemplate>
-					</ListBox.ItemTemplate>
-				</ListBox>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
 			</TabItem>
 			<TabItem Header="Global Settings">
 

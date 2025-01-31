@@ -55,7 +55,10 @@ public class SpriteCharacterSetup : ICharacterSetup
         parent = settings.Parent;
         settings.SpriteImages = [parent];
         if (parent.ImageBase64.Count > 0)
+        {
             parent.Load();
+            settings.SetupTriggers();
+        }
         ReloadLayerList();
     }
 
@@ -66,7 +69,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
     public void SetupHotKeys()
     {
-        //todo
+        settings.SetupTriggers();
     }
 
     public void ToggleState(string state)

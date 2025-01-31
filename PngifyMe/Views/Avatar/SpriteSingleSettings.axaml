@@ -43,7 +43,7 @@
 			<TextBlock Text="{Binding RotMovement}"/>
 		</StackPanel>
 
-		<StackPanel Orientation="Horizontal" Spacing="5">
+		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
 			<ComboBox ItemsSource="{Binding BlinkStates }"
 				 SelectedItem="{Binding ShowBlink }"
@@ -54,9 +54,5 @@
 					 SelectedItem="{Binding ShowMouth }"
 					 DisplayMemberBinding="{Binding}" />
 		</StackPanel>
-		<TextBlock>Ignore means it's shown regardless of blinking or not (same with mouth)</TextBlock>
-
-
 	</StackPanel>
-
 </UserControl>

@@ -12,7 +12,6 @@ namespace PngifyMe.Services.CharacterSetup.Advanced;
 
 public partial class SpriteStates : ObservableObject
 {
-
     public string Name { get; set; }
     public int Index { get; set; }
 
@@ -32,7 +31,6 @@ public partial class SpriteStates : ObservableObject
     public SpriteStates()
     {
         Trigger = new HotkeyTrigger();
-        TriggerVm = new TriggerViewModel(Trigger);
     }
 
     private static void InitializeAvailableTriggers()
@@ -61,13 +59,13 @@ public partial class SpriteStates : ObservableObject
         if (newValue != null && (Trigger?.GetType() != newValue.Type))
         {
             Trigger = (Trigger)Activator.CreateInstance(newValue.Type)!;
-            TriggerVm = new TriggerViewModel(Trigger);
         }
     }
 
     partial void OnTriggerChanged(Trigger? oldValue, Trigger newValue)
     {
         SelectedTriggerType = AvailableTriggers.FirstOrDefault(t => t.Type == newValue?.GetType());
+        TriggerVm = new TriggerViewModel(newValue);
     }
 
 
