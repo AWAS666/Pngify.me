@@ -2,20 +2,19 @@
 using PngifyMe.Layers.Movements;
 using System;
 
-namespace PngifyMe.Layers
-{
-    [LayerDescription("Little bit of a wiggle")]
-    public class Wiggle : MovementBaseLayer
-    {
-        [Unit("pixels")]
-        public float Offset { get; set; } = 20f;
-        public float Frequency { get; set; } = 5f;
+namespace PngifyMe.Layers;
 
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
-        {
-            float pi2 = MathF.PI * 2;
-            values.PosY += (float)Math.Sin(pi2 * CurrentTime * Frequency) * Offset * CurrentStrength;
-            values.PosX += (float)Math.Sin(pi2 * CurrentTime * Frequency / 2) * Offset * CurrentStrength;
-        }
+[LayerDescription("Little bit of a wiggle")]
+public class Wiggle : MovementBaseLayer
+{
+    [Unit("pixels")]
+    public float Offset { get; set; } = 20f;
+    public float Frequency { get; set; } = 5f;
+
+    public override void OnCalculateParameters(float dt, ref LayerValues values)
+    {
+        float pi2 = MathF.PI * 2;
+        values.PosY += (float)Math.Sin(pi2 * CurrentTime * Frequency) * Offset * CurrentStrength;
+        values.PosX += (float)Math.Sin(pi2 * CurrentTime * Frequency / 2) * Offset * CurrentStrength;
     }
 }

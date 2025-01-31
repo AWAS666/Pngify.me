@@ -1,26 +1,25 @@
 ﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
 
-namespace PngifyMe.Layers
+namespace PngifyMe.Layers;
+
+[LayerDescription("Stretch in x/y whenever talking")]
+public class SquishOnTalk : RampOnConditionLayer
 {
-    [LayerDescription("Stretch in x/y whenever talking")]
-    public class SquishOnTalk : RampOnConditionLayer
+    [Unit("%")]
+    public uint StrengthX { get; set; } = 10;
+
+    [Unit("%")]
+    public uint StrengthY { get; set; } = 10;
+    public SquishOnTalk()
     {
-        [Unit("%")]
-        public uint StrengthX { get; set; } = 10;
-
-        [Unit("%")]
-        public uint StrengthY { get; set; } = 10;
-        public SquishOnTalk()
-        {
-            EnterTime = 0f;
-        }
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
-        {
-            values.ZoomX += StrengthX / 100f * CurrentStrength;
-            values.ZoomY += StrengthY / 100f * CurrentStrength;
-        }
-
-        public override bool Triggered() => AudioService.Talking;
+        EnterTime = 0f;
     }
+    public override void OnCalculateParameters(float dt, ref LayerValues values)
+    {
+        values.ZoomX += StrengthX / 100f * CurrentStrength;
+        values.ZoomY += StrengthY / 100f * CurrentStrength;
+    }
+
+    public override bool Triggered() => AudioService.Talking;
 }

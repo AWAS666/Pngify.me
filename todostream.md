@@ -2,17 +2,18 @@
 	- import progress
 	- use stretch (y zoom)
 	- editor
-		- hotkeys
-		- layers
-		- blink/mouth
-	- streamdeck integration, might be something new, todo
+		- add layers
 	- change position of all by mouse drag/drop
 	- zoom with crtl+mousewheel
 	- position change
+	- clear select and better highlight
 	- canvas
 		- select
 		- drag/drop
-		- 
-- button style/icons
+
+- - button style/icons
 - solution cleanup
 - make trigger views more reusable
+- common trigger connector
+- add all triggers to basiccharsetup
+- idle x/y move layer
