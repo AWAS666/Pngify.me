@@ -80,6 +80,7 @@ public partial class SpriteImage : ObservableObject
 
     [ObservableProperty]
     private int rotMovement;
+
     public BlinkState ShowBlink { get; set; }
     public MouthState ShowMouth { get; set; }
     public List<int> LayerStates { get; set; } = new List<int>(10);
@@ -95,9 +96,12 @@ public partial class SpriteImage : ObservableObject
     private SpriteImage? parent;
 
     [JsonIgnore]
-    public float CurrentRotation { get; internal set; }
-    public ObservableCollection<SpriteImage> Children { get; set; } = new();
+    public float CurrentRotation { get; private set; }
+
+    [JsonIgnore]
     public float CurrentStretch { get; private set; }
+    public ObservableCollection<SpriteImage> Children { get; set; } = new();
+
 
     public void Update(float deltaTime, Vector2 offset)
     {
@@ -121,18 +125,10 @@ public partial class SpriteImage : ObservableObject
         Offset = lastOffset + velocity;
 
         // Calculate the rotation change based on the velocity
-        float targetRotation = Math.Min(velocity.Length(), 1) * RotMovement;
-
-        // Smoothly interpolate the current rotation towards the target rotation
-        float rotationSmoothingFactor = 0.05f; // Adjust this value for smoother or sharper transitions
-        CurrentRotation = Easings.Lerp(CurrentRotation, targetRotation, rotationSmoothingFactor);
+        CurrentRotation = Math.Min(offset.Y / 20, 1) * RotMovement;
 
         // Calculate the rotation change based on the velocity
-        float targetStrech = Math.Min(velocity.Length(), 1) * Stretch/10f;
-
-        // Smoothly interpolate the current rotation towards the target rotation
-        CurrentStretch = Easings.Lerp(CurrentStretch, targetStrech, rotationSmoothingFactor);
-
+        CurrentStretch = Math.Min(offset.Y / 20, 1) * Stretch / 10f;
 
         // Update all child elements
         foreach (var child in Children)
