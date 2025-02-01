@@ -53,7 +53,7 @@ public partial class SpriteImage : ObservableObject
     public Vector2 CurrentPosition => Position + Offset;
 
     [JsonIgnore]
-    public Vector2 Position { get; set; }
+    public Vector2 Position { get; set; } = Vector2.Zero;
 
     public float X
     {
@@ -235,11 +235,7 @@ public partial class SpriteImage : ObservableObject
 
     public void SwitchImage(string path)
     {
-        Bitmap = BaseImage.LoadFromPath(path);
-        ImageBase64 = Bitmap.ConvertToBase64();
-        // set duration to first frame
-        if (Bitmap is GifImage gif)
-            FrameTimeSpan = gif.Frames.First().Duration;
+        PngTuberPlusMigrator.LoadFromFile(path, this);
     }
 
     [RelayCommand]
@@ -256,6 +252,7 @@ public partial class SpriteImage : ObservableObject
         child.Parent = this;
         child.Name = "New Layer";
         child.LayerStates = [.. LayerStates];
+        child.Zindex = Zindex;
         Children.Add(child);
         ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
     }

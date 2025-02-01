@@ -1,6 +1,4 @@
-﻿using Avalonia.Media;
-using NAudio.CoreAudioApi;
-using PngifyMe.Services.CharacterSetup.Images;
+﻿using PngifyMe.Services.CharacterSetup.Images;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -8,10 +6,6 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Numerics;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Ursa.Common;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 
@@ -26,7 +20,7 @@ public static class PngTuberPlusMigrator
         sprite.ParentId = self.parentId;
         sprite.Zindex = self.zindex;
         sprite.Parent = parent;
-        sprite.RotMovement = self.rotDrag;
+        sprite.RotMovement = self.rotDrag * 5;
         sprite.Drag = self.drag;
         sprite.Stretch = self.stretchAmount;
         sprite.ShowBlink = (BlinkState)self.showBlink;
@@ -68,6 +62,34 @@ public static class PngTuberPlusMigrator
         }
         return sprite;
     }
+
+    public static void LoadFromFile(string path, SpriteImage sprite)
+    {
+        var loaded = BaseImage.LoadFromPath(path);
+        if (loaded is StaticImage bitmap)
+        {
+            using var scaled = Resize(bitmap.Preview, Specsmanager.Width, Specsmanager.Height);
+            var scaleImportFactor = (float)scaled.Width / bitmap.Width;
+            var scaleMidOffset = scaleImportFactor * bitmap.Width / 2;
+            var cropped = CropAndGetOffset(scaled);
+            sprite.Bitmap = new StaticImage(cropped.croppedBitmap);
+
+            sprite.Position = new Vector2(cropped.offset.X, cropped.offset.Y);
+
+            // save back to base 64
+            using var imageData = cropped.croppedBitmap.Encode(SKEncodedImageFormat.Png, 100);
+            sprite.ImageBase64 = [Convert.ToBase64String(imageData.ToArray())];
+            loaded.Dispose();
+        }
+        else if (loaded is GifImage gif)
+        {
+            sprite.Bitmap = loaded;
+            sprite.FrameTimeSpan = gif.Frames.First().Duration;
+            sprite.ImageBase64 = gif.ConvertToBase64();
+        }
+        sprite.Anchor = new Vector2(sprite.Position.X + sprite.Bitmap.Width / 2, sprite.Position.Y + sprite.Bitmap.Height / 2);
+    }
+
     public static (float scaleImportFactor, float scaleMidOffset) MigrateBase64(SpriteImage sprite)
     {
         byte[] imageBytes = Convert.FromBase64String(sprite.ImageBase64.First());
@@ -76,12 +98,12 @@ public static class PngTuberPlusMigrator
         using var skStream = new SKManagedStream(memoryStream);
         using var bitmap = SKBitmap.Decode(skStream);
 
-        using var scaled = Resize(bitmap, (int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
+        using var scaled = Resize(bitmap, Specsmanager.Width, Specsmanager.Height);
         var scaleImportFactor = (float)scaled.Width / bitmap.Width;
         var scaleMidOffset = scaleImportFactor * bitmap.Width / 2;
         var cropped = CropAndGetOffset(scaled);
         sprite.Bitmap = new StaticImage(cropped.croppedBitmap);
-        
+
         sprite.Position = new Vector2(cropped.offset.X, cropped.offset.Y);
 
         // save back to base 64
