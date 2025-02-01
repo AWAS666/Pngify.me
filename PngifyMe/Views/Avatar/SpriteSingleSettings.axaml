@@ -59,6 +59,13 @@
 					Minimum="-10" Maximum="10"/>
 			<NumericUpDown Increment="1" Value="{Binding Zindex}"/>
 		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock>Position</TextBlock>
+			<Label>X</Label>
+			<NumericUpDown Increment="1" Value="{Binding X}"/>
+			<Label>Y</Label>
+			<NumericUpDown Increment="1" Value="{Binding Y}"/>
+		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
 			<ComboBox ItemsSource="{Binding BlinkStates }"

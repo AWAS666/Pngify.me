@@ -55,6 +55,32 @@ public partial class SpriteImage : ObservableObject
     [JsonIgnore]
     public Vector2 Position { get; set; }
 
+    public float X
+    {
+        get => Position.X;
+        set
+        {
+            if (Position.X != value)
+            {
+                Position = new Vector2(value, Position.Y);
+                OnPropertyChanged(nameof(X));
+            }
+        }
+    }
+
+    public float Y
+    {
+        get => Position.Y;
+        set
+        {
+            if (Position.Y != value)
+            {
+                Position = new Vector2(Position.X, value);
+                OnPropertyChanged(nameof(Y));
+            }
+        }
+    }
+
     /// <summary>
     /// used for json serialize
     /// </summary>
