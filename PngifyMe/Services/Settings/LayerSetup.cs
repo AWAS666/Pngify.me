@@ -21,7 +21,7 @@ namespace PngifyMe.Services.Settings
             new Layersetting()
             {
                 Name = "Basic",
-                Layers = [new WiggleOnTalk(), new SquishOnTalk()],
+                Layers = [new WiggleOnTalk(), new SquishOnTalk(), new IdleMove()],
                 Trigger = new AlwaysActive(),
             },
             new Layersetting()

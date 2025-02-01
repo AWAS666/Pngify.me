@@ -9,10 +9,10 @@ public abstract class RampOnConditionLayer : PermaLayer
     private bool lastCondition;
 
     [Unit("s")]
-    public float ActivationRamp { get; set; } = 0.5f;
+    public float ActivationRamp { get; set; } = 0.3f;
 
     [Unit("s")]
-    public float DeActivationRamp { get; set; } = 0.5f;
+    public float DeActivationRamp { get; set; } = 0.3f;
 
     [Unit("s")]
     public float RemoveTime { get; set; } = float.MaxValue;

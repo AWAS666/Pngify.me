@@ -8,8 +8,8 @@ namespace PngifyMe.Layers;
 public class WiggleOnTalk : RampOnConditionLayer
 {
     [Unit("pixels")]
-    public float Offset { get; set; } = 15f;
-    public float Frequency { get; set; } = 4f;
+    public float Offset { get; set; } = 10f;
+    public float Frequency { get; set; } = 1f;
 
     public override void OnCalculateParameters(float dt, ref LayerValues values)
     {
