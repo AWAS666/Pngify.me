@@ -1,16 +1,13 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
-using CommunityToolkit.Mvvm.Input;
-using PngifyMe.Layers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.Twitch;
-using PngifyMe.ViewModels.Helper;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text.Json.Serialization;
-using static PortAudioSharp.Stream;
+
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
@@ -32,6 +29,15 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 
     [ObservableProperty]
     private double blinkInterval = 3f;
+
+    [ObservableProperty]
+    private float offsetX = 0f;
+
+    [ObservableProperty]
+    private float offsetY = 0f;
+
+    [ObservableProperty]
+    private float zoom = 1f;
 
     [property: JsonIgnore]
     [ObservableProperty]

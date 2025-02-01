@@ -106,7 +106,7 @@ public class SpriteCharacterSetup : ICharacterSetup
            .Where(x => x.ShowBlink == BlinkState.Ignore || x.ShowBlink == blinkState);
 
         //todo: save rescaled dimension and translate by that
-        canvas.Translate((canvasWidth - canvasHeight) / 2, 0);
+        canvas.Translate((canvasWidth - canvasHeight) / 2 + settings.OffsetX, settings.OffsetY);
         var timespan = TimeSpan.FromSeconds(CurrentTime);
         foreach (var item in rel)
         {
@@ -116,6 +116,8 @@ public class SpriteCharacterSetup : ICharacterSetup
             // Apply transformations
             canvas.RotateDegrees(item.CurrentRotation, item.Anchor.X, item.Anchor.Y);
             canvas.Scale(1f, 1f + item.CurrentStretch, item.Anchor.X, item.Anchor.Y);
+
+            canvas.Scale(settings.Zoom, settings.Zoom, canvasWidth / 2, canvasHeight / 2);
 
             // Draw the rotated bitmap
             //canvas.DrawBitmap(item.Bitmap, 0, 0);
