@@ -88,9 +88,17 @@ public partial class SpriteSetupViewModel : ObservableObject
             AllowMultiple = true
         });
         var parent = new SpriteImage();
-        parent.LayerStates = new List<int>(Settings.States.Count);
+        parent.LayerStates = Enumerable.Repeat(true, Settings.States.Count).ToList();
         Settings.Parent = parent;
         Settings.SpriteImages = [parent];
+        if (Settings.States.Count == 0)
+        {
+            Settings.States.Add(new()
+            {
+                Name = "Layer 1",
+                Index = 0
+            });
+        }
 
         string filePath = string.Empty;
         foreach (var item in path)
@@ -104,7 +112,7 @@ public partial class SpriteSetupViewModel : ObservableObject
                     // takes some time, maybe show progress
                     PngTuberPlusMigrator.LoadFromFile(filePath, sprite);
                 });
-                sprite.LayerStates = new List<int>(Settings.States.Count);
+                sprite.LayerStates = Enumerable.Repeat(true, Settings.States.Count).ToList();
                 parent.Children.Add(sprite);
 
             }

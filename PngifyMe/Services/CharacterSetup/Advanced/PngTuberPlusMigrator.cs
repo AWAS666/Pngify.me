@@ -29,7 +29,8 @@ public static class PngTuberPlusMigrator
 
         sprite.LayerStates = self.costumeLayers.Trim('[', ']') // Remove brackets
                                  .Split(',')    // Split by comma
-                                 .Select(int.Parse) // Convert each part to an integer
+                                 .Select(int.Parse)
+                                 .Select(x => x != 0)
                                  .ToList();
 
         (var scaleImportFactor, var scaleMidOffset) = MigrateBase64(sprite);
@@ -89,7 +90,7 @@ public static class PngTuberPlusMigrator
         }
 
         sprite.Anchor = new Vector2(sprite.Position.X + sprite.Bitmap.Width / 2, sprite.Position.Y + sprite.Bitmap.Height / 2);
-        if (sprite.Name == "New Layer" || sprite.Name == null)
+        if (sprite.Name == "New Layer" || string.IsNullOrEmpty(sprite.Name))
             sprite.Name = Path.GetFileNameWithoutExtension(path);
     }
 

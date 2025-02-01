@@ -4,14 +4,17 @@ using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services.CharacterSetup.Images;
+using Serilog;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Numerics;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteImage : ObservableObject
@@ -110,7 +113,7 @@ public partial class SpriteImage : ObservableObject
 
     public BlinkState ShowBlink { get; set; }
     public MouthState ShowMouth { get; set; }
-    public List<int> LayerStates { get; set; } = new List<int>(10);
+    public List<bool> LayerStates { get; set; } = Enumerable.Repeat(true, 10).ToList();
 
     [ObservableProperty]
     private int drag;
@@ -235,7 +238,18 @@ public partial class SpriteImage : ObservableObject
 
     public void SwitchImage(string path)
     {
-        PngTuberPlusMigrator.LoadFromFile(path, this);
+        try
+        {
+            PngTuberPlusMigrator.LoadFromFile(path, this);
+            if(LayerStates.Count == 0)
+            {
+                LayerStates = Enumerable.Repeat(true, 10).ToList();
+            }
+        }
+        catch (Exception e)
+        {
+            Log.Error($"{e.Message}");
+        } 
     }
 
     [RelayCommand]

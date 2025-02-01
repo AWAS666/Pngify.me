@@ -58,7 +58,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
     public void ReloadLayerList()
     {
-        layers = [.. parent.GetAllSprites().OrderBy(x => x.Zindex)];
+        layers = [.. parent.GetAllSprites()];
     }
 
     public void SetupHotKeys()
@@ -95,9 +95,10 @@ public class SpriteCharacterSetup : ICharacterSetup
         using var canvas = new SKCanvas(mainBitmap);
         var rel = layers
            .Where(x => x.Bitmap != null)
-           .Where(x => x.LayerStates[settings.ActivateState.Index] == 1)
+           .Where(x => x.LayerStates[settings.ActivateState.Index])
            .Where(x => x.ShowMouth == MouthState.Ignore || x.ShowMouth == mouthState)
-           .Where(x => x.ShowBlink == BlinkState.Ignore || x.ShowBlink == blinkState);
+           .Where(x => x.ShowBlink == BlinkState.Ignore || x.ShowBlink == blinkState)
+           .OrderBy(x => x.Zindex);
 
         //todo: save rescaled dimension and translate by that
         canvas.Translate((canvasWidth - canvasHeight) / 2 + settings.OffsetX, settings.OffsetY);
