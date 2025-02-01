@@ -5,6 +5,7 @@ using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.CharacterSetup.Advanced;
 using PngifyMe.ViewModels.Helper;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -74,6 +75,46 @@ public partial class SpriteSetupViewModel : ObservableObject
         }
         Settings.SetupTriggers();
 
+        LayerManager.CharacterStateHandler.CharacterSetup.RefreshCharacterSettings();
+    }
+
+    [RelayCommand]
+    public async Task ImportFromPngs()
+    {
+        var path = await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
+        {
+            Title = "Select images",
+            FileTypeFilter = new[] { FilePickers.ImageAll },
+            AllowMultiple = true
+        });
+        var parent = new SpriteImage();
+        parent.LayerStates = new List<int>(Settings.States.Count);
+        Settings.Parent = parent;
+        Settings.SpriteImages = [parent];
+
+        string filePath = string.Empty;
+        foreach (var item in path)
+        {
+            try
+            {
+                filePath = WebUtility.UrlDecode(item.Path.AbsolutePath);
+                var sprite = new SpriteImage();
+                await Task.Run(async () =>
+                {
+                    // takes some time, maybe show progress
+                    PngTuberPlusMigrator.LoadFromFile(filePath, sprite);
+                });
+                sprite.LayerStates = new List<int>(Settings.States.Count);
+                parent.Children.Add(sprite);
+
+            }
+            catch (Exception e)
+            {
+                Log.Error($"{Path.GetFileNameWithoutExtension(filePath)}{e.Message}");
+            }
+        }
+
+        Settings.SetupTriggers();
         LayerManager.CharacterStateHandler.CharacterSetup.RefreshCharacterSettings();
     }
 

@@ -87,7 +87,10 @@ public static class PngTuberPlusMigrator
             sprite.FrameTimeSpan = gif.Frames.First().Duration;
             sprite.ImageBase64 = gif.ConvertToBase64();
         }
+
         sprite.Anchor = new Vector2(sprite.Position.X + sprite.Bitmap.Width / 2, sprite.Position.Y + sprite.Bitmap.Height / 2);
+        if (sprite.Name == "New Layer" || sprite.Name == null)
+            sprite.Name = Path.GetFileNameWithoutExtension(path);
     }
 
     public static (float scaleImportFactor, float scaleMidOffset) MigrateBase64(SpriteImage sprite)

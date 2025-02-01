@@ -23,8 +23,7 @@
 			<TextBlock FontSize="24" Margin="0,0,0,5">Sprite Avatar State Setup</TextBlock>
 			<StackPanel Margin="5,0,5,6" Orientation="Horizontal" Spacing="5">
 				<Button Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
-				<Button IsEnabled="False">Import</Button>
-				<Button IsEnabled="False">Export</Button>
+				<Button Command="{Binding ImportFromPngsCommand}">Import from pngs</Button>
 			</StackPanel>
 		</StackPanel>
 		<TabControl Grid.Row="1">
