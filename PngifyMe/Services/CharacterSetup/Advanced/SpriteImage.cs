@@ -76,7 +76,8 @@ public partial class SpriteImage : ObservableObject
         set => Anchor = new Vector2(value[0], value[1]);
     }
 
-    public int Zindex { get; set; }
+    [ObservableProperty]
+    private int zindex;
 
     [ObservableProperty]
     private int rotMovement;
@@ -209,7 +210,6 @@ public partial class SpriteImage : ObservableObject
     public void SwitchImage(string path)
     {
         Bitmap = BaseImage.LoadFromPath(path);
-        Bitmap.ConvertToBase64();
         ImageBase64 = Bitmap.ConvertToBase64();
         // set duration to first frame
         if (Bitmap is GifImage gif)
@@ -223,6 +223,16 @@ public partial class SpriteImage : ObservableObject
         ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
     }
 
+    [RelayCommand]
+    public void AddSprite()
+    {
+        var child = new SpriteImage();
+        child.Parent = this;
+        child.Name = "New Layer";
+        child.LayerStates = [.. LayerStates];
+        Children.Add(child);
+        ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
+    }
 }
 
 public enum BlinkState

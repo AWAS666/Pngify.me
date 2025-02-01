@@ -32,6 +32,7 @@
 				<Grid RowDefinitions="Auto,Auto,*">
 					<local:SpriteSingleSettings DataContext="{Binding Settings.Selected}"></local:SpriteSingleSettings>
 					<Rectangle Grid.Row="1" Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+
 					<ScrollViewer Grid.Row="2">
 						<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
 								  SelectionMode="Single"
@@ -39,9 +40,9 @@
 							<TreeView.ItemTemplate>
 								<TreeDataTemplate DataType="setup:SpriteImage"
 												  ItemsSource="{Binding Children}">
-									<Grid ColumnDefinitions="250,50,75">
+									<Grid ColumnDefinitions="250,75,75">
 										<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
-										<Button Grid.Column="1">Edit</Button>
+										<Button Command="{Binding AddSpriteCommand}" Grid.Column="1">Add</Button>
 										<Button Command="{Binding RemoveCommand }" Grid.Column="2">Delete</Button>
 									</Grid>
 								</TreeDataTemplate>

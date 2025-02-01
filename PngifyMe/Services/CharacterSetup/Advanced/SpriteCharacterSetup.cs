@@ -1,15 +1,9 @@
-﻿using Avalonia.Controls;
-using Avalonia.Data;
-using NAudio.CoreAudioApi;
-using PngifyMe.Layers;
-using PngifyMe.Services.CharacterSetup.Basic;
+﻿using PngifyMe.Layers;
 using PngifyMe.Services.CharacterSetup.Images;
-using Semi.Avalonia.Tokens.Palette;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Numerics;
 
@@ -40,7 +34,7 @@ public class SpriteCharacterSetup : ICharacterSetup
     {
         highlightPaint = new SKPaint
         {
-            ColorFilter = SKColorFilter.CreateBlendMode(new SKColor(255, 0, 0, 128), SKBlendMode.Screen)
+            ColorFilter = SKColorFilter.CreateBlendMode(new SKColor(255, 0, 0, 128), SKBlendMode.SrcIn)
             //Color = SKColors.Red.WithAlpha(128)
         };
     }

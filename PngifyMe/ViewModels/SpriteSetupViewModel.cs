@@ -79,6 +79,13 @@ public partial class SpriteSetupViewModel : ObservableObject
 
 
     [RelayCommand]
+    public void AddSprite()
+    {
+        Settings.Parent.AddSprite();
+    }
+
+
+    [RelayCommand]
     public void SetupTriggers()
     {
         Settings.SetupTriggers();

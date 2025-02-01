@@ -30,7 +30,7 @@
 					VerticalAlignment="Center"
 					Width="150"
 					Minimum="0" Maximum="10"/>
-			<NumericUpDown Value="{Binding Drag}"/>
+			<NumericUpDown Increment="1" Value="{Binding Drag}"/>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
@@ -39,7 +39,7 @@
 					VerticalAlignment="Center"
 					Width="150"
 					Minimum="-20" Maximum="20"/>
-			<NumericUpDown Value="{Binding RotMovement}"/>
+			<NumericUpDown Increment="1" Value="{Binding RotMovement}"/>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
@@ -48,7 +48,16 @@
 					VerticalAlignment="Center"
 					Width="150"
 					Minimum="-5" Maximum="5"/>
-			<NumericUpDown Value="{Binding Stretch}"/>
+			<NumericUpDown Increment="0.25" Value="{Binding Stretch}"/>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock>Z Index</TextBlock>
+			<Slider Value="{Binding Zindex}"
+					VerticalAlignment="Center"
+					Width="150"
+					Minimum="-10" Maximum="10"/>
+			<NumericUpDown Increment="1" Value="{Binding Zindex}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
