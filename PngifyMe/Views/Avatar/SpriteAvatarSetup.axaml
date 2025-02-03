@@ -32,11 +32,14 @@
 		</StackPanel>
 		<TabControl Grid.Row="1">
 			<TabItem Header="Layers">
-				<Grid RowDefinitions="Auto,Auto,*">
-					<local:SpriteSingleSettings DataContext="{Binding Settings.Selected}"></local:SpriteSingleSettings>
-					<Rectangle Grid.Row="1" Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+				<Grid RowDefinitions="Auto,*" >
+					<StackPanel IsVisible="{Binding !!Settings.Selected}">
+						<local:SpriteSingleSettings
+							DataContext="{Binding Settings.Selected}"/>
+						<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+					</StackPanel>
 
-					<ScrollViewer Grid.Row="2">
+					<ScrollViewer Grid.Row="1">
 						<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
 								  SelectionMode="Single"
 								  SelectedItem="{Binding Settings.Selected}">
