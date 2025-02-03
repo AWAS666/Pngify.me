@@ -89,5 +89,23 @@
 					 SelectedItem="{Binding ShowMouth }"
 					 DisplayMemberBinding="{Binding}" />
 		</StackPanel>
+		<DropDownButton Content="Select active states"
+				  HorizontalAlignment="Left"
+				  VerticalAlignment="Center"
+				  Width="200">
+			<DropDownButton.Flyout>
+				<Flyout Placement="Right">
+					<ListBox ItemsSource="{Binding LayerStates}"
+						BorderThickness="0"
+						Background="Transparent">
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<CheckBox Content="{Binding Index}" IsChecked="{Binding Flag, Mode=TwoWay}"></CheckBox>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Flyout>
+			</DropDownButton.Flyout>
+		</DropDownButton>
 	</StackPanel>
 </UserControl>

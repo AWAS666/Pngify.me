@@ -142,7 +142,18 @@ public partial class SpriteImage : ObservableObject
 
     public BlinkState ShowBlink { get; set; }
     public MouthState ShowMouth { get; set; }
-    public List<bool> LayerStates { get; set; } = Enumerable.Repeat(true, 10).ToList();
+    public List<SpriteStateSetting> LayerStates { get; set; } = InitLayerStates(10);
+
+    public static List<SpriteStateSetting> InitLayerStates(int count)
+    {
+        var states = Enumerable.Repeat(new SpriteStateSetting(), count).ToList();
+        int counter = 0;
+        foreach (var item in states)
+        {
+            item.Index = counter++;
+        }
+        return states;
+    }
 
     [ObservableProperty]
     private int drag;
@@ -226,7 +237,7 @@ public partial class SpriteImage : ObservableObject
 
     public bool Show(int state, MouthState mouth, BlinkState blink)
     {
-        return LayerStates[state]
+        return LayerStates[state].Flag
             && (ShowMouth == MouthState.Ignore || ShowMouth == mouth)
             && (ShowBlink == BlinkState.Ignore || ShowBlink == blink);
     }
@@ -304,7 +315,7 @@ public partial class SpriteImage : ObservableObject
             PngTuberPlusMigrator.LoadFromFile(path, this);
             if (LayerStates.Count == 0)
             {
-                LayerStates = Enumerable.Repeat(true, 10).ToList();
+                LayerStates = InitLayerStates(10);
             }
         }
         catch (Exception e)
@@ -332,18 +343,4 @@ public partial class SpriteImage : ObservableObject
         Children.Add(child);
         ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
     }
-}
-
-public enum BlinkState
-{
-    Ignore = 0,
-    Closed = 1,
-    Open = 2,
-}
-
-public enum MouthState
-{
-    Ignore = 0,
-    Closed = 1,
-    Open = 2,
 }

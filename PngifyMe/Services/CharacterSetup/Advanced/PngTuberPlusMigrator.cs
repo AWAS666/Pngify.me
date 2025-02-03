@@ -30,7 +30,7 @@ public static class PngTuberPlusMigrator
         sprite.LayerStates = self.costumeLayers.Trim('[', ']') // Remove brackets
                                  .Split(',')    // Split by comma
                                  .Select(int.Parse)
-                                 .Select(x => x != 0)
+                                 .Select((x, y) => new SpriteStateSetting() { Index = y, Flag = x != 0 })
                                  .ToList();
 
         (var scaleImportFactor, var scaleMidOffset) = MigrateBase64(sprite);

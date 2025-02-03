@@ -88,7 +88,7 @@ public partial class SpriteSetupViewModel : ObservableObject
             AllowMultiple = true
         });
         var parent = new SpriteImage();
-        parent.LayerStates = Enumerable.Repeat(true, Settings.States.Count).ToList();
+        parent.LayerStates = SpriteImage.InitLayerStates(Settings.States.Count);
         Settings.Parent = parent;
         Settings.SpriteImages = [parent];
         if (Settings.States.Count == 0)
@@ -112,7 +112,7 @@ public partial class SpriteSetupViewModel : ObservableObject
                     // takes some time, maybe show progress
                     PngTuberPlusMigrator.LoadFromFile(filePath, sprite);
                 });
-                sprite.LayerStates = Enumerable.Repeat(true, Settings.States.Count).ToList();
+                sprite.LayerStates = SpriteImage.InitLayerStates(Settings.States.Count);
                 parent.Children.Add(sprite);
 
             }
