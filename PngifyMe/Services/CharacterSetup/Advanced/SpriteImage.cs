@@ -135,6 +135,14 @@ public partial class SpriteImage : ObservableObject
 
     public void Update(float deltaTime, Vector2 offset)
     {
+        // factor in parent rotation to move along with it
+        if (Parent != null)
+        {
+            Vector2 dif = Anchor - Parent.Anchor;
+            Vector2 newDif = Rotate(dif, Parent.CurrentRotation / 180 * MathF.PI);
+            offset += newDif - dif;
+        }
+
         // Calculate the velocity based on the offset difference
         Vector2 velocity = offset - lastOffset;
 
@@ -148,7 +156,7 @@ public partial class SpriteImage : ObservableObject
             float easedDrag = Easings.QuadraticEaseOut(dragProgress);
 
             // Reduce the velocity based on the eased drag
-            velocity *= (1 - easedDrag);
+            velocity *= 1 - easedDrag;
         }
 
         // Update the offset based on the smoothed velocity
@@ -160,6 +168,13 @@ public partial class SpriteImage : ObservableObject
         // Calculate the rotation change based on the velocity
         CurrentStretch = Math.Min(offset.Y / 20, 1) * Stretch / 10f;
 
+        // factor in parent manipulations
+        if (Parent != null)
+        {
+            CurrentRotation += Parent.CurrentRotation;
+            CurrentStretch += Parent.CurrentStretch;
+        }
+
         // Update all child elements
         foreach (var child in Children)
         {
@@ -168,6 +183,16 @@ public partial class SpriteImage : ObservableObject
 
         // Store the current offset for the next frame
         lastOffset = Offset;
+    }
+
+    private Vector2 Rotate(Vector2 v, float angleRadians)
+    {
+        float cos = MathF.Cos(angleRadians);
+        float sin = MathF.Sin(angleRadians);
+        return new Vector2(
+            v.X * cos - v.Y * sin,
+            v.X * sin + v.Y * cos
+        );
     }
 
     public List<SpriteImage> GetAllSprites()
@@ -241,7 +266,7 @@ public partial class SpriteImage : ObservableObject
         try
         {
             PngTuberPlusMigrator.LoadFromFile(path, this);
-            if(LayerStates.Count == 0)
+            if (LayerStates.Count == 0)
             {
                 LayerStates = Enumerable.Repeat(true, 10).ToList();
             }
@@ -249,7 +274,7 @@ public partial class SpriteImage : ObservableObject
         catch (Exception e)
         {
             Log.Error($"{e.Message}");
-        } 
+        }
     }
 
     [RelayCommand]
