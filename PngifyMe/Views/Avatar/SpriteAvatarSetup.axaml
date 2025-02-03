@@ -40,10 +40,16 @@
 							<TreeView.ItemTemplate>
 								<TreeDataTemplate DataType="setup:SpriteImage"
 												  ItemsSource="{Binding Children}">
-									<Grid ColumnDefinitions="250,75,75">
+									<Grid ColumnDefinitions="250,50,50">
 										<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
-										<Button Command="{Binding AddSpriteCommand}" Grid.Column="1">Add</Button>
-										<Button Command="{Binding RemoveCommand }" Grid.Column="2">Delete</Button>
+										<Button Command="{Binding AddSpriteCommand}" Grid.Column="1">
+											<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="White"
+													   StrokeThickness="2" Width="18" Height="18"/>
+										</Button>
+										<Button Command="{Binding RemoveCommand }" Grid.Column="2">
+											<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="White"
+													   StrokeThickness="2" Width="18" Height="18"/>
+										</Button>
 									</Grid>
 								</TreeDataTemplate>
 							</TreeView.ItemTemplate>
@@ -54,8 +60,14 @@
 			<TabItem Header="Trigger Setup">
 				<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
 					<StackPanel Orientation="Horizontal" Spacing="10">
-						<Button Command="{Binding SetupTriggersCommand}">Apply</Button>
-						<Button Command="{Binding AddTriggerCommand}">Add</Button>
+						<Button Command="{Binding SetupTriggersCommand}" ToolTip.Tip="Apply changes">
+							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="White"
+												StrokeThickness="2" Width="18" Height="18"/>
+						</Button>
+						<Button Command="{Binding AddTriggerCommand}">
+							<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="White"
+												StrokeThickness="2" Width="18" Height="18"/>
+						</Button>
 					</StackPanel>
 					<ListBox Grid.Row="1" ItemsSource="{Binding Settings.States}" >
 						<ListBox.ItemTemplate>
@@ -65,9 +77,15 @@
 										<StackPanel Orientation="Horizontal" Spacing="5">
 											<TextBox Width="200" Text="{Binding Name}"/>
 											<NumericUpDown Width="75" Value="{Binding Index}"/>
-											<Button Click="ActivateState">Activate</Button>
+											<Button Click="ActivateState" ToolTip.Tip="Activate this state">
+												<lucideAvalonia:Lucide Icon="Rocket" StrokeBrush="White"
+														   StrokeThickness="2" Width="18" Height="18"/>
+											</Button>
 											<Button Command="{Binding $parent[ListBox].((vm:SpriteSetupViewModel)DataContext).RemoveTriggerCommand}"
-													CommandParameter="{Binding}">Delete</Button>
+													CommandParameter="{Binding}">
+												<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="White"
+												   StrokeThickness="2" Width="18" Height="18"/>
+											</Button>
 										</StackPanel>
 										<StackPanel Orientation="Horizontal" Spacing="5">
 											<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"

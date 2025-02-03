@@ -318,6 +318,7 @@ public partial class SpriteImage : ObservableObject
     {
         Parent?.Children.Remove(this);
         ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
+        ((SpriteCharacterSettings)SettingsManager.Current.Profile.Active.AvatarSettings).Selected = null;
     }
 
     [RelayCommand]
