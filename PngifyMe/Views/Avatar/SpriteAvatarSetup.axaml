@@ -22,9 +22,12 @@
 		<StackPanel>
 			<TextBlock FontSize="24" Margin="0,0,0,5">Sprite Avatar State Setup</TextBlock>
 			<StackPanel Margin="5,0,5,6" Orientation="Horizontal" Spacing="5">
-				<Button Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
-				<Button Command="{Binding ImportFromPngsCommand}">Import from pngs</Button>
-				<Button Command="{Binding ClearSelectCommand}">Clear Selected</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ImportFromPngsCommand}">Import from pngs</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ClearSelectCommand}">Clear Selected</Button>
 			</StackPanel>
 		</StackPanel>
 		<TabControl Grid.Row="1">
@@ -42,12 +45,14 @@
 												  ItemsSource="{Binding Children}">
 									<Grid ColumnDefinitions="250,50,50">
 										<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
-										<Button Command="{Binding AddSpriteCommand}" Grid.Column="1">
-											<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="White"
+										<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+											Command="{Binding AddSpriteCommand}" Grid.Column="1">
+											<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 													   StrokeThickness="2" Width="18" Height="18"/>
 										</Button>
-										<Button Command="{Binding RemoveCommand }" Grid.Column="2">
-											<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="White"
+										<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+												Command="{Binding RemoveCommand }" Grid.Column="2">
+											<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
 													   StrokeThickness="2" Width="18" Height="18"/>
 										</Button>
 									</Grid>
@@ -59,13 +64,15 @@
 			</TabItem>
 			<TabItem Header="Trigger Setup">
 				<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
-					<StackPanel Orientation="Horizontal" Spacing="10">
-						<Button Command="{Binding SetupTriggersCommand}" ToolTip.Tip="Apply changes">
-							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="White"
+					<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,5">
+						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Command="{Binding SetupTriggersCommand}" ToolTip.Tip="Apply changes">
+							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="DodgerBlue"
 												StrokeThickness="2" Width="18" Height="18"/>
 						</Button>
-						<Button Command="{Binding AddTriggerCommand}">
-							<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="White"
+						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Command="{Binding AddTriggerCommand}">
+							<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 												StrokeThickness="2" Width="18" Height="18"/>
 						</Button>
 					</StackPanel>
@@ -77,13 +84,15 @@
 										<StackPanel Orientation="Horizontal" Spacing="5">
 											<TextBox Width="200" Text="{Binding Name}"/>
 											<NumericUpDown Width="75" Value="{Binding Index}"/>
-											<Button Click="ActivateState" ToolTip.Tip="Activate this state">
-												<lucideAvalonia:Lucide Icon="Rocket" StrokeBrush="White"
+											<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+													Click="ActivateState" ToolTip.Tip="Activate this state">
+												<lucideAvalonia:Lucide Icon="Rocket" StrokeBrush="DodgerBlue"
 														   StrokeThickness="2" Width="18" Height="18"/>
 											</Button>
-											<Button Command="{Binding $parent[ListBox].((vm:SpriteSetupViewModel)DataContext).RemoveTriggerCommand}"
+											<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+													Command="{Binding $parent[ListBox].((vm:SpriteSetupViewModel)DataContext).RemoveTriggerCommand}"
 													CommandParameter="{Binding}">
-												<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="White"
+												<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
 												   StrokeThickness="2" Width="18" Height="18"/>
 											</Button>
 										</StackPanel>

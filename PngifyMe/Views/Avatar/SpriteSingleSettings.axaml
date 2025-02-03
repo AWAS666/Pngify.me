@@ -21,8 +21,13 @@
 		<TextBlock>Item Settings:</TextBlock>
 		<TextBox Text="{Binding Name}"/>
 		<StackPanel Orientation="Horizontal" Spacing="5">
-			<Button Click="SwapImage">SwapImage</Button>
-			<Button Command="{Binding RemoveCommand}">Remove</Button>
+			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+					Click="SwapImage">SwapImage</Button>
+			<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+					Command="{Binding RemoveCommand}">
+				<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+								StrokeThickness="2" Width="18" Height="18"/>
+			</Button>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<TextBlock>Drag</TextBlock>

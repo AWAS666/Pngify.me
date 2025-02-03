@@ -41,7 +41,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
         anchorPaint = new SKPaint
         {
-            Color = SKColors.Orange,
+            Color = SKColors.Green,
         };
     }
 
