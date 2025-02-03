@@ -95,9 +95,7 @@ public class SpriteCharacterSetup : ICharacterSetup
         using var canvas = new SKCanvas(mainBitmap);
         var rel = layers
            .Where(x => x.Bitmap != null)
-           .Where(x => x.LayerStates[settings.ActivateState.Index])
-           .Where(x => x.ShowMouth == MouthState.Ignore || x.ShowMouth == mouthState)
-           .Where(x => x.ShowBlink == BlinkState.Ignore || x.ShowBlink == blinkState)
+           .Where(x => x.Show(settings.ActivateState.Index, mouthState, blinkState))
            .OrderBy(x => x.Zindex);
 
         //todo: save rescaled dimension and translate by that

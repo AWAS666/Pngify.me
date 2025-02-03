@@ -195,6 +195,13 @@ public partial class SpriteImage : ObservableObject
         );
     }
 
+    public bool Show(int state, MouthState mouth, BlinkState blink)
+    {
+        return LayerStates[state]
+            && (ShowMouth == MouthState.Ignore || ShowMouth == mouth)
+            && (ShowBlink == BlinkState.Ignore || ShowBlink == blink);
+    }
+
     public List<SpriteImage> GetAllSprites()
     {
         var sprites = new List<SpriteImage>
