@@ -56,6 +56,9 @@ public partial class SpriteImage : ObservableObject
     public Vector2 CurrentPosition => Position + Offset;
 
     [JsonIgnore]
+    public Vector2 CurrentAnchor => Anchor + Offset;
+
+    [JsonIgnore]
     public Vector2 Position { get; set; } = Vector2.Zero;
 
     public float X
@@ -130,8 +133,8 @@ public partial class SpriteImage : ObservableObject
 
     [JsonIgnore]
     public float CurrentStretch { get; private set; }
-    public ObservableCollection<SpriteImage> Children { get; set; } = new();
 
+    public ObservableCollection<SpriteImage> Children { get; set; } = new();
 
     public void Update(float deltaTime, Vector2 offset)
     {

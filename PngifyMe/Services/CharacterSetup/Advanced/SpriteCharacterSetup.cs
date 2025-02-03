@@ -107,8 +107,8 @@ public class SpriteCharacterSetup : ICharacterSetup
             canvas.Save();
 
             // Apply transformations
-            canvas.RotateDegrees(item.CurrentRotation, item.Anchor.X, item.Anchor.Y);
-            canvas.Scale(1f, 1f + item.CurrentStretch, item.Anchor.X, item.Anchor.Y);
+            canvas.RotateDegrees(item.CurrentRotation, item.CurrentAnchor.X, item.CurrentAnchor.Y);
+            canvas.Scale(1f, 1f + item.CurrentStretch, item.CurrentAnchor.X, item.CurrentAnchor.Y);
 
             canvas.Scale(settings.Zoom, settings.Zoom, canvasWidth / 2, canvasHeight / 2);
 
