@@ -22,7 +22,7 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 
     [property: JsonIgnore]
     [ObservableProperty]
-    private SpriteImage selected = new();
+    private SpriteImage? selected = null;
 
     [ObservableProperty]
     private double blinkTime = 0.25f;

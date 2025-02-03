@@ -154,4 +154,10 @@ public partial class SpriteSetupViewModel : ObservableObject
     {
         Settings.States.Remove(state);
     }
+
+    [RelayCommand]
+    public void ClearSelect()
+    {
+        Settings.Selected = null;
+    }
 }
