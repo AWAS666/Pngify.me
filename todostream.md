@@ -1,19 +1,17 @@
-- integrate into pngify.me	
-	- import progress
-	- use stretch (y zoom)
-	- editor
-		- add layers
-	- change position of all by mouse drag/drop
-	- zoom with crtl+mousewheel
-	- position change
-	- clear select and better highlight
-	- canvas
-		- select
-		- drag/drop
+# before steam
+- drag in treeview
+- set anchor point
+- layer association
+- button style/icons
+- resize loading of layers, maybe store original?
 
-- - button style/icons
-- solution cleanup
+# improvements:
+- import progress
+- change position of all by mouse drag/drop
+- zoom with crtl+mousewheel
+- canvas
+	- select
+	- drag/drop
 - make trigger views more reusable
 - common trigger connector
 - add all triggers to basiccharsetup
-- idle x/y move layer

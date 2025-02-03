@@ -41,7 +41,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
         anchorPaint = new SKPaint
         {
-            Color = SKColors.Black,
+            Color = SKColors.Orange,
         };
     }
 
@@ -114,7 +114,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
         // draw selected item on top
         if (settings.Selected != null)
-            DrawItem(canvasWidth, canvasHeight, canvas, timespan, settings.Selected);
+            DrawItem(canvasWidth, canvasHeight, canvas, timespan, settings.Selected, highlight: true);
 
 
         Debug.WriteLine($"Rendered {rel.Count()} in {watch.ElapsedMilliseconds}ms {watch.ElapsedTicks}ticks");
@@ -122,7 +122,7 @@ public class SpriteCharacterSetup : ICharacterSetup
         values.Image = mainBitmap;
     }
 
-    private void DrawItem(int canvasWidth, int canvasHeight, SKCanvas canvas, TimeSpan timespan, SpriteImage item)
+    private void DrawItem(int canvasWidth, int canvasHeight, SKCanvas canvas, TimeSpan timespan, SpriteImage item, bool highlight = false)
     {
         // Save the current canvas state
         canvas.Save();
@@ -134,7 +134,7 @@ public class SpriteCharacterSetup : ICharacterSetup
         canvas.Scale(settings.Zoom, settings.Zoom, canvasWidth / 2, canvasHeight / 2);
 
         // Draw the rotated bitmap
-        if (item == settings.Selected)
+        if (highlight)
         {
             canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
             // draw anchor point -> todo check if this is currently 
