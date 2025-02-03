@@ -19,6 +19,7 @@ public class SpriteCharacterSetup : ICharacterSetup
     private double transTime;
     private SKBitmap mainBitmap;
     private SKPaint highlightPaint;
+    private SKPaint anchorPaint;
 
     public BaseImage CurrentImage { get; set; } = new StaticImage(ImageSetting.PlaceHolder);
 
@@ -36,6 +37,11 @@ public class SpriteCharacterSetup : ICharacterSetup
         {
             ColorFilter = SKColorFilter.CreateBlendMode(new SKColor(255, 0, 0, 128), SKBlendMode.SrcIn)
             //Color = SKColors.Red.WithAlpha(128)
+        };
+
+        anchorPaint = new SKPaint
+        {
+            Color = SKColors.Black,
         };
     }
 
@@ -115,9 +121,15 @@ public class SpriteCharacterSetup : ICharacterSetup
             // Draw the rotated bitmap
             //canvas.DrawBitmap(item.Bitmap, 0, 0);
             if (item == settings.Selected)
+            {
                 canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
+                // draw anchor point -> todo check if this is currently 
+                canvas.DrawCircle(item.CurrentAnchor.X, item.CurrentAnchor.Y, 5, anchorPaint);
+            }
             else
                 canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y);
+
+
             // Restore the canvas to the original state
             canvas.Restore();
         }
