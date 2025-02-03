@@ -109,34 +109,42 @@ public class SpriteCharacterSetup : ICharacterSetup
         var timespan = TimeSpan.FromSeconds(CurrentTime);
         foreach (var item in rel)
         {
-            // Save the current canvas state
-            canvas.Save();
-
-            // Apply transformations
-            canvas.RotateDegrees(item.CurrentRotation, item.CurrentAnchor.X, item.CurrentAnchor.Y);
-            canvas.Scale(1f, 1f + item.CurrentStretch, item.CurrentAnchor.X, item.CurrentAnchor.Y);
-
-            canvas.Scale(settings.Zoom, settings.Zoom, canvasWidth / 2, canvasHeight / 2);
-
-            // Draw the rotated bitmap
-            //canvas.DrawBitmap(item.Bitmap, 0, 0);
-            if (item == settings.Selected)
-            {
-                canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
-                // draw anchor point -> todo check if this is currently 
-                canvas.DrawCircle(item.CurrentAnchor.X, item.CurrentAnchor.Y, 5, anchorPaint);
-            }
-            else
-                canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y);
-
-
-            // Restore the canvas to the original state
-            canvas.Restore();
+            DrawItem(canvasWidth, canvasHeight, canvas, timespan, item);
         }
+
+        // draw selected item on top
+        if (settings.Selected != null)
+            DrawItem(canvasWidth, canvasHeight, canvas, timespan, settings.Selected);
+
 
         Debug.WriteLine($"Rendered {rel.Count()} in {watch.ElapsedMilliseconds}ms {watch.ElapsedTicks}ticks");
 
         values.Image = mainBitmap;
+    }
+
+    private void DrawItem(int canvasWidth, int canvasHeight, SKCanvas canvas, TimeSpan timespan, SpriteImage item)
+    {
+        // Save the current canvas state
+        canvas.Save();
+
+        // Apply transformations
+        canvas.RotateDegrees(item.CurrentRotation, item.CurrentAnchor.X, item.CurrentAnchor.Y);
+        canvas.Scale(1f, 1f + item.CurrentStretch, item.CurrentAnchor.X, item.CurrentAnchor.Y);
+
+        canvas.Scale(settings.Zoom, settings.Zoom, canvasWidth / 2, canvasHeight / 2);
+
+        // Draw the rotated bitmap
+        if (item == settings.Selected)
+        {
+            canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
+            // draw anchor point -> todo check if this is currently 
+            canvas.DrawCircle(item.CurrentAnchor.X, item.CurrentAnchor.Y, 5, anchorPaint);
+        }
+        else
+            canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y);
+
+        // Restore the canvas to the original state
+        canvas.Restore();
     }
 
     private void SetBlinkMouth()
