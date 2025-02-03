@@ -66,6 +66,13 @@
 			<Label VerticalAlignment="Center">Y</Label>
 			<NumericUpDown Increment="1" Value="{Binding Y}"/>
 		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock VerticalAlignment="Center">Anchor Position</TextBlock>
+			<Label VerticalAlignment="Center">X</Label>
+			<NumericUpDown Increment="1" Value="{Binding AnchorX}"/>
+			<Label VerticalAlignment="Center">Y</Label>
+			<NumericUpDown Increment="1" Value="{Binding AnchorY}"/>
+		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
 			<ComboBox ItemsSource="{Binding BlinkStates }"

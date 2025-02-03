@@ -87,6 +87,32 @@ public partial class SpriteImage : ObservableObject
         }
     }
 
+    public float AnchorX
+    {
+        get => Anchor.X;
+        set
+        {
+            if (Anchor.X != value)
+            {
+                Anchor = new Vector2(value, Anchor.Y);
+                OnPropertyChanged(nameof(AnchorX));
+            }
+        }
+    }
+
+    public float AnchorY
+    {
+        get => Anchor.Y;
+        set
+        {
+            if (Anchor.Y != value)
+            {
+                Anchor = new Vector2(Anchor.X, value);
+                OnPropertyChanged(nameof(AnchorY));
+            }
+        }
+    }
+
     /// <summary>
     /// used for json serialize
     /// </summary>
