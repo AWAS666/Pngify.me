@@ -33,11 +33,19 @@
 		<TabControl Grid.Row="1">
 			<TabItem Header="Layers">
 				<Grid RowDefinitions="Auto,*" >
-					<StackPanel IsVisible="{Binding !!Settings.Selected}">
-						<local:SpriteSingleSettings
-							DataContext="{Binding Settings.Selected}"/>
-						<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
-					</StackPanel>
+					<Expander IsExpanded="True">
+						<Expander.Header>
+							Selected Settings
+						</Expander.Header>
+						<StackPanel>
+							<local:SpriteSingleSettings x:Name="test" IsVisible="{Binding !!.}"
+								DataContext="{Binding Settings.Selected}"/>
+							<TextBlock Height="300" FontSize="28" 
+									   VerticalAlignment="Center" HorizontalAlignment="Center"
+									   IsVisible="{Binding !#test.IsVisible}">Nothing selected</TextBlock>
+							<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+						</StackPanel>
+					</Expander>
 
 					<ScrollViewer Grid.Row="1">
 						<TreeView ItemsSource="{ Binding Settings.SpriteImages}"

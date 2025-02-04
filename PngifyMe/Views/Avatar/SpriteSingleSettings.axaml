@@ -30,54 +30,50 @@
 			</Button>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5">
-			<TextBlock>Drag</TextBlock>
+			<TextBlock VerticalAlignment="Center">Drag</TextBlock>
 			<Slider Value="{Binding Drag}"
 					VerticalAlignment="Center"
-					Width="150"
+					Width="130"
 					Minimum="0" Maximum="10"/>
 			<NumericUpDown Increment="1" Value="{Binding Drag}"/>
-		</StackPanel>
 
-		<StackPanel Orientation="Horizontal" Spacing="5">
-			<TextBlock>Max. Rotation</TextBlock>
+			<TextBlock VerticalAlignment="Center">Max. Rotation</TextBlock>
 			<Slider Value="{Binding RotMovement}"
 					VerticalAlignment="Center"
-					Width="150"
+					Width="130"
 					Minimum="-20" Maximum="20"/>
 			<NumericUpDown Increment="1" Value="{Binding RotMovement}"/>
 		</StackPanel>
-
 		<StackPanel Orientation="Horizontal" Spacing="5">
-			<TextBlock>Stretch</TextBlock>
+			<TextBlock VerticalAlignment="Center">Stretch</TextBlock>
 			<Slider Value="{Binding Stretch}"
 					VerticalAlignment="Center"
-					Width="150"
+					Width="130"
 					Minimum="-5" Maximum="5"/>
 			<NumericUpDown Increment="0.25" Value="{Binding Stretch}"/>
-		</StackPanel>
-
-		<StackPanel Orientation="Horizontal" Spacing="5">
-			<TextBlock>Z Index</TextBlock>
+			<TextBlock VerticalAlignment="Center">Z Index</TextBlock>
 			<Slider Value="{Binding Zindex}"
 					VerticalAlignment="Center"
-					Width="150"
+					Width="130"
 					Minimum="-10" Maximum="10"/>
 			<NumericUpDown Increment="1" Value="{Binding Zindex}"/>
 		</StackPanel>
+
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<TextBlock VerticalAlignment="Center">Position</TextBlock>
 			<Label VerticalAlignment="Center">X</Label>
 			<NumericUpDown Increment="1" Value="{Binding X}"/>
 			<Label VerticalAlignment="Center">Y</Label>
 			<NumericUpDown Increment="1" Value="{Binding Y}"/>
-		</StackPanel>
-		<StackPanel Orientation="Horizontal" Spacing="5">
+
+			<Rectangle Margin="5,0,5,0" Width="1" Fill="White"></Rectangle>
+			
 			<TextBlock VerticalAlignment="Center">Anchor Position</TextBlock>
 			<Label VerticalAlignment="Center">X</Label>
 			<NumericUpDown Increment="1" Value="{Binding AnchorX}"/>
 			<Label VerticalAlignment="Center">Y</Label>
 			<NumericUpDown Increment="1" Value="{Binding AnchorY}"/>
-		</StackPanel>
+		</StackPanel>		
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
 			<ComboBox ItemsSource="{Binding BlinkStates }"
