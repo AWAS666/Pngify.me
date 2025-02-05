@@ -10,7 +10,8 @@
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
 			 xmlns:local="clr-namespace:PngifyMe.Views.Avatar"
 			 xmlns:setup="clr-namespace:PngifyMe.Services.CharacterSetup.Advanced"
-			  xmlns:u="https://irihi.tech/ursa"
+			  xmlns:input="using:Avalonia.Input"
+			 xmlns:u="https://irihi.tech/ursa"
 			 x:DataType="vm:SpriteSetupViewModel"
              x:Class="PngifyMe.Views.Avatar.SpriteAvatarSetup"
 			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
@@ -49,12 +50,18 @@
 
 					<ScrollViewer Grid.Row="1">
 						<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
-								  SelectionMode="Single"
-								  SelectedItem="{Binding Settings.Selected}">
+								  SelectionMode="Single"	
+								  DragDrop.AllowDrop="True"
+								  SelectedItem="{Binding Settings.Selected}">						
 							<TreeView.ItemTemplate>
 								<TreeDataTemplate DataType="setup:SpriteImage"
 												  ItemsSource="{Binding Children}">
-									<Grid ColumnDefinitions="250,50,50">
+									<Grid ColumnDefinitions="250,50,50"
+										  DragDrop.DragOver="OnDragOver"
+										  DragDrop.Drop="OnDrop"
+										  PointerPressed="OnPointerPressed"
+										  PointerMoved="OnPointerMoved"
+										  >
 										<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
 										<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 											Command="{Binding AddSpriteCommand}" Grid.Column="1">
@@ -67,7 +74,7 @@
 													   StrokeThickness="2" Width="18" Height="18"/>
 										</Button>
 									</Grid>
-								</TreeDataTemplate>
+								</TreeDataTemplate >
 							</TreeView.ItemTemplate>
 						</TreeView>
 					</ScrollViewer>
