@@ -1,8 +1,14 @@
 # before steam
 - drag in treeview
+- parent layer handling on new setup
+- highlight selected state
+- steam beta build
+
 
 # improvements:
 - import progress
+- import full size -> fps limit, make that a setting?
+- improve hop layer -> global currenttime to sync them all
 - change position of all by mouse drag/drop
 - zoom with crtl+mousewheel
 - canvas
