@@ -3,6 +3,7 @@ using Avalonia.Interactivity;
 using DynamicData;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
+using Serilog;
 
 namespace PngifyMe.Views.Helper;
 
@@ -44,6 +45,6 @@ public partial class ModeSelect : UserControl
     private void SwitchToTTS(object sender, RoutedEventArgs e)
     {
         SettingsManager.Current.Profile.Active.SwitchType(ProfileType.TTS);
-        Recolour();
+        Recolour();       
     }
 }

@@ -1,8 +1,6 @@
 # before steam
 - parent layer handling on new setup
 - highlight selected state
-- steam beta build
-
 
 # improvements:
 - import progress

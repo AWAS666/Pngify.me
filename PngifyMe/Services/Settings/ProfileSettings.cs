@@ -3,6 +3,7 @@ using PngifyMe.Helpers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Basic;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -129,6 +130,9 @@ namespace PngifyMe.Services.Settings
             if (Type == type) return;
             Type = type;
             AudioService.ChangeMode(type);
+            if (Type == ProfileType.TTS)
+                if (string.IsNullOrEmpty(SettingsManager.Current.LLM.OpenAIKey))
+                    Log.Error("Missing openai key");
         }
     }
 
