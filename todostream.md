@@ -1,5 +1,4 @@
 # before steam
-- drag in treeview
 - parent layer handling on new setup
 - highlight selected state
 - steam beta build
