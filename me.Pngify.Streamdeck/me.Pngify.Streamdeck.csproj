@@ -29,6 +29,9 @@
     <None Update="imgs\logo@2x.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="imgs\logo_white.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="imgs\state.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
