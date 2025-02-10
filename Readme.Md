@@ -16,6 +16,9 @@ Feel free to suggest features and submit code yourself
 - [ ] web view -> just display current image on web, need ws connection of some sort probably
 - [x] stream deck websocket to trigger stuff
 - [ ] splash screen or load json in bg
+- [ ] change audio engine to this: https://github.com/LSXPrime/SoundFlow
+	- this also allows fancy effects like audio spectrums
+	- likely just more compatible
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 
