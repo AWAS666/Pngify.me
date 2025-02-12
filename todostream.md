@@ -3,6 +3,7 @@
 - delete of layer doesn't work, stays there
 - clean up layer states and adding to sprites
 - highlight selected state
+- zoom level on sprites
 
 # improvements:
 - import progress

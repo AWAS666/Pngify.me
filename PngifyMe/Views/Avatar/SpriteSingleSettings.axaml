@@ -41,7 +41,7 @@
 			<Slider Value="{Binding RotMovement}"
 					VerticalAlignment="Center"
 					Width="130"
-					Minimum="-20" Maximum="20"/>
+					Minimum="-40" Maximum="40"/>
 			<NumericUpDown Increment="1" Value="{Binding RotMovement}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5">

@@ -76,6 +76,11 @@
 									</Grid>
 								</TreeDataTemplate >
 							</TreeView.ItemTemplate>
+							<TreeView.ItemContainerTheme>
+								<ControlTheme TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+									<Setter Property="IsExpanded" Value="True" />
+								</ControlTheme>
+							</TreeView.ItemContainerTheme>
 						</TreeView>
 					</ScrollViewer>
 				</Grid>
