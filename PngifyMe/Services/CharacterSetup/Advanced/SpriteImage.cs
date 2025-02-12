@@ -146,11 +146,14 @@ public partial class SpriteImage : ObservableObject
 
     public static List<SpriteStateSetting> InitLayerStates(int count)
     {
-        var states = Enumerable.Repeat(new SpriteStateSetting(), count).ToList();
-        int counter = 0;
-        foreach (var item in states)
+        var states = new List<SpriteStateSetting>();      
+
+        for (int i = 0; i < count; i++)
         {
-            item.Index = counter++;
+            states.Add(new SpriteStateSetting()
+            {
+                Index = i,
+            });
         }
         return states;
     }
