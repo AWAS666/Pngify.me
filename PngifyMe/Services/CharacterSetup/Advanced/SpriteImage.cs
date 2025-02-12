@@ -56,7 +56,7 @@ public partial class SpriteImage : ObservableObject
     public Vector2 CurrentPosition => Position + Offset;
 
     [JsonIgnore]
-    public Vector2 CurrentAnchor => Anchor + Offset;
+    public Vector2 CurrentAnchor => Anchor + rotOffset;
 
     [JsonIgnore]
     public Vector2 Position { get; set; } = Vector2.Zero;
@@ -183,7 +183,8 @@ public partial class SpriteImage : ObservableObject
         {
             Vector2 dif = Anchor - Parent.Anchor;
             Vector2 newDif = Rotate(dif, Parent.CurrentRotation / 180 * MathF.PI);
-            offset += newDif - dif;
+            rotOffset = newDif - dif;
+            offset += rotOffset;
         }
 
         // Calculate the velocity based on the offset difference
