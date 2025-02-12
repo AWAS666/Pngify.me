@@ -146,7 +146,7 @@ public partial class SpriteImage : ObservableObject
 
     public static List<SpriteStateSetting> InitLayerStates(int count)
     {
-        var states = new List<SpriteStateSetting>();      
+        var states = new List<SpriteStateSetting>();
 
         for (int i = 0; i < count; i++)
         {
@@ -206,10 +206,10 @@ public partial class SpriteImage : ObservableObject
         Offset = lastOffset + velocity;
 
         // Calculate the rotation change based on the velocity
-        CurrentRotation = Math.Min(offset.Y / 20, 1) * RotMovement;
+        CurrentRotation = Math.Clamp(offset.Y / 20, -1, 1) * RotMovement;
 
         // Calculate the rotation change based on the velocity
-        CurrentStretch = Math.Min(offset.Y / 20, 1) * Stretch / 10f;
+        CurrentStretch = Math.Clamp(offset.Y / 20, -1, 1) * Stretch / 10f;
 
         // factor in parent manipulations
         if (Parent != null)
