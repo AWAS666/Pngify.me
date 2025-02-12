@@ -42,7 +42,9 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
     [property: JsonIgnore]
     [ObservableProperty]
     private SpriteStates activateState;
-    public ObservableCollection<SpriteStates> States { get; set; } = new();
+    public ObservableCollection<SpriteStates> States { get; set; } = [new SpriteStates() {
+        Name = "Default",
+    }];
     public List<string> AvailableStates() => States.Select(s => s.Name).ToList();
 
     public SpriteCharacterSettings()

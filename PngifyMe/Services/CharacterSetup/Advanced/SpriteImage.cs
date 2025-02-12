@@ -341,7 +341,7 @@ public partial class SpriteImage : ObservableObject
         var child = new SpriteImage();
         child.Parent = this;
         child.Name = "New Layer";
-        child.LayerStates = [.. LayerStates];
+        child.LayerStates = LayerStates.Select(x => x.Clone()).ToList();
         child.Zindex = Zindex;
         Children.Add(child);
         ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
