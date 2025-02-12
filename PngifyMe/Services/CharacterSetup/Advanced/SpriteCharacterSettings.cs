@@ -37,7 +37,7 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
     private float offsetY = 0f;
 
     [ObservableProperty]
-    private float zoom = 1f;
+    private float zoom = 0.9f;
 
     [property: JsonIgnore]
     [ObservableProperty]
