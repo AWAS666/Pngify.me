@@ -19,7 +19,7 @@ public class IdleMove : PermaLayer
     public override void OnCalculateParameters(float dt, ref LayerValues values)
     {
         float pi2 = MathF.PI * 2;
-        float freq = (float)Math.Sin(pi2 * CurrentTime * Frequency);
+        float freq = (float)Math.Sin(pi2 * GlobalTime * Frequency);
         values.PosY += freq * OffsetY;
         values.PosX += freq * OffsetX;
     }

@@ -14,7 +14,7 @@ public class Wiggle : MovementBaseLayer
     public override void OnCalculateParameters(float dt, ref LayerValues values)
     {
         float pi2 = MathF.PI * 2;
-        values.PosY += (float)Math.Sin(pi2 * CurrentTime * Frequency) * Offset * CurrentStrength;
-        values.PosX += (float)Math.Sin(pi2 * CurrentTime * Frequency / 2) * Offset * CurrentStrength;
+        values.PosY += (float)Math.Sin(pi2 * GlobalTime * Frequency) * Offset * CurrentStrength;
+        values.PosX += (float)Math.Sin(pi2 * GlobalTime * Frequency / 2) * Offset * CurrentStrength;
     }
 }

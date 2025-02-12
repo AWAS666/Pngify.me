@@ -13,8 +13,14 @@ namespace PngifyMe.Layers
 
         protected float CurrentTime = 0;
         protected float CurrentExitingTime = 0;
+        protected float GlobalTime = 0;
 
         public Layersetting AddedBy;
+
+        public virtual void SetGlobalTime(float time)
+        {
+            GlobalTime = time;
+        }
 
         public virtual bool Update(float dt)
         {

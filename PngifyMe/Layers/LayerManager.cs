@@ -136,6 +136,7 @@ public static class LayerManager
             Time += dt;
             foreach (BaseLayer layer in Layers.ToList())
             {
+                layer.SetGlobalTime(Time);
                 bool exit = layer.Update(dt);
                 if (exit)
                 {

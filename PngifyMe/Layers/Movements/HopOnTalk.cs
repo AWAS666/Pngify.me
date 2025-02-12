@@ -16,7 +16,7 @@ public class HopOnTalk : RampOnConditionLayer
     public override void OnCalculateParameters(float dt, ref LayerValues values)
     {
         float pi2 = MathF.PI * 2;
-        values.PosY += (float)Math.Sin(pi2 * CurrentTime * Frequency) *
+        values.PosY += (float)Math.Sin(pi2 * GlobalTime * Frequency) *
             Offset * CurrentStrength
             - Offset * CurrentStrength;
     }
