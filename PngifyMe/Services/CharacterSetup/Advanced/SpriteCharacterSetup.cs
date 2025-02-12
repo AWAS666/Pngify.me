@@ -113,7 +113,7 @@ public class SpriteCharacterSetup : ICharacterSetup
         }
 
         // draw selected item on top
-        if (settings.Selected != null)
+        if (settings.Selected != null && settings.Selected.Bitmap != null)
             DrawItem(canvasWidth, canvasHeight, canvas, timespan, settings.Selected, highlight: true);
 
 
