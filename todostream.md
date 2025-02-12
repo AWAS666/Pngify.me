@@ -1,11 +1,12 @@
 # before steam
-- parent layer handling on new setup
+- parent layer handling on new setup -> better import
+- delete of layer doesn't work, stays there
+- clean up layer states and adding to sprites
 - highlight selected state
 
 # improvements:
 - import progress
 - import full size -> fps limit, make that a setting?
-- improve hop layer -> global currenttime to sync them all
 - change position of all by mouse drag/drop
 - zoom with crtl+mousewheel
 - canvas

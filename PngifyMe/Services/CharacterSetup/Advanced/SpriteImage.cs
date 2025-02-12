@@ -57,9 +57,13 @@ public partial class SpriteImage : ObservableObject
 
     [JsonIgnore]
     public Vector2 CurrentAnchor => Anchor + rotOffset;
+    private Vector2 rotOffset = Vector2.Zero;
 
-    [JsonIgnore]
-    public Vector2 Position { get; set; } = Vector2.Zero;
+    [property: JsonIgnore]
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(X))]
+    [NotifyPropertyChangedFor(nameof(Y))]
+    private Vector2 position = Vector2.Zero;
 
     public float X
     {
@@ -122,8 +126,11 @@ public partial class SpriteImage : ObservableObject
         set => Position = new Vector2(value[0], value[1]);
     }
 
-    [JsonIgnore]
-    public Vector2 Anchor { get; set; }
+    [property: JsonIgnore]
+    [ObservableProperty]
+    [NotifyPropertyChangedFor(nameof(AnchorX))]
+    [NotifyPropertyChangedFor(nameof(AnchorY))]
+    private Vector2 anchor;
 
     /// <summary>
     /// used for json serialize
