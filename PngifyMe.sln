@@ -11,7 +11,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		deploy.bat = deploy.bat
 		Readme.Md = Readme.Md
-		todostream.md = todostream.md
+		todosprite.md = todosprite.md
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "me.Pngify.Streamdeck", "me.Pngify.Streamdeck\me.Pngify.Streamdeck.csproj", "{11036B79-EFC4-4823-B547-808EF2121104}"

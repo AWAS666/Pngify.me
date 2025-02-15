@@ -23,13 +23,14 @@ Feel free to suggest features and submit code yourself
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 
 ## Roadmap (future stuff)
-- [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
+- [x] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] virtual webcam integration
 	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
 - [ ] controller tracking
 - [ ] mouse tracking
+- [ ] drawing tablets?
 - [ ] LCOLONQ mode
 
 ## Support

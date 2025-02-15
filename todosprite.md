@@ -1,7 +1,6 @@
 # before steam
 - parent layer handling on new setup -> better import
-- delete of layer doesn't work, stays there
-- clean up layer states and adding to sprites
+- clean up layer states and adding to sprites -> improve code here
 - highlight selected state
 - zoom level on sprites
 
