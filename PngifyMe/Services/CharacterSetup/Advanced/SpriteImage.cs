@@ -354,4 +354,18 @@ public partial class SpriteImage : ObservableObject
         Children.Add(child);
         ((SpriteCharacterSetup)LayerManager.CharacterStateHandler.CharacterSetup).ReloadLayerList();
     }
+
+    public void AddNewState(int count)
+    {
+        if (LayerStates.Count < count)
+            LayerStates.Add(new SpriteStateSetting()
+            {
+                Flag = true,
+                Index = count - 1
+            });
+        foreach (var item in Children)
+        {
+            item.AddNewState(count);
+        }
+    }
 }

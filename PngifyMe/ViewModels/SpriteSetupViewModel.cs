@@ -147,6 +147,7 @@ public partial class SpriteSetupViewModel : ObservableObject
         {
             Index = Settings.States.Count,
         });
+        Settings.Parent.AddNewState(Settings.States.Count);
     }
 
     [RelayCommand]
