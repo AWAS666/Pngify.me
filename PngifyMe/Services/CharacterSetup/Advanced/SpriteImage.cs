@@ -171,6 +171,9 @@ public partial class SpriteImage : ObservableObject
     [ObservableProperty]
     private float stretch;
 
+    [ObservableProperty]
+    private float zoom = 1f;
+
     [property: JsonIgnore]
     [ObservableProperty]
     private SpriteImage? parent;

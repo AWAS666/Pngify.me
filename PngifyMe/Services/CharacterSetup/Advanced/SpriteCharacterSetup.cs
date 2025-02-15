@@ -129,7 +129,7 @@ public class SpriteCharacterSetup : ICharacterSetup
 
         // Apply transformations
         canvas.RotateDegrees(item.CurrentRotation, item.CurrentAnchor.X, item.CurrentAnchor.Y);
-        canvas.Scale(1f, 1f + item.CurrentStretch, item.CurrentAnchor.X, item.CurrentAnchor.Y);
+        canvas.Scale(item.Zoom, item.Zoom + item.CurrentStretch, item.CurrentAnchor.X, item.CurrentAnchor.Y);
 
         canvas.Scale(settings.Zoom, settings.Zoom, canvasWidth / 2, canvasHeight / 2);
 
@@ -137,8 +137,8 @@ public class SpriteCharacterSetup : ICharacterSetup
         if (highlight)
         {
             canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y, highlightPaint);
-            // draw anchor point -> todo check if this is currently 
-            canvas.DrawCircle(item.CurrentAnchor.X, item.CurrentAnchor.Y, 5, anchorPaint);
+            // draw anchor point
+            canvas.DrawCircle(item.CurrentAnchor.X, item.CurrentAnchor.Y, 5 / item.Zoom, anchorPaint);
         }
         else
             canvas.DrawBitmap(item.Bitmap.GetImage(timespan), item.CurrentPosition.X, item.CurrentPosition.Y);
