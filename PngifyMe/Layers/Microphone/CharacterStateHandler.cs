@@ -3,6 +3,7 @@ using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Advanced;
 using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.CharacterSetup.Images;
+using PngifyMe.Services.Settings;
 using System;
 
 namespace PngifyMe.Layers.Microphone;
@@ -35,7 +36,9 @@ public class CharacterStateHandler
 
     private void Profile_PropertyChanged(object? sender, System.ComponentModel.PropertyChangedEventArgs e)
     {
-        RefreshCharacterSettings();
+        LayerManager.Pause();
+        LayerManager.CharacterStateHandler.ChangeProfile(SettingsManager.Current.Profile.Active.AvatarSettings);
+        LayerManager.UnPause();
     }
 
     private void RefreshCharacterSettings()
@@ -79,5 +82,21 @@ public class CharacterStateHandler
         }
         RefreshCharacterSettings();
         LayerManager.UnPause();
+    }
+
+    internal void ChangeProfile(IAvatarSettings newValue)
+    {
+        switch (newValue)
+        {
+            case BasicCharSettings:
+                CharacterSetup = new BasicCharacterSetup();
+                break;
+            case SpriteCharacterSettings:
+                CharacterSetup = new SpriteCharacterSetup();
+                break;
+            default:
+                break;
+        }
+        RefreshCharacterSettings();
     }
 }

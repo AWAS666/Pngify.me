@@ -200,11 +200,12 @@ public static class LayerManager
             {
                 img.RenderImage(canvas, 0, 0);
             }
+            baseImg.SetImmutable();
 
             if (CharacterStateHandler.CharacterSetup.RenderPosition)
                 canvas.Translate(layert.PosX, layert.PosY);
             canvas.Translate(width / 2 + layert.OriginOffsetX, height / 2 + layert.OriginOffsetY);
-            canvas.RotateDegrees((float)rotationAngle);
+            canvas.RotateDegrees(rotationAngle);
             canvas.Scale(layert.ZoomX, layert.ZoomY);
             canvas.Translate(-width / 2 - layert.OriginOffsetX, -height / 2 - layert.OriginOffsetY);
 

@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Helpers;
+using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services.CharacterSetup;
 using PngifyMe.Services.CharacterSetup.Basic;
@@ -64,7 +65,7 @@ namespace PngifyMe.Services.Settings
 
         public void LoadNewProfile(Profile profile)
         {
-            Active = profile;
+            Active = profile;         
         }
 
         private void FixNames()
