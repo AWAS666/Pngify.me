@@ -239,6 +239,11 @@ public static class LayerManager
                 img.RenderImage(canvas, 0, 0);
             }
         }
+        BufferAndCleanUp(mainBitmap);
+    }
+
+    private static void BufferAndCleanUp(SKBitmap mainBitmap)
+    {
         CurrentFrame = new SaveDispose<SKBitmap>(mainBitmap);
         FrameBuffer.Add(CurrentFrame);
         foreach (var item in FrameBuffer.SkipLast(10))
@@ -248,8 +253,6 @@ public static class LayerManager
             FrameBuffer.Remove(item);
         }
     }
-
-
 
     private static void DrawTits(SKCanvas canvas)
     {

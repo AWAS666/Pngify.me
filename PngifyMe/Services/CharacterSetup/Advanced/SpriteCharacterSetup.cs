@@ -117,7 +117,7 @@ public class SpriteCharacterSetup : ICharacterSetup
             DrawItem(canvasWidth, canvasHeight, canvas, timespan, settings.Selected, highlight: true);
 
 
-        Debug.WriteLine($"Rendered {rel.Count()} in {watch.ElapsedMilliseconds}ms {watch.ElapsedTicks}ticks");
+        //Debug.WriteLine($"Rendered {rel.Count()} in {watch.ElapsedMilliseconds}ms {watch.ElapsedTicks}ticks");
 
         values.Image = mainBitmap;
     }
