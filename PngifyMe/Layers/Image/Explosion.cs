@@ -1,6 +1,6 @@
 ﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
-using PngifyMe.Services.Settings.Images;
+using PngifyMe.Services.CharacterSetup.Images;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -30,7 +30,7 @@ public class Explosion : ImageLayer
         EnterTime = 0f;
         ExitTime = 1f;
         // save current frame as the one to explode
-        frame = LayerManager.MicroPhoneStateLayer.CurrentImage;
+        frame = LayerManager.CharacterStateHandler.CurrentImage;
 
         // Number of particles for the explosion effect
         int particleSize = 40; // Size of each particle

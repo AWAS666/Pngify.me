@@ -1,5 +1,10 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Helpers;
+using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
+using PngifyMe.Services.CharacterSetup;
+using PngifyMe.Services.CharacterSetup.Basic;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,6 +12,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Services.Settings
 {
@@ -37,10 +43,6 @@ namespace PngifyMe.Services.Settings
 
         public void Save()
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new BaseLayerJsonConverter());
-            options.Converters.Add(new TriggerJsonConverter());
-
             FixNames();
             string path = Path.Combine(SettingsManager.BasePath, "Profiles");
             // clear and create new
@@ -49,7 +51,7 @@ namespace PngifyMe.Services.Settings
             foreach (var prof in ProfileList)
             {
                 Directory.CreateDirectory(Path.Combine(path, prof.Name));
-                File.WriteAllText(Path.Combine(path, prof.Name, "setup.json"), JsonSerializer.Serialize(prof, options));
+                File.WriteAllText(Path.Combine(path, prof.Name, "setup.json"), JsonSerializer.Serialize(prof, JsonSerializeHelper.GetDefault()));
                 // move and save all images
                 // make it a zip file
             }
@@ -63,7 +65,7 @@ namespace PngifyMe.Services.Settings
 
         public void LoadNewProfile(Profile profile)
         {
-            Active = profile;
+            Active = profile;         
         }
 
         private void FixNames()
@@ -87,55 +89,16 @@ namespace PngifyMe.Services.Settings
             ProfileList.Remove(profile);
         }
 
-        public void ExportProfile(Profile profile, string exportTo)
+        public async Task ExportProfile(Profile profile, string exportTo)
         {
-            var options = new JsonSerializerOptions();
-            options.Converters.Add(new BaseLayerJsonConverter());
-            options.Converters.Add(new TriggerJsonConverter());
-
             FixNames();
-            string path = Path.Combine(SettingsManager.BasePath, "Profiles");
-            // clear and create new
-            Directory.CreateDirectory(path);
-
-            var newFolder = Path.Combine(path, profile.Name);
-            Directory.CreateDirectory(newFolder);
-
-            // move and save all images
-            foreach (var item in profile.MicroPhone.States)
-            {
-                item.Open.FilePath = MoveFile(item.Open.FilePath, newFolder);
-                item.Closed.FilePath = MoveFile(item.Closed.FilePath, newFolder);
-                item.OpenBlink.FilePath = MoveFile(item.OpenBlink.FilePath, newFolder);
-                item.ClosedBlink.FilePath = MoveFile(item.ClosedBlink.FilePath, newFolder);
-            }
-            File.WriteAllText(Path.Combine(newFolder, "setup.json"), JsonSerializer.Serialize(profile, options));
-
-            // make it a zip file
-            if (File.Exists(exportTo)) File.Delete(exportTo);
-            ZipFile.CreateFromDirectory(newFolder, exportTo);
+            await File.WriteAllTextAsync(exportTo, JsonSerializer.Serialize(profile, JsonSerializeHelper.GetDefault()));
         }
 
-        public Profile ImportProfile(string fromFile)
+        public async Task<Profile> ImportProfile(string fromFile)
         {
-            string path = Path.Combine(SettingsManager.BasePath, "Profiles");
+            var profile = JsonSerializer.Deserialize<Profile>(await File.ReadAllTextAsync(fromFile), JsonSerializeHelper.GetDefault());
 
-            string output = Path.Combine(path, Path.GetFileNameWithoutExtension(fromFile));
-            Directory.CreateDirectory(output);
-            ZipFile.ExtractToDirectory(fromFile, output, true);
-            var profile = JsonSerializer.Deserialize<Profile>(File.ReadAllText(Path.Combine(output, "setup.json")));
-
-            // fix any broken image references
-            foreach (var item in profile.MicroPhone.States)
-            {
-                item.Open.FilePath = Path.Combine(output, Path.GetFileName(item.Open.FilePath));
-                item.Closed.FilePath = Path.Combine(output, Path.GetFileName(item.Closed.FilePath));
-
-                if (item.ClosedBlink.FilePath != null)
-                    item.ClosedBlink.FilePath = Path.Combine(output, Path.GetFileName(item.ClosedBlink.FilePath));
-                if (item.OpenBlink.FilePath != null)
-                    item.OpenBlink.FilePath = Path.Combine(output, Path.GetFileName(item.OpenBlink.FilePath));
-            }
             profile.Default = false;
 
             ProfileList.Add(profile);
@@ -160,13 +123,17 @@ namespace PngifyMe.Services.Settings
         public string Name { get; set; } = "Profile1";
         public bool Default { get; set; }
         public ProfileType Type { get; set; } = ProfileType.Human;
-        public MicroPhoneSettings MicroPhone { get; set; } = new();
+        public MicSettings MicSettings { get; set; } = new MicSettings();
+        public IAvatarSettings AvatarSettings { get; set; } = new BasicCharSettings();
 
         public void SwitchType(ProfileType type)
         {
             if (Type == type) return;
             Type = type;
             AudioService.ChangeMode(type);
+            if (Type == ProfileType.TTS)
+                if (string.IsNullOrEmpty(SettingsManager.Current.LLM.OpenAIKey))
+                    Log.Error("Missing openai key");
         }
     }
 

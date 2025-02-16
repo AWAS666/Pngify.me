@@ -5,7 +5,7 @@ using System.Numerics;
 
 namespace PngifyMe.Services.ThrowingSystem
 {
-    public class MovableObject
+    public class MovableObject : IDisposable
     {
         private LayerValues Values;
 
@@ -68,6 +68,12 @@ namespace PngifyMe.Services.ThrowingSystem
         public bool SameBitmap(SKBitmap bitmap)
         {
             return bitmap == Values.Image;
+        }
+
+        public void Dispose()
+        {
+            CollissionCache.Remove(Values.Image);
+            Values.Image.Dispose();
         }
     }
 }

@@ -1,5 +1,5 @@
 ﻿using PngifyMe.Layers.Helper;
-using PngifyMe.Services.Settings.Images;
+using PngifyMe.Services.CharacterSetup.Images;
 using Serilog;
 using SkiaSharp;
 using System;
@@ -35,16 +35,7 @@ namespace PngifyMe.Layers.Image
             }
 
             AutoRemoveTime = StickyFor;
-
-            string extension = Path.GetExtension(FilePath).ToLower();
-            if (extension == ".gif")
-            {
-                image = new GifImage(FilePath);
-            }
-            else if (extension == ".png" || extension == ".jpg" || extension == ".jpeg" || extension == ".bmp")
-            {
-                image = new StaticImage(FilePath);
-            }
+            image = BaseImage.LoadFromPath(FilePath);
             base.OnEnter();
         }
 

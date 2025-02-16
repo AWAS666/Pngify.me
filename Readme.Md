@@ -16,17 +16,21 @@ Feel free to suggest features and submit code yourself
 - [ ] web view -> just display current image on web, need ws connection of some sort probably
 - [x] stream deck websocket to trigger stuff
 - [ ] splash screen or load json in bg
+- [ ] change audio engine to this: https://github.com/LSXPrime/SoundFlow
+	- this also allows fancy effects like audio spectrums
+	- likely just more compatible
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 
 ## Roadmap (future stuff)
-- [ ] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
+- [x] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] virtual webcam integration
 	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
 - [ ] controller tracking
 - [ ] mouse tracking
+- [ ] drawing tablets?
 - [ ] LCOLONQ mode
 
 ## Support

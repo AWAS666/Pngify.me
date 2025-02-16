@@ -22,7 +22,8 @@ namespace PngifyMe.Services.TTSPet.OpenAI
         {
             if (string.IsNullOrEmpty(SettingsManager.Current.LLM.OpenAIKey))
             {
-                Log.Error("Missing openai key");
+                if (SettingsManager.Current.Profile.Active.Type == Services.Settings.ProfileType.TTS)
+                    Log.Error("Missing openai key");
                 return;
             }
             var options = new OpenAiOptions()

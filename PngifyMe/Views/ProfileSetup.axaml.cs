@@ -78,12 +78,14 @@ public partial class ProfileSetup : UserControl
         var path = await top.StorageProvider.SaveFilePickerAsync(new Avalonia.Platform.Storage.FilePickerSaveOptions()
         {
             Title = "Save profile where?",
-            SuggestedFileName = $"{vmS.Profile.Name}.zip"
+            SuggestedFileName = $"{vmS.Profile.Name}.pngprofile",
+            DefaultExtension = "pngprofile",
+            FileTypeChoices = new[] { FilePickers.Pngifyme }
         });
 
         if (path == null) return;
 
-        SettingsManager.Current.Profile.ExportProfile(vmS.Profile, path.Path.AbsolutePath);
+        await SettingsManager.Current.Profile.ExportProfile(vmS.Profile, path.Path.AbsolutePath);
     }
 
     public async void Import(object sender, RoutedEventArgs e)
@@ -94,14 +96,14 @@ public partial class ProfileSetup : UserControl
         var path = await top.StorageProvider.OpenFilePickerAsync(new Avalonia.Platform.Storage.FilePickerOpenOptions()
         {
             // todo: add file filter
-            Title = "Open profiles to import",
+            Title = "Open profile(s) to import",
             AllowMultiple = true,
-            FileTypeFilter = new[] { FilePickers.Zip },
+            FileTypeFilter = new[] { FilePickers.Pngifyme },
         });
 
         foreach (var item in path)
         {
-            var prof = SettingsManager.Current.Profile.ImportProfile(item.Path.AbsolutePath);
+            var prof = await SettingsManager.Current.Profile.ImportProfile(item.Path.AbsolutePath);
             vm.Profiles.Add(new ProfileViewModel(prof));
         }
     }

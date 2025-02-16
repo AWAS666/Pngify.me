@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using PngifyMe.Services.CharacterSetup.Images;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
 using System.Linq;
@@ -28,13 +29,13 @@ public partial class ImageSelectView : UserControl
         });
         if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
         {
-            vm.FilePath = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            vm.LoadFromFile(WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath));
         }
     }
 
     public void Delete(object sender, RoutedEventArgs e)
     {
         var vm = (ImageSetting)DataContext;
-        vm.FilePath = string.Empty;
+        vm.Delete();
     }
 }

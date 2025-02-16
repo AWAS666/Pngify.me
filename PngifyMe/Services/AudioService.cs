@@ -1,4 +1,6 @@
 ﻿using NAudio.Wave;
+using PngifyMe.Services.CharacterSetup;
+using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
 using PortAudioSharp;
 using Serilog;
@@ -18,7 +20,7 @@ namespace PngifyMe.Services;
 /// </summary>
 public static class AudioService
 {
-    public static MicroPhoneSettings Settings => SettingsManager.Current.Profile.Active.MicroPhone;
+    public static MicSettings Settings => SettingsManager.Current.Profile.Active.MicSettings;
     private static float last = 0f;
     private static ProfileType current;
     private static Stream stream;

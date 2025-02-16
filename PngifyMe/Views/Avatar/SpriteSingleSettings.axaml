@@ -1,0 +1,115 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			 xmlns:setup="clr-namespace:PngifyMe.Services.CharacterSetup.Advanced"
+			  xmlns:u="https://irihi.tech/ursa"
+			 x:DataType="setup:SpriteImage"
+             x:Class="PngifyMe.Views.Avatar.SpriteSingleSettings"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 >
+	<Design.DataContext>
+		<setup:SpriteImage/>
+	</Design.DataContext>
+	<StackPanel Margin="5,5,5,5" Spacing="10">
+		<TextBlock>Item Settings:</TextBlock>
+		<TextBox Text="{Binding Name}"/>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+					Click="SwapImage">SwapImage</Button>
+			<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+					Command="{Binding RemoveCommand}">
+				<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+								StrokeThickness="2" Width="18" Height="18"/>
+			</Button>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock VerticalAlignment="Center">Drag</TextBlock>
+			<Slider Value="{Binding Drag}"
+					VerticalAlignment="Center"
+					Width="130"
+					Minimum="0" Maximum="10"/>
+			<NumericUpDown Increment="1" Value="{Binding Drag}"/>
+
+			<TextBlock VerticalAlignment="Center">Max. Rotation</TextBlock>
+			<Slider Value="{Binding RotMovement}"
+					VerticalAlignment="Center"
+					Width="130"
+					Minimum="-40" Maximum="40"/>
+			<NumericUpDown Increment="1" Value="{Binding RotMovement}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock VerticalAlignment="Center">Stretch</TextBlock>
+			<Slider Value="{Binding Stretch}"
+					VerticalAlignment="Center"
+					Width="130"
+					Minimum="-5" Maximum="5"/>
+			<NumericUpDown Increment="0.25" Value="{Binding Stretch}"/>
+			<TextBlock VerticalAlignment="Center">Z Index</TextBlock>
+			<Slider Value="{Binding Zindex}"
+					VerticalAlignment="Center"
+					Width="130"
+					Minimum="-10" Maximum="10"/>
+			<NumericUpDown Increment="1" Value="{Binding Zindex}"/>
+		</StackPanel>
+
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock VerticalAlignment="Center">Position</TextBlock>
+			<Label VerticalAlignment="Center">X</Label>
+			<NumericUpDown Increment="1" Value="{Binding X}"/>
+			<Label VerticalAlignment="Center">Y</Label>
+			<NumericUpDown Increment="1" Value="{Binding Y}"/>
+
+			<Rectangle Margin="5,0,5,0" Width="1" Fill="White"></Rectangle>
+
+			<TextBlock VerticalAlignment="Center">Anchor Position</TextBlock>
+			<Label VerticalAlignment="Center">X</Label>
+			<NumericUpDown Increment="1" Value="{Binding AnchorX}"/>
+			<Label VerticalAlignment="Center">Y</Label>
+			<NumericUpDown Increment="1" Value="{Binding AnchorY}"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
+			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>
+			<ComboBox ItemsSource="{Binding BlinkStates }"
+				 SelectedItem="{Binding ShowBlink }"
+				 DisplayMemberBinding="{Binding}" />
+
+			<TextBlock VerticalAlignment="Center">Speaking:</TextBlock>
+			<ComboBox ItemsSource="{Binding MouthStates }"
+					 SelectedItem="{Binding ShowMouth }"
+					 DisplayMemberBinding="{Binding}" />
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<DropDownButton Content="Select active states"
+					  HorizontalAlignment="Left"
+					  VerticalAlignment="Center"
+					  Width="200">
+				<DropDownButton.Flyout>
+					<Flyout Placement="Right">
+						<ListBox ItemsSource="{Binding LayerStates}"
+							BorderThickness="0"
+							Background="Transparent">
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<CheckBox Content="{Binding Index}" IsChecked="{Binding Flag, Mode=TwoWay}"></CheckBox>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Flyout>
+				</DropDownButton.Flyout>
+			</DropDownButton>
+			<TextBlock VerticalAlignment="Center">Zoom</TextBlock>
+			<Slider Value="{Binding Zoom}"
+					VerticalAlignment="Center"
+					Width="130"					
+					Minimum="0" Maximum="5"/>
+			<NumericUpDown Increment="0.1" Value="{Binding Zoom}"/>
+		</StackPanel>
+	</StackPanel>
+</UserControl>

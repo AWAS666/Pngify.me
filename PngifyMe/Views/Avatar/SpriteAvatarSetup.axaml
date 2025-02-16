@@ -1,0 +1,180 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
+			 xmlns:local="clr-namespace:PngifyMe.Views.Avatar"
+			 xmlns:setup="clr-namespace:PngifyMe.Services.CharacterSetup.Advanced"
+			  xmlns:input="using:Avalonia.Input"
+			 xmlns:u="https://irihi.tech/ursa"
+			 x:DataType="vm:SpriteSetupViewModel"
+             x:Class="PngifyMe.Views.Avatar.SpriteAvatarSetup"
+			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 >
+	<Design.DataContext>
+		<vm:SpriteSetupViewModel/>
+	</Design.DataContext>
+	<Grid RowDefinitions="Auto,*">
+		<StackPanel>
+			<TextBlock FontSize="24" Margin="0,0,0,5">Sprite Avatar State Setup</TextBlock>
+			<StackPanel Margin="5,0,5,6" Orientation="Horizontal" Spacing="5">
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ImportPngtuberPlusCommand}">Import from PngTuber Plus</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ImportFromPngsCommand}">Import from pngs</Button>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Command="{Binding ClearSelectCommand}">Clear Selected</Button>
+			</StackPanel>
+		</StackPanel>
+		<TabControl Grid.Row="1">
+			<TabItem Header="Layers">
+				<Grid RowDefinitions="Auto,*" >
+					<Expander IsExpanded="True">
+						<Expander.Header>
+							Selected Settings
+						</Expander.Header>
+						<StackPanel>
+							<local:SpriteSingleSettings x:Name="test" IsVisible="{Binding !!.}"
+								DataContext="{Binding Settings.Selected}"/>
+							<TextBlock Height="300" FontSize="28" 
+									   VerticalAlignment="Center" HorizontalAlignment="Center"
+									   IsVisible="{Binding !#test.IsVisible}">Nothing selected</TextBlock>
+							<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+						</StackPanel>
+					</Expander>
+
+					<ScrollViewer Grid.Row="1">
+						<TreeView ItemsSource="{ Binding Settings.SpriteImages}"
+								  SelectionMode="Single"	
+								  DragDrop.AllowDrop="True"
+								  SelectedItem="{Binding Settings.Selected}">						
+							<TreeView.ItemTemplate>
+								<TreeDataTemplate DataType="setup:SpriteImage"
+												  ItemsSource="{Binding Children}">
+									<Grid ColumnDefinitions="250,50,50"
+										  DragDrop.DragOver="OnDragOver"
+										  DragDrop.Drop="OnDrop"
+										  PointerPressed="OnPointerPressed"
+										  PointerMoved="OnPointerMoved"
+										  >
+										<TextBlock VerticalAlignment="Center" Text="{Binding Name}" />
+										<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+											Command="{Binding AddSpriteCommand}" Grid.Column="1">
+											<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
+													   StrokeThickness="2" Width="18" Height="18"/>
+										</Button>
+										<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+												Command="{Binding RemoveCommand }" Grid.Column="2">
+											<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+													   StrokeThickness="2" Width="18" Height="18"/>
+										</Button>
+									</Grid>
+								</TreeDataTemplate >
+							</TreeView.ItemTemplate>
+							<TreeView.ItemContainerTheme>
+								<ControlTheme TargetType="TreeViewItem" BasedOn="{StaticResource {x:Type TreeViewItem}}">
+									<Setter Property="IsExpanded" Value="True" />
+								</ControlTheme>
+							</TreeView.ItemContainerTheme>
+						</TreeView>
+					</ScrollViewer>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Trigger Setup">
+				<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
+					<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,5">
+						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Command="{Binding SetupTriggersCommand}" ToolTip.Tip="Apply changes">
+							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="DodgerBlue"
+												StrokeThickness="2" Width="18" Height="18"/>
+						</Button>
+						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Command="{Binding AddTriggerCommand}">
+							<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
+												StrokeThickness="2" Width="18" Height="18"/>
+						</Button>
+					</StackPanel>
+					<ListBox Grid.Row="1" ItemsSource="{Binding Settings.States}" >
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal" Spacing="10">
+									<StackPanel Spacing="5">
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<TextBox Width="200" Text="{Binding Name}"/>
+											<NumericUpDown Width="75" Value="{Binding Index}"/>
+											<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+													Click="ActivateState" ToolTip.Tip="Activate this state">
+												<lucideAvalonia:Lucide Icon="Rocket" StrokeBrush="DodgerBlue"
+														   StrokeThickness="2" Width="18" Height="18"/>
+											</Button>
+											<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+													Command="{Binding $parent[ListBox].((vm:SpriteSetupViewModel)DataContext).RemoveTriggerCommand}"
+													CommandParameter="{Binding}">
+												<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+												   StrokeThickness="2" Width="18" Height="18"/>
+											</Button>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
+													  SelectedItem="{Binding SelectedTriggerType}"
+													  DisplayMemberBinding="{Binding DisplayName}"/>
+											<helper:TriggerView DataContext="{Binding TriggerVm}"/>
+										</StackPanel>
+									</StackPanel>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="Global Settings">
+
+				<StackPanel Margin="5,5,5,5" Spacing="5">
+					<Grid ColumnDefinitions="100,100,100" ToolTip.Tip="Time between blinks">
+						<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
+						<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkInterval}"/>
+						<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+					</Grid>
+
+					<Grid ColumnDefinitions="100,100,100" ToolTip.Tip="How long character blinks">
+						<TextBlock VerticalAlignment="Center">Blink Time</TextBlock>
+						<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkTime}"/>
+						<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+					</Grid>
+
+					<StackPanel Orientation="Horizontal" Spacing="5">
+						<TextBlock VerticalAlignment="Center">Global Zoom</TextBlock>
+						<Slider Value="{Binding Settings.Zoom}"
+								VerticalAlignment="Center"
+								Width="250"
+								Minimum="0" Maximum="3"/>
+						<NumericUpDown Increment="0.1" Value="{Binding Settings.Zoom}"/>
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal" Spacing="5">
+						<TextBlock VerticalAlignment="Center">Global Offset X</TextBlock>
+						<Slider Value="{Binding Settings.OffsetX}"
+								VerticalAlignment="Center"
+								Width="250"
+								Minimum="-500" Maximum="500"/>
+						<NumericUpDown Increment="10" Value="{Binding Settings.OffsetX}"/>
+					</StackPanel>
+
+					<StackPanel Orientation="Horizontal" Spacing="5">
+						<TextBlock VerticalAlignment="Center">Global Offset Y</TextBlock>
+						<Slider Value="{Binding Settings.OffsetY}"
+								VerticalAlignment="Center"
+								Width="250"
+								Minimum="-500" Maximum="500"/>
+						<NumericUpDown Increment="10" Value="{Binding Settings.OffsetY}"/>
+					</StackPanel>
+				</StackPanel>
+			</TabItem>
+		</TabControl>
+	</Grid>
+</UserControl>

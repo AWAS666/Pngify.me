@@ -2,49 +2,48 @@
 using PngifyMe.Layers.Movements;
 using System;
 
-namespace PngifyMe.Layers
+namespace PngifyMe.Layers;
+
+[LayerDescription("Panic emote, running of panicking")]
+public class Panic : MovementBaseLayer
 {
-    [LayerDescription("Panic emote, running of panicking")]
-    public class Panic : MovementBaseLayer
+    private float zoom;
+
+    //[Unit("pixels/s")]
+    public float Speed = 400;
+
+    [Unit("times")]
+    public int Cycles { get; set; } = 5;
+
+
+    public Panic()
     {
-        private float zoom;
-
-        //[Unit("pixels/s")]
-        public float Speed = 400;
-
-        [Unit("times")]
-        public int Cycles { get; set; } = 5;
+        EnterTime = 2f;
+        ExitTime = 1f;
+    }
 
 
-        public Panic()
+    public override void OnCalculateParameters(float dt, ref LayerValues values)
+    {
+        float sin = (float)Math.Sin(CurrentTime * Speed / 300);
+        float x = (float)(-sin * Speed * CurrentStrength * Easings.SineEaseIn(Math.Abs(sin)));
+        if (x > Speed * 0.75)
         {
-            EnterTime = 2f;
-            ExitTime = 1f;
+            zoom = Math.Clamp(zoom + dt * 4 * Speed / 400, -2, 0);
+        }
+        if (x < -Speed * 0.75f)
+        {
+            zoom = Math.Clamp(zoom - dt * 4 * Speed / 400, -2, 0);
         }
 
 
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
+        if (CurrentTime > Cycles * Math.PI)
         {
-            float sin = (float)Math.Sin(CurrentTime * Speed / 300);
-            float x = (float)(-sin * Speed * CurrentStrength * Easings.SineEaseIn(Math.Abs(sin)));
-            if (x > Speed * 0.75)
-            {
-                zoom = Math.Clamp(zoom + dt * 4 * Speed / 400, -2, 0);
-            }
-            if (x < -Speed * 0.75f)
-            {
-                zoom = Math.Clamp(zoom - dt * 4 * Speed / 400, -2, 0);
-            }
-
-
-            if (CurrentTime > Cycles * Math.PI)
-            {
-                IsExiting = true;
-            }
-
-            values.ZoomX += zoom;
-            values.PosX += x;
-            values.PosY += (float)Math.Sin(CurrentTime * Speed / 30) * Speed / 10 * CurrentStrength;
+            IsExiting = true;
         }
+
+        values.ZoomX += zoom;
+        values.PosX += x;
+        values.PosY += (float)Math.Sin(CurrentTime * Speed / 30) * Speed / 10 * CurrentStrength;
     }
 }

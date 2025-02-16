@@ -7,7 +7,7 @@
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
-			 x:DataType="vm:MicroPhoneStateViewModel"
+			 x:DataType="vm:BasicStateViewModel"
              x:Class="PngifyMe.Views.Helper.TransitionView"
 			 xmlns:siv="https://github.com/kekyo/SkiaImageView"			 
 			 >
@@ -20,7 +20,7 @@
 	</UserControl.Background>
 
 	<Design.DataContext>
-		<vm:MicroPhoneStateViewModel/>
+		<vm:BasicStateViewModel/>
 	</Design.DataContext>
 	<StackPanel Margin="5" Spacing="10">
 		<TextBlock FontSize="24">Setup transitions</TextBlock>

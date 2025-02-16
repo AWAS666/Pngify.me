@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace PngifyMe.Services.ThrowingSystem
 {
-    public class CollisionDetector
+    public class CollisionDetector : IDisposable
     {
         private SKBitmap bitmap;
         public List<SKPoint> leftOutline;
@@ -155,5 +155,9 @@ namespace PngifyMe.Services.ThrowingSystem
             return false;
         }
 
+        public void Dispose()
+        {
+            bitmap.Dispose();
+        }
     }
 }

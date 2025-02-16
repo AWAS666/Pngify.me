@@ -9,26 +9,26 @@
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
 			  xmlns:u="https://irihi.tech/ursa"
-			 x:DataType="vm:MicroPhoneSetupViewModel"
-             x:Class="PngifyMe.Views.MicStateSetup"
+			 x:DataType="vm:BasicSetupViewModel"
+             x:Class="PngifyMe.Views.Avatar.BasicAvatarSetup"
 			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
 			 >
 	<Design.DataContext>
-		<vm:MicroPhoneSetupViewModel/>
+		<vm:BasicSetupViewModel/>
 	</Design.DataContext>
 	<UserControl.Resources>
 		<conv:FloatConverter x:Key="FloatConverter" />
 	</UserControl.Resources>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
-			<TextBlock FontSize="24">Microphone State Setup</TextBlock>
+			<TextBlock FontSize="24">Basic Avatar State Setup</TextBlock>
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">States</TextBlock>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding Add}">
 					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 												   StrokeThickness="2" Width="18" Height="18"/>
-					</Button>
+				</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding Apply}" Content="Apply and Save" />
 			</StackPanel>
@@ -66,16 +66,16 @@
 									<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
 									<Button
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).Remove}"
+										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).Remove}"
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left">
 										<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
 												   StrokeThickness="2" Width="18" Height="18"/>
-										</Button>
+									</Button>
 
 									<Button
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding $parent[ListBox].((vm:MicroPhoneSetupViewModel)DataContext).SwitchState}"
+										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).SwitchState}"
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left"
 										Content="Activate" />
@@ -89,7 +89,7 @@
 										Click="ShowTransition">Transitions</Button>
 									<TextBox Name="Hotkeybox"
 											 Text="{Binding Hotkey}"
-											 Margin="15,0,0,0" Watermark="Hotkey" Width="150" 
+											 Margin="15,0,0,0" Watermark="Hotkey" Width="150"
 											 KeyDown="HotkeyDown">
 									</TextBox>
 								</StackPanel>
