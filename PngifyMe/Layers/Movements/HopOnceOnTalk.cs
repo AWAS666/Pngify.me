@@ -7,6 +7,8 @@ namespace PngifyMe.Layers;
 [LayerDescription("hop once when starting to talk")]
 public class HopOnceOnTalk : RampOnConditionOnceLayer
 {
+    private float timeOffset;
+
     [Unit("pixels")]
     public float Offset { get; set; } = 20f;
     public float Frequency { get; set; } = 2f;
@@ -15,8 +17,12 @@ public class HopOnceOnTalk : RampOnConditionOnceLayer
     }
     public override void OnCalculateParameters(float dt, ref LayerValues values)
     {
+        // this should make it so sinus always start from zero on fresh trigger
+        if (Triggering)
+            timeOffset = GlobalTime;
+
         float pi2 = MathF.PI * 2;
-        values.PosY += (float)Math.Sin(pi2 * GlobalTime * Frequency)
+        values.PosY += (float)Math.Sin(pi2 * GlobalTime - timeOffset * Frequency)
             * Offset * CurrentStrength
             - Offset * CurrentStrength;
     }

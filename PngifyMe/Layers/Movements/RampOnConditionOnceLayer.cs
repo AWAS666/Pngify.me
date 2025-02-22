@@ -10,6 +10,9 @@ public abstract class RampOnConditionOnceLayer : PermaLayer
     private float activatedTime;
     private bool activating;
 
+    protected bool Triggering;
+    protected bool Releasing;
+
     [Unit("s")]
     public float ActivationRamp { get; set; } = 0.5f;
 
@@ -38,6 +41,8 @@ public abstract class RampOnConditionOnceLayer : PermaLayer
 
     public override void OnUpdate(float dt, float time)
     {
+        Triggering = false;
+        Releasing = false;
         bool current = Triggered();
         if (!lastCondition && current && !activating)
         {
@@ -50,6 +55,7 @@ public abstract class RampOnConditionOnceLayer : PermaLayer
                 stateChangeTime = CurrentTime;
             activatedTime = stateChangeTime;
             activating = true;
+            Triggering = true;
         }
 
         if (activatedTime + ActivationRamp + ActiveTime < CurrentTime && activating)
@@ -62,6 +68,7 @@ public abstract class RampOnConditionOnceLayer : PermaLayer
             else
                 stateChangeTime = CurrentTime;
             activating = false;
+            Releasing = true;
         }
 
         var value = Easings.CubicEaseInOut(Math.Min(1, (CurrentTime - stateChangeTime) / (activating ? ActivationRamp : DeActivationRamp)));

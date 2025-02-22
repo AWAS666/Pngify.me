@@ -2,7 +2,7 @@
 - parent layer handling on new setup -> better import
 - clean up layer states and adding to sprites -> improve code here
 - highlight selected state
-- zoom level on sprites
+- 
 
 # improvements:
 - import progress
