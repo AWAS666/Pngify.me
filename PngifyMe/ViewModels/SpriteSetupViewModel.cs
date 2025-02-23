@@ -121,6 +121,7 @@ public partial class SpriteSetupViewModel : ObservableObject
             catch (Exception e)
             {
                 Log.Error($"{Path.GetFileNameWithoutExtension(filePath)}{e.Message}");
+                count++;
             }
         }
 
