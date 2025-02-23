@@ -1,4 +1,5 @@
 ﻿using PngifyMe.Services.CharacterSetup.Images;
+using Serilog;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -60,6 +61,7 @@ public static class PngTuberPlusMigrator
             var child = MigratePngtuberPlus(item, items, sprite);
             items.Remove(item);
             sprite.Children.Add(child);
+            Log.Information($"{items.Count} left to import");
         }
         return sprite;
     }
