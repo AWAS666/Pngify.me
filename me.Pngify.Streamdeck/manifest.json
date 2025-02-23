@@ -37,7 +37,7 @@
   "Description": "Stream deck integration for PNGify.me, allows you to switch images and trigger effects via the Streamdeck.",
   "Icon": "imgs/logo",
   "URL": "https://pngify.me",
-  "Version": "1.0.3.0",
+  "Version": "1.0.4.0",
   "CodePath": "me.Pngify.Streamdeck.exe",
   "Category": "Pngify.Me",
   "CategoryIcon": "imgs/logo_white",
