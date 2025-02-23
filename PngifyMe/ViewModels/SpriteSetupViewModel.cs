@@ -101,6 +101,7 @@ public partial class SpriteSetupViewModel : ObservableObject
         }
 
         string filePath = string.Empty;
+        int count = 0;
         foreach (var item in path)
         {
             try
@@ -114,6 +115,7 @@ public partial class SpriteSetupViewModel : ObservableObject
                 });
                 sprite.LayerStates = SpriteImage.InitLayerStates(Settings.States.Count);
                 parent.Children.Add(sprite);
+                Log.Information($"Imported {++count}/{path.Count}");
 
             }
             catch (Exception e)
