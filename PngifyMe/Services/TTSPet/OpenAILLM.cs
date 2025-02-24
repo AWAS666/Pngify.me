@@ -60,8 +60,8 @@ Current Date and time: {DateTime.Now}"),
                 {
                     Messages = messages,
                     Model = SettingsManager.Current.LLM.ModelName,
-                    FrequencyPenalty = 1f,
-                    PresencePenalty = 1f,
+                    FrequencyPenalty = 0.2f,
+                    PresencePenalty = 0.2f,
                     MaxTokens = SettingsManager.Current.LLM.MaxTokens,
                     Temperature = 0.8f
                 });

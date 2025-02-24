@@ -33,6 +33,11 @@ public class TextRenderer : BitMapTransformer
         //nothing
     }
 
+    /// <summary>
+    /// todo: optimize memory usage
+    /// </summary>
+    /// <param name="bitmap"></param>
+    /// <returns></returns>
     public override SKBitmap RenderBitmap(SKBitmap bitmap)
     {
         // skip render if last is same
