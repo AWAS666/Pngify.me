@@ -55,7 +55,7 @@
 		</StackPanel>
 
 		<StackPanel  Orientation="Horizontal" Spacing="5">
-			<Label VerticalAlignment="Center">Enable Spout2 (experimental)</Label>
+			<Label VerticalAlignment="Center">Enable Spout2</Label>
 			<CheckBox x:Name="spout2"></CheckBox>
 			<HyperlinkButton
 						  BorderThickness="1"
