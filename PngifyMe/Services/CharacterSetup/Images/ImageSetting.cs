@@ -19,6 +19,18 @@ public partial class ImageSetting : ObservableObject
     [ObservableProperty]
     private BaseImage bitmap = new StaticImage(PlaceHolder);
 
+    public TimeSpan TimeSpan
+    {
+        get => timeSpan;
+        set
+        {
+            timeSpan = value;
+            SetGifTime();
+        }
+    }    
+
+    private TimeSpan timeSpan = TimeSpan.Zero;
+
     public List<string> Base64
     {
         get => base64; set
@@ -28,8 +40,6 @@ public partial class ImageSetting : ObservableObject
         }
     }
     private List<string> base64 { get; set; } = new();
-
-    public TimeSpan TimeSpan { get; set; } = TimeSpan.Zero;
 
     public ImageSetting()
     {
@@ -49,6 +59,14 @@ public partial class ImageSetting : ObservableObject
             Bitmap = new GifImage(base64, TimeSpan);
 
         Bitmap.Resize((int)(Specsmanager.Width * Specsmanager.ScaleFactor), (int)(Specsmanager.Height * Specsmanager.ScaleFactor));
+    }
+
+    private void SetGifTime()
+    {
+        if (bitmap is GifImage gifim)
+        {
+            gifim.Frames.ForEach(x => x.Duration = TimeSpan);
+        }
     }
 
     public ImageSetting LoadFromFile(string filePath)
