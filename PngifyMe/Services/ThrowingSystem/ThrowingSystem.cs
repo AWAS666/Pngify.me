@@ -69,12 +69,12 @@ namespace PngifyMe.Services.ThrowingSystem
         {
             return
             [
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit100.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit5000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit10000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
-                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit20000.png"))).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit100.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit5000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default), 
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit10000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
+                SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit20000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
             ];
         }
 
@@ -95,14 +95,14 @@ namespace PngifyMe.Services.ThrowingSystem
                     {
                         var imageBytes = await File.ReadAllBytesAsync(fileName);
                         using var stream = new SKMemoryStream(imageBytes);
-                        Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                        Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize), SKSamplingOptions.Default));
                     }
                     else
                     {
                         var imageBytes = await httpClient.GetByteArrayAsync(emote.Images.Url4X);
                         await File.WriteAllBytesAsync(fileName, imageBytes);
                         using var stream = new SKMemoryStream(imageBytes);
-                        Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                        Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize), SKSamplingOptions.Default));
                     }
                 }
 
@@ -115,7 +115,7 @@ namespace PngifyMe.Services.ThrowingSystem
 
                     var imageBytes = await File.ReadAllBytesAsync(filePath);
                     using var stream = new SKMemoryStream(imageBytes);
-                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(50, 50), SKFilterQuality.Medium));
+                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize), SKSamplingOptions.Default));
                     count++;
                 }
                 if (count > 0)

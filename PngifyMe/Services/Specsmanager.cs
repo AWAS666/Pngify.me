@@ -18,6 +18,7 @@ namespace PngifyMe.Services
         public static SpecsSettings Settings { get; private set; }
         public static string BasePath { get; }
         public static string FilePath { get; }
+        public static int TitsSize { get; set; }
 
         static Specsmanager()
         {
@@ -35,21 +36,25 @@ namespace PngifyMe.Services
                     Width = 960;
                     Height = 540;
                     FPS = 60;
+                    TitsSize = 30;
                     break;
                 case SpecMode.Low:
                     Width = 1280;
                     Height = 720;
                     FPS = 60;
+                    TitsSize = 50;
                     break;
                 case SpecMode.Normal:
                     Width = 1920;
                     Height = 1080;
                     FPS = 60;
+                    TitsSize = 75;
                     break;
                 case SpecMode.Ultra:
                     Width = 3840;
                     Height = 2160;
                     FPS = 60;
+                    TitsSize = 100;
                     break;
                 default:
                     break;
