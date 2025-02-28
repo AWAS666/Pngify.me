@@ -1,7 +1,10 @@
 ﻿using Avalonia;
 using Avalonia.ReactiveUI;
+using PngifyMe.Helpers;
 using Serilog;
+using Serilog.Events;
 using System;
+using System.IO;
 
 namespace PngifyMe.Desktop;
 
@@ -15,6 +18,7 @@ class Program
     {
         try
         {
+            SetupSerilog();
             BuildAvaloniaApp()
                 .StartWithClassicDesktopLifetime(args);
         }
@@ -37,5 +41,22 @@ class Program
             .WithInterFont()
             .LogToTrace()
             .UseReactiveUI();
+    }
+
+    private static void SetupSerilog()
+    {
+        // Define the path to the log file in %localappdata%/appname
+        var localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PngifyMe", "log-.txt");
+        // Ensure the directory exists
+        Directory.CreateDirectory(Path.GetDirectoryName(localAppDataPath));
+        // Configure Serilog to write to a file
+        //https://github.com/serilog/serilog/wiki/configuration-basics
+        Log.Logger = new LoggerConfiguration()
+            .WriteTo.File(localAppDataPath,
+                rollingInterval: RollingInterval.Day,
+                restrictedToMinimumLevel: LogEventLevel.Debug)
+            .WriteTo.Sink(ErrorForwarder.Sink, restrictedToMinimumLevel: LogEventLevel.Information)
+            .MinimumLevel.Debug()
+            .CreateLogger();
     }
 }
