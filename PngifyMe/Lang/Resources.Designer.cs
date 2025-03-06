@@ -277,6 +277,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enable Spout2.
+        /// </summary>
+        public static string EnableSpout2 {
+            get {
+                return ResourceManager.GetString("EnableSpout2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Endpoint:.
         /// </summary>
         public static string EndPoint {
@@ -399,6 +408,15 @@ namespace PngifyMe.Lang {
         public static string InputText {
             get {
                 return ResourceManager.GetString("InputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Install in OBS.
+        /// </summary>
+        public static string InstallInOBS {
+            get {
+                return ResourceManager.GetString("InstallInOBS", resourceCulture);
             }
         }
         
@@ -601,6 +619,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Not Authenticated.
+        /// </summary>
+        public static string NotAuthenticated {
+            get {
+                return ResourceManager.GetString("NotAuthenticated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not connected.
         /// </summary>
         public static string NotConnected {
@@ -642,6 +669,15 @@ namespace PngifyMe.Lang {
         public static string Output {
             get {
                 return ResourceManager.GetString("Output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Performance:.
+        /// </summary>
+        public static string Performance {
+            get {
+                return ResourceManager.GetString("Performance", resourceCulture);
             }
         }
         
@@ -772,6 +808,42 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Retry Twitch Connection.
+        /// </summary>
+        public static string RetryTwitchConnection {
+            get {
+                return ResourceManager.GetString("RetryTwitchConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use this to start twitch after enabling it, or restarting it after going offline.
+        /// </summary>
+        public static string RetryTwitchConnectionToolTip {
+            get {
+                return ResourceManager.GetString("RetryTwitchConnectionToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Run Specs.
+        /// </summary>
+        public static string RunSpecs {
+            get {
+                return ResourceManager.GetString("RunSpecs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Requires save and restart to apply.
+        /// </summary>
+        public static string RunSpecsNote {
+            get {
+                return ResourceManager.GetString("RunSpecsNote", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hello, how are you?.
         /// </summary>
         public static string SampleText {
@@ -817,6 +889,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Show FPS Counter.
+        /// </summary>
+        public static string ShowFPSCounter {
+            get {
+                return ResourceManager.GetString("ShowFPSCounter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show Hitboxes.
         /// </summary>
         public static string ShowHitbox {
@@ -840,6 +921,42 @@ namespace PngifyMe.Lang {
         public static string SoundEnabled {
             get {
                 return ResourceManager.GetString("SoundEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Low is 1280x720 60fps.
+        /// </summary>
+        public static string SpecLow {
+            get {
+                return ResourceManager.GetString("SpecLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Normal is 1920x1080 60fps.
+        /// </summary>
+        public static string SpecNormal {
+            get {
+                return ResourceManager.GetString("SpecNormal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Ultra is 3840x2160 60fps.
+        /// </summary>
+        public static string SpecUltra {
+            get {
+                return ResourceManager.GetString("SpecUltra", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Very Low is 960x540 60fps.
+        /// </summary>
+        public static string SpecVeryLow {
+            get {
+                return ResourceManager.GetString("SpecVeryLow", resourceCulture);
             }
         }
         
@@ -1150,6 +1267,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Twitch Enabled.
+        /// </summary>
+        public static string TwitchEnabled {
+            get {
+                return ResourceManager.GetString("TwitchEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Twitch Redeem:.
         /// </summary>
         public static string TwitchRedeem {
@@ -1182,6 +1308,24 @@ namespace PngifyMe.Lang {
         public static string TwitchStatus {
             get {
                 return ResourceManager.GetString("TwitchStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch Token lasts until:.
+        /// </summary>
+        public static string TwitchTokenLasts {
+            get {
+                return ResourceManager.GetString("TwitchTokenLasts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to you will need to refresh this every now and then.
+        /// </summary>
+        public static string TwitchTokenLastsToolTip {
+            get {
+                return ResourceManager.GetString("TwitchTokenLastsToolTip", resourceCulture);
             }
         }
         

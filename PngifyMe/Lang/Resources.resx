@@ -504,4 +504,52 @@
   <data name="SelectedTriggerSetting" xml:space="preserve">
     <value>Selected Trigger Settings:</value>
   </data>
+  <data name="TwitchEnabled" xml:space="preserve">
+    <value>Twitch Enabled</value>
+  </data>
+  <data name="RetryTwitchConnection" xml:space="preserve">
+    <value>Retry Twitch Connection</value>
+  </data>
+  <data name="RetryTwitchConnectionToolTip" xml:space="preserve">
+    <value>Use this to start twitch after enabling it, or restarting it after going offline</value>
+  </data>
+  <data name="TwitchTokenLasts" xml:space="preserve">
+    <value>Twitch Token lasts until:</value>
+  </data>
+  <data name="TwitchTokenLastsToolTip" xml:space="preserve">
+    <value>you will need to refresh this every now and then</value>
+  </data>
+  <data name="NotAuthenticated" xml:space="preserve">
+    <value>Not Authenticated</value>
+  </data>
+  <data name="Performance" xml:space="preserve">
+    <value>Performance:</value>
+  </data>
+  <data name="ShowFPSCounter" xml:space="preserve">
+    <value>Show FPS Counter</value>
+  </data>
+  <data name="RunSpecs" xml:space="preserve">
+    <value>Run Specs</value>
+  </data>
+  <data name="RunSpecsNote" xml:space="preserve">
+    <value>Requires save and restart to apply</value>
+  </data>
+  <data name="SpecVeryLow" xml:space="preserve">
+    <value>Very Low is 960x540 60fps</value>
+  </data>
+  <data name="SpecLow" xml:space="preserve">
+    <value>Low is 1280x720 60fps</value>
+  </data>
+  <data name="SpecNormal" xml:space="preserve">
+    <value>Normal is 1920x1080 60fps</value>
+  </data>
+  <data name="SpecUltra" xml:space="preserve">
+    <value>Ultra is 3840x2160 60fps</value>
+  </data>
+  <data name="EnableSpout2" xml:space="preserve">
+    <value>Enable Spout2</value>
+  </data>
+  <data name="InstallInOBS" xml:space="preserve">
+    <value>Install in OBS</value>
+  </data>
 </root>
