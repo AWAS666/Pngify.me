@@ -88,6 +88,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply and Reload.
+        /// </summary>
+        public static string ApplyAndReload {
+            get {
+                return ResourceManager.GetString("ApplyAndReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avatar.
         /// </summary>
         public static string Avatar {
@@ -102,6 +111,42 @@ namespace PngifyMe.Lang {
         public static string ChangeSound {
             get {
                 return ResourceManager.GetString("ChangeSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Chat Trigger:.
+        /// </summary>
+        public static string ChatTrigger {
+            get {
+                return ResourceManager.GetString("ChatTrigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TTSPet will respond to any chat message starting with this, leave empty to disable.
+        /// </summary>
+        public static string ChatTriggerToolTip {
+            get {
+                return ResourceManager.GetString("ChatTriggerToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose your TTS Provider.
+        /// </summary>
+        public static string ChooseTTSProvider {
+            get {
+                return ResourceManager.GetString("ChooseTTSProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        public static string Clear {
+            get {
+                return ResourceManager.GetString("Clear", resourceCulture);
             }
         }
         
@@ -142,6 +187,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom Domain:.
+        /// </summary>
+        public static string CustomDomain {
+            get {
+                return ResourceManager.GetString("CustomDomain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to for non OpenAI Models.
+        /// </summary>
+        public static string CustomDomainToolTip {
+            get {
+                return ResourceManager.GetString("CustomDomainToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
         public static string Default {
@@ -178,11 +241,47 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Endpoint:.
+        /// </summary>
+        public static string EndPoint {
+            get {
+                return ResourceManager.GetString("EndPoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string Export {
             get {
                 return ResourceManager.GetString("Export", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter.
+        /// </summary>
+        public static string Filter {
+            get {
+                return ResourceManager.GetString("Filter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filtered Words (separated with &quot;;&quot;):.
+        /// </summary>
+        public static string FilteredWords {
+            get {
+                return ResourceManager.GetString("FilteredWords", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter all filtered words you want to add.
+        /// </summary>
+        public static string FilteredWordsToolTip {
+            get {
+                return ResourceManager.GetString("FilteredWordsToolTip", resourceCulture);
             }
         }
         
@@ -214,6 +313,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to History.
+        /// </summary>
+        public static string History {
+            get {
+                return ResourceManager.GetString("History", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to History and Test.
+        /// </summary>
+        public static string HistoryAndTest {
+            get {
+                return ResourceManager.GetString("HistoryAndTest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Mode.
         /// </summary>
         public static string HumanMode {
@@ -232,11 +349,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Input:.
+        ///   Looks up a localized string similar to Input.
         /// </summary>
         public static string Input {
             get {
                 return ResourceManager.GetString("Input", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input Text:.
+        /// </summary>
+        public static string InputText {
+            get {
+                return ResourceManager.GetString("InputText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Just Read, no LLM.
+        /// </summary>
+        public static string JustReadNoLLM {
+            get {
+                return ResourceManager.GetString("JustReadNoLLM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to if checked: will just read all messages and not respond using the llm.
+        /// </summary>
+        public static string JustReadNoLLMToolTip {
+            get {
+                return ResourceManager.GetString("JustReadNoLLMToolTip", resourceCulture);
             }
         }
         
@@ -259,11 +403,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LLM.
+        /// </summary>
+        public static string LLM {
+            get {
+                return ResourceManager.GetString("LLM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load.
         /// </summary>
         public static string Load {
             get {
                 return ResourceManager.GetString("Load", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Context:.
+        /// </summary>
+        public static string MaxContext {
+            get {
+                return ResourceManager.GetString("MaxContext", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How many messages should be kept in memory.
+        /// </summary>
+        public static string MaxContextToolTip {
+            get {
+                return ResourceManager.GetString("MaxContextToolTip", resourceCulture);
             }
         }
         
@@ -282,6 +453,24 @@ namespace PngifyMe.Lang {
         public static string MaximumObjectSpeed {
             get {
                 return ResourceManager.GetString("MaximumObjectSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Max Tokens:.
+        /// </summary>
+        public static string MaxTokens {
+            get {
+                return ResourceManager.GetString("MaxTokens", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How many tokens the model should be allowed to respond with (1 token is roughly 1 word).
+        /// </summary>
+        public static string MaxTokensToolTip {
+            get {
+                return ResourceManager.GetString("MaxTokensToolTip", resourceCulture);
             }
         }
         
@@ -313,11 +502,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimum bits threshhold to react.
+        /// </summary>
+        public static string MinimumBitsToolTip {
+            get {
+                return ResourceManager.GetString("MinimumBitsToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Minimum Object Speed:.
         /// </summary>
         public static string MinimumObjectSpeed {
             get {
                 return ResourceManager.GetString("MinimumObjectSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Model:.
+        /// </summary>
+        public static string Model {
+            get {
+                return ResourceManager.GetString("Model", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input your api model name.
+        /// </summary>
+        public static string ModelToolTip {
+            get {
+                return ResourceManager.GetString("ModelToolTip", resourceCulture);
             }
         }
         
@@ -349,7 +565,34 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Output:.
+        ///   Looks up a localized string similar to OpenAI API Key:.
+        /// </summary>
+        public static string OpenAIKey {
+            get {
+                return ResourceManager.GetString("OpenAIKey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insert your openai key or other provider.
+        /// </summary>
+        public static string OpenAIKeyToolTip {
+            get {
+                return ResourceManager.GetString("OpenAIKeyToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to (optional).
+        /// </summary>
+        public static string Optional {
+            get {
+                return ResourceManager.GetString("Optional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output.
         /// </summary>
         public static string Output {
             get {
@@ -367,6 +610,60 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to React to followers.
+        /// </summary>
+        public static string ReactFollowers {
+            get {
+                return ResourceManager.GetString("ReactFollowers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Will read new followers if enabled.
+        /// </summary>
+        public static string ReactFollowersToolTip {
+            get {
+                return ResourceManager.GetString("ReactFollowersToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to React to all chat messages.
+        /// </summary>
+        public static string ReactToAllMessages {
+            get {
+                return ResourceManager.GetString("ReactToAllMessages", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to will react to any chat message.
+        /// </summary>
+        public static string ReactToAllMessagesToolTip {
+            get {
+                return ResourceManager.GetString("ReactToAllMessagesToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Read.
+        /// </summary>
+        public static string Read {
+            get {
+                return ResourceManager.GetString("Read", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use this to read the input text (usefull to test tts voices).
+        /// </summary>
+        public static string ReadToolTip {
+            get {
+                return ResourceManager.GetString("ReadToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Redeem:.
         /// </summary>
         public static string Redeem {
@@ -376,11 +673,65 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Replacement:.
+        /// </summary>
+        public static string Replacement {
+            get {
+                return ResourceManager.GetString("Replacement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This phrase will replace all filtered words found in the text the ttspet is about to speak.
+        /// </summary>
+        public static string ReplacementToolTip {
+            get {
+                return ResourceManager.GetString("ReplacementToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Respond.
+        /// </summary>
+        public static string Respond {
+            get {
+                return ResourceManager.GetString("Respond", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use this to respond to the input text.
+        /// </summary>
+        public static string RespondToolTip {
+            get {
+                return ResourceManager.GetString("RespondToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hello, how are you?.
+        /// </summary>
+        public static string SampleText {
+            get {
+                return ResourceManager.GetString("SampleText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         public static string SaveChanges {
             get {
                 return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Settings {
+            get {
+                return ResourceManager.GetString("Settings", resourceCulture);
             }
         }
         
@@ -412,6 +763,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System Message (Base instructions):.
+        /// </summary>
+        public static string SystemMessage {
+            get {
+                return ResourceManager.GetString("SystemMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test Rain.
         /// </summary>
         public static string TestRain {
@@ -439,11 +799,29 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Test your setup.
+        /// </summary>
+        public static string TestYourSetup {
+            get {
+                return ResourceManager.GetString("TestYourSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Throwing.
         /// </summary>
         public static string Throwing {
             get {
                 return ResourceManager.GetString("Throwing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TimeStamp.
+        /// </summary>
+        public static string TimeStamp {
+            get {
+                return ResourceManager.GetString("TimeStamp", resourceCulture);
             }
         }
         
@@ -556,6 +934,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TTS.
+        /// </summary>
+        public static string TTS {
+            get {
+                return ResourceManager.GetString("TTS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TTS Model:.
+        /// </summary>
+        public static string TTSModel {
+            get {
+                return ResourceManager.GetString("TTSModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TTSPet.
         /// </summary>
         public static string TTSPet {
@@ -570,6 +966,42 @@ namespace PngifyMe.Lang {
         public static string TTSPetMode {
             get {
                 return ResourceManager.GetString("TTSPetMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TTS Pet Setup.
+        /// </summary>
+        public static string TTSPetSetup {
+            get {
+                return ResourceManager.GetString("TTSPetSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TTS Provider:.
+        /// </summary>
+        public static string TTSProvider {
+            get {
+                return ResourceManager.GetString("TTSProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick your TTS provider.
+        /// </summary>
+        public static string TTSProviderToolTip {
+            get {
+                return ResourceManager.GetString("TTSProviderToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TTS Voice:.
+        /// </summary>
+        public static string TTSVoice {
+            get {
+                return ResourceManager.GetString("TTSVoice", resourceCulture);
             }
         }
         
@@ -592,11 +1024,56 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Twitch Redeem:.
+        /// </summary>
+        public static string TwitchRedeem {
+            get {
+                return ResourceManager.GetString("TwitchRedeem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to the name of the twitch redeem which should trigger the ttspet.
+        /// </summary>
+        public static string TwitchRedeemToolTip {
+            get {
+                return ResourceManager.GetString("TwitchRedeemToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the name of any redeem that should trigger the ttspet.
+        /// </summary>
+        public static string TwitchRedeemToolTip2 {
+            get {
+                return ResourceManager.GetString("TwitchRedeemToolTip2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Twitch Status:.
         /// </summary>
         public static string TwitchStatus {
             get {
                 return ResourceManager.GetString("TwitchStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch triggers.
+        /// </summary>
+        public static string TwitchTriggers {
+            get {
+                return ResourceManager.GetString("TwitchTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User.
+        /// </summary>
+        public static string User {
+            get {
+                return ResourceManager.GetString("User", resourceCulture);
             }
         }
         

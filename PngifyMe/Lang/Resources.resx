@@ -139,7 +139,7 @@
     <value>Human Mode</value>
   </data>
   <data name="Input" xml:space="preserve">
-    <value>Input:</value>
+    <value>Input</value>
   </data>
   <data name="LayerSetup" xml:space="preserve">
     <value>LayerSetup</value>
@@ -160,7 +160,7 @@
     <value>Not connected</value>
   </data>
   <data name="Output" xml:space="preserve">
-    <value>Output:</value>
+    <value>Output</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Profiles</value>
@@ -302,5 +302,164 @@
   </data>
   <data name="Export" xml:space="preserve">
     <value>Export</value>
+  </data>
+  <data name="TTSPetSetup" xml:space="preserve">
+    <value>TTS Pet Setup</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="ApplyAndReload" xml:space="preserve">
+    <value>Apply and Reload</value>
+  </data>
+  <data name="LLM" xml:space="preserve">
+    <value>LLM</value>
+  </data>
+  <data name="JustReadNoLLM" xml:space="preserve">
+    <value>Just Read, no LLM</value>
+  </data>
+  <data name="JustReadNoLLMToolTip" xml:space="preserve">
+    <value>if checked: will just read all messages and not respond using the llm</value>
+  </data>
+  <data name="OpenAIKey" xml:space="preserve">
+    <value>OpenAI API Key:</value>
+  </data>
+  <data name="OpenAIKeyToolTip" xml:space="preserve">
+    <value>Insert your openai key or other provider</value>
+  </data>
+  <data name="CustomDomain" xml:space="preserve">
+    <value>Custom Domain:</value>
+  </data>
+  <data name="CustomDomainToolTip" xml:space="preserve">
+    <value>for non OpenAI Models</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>(optional)</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model:</value>
+  </data>
+  <data name="ModelToolTip" xml:space="preserve">
+    <value>Input your api model name</value>
+  </data>
+  <data name="MaxTokens" xml:space="preserve">
+    <value>Max Tokens:</value>
+  </data>
+  <data name="MaxTokensToolTip" xml:space="preserve">
+    <value>How many tokens the model should be allowed to respond with (1 token is roughly 1 word)</value>
+  </data>
+  <data name="MaxContext" xml:space="preserve">
+    <value>Max Context:</value>
+  </data>
+  <data name="MaxContextToolTip" xml:space="preserve">
+    <value>How many messages should be kept in memory</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="SystemMessage" xml:space="preserve">
+    <value>System Message (Base instructions):</value>
+  </data>
+  <data name="TwitchTriggers" xml:space="preserve">
+    <value>Twitch triggers</value>
+  </data>
+  <data name="MinimumBitsToolTip" xml:space="preserve">
+    <value>Minimum bits threshhold to react</value>
+  </data>
+  <data name="TwitchRedeem" xml:space="preserve">
+    <value>Twitch Redeem:</value>
+  </data>
+  <data name="TwitchRedeemToolTip" xml:space="preserve">
+    <value>the name of the twitch redeem which should trigger the ttspet</value>
+  </data>
+  <data name="TwitchRedeemToolTip2" xml:space="preserve">
+    <value>Enter the name of any redeem that should trigger the ttspet</value>
+  </data>
+  <data name="ChatTrigger" xml:space="preserve">
+    <value>Chat Trigger:</value>
+  </data>
+  <data name="ChatTriggerToolTip" xml:space="preserve">
+    <value>TTSPet will respond to any chat message starting with this, leave empty to disable</value>
+  </data>
+  <data name="ReactToAllMessages" xml:space="preserve">
+    <value>React to all chat messages</value>
+  </data>
+  <data name="ReactToAllMessagesToolTip" xml:space="preserve">
+    <value>will react to any chat message</value>
+  </data>
+  <data name="ReactFollowers" xml:space="preserve">
+    <value>React to followers</value>
+  </data>
+  <data name="ReactFollowersToolTip" xml:space="preserve">
+    <value>Will read new followers if enabled</value>
+  </data>
+  <data name="TTS" xml:space="preserve">
+    <value>TTS</value>
+  </data>
+  <data name="ChooseTTSProvider" xml:space="preserve">
+    <value>Choose your TTS Provider</value>
+  </data>
+  <data name="TTSProvider" xml:space="preserve">
+    <value>TTS Provider:</value>
+  </data>
+  <data name="TTSVoice" xml:space="preserve">
+    <value>TTS Voice:</value>
+  </data>
+  <data name="EndPoint" xml:space="preserve">
+    <value>Endpoint:</value>
+  </data>
+  <data name="TTSProviderToolTip" xml:space="preserve">
+    <value>Pick your TTS provider</value>
+  </data>
+  <data name="TTSModel" xml:space="preserve">
+    <value>TTS Model:</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="Replacement" xml:space="preserve">
+    <value>Replacement:</value>
+  </data>
+  <data name="ReplacementToolTip" xml:space="preserve">
+    <value>This phrase will replace all filtered words found in the text the ttspet is about to speak</value>
+  </data>
+  <data name="FilteredWords" xml:space="preserve">
+    <value>Filtered Words (separated with ";"):</value>
+  </data>
+  <data name="FilteredWordsToolTip" xml:space="preserve">
+    <value>Enter all filtered words you want to add</value>
+  </data>
+  <data name="HistoryAndTest" xml:space="preserve">
+    <value>History and Test</value>
+  </data>
+  <data name="TestYourSetup" xml:space="preserve">
+    <value>Test your setup</value>
+  </data>
+  <data name="SampleText" xml:space="preserve">
+    <value>Hello, how are you?</value>
+  </data>
+  <data name="InputText" xml:space="preserve">
+    <value>Input Text:</value>
+  </data>
+  <data name="Respond" xml:space="preserve">
+    <value>Respond</value>
+  </data>
+  <data name="RespondToolTip" xml:space="preserve">
+    <value>Use this to respond to the input text</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="ReadToolTip" xml:space="preserve">
+    <value>Use this to read the input text (usefull to test tts voices)</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="TimeStamp" xml:space="preserve">
+    <value>TimeStamp</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
   </data>
 </root>
