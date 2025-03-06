@@ -124,6 +124,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Art.
+        /// </summary>
+        public static string Art {
+            get {
+                return ResourceManager.GetString("Art", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avatar.
         /// </summary>
         public static string Avatar {
@@ -196,6 +205,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Created by:.
+        /// </summary>
+        public static string Createdby {
+            get {
+                return ResourceManager.GetString("Createdby", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Credits.
         /// </summary>
         public static string Credits {
@@ -246,6 +264,15 @@ namespace PngifyMe.Lang {
         public static string Default {
             get {
                 return ResourceManager.GetString("Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default Character by:.
+        /// </summary>
+        public static string DefaultCharacter {
+            get {
+                return ResourceManager.GetString("DefaultCharacter", resourceCulture);
             }
         }
         
@@ -475,6 +502,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Logo by:.
+        /// </summary>
+        public static string LogoBy {
+            get {
+                return ResourceManager.GetString("LogoBy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Context:.
         /// </summary>
         public static string MaxContext {
@@ -660,6 +696,15 @@ namespace PngifyMe.Lang {
         public static string Optional {
             get {
                 return ResourceManager.GetString("Optional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Other Software/Games.
+        /// </summary>
+        public static string OtherSoftware {
+            get {
+                return ResourceManager.GetString("OtherSoftware", resourceCulture);
             }
         }
         
@@ -957,6 +1002,15 @@ namespace PngifyMe.Lang {
         public static string SpecVeryLow {
             get {
                 return ResourceManager.GetString("SpecVeryLow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Support us:.
+        /// </summary>
+        public static string SupportUs {
+            get {
+                return ResourceManager.GetString("SupportUs", resourceCulture);
             }
         }
         

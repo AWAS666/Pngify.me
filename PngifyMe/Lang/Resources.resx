@@ -552,4 +552,22 @@
   <data name="InstallInOBS" xml:space="preserve">
     <value>Install in OBS</value>
   </data>
+  <data name="Createdby" xml:space="preserve">
+    <value>Created by:</value>
+  </data>
+  <data name="SupportUs" xml:space="preserve">
+    <value>Support us:</value>
+  </data>
+  <data name="OtherSoftware" xml:space="preserve">
+    <value>Other Software/Games</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Art</value>
+  </data>
+  <data name="DefaultCharacter" xml:space="preserve">
+    <value>Default Character by:</value>
+  </data>
+  <data name="LogoBy" xml:space="preserve">
+    <value>Logo by:</value>
+  </data>
 </root>

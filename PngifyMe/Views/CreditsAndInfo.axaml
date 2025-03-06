@@ -4,20 +4,21 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
-			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
-			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"		 
              x:Class="PngifyMe.Views.CreditsAndInfo"
 			 >
 
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel Spacing="10">
-			<TextBlock FontSize="24">Credits</TextBlock>
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.Credits}"/>
 
 			<Image Source="/Assets/logo_full.png" MaxHeight="250"></Image>
 
 			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBlock VerticalAlignment="Center">Created by:</TextBlock>
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Createdby}"/>
 				<HyperlinkButton
 					  BorderThickness="1"
 					  Classes="WithIcon"
@@ -32,7 +33,7 @@
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBlock VerticalAlignment="Center">Support us:</TextBlock>
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.SupportUs}"/>
 				<HyperlinkButton
 					  BorderThickness="1"
 					  Classes="WithIcon"
@@ -47,8 +48,7 @@
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
-			<TextBlock FontSize="24">Other Software/Games</TextBlock>
-
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.OtherSoftware}"/>
 
 			<StackPanel Orientation="Horizontal" Spacing="5">
 				<TextBlock VerticalAlignment="Center"></TextBlock>
@@ -66,10 +66,10 @@
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
-			<TextBlock FontSize="24">Art</TextBlock>
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.Art}"/>
 
 			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBlock VerticalAlignment="Center">Default Character by:</TextBlock>
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.DefaultCharacter}"/>
 				<HyperlinkButton
 				  BorderThickness="1"
 				  Classes="WithIcon"
@@ -84,7 +84,7 @@
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBlock VerticalAlignment="Center">Logo by:</TextBlock>
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.LogoBy}"/>
 				<HyperlinkButton
 			  BorderThickness="1"
 			  Classes="WithIcon"
@@ -97,8 +97,6 @@
 						VerticalAlignment="Center" />
 				</HyperlinkButton>
 			</StackPanel>
-
-
 		</StackPanel>
 	</Grid>
 </UserControl>
