@@ -20,10 +20,10 @@
 		<DataTemplate DataType="{x:Type sett:HotkeyTrigger}">
 			<StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.HotKey}" Width="75"/>
-					<TextBox HorizontalAlignment="Left" Name="{x:Static lang:Resources.Hotkeybox}" KeyDown="HotkeyDown"
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Hotkey}" Width="75"/>
+					<TextBox HorizontalAlignment="Left" Name="Hotkeybox" KeyDown="HotkeyDown"
 						Text="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).Hotkey}"
-						 Watermark="{x:Static lang:Resources.HotKey}" Width="150">
+						 Watermark="{x:Static lang:Resources.Hotkey}" Width="150">
 					</TextBox>
 				</StackPanel>
 			</StackPanel>
