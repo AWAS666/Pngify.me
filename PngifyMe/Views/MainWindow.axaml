@@ -9,6 +9,7 @@
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
 		xmlns:sett="clr-namespace:PngifyMe.Settings"
 		xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+		xmlns:lang="clr-namespace:PngifyMe.Lang"		
         x:Class="PngifyMe.Views.MainWindow"
         Icon="/Assets/icon.ico"
 		Background="Transparent"
@@ -34,22 +35,21 @@
 				<vmh:ModeSelect></vmh:ModeSelect>
 				<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="5">
 					<Button  Click="SaveSettings" 
-							ToolTip.Tip="Only save, doesnt apply"
+							ToolTip.Tip="{x:Static lang:Resources.ToolTipSaveChanges}"
 							Classes="Primary" Theme="{DynamicResource SolidButton}"
 					>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock>Save Changes</TextBlock>
+							<TextBlock Text="{x:Static lang:Resources.SaveChanges}"/>
 							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
 
 					</Button>
 					<Button  Click="CloseSettings" 
-							ToolTip.Tip="Close settings"
+							ToolTip.Tip="{x:Static lang:Resources.ToolTipCloseSettings}"
 							Classes="Warning" Theme="{DynamicResource SolidButton}"
 					>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<!--<TextBlock>Close</TextBlock>-->
 							<lucideAvalonia:Lucide Icon="X" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -61,9 +61,9 @@
 				<Rectangle Fill="White" Height="1"></Rectangle>
 				<StackPanel Orientation="Horizontal" Spacing="10"
 							PointerPressed="TwitchPressed"
-							ToolTip.Tip="Head to general settings to authenticate with twitch">
-					<TextBlock>Twitch Status:</TextBlock>
-					<TextBlock x:Name="twitchStatus">Not connected</TextBlock>
+							ToolTip.Tip="{x:Static lang:Resources.ToolTipTwitchStatus}">
+					<TextBlock Text="{x:Static lang:Resources.TwitchStatus}"/>
+					<TextBlock x:Name="twitchStatus" Text="{x:Static lang:Resources.NotConnected}"/>
 				</StackPanel>
 			</StackPanel>
 			<TabControl Grid.Row="1" WrapSelection="True" Name="tabs"
@@ -72,7 +72,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">Microphone</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Microphone}"/>
 							<lucideAvalonia:Lucide Icon="Mic" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -82,7 +82,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">LayoutMenu</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.LayoutMenu}"/>
 							<lucideAvalonia:Lucide Icon="LayoutGrid" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -92,7 +92,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">LayerSetup</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.LayerSetup}"/>
 							<lucideAvalonia:Lucide Icon="Layers" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -102,7 +102,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">Avatar</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Avatar}"/>
 							<lucideAvalonia:Lucide Icon="User" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -112,7 +112,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">Throwing</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Throwing}"/>
 							<lucideAvalonia:Lucide Icon="Anchor" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -122,7 +122,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">TTSPet</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.TTSPet}"/>
 							<lucideAvalonia:Lucide Icon="Squirrel" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -132,7 +132,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">Profiles</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Profiles}"/>
 							<lucideAvalonia:Lucide Icon="Users" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -142,7 +142,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">General</TextBlock>
+							<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.General}"/>
 							<lucideAvalonia:Lucide Icon="Cog" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>
@@ -152,7 +152,7 @@
 				<TabItem FontSize="12" Width="125">
 					<TabItem.Header>
 						<StackPanel Orientation="Horizontal" Spacing="5">
-							<TextBlock VerticalAlignment="Center">Credits</TextBlock>
+							<TextBlock VerticalAlignment="Center"  Text="{x:Static lang:Resources.Credits}"/>
 							<lucideAvalonia:Lucide Icon="Copyright" StrokeBrush="White"
 												   StrokeThickness="2" Width="22" Height="22"/>
 						</StackPanel>

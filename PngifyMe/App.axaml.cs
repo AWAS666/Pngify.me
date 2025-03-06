@@ -1,6 +1,7 @@
 ﻿using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
+using CppSharp.Types.Std;
 using PngifyMe.Helpers;
 using PngifyMe.Services;
 using PngifyMe.Services.Hotkey;
@@ -10,6 +11,7 @@ using PngifyMe.Views;
 using Serilog;
 using Serilog.Events;
 using System;
+using System.Globalization;
 using System.IO;
 using System.Threading.Tasks;
 
@@ -24,6 +26,8 @@ public partial class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
+        // load language here, either system or steam
+        Lang.Resources.Culture = new CultureInfo("en-us");
         AudioService.Init();
         WebSocketServer.Start();
 

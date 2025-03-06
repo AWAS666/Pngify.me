@@ -8,13 +8,14 @@
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
              x:Class="PngifyMe.Views.GeneralSettings"
 			 x:DataType="vm:GeneralSettingsViewModel"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"			 
 			 >
 	<Design.DataContext>
 		<vm:GeneralSettingsViewModel></vm:GeneralSettingsViewModel>
 	</Design.DataContext>
 	<StackPanel Spacing="5">
-		<TextBlock FontSize="24">General Settings</TextBlock>
-		<TextBlock FontSize="16">Twitch:</TextBlock>
+		<TextBlock FontSize="24" Text="{x:Static lang:Resources.GeneralSettings}"/>
+		<TextBlock FontSize="16" Text="{x:Static lang:Resources.Twitch}"/>
 
 		<StackPanel Orientation="Horizontal" Spacing="5">
 			<Label VerticalAlignment="Center">Twitch Enabled</Label>

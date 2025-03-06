@@ -1,160 +1,176 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-  <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <LangVersion>latest</LangVersion>
-    <AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
-    <AssemblyVersion>2.0.2.0</AssemblyVersion>
-    <Version>$(VersionPrefix)</Version>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <FileVersion>2.0.2.0</FileVersion>
-    <AssemblyName>PngifyMeCode</AssemblyName>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
-    <DebugType>embedded</DebugType>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net9.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<LangVersion>latest</LangVersion>
+		<AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
+		<AssemblyVersion>2.0.2.0</AssemblyVersion>
+		<Version>$(VersionPrefix)</Version>
+		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+		<FileVersion>2.0.2.0</FileVersion>
+		<AssemblyName>PngifyMeCode</AssemblyName>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+		<DebugType>embedded</DebugType>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <AvaloniaResource Include="Assets\**" />
-  </ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Include="Assets\**" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <AvaloniaResource Remove="Assets\closedMouthclosedEyes.png" />
-    <AvaloniaResource Remove="Assets\closedMouthopenEyes.png" />
-    <AvaloniaResource Remove="Assets\openMouthclosedEyes.png" />
-    <AvaloniaResource Remove="Assets\openMouthopenEyes.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<AvaloniaResource Remove="Assets\closedMouthclosedEyes.png" />
+		<AvaloniaResource Remove="Assets\closedMouthopenEyes.png" />
+		<AvaloniaResource Remove="Assets\openMouthclosedEyes.png" />
+		<AvaloniaResource Remove="Assets\openMouthopenEyes.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <None Remove="Assets\logo_full.png" />
-  </ItemGroup>
+	<ItemGroup>
+		<None Remove="Assets\logo_full.png" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Assets\closedMouthclosedEyes.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\closedMouthopenEyes.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Assets\openMouthclosedEyes.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\closedMouthclosedEyes.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\closedMouthopenEyes.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="Assets\openMouthclosedEyes.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Content Include="Assets\openMouthopenEyes.png">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
+	<ItemGroup>
+		<Content Include="Assets\openMouthopenEyes.png">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+	</ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Include=".env" />
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Include=".env" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Avalonia" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Skia" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.4" />
-    <PackageReference Include="Avalonia.ReactiveUI" Version="11.2.4" />
-    <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
-    <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.4" />
-    <PackageReference Include="Avalonia.Win32" Version="11.2.4" />
-    <PackageReference Include="Betalgo.OpenAI" Version="8.7.2" />
-    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-    <PackageReference Include="Irihi.Ursa" Version="1.8.1" />
-    <PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.8.1" />
-    <PackageReference Include="LucideAvalonia" Version="1.6.1" />
-    <PackageReference Include="NAudio" Version="2.2.1" />
-    <PackageReference Include="NAudio.Core" Version="2.2.1" />
-    <PackageReference Include="NetCoreServer" Version="8.0.7" />
-    <PackageReference Include="PortAudioSharp2" Version="1.0.4" />
-    <PackageReference Include="Semi.Avalonia" Version="11.2.1.4" />
-    <PackageReference Include="Semi.Avalonia.ColorPicker" Version="11.2.1.4" />
-    <PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.4" />
-    <PackageReference Include="Serilog" Version="4.2.0" />
-    <PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
-    <PackageReference Include="SharpHook" Version="5.3.8" />
-    <PackageReference Include="SkiaImageView.Avalonia11" Version="1.5.0" />
-    <PackageReference Include="SkiaSharp" Version="3.116.1" />
-    <PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1" />
-    <PackageReference Include="Spout.NETCore" Version="1.0.0" />
-    <PackageReference Include="System.Drawing.Common" Version="9.0.2" />
-    <PackageReference Include="TwitchLib" Version="3.5.3" />
-    <PackageReference Include="TwitchLib.EventSub.Websockets" Version="0.5.0" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Avalonia" Version="11.2.4" />
+		<PackageReference Include="Avalonia.Controls.DataGrid" Version="11.2.4" />
+		<PackageReference Include="Avalonia.Skia" Version="11.2.4" />
+		<PackageReference Include="Avalonia.Themes.Fluent" Version="11.2.4" />
+		<PackageReference Include="Avalonia.Fonts.Inter" Version="11.2.4" />
+		<PackageReference Include="Avalonia.ReactiveUI" Version="11.2.4" />
+		<!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+		<PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.2.4" />
+		<PackageReference Include="Avalonia.Win32" Version="11.2.4" />
+		<PackageReference Include="Betalgo.OpenAI" Version="8.7.2" />
+		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+		<PackageReference Include="Irihi.Ursa" Version="1.8.1" />
+		<PackageReference Include="Irihi.Ursa.Themes.Semi" Version="1.8.1" />
+		<PackageReference Include="LucideAvalonia" Version="1.6.1" />
+		<PackageReference Include="NAudio" Version="2.2.1" />
+		<PackageReference Include="NAudio.Core" Version="2.2.1" />
+		<PackageReference Include="NetCoreServer" Version="8.0.7" />
+		<PackageReference Include="PortAudioSharp2" Version="1.0.4" />
+		<PackageReference Include="Semi.Avalonia" Version="11.2.1.4" />
+		<PackageReference Include="Semi.Avalonia.ColorPicker" Version="11.2.1.4" />
+		<PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.4" />
+		<PackageReference Include="Serilog" Version="4.2.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="6.0.0" />
+		<PackageReference Include="SharpHook" Version="5.3.8" />
+		<PackageReference Include="SkiaImageView.Avalonia11" Version="1.5.0" />
+		<PackageReference Include="SkiaSharp" Version="3.116.1" />
+		<PackageReference Include="SkiaSharp.NativeAssets.Linux" Version="3.116.1" />
+		<PackageReference Include="Spout.NETCore" Version="1.0.0" />
+		<PackageReference Include="System.Drawing.Common" Version="9.0.2" />
+		<PackageReference Include="TwitchLib" Version="3.5.3" />
+		<PackageReference Include="TwitchLib.EventSub.Websockets" Version="0.5.0" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <AvaloniaXaml Update="Views\LayerSetup.axaml">
-      <SubType>Designer</SubType>
-    </AvaloniaXaml>
-  </ItemGroup>
+	<ItemGroup>
+		<AvaloniaXaml Update="Views\LayerSetup.axaml">
+			<SubType>Designer</SubType>
+		</AvaloniaXaml>
+	</ItemGroup>
 
-  <ItemGroup>
-    <Compile Update="Views\Avatar\SpriteSingleSettings.axaml.cs">
-      <DependentUpon>SpriteSingleSettings.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Avatar\SpriteAvatarSetup.axaml.cs">
-      <DependentUpon>SpriteAvatarSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\Avatar\BasicAvatarSetup.axaml.cs">
-      <DependentUpon>BasicAvatarSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\LayerSelectorView.axaml.cs">
-      <DependentUpon>LayerSelectorView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\TransitionView.axaml.cs">
-      <DependentUpon>TransitionView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\LayerSettingsView.axaml.cs">
-      <DependentUpon>LayerSettingsView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\ModeSelect.axaml.cs">
-      <DependentUpon>ModeSelect.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\LayerView.axaml.cs">
-      <DependentUpon>LayerView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\ImageSelectView.axaml.cs">
-      <DependentUpon>ImageSelectView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\ThrowSetup.axaml.cs">
-      <DependentUpon>ThrowSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\PropertyView.axaml.cs">
-      <DependentUpon>PropertyView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\LLMSetup.axaml.cs">
-      <DependentUpon>LLMSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\ProfileSetup.axaml.cs">
-      <DependentUpon>ProfileSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\TriggerView.axaml.cs">
-      <DependentUpon>TriggerView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\SubView\TriggerEditorView.axaml.cs">
-      <DependentUpon>TriggerEditorView.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\CreditsAndInfo.axaml.cs">
-      <DependentUpon>CreditsAndInfo.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\TITSSetup.axaml.cs">
-      <DependentUpon>TITSSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\AvatarSetup.axaml.cs">
-      <DependentUpon>AvatarSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\LayerSetup.axaml.cs">
-      <SubType>Code</SubType>
-      <DependentUpon>LayerSetup.axaml</DependentUpon>
-    </Compile>
-    <Compile Update="Views\GeneralSettings.axaml.cs">
-      <DependentUpon>GeneralSettings.axaml</DependentUpon>
-    </Compile>
-  </ItemGroup>
+	<ItemGroup>
+		<EmbeddedResource Update="Lang\Resources.resx">
+		  <Generator>PublicResXFileCodeGenerator</Generator>
+		  <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+		</EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
+		<Compile Update="Lang\Resources.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Resources.resx</DependentUpon>
+		</Compile>		
+	</ItemGroup>
+
+	<ItemGroup>
+
+		<Compile Update="Views\Avatar\SpriteSingleSettings.axaml.cs">
+			<DependentUpon>SpriteSingleSettings.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Avatar\SpriteAvatarSetup.axaml.cs">
+			<DependentUpon>SpriteAvatarSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\Avatar\BasicAvatarSetup.axaml.cs">
+			<DependentUpon>BasicAvatarSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\LayerSelectorView.axaml.cs">
+			<DependentUpon>LayerSelectorView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\TransitionView.axaml.cs">
+			<DependentUpon>TransitionView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\LayerSettingsView.axaml.cs">
+			<DependentUpon>LayerSettingsView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\ModeSelect.axaml.cs">
+			<DependentUpon>ModeSelect.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\LayerView.axaml.cs">
+			<DependentUpon>LayerView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\ImageSelectView.axaml.cs">
+			<DependentUpon>ImageSelectView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\ThrowSetup.axaml.cs">
+			<DependentUpon>ThrowSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\PropertyView.axaml.cs">
+			<DependentUpon>PropertyView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\LLMSetup.axaml.cs">
+			<DependentUpon>LLMSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\ProfileSetup.axaml.cs">
+			<DependentUpon>ProfileSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\TriggerView.axaml.cs">
+			<DependentUpon>TriggerView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\SubView\TriggerEditorView.axaml.cs">
+			<DependentUpon>TriggerEditorView.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\CreditsAndInfo.axaml.cs">
+			<DependentUpon>CreditsAndInfo.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\TITSSetup.axaml.cs">
+			<DependentUpon>TITSSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\AvatarSetup.axaml.cs">
+			<DependentUpon>AvatarSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\LayerSetup.axaml.cs">
+			<SubType>Code</SubType>
+			<DependentUpon>LayerSetup.axaml</DependentUpon>
+		</Compile>
+		<Compile Update="Views\GeneralSettings.axaml.cs">
+			<DependentUpon>GeneralSettings.axaml</DependentUpon>
+		</Compile>
+	</ItemGroup>
 </Project>

@@ -7,16 +7,18 @@
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
              x:Class="PngifyMe.Views.Helper.ModeSelect"
 			 >
-	
+
 
 	<StackPanel Orientation="Horizontal" Spacing="5">
-		<TextBlock VerticalAlignment="Center" FontSize="16">Mode Select:</TextBlock>
-		<Button Theme="{DynamicResource SolidButton}"  ToolTip.Tip="Switch to human activated mode"
-				Click="SwitchToHuman" Name="human" Margin="15,0,15,0">Human Mode</Button>
-		<Button Theme="{DynamicResource SolidButton}" ToolTip.Tip="Switch to TTS pet mode with ai integration"
-				Click="SwitchToTTS" Name="tts" Margin="15,0,15,0">TTS Pet Mode</Button>
+		<TextBlock Text="{x:Static lang:Resources.ModeSelect}" VerticalAlignment="Center" FontSize="16"/>
+		<Button Theme="{DynamicResource SolidButton}"  ToolTip.Tip="{x:Static lang:Resources.ToolTipHuman}"
+				Click="SwitchToHuman" Name="human" Margin="15,0,15,0" Content="{x:Static lang:Resources.HumanMode}"/>
+		
+		<Button Theme="{DynamicResource SolidButton}" ToolTip.Tip="{x:Static lang:Resources.ToolTipTTS}"
+				Click="SwitchToTTS" Name="tts" Margin="15,0,15,0" Content="{x:Static lang:Resources.TTSPetMode}"/>
 	</StackPanel>
 
 
