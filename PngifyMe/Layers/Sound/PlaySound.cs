@@ -4,43 +4,42 @@ using Serilog;
 using System.IO;
 using System.Threading.Tasks;
 
-namespace PngifyMe.Layers.Sound
+namespace PngifyMe.Layers.Sound;
+
+[LayerDescription("PlayOneSound")]
+public class PlaySound : PermaLayer
 {
-    [LayerDescription("Play once specific sound")]
-    public class PlaySound : PermaLayer
+    [Unit("Path")]
+    [WavPicker]
+    public string FilePath { get; set; } = string.Empty;
+
+    public PlaySound()
     {
-        [Unit("Path")]
-        [WavPicker]
-        public string FilePath { get; set; } = string.Empty;
+        EnterTime = 0f;
+        ExitTime = 0f;
+    }
 
-        public PlaySound()
+    public override void OnEnter()
+    {
+        if (!File.Exists(FilePath))
         {
-            EnterTime = 0f;
-            ExitTime = 0f;
+            Log.Error($"PlaySound: File {FilePath} not found");
+            IsExiting = true;
+            return;
         }
+        var audio = File.OpenRead(FilePath);
 
-        public override void OnEnter()
+        _ = Task.Run(async () =>
         {
-            if (!File.Exists(FilePath))
-            {
-                Log.Error($"PlaySound: File {FilePath} not found");
-                IsExiting = true;
-                return;
-            }
-            var audio = File.OpenRead(FilePath);
+            await AudioService.PlaySoundWav(audio, 1, true);
+            audio.Dispose();
+            IsExiting = true;
+        });
+        base.OnEnter();
+    }
 
-            _ = Task.Run(async () =>
-            {
-                await AudioService.PlaySoundWav(audio, 1, true);
-                audio.Dispose();
-                IsExiting = true;
-            });
-            base.OnEnter();
-        }
-
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
-        {
-            // do nothing
-        }
+    public override void OnCalculateParameters(float dt, ref LayerValues values)
+    {
+        // do nothing
     }
 }

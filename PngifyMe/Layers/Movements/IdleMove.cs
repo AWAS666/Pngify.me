@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("X/Y movement all the time")]
+[LayerDescription("XYMovement")]
 public class IdleMove : PermaLayer
 {
     [Unit("pixels")]

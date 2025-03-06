@@ -6,52 +6,51 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace PngifyMe.Layers.Sound
+namespace PngifyMe.Layers.Sound;
+
+[LayerDescription("RandomSound")]
+public class PlayRandomSound : PermaLayer
 {
-    [LayerDescription("Play random sound from a folder")]
-    public class PlayRandomSound : PermaLayer
+    [Unit("Path")]
+    [FolderPicker]
+    public string Folder { get; set; } = string.Empty;
+
+    public PlayRandomSound()
     {
-        [Unit("Path")]
-        [FolderPicker]
-        public string Folder { get; set; } = string.Empty;
+        EnterTime = 0f;
+        ExitTime = 0f;
+    }
 
-        public PlayRandomSound()
+    public override void OnEnter()
+    {
+        if (!Directory.Exists(Folder))
         {
-            EnterTime = 0f;
-            ExitTime = 0f;
+            Log.Error($"PlayRandomSound: Directory {Folder} not found");
+            IsExiting = true;
+            return;
+        }
+        var files = Directory.GetFiles(Folder).Where(x => x.EndsWith(".wav"));
+
+        if (files.Count() < 1)
+        {
+            Log.Error($"PlayRandomSound: no files found in folder: {Folder}");
+            IsExiting = true;
+            return;
         }
 
-        public override void OnEnter()
+        var audio = File.OpenRead(files.ElementAt(Random.Shared.Next(0, files.Count())));
+
+        _ = Task.Run(async () =>
         {
-            if (!Directory.Exists(Folder))
-            {
-                Log.Error($"PlayRandomSound: Directory {Folder} not found");
-                IsExiting = true;
-                return;
-            }
-            var files = Directory.GetFiles(Folder).Where(x => x.EndsWith(".wav"));
+            await AudioService.PlaySoundWav(audio, 1, true);
+            audio.Dispose();
+            IsExiting = true;
+        });
+        base.OnEnter();
+    }
 
-            if (files.Count() < 1)
-            {
-                Log.Error($"PlayRandomSound: no files found in folder: {Folder}");
-                IsExiting = true;
-                return;
-            }
-
-            var audio = File.OpenRead(files.ElementAt(Random.Shared.Next(0, files.Count())));
-
-            _ = Task.Run(async () =>
-            {
-                await AudioService.PlaySoundWav(audio, 1, true);
-                audio.Dispose();
-                IsExiting = true;
-            });
-            base.OnEnter();
-        }
-
-        public override void OnCalculateParameters(float dt, ref LayerValues values)
-        {
-            // do nothing
-        }
+    public override void OnCalculateParameters(float dt, ref LayerValues values)
+    {
+        // do nothing
     }
 }

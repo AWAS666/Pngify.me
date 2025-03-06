@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace PngifyMe.Layers.Image
 {
-    [LayerDescription("Add a gradient")]
+    [LayerDescription("AddGradient")]
     public class Gradient : ImageLayer
     {
 

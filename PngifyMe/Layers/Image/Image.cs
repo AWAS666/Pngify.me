@@ -7,7 +7,7 @@ using System.IO;
 
 namespace PngifyMe.Layers.Image
 {
-    [LayerDescription("Pin an image to your model")]
+    [LayerDescription("PinImageToModel")]
     public class Image : ImageLayer
     {
         [Unit("pixels (center)")]

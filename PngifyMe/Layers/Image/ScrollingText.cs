@@ -4,7 +4,7 @@ using SkiaSharp;
 
 namespace PngifyMe.Layers.Image
 {
-    [LayerDescription("Scrolling text, maybe an ad?")]
+    [LayerDescription("ScrollingText")]
     public class ScrollingText : ImageLayer
     {
         private float currentOffset;

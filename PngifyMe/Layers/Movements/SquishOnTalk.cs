@@ -3,7 +3,7 @@ using PngifyMe.Services;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("Stretch in x/y whenever talking")]
+[LayerDescription("StretchXY")]
 public class SquishOnTalk : RampOnConditionLayer
 {
     [Unit("%")]

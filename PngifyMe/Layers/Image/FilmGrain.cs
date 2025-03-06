@@ -5,8 +5,7 @@ using System;
 
 namespace PngifyMe.Layers.Image
 {
-    [LayerDescription("Add noise on top of your model")]
-
+    [LayerDescription("AddNoise")]
     public class FilmGrain : ImageLayer
     {
         private SKBitmap cachedNoiseBitmap;

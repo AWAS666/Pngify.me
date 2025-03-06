@@ -27,7 +27,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         // load language here, either system or steam
-        Lang.Resources.Culture = new CultureInfo("en-us");
+        Lang.Resources.Culture = new CultureInfo("en-US");
         AudioService.Init();
         WebSocketServer.Start();
 

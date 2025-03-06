@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("hop once when starting to talk")]
+[LayerDescription("HopOnce")]
 public class HopOnceOnTalk : RampOnConditionOnceLayer
 {
     private float timeOffset;

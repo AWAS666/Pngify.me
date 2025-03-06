@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("Panic emote, running of panicking")]
+[LayerDescription("PanicEmote")]
 public class Panic : MovementBaseLayer
 {
     private float zoom;

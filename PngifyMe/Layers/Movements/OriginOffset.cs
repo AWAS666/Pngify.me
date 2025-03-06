@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("offsets effect origin, useful for rotation, stretch from bottom")]
+[LayerDescription("OriginOffset")]
 public class OriginOffset : PermaLayer
 {
     [Unit("Pixels")]

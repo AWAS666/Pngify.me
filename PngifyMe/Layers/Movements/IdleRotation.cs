@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("Add a little rotation to your idle character.")]
+[LayerDescription("IdleRotation")]
 public class IdleRotation : MovementBaseLayer
 {
     [Unit("degrees")]

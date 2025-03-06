@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("Yeet yourself of the screen")]
+[LayerDescription("Yeet")]
 public class Yeet : MovementBaseLayer
 {
     [Unit("pixels/s")]

@@ -1,15 +1,18 @@
-﻿using System;
+﻿using PngifyMe.Lang;
+using System;
+using System.Resources;
 
-namespace PngifyMe.Layers.Helper
+namespace PngifyMe.Layers.Helper;
+
+
+[AttributeUsage(AttributeTargets.Class)]
+public class LayerDescriptionAttribute : Attribute
 {
+    public string Description => Resources.ResourceManager.GetString(DescriptionKey);
+    public string DescriptionKey { get; }
 
-    [AttributeUsage(AttributeTargets.Class)]
-    public class LayerDescriptionAttribute : Attribute
+    public LayerDescriptionAttribute(string description)
     {
-        public string Description { get; }
-        public LayerDescriptionAttribute(string description)
-        {
-            Description = description;
-        }
+        DescriptionKey = description;
     }
 }

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace PngifyMe.Layers.Image;
 
-[LayerDescription("Render as terminal")]
+[LayerDescription("RenderTerminal")]
 public class TextRenderer : BitMapTransformer
 {
     [Unit("")]

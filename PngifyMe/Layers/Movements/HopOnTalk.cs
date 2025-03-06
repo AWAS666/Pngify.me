@@ -4,7 +4,7 @@ using System;
 
 namespace PngifyMe.Layers;
 
-[LayerDescription("Y movement whenever talking")]
+[LayerDescription("YMovementTalk")]
 public class HopOnTalk : RampOnConditionLayer
 {
     [Unit("pixels")]

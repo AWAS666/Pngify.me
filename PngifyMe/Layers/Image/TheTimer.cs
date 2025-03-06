@@ -9,7 +9,7 @@ namespace PngifyMe.Layers.Image
     /// <summary>
     /// todo: handle Tiers of subs 
     /// </summary>
-    [LayerDescription("Timer that changes with subs/bits/etc.")]
+    [LayerDescription("TimerLayer")]
     public class TheTimer : ImageLayer
     {
         private SKPaint paint;

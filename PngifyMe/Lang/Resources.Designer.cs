@@ -88,6 +88,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add a gradient.
+        /// </summary>
+        public static string AddGradient {
+            get {
+                return ResourceManager.GetString("AddGradient", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to AddLayer.
         /// </summary>
         public static string AddLayer {
@@ -102,6 +111,15 @@ namespace PngifyMe.Lang {
         public static string AddNewProfile {
             get {
                 return ResourceManager.GetString("AddNewProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add noise on top of your model.
+        /// </summary>
+        public static string AddNoise {
+            get {
+                return ResourceManager.GetString("AddNoise", resourceCulture);
             }
         }
         
@@ -403,6 +421,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Darken your image.
+        /// </summary>
+        public static string DarkenImage {
+            get {
+                return ResourceManager.GetString("DarkenImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default.
         /// </summary>
         public static string Default {
@@ -480,6 +507,15 @@ namespace PngifyMe.Lang {
         public static string ExitTime {
             get {
                 return ResourceManager.GetString("ExitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Explode your png.
+        /// </summary>
+        public static string ExplodePNG {
+            get {
+                return ResourceManager.GetString("ExplodePNG", resourceCulture);
             }
         }
         
@@ -574,6 +610,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run away and go back home....
+        /// </summary>
+        public static string GoHomeLayer {
+            get {
+                return ResourceManager.GetString("GoHomeLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gravity.
         /// </summary>
         public static string Gravity {
@@ -601,6 +646,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to hop once when starting to talk.
+        /// </summary>
+        public static string HopOnce {
+            get {
+                return ResourceManager.GetString("HopOnce", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Hotkey.
         /// </summary>
         public static string Hotkey {
@@ -624,6 +678,15 @@ namespace PngifyMe.Lang {
         public static string HumanMode {
             get {
                 return ResourceManager.GetString("HumanMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add a little rotation to your idle character.
+        /// </summary>
+        public static string IdleRotation {
+            get {
+                return ResourceManager.GetString("IdleRotation", resourceCulture);
             }
         }
         
@@ -1024,6 +1087,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to offsets effect origin, useful for rotation, stretch from bottom.
+        /// </summary>
+        public static string OriginOffset {
+            get {
+                return ResourceManager.GetString("OriginOffset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Other Software/Games.
         /// </summary>
         public static string OtherSoftware {
@@ -1038,6 +1110,15 @@ namespace PngifyMe.Lang {
         public static string Output {
             get {
                 return ResourceManager.GetString("Output", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Panic emote, running of panicking.
+        /// </summary>
+        public static string PanicEmote {
+            get {
+                return ResourceManager.GetString("PanicEmote", resourceCulture);
             }
         }
         
@@ -1078,11 +1159,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pin an image to your model.
+        /// </summary>
+        public static string PinImageToModel {
+            get {
+                return ResourceManager.GetString("PinImageToModel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play once specific sound.
+        /// </summary>
+        public static string PlayOneSound {
+            get {
+                return ResourceManager.GetString("PlayOneSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profiles.
         /// </summary>
         public static string Profiles {
             get {
                 return ResourceManager.GetString("Profiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Play random sound from a folder.
+        /// </summary>
+        public static string RandomSound {
+            get {
+                return ResourceManager.GetString("RandomSound", resourceCulture);
             }
         }
         
@@ -1159,6 +1267,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Render as terminal.
+        /// </summary>
+        public static string RenderTerminal {
+            get {
+                return ResourceManager.GetString("RenderTerminal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replacement:.
         /// </summary>
         public static string Replacement {
@@ -1213,6 +1330,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rotate by amount, great for a spin effect.
+        /// </summary>
+        public static string RotateByRel {
+            get {
+                return ResourceManager.GetString("RotateByRel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Run Specs.
         /// </summary>
         public static string RunSpecs {
@@ -1245,6 +1371,15 @@ namespace PngifyMe.Lang {
         public static string SaveChanges {
             get {
                 return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scrolling text, maybe an ad?.
+        /// </summary>
+        public static string ScrollingText {
+            get {
+                return ResourceManager.GetString("ScrollingText", resourceCulture);
             }
         }
         
@@ -1411,6 +1546,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Stretch in x/y whenever talking.
+        /// </summary>
+        public static string StretchXY {
+            get {
+                return ResourceManager.GetString("StretchXY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Submit.
         /// </summary>
         public static string Submit {
@@ -1479,6 +1623,15 @@ namespace PngifyMe.Lang {
         public static string Throwing {
             get {
                 return ResourceManager.GetString("Throwing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Timer that changes with subs/bits/etc..
+        /// </summary>
+        public static string TimerLayer {
+            get {
+                return ResourceManager.GetString("TimerLayer", resourceCulture);
             }
         }
         
@@ -1875,6 +2028,51 @@ namespace PngifyMe.Lang {
         public static string Volume {
             get {
                 return ResourceManager.GetString("Volume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Little bit of a wiggle.
+        /// </summary>
+        public static string Wiggle {
+            get {
+                return ResourceManager.GetString("Wiggle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wiggle whenever talking (x/y movement).
+        /// </summary>
+        public static string WiggleWhenTalk {
+            get {
+                return ResourceManager.GetString("WiggleWhenTalk", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to X/Y movement all the time.
+        /// </summary>
+        public static string XYMovement {
+            get {
+                return ResourceManager.GetString("XYMovement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yeet yourself of the screen.
+        /// </summary>
+        public static string Yeet {
+            get {
+                return ResourceManager.GetString("Yeet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Y movement whenever talking.
+        /// </summary>
+        public static string YMovementTalk {
+            get {
+                return ResourceManager.GetString("YMovementTalk", resourceCulture);
             }
         }
     }

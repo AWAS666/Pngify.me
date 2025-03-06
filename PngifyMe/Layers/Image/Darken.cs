@@ -5,8 +5,7 @@ using System;
 
 namespace PngifyMe.Layers.Image
 {
-    [LayerDescription("Darken your image")]
-
+    [LayerDescription("DarkenImage")]
     public class Darken : ImageLayer
     {
         private SKBitmap bitmap;

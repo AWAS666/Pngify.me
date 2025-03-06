@@ -723,4 +723,70 @@
   <data name="Max" xml:space="preserve">
     <value>Max</value>
   </data>
+  <data name="DarkenImage" xml:space="preserve">
+    <value>Darken your image</value>
+  </data>
+  <data name="ExplodePNG" xml:space="preserve">
+    <value>Explode your png</value>
+  </data>
+  <data name="AddNoise" xml:space="preserve">
+    <value>Add noise on top of your model</value>
+  </data>
+  <data name="AddGradient" xml:space="preserve">
+    <value>Add a gradient</value>
+  </data>
+  <data name="PinImageToModel" xml:space="preserve">
+    <value>Pin an image to your model</value>
+  </data>
+  <data name="ScrollingText" xml:space="preserve">
+    <value>Scrolling text, maybe an ad?</value>
+  </data>
+  <data name="RenderTerminal" xml:space="preserve">
+    <value>Render as terminal</value>
+  </data>
+  <data name="TimerLayer" xml:space="preserve">
+    <value>Timer that changes with subs/bits/etc.</value>
+  </data>
+  <data name="GoHomeLayer" xml:space="preserve">
+    <value>Run away and go back home...</value>
+  </data>
+  <data name="HopOnce" xml:space="preserve">
+    <value>hop once when starting to talk</value>
+  </data>
+  <data name="YMovementTalk" xml:space="preserve">
+    <value>Y movement whenever talking</value>
+  </data>
+  <data name="XYMovement" xml:space="preserve">
+    <value>X/Y movement all the time</value>
+  </data>
+  <data name="IdleRotation" xml:space="preserve">
+    <value>Add a little rotation to your idle character</value>
+  </data>
+  <data name="OriginOffset" xml:space="preserve">
+    <value>offsets effect origin, useful for rotation, stretch from bottom</value>
+  </data>
+  <data name="PanicEmote" xml:space="preserve">
+    <value>Panic emote, running of panicking</value>
+  </data>
+  <data name="RotateByRel" xml:space="preserve">
+    <value>Rotate by amount, great for a spin effect</value>
+  </data>
+  <data name="StretchXY" xml:space="preserve">
+    <value>Stretch in x/y whenever talking</value>
+  </data>
+  <data name="Wiggle" xml:space="preserve">
+    <value>Little bit of a wiggle</value>
+  </data>
+  <data name="WiggleWhenTalk" xml:space="preserve">
+    <value>Wiggle whenever talking (x/y movement)</value>
+  </data>
+  <data name="Yeet" xml:space="preserve">
+    <value>Yeet yourself of the screen</value>
+  </data>
+  <data name="RandomSound" xml:space="preserve">
+    <value>Play random sound from a folder</value>
+  </data>
+  <data name="PlayOneSound" xml:space="preserve">
+    <value>Play once specific sound</value>
+  </data>
 </root>
