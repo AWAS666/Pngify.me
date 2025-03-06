@@ -474,4 +474,34 @@
   <data name="TransparentToolTip" xml:space="preserve">
     <value>Set the background to transparent to capture it easier in obs</value>
   </data>
+  <data name="TriggerAndEffectSetup" xml:space="preserve">
+    <value>Trigger and Effect setup</value>
+  </data>
+  <data name="TriggerConditions" xml:space="preserve">
+    <value>Trigger Conditions</value>
+  </data>
+  <data name="NewTriggerToolTip" xml:space="preserve">
+    <value>Adds a new trigger group</value>
+  </data>
+  <data name="ApplyAndSave" xml:space="preserve">
+    <value>Apply and Save</value>
+  </data>
+  <data name="ApplyAndSaveToolTip" xml:space="preserve">
+    <value>Apply all changed settings and save them</value>
+  </data>
+  <data name="AllTriggers" xml:space="preserve">
+    <value>All Triggers:</value>
+  </data>
+  <data name="SelectMeToolTip" xml:space="preserve">
+    <value>Select me :)</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Trigger:</value>
+  </data>
+  <data name="SelectedTriggerSetting" xml:space="preserve">
+    <value>Selected Trigger Settings:</value>
+  </data>
 </root>

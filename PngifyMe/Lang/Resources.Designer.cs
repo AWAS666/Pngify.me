@@ -88,11 +88,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to All Triggers:.
+        /// </summary>
+        public static string AllTriggers {
+            get {
+                return ResourceManager.GetString("AllTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply and Reload.
         /// </summary>
         public static string ApplyAndReload {
             get {
                 return ResourceManager.GetString("ApplyAndReload", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply and Save.
+        /// </summary>
+        public static string ApplyAndSave {
+            get {
+                return ResourceManager.GetString("ApplyAndSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Apply all changed settings and save them.
+        /// </summary>
+        public static string ApplyAndSaveToolTip {
+            get {
+                return ResourceManager.GetString("ApplyAndSaveToolTip", resourceCulture);
             }
         }
         
@@ -565,6 +592,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adds a new trigger group.
+        /// </summary>
+        public static string NewTriggerToolTip {
+            get {
+                return ResourceManager.GetString("NewTriggerToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Not connected.
         /// </summary>
         public static string NotConnected {
@@ -691,6 +727,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Remove.
+        /// </summary>
+        public static string Remove {
+            get {
+                return ResourceManager.GetString("Remove", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Replacement:.
         /// </summary>
         public static string Replacement {
@@ -741,6 +786,24 @@ namespace PngifyMe.Lang {
         public static string SaveChanges {
             get {
                 return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selected Trigger Settings:.
+        /// </summary>
+        public static string SelectedTriggerSetting {
+            get {
+                return ResourceManager.GetString("SelectedTriggerSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select me :).
+        /// </summary>
+        public static string SelectMeToolTip {
+            get {
+                return ResourceManager.GetString("SelectMeToolTip", resourceCulture);
             }
         }
         
@@ -966,6 +1029,33 @@ namespace PngifyMe.Lang {
         public static string Treshhold {
             get {
                 return ResourceManager.GetString("Treshhold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger:.
+        /// </summary>
+        public static string Trigger {
+            get {
+                return ResourceManager.GetString("Trigger", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger and Effect setup.
+        /// </summary>
+        public static string TriggerAndEffectSetup {
+            get {
+                return ResourceManager.GetString("TriggerAndEffectSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger Conditions.
+        /// </summary>
+        public static string TriggerConditions {
+            get {
+                return ResourceManager.GetString("TriggerConditions", resourceCulture);
             }
         }
         

@@ -3,10 +3,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
-			xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"			 
-			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
-			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"			 
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"			 
 			 x:DataType="vm:LayerSetupViewModel"
              x:Class="PngifyMe.Views.LayerSetup"
 			 >
@@ -15,43 +16,44 @@
 	</Design.DataContext>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
-			<TextBlock FontSize="24">Trigger and Effect setup</TextBlock>
-			<StackPanel Orientation="Horizontal"  Spacing="5">
-				<TextBlock VerticalAlignment="Center">Trigger Conditions</TextBlock>
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.TriggerAndEffectSetup}"/>
+			<StackPanel Orientation="Horizontal" Spacing="5">
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.TriggerConditions}"/>
 				<Button Command="{Binding AddNewSettings}"
-						ToolTip.Tip="Adds a new trigger group"
+						ToolTip.Tip="{x:Static lang:Resources.NewTriggerToolTip}"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}">
 					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 												   StrokeThickness="2" Width="18" Height="18"/>
 					</Button>
-				<Button Command="{Binding Save}" Content="Apply and Save"
-						ToolTip.Tip="Apply all changed settings and save them"
+				<Button Command="{Binding Save}" Content="{x:Static lang:Resources.ApplyAndSave}"
+						ToolTip.Tip="{x:Static lang:Resources.ApplyAndSaveToolTip}"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
 			</StackPanel>
 		</StackPanel>
 		<ScrollViewer Grid.Row="1"
 					  HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
 			<StackPanel>
-				<TextBlock FontSize="24" >All Triggers:</TextBlock>
+				<TextBlock FontSize="24" Text="{x:Static lang:Resources.AllTriggers}"/>
 				<ListBox ItemsSource="{Binding Layers}"
 						 SelectedItem="{Binding Selected, Mode= TwoWay}"
 						 Margin="0,5,0,0">
 					<ListBox.ItemTemplate>
 						<DataTemplate>
 							<StackPanel Orientation="Horizontal" Spacing="20"
-										ToolTip.Tip="Select me :)">
+										ToolTip.Tip="{x:Static lang:Resources.SelectMeToolTip}">
 								<TextBox MinWidth="100" Text="{Binding Name}"></TextBox>
 								<Button Command="{Binding Parent.RemoveCommand}" 
-										CommandParameter="{Binding}">Remove</Button>
-								<Label>Trigger:</Label>
-								<TextBlock Text="{Binding SelectedTriggerType.Name}"></TextBlock>
+										CommandParameter="{Binding}"
+										Content="{x:Static lang:Resources.Remove}"/>
+								<Label Content="{x:Static lang:Resources.Trigger}"/>
+								<TextBlock Text="{Binding SelectedTriggerType.Name}"/>
 							</StackPanel>
 						</DataTemplate>
 					</ListBox.ItemTemplate>
 				</ListBox>
 				
 				<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
-				<TextBlock FontSize="24">Selected Trigger Settings:</TextBlock>
+				<TextBlock FontSize="24" Text="{x:Static lang:Resources.SelectedTriggerSetting}"/>
 				<helper:LayerSettingsView Margin="0,5,0,0" DataContext="{Binding Selected}" />
 
 			</StackPanel>
