@@ -106,6 +106,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background Setup.
+        /// </summary>
+        public static string BackGroundSetup {
+            get {
+                return ResourceManager.GetString("BackGroundSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ChangeSound.
         /// </summary>
         public static string ChangeSound {
@@ -601,6 +610,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pick Background Colour.
+        /// </summary>
+        public static string PickBackgroundColour {
+            get {
+                return ResourceManager.GetString("PickBackgroundColour", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profiles.
         /// </summary>
         public static string Profiles {
@@ -921,6 +939,24 @@ namespace PngifyMe.Lang {
         public static string ToolTipTwitchStatus {
             get {
                 return ResourceManager.GetString("ToolTipTwitchStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Transparent.
+        /// </summary>
+        public static string Transparent {
+            get {
+                return ResourceManager.GetString("Transparent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the background to transparent to capture it easier in obs.
+        /// </summary>
+        public static string TransparentToolTip {
+            get {
+                return ResourceManager.GetString("TransparentToolTip", resourceCulture);
             }
         }
         

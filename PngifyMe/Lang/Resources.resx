@@ -462,4 +462,16 @@
   <data name="User" xml:space="preserve">
     <value>User</value>
   </data>
+  <data name="BackGroundSetup" xml:space="preserve">
+    <value>Background Setup</value>
+  </data>
+  <data name="PickBackgroundColour" xml:space="preserve">
+    <value>Pick Background Colour</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>Transparent</value>
+  </data>
+  <data name="TransparentToolTip" xml:space="preserve">
+    <value>Set the background to transparent to capture it easier in obs</value>
+  </data>
 </root>

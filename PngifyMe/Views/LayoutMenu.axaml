@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:vm ="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
              x:Class="PngifyMe.Views.LayoutMenu"
 			 x:DataType="vm:LayoutViewModel"
 			 >
@@ -11,21 +12,21 @@
 		<vm:LayoutViewModel></vm:LayoutViewModel>
 	</Design.DataContext>
 	<StackPanel>
-		<TextBlock FontSize="24">Background Setup</TextBlock>
+		<TextBlock FontSize="24" Text="{x:Static lang:Resources.BackGroundSetup}"/>
 		<Grid ColumnDefinitions="auto,200" RowDefinitions="auto,*">
-			<TextBlock>Pick Background Colour</TextBlock>
+			<TextBlock Text="{x:Static lang:Resources.PickBackgroundColour}"/>
 			<ColorView HorizontalAlignment="Left" Name="colorPicker"
 					   Grid.Row="1"
-							   ColorChanged="ColorChanged"
-							   Palette="{DynamicResource SemiColorPalette}"
-							   Theme="{StaticResource SimpleColorView}"/>
+					   ColorChanged="ColorChanged"
+					   Palette="{DynamicResource SemiColorPalette}"
+					   Theme="{StaticResource SimpleColorView}"/>
+			
 			<Button Click="SetToTransparant" Margin="5,5,5,5" 
 					Grid.Column="1" Grid.Row="1"
-					ToolTip.Tip="Set the background to transparent to capture it easier in obs"
+					ToolTip.Tip="{x:Static lang:Resources.TransparentToolTip}"
 					VerticalAlignment="Top" HorizontalAlignment="Left"
-						Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-				>Transparent</Button>
+					Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+					Content="{x:Static lang:Resources.Transparent}"/>
 		</Grid>
-
 	</StackPanel>
 </UserControl>
