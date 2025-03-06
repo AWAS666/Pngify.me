@@ -70,6 +70,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add New Profile.
+        /// </summary>
+        public static string AddNewProfile {
+            get {
+                return ResourceManager.GetString("AddNewProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Profiles:.
+        /// </summary>
+        public static string AllProfiles {
+            get {
+                return ResourceManager.GetString("AllProfiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avatar.
         /// </summary>
         public static string Avatar {
@@ -115,6 +133,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current Profile:.
+        /// </summary>
+        public static string CurrentProfile {
+            get {
+                return ResourceManager.GetString("CurrentProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Default.
+        /// </summary>
+        public static string Default {
+            get {
+                return ResourceManager.GetString("Default", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Default Sound.
         /// </summary>
         public static string DefaultSound {
@@ -129,6 +165,24 @@ namespace PngifyMe.Lang {
         public static string DefaultSoundToolTip {
             get {
                 return ResourceManager.GetString("DefaultSoundToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Export.
+        /// </summary>
+        public static string Export {
+            get {
+                return ResourceManager.GetString("Export", resourceCulture);
             }
         }
         
@@ -169,6 +223,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Import Profile.
+        /// </summary>
+        public static string ImportProfile {
+            get {
+                return ResourceManager.GetString("ImportProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input:.
         /// </summary>
         public static string Input {
@@ -192,6 +255,15 @@ namespace PngifyMe.Lang {
         public static string LayoutMenu {
             get {
                 return ResourceManager.GetString("LayoutMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load.
+        /// </summary>
+        public static string Load {
+            get {
+                return ResourceManager.GetString("Load", resourceCulture);
             }
         }
         
@@ -255,6 +327,15 @@ namespace PngifyMe.Lang {
         public static string ModeSelect {
             get {
                 return ResourceManager.GetString("ModeSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to New Profile Name.
+        /// </summary>
+        public static string NewProfileName {
+            get {
+                return ResourceManager.GetString("NewProfileName", resourceCulture);
             }
         }
         

@@ -4,35 +4,35 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
-			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
-			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"			 
              x:Class="PngifyMe.Views.ProfileSetup"
-			  x:DataType="vm:ProfileSettViewModel"
+			 x:DataType="vm:ProfileSettViewModel"
 			 >
 	<Design.DataContext>
 		<vm:ProfileSettViewModel/>
 	</Design.DataContext>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel Spacing="10">
-			<TextBlock FontSize="24">Profiles</TextBlock>
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.Profiles}"/>
 			<StackPanel Orientation="Horizontal" Spacing="10">
-				<TextBlock>Current Profile:</TextBlock>
+				<TextBlock Text="{x:Static lang:Resources.CurrentProfile}"/>
 				<TextBlock Text="{Binding ProfilesSettings.Active.Name}"></TextBlock>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
-				<TextBox Name="newProfile" Watermark="New Profile Name" Width="150"></TextBox>
+				<TextBox Name="newProfile" Watermark="{x:Static lang:Resources.NewProfileName}" Width="150"></TextBox>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Click="CreateNewProfile">Add New Profile</Button>
+						Click="CreateNewProfile" Content="{x:Static lang:Resources.AddNewProfile}"/>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Click="Import">Import Profile</Button>
+						Click="Import" Content="{x:Static lang:Resources.ImportProfile}"/>
 			</StackPanel>
-
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
-			<TextBlock FontSize="18">All Profiles:</TextBlock>
+			<TextBlock FontSize="18" Text="{x:Static lang:Resources.AllProfiles}"/>
 
 			<ListBox ItemsSource="{Binding Profiles}" >
 				<ListBox.ItemTemplate>
@@ -41,16 +41,16 @@
 							<TextBox Padding="10,5,10,5" VerticalAlignment="Center" Text="{Binding Profile.Name, Mode=TwoWay}" ></TextBox>
 							<CheckBox VerticalAlignment="Center" 
 									  IsChecked="{Binding DefaultValue, Mode=TwoWay}" 
-									  Click="CheckChanged">Default</CheckBox>
+									  Click="CheckChanged" Content="{x:Static lang:Resources.Default}"/>
 							<ComboBox ItemsSource="{Binding ProfileTypes}"
 									  SelectedItem="{Binding Type}">
 							</ComboBox>
 							<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
-									Click="LoadProfile">Load</Button>
+									Click="LoadProfile" Content="{x:Static lang:Resources.Load}"/>
 							<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
-									Click="DeleteProfile">Delete</Button>
+									Click="DeleteProfile" Content="{x:Static lang:Resources.Delete}"/>
 							<Button Classes="Success" Theme="{DynamicResource OutlineButton}"
-									Click="Export">Export</Button>
+									Click="Export" Content="{x:Static lang:Resources.Export}"/>
 						</StackPanel>
 					</DataTemplate>
 				</ListBox.ItemTemplate>

@@ -276,4 +276,31 @@
   <data name="Redeem" xml:space="preserve">
     <value>Redeem:</value>
   </data>
+  <data name="CurrentProfile" xml:space="preserve">
+    <value>Current Profile:</value>
+  </data>
+  <data name="NewProfileName" xml:space="preserve">
+    <value>New Profile Name</value>
+  </data>
+  <data name="AddNewProfile" xml:space="preserve">
+    <value>Add New Profile</value>
+  </data>
+  <data name="ImportProfile" xml:space="preserve">
+    <value>Import Profile</value>
+  </data>
+  <data name="AllProfiles" xml:space="preserve">
+    <value>All Profiles:</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
 </root>
