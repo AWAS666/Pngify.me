@@ -88,11 +88,29 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AddLayer.
+        /// </summary>
+        public static string AddLayer {
+            get {
+                return ResourceManager.GetString("AddLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Profile.
         /// </summary>
         public static string AddNewProfile {
             get {
                 return ResourceManager.GetString("AddNewProfile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Add Selected Layer.
+        /// </summary>
+        public static string AddSelectLayerToolTip {
+            get {
+                return ResourceManager.GetString("AddSelectLayerToolTip", resourceCulture);
             }
         }
         
@@ -246,6 +264,15 @@ namespace PngifyMe.Lang {
         public static string BlinkTimeToolTip {
             get {
                 return ResourceManager.GetString("BlinkTimeToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel.
+        /// </summary>
+        public static string Cancel {
+            get {
+                return ResourceManager.GetString("Cancel", resourceCulture);
             }
         }
         
@@ -439,6 +466,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Entry Time:.
+        /// </summary>
+        public static string EntryTime {
+            get {
+                return ResourceManager.GetString("EntryTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exit Time:.
+        /// </summary>
+        public static string ExitTime {
+            get {
+                return ResourceManager.GetString("ExitTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Export.
         /// </summary>
         public static string Export {
@@ -565,6 +610,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotkeybox.
+        /// </summary>
+        public static string Hotkeybox {
+            get {
+                return ResourceManager.GetString("Hotkeybox", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Mode.
         /// </summary>
         public static string HumanMode {
@@ -646,6 +700,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to LayerList:.
+        /// </summary>
+        public static string LayerList {
+            get {
+                return ResourceManager.GetString("LayerList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layer Menu.
+        /// </summary>
+        public static string LayerMenu {
+            get {
+                return ResourceManager.GetString("LayerMenu", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Layers.
         /// </summary>
         public static string Layers {
@@ -700,6 +772,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max.
+        /// </summary>
+        public static string Max {
+            get {
+                return ResourceManager.GetString("Max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Context:.
         /// </summary>
         public static string MaxContext {
@@ -714,6 +795,15 @@ namespace PngifyMe.Lang {
         public static string MaxContextToolTip {
             get {
                 return ResourceManager.GetString("MaxContextToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum.
+        /// </summary>
+        public static string Maximum {
+            get {
+                return ResourceManager.GetString("Maximum", resourceCulture);
             }
         }
         
@@ -768,6 +858,24 @@ namespace PngifyMe.Lang {
         public static string MicSetup {
             get {
                 return ResourceManager.GetString("MicSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min.
+        /// </summary>
+        public static string Min {
+            get {
+                return ResourceManager.GetString("Min", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum.
+        /// </summary>
+        public static string Minimum {
+            get {
+                return ResourceManager.GetString("Minimum", resourceCulture);
             }
         }
         
@@ -952,6 +1060,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Pick File.
+        /// </summary>
+        public static string PickFile {
+            get {
+                return ResourceManager.GetString("PickFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pick Folder.
+        /// </summary>
+        public static string PickFolder {
+            get {
+                return ResourceManager.GetString("PickFolder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Profiles.
         /// </summary>
         public static string Profiles {
@@ -1123,6 +1249,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Search.
+        /// </summary>
+        public static string Search {
+            get {
+                return ResourceManager.GetString("Search", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selected Settings.
         /// </summary>
         public static string SelectedSettings {
@@ -1141,6 +1276,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected layer, then click AddLayer to add it.
+        /// </summary>
+        public static string SelectLayerToolTip {
+            get {
+                return ResourceManager.GetString("SelectLayerToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select me :).
         /// </summary>
         public static string SelectMeToolTip {
@@ -1150,11 +1294,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select a new layer.
+        /// </summary>
+        public static string SelectNewLayer {
+            get {
+                return ResourceManager.GetString("SelectNewLayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select trigger type.
+        /// </summary>
+        public static string SelectTriggerType {
+            get {
+                return ResourceManager.GetString("SelectTriggerType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Settings {
             get {
                 return ResourceManager.GetString("Settings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Setup transitions.
+        /// </summary>
+        public static string SetupTransitions {
+            get {
+                return ResourceManager.GetString("SetupTransitions", resourceCulture);
             }
         }
         
@@ -1236,6 +1407,15 @@ namespace PngifyMe.Lang {
         public static string SpriteAvatarSetup {
             get {
                 return ResourceManager.GetString("SpriteAvatarSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit.
+        /// </summary>
+        public static string Submit {
+            get {
+                return ResourceManager.GetString("Submit", resourceCulture);
             }
         }
         
@@ -1326,6 +1506,24 @@ namespace PngifyMe.Lang {
         public static string TITSSetup {
             get {
                 return ResourceManager.GetString("TITSSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Toggleable.
+        /// </summary>
+        public static string Toggleable {
+            get {
+                return ResourceManager.GetString("Toggleable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Makes it so trigger removes layers if already added.
+        /// </summary>
+        public static string ToggleableToolTip {
+            get {
+                return ResourceManager.GetString("ToggleableToolTip", resourceCulture);
             }
         }
         

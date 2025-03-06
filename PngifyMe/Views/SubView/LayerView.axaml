@@ -9,6 +9,7 @@
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
 			 x:DataType="vm:BaseLayerViewModel"
              x:Class="PngifyMe.Views.Helper.LayerView"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 >
 
 	<Design.DataContext>
@@ -17,7 +18,7 @@
 	<StackPanel>
 		<StackPanel Orientation="Horizontal" Margin="0" Spacing="3">
 			<TextBlock VerticalAlignment="Center" Text="{Binding Name}"></TextBlock>
-			<Button Content="Remove"
+			<Button Content="{x:Static lang:Resources.Remove}"
 					Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 					Command="{Binding Parent.RemoveCommand}"
 					CommandParameter="{Binding}"></Button>

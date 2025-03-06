@@ -7,6 +7,7 @@
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"	
 			 x:DataType="vm:TriggerViewModel"
              x:Class="PngifyMe.Views.Helper.TriggerView"			 
 			 >
@@ -19,31 +20,29 @@
 		<DataTemplate DataType="{x:Type sett:HotkeyTrigger}">
 			<StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock VerticalAlignment="Center" Text="Hotkey" Width="75"/>
-					<TextBox HorizontalAlignment="Left" Name="Hotkeybox" KeyDown="HotkeyDown"
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.HotKey}" Width="75"/>
+					<TextBox HorizontalAlignment="Left" Name="{x:Static lang:Resources.Hotkeybox}" KeyDown="HotkeyDown"
 						Text="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).Hotkey}"
-						 Watermark="Hotkey" Width="150">
+						 Watermark="{x:Static lang:Resources.HotKey}" Width="150">
 					</TextBox>
 				</StackPanel>
-
-
 			</StackPanel>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:TwitchRedeem}">
 			<StackPanel Orientation="Horizontal" Margin="5">
-				<TextBlock VerticalAlignment="Center" Text="Redeem" Width="75"/>
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Redeem}" Width="75"/>
 				<TextBox VerticalAlignment="Center" Text="{Binding Redeem}" Width="150"/>
 			</StackPanel>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:TwitchBits}">
 			<StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock VerticalAlignment="Center" Text="Minimum" Width="75"/>
-					<helper:UintTextBox Watermark="Min" Text="{Binding MinAmount}"></helper:UintTextBox>
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Minimum}" Width="75"/>
+					<helper:UintTextBox Watermark="{x:Static lang:Resources.Min}" Text="{Binding MinAmount}"/>
 				</StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">
-					<TextBlock VerticalAlignment="Center" Text="Maximum" Width="75"/>
-					<helper:UintTextBox Watermark="Max" Text="{Binding MaxAmount}"></helper:UintTextBox>
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Maximum}" Width="75"/>
+					<helper:UintTextBox Watermark="{x:Static lang:Resources.Max}" Text="{Binding MaxAmount}"/>
 				</StackPanel>
 			</StackPanel>
 		</DataTemplate>

@@ -4,32 +4,29 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
-			  xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
-			  xmlns:views="clr-namespace:PngifyMe.Views.Helper"
-			  x:DataType="vm:LayersettingViewModel"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:views="clr-namespace:PngifyMe.Views.Helper"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"		
+			 x:DataType="vm:LayersettingViewModel"
              x:Class="PngifyMe.Views.Helper.TriggerEditorView"
 			 >
 	<Design.DataContext>
 		<vm:LayersettingViewModel/>
 	</Design.DataContext>
 	<Grid ColumnDefinitions="150,*" RowDefinitions="35,35,*">
-
-		<TextBlock VerticalAlignment="Center" Grid.Row="0">Trigger:</TextBlock>
+		<TextBlock VerticalAlignment="Center" Grid.Row="0" Text="{x:Static lang:Resources.Trigger}"/>
 
 		<ComboBox Grid.Column="0" Grid.Row="1"
                   ItemsSource="{Binding TriggerTypes}"
                   SelectedItem="{Binding SelectedTriggerType}"
 				  DisplayMemberBinding="{Binding Name}"
-				  ToolTip.Tip ="Select trigger type"
-                  />
+				  ToolTip.Tip="{x:Static lang:Resources.SelectTriggerType}"/>
 		<CheckBox Grid.Row="2" IsChecked="{Binding SelectedTrigger.IsToggleable, Mode=TwoWay}"
-				  ToolTip.Tip="Makes it so trigger removes layers if already added"
-				  >Toggleable</CheckBox>
+				  ToolTip.Tip="{x:Static lang:Resources.ToggleableToolTip}"
+				  Content="{x:Static lang:Resources.Toggleable}"/>
 
 		<views:TriggerView DataContext="{Binding SelectedTriggerView}"
 						   Grid.Column="1" Grid.RowSpan="3" Grid.Row="0"></views:TriggerView>
 
 	</Grid>
-
-
 </UserControl>

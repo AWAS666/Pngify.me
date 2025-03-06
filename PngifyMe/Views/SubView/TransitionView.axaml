@@ -9,6 +9,7 @@
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
 			 x:DataType="vm:BasicStateViewModel"
              x:Class="PngifyMe.Views.Helper.TransitionView"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"			 
 			 xmlns:siv="https://github.com/kekyo/SkiaImageView"			 
 			 >
 	<UserControl.Background>
@@ -23,11 +24,11 @@
 		<vm:BasicStateViewModel/>
 	</Design.DataContext>
 	<StackPanel Margin="5" Spacing="10">
-		<TextBlock FontSize="24">Setup transitions</TextBlock>
+		<TextBlock FontSize="24" Text="{x:Static lang:Resources.SetupTransitions}"/>
 		<StackPanel Orientation="Horizontal" Spacing="10">
 			<StackPanel Spacing="10">
 				<StackPanel Orientation="Horizontal">
-					<Label VerticalAlignment="Center">Entry Time:</Label>
+					<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.EntryTime}"/>
 					<NumericUpDown Minimum="0.0" Increment="0.1" Width="75" Value="{Binding EntryTime}"/>
 					<TextBlock VerticalAlignment="Center">seconds</TextBlock>
 				</StackPanel>
@@ -36,7 +37,7 @@
 			<StackPanel Spacing="10">
 
 				<StackPanel Orientation="Horizontal">
-					<Label VerticalAlignment="Center">Exit Time:</Label>
+					<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.ExitTime}"/>
 					<NumericUpDown Minimum="0.0" Increment="0.1" Width="75" Value="{Binding ExitTime}"/>
 					<TextBlock VerticalAlignment="Center">seconds</TextBlock>
 				</StackPanel>
@@ -44,5 +45,4 @@
 			</StackPanel>
 		</StackPanel>
 	</StackPanel>
-
 </UserControl>

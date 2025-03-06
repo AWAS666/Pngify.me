@@ -657,4 +657,70 @@
   <data name="GlobalOffsetY" xml:space="preserve">
     <value>Global Offset Y</value>
   </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelectNewLayer" xml:space="preserve">
+    <value>Select a new layer</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="SelectLayerToolTip" xml:space="preserve">
+    <value>Selected layer, then click AddLayer to add it</value>
+  </data>
+  <data name="LayerList" xml:space="preserve">
+    <value>LayerList:</value>
+  </data>
+  <data name="LayerMenu" xml:space="preserve">
+    <value>Layer Menu</value>
+  </data>
+  <data name="AddSelectLayerToolTip" xml:space="preserve">
+    <value>Add Selected Layer</value>
+  </data>
+  <data name="AddLayer" xml:space="preserve">
+    <value>AddLayer</value>
+  </data>
+  <data name="PickFile" xml:space="preserve">
+    <value>Pick File</value>
+  </data>
+  <data name="PickFolder" xml:space="preserve">
+    <value>Pick Folder</value>
+  </data>
+  <data name="SetupTransitions" xml:space="preserve">
+    <value>Setup transitions</value>
+  </data>
+  <data name="EntryTime" xml:space="preserve">
+    <value>Entry Time:</value>
+  </data>
+  <data name="ExitTime" xml:space="preserve">
+    <value>Exit Time:</value>
+  </data>
+  <data name="SelectTriggerType" xml:space="preserve">
+    <value>Select trigger type</value>
+  </data>
+  <data name="Toggleable" xml:space="preserve">
+    <value>Toggleable</value>
+  </data>
+  <data name="ToggleableToolTip" xml:space="preserve">
+    <value>Makes it so trigger removes layers if already added</value>
+  </data>
+  <data name="Hotkeybox" xml:space="preserve">
+    <value>Hotkeybox</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
 </root>

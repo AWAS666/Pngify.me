@@ -4,12 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
-			  xmlns:u="https://irihi.tech/ursa"
+			 xmlns:u="https://irihi.tech/ursa"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
 			 x:DataType="vm:LayersettingViewModel"
              x:Class="PngifyMe.Views.Helper.LayerSettingsView"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 >
 
 	<Design.DataContext>
@@ -17,7 +18,7 @@
 	</Design.DataContext>
 	<Grid ColumnDefinitions="200,100,*" RowDefinitions="35,50*,35,35*">
 
-		<TextBox Watermark="Name" HorizontalAlignment="Stretch" Text="{Binding Name}"></TextBox>
+		<TextBox Watermark="{x:Static lang:Resources.Name}" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
 		<Button Command="{Binding Parent.RemoveCommand}"
 				CommandParameter="{Binding}" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 			Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left">
@@ -27,18 +28,18 @@
 		<helper:TriggerEditorView Margin="5" Grid.Row="1" Grid.ColumnSpan="3" DataContext="{Binding}" />
 
 		<StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="5">
-			<TextBlock VerticalAlignment="Center" >LayerList:</TextBlock>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.LayerList}"/>
 			<ComboBox VerticalAlignment="Center"
-					  ToolTip.Tip="Selected layer, then click AddLayer to add it"
+					  ToolTip.Tip="{x:Static lang:Resources.SelectLayerToolTip}"
 					  ItemsSource="{Binding AllLayers}"
 					  DisplayMemberBinding="{Binding Name}"
 					  SelectedItem="{Binding SelectedLayer}"
-					  Width="150"></ComboBox>
-			<Button ToolTip.Tip="Add Selected Layer"
+					  Width="150"/>
+			<Button ToolTip.Tip="{x:Static lang:Resources.AddSelectLayerToolTip}"
 				Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-				Command="{Binding AddNewLayer}">AddLayer</Button>
+				Command="{Binding AddNewLayer}" Content="{x:Static lang:Resources.AddLayer}"/>
 			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-					Click="ShowSelector">Layer Menu</Button>
+					Click="ShowSelector" Content="{x:Static lang:Resources.LayerMenu}"/>
 		</StackPanel>
 
 		<Expander Grid.Row="3" Grid.ColumnSpan="3" IsExpanded="true"
