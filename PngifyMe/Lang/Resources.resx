@@ -117,6 +117,9 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="Activated" xml:space="preserve">
+    <value>Activated</value>
+  </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
   </data>
@@ -165,17 +168,38 @@
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="ShowHitbox" xml:space="preserve">
+    <value>Show Hitboxes</value>
+  </data>
   <data name="Smoothing" xml:space="preserve">
     <value>Smoothing</value>
   </data>
+  <data name="TestRain" xml:space="preserve">
+    <value>Test Rain</value>
+  </data>
+  <data name="TestThrow" xml:space="preserve">
+    <value>Test Throw</value>
+  </data>
+  <data name="TestThrowToolTip" xml:space="preserve">
+    <value>test the throwing system</value>
+  </data>
   <data name="Throwing" xml:space="preserve">
     <value>Throwing</value>
+  </data>
+  <data name="TITSExplanation" xml:space="preserve">
+    <value>Twitch Integrated Throwing System (TITS) allows you to throw items at your PngTuber.</value>
+  </data>
+  <data name="TITSSetup" xml:space="preserve">
+    <value>TITS Setup</value>
   </data>
   <data name="ToolTipCloseSettings" xml:space="preserve">
     <value>Close settings</value>
   </data>
   <data name="ToolTipCurrent" xml:space="preserve">
     <value>Current speaking volume</value>
+  </data>
+  <data name="ToolTipHitbox" xml:space="preserve">
+    <value>Use this to test the hit box of your character</value>
   </data>
   <data name="ToolTipHuman" xml:space="preserve">
     <value>Switch to human activated mode</value>
@@ -207,7 +231,49 @@
   <data name="Twitch" xml:space="preserve">
     <value>Twitch:</value>
   </data>
+  <data name="TwitchEmotesToolTip" xml:space="preserve">
+    <value>Use your channels twitch emotes, need to connect twitch to enable this</value>
+  </data>
   <data name="TwitchStatus" xml:space="preserve">
     <value>Twitch Status:</value>
+  </data>
+  <data name="SoundEnabled" xml:space="preserve">
+    <value>Sound Enabled</value>
+  </data>
+  <data name="UseTwitchEmotes" xml:space="preserve">
+    <value>Use Twitch Emotes</value>
+  </data>
+  <data name="ChangeSound" xml:space="preserve">
+    <value>ChangeSound</value>
+  </data>
+  <data name="DefaultSound" xml:space="preserve">
+    <value>Default Sound</value>
+  </data>
+  <data name="DefaultSoundToolTip" xml:space="preserve">
+    <value>revert to default sound</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>Volume</value>
+  </data>
+  <data name="Gravity" xml:space="preserve">
+    <value>Gravity</value>
+  </data>
+  <data name="CollissionSpeedDrop" xml:space="preserve">
+    <value>Collission speed drop:</value>
+  </data>
+  <data name="MinimumObjectSpeed" xml:space="preserve">
+    <value>Minimum Object Speed:</value>
+  </data>
+  <data name="MaximumObjectSpeed" xml:space="preserve">
+    <value>Maximum Object Speed:</value>
+  </data>
+  <data name="MinimumBits" xml:space="preserve">
+    <value>Minimum Bits:</value>
+  </data>
+  <data name="MaximumBits" xml:space="preserve">
+    <value>Maximum Bits:</value>
+  </data>
+  <data name="Redeem" xml:space="preserve">
+    <value>Redeem:</value>
   </data>
 </root>

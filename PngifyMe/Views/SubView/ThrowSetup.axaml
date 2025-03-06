@@ -7,6 +7,7 @@
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 x:DataType="sett:TitsTriggerSetup"
              x:Class="PngifyMe.Views.Helper.ThrowSetup"
 			 >
@@ -16,31 +17,31 @@
 	</Design.DataContext>
 	<StackPanel Spacing="10">
 		<StackPanel Orientation="Horizontal" Spacing="10">
-			<TextBlock VerticalAlignment="Center">Minimum Object Speed:</TextBlock>
-			<helper:UintTextBox Text="{Binding ObjectSpeedMin}" Max="{Binding ObjectSpeedMax}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.MinimumObjectSpeed}"/>
+			<helper:UintTextBox Text="{Binding ObjectSpeedMin}" Max="{Binding ObjectSpeedMax}"/>
 			<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="10">
-			<TextBlock VerticalAlignment="Center">Maximum Object Speed:</TextBlock>
-			<helper:UintTextBox Text="{Binding ObjectSpeedMax}" Min="{Binding ObjectSpeedMin}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.MaximumObjectSpeed}"/>
+			<helper:UintTextBox Text="{Binding ObjectSpeedMax}" Min="{Binding ObjectSpeedMin}"/>
 			<TextBlock VerticalAlignment="Center">pixels/s</TextBlock>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="10">
-			<TextBlock VerticalAlignment="Center">Minimum Bits:</TextBlock>
-			<helper:UintTextBox Text="{Binding MinBits}" Max="{Binding MaxBits}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.MinimumBits}"/>
+			<helper:UintTextBox Text="{Binding MinBits}" Max="{Binding MaxBits}"/>
 			<TextBlock VerticalAlignment="Center">bits</TextBlock>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="10">
-			<TextBlock VerticalAlignment="Center">Maximum Bits:</TextBlock>
-			<helper:UintTextBox Text="{Binding MaxBits}" Min="{Binding MinBits}">"</helper:UintTextBox>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.MaximumBits}"/>
+			<helper:UintTextBox Text="{Binding MaxBits}" Min="{Binding MinBits}"/>
 			<TextBlock VerticalAlignment="Center">bits</TextBlock>
 		</StackPanel>
 
 		<StackPanel Orientation="Horizontal" Spacing="10">
-			<TextBlock VerticalAlignment="Center">Redeem:</TextBlock>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Redeem}"/>
 			<TextBox MinWidth="150" Text="{Binding Redeem}"></TextBox>
 		</StackPanel>
 	</StackPanel>

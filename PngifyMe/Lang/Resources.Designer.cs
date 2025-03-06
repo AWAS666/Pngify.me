@@ -61,11 +61,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activated.
+        /// </summary>
+        public static string Activated {
+            get {
+                return ResourceManager.GetString("Activated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Avatar.
         /// </summary>
         public static string Avatar {
             get {
                 return ResourceManager.GetString("Avatar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ChangeSound.
+        /// </summary>
+        public static string ChangeSound {
+            get {
+                return ResourceManager.GetString("ChangeSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Collission speed drop:.
+        /// </summary>
+        public static string CollissionSpeedDrop {
+            get {
+                return ResourceManager.GetString("CollissionSpeedDrop", resourceCulture);
             }
         }
         
@@ -88,6 +115,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Default Sound.
+        /// </summary>
+        public static string DefaultSound {
+            get {
+                return ResourceManager.GetString("DefaultSound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to revert to default sound.
+        /// </summary>
+        public static string DefaultSoundToolTip {
+            get {
+                return ResourceManager.GetString("DefaultSoundToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         public static string General {
@@ -102,6 +147,15 @@ namespace PngifyMe.Lang {
         public static string GeneralSettings {
             get {
                 return ResourceManager.GetString("GeneralSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gravity.
+        /// </summary>
+        public static string Gravity {
+            get {
+                return ResourceManager.GetString("Gravity", resourceCulture);
             }
         }
         
@@ -142,6 +196,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Maximum Bits:.
+        /// </summary>
+        public static string MaximumBits {
+            get {
+                return ResourceManager.GetString("MaximumBits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum Object Speed:.
+        /// </summary>
+        public static string MaximumObjectSpeed {
+            get {
+                return ResourceManager.GetString("MaximumObjectSpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Microphone.
         /// </summary>
         public static string Microphone {
@@ -156,6 +228,24 @@ namespace PngifyMe.Lang {
         public static string MicSetup {
             get {
                 return ResourceManager.GetString("MicSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Bits:.
+        /// </summary>
+        public static string MinimumBits {
+            get {
+                return ResourceManager.GetString("MinimumBits", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimum Object Speed:.
+        /// </summary>
+        public static string MinimumObjectSpeed {
+            get {
+                return ResourceManager.GetString("MinimumObjectSpeed", resourceCulture);
             }
         }
         
@@ -196,11 +286,29 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Redeem:.
+        /// </summary>
+        public static string Redeem {
+            get {
+                return ResourceManager.GetString("Redeem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Changes.
         /// </summary>
         public static string SaveChanges {
             get {
                 return ResourceManager.GetString("SaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Hitboxes.
+        /// </summary>
+        public static string ShowHitbox {
+            get {
+                return ResourceManager.GetString("ShowHitbox", resourceCulture);
             }
         }
         
@@ -214,11 +322,65 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sound Enabled.
+        /// </summary>
+        public static string SoundEnabled {
+            get {
+                return ResourceManager.GetString("SoundEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Rain.
+        /// </summary>
+        public static string TestRain {
+            get {
+                return ResourceManager.GetString("TestRain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Test Throw.
+        /// </summary>
+        public static string TestThrow {
+            get {
+                return ResourceManager.GetString("TestThrow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to test the throwing system.
+        /// </summary>
+        public static string TestThrowToolTip {
+            get {
+                return ResourceManager.GetString("TestThrowToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Throwing.
         /// </summary>
         public static string Throwing {
             get {
                 return ResourceManager.GetString("Throwing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Twitch Integrated Throwing System (TITS) allows you to throw items at your PngTuber..
+        /// </summary>
+        public static string TITSExplanation {
+            get {
+                return ResourceManager.GetString("TITSExplanation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to TITS Setup.
+        /// </summary>
+        public static string TITSSetup {
+            get {
+                return ResourceManager.GetString("TITSSetup", resourceCulture);
             }
         }
         
@@ -237,6 +399,15 @@ namespace PngifyMe.Lang {
         public static string ToolTipCurrent {
             get {
                 return ResourceManager.GetString("ToolTipCurrent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use this to test the hit box of your character.
+        /// </summary>
+        public static string ToolTipHitbox {
+            get {
+                return ResourceManager.GetString("ToolTipHitbox", resourceCulture);
             }
         }
         
@@ -331,11 +502,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Use your channels twitch emotes, need to connect twitch to enable this.
+        /// </summary>
+        public static string TwitchEmotesToolTip {
+            get {
+                return ResourceManager.GetString("TwitchEmotesToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Twitch Status:.
         /// </summary>
         public static string TwitchStatus {
             get {
                 return ResourceManager.GetString("TwitchStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use Twitch Emotes.
+        /// </summary>
+        public static string UseTwitchEmotes {
+            get {
+                return ResourceManager.GetString("UseTwitchEmotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Volume.
+        /// </summary>
+        public static string Volume {
+            get {
+                return ResourceManager.GetString("Volume", resourceCulture);
             }
         }
     }
