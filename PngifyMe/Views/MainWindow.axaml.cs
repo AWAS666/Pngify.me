@@ -34,7 +34,7 @@ public partial class MainWindow : Window
         this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}";
         TwitchEventSocket.Authenticated += Authenticated;
         if (SettingsManager.Current.Twitch.Enabled == true)
-            twitchStatus.Text = "Connecting";
+            twitchStatus.Text = Lang.Resources.Connecting;
 
         var topLevel = TopLevel.GetTopLevel(this);
         ErrorForwarder.Sink.SetNotificationHandler(new WindowNotificationManager(topLevel) { MaxItems = 3 });
@@ -89,7 +89,7 @@ public partial class MainWindow : Window
     {
         Dispatcher.UIThread.Invoke(() =>
         {
-            twitchStatus.Text = "Connected";
+            twitchStatus.Text = Lang.Resources.Connected;
         });
     }
 

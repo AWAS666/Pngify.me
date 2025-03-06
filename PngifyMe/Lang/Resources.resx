@@ -789,4 +789,10 @@
   <data name="PlayOneSound" xml:space="preserve">
     <value>Play once specific sound</value>
   </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
 </root>

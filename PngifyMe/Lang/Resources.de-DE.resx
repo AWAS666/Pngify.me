@@ -186,4 +186,10 @@
   <data name="PlayOneSound" xml:space="preserve">
     <value />
   </data>
+  <data name="Connecting" xml:space="preserve">
+    <value />
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value />
+  </data>
 </root>
