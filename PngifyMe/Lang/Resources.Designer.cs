@@ -79,6 +79,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current.
+        /// </summary>
+        public static string Current {
+            get {
+                return ResourceManager.GetString("Current", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to General.
         /// </summary>
         public static string General {
@@ -102,6 +111,15 @@ namespace PngifyMe.Lang {
         public static string HumanMode {
             get {
                 return ResourceManager.GetString("HumanMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Input:.
+        /// </summary>
+        public static string Input {
+            get {
+                return ResourceManager.GetString("Input", resourceCulture);
             }
         }
         
@@ -133,6 +151,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Microphone Setup.
+        /// </summary>
+        public static string MicSetup {
+            get {
+                return ResourceManager.GetString("MicSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mode Select:.
         /// </summary>
         public static string ModeSelect {
@@ -147,6 +174,15 @@ namespace PngifyMe.Lang {
         public static string NotConnected {
             get {
                 return ResourceManager.GetString("NotConnected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Output:.
+        /// </summary>
+        public static string Output {
+            get {
+                return ResourceManager.GetString("Output", resourceCulture);
             }
         }
         
@@ -169,6 +205,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Smoothing.
+        /// </summary>
+        public static string Smoothing {
+            get {
+                return ResourceManager.GetString("Smoothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Throwing.
         /// </summary>
         public static string Throwing {
@@ -183,6 +228,15 @@ namespace PngifyMe.Lang {
         public static string ToolTipCloseSettings {
             get {
                 return ResourceManager.GetString("ToolTipCloseSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Current speaking volume.
+        /// </summary>
+        public static string ToolTipCurrent {
+            get {
+                return ResourceManager.GetString("ToolTipCurrent", resourceCulture);
             }
         }
         
@@ -205,6 +259,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to How quickly current volume gains/loses.
+        /// </summary>
+        public static string ToolTipSmoothing {
+            get {
+                return ResourceManager.GetString("ToolTipSmoothing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Threshhold to switch to speaking image.
+        /// </summary>
+        public static string ToolTipThreshhold {
+            get {
+                return ResourceManager.GetString("ToolTipThreshhold", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Switch to TTS pet mode with ai integration.
         /// </summary>
         public static string ToolTipTTS {
@@ -219,6 +291,15 @@ namespace PngifyMe.Lang {
         public static string ToolTipTwitchStatus {
             get {
                 return ResourceManager.GetString("ToolTipTwitchStatus", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Treshhold.
+        /// </summary>
+        public static string Treshhold {
+            get {
+                return ResourceManager.GetString("Treshhold", resourceCulture);
             }
         }
         

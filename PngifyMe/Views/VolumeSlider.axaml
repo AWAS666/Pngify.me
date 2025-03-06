@@ -5,6 +5,7 @@
              mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
              xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 x:Class="PngifyMe.Views.VolumeSlider"
 			 x:DataType="vm:AudioSetupViewModel">
 	<Design.DataContext>
@@ -12,16 +13,16 @@
 	</Design.DataContext>
 	<Grid>
 		<StackPanel>
-			<TextBlock FontSize="24">Microphone Setup</TextBlock>
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.MicSetup}"/>
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
-				<TextBlock Width="50" VerticalAlignment="Center">Input: </TextBlock>
+				<TextBlock Width="50" VerticalAlignment="Center" Text="{x:Static lang:Resources.Input}"/>
 				<ComboBox Name="inputAudio" ItemsSource="{Binding InputDevices }"
 						  DisplayMemberBinding="{ Binding Name}"
 						  SelectionChanged="InputDeviceChanged"/>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
-				<TextBlock Width="50" VerticalAlignment="Center">Output: </TextBlock>
+				<TextBlock Width="50" VerticalAlignment="Center" Text="{x:Static lang:Resources.Output}"/>
 
 				<ComboBox Name="outputAudio" DisplayMemberBinding="{ Binding Name}"
 						  ItemsSource="{Binding OutputDevices}"
@@ -46,12 +47,13 @@
 						Value="{Binding Settings.Smoothing}" Minimum="1" Maximum="100" />
 
 				<TextBlock Grid.Row="2" HorizontalAlignment="Center"
-						   ToolTip.Tip="Current speaking volume"
-						   >Current</TextBlock>
-				<TextBlock ToolTip.Tip="Threshhold to switch to speaking image"
-					Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center">Treshhold</TextBlock>
-				<TextBlock ToolTip.Tip="How quickly current volume gains/loses"
-					Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center">Smoothing</TextBlock>
+						   ToolTip.Tip="{x:Static lang:Resources.ToolTipCurrent}"
+						   Text="{x:Static lang:Resources.Current}"/>
+				
+				<TextBlock ToolTip.Tip="{x:Static lang:Resources.ToolTipThreshhold}"
+					Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Treshhold}"/>
+				<TextBlock ToolTip.Tip="{x:Static lang:Resources.ToolTipThreshhold}"
+					Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Smoothing}"/>
 			</Grid>
 		</StackPanel>
 	</Grid>

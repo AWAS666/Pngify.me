@@ -123,6 +123,9 @@
   <data name="Credits" xml:space="preserve">
     <value>Credits</value>
   </data>
+  <data name="Current" xml:space="preserve">
+    <value>Current</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
   </data>
@@ -131,6 +134,9 @@
   </data>
   <data name="HumanMode" xml:space="preserve">
     <value>Human Mode</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>Input:</value>
   </data>
   <data name="LayerSetup" xml:space="preserve">
     <value>LayerSetup</value>
@@ -141,11 +147,17 @@
   <data name="Microphone" xml:space="preserve">
     <value>Microphone</value>
   </data>
+  <data name="MicSetup" xml:space="preserve">
+    <value>Microphone Setup</value>
+  </data>
   <data name="ModeSelect" xml:space="preserve">
     <value>Mode Select:</value>
   </data>
   <data name="NotConnected" xml:space="preserve">
     <value>Not connected</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>Output:</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Profiles</value>
@@ -153,11 +165,17 @@
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
   </data>
+  <data name="Smoothing" xml:space="preserve">
+    <value>Smoothing</value>
+  </data>
   <data name="Throwing" xml:space="preserve">
     <value>Throwing</value>
   </data>
   <data name="ToolTipCloseSettings" xml:space="preserve">
     <value>Close settings</value>
+  </data>
+  <data name="ToolTipCurrent" xml:space="preserve">
+    <value>Current speaking volume</value>
   </data>
   <data name="ToolTipHuman" xml:space="preserve">
     <value>Switch to human activated mode</value>
@@ -165,11 +183,20 @@
   <data name="ToolTipSaveChanges" xml:space="preserve">
     <value>Only save, doesnt apply</value>
   </data>
+  <data name="ToolTipSmoothing" xml:space="preserve">
+    <value>How quickly current volume gains/loses</value>
+  </data>
+  <data name="ToolTipThreshhold" xml:space="preserve">
+    <value>Threshhold to switch to speaking image</value>
+  </data>
   <data name="ToolTipTTS" xml:space="preserve">
     <value>Switch to TTS pet mode with ai integration</value>
   </data>
   <data name="ToolTipTwitchStatus" xml:space="preserve">
     <value>Head to general settings to authenticate with twitch</value>
+  </data>
+  <data name="Treshhold" xml:space="preserve">
+    <value>Treshhold</value>
   </data>
   <data name="TTSPet" xml:space="preserve">
     <value>TTSPet</value>
