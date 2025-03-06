@@ -570,4 +570,91 @@
   <data name="LogoBy" xml:space="preserve">
     <value>Logo by:</value>
   </data>
+  <data name="AvatarMode" xml:space="preserve">
+    <value>Avatar Mode:</value>
+  </data>
+  <data name="BasicAvatarSetup" xml:space="preserve">
+    <value>Basic Avatar State Setup</value>
+  </data>
+  <data name="BlinkInterval" xml:space="preserve">
+    <value>Blink Interval</value>
+  </data>
+  <data name="BlinkIntervalToolTip" xml:space="preserve">
+    <value>Time between blinks</value>
+  </data>
+  <data name="BlinkTime" xml:space="preserve">
+    <value>Blink Time</value>
+  </data>
+  <data name="BlinkTimeToolTip" xml:space="preserve">
+    <value>How long character blinks</value>
+  </data>
+  <data name="BlendTime" xml:space="preserve">
+    <value>Blend Time</value>
+  </data>
+  <data name="BlendTimeToolTip" xml:space="preserve">
+    <value>Blending of last image, set to 0 to disable all blending</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>Activate</value>
+  </data>
+  <data name="ToggleAvatarToolTip" xml:space="preserve">
+    <value>Will revert to default if already active.</value>
+  </data>
+  <data name="Transitions" xml:space="preserve">
+    <value>Transitions</value>
+  </data>
+  <data name="Hotkey" xml:space="preserve">
+    <value>Hotkey</value>
+  </data>
+  <data name="OpenMouth" xml:space="preserve">
+    <value>Open Mouth</value>
+  </data>
+  <data name="ClosedMouth" xml:space="preserve">
+    <value>Closed Mouth</value>
+  </data>
+  <data name="Blink" xml:space="preserve">
+    <value>Blink</value>
+  </data>
+  <data name="SpriteAvatarSetup" xml:space="preserve">
+    <value>Sprite Avatar State Setup</value>
+  </data>
+  <data name="ImportPngTuberPlus" xml:space="preserve">
+    <value>Import from PngTuber Plus</value>
+  </data>
+  <data name="ImportPNGs" xml:space="preserve">
+    <value>Import PNGs</value>
+  </data>
+  <data name="ClearSelected" xml:space="preserve">
+    <value>Clear Selected</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Layers</value>
+  </data>
+  <data name="SelectedSettings" xml:space="preserve">
+    <value>Selected Settings</value>
+  </data>
+  <data name="NothingSelected" xml:space="preserve">
+    <value>Nothing selected</value>
+  </data>
+  <data name="TriggerSetup" xml:space="preserve">
+    <value>Trigger Setup</value>
+  </data>
+  <data name="ActivateStateToolTip" xml:space="preserve">
+    <value>Activate this state</value>
+  </data>
+  <data name="GlobalSettings" xml:space="preserve">
+    <value>Global Settings</value>
+  </data>
+  <data name="GlobalZoom" xml:space="preserve">
+    <value>Global Zoom</value>
+  </data>
+  <data name="GlobalOffsetX" xml:space="preserve">
+    <value>Global Offset X</value>
+  </data>
+  <data name="GlobalOffsetY" xml:space="preserve">
+    <value>Global Offset Y</value>
+  </data>
 </root>

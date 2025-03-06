@@ -4,14 +4,15 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
-			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
-			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
-			  xmlns:u="https://irihi.tech/ursa"
+			 xmlns:u="https://irihi.tech/ursa"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 x:DataType="vm:BasicSetupViewModel"
              x:Class="PngifyMe.Views.Avatar.BasicAvatarSetup"
-			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 xmlns:siv="https://github.com/kekyo/SkiaImageView"
 			 >
 	<Design.DataContext>
 		<vm:BasicSetupViewModel/>
@@ -21,7 +22,7 @@
 	</UserControl.Resources>
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
-			<TextBlock FontSize="24">Basic Avatar State Setup</TextBlock>
+			<TextBlock FontSize="24" Text="{x:Static lang:Resources.BasicAvatarSetup}"/>
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">States</TextBlock>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
@@ -30,29 +31,28 @@
 												   StrokeThickness="2" Width="18" Height="18"/>
 				</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Command="{Binding Apply}" Content="Apply and Save" />
+						Command="{Binding Apply}" Content="{x:Static lang:Resources.ApplyAndSave}" />
 			</StackPanel>
 
 			<Grid RowDefinitions="30,30,30" Margin="5,5,5,5">
-				<Grid ColumnDefinitions="150,100,100" ToolTip.Tip="Time between blinks">
-					<TextBlock VerticalAlignment="Center">Blink Interval</TextBlock>
+				<Grid ColumnDefinitions="150,100,100" ToolTip.Tip="{x:Static lang:Resources.BlinkIntervalToolTip}">
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlinkInterval}"/>
 					<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkInterval}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
-				<Grid ColumnDefinitions="150,100,100" Grid.Row="1" ToolTip.Tip="How long character blinks">
-					<TextBlock VerticalAlignment="Center">Blink Time</TextBlock>
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="1" ToolTip.Tip="{x:Static lang:Resources.BlinkTimeToolTip}">
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlinkTime}"/>
 					<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkTime}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
 				<Grid ColumnDefinitions="150,100,100" Grid.Row="2"
-					  ToolTip.Tip="Blending of last image, set to 0 to disable all blending">
-					<TextBlock VerticalAlignment="Center">Blend Time</TextBlock>
+					  ToolTip.Tip="{x:Static lang:Resources.BlendTimeToolTip}">
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlendTime}"/>
 					<NumericUpDown Minimum="0" Maximum="{Binding Settings.BlinkTime}" Increment="0.1" Grid.Column="1" Value="{Binding Settings.TransitionTime}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
-
 			</Grid>
 		</StackPanel>
 
@@ -63,7 +63,7 @@
 						<DataTemplate>
 							<StackPanel Spacing="5">
 								<StackPanel Orientation="Horizontal" Spacing="5">
-									<TextBox Watermark="Name" Width="150" Text="{Binding State.Name}"></TextBox>
+									<TextBox Watermark="{x:Static lang:Resources.Name}" Width="150" Text="{Binding State.Name}"></TextBox>
 									<Button
 										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).Remove}"
@@ -78,15 +78,16 @@
 										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).SwitchState}"
 										CommandParameter="{Binding}"
 										Margin="5,0,0,0" HorizontalAlignment="Left"
-										Content="Activate" />
+										Content="{x:Static lang:Resources.Activate}" />
 									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default" VerticalAlignment="Center"/>
-									<CheckBox ToolTip.Tip="Will revert to default if already active."
+									<CheckBox ToolTip.Tip="{x:Static lang:Resources.ToggleAvatarToolTip}"
 										IsChecked="{Binding ToggleAble, Mode=TwoWay}" VerticalAlignment="Center" Content="ToggleAble"/>
 
 								</StackPanel>
 								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
 									<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Click="ShowTransition">Transitions</Button>
+										Click="ShowTransition"
+										Content="{x:Static lang:Resources.Transitions}"/>
 									<TextBox Name="Hotkeybox"
 											 Text="{Binding Hotkey}"
 											 Margin="15,0,0,0" Watermark="Hotkey" Width="150"
@@ -94,25 +95,24 @@
 									</TextBox>
 								</StackPanel>
 
-
 								<Grid ColumnDefinitions="100,160,100,160">
-									<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
+									<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.OpenMouth}"/>
 									<helper:ImageSelectView DataContext="{ Binding State.Open }" Grid.Column="1"/>
 
-									<TextBlock VerticalAlignment="Center" Grid.Column="2">Closed Mouth</TextBlock>
+									<TextBlock VerticalAlignment="Center" Grid.Column="2" Text="{x:Static lang:Resources.ClosedMouth}"/>
 									<helper:ImageSelectView DataContext="{ Binding State.Closed }" Grid.Column="3"/>
 								</Grid>
 
 								<Grid ColumnDefinitions="100,160,100,160">
 									<StackPanel VerticalAlignment="Center">
-										<TextBlock VerticalAlignment="Center">Open Mouth</TextBlock>
-										<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
+										<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.OpenMouth}"/>
+										<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Blink}"/>
 									</StackPanel>
 									<helper:ImageSelectView DataContext="{ Binding State.OpenBlink }" Grid.Column="1"/>
 
 									<StackPanel VerticalAlignment="Center" Grid.Column="2">
-										<TextBlock VerticalAlignment="Center">Closed Mouth</TextBlock>
-										<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center">Blink</TextBlock>
+										<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.ClosedMouth}"/>
+										<TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Blink}"/>
 									</StackPanel>
 									<helper:ImageSelectView DataContext="{ Binding State.ClosedBlink }" Grid.Column="3"/>
 								</Grid>

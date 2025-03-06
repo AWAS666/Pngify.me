@@ -4,15 +4,16 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
-			  xmlns:vm="clr-namespace:PngifyMe.ViewModels"
-			  xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:conv="clr-namespace:PngifyMe.Views.Converter"
 			 xmlns:a="clr-namespace:PngifyMe.Views.Avatar"
-			  xmlns:u="https://irihi.tech/ursa"
+			 xmlns:u="https://irihi.tech/ursa"
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 x:DataType="vm:AvatarSetupViewModel"
              x:Class="PngifyMe.Views.AvatarSetup"
-			  xmlns:siv="https://github.com/kekyo/SkiaImageView"
+			 xmlns:siv="https://github.com/kekyo/SkiaImageView"
 			 >
 	<Design.DataContext>
 		<vm:AvatarSetupViewModel/>
@@ -23,7 +24,7 @@
 	<Grid RowDefinitions="Auto,*">
 		<StackPanel>
 			<StackPanel Orientation="Horizontal" Spacing="5">
-				<TextBlock VerticalAlignment="Center" FontSize="24">Avatar Mode:</TextBlock>
+				<TextBlock VerticalAlignment="Center" FontSize="24" Text="{x:Static lang:Resources.AvatarMode}"/>
 				<ComboBox ItemsSource="{Binding Options}" SelectedItem="{Binding SelectedMode}" SelectedIndex="0"/>
 			</StackPanel>
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>

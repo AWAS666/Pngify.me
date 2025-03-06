@@ -61,11 +61,29 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Activate.
+        /// </summary>
+        public static string Activate {
+            get {
+                return ResourceManager.GetString("Activate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Activated.
         /// </summary>
         public static string Activated {
             get {
                 return ResourceManager.GetString("Activated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Activate this state.
+        /// </summary>
+        public static string ActivateStateToolTip {
+            get {
+                return ResourceManager.GetString("ActivateStateToolTip", resourceCulture);
             }
         }
         
@@ -142,11 +160,92 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Avatar Mode:.
+        /// </summary>
+        public static string AvatarMode {
+            get {
+                return ResourceManager.GetString("AvatarMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Background Setup.
         /// </summary>
         public static string BackGroundSetup {
             get {
                 return ResourceManager.GetString("BackGroundSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Basic Avatar State Setup.
+        /// </summary>
+        public static string BasicAvatarSetup {
+            get {
+                return ResourceManager.GetString("BasicAvatarSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blend Time.
+        /// </summary>
+        public static string BlendTime {
+            get {
+                return ResourceManager.GetString("BlendTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blending of last image, set to 0 to disable all blending.
+        /// </summary>
+        public static string BlendTimeToolTip {
+            get {
+                return ResourceManager.GetString("BlendTimeToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blink.
+        /// </summary>
+        public static string Blink {
+            get {
+                return ResourceManager.GetString("Blink", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blink Interval.
+        /// </summary>
+        public static string BlinkInterval {
+            get {
+                return ResourceManager.GetString("BlinkInterval", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time between blinks.
+        /// </summary>
+        public static string BlinkIntervalToolTip {
+            get {
+                return ResourceManager.GetString("BlinkIntervalToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Blink Time.
+        /// </summary>
+        public static string BlinkTime {
+            get {
+                return ResourceManager.GetString("BlinkTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to How long character blinks.
+        /// </summary>
+        public static string BlinkTimeToolTip {
+            get {
+                return ResourceManager.GetString("BlinkTimeToolTip", resourceCulture);
             }
         }
         
@@ -192,6 +291,24 @@ namespace PngifyMe.Lang {
         public static string Clear {
             get {
                 return ResourceManager.GetString("Clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Selected.
+        /// </summary>
+        public static string ClearSelected {
+            get {
+                return ResourceManager.GetString("ClearSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Closed Mouth.
+        /// </summary>
+        public static string ClosedMouth {
+            get {
+                return ResourceManager.GetString("ClosedMouth", resourceCulture);
             }
         }
         
@@ -376,6 +493,42 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Global Offset X.
+        /// </summary>
+        public static string GlobalOffsetX {
+            get {
+                return ResourceManager.GetString("GlobalOffsetX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global Offset Y.
+        /// </summary>
+        public static string GlobalOffsetY {
+            get {
+                return ResourceManager.GetString("GlobalOffsetY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global Settings.
+        /// </summary>
+        public static string GlobalSettings {
+            get {
+                return ResourceManager.GetString("GlobalSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Global Zoom.
+        /// </summary>
+        public static string GlobalZoom {
+            get {
+                return ResourceManager.GetString("GlobalZoom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Gravity.
         /// </summary>
         public static string Gravity {
@@ -403,11 +556,38 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hotkey.
+        /// </summary>
+        public static string Hotkey {
+            get {
+                return ResourceManager.GetString("Hotkey", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Human Mode.
         /// </summary>
         public static string HumanMode {
             get {
                 return ResourceManager.GetString("HumanMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import PNGs.
+        /// </summary>
+        public static string ImportPNGs {
+            get {
+                return ResourceManager.GetString("ImportPNGs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Import from PngTuber Plus.
+        /// </summary>
+        public static string ImportPngTuberPlus {
+            get {
+                return ResourceManager.GetString("ImportPngTuberPlus", resourceCulture);
             }
         }
         
@@ -462,6 +642,15 @@ namespace PngifyMe.Lang {
         public static string JustReadNoLLMToolTip {
             get {
                 return ResourceManager.GetString("JustReadNoLLMToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Layers.
+        /// </summary>
+        public static string Layers {
+            get {
+                return ResourceManager.GetString("Layers", resourceCulture);
             }
         }
         
@@ -637,6 +826,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Name.
+        /// </summary>
+        public static string Name {
+            get {
+                return ResourceManager.GetString("Name", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to New Profile Name.
         /// </summary>
         public static string NewProfileName {
@@ -673,6 +871,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Nothing selected.
+        /// </summary>
+        public static string NothingSelected {
+            get {
+                return ResourceManager.GetString("NothingSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to OpenAI API Key:.
         /// </summary>
         public static string OpenAIKey {
@@ -687,6 +894,15 @@ namespace PngifyMe.Lang {
         public static string OpenAIKeyToolTip {
             get {
                 return ResourceManager.GetString("OpenAIKeyToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Open Mouth.
+        /// </summary>
+        public static string OpenMouth {
+            get {
+                return ResourceManager.GetString("OpenMouth", resourceCulture);
             }
         }
         
@@ -907,6 +1123,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Selected Settings.
+        /// </summary>
+        public static string SelectedSettings {
+            get {
+                return ResourceManager.GetString("SelectedSettings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Selected Trigger Settings:.
         /// </summary>
         public static string SelectedTriggerSetting {
@@ -1006,6 +1231,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sprite Avatar State Setup.
+        /// </summary>
+        public static string SpriteAvatarSetup {
+            get {
+                return ResourceManager.GetString("SpriteAvatarSetup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Support us:.
         /// </summary>
         public static string SupportUs {
@@ -1096,6 +1330,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Will revert to default if already active..
+        /// </summary>
+        public static string ToggleAvatarToolTip {
+            get {
+                return ResourceManager.GetString("ToggleAvatarToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Close settings.
         /// </summary>
         public static string ToolTipCloseSettings {
@@ -1177,6 +1420,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Transitions.
+        /// </summary>
+        public static string Transitions {
+            get {
+                return ResourceManager.GetString("Transitions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transparent.
         /// </summary>
         public static string Transparent {
@@ -1227,6 +1479,15 @@ namespace PngifyMe.Lang {
         public static string TriggerConditions {
             get {
                 return ResourceManager.GetString("TriggerConditions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trigger Setup.
+        /// </summary>
+        public static string TriggerSetup {
+            get {
+                return ResourceManager.GetString("TriggerSetup", resourceCulture);
             }
         }
         
