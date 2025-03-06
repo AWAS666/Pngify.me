@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-	<!-- 
+  <!-- 
 		Microsoft ResX Schema
 
 		Version 1.3
@@ -58,44 +58,721 @@
 			: using a System.ComponentModel.TypeConverter
 			: and then encoded with base64 encoding.
 	-->
-	
-	<xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
-		<xsd:element name="root" msdata:IsDataSet="true">
-			<xsd:complexType>
-				<xsd:choice maxOccurs="unbounded">
-					<xsd:element name="data">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-								<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
-							<xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
-							<xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
-						</xsd:complexType>
-					</xsd:element>
-					<xsd:element name="resheader">
-						<xsd:complexType>
-							<xsd:sequence>
-								<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
-							</xsd:sequence>
-							<xsd:attribute name="name" type="xsd:string" use="required" />
-						</xsd:complexType>
-					</xsd:element>
-				</xsd:choice>
-			</xsd:complexType>
-		</xsd:element>
-	</xsd:schema>
-	<resheader name="resmimetype">
-		<value>text/microsoft-resx</value>
-	</resheader>
-	<resheader name="version">
-		<value>1.3</value>
-	</resheader>
-	<resheader name="reader">
-		<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
-	<resheader name="writer">
-		<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-	</resheader>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AddGradient" xml:space="preserve">
+    <value>添加渐变</value>
+  </data>
+  <data name="AddLayer" xml:space="preserve">
+    <value>添加图层</value>
+  </data>
+  <data name="AddNewProfile" xml:space="preserve">
+    <value>添加新配置文件</value>
+  </data>
+  <data name="AddNoise" xml:space="preserve">
+    <value>在模型上添加噪点</value>
+  </data>
+  <data name="AddSelectLayerToolTip" xml:space="preserve">
+    <value>添加选定图层</value>
+  </data>
+  <data name="AllProfiles" xml:space="preserve">
+    <value>所有配置文件：</value>
+  </data>
+  <data name="AllTriggers" xml:space="preserve">
+    <value>所有触发器：</value>
+  </data>
+  <data name="ApplyAndReload" xml:space="preserve">
+    <value>应用并重新加载</value>
+  </data>
+  <data name="ApplyAndSave" xml:space="preserve">
+    <value>应用并保存</value>
+  </data>
+  <data name="ApplyAndSaveToolTip" xml:space="preserve">
+    <value>应用所有更改的设置并保存</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>艺术</value>
+  </data>
+  <data name="Avatar" xml:space="preserve">
+    <value>头像</value>
+  </data>
+  <data name="AvatarMode" xml:space="preserve">
+    <value>头像模式：</value>
+  </data>
+  <data name="BackGroundSetup" xml:space="preserve">
+    <value>背景设置</value>
+  </data>
+  <data name="BasicAvatarSetup" xml:space="preserve">
+    <value>基本头像状态设置</value>
+  </data>
+  <data name="BlendTime" xml:space="preserve">
+    <value>混合时间</value>
+  </data>
+  <data name="BlendTimeToolTip" xml:space="preserve">
+    <value>上张图像的混合，设置为0可禁用混合</value>
+  </data>
+  <data name="Blink" xml:space="preserve">
+    <value>眨眼</value>
+  </data>
+  <data name="BlinkInterval" xml:space="preserve">
+    <value>眨眼间隔</value>
+  </data>
+  <data name="BlinkIntervalToolTip" xml:space="preserve">
+    <value>眨眼间隔时间</value>
+  </data>
+  <data name="BlinkTime" xml:space="preserve">
+    <value>眨眼时间</value>
+  </data>
+  <data name="BlinkTimeToolTip" xml:space="preserve">
+    <value>角色眨眼持续时间</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>取消</value>
+  </data>
+  <data name="ChangeSound" xml:space="preserve">
+    <value>更换声音</value>
+  </data>
+  <data name="ChatTrigger" xml:space="preserve">
+    <value>聊天触发器：</value>
+  </data>
+  <data name="ChatTriggerToolTip" xml:space="preserve">
+    <value>TTSPet 将响应任何以此开头的聊天消息，留空以禁用</value>
+  </data>
+  <data name="ChooseTTSProvider" xml:space="preserve">
+    <value>选择您的TTS提供商</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>清除</value>
+  </data>
+  <data name="ClearSelected" xml:space="preserve">
+    <value>清除选中项</value>
+  </data>
+  <data name="ClosedMouth" xml:space="preserve">
+    <value>闭嘴</value>
+  </data>
+  <data name="CollissionSpeedDrop" xml:space="preserve">
+    <value>碰撞速度下降：</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>已连接</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>连接中</value>
+  </data>
+  <data name="Createdby" xml:space="preserve">
+    <value>由...创建：</value>
+  </data>
+  <data name="Credits" xml:space="preserve">
+    <value>鸣谢</value>
+  </data>
+  <data name="Current" xml:space="preserve">
+    <value>当前</value>
+  </data>
+  <data name="CurrentProfile" xml:space="preserve">
+    <value>当前配置文件：</value>
+  </data>
+  <data name="CustomDomain" xml:space="preserve">
+    <value>自定义域名：</value>
+  </data>
+  <data name="CustomDomainToolTip" xml:space="preserve">
+    <value>用于非 OpenAI 模型</value>
+  </data>
+  <data name="DarkenImage" xml:space="preserve">
+    <value>使图像变暗</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>默认</value>
+  </data>
+  <data name="DefaultCharacter" xml:space="preserve">
+    <value>默认角色来自：</value>
+  </data>
+  <data name="DefaultSound" xml:space="preserve">
+    <value>默认声音</value>
+  </data>
+  <data name="DefaultSoundToolTip" xml:space="preserve">
+    <value>恢复默认声音</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>删除</value>
+  </data>
+  <data name="EnableSpout2" xml:space="preserve">
+    <value>启用 Spout2</value>
+  </data>
+  <data name="EndPoint" xml:space="preserve">
+    <value>终端：</value>
+  </data>
+  <data name="EntryTime" xml:space="preserve">
+    <value>进入时间：</value>
+  </data>
+  <data name="ExitTime" xml:space="preserve">
+    <value>退出时间：</value>
+  </data>
+  <data name="ExplodePNG" xml:space="preserve">
+    <value>让你的PNG爆炸</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>导出</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>过滤器</value>
+  </data>
+  <data name="FilteredWords" xml:space="preserve">
+    <value>过滤词（用“;”分隔）：</value>
+  </data>
+  <data name="FilteredWordsToolTip" xml:space="preserve">
+    <value>输入您想添加的所有过滤词</value>
+  </data>
+  <data name="General" xml:space="preserve">
+    <value>常规</value>
+  </data>
+  <data name="GeneralSettings" xml:space="preserve">
+    <value>常规设置</value>
+  </data>
+  <data name="GlobalOffsetX" xml:space="preserve">
+    <value>全局偏移X</value>
+  </data>
+  <data name="GlobalOffsetY" xml:space="preserve">
+    <value>全局偏移Y</value>
+  </data>
+  <data name="GlobalSettings" xml:space="preserve">
+    <value>全局设置</value>
+  </data>
+  <data name="GlobalZoom" xml:space="preserve">
+    <value>全局缩放</value>
+  </data>
+  <data name="GoHomeLayer" xml:space="preserve">
+    <value>逃走并回家...</value>
+  </data>
+  <data name="Gravity" xml:space="preserve">
+    <value>重力</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>历史</value>
+  </data>
+  <data name="HistoryAndTest" xml:space="preserve">
+    <value>历史和测试</value>
+  </data>
+  <data name="HopOnce" xml:space="preserve">
+    <value>开始说话时跳一下</value>
+  </data>
+  <data name="Hotkey" xml:space="preserve">
+    <value>快捷键</value>
+  </data>
+  <data name="Hotkeybox" xml:space="preserve">
+    <value>快捷键框</value>
+  </data>
+  <data name="HumanMode" xml:space="preserve">
+    <value>真人模式</value>
+  </data>
+  <data name="IdleRotation" xml:space="preserve">
+    <value>为闲置角色增加一点旋转效果</value>
+  </data>
+  <data name="ImportPNGs" xml:space="preserve">
+    <value>导入 PNGs</value>
+  </data>
+  <data name="ImportPngTuberPlus" xml:space="preserve">
+    <value>从 PngTuber Plus 导入</value>
+  </data>
+  <data name="ImportProfile" xml:space="preserve">
+    <value>导入配置文件</value>
+  </data>
+  <data name="Input" xml:space="preserve">
+    <value>输入</value>
+  </data>
+  <data name="InputText" xml:space="preserve">
+    <value>输入文本：</value>
+  </data>
+  <data name="InstallInOBS" xml:space="preserve">
+    <value>在 OBS 中安装</value>
+  </data>
+  <data name="JustReadNoLLM" xml:space="preserve">
+    <value>仅阅读，无 LLM</value>
+  </data>
+  <data name="JustReadNoLLMToolTip" xml:space="preserve">
+    <value>如果选中：只读取所有消息，不使用LLM响应</value>
+  </data>
+  <data name="LayerList" xml:space="preserve">
+    <value>图层列表：</value>
+  </data>
+  <data name="LayerMenu" xml:space="preserve">
+    <value>图层菜单</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>图层</value>
+  </data>
+  <data name="LayerSetup" xml:space="preserve">
+    <value>图层设置</value>
+  </data>
+  <data name="LayoutMenu" xml:space="preserve">
+    <value>布局菜单</value>
+  </data>
+  <data name="LLM" xml:space="preserve">
+    <value>LLM</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>加载</value>
+  </data>
+  <data name="LogoBy" xml:space="preserve">
+    <value>Logo 由：</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>最大</value>
+  </data>
+  <data name="MaxContext" xml:space="preserve">
+    <value>最大上下文：</value>
+  </data>
+  <data name="MaxContextToolTip" xml:space="preserve">
+    <value>记忆中应保留多少消息</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>最大值</value>
+  </data>
+  <data name="MaximumBits" xml:space="preserve">
+    <value>最大比特数：</value>
+  </data>
+  <data name="MaximumObjectSpeed" xml:space="preserve">
+    <value>物体最大速度：</value>
+  </data>
+  <data name="MaxTokens" xml:space="preserve">
+    <value>最大标记数：</value>
+  </data>
+  <data name="MaxTokensToolTip" xml:space="preserve">
+    <value>模型响应时允许使用的标记数（1个标记大约等于1个词）</value>
+  </data>
+  <data name="Microphone" xml:space="preserve">
+    <value>麦克风</value>
+  </data>
+  <data name="MicSetup" xml:space="preserve">
+    <value>麦克风设置</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>最小</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>最小值</value>
+  </data>
+  <data name="MinimumBits" xml:space="preserve">
+    <value>最小比特数：</value>
+  </data>
+  <data name="MinimumBitsToolTip" xml:space="preserve">
+    <value>反应的最小比特阈值</value>
+  </data>
+  <data name="MinimumObjectSpeed" xml:space="preserve">
+    <value>物体最小速度：</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>模型：</value>
+  </data>
+  <data name="ModelToolTip" xml:space="preserve">
+    <value>输入您的 API 模型名称</value>
+  </data>
+  <data name="ModeSelect" xml:space="preserve">
+    <value>模式选择：</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>名称</value>
+  </data>
+  <data name="NewProfileName" xml:space="preserve">
+    <value>新配置文件名称</value>
+  </data>
+  <data name="NewTriggerToolTip" xml:space="preserve">
+    <value>添加一个新的触发组</value>
+  </data>
+  <data name="NotAuthenticated" xml:space="preserve">
+    <value>未认证</value>
+  </data>
+  <data name="NotConnected" xml:space="preserve">
+    <value>未连接</value>
+  </data>
+  <data name="NothingSelected" xml:space="preserve">
+    <value>未选择任何内容</value>
+  </data>
+  <data name="OpenAIKey" xml:space="preserve">
+    <value>OpenAI API 密钥：</value>
+  </data>
+  <data name="OpenAIKeyToolTip" xml:space="preserve">
+    <value>输入您的 OpenAI 密钥或其他提供商的密钥</value>
+  </data>
+  <data name="OpenMouth" xml:space="preserve">
+    <value>张嘴</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>(可选)</value>
+  </data>
+  <data name="OriginOffset" xml:space="preserve">
+    <value>偏移效果原点，有助于旋转，从底部拉伸</value>
+  </data>
+  <data name="OtherSoftware" xml:space="preserve">
+    <value>其他软件/游戏</value>
+  </data>
+  <data name="Output" xml:space="preserve">
+    <value>输出</value>
+  </data>
+  <data name="PanicEmote" xml:space="preserve">
+    <value>恐慌表情，慌乱奔跑</value>
+  </data>
+  <data name="Performance" xml:space="preserve">
+    <value>性能：</value>
+  </data>
+  <data name="PickBackgroundColour" xml:space="preserve">
+    <value>选择背景颜色</value>
+  </data>
+  <data name="PickFile" xml:space="preserve">
+    <value>选择文件</value>
+  </data>
+  <data name="PickFolder" xml:space="preserve">
+    <value>选择文件夹</value>
+  </data>
+  <data name="PinImageToModel" xml:space="preserve">
+    <value>将图像固定到你的模型上</value>
+  </data>
+  <data name="PlayOneSound" xml:space="preserve">
+    <value>播放一次特定声音</value>
+  </data>
+  <data name="Profiles" xml:space="preserve">
+    <value>配置文件</value>
+  </data>
+  <data name="RandomSound" xml:space="preserve">
+    <value>从文件夹中播放随机声音</value>
+  </data>
+  <data name="ReactFollowers" xml:space="preserve">
+    <value>对粉丝作出反应</value>
+  </data>
+  <data name="ReactFollowersToolTip" xml:space="preserve">
+    <value>如果启用，将读取新关注者</value>
+  </data>
+  <data name="ReactToAllMessages" xml:space="preserve">
+    <value>对所有聊天消息作出反应</value>
+  </data>
+  <data name="ReactToAllMessagesToolTip" xml:space="preserve">
+    <value>将对任何聊天消息作出反应</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>阅读</value>
+  </data>
+  <data name="ReadToolTip" xml:space="preserve">
+    <value>使用此功能读取输入文本（用于测试 TTS 声音）</value>
+  </data>
+  <data name="Redeem" xml:space="preserve">
+    <value>兑换：</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>移除</value>
+  </data>
+  <data name="RenderTerminal" xml:space="preserve">
+    <value>以终端方式呈现</value>
+  </data>
+  <data name="Replacement" xml:space="preserve">
+    <value>替换：</value>
+  </data>
+  <data name="ReplacementToolTip" xml:space="preserve">
+    <value>这句话将替换TTSPet即将朗读文本中所有被过滤的词语</value>
+  </data>
+  <data name="Respond" xml:space="preserve">
+    <value>回应</value>
+  </data>
+  <data name="RespondToolTip" xml:space="preserve">
+    <value>使用此功能回应输入文本</value>
+  </data>
+  <data name="RetryTwitchConnection" xml:space="preserve">
+    <value>重试 Twitch 连接</value>
+  </data>
+  <data name="RetryTwitchConnectionToolTip" xml:space="preserve">
+    <value>启用后或离线后重启Twitch时使用此功能</value>
+  </data>
+  <data name="RotateByRel" xml:space="preserve">
+    <value>旋转指定角度，适合旋转效果</value>
+  </data>
+  <data name="RunSpecs" xml:space="preserve">
+    <value>运行规格</value>
+  </data>
+  <data name="RunSpecsNote" xml:space="preserve">
+    <value>需要保存并重启以应用</value>
+  </data>
+  <data name="SampleText" xml:space="preserve">
+    <value>你好，你怎么样？</value>
+  </data>
+  <data name="SaveChanges" xml:space="preserve">
+    <value>保存更改</value>
+  </data>
+  <data name="ScrollingText" xml:space="preserve">
+    <value>滚动文本，可能是广告？</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>搜索</value>
+  </data>
+  <data name="SelectedSettings" xml:space="preserve">
+    <value>已选择的设置</value>
+  </data>
+  <data name="SelectedTriggerSetting" xml:space="preserve">
+    <value>已选择的触发器设置：</value>
+  </data>
+  <data name="SelectLayerToolTip" xml:space="preserve">
+    <value>选择图层，然后点击 AddLayer 添加</value>
+  </data>
+  <data name="SelectMeToolTip" xml:space="preserve">
+    <value>选择我 :)</value>
+  </data>
+  <data name="SelectNewLayer" xml:space="preserve">
+    <value>选择一个新图层</value>
+  </data>
+  <data name="SelectTriggerType" xml:space="preserve">
+    <value>选择触发器类型</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>设置</value>
+  </data>
+  <data name="SetupTransitions" xml:space="preserve">
+    <value>设置过渡效果</value>
+  </data>
+  <data name="ShowFPSCounter" xml:space="preserve">
+    <value>显示 FPS 计数器</value>
+  </data>
+  <data name="ShowHitbox" xml:space="preserve">
+    <value>显示碰撞盒</value>
+  </data>
+  <data name="Smoothing" xml:space="preserve">
+    <value>平滑</value>
+  </data>
+  <data name="SoundEnabled" xml:space="preserve">
+    <value>启用声音</value>
+  </data>
+  <data name="SpecLow" xml:space="preserve">
+    <value>低：1280x720 60fps</value>
+  </data>
+  <data name="SpecNormal" xml:space="preserve">
+    <value>标准：1920x1080 60fps</value>
+  </data>
+  <data name="SpecUltra" xml:space="preserve">
+    <value>超高：3840x2160 60fps</value>
+  </data>
+  <data name="SpecVeryLow" xml:space="preserve">
+    <value>非常低：960x540 60fps</value>
+  </data>
+  <data name="SpriteAvatarSetup" xml:space="preserve">
+    <value>精灵头像状态设置</value>
+  </data>
+  <data name="StretchXY" xml:space="preserve">
+    <value>说话时在x/y方向拉伸</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>提交</value>
+  </data>
+  <data name="SupportUs" xml:space="preserve">
+    <value>支持我们：</value>
+  </data>
+  <data name="SystemMessage" xml:space="preserve">
+    <value>系统消息（基本指令）：</value>
+  </data>
+  <data name="TestRain" xml:space="preserve">
+    <value>测试雨效果</value>
+  </data>
+  <data name="TestThrow" xml:space="preserve">
+    <value>测试投掷</value>
+  </data>
+  <data name="TestThrowToolTip" xml:space="preserve">
+    <value>测试投掷系统</value>
+  </data>
+  <data name="TestYourSetup" xml:space="preserve">
+    <value>测试你的设置</value>
+  </data>
+  <data name="Throwing" xml:space="preserve">
+    <value>投掷</value>
+  </data>
+  <data name="TimerLayer" xml:space="preserve">
+    <value>根据订阅者/比特数等变化的计时器</value>
+  </data>
+  <data name="TimeStamp" xml:space="preserve">
+    <value>时间戳</value>
+  </data>
+  <data name="TITSExplanation" xml:space="preserve">
+    <value>Twitch 集成投掷系统 (TITS) 允许你向你的 PngTuber 投掷物品。</value>
+  </data>
+  <data name="TITSSetup" xml:space="preserve">
+    <value>TITS 设置</value>
+  </data>
+  <data name="Toggleable" xml:space="preserve">
+    <value>可切换</value>
+  </data>
+  <data name="ToggleableToolTip" xml:space="preserve">
+    <value>使触发器在已添加时移除图层</value>
+  </data>
+  <data name="ToggleAvatarToolTip" xml:space="preserve">
+    <value>如果已激活，将恢复为默认。</value>
+  </data>
+  <data name="ToolTipCloseSettings" xml:space="preserve">
+    <value>关闭设置</value>
+  </data>
+  <data name="ToolTipCurrent" xml:space="preserve">
+    <value>当前说话音量</value>
+  </data>
+  <data name="ToolTipHitbox" xml:space="preserve">
+    <value>用来测试你的角色碰撞盒</value>
+  </data>
+  <data name="ToolTipHuman" xml:space="preserve">
+    <value>切换到真人模式</value>
+  </data>
+  <data name="ToolTipSaveChanges" xml:space="preserve">
+    <value>仅保存，不应用</value>
+  </data>
+  <data name="ToolTipSmoothing" xml:space="preserve">
+    <value>当前音量增加/减少的速度</value>
+  </data>
+  <data name="ToolTipThreshhold" xml:space="preserve">
+    <value>切换到说话图像的阈值</value>
+  </data>
+  <data name="ToolTipTTS" xml:space="preserve">
+    <value>切换到带有 AI 集成的 TTS 宠物模式</value>
+  </data>
+  <data name="ToolTipTwitchStatus" xml:space="preserve">
+    <value>前往常规设置以通过 Twitch 认证</value>
+  </data>
+  <data name="Transitions" xml:space="preserve">
+    <value>过渡</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>透明</value>
+  </data>
+  <data name="TransparentToolTip" xml:space="preserve">
+    <value>将背景设置为透明，以便在 OBS 中更容易捕捉</value>
+  </data>
+  <data name="Treshhold" xml:space="preserve">
+    <value>阈值</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>触发器：</value>
+  </data>
+  <data name="TriggerAndEffectSetup" xml:space="preserve">
+    <value>触发器和效果设置</value>
+  </data>
+  <data name="TriggerConditions" xml:space="preserve">
+    <value>触发条件</value>
+  </data>
+  <data name="TriggerSetup" xml:space="preserve">
+    <value>触发器设置</value>
+  </data>
+  <data name="TTS" xml:space="preserve">
+    <value>TTS</value>
+  </data>
+  <data name="TTSModel" xml:space="preserve">
+    <value>TTS 模型：</value>
+  </data>
+  <data name="TTSPet" xml:space="preserve">
+    <value>TTSPet</value>
+  </data>
+  <data name="TTSPetMode" xml:space="preserve">
+    <value>TTS 宠物模式</value>
+  </data>
+  <data name="TTSPetSetup" xml:space="preserve">
+    <value>TTS 宠物设置</value>
+  </data>
+  <data name="TTSProvider" xml:space="preserve">
+    <value>TTS 提供商：</value>
+  </data>
+  <data name="TTSProviderToolTip" xml:space="preserve">
+    <value>选择您的 TTS 提供商</value>
+  </data>
+  <data name="TTSVoice" xml:space="preserve">
+    <value>TTS 声音：</value>
+  </data>
+  <data name="Twitch" xml:space="preserve">
+    <value>Twitch：</value>
+  </data>
+  <data name="TwitchEmotesToolTip" xml:space="preserve">
+    <value>使用您频道的 Twitch 表情符号，需要连接 Twitch 以启用此功能</value>
+  </data>
+  <data name="TwitchEnabled" xml:space="preserve">
+    <value>Twitch 已启用</value>
+  </data>
+  <data name="TwitchRedeem" xml:space="preserve">
+    <value>Twitch 兑换：</value>
+  </data>
+  <data name="TwitchRedeemToolTip" xml:space="preserve">
+    <value>触发 TTSPet 的 Twitch 兑换名称</value>
+  </data>
+  <data name="TwitchRedeemToolTip2" xml:space="preserve">
+    <value>输入任何应触发 TTSPet 的兑换名称</value>
+  </data>
+  <data name="TwitchStatus" xml:space="preserve">
+    <value>Twitch 状态：</value>
+  </data>
+  <data name="TwitchTokenLasts" xml:space="preserve">
+    <value>Twitch 令牌有效期至：</value>
+  </data>
+  <data name="TwitchTokenLastsToolTip" xml:space="preserve">
+    <value>你需要不时刷新此令牌</value>
+  </data>
+  <data name="TwitchTriggers" xml:space="preserve">
+    <value>Twitch 触发器</value>
+  </data>
+  <data name="User" xml:space="preserve">
+    <value>用户</value>
+  </data>
+  <data name="UseTwitchEmotes" xml:space="preserve">
+    <value>使用 Twitch 表情</value>
+  </data>
+  <data name="Volume" xml:space="preserve">
+    <value>音量</value>
+  </data>
+  <data name="Wiggle" xml:space="preserve">
+    <value>轻微晃动</value>
+  </data>
+  <data name="WiggleWhenTalk" xml:space="preserve">
+    <value>说话时晃动（x/y 方向移动）</value>
+  </data>
+  <data name="XYMovement" xml:space="preserve">
+    <value>一直在x/y方向移动</value>
+  </data>
+  <data name="Yeet" xml:space="preserve">
+    <value>把自己甩出屏幕</value>
+  </data>
+  <data name="YMovementTalk" xml:space="preserve">
+    <value>说话时Y轴移动</value>
+  </data>
+  <data name="Activate" xml:space="preserve">
+    <value>激活</value>
+  </data>
+  <data name="Activated" xml:space="preserve">
+    <value>已激活</value>
+  </data>
+  <data name="ActivateStateToolTip" xml:space="preserve">
+    <value>激活此状态</value>
+  </data>
 </root>

@@ -556,7 +556,7 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Filtered Words (separated with &quot;;&quot;):.
+        ///   Looks up a localized string similar to Filtered Words (separated with &quot;;&quot; ):.
         /// </summary>
         public static string FilteredWords {
             get {

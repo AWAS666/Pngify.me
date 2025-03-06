@@ -117,11 +117,107 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Activated" xml:space="preserve">
-    <value>Activated</value>
+  <data name="AddGradient" xml:space="preserve">
+    <value>Add a gradient</value>
+  </data>
+  <data name="AddLayer" xml:space="preserve">
+    <value>AddLayer</value>
+  </data>
+  <data name="AddNewProfile" xml:space="preserve">
+    <value>Add New Profile</value>
+  </data>
+  <data name="AddNoise" xml:space="preserve">
+    <value>Add noise on top of your model</value>
+  </data>
+  <data name="AddSelectLayerToolTip" xml:space="preserve">
+    <value>Add Selected Layer</value>
+  </data>
+  <data name="AllProfiles" xml:space="preserve">
+    <value>All Profiles:</value>
+  </data>
+  <data name="AllTriggers" xml:space="preserve">
+    <value>All Triggers:</value>
+  </data>
+  <data name="ApplyAndReload" xml:space="preserve">
+    <value>Apply and Reload</value>
+  </data>
+  <data name="ApplyAndSave" xml:space="preserve">
+    <value>Apply and Save</value>
+  </data>
+  <data name="ApplyAndSaveToolTip" xml:space="preserve">
+    <value>Apply all changed settings and save them</value>
+  </data>
+  <data name="Art" xml:space="preserve">
+    <value>Art</value>
   </data>
   <data name="Avatar" xml:space="preserve">
     <value>Avatar</value>
+  </data>
+  <data name="AvatarMode" xml:space="preserve">
+    <value>Avatar Mode:</value>
+  </data>
+  <data name="BackGroundSetup" xml:space="preserve">
+    <value>Background Setup</value>
+  </data>
+  <data name="BasicAvatarSetup" xml:space="preserve">
+    <value>Basic Avatar State Setup</value>
+  </data>
+  <data name="BlendTime" xml:space="preserve">
+    <value>Blend Time</value>
+  </data>
+  <data name="BlendTimeToolTip" xml:space="preserve">
+    <value>Blending of last image, set to 0 to disable all blending</value>
+  </data>
+  <data name="Blink" xml:space="preserve">
+    <value>Blink</value>
+  </data>
+  <data name="BlinkInterval" xml:space="preserve">
+    <value>Blink Interval</value>
+  </data>
+  <data name="BlinkIntervalToolTip" xml:space="preserve">
+    <value>Time between blinks</value>
+  </data>
+  <data name="BlinkTime" xml:space="preserve">
+    <value>Blink Time</value>
+  </data>
+  <data name="BlinkTimeToolTip" xml:space="preserve">
+    <value>How long character blinks</value>
+  </data>
+  <data name="Cancel" xml:space="preserve">
+    <value>Cancel</value>
+  </data>
+  <data name="ChangeSound" xml:space="preserve">
+    <value>ChangeSound</value>
+  </data>
+  <data name="ChatTrigger" xml:space="preserve">
+    <value>Chat Trigger:</value>
+  </data>
+  <data name="ChatTriggerToolTip" xml:space="preserve">
+    <value>TTSPet will respond to any chat message starting with this, leave empty to disable</value>
+  </data>
+  <data name="ChooseTTSProvider" xml:space="preserve">
+    <value>Choose your TTS Provider</value>
+  </data>
+  <data name="Clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="ClearSelected" xml:space="preserve">
+    <value>Clear Selected</value>
+  </data>
+  <data name="ClosedMouth" xml:space="preserve">
+    <value>Closed Mouth</value>
+  </data>
+  <data name="CollissionSpeedDrop" xml:space="preserve">
+    <value>Collission speed drop:</value>
+  </data>
+  <data name="Connected" xml:space="preserve">
+    <value>Connected</value>
+  </data>
+  <data name="Connecting" xml:space="preserve">
+    <value>Connecting</value>
+  </data>
+  <data name="Createdby" xml:space="preserve">
+    <value>Created by:</value>
   </data>
   <data name="Credits" xml:space="preserve">
     <value>Credits</value>
@@ -129,17 +225,137 @@
   <data name="Current" xml:space="preserve">
     <value>Current</value>
   </data>
+  <data name="CurrentProfile" xml:space="preserve">
+    <value>Current Profile:</value>
+  </data>
+  <data name="CustomDomain" xml:space="preserve">
+    <value>Custom Domain:</value>
+  </data>
+  <data name="CustomDomainToolTip" xml:space="preserve">
+    <value>for non OpenAI Models</value>
+  </data>
+  <data name="DarkenImage" xml:space="preserve">
+    <value>Darken your image</value>
+  </data>
+  <data name="Default" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="DefaultCharacter" xml:space="preserve">
+    <value>Default Character by:</value>
+  </data>
+  <data name="DefaultSound" xml:space="preserve">
+    <value>Default Sound</value>
+  </data>
+  <data name="DefaultSoundToolTip" xml:space="preserve">
+    <value>revert to default sound</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="EnableSpout2" xml:space="preserve">
+    <value>Enable Spout2</value>
+  </data>
+  <data name="EndPoint" xml:space="preserve">
+    <value>Endpoint:</value>
+  </data>
+  <data name="EntryTime" xml:space="preserve">
+    <value>Entry Time:</value>
+  </data>
+  <data name="ExitTime" xml:space="preserve">
+    <value>Exit Time:</value>
+  </data>
+  <data name="ExplodePNG" xml:space="preserve">
+    <value>Explode your png</value>
+  </data>
+  <data name="Export" xml:space="preserve">
+    <value>Export</value>
+  </data>
+  <data name="Filter" xml:space="preserve">
+    <value>Filter</value>
+  </data>
+  <data name="FilteredWords" xml:space="preserve">
+    <value>Filtered Words (separated with ";" ):</value>
+  </data>
+  <data name="FilteredWordsToolTip" xml:space="preserve">
+    <value>Enter all filtered words you want to add</value>
+  </data>
   <data name="General" xml:space="preserve">
     <value>General</value>
   </data>
   <data name="GeneralSettings" xml:space="preserve">
     <value>General Settings</value>
   </data>
+  <data name="GlobalOffsetX" xml:space="preserve">
+    <value>Global Offset X</value>
+  </data>
+  <data name="GlobalOffsetY" xml:space="preserve">
+    <value>Global Offset Y</value>
+  </data>
+  <data name="GlobalSettings" xml:space="preserve">
+    <value>Global Settings</value>
+  </data>
+  <data name="GlobalZoom" xml:space="preserve">
+    <value>Global Zoom</value>
+  </data>
+  <data name="GoHomeLayer" xml:space="preserve">
+    <value>Run away and go back home...</value>
+  </data>
+  <data name="Gravity" xml:space="preserve">
+    <value>Gravity</value>
+  </data>
+  <data name="History" xml:space="preserve">
+    <value>History</value>
+  </data>
+  <data name="HistoryAndTest" xml:space="preserve">
+    <value>History and Test</value>
+  </data>
+  <data name="HopOnce" xml:space="preserve">
+    <value>hop once when starting to talk</value>
+  </data>
+  <data name="Hotkey" xml:space="preserve">
+    <value>Hotkey</value>
+  </data>
+  <data name="Hotkeybox" xml:space="preserve">
+    <value>Hotkeybox</value>
+  </data>
   <data name="HumanMode" xml:space="preserve">
     <value>Human Mode</value>
   </data>
+  <data name="IdleRotation" xml:space="preserve">
+    <value>Add a little rotation to your idle character</value>
+  </data>
+  <data name="ImportPNGs" xml:space="preserve">
+    <value>Import PNGs</value>
+  </data>
+  <data name="ImportPngTuberPlus" xml:space="preserve">
+    <value>Import from PngTuber Plus</value>
+  </data>
+  <data name="ImportProfile" xml:space="preserve">
+    <value>Import Profile</value>
+  </data>
   <data name="Input" xml:space="preserve">
     <value>Input</value>
+  </data>
+  <data name="InputText" xml:space="preserve">
+    <value>Input Text:</value>
+  </data>
+  <data name="InstallInOBS" xml:space="preserve">
+    <value>Install in OBS</value>
+  </data>
+  <data name="JustReadNoLLM" xml:space="preserve">
+    <value>Just Read, no LLM</value>
+  </data>
+  <data name="JustReadNoLLMToolTip" xml:space="preserve">
+    <value>if checked: will just read all messages and not respond using the llm</value>
+  </data>
+  <data name="LayerList" xml:space="preserve">
+    <value>LayerList:</value>
+  </data>
+  <data name="LayerMenu" xml:space="preserve">
+    <value>Layer Menu</value>
+  </data>
+  <data name="Layers" xml:space="preserve">
+    <value>Layers</value>
   </data>
   <data name="LayerSetup" xml:space="preserve">
     <value>LayerSetup</value>
@@ -147,32 +363,263 @@
   <data name="LayoutMenu" xml:space="preserve">
     <value>LayoutMenu</value>
   </data>
+  <data name="LLM" xml:space="preserve">
+    <value>LLM</value>
+  </data>
+  <data name="Load" xml:space="preserve">
+    <value>Load</value>
+  </data>
+  <data name="LogoBy" xml:space="preserve">
+    <value>Logo by:</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="MaxContext" xml:space="preserve">
+    <value>Max Context:</value>
+  </data>
+  <data name="MaxContextToolTip" xml:space="preserve">
+    <value>How many messages should be kept in memory</value>
+  </data>
+  <data name="Maximum" xml:space="preserve">
+    <value>Maximum</value>
+  </data>
+  <data name="MaximumBits" xml:space="preserve">
+    <value>Maximum Bits:</value>
+  </data>
+  <data name="MaximumObjectSpeed" xml:space="preserve">
+    <value>Maximum Object Speed:</value>
+  </data>
+  <data name="MaxTokens" xml:space="preserve">
+    <value>Max Tokens:</value>
+  </data>
+  <data name="MaxTokensToolTip" xml:space="preserve">
+    <value>How many tokens the model should be allowed to respond with (1 token is roughly 1 word)</value>
+  </data>
   <data name="Microphone" xml:space="preserve">
     <value>Microphone</value>
   </data>
   <data name="MicSetup" xml:space="preserve">
     <value>Microphone Setup</value>
   </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="Minimum" xml:space="preserve">
+    <value>Minimum</value>
+  </data>
+  <data name="MinimumBits" xml:space="preserve">
+    <value>Minimum Bits:</value>
+  </data>
+  <data name="MinimumBitsToolTip" xml:space="preserve">
+    <value>Minimum bits threshhold to react</value>
+  </data>
+  <data name="MinimumObjectSpeed" xml:space="preserve">
+    <value>Minimum Object Speed:</value>
+  </data>
+  <data name="Model" xml:space="preserve">
+    <value>Model:</value>
+  </data>
+  <data name="ModelToolTip" xml:space="preserve">
+    <value>Input your api model name</value>
+  </data>
   <data name="ModeSelect" xml:space="preserve">
     <value>Mode Select:</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewProfileName" xml:space="preserve">
+    <value>New Profile Name</value>
+  </data>
+  <data name="NewTriggerToolTip" xml:space="preserve">
+    <value>Adds a new trigger group</value>
+  </data>
+  <data name="NotAuthenticated" xml:space="preserve">
+    <value>Not Authenticated</value>
   </data>
   <data name="NotConnected" xml:space="preserve">
     <value>Not connected</value>
   </data>
+  <data name="NothingSelected" xml:space="preserve">
+    <value>Nothing selected</value>
+  </data>
+  <data name="OpenAIKey" xml:space="preserve">
+    <value>OpenAI API Key:</value>
+  </data>
+  <data name="OpenAIKeyToolTip" xml:space="preserve">
+    <value>Insert your openai key or other provider</value>
+  </data>
+  <data name="OpenMouth" xml:space="preserve">
+    <value>Open Mouth</value>
+  </data>
+  <data name="Optional" xml:space="preserve">
+    <value>(optional)</value>
+  </data>
+  <data name="OriginOffset" xml:space="preserve">
+    <value>offsets effect origin, useful for rotation, stretch from bottom</value>
+  </data>
+  <data name="OtherSoftware" xml:space="preserve">
+    <value>Other Software/Games</value>
+  </data>
   <data name="Output" xml:space="preserve">
     <value>Output</value>
+  </data>
+  <data name="PanicEmote" xml:space="preserve">
+    <value>Panic emote, running of panicking</value>
+  </data>
+  <data name="Performance" xml:space="preserve">
+    <value>Performance:</value>
+  </data>
+  <data name="PickBackgroundColour" xml:space="preserve">
+    <value>Pick Background Colour</value>
+  </data>
+  <data name="PickFile" xml:space="preserve">
+    <value>Pick File</value>
+  </data>
+  <data name="PickFolder" xml:space="preserve">
+    <value>Pick Folder</value>
+  </data>
+  <data name="PinImageToModel" xml:space="preserve">
+    <value>Pin an image to your model</value>
+  </data>
+  <data name="PlayOneSound" xml:space="preserve">
+    <value>Play once specific sound</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Profiles</value>
   </data>
+  <data name="RandomSound" xml:space="preserve">
+    <value>Play random sound from a folder</value>
+  </data>
+  <data name="ReactFollowers" xml:space="preserve">
+    <value>React to followers</value>
+  </data>
+  <data name="ReactFollowersToolTip" xml:space="preserve">
+    <value>Will read new followers if enabled</value>
+  </data>
+  <data name="ReactToAllMessages" xml:space="preserve">
+    <value>React to all chat messages</value>
+  </data>
+  <data name="ReactToAllMessagesToolTip" xml:space="preserve">
+    <value>will react to any chat message</value>
+  </data>
+  <data name="Read" xml:space="preserve">
+    <value>Read</value>
+  </data>
+  <data name="ReadToolTip" xml:space="preserve">
+    <value>Use this to read the input text (usefull to test tts voices)</value>
+  </data>
+  <data name="Redeem" xml:space="preserve">
+    <value>Redeem:</value>
+  </data>
+  <data name="Remove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="RenderTerminal" xml:space="preserve">
+    <value>Render as terminal</value>
+  </data>
+  <data name="Replacement" xml:space="preserve">
+    <value>Replacement:</value>
+  </data>
+  <data name="ReplacementToolTip" xml:space="preserve">
+    <value>This phrase will replace all filtered words found in the text the ttspet is about to speak</value>
+  </data>
+  <data name="Respond" xml:space="preserve">
+    <value>Respond</value>
+  </data>
+  <data name="RespondToolTip" xml:space="preserve">
+    <value>Use this to respond to the input text</value>
+  </data>
+  <data name="RetryTwitchConnection" xml:space="preserve">
+    <value>Retry Twitch Connection</value>
+  </data>
+  <data name="RetryTwitchConnectionToolTip" xml:space="preserve">
+    <value>Use this to start twitch after enabling it, or restarting it after going offline</value>
+  </data>
+  <data name="RotateByRel" xml:space="preserve">
+    <value>Rotate by amount, great for a spin effect</value>
+  </data>
+  <data name="RunSpecs" xml:space="preserve">
+    <value>Run Specs</value>
+  </data>
+  <data name="RunSpecsNote" xml:space="preserve">
+    <value>Requires save and restart to apply</value>
+  </data>
+  <data name="SampleText" xml:space="preserve">
+    <value>Hello, how are you?</value>
+  </data>
   <data name="SaveChanges" xml:space="preserve">
     <value>Save Changes</value>
+  </data>
+  <data name="ScrollingText" xml:space="preserve">
+    <value>Scrolling text, maybe an ad?</value>
+  </data>
+  <data name="Search" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="SelectedSettings" xml:space="preserve">
+    <value>Selected Settings</value>
+  </data>
+  <data name="SelectedTriggerSetting" xml:space="preserve">
+    <value>Selected Trigger Settings:</value>
+  </data>
+  <data name="SelectLayerToolTip" xml:space="preserve">
+    <value>Selected layer, then click AddLayer to add it</value>
+  </data>
+  <data name="SelectMeToolTip" xml:space="preserve">
+    <value>Select me :)</value>
+  </data>
+  <data name="SelectNewLayer" xml:space="preserve">
+    <value>Select a new layer</value>
+  </data>
+  <data name="SelectTriggerType" xml:space="preserve">
+    <value>Select trigger type</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="SetupTransitions" xml:space="preserve">
+    <value>Setup transitions</value>
+  </data>
+  <data name="ShowFPSCounter" xml:space="preserve">
+    <value>Show FPS Counter</value>
   </data>
   <data name="ShowHitbox" xml:space="preserve">
     <value>Show Hitboxes</value>
   </data>
   <data name="Smoothing" xml:space="preserve">
     <value>Smoothing</value>
+  </data>
+  <data name="SoundEnabled" xml:space="preserve">
+    <value>Sound Enabled</value>
+  </data>
+  <data name="SpecLow" xml:space="preserve">
+    <value>Low is 1280x720 60fps</value>
+  </data>
+  <data name="SpecNormal" xml:space="preserve">
+    <value>Normal is 1920x1080 60fps</value>
+  </data>
+  <data name="SpecUltra" xml:space="preserve">
+    <value>Ultra is 3840x2160 60fps</value>
+  </data>
+  <data name="SpecVeryLow" xml:space="preserve">
+    <value>Very Low is 960x540 60fps</value>
+  </data>
+  <data name="SpriteAvatarSetup" xml:space="preserve">
+    <value>Sprite Avatar State Setup</value>
+  </data>
+  <data name="StretchXY" xml:space="preserve">
+    <value>Stretch in x/y whenever talking</value>
+  </data>
+  <data name="Submit" xml:space="preserve">
+    <value>Submit</value>
+  </data>
+  <data name="SupportUs" xml:space="preserve">
+    <value>Support us:</value>
+  </data>
+  <data name="SystemMessage" xml:space="preserve">
+    <value>System Message (Base instructions):</value>
   </data>
   <data name="TestRain" xml:space="preserve">
     <value>Test Rain</value>
@@ -183,14 +630,32 @@
   <data name="TestThrowToolTip" xml:space="preserve">
     <value>test the throwing system</value>
   </data>
+  <data name="TestYourSetup" xml:space="preserve">
+    <value>Test your setup</value>
+  </data>
   <data name="Throwing" xml:space="preserve">
     <value>Throwing</value>
+  </data>
+  <data name="TimerLayer" xml:space="preserve">
+    <value>Timer that changes with subs/bits/etc.</value>
+  </data>
+  <data name="TimeStamp" xml:space="preserve">
+    <value>TimeStamp</value>
   </data>
   <data name="TITSExplanation" xml:space="preserve">
     <value>Twitch Integrated Throwing System (TITS) allows you to throw items at your PngTuber.</value>
   </data>
   <data name="TITSSetup" xml:space="preserve">
     <value>TITS Setup</value>
+  </data>
+  <data name="Toggleable" xml:space="preserve">
+    <value>Toggleable</value>
+  </data>
+  <data name="ToggleableToolTip" xml:space="preserve">
+    <value>Makes it so trigger removes layers if already added</value>
+  </data>
+  <data name="ToggleAvatarToolTip" xml:space="preserve">
+    <value>Will revert to default if already active.</value>
   </data>
   <data name="ToolTipCloseSettings" xml:space="preserve">
     <value>Close settings</value>
@@ -219,8 +684,35 @@
   <data name="ToolTipTwitchStatus" xml:space="preserve">
     <value>Head to general settings to authenticate with twitch</value>
   </data>
+  <data name="Transitions" xml:space="preserve">
+    <value>Transitions</value>
+  </data>
+  <data name="Transparent" xml:space="preserve">
+    <value>Transparent</value>
+  </data>
+  <data name="TransparentToolTip" xml:space="preserve">
+    <value>Set the background to transparent to capture it easier in obs</value>
+  </data>
   <data name="Treshhold" xml:space="preserve">
     <value>Treshhold</value>
+  </data>
+  <data name="Trigger" xml:space="preserve">
+    <value>Trigger:</value>
+  </data>
+  <data name="TriggerAndEffectSetup" xml:space="preserve">
+    <value>Trigger and Effect setup</value>
+  </data>
+  <data name="TriggerConditions" xml:space="preserve">
+    <value>Trigger Conditions</value>
+  </data>
+  <data name="TriggerSetup" xml:space="preserve">
+    <value>Trigger Setup</value>
+  </data>
+  <data name="TTS" xml:space="preserve">
+    <value>TTS</value>
+  </data>
+  <data name="TTSModel" xml:space="preserve">
+    <value>TTS Model:</value>
   </data>
   <data name="TTSPet" xml:space="preserve">
     <value>TTSPet</value>
@@ -228,143 +720,26 @@
   <data name="TTSPetMode" xml:space="preserve">
     <value>TTS Pet Mode</value>
   </data>
+  <data name="TTSPetSetup" xml:space="preserve">
+    <value>TTS Pet Setup</value>
+  </data>
+  <data name="TTSProvider" xml:space="preserve">
+    <value>TTS Provider:</value>
+  </data>
+  <data name="TTSProviderToolTip" xml:space="preserve">
+    <value>Pick your TTS provider</value>
+  </data>
+  <data name="TTSVoice" xml:space="preserve">
+    <value>TTS Voice:</value>
+  </data>
   <data name="Twitch" xml:space="preserve">
     <value>Twitch:</value>
   </data>
   <data name="TwitchEmotesToolTip" xml:space="preserve">
     <value>Use your channels twitch emotes, need to connect twitch to enable this</value>
   </data>
-  <data name="TwitchStatus" xml:space="preserve">
-    <value>Twitch Status:</value>
-  </data>
-  <data name="SoundEnabled" xml:space="preserve">
-    <value>Sound Enabled</value>
-  </data>
-  <data name="UseTwitchEmotes" xml:space="preserve">
-    <value>Use Twitch Emotes</value>
-  </data>
-  <data name="ChangeSound" xml:space="preserve">
-    <value>ChangeSound</value>
-  </data>
-  <data name="DefaultSound" xml:space="preserve">
-    <value>Default Sound</value>
-  </data>
-  <data name="DefaultSoundToolTip" xml:space="preserve">
-    <value>revert to default sound</value>
-  </data>
-  <data name="Volume" xml:space="preserve">
-    <value>Volume</value>
-  </data>
-  <data name="Gravity" xml:space="preserve">
-    <value>Gravity</value>
-  </data>
-  <data name="CollissionSpeedDrop" xml:space="preserve">
-    <value>Collission speed drop:</value>
-  </data>
-  <data name="MinimumObjectSpeed" xml:space="preserve">
-    <value>Minimum Object Speed:</value>
-  </data>
-  <data name="MaximumObjectSpeed" xml:space="preserve">
-    <value>Maximum Object Speed:</value>
-  </data>
-  <data name="MinimumBits" xml:space="preserve">
-    <value>Minimum Bits:</value>
-  </data>
-  <data name="MaximumBits" xml:space="preserve">
-    <value>Maximum Bits:</value>
-  </data>
-  <data name="Redeem" xml:space="preserve">
-    <value>Redeem:</value>
-  </data>
-  <data name="CurrentProfile" xml:space="preserve">
-    <value>Current Profile:</value>
-  </data>
-  <data name="NewProfileName" xml:space="preserve">
-    <value>New Profile Name</value>
-  </data>
-  <data name="AddNewProfile" xml:space="preserve">
-    <value>Add New Profile</value>
-  </data>
-  <data name="ImportProfile" xml:space="preserve">
-    <value>Import Profile</value>
-  </data>
-  <data name="AllProfiles" xml:space="preserve">
-    <value>All Profiles:</value>
-  </data>
-  <data name="Default" xml:space="preserve">
-    <value>Default</value>
-  </data>
-  <data name="Load" xml:space="preserve">
-    <value>Load</value>
-  </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
-  </data>
-  <data name="Export" xml:space="preserve">
-    <value>Export</value>
-  </data>
-  <data name="TTSPetSetup" xml:space="preserve">
-    <value>TTS Pet Setup</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="ApplyAndReload" xml:space="preserve">
-    <value>Apply and Reload</value>
-  </data>
-  <data name="LLM" xml:space="preserve">
-    <value>LLM</value>
-  </data>
-  <data name="JustReadNoLLM" xml:space="preserve">
-    <value>Just Read, no LLM</value>
-  </data>
-  <data name="JustReadNoLLMToolTip" xml:space="preserve">
-    <value>if checked: will just read all messages and not respond using the llm</value>
-  </data>
-  <data name="OpenAIKey" xml:space="preserve">
-    <value>OpenAI API Key:</value>
-  </data>
-  <data name="OpenAIKeyToolTip" xml:space="preserve">
-    <value>Insert your openai key or other provider</value>
-  </data>
-  <data name="CustomDomain" xml:space="preserve">
-    <value>Custom Domain:</value>
-  </data>
-  <data name="CustomDomainToolTip" xml:space="preserve">
-    <value>for non OpenAI Models</value>
-  </data>
-  <data name="Optional" xml:space="preserve">
-    <value>(optional)</value>
-  </data>
-  <data name="Model" xml:space="preserve">
-    <value>Model:</value>
-  </data>
-  <data name="ModelToolTip" xml:space="preserve">
-    <value>Input your api model name</value>
-  </data>
-  <data name="MaxTokens" xml:space="preserve">
-    <value>Max Tokens:</value>
-  </data>
-  <data name="MaxTokensToolTip" xml:space="preserve">
-    <value>How many tokens the model should be allowed to respond with (1 token is roughly 1 word)</value>
-  </data>
-  <data name="MaxContext" xml:space="preserve">
-    <value>Max Context:</value>
-  </data>
-  <data name="MaxContextToolTip" xml:space="preserve">
-    <value>How many messages should be kept in memory</value>
-  </data>
-  <data name="Clear" xml:space="preserve">
-    <value>Clear</value>
-  </data>
-  <data name="SystemMessage" xml:space="preserve">
-    <value>System Message (Base instructions):</value>
-  </data>
-  <data name="TwitchTriggers" xml:space="preserve">
-    <value>Twitch triggers</value>
-  </data>
-  <data name="MinimumBitsToolTip" xml:space="preserve">
-    <value>Minimum bits threshhold to react</value>
+  <data name="TwitchEnabled" xml:space="preserve">
+    <value>Twitch Enabled</value>
   </data>
   <data name="TwitchRedeem" xml:space="preserve">
     <value>Twitch Redeem:</value>
@@ -375,143 +750,8 @@
   <data name="TwitchRedeemToolTip2" xml:space="preserve">
     <value>Enter the name of any redeem that should trigger the ttspet</value>
   </data>
-  <data name="ChatTrigger" xml:space="preserve">
-    <value>Chat Trigger:</value>
-  </data>
-  <data name="ChatTriggerToolTip" xml:space="preserve">
-    <value>TTSPet will respond to any chat message starting with this, leave empty to disable</value>
-  </data>
-  <data name="ReactToAllMessages" xml:space="preserve">
-    <value>React to all chat messages</value>
-  </data>
-  <data name="ReactToAllMessagesToolTip" xml:space="preserve">
-    <value>will react to any chat message</value>
-  </data>
-  <data name="ReactFollowers" xml:space="preserve">
-    <value>React to followers</value>
-  </data>
-  <data name="ReactFollowersToolTip" xml:space="preserve">
-    <value>Will read new followers if enabled</value>
-  </data>
-  <data name="TTS" xml:space="preserve">
-    <value>TTS</value>
-  </data>
-  <data name="ChooseTTSProvider" xml:space="preserve">
-    <value>Choose your TTS Provider</value>
-  </data>
-  <data name="TTSProvider" xml:space="preserve">
-    <value>TTS Provider:</value>
-  </data>
-  <data name="TTSVoice" xml:space="preserve">
-    <value>TTS Voice:</value>
-  </data>
-  <data name="EndPoint" xml:space="preserve">
-    <value>Endpoint:</value>
-  </data>
-  <data name="TTSProviderToolTip" xml:space="preserve">
-    <value>Pick your TTS provider</value>
-  </data>
-  <data name="TTSModel" xml:space="preserve">
-    <value>TTS Model:</value>
-  </data>
-  <data name="Filter" xml:space="preserve">
-    <value>Filter</value>
-  </data>
-  <data name="Replacement" xml:space="preserve">
-    <value>Replacement:</value>
-  </data>
-  <data name="ReplacementToolTip" xml:space="preserve">
-    <value>This phrase will replace all filtered words found in the text the ttspet is about to speak</value>
-  </data>
-  <data name="FilteredWords" xml:space="preserve">
-    <value>Filtered Words (separated with ";"):</value>
-  </data>
-  <data name="FilteredWordsToolTip" xml:space="preserve">
-    <value>Enter all filtered words you want to add</value>
-  </data>
-  <data name="HistoryAndTest" xml:space="preserve">
-    <value>History and Test</value>
-  </data>
-  <data name="TestYourSetup" xml:space="preserve">
-    <value>Test your setup</value>
-  </data>
-  <data name="SampleText" xml:space="preserve">
-    <value>Hello, how are you?</value>
-  </data>
-  <data name="InputText" xml:space="preserve">
-    <value>Input Text:</value>
-  </data>
-  <data name="Respond" xml:space="preserve">
-    <value>Respond</value>
-  </data>
-  <data name="RespondToolTip" xml:space="preserve">
-    <value>Use this to respond to the input text</value>
-  </data>
-  <data name="Read" xml:space="preserve">
-    <value>Read</value>
-  </data>
-  <data name="ReadToolTip" xml:space="preserve">
-    <value>Use this to read the input text (usefull to test tts voices)</value>
-  </data>
-  <data name="History" xml:space="preserve">
-    <value>History</value>
-  </data>
-  <data name="TimeStamp" xml:space="preserve">
-    <value>TimeStamp</value>
-  </data>
-  <data name="User" xml:space="preserve">
-    <value>User</value>
-  </data>
-  <data name="BackGroundSetup" xml:space="preserve">
-    <value>Background Setup</value>
-  </data>
-  <data name="PickBackgroundColour" xml:space="preserve">
-    <value>Pick Background Colour</value>
-  </data>
-  <data name="Transparent" xml:space="preserve">
-    <value>Transparent</value>
-  </data>
-  <data name="TransparentToolTip" xml:space="preserve">
-    <value>Set the background to transparent to capture it easier in obs</value>
-  </data>
-  <data name="TriggerAndEffectSetup" xml:space="preserve">
-    <value>Trigger and Effect setup</value>
-  </data>
-  <data name="TriggerConditions" xml:space="preserve">
-    <value>Trigger Conditions</value>
-  </data>
-  <data name="NewTriggerToolTip" xml:space="preserve">
-    <value>Adds a new trigger group</value>
-  </data>
-  <data name="ApplyAndSave" xml:space="preserve">
-    <value>Apply and Save</value>
-  </data>
-  <data name="ApplyAndSaveToolTip" xml:space="preserve">
-    <value>Apply all changed settings and save them</value>
-  </data>
-  <data name="AllTriggers" xml:space="preserve">
-    <value>All Triggers:</value>
-  </data>
-  <data name="SelectMeToolTip" xml:space="preserve">
-    <value>Select me :)</value>
-  </data>
-  <data name="Remove" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="Trigger" xml:space="preserve">
-    <value>Trigger:</value>
-  </data>
-  <data name="SelectedTriggerSetting" xml:space="preserve">
-    <value>Selected Trigger Settings:</value>
-  </data>
-  <data name="TwitchEnabled" xml:space="preserve">
-    <value>Twitch Enabled</value>
-  </data>
-  <data name="RetryTwitchConnection" xml:space="preserve">
-    <value>Retry Twitch Connection</value>
-  </data>
-  <data name="RetryTwitchConnectionToolTip" xml:space="preserve">
-    <value>Use this to start twitch after enabling it, or restarting it after going offline</value>
+  <data name="TwitchStatus" xml:space="preserve">
+    <value>Twitch Status:</value>
   </data>
   <data name="TwitchTokenLasts" xml:space="preserve">
     <value>Twitch Token lasts until:</value>
@@ -519,260 +759,17 @@
   <data name="TwitchTokenLastsToolTip" xml:space="preserve">
     <value>you will need to refresh this every now and then</value>
   </data>
-  <data name="NotAuthenticated" xml:space="preserve">
-    <value>Not Authenticated</value>
+  <data name="TwitchTriggers" xml:space="preserve">
+    <value>Twitch triggers</value>
   </data>
-  <data name="Performance" xml:space="preserve">
-    <value>Performance:</value>
+  <data name="User" xml:space="preserve">
+    <value>User</value>
   </data>
-  <data name="ShowFPSCounter" xml:space="preserve">
-    <value>Show FPS Counter</value>
+  <data name="UseTwitchEmotes" xml:space="preserve">
+    <value>Use Twitch Emotes</value>
   </data>
-  <data name="RunSpecs" xml:space="preserve">
-    <value>Run Specs</value>
-  </data>
-  <data name="RunSpecsNote" xml:space="preserve">
-    <value>Requires save and restart to apply</value>
-  </data>
-  <data name="SpecVeryLow" xml:space="preserve">
-    <value>Very Low is 960x540 60fps</value>
-  </data>
-  <data name="SpecLow" xml:space="preserve">
-    <value>Low is 1280x720 60fps</value>
-  </data>
-  <data name="SpecNormal" xml:space="preserve">
-    <value>Normal is 1920x1080 60fps</value>
-  </data>
-  <data name="SpecUltra" xml:space="preserve">
-    <value>Ultra is 3840x2160 60fps</value>
-  </data>
-  <data name="EnableSpout2" xml:space="preserve">
-    <value>Enable Spout2</value>
-  </data>
-  <data name="InstallInOBS" xml:space="preserve">
-    <value>Install in OBS</value>
-  </data>
-  <data name="Createdby" xml:space="preserve">
-    <value>Created by:</value>
-  </data>
-  <data name="SupportUs" xml:space="preserve">
-    <value>Support us:</value>
-  </data>
-  <data name="OtherSoftware" xml:space="preserve">
-    <value>Other Software/Games</value>
-  </data>
-  <data name="Art" xml:space="preserve">
-    <value>Art</value>
-  </data>
-  <data name="DefaultCharacter" xml:space="preserve">
-    <value>Default Character by:</value>
-  </data>
-  <data name="LogoBy" xml:space="preserve">
-    <value>Logo by:</value>
-  </data>
-  <data name="AvatarMode" xml:space="preserve">
-    <value>Avatar Mode:</value>
-  </data>
-  <data name="BasicAvatarSetup" xml:space="preserve">
-    <value>Basic Avatar State Setup</value>
-  </data>
-  <data name="BlinkInterval" xml:space="preserve">
-    <value>Blink Interval</value>
-  </data>
-  <data name="BlinkIntervalToolTip" xml:space="preserve">
-    <value>Time between blinks</value>
-  </data>
-  <data name="BlinkTime" xml:space="preserve">
-    <value>Blink Time</value>
-  </data>
-  <data name="BlinkTimeToolTip" xml:space="preserve">
-    <value>How long character blinks</value>
-  </data>
-  <data name="BlendTime" xml:space="preserve">
-    <value>Blend Time</value>
-  </data>
-  <data name="BlendTimeToolTip" xml:space="preserve">
-    <value>Blending of last image, set to 0 to disable all blending</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Activate" xml:space="preserve">
-    <value>Activate</value>
-  </data>
-  <data name="ToggleAvatarToolTip" xml:space="preserve">
-    <value>Will revert to default if already active.</value>
-  </data>
-  <data name="Transitions" xml:space="preserve">
-    <value>Transitions</value>
-  </data>
-  <data name="Hotkey" xml:space="preserve">
-    <value>Hotkey</value>
-  </data>
-  <data name="OpenMouth" xml:space="preserve">
-    <value>Open Mouth</value>
-  </data>
-  <data name="ClosedMouth" xml:space="preserve">
-    <value>Closed Mouth</value>
-  </data>
-  <data name="Blink" xml:space="preserve">
-    <value>Blink</value>
-  </data>
-  <data name="SpriteAvatarSetup" xml:space="preserve">
-    <value>Sprite Avatar State Setup</value>
-  </data>
-  <data name="ImportPngTuberPlus" xml:space="preserve">
-    <value>Import from PngTuber Plus</value>
-  </data>
-  <data name="ImportPNGs" xml:space="preserve">
-    <value>Import PNGs</value>
-  </data>
-  <data name="ClearSelected" xml:space="preserve">
-    <value>Clear Selected</value>
-  </data>
-  <data name="Layers" xml:space="preserve">
-    <value>Layers</value>
-  </data>
-  <data name="SelectedSettings" xml:space="preserve">
-    <value>Selected Settings</value>
-  </data>
-  <data name="NothingSelected" xml:space="preserve">
-    <value>Nothing selected</value>
-  </data>
-  <data name="TriggerSetup" xml:space="preserve">
-    <value>Trigger Setup</value>
-  </data>
-  <data name="ActivateStateToolTip" xml:space="preserve">
-    <value>Activate this state</value>
-  </data>
-  <data name="GlobalSettings" xml:space="preserve">
-    <value>Global Settings</value>
-  </data>
-  <data name="GlobalZoom" xml:space="preserve">
-    <value>Global Zoom</value>
-  </data>
-  <data name="GlobalOffsetX" xml:space="preserve">
-    <value>Global Offset X</value>
-  </data>
-  <data name="GlobalOffsetY" xml:space="preserve">
-    <value>Global Offset Y</value>
-  </data>
-  <data name="Search" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="SelectNewLayer" xml:space="preserve">
-    <value>Select a new layer</value>
-  </data>
-  <data name="Cancel" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="Submit" xml:space="preserve">
-    <value>Submit</value>
-  </data>
-  <data name="SelectLayerToolTip" xml:space="preserve">
-    <value>Selected layer, then click AddLayer to add it</value>
-  </data>
-  <data name="LayerList" xml:space="preserve">
-    <value>LayerList:</value>
-  </data>
-  <data name="LayerMenu" xml:space="preserve">
-    <value>Layer Menu</value>
-  </data>
-  <data name="AddSelectLayerToolTip" xml:space="preserve">
-    <value>Add Selected Layer</value>
-  </data>
-  <data name="AddLayer" xml:space="preserve">
-    <value>AddLayer</value>
-  </data>
-  <data name="PickFile" xml:space="preserve">
-    <value>Pick File</value>
-  </data>
-  <data name="PickFolder" xml:space="preserve">
-    <value>Pick Folder</value>
-  </data>
-  <data name="SetupTransitions" xml:space="preserve">
-    <value>Setup transitions</value>
-  </data>
-  <data name="EntryTime" xml:space="preserve">
-    <value>Entry Time:</value>
-  </data>
-  <data name="ExitTime" xml:space="preserve">
-    <value>Exit Time:</value>
-  </data>
-  <data name="SelectTriggerType" xml:space="preserve">
-    <value>Select trigger type</value>
-  </data>
-  <data name="Toggleable" xml:space="preserve">
-    <value>Toggleable</value>
-  </data>
-  <data name="ToggleableToolTip" xml:space="preserve">
-    <value>Makes it so trigger removes layers if already added</value>
-  </data>
-  <data name="Hotkeybox" xml:space="preserve">
-    <value>Hotkeybox</value>
-  </data>
-  <data name="Minimum" xml:space="preserve">
-    <value>Minimum</value>
-  </data>
-  <data name="Maximum" xml:space="preserve">
-    <value>Maximum</value>
-  </data>
-  <data name="Min" xml:space="preserve">
-    <value>Min</value>
-  </data>
-  <data name="Max" xml:space="preserve">
-    <value>Max</value>
-  </data>
-  <data name="DarkenImage" xml:space="preserve">
-    <value>Darken your image</value>
-  </data>
-  <data name="ExplodePNG" xml:space="preserve">
-    <value>Explode your png</value>
-  </data>
-  <data name="AddNoise" xml:space="preserve">
-    <value>Add noise on top of your model</value>
-  </data>
-  <data name="AddGradient" xml:space="preserve">
-    <value>Add a gradient</value>
-  </data>
-  <data name="PinImageToModel" xml:space="preserve">
-    <value>Pin an image to your model</value>
-  </data>
-  <data name="ScrollingText" xml:space="preserve">
-    <value>Scrolling text, maybe an ad?</value>
-  </data>
-  <data name="RenderTerminal" xml:space="preserve">
-    <value>Render as terminal</value>
-  </data>
-  <data name="TimerLayer" xml:space="preserve">
-    <value>Timer that changes with subs/bits/etc.</value>
-  </data>
-  <data name="GoHomeLayer" xml:space="preserve">
-    <value>Run away and go back home...</value>
-  </data>
-  <data name="HopOnce" xml:space="preserve">
-    <value>hop once when starting to talk</value>
-  </data>
-  <data name="YMovementTalk" xml:space="preserve">
-    <value>Y movement whenever talking</value>
-  </data>
-  <data name="XYMovement" xml:space="preserve">
-    <value>X/Y movement all the time</value>
-  </data>
-  <data name="IdleRotation" xml:space="preserve">
-    <value>Add a little rotation to your idle character</value>
-  </data>
-  <data name="OriginOffset" xml:space="preserve">
-    <value>offsets effect origin, useful for rotation, stretch from bottom</value>
-  </data>
-  <data name="PanicEmote" xml:space="preserve">
-    <value>Panic emote, running of panicking</value>
-  </data>
-  <data name="RotateByRel" xml:space="preserve">
-    <value>Rotate by amount, great for a spin effect</value>
-  </data>
-  <data name="StretchXY" xml:space="preserve">
-    <value>Stretch in x/y whenever talking</value>
+  <data name="Volume" xml:space="preserve">
+    <value>Volume</value>
   </data>
   <data name="Wiggle" xml:space="preserve">
     <value>Little bit of a wiggle</value>
@@ -780,19 +777,22 @@
   <data name="WiggleWhenTalk" xml:space="preserve">
     <value>Wiggle whenever talking (x/y movement)</value>
   </data>
+  <data name="XYMovement" xml:space="preserve">
+    <value>X/Y movement all the time</value>
+  </data>
   <data name="Yeet" xml:space="preserve">
     <value>Yeet yourself of the screen</value>
   </data>
-  <data name="RandomSound" xml:space="preserve">
-    <value>Play random sound from a folder</value>
+  <data name="YMovementTalk" xml:space="preserve">
+    <value>Y movement whenever talking</value>
   </data>
-  <data name="PlayOneSound" xml:space="preserve">
-    <value>Play once specific sound</value>
+  <data name="Activate" xml:space="preserve">
+    <value>Activate</value>
   </data>
-  <data name="Connecting" xml:space="preserve">
-    <value>Connecting</value>
+  <data name="Activated" xml:space="preserve">
+    <value>Activated</value>
   </data>
-  <data name="Connected" xml:space="preserve">
-    <value>Connected</value>
+  <data name="ActivateStateToolTip" xml:space="preserve">
+    <value>Activate this state</value>
   </data>
 </root>
