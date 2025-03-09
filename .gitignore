@@ -454,3 +454,5 @@ $RECYCLE.BIN/
 !.vscode/extensions.json
 /PngifyMe/secrets.json
 /PngifyMe/.env
+/PngifyMe/libsteam_api.so
+/PngifyMe/steam_api64.dll
