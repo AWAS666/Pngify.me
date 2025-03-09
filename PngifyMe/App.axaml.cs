@@ -7,6 +7,7 @@ using PngifyMe.Services;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
 using PngifyMe.Services.WebSocket;
+using PngifyMe.Steam;
 using PngifyMe.Views;
 using Serilog;
 using Serilog.Events;
@@ -27,7 +28,7 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         // load language here, either system or steam
-        Lang.Resources.Culture = new CultureInfo("en-US");
+        Lang.Resources.Culture = SteamLocalization.GetStartUpCulture();
         AudioService.Init();
         WebSocketServer.Start();
 
