@@ -23,7 +23,7 @@ public static class HotkeyManager
     public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
     {
 #if DEBUG 
-        Hook = new SimpleGlobalHook(GlobalHookType.All);
+        Hook = new SimpleGlobalHook(GlobalHookType.Keyboard);
 #else
         Hook = new SimpleGlobalHook(GlobalHookType.All);
 #endif

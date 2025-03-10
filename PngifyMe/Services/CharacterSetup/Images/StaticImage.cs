@@ -1,4 +1,5 @@
-﻿using SkiaSharp;
+﻿using Avalonia.Platform;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -60,5 +61,10 @@ public class StaticImage : BaseImage
     {
         using var imageData = Bitmap.Encode(SKEncodedImageFormat.Png, 100);
         return [Convert.ToBase64String(imageData.ToArray())];
+    }
+
+    public static StaticImage LoadFromRessource(string resourceString)
+    {
+        return new StaticImage(SKBitmap.Decode(AssetLoader.Open(new Uri(resourceString))));
     }
 }

@@ -19,6 +19,8 @@ public static class SkiaHelper
     /// <returns></returns>
     public static SKBitmap Resize(SKBitmap bitmap, int maxWidth, int maxHeight, bool skipDispose = false)
     {
+        if (maxWidth == bitmap.Width && maxHeight == bitmap.Height)
+            return bitmap;
         float widthRatio = (float)maxWidth / bitmap.Width;
         float heightRatio = (float)maxHeight / bitmap.Height;
         float scaleRatio = Math.Min(widthRatio, heightRatio);

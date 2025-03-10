@@ -1,13 +1,12 @@
 ﻿using Avalonia.Platform;
-using PngifyMe.Helpers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
+using PngifyMe.Services.CharacterSetup.Images;
 using PngifyMe.Services.Hotkey;
 using Serilog;
 using SharpHook;
 using SkiaSharp;
 using System;
-using TwitchLib.Api.Core.RateLimiter;
 
 namespace PngifyMe.Layers.Image;
 
@@ -16,8 +15,8 @@ public class DrawingTablet : ImageLayer
 {
     private static SKBitmap defaulttablet;
     private static SKBitmap defaultstylus;
-    private SKBitmap tablet;
-    private SKBitmap stylus;
+    private BaseImage tablet;
+    private BaseImage stylus;
     private short x;
     private short y;
     private int count;
@@ -55,39 +54,25 @@ public class DrawingTablet : ImageLayer
 
     public override void OnEnter()
     {
-        // todo:
-        // rescale based on parameter
         HotkeyManager.Hook.MouseMoved += OnMouseMove;
 
         int width;
         if (string.IsNullOrEmpty(TabletPath))
-        {
-            tablet = defaulttablet;
-            width = tablet.Width;
-            tablet = SkiaHelper.Resize(tablet, Specsmanager.Width * Scale / 100, Specsmanager.Height * Scale / 100, skipDispose: true);
-        }
+            tablet = new StaticImage(defaulttablet.Copy());
         else
-        {
-            tablet = SKBitmap.Decode(TabletPath);
-            width = tablet.Width;
-            tablet = SkiaHelper.Resize(tablet, Specsmanager.Width * Scale / 100, Specsmanager.Height * Scale / 100);
-        }
+            tablet = BaseImage.LoadFromPath(TabletPath);
+        width = tablet.Width;
+        tablet.Resize(Specsmanager.Width * Scale / 100, Specsmanager.Height * Scale / 100);
 
         float scale = tablet.Width / (float)width;
 
         if (string.IsNullOrEmpty(StylusPath))
-        {
-            stylus = defaultstylus;
-            stylus = SkiaHelper.Resize(stylus, (int)(stylus.Width * scale), (int)(stylus.Height * scale), skipDispose: true);
-        }
+            stylus = new StaticImage(defaultstylus.Copy());
         else
-        {
-            stylus = SKBitmap.Decode(StylusPath);
-            stylus = SkiaHelper.Resize(stylus, (int)(stylus.Width * scale), (int)(stylus.Height * scale));
-        }
+            stylus = BaseImage.LoadFromPath(StylusPath);
 
-        tablet.SetImmutable();
-        stylus.SetImmutable();
+        stylus.Resize((int)(stylus.Width * scale), (int)(stylus.Height * scale));
+
         base.OnEnter();
     }
 
@@ -121,10 +106,14 @@ public class DrawingTablet : ImageLayer
         //posx += -stylus.Width / 2;
         //posy += -stylus.Height;
         canvas.RotateDegrees((posx / Specsmanager.Width - 0.5f) * 2 * 20 + sinRot, posx, posy);
-        canvas.DrawBitmap(stylus, posx - stylus.Width / 2 + offsetX, posy - stylus.Height + offsetY);
+        canvas.DrawBitmap(stylus.GetImage(TimeSpan.FromSeconds(CurrentTime)),
+            posx - stylus.Width / 2 + offsetX,
+            posy - stylus.Height + offsetY);
         canvas.Restore();
 
-        canvas.DrawBitmap(tablet, Specsmanager.Width / 2 - tablet.Width / 2, Specsmanager.Height - tablet.Height);
+        canvas.DrawBitmap(tablet.GetImage(TimeSpan.FromSeconds(CurrentTime)),
+            Specsmanager.Width / 2 - tablet.Width / 2,
+            Specsmanager.Height - tablet.Height);
     }
 
     public static float ScaleValue(float value, float oldMin, float oldMax, float newMin, float newMax)
