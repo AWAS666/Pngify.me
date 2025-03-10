@@ -3,9 +3,11 @@ using PngifyMe.Helpers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
 using PngifyMe.Services.Hotkey;
+using Serilog;
 using SharpHook;
 using SkiaSharp;
 using System;
+using TwitchLib.Api.Core.RateLimiter;
 
 namespace PngifyMe.Layers.Image;
 
@@ -18,6 +20,7 @@ public class DrawingTablet : ImageLayer
     private SKBitmap stylus;
     private short x;
     private short y;
+    private int count;
 
     [Unit("pixel")]
     public int ScreenMinX { get; set; } = 0;
@@ -41,6 +44,8 @@ public class DrawingTablet : ImageLayer
 
     [Unit("%")]
     public int Scale { get; set; } = 80;
+
+    public bool DebugMode { get; set; } = false;
 
     static DrawingTablet()
     {
@@ -96,6 +101,8 @@ public class DrawingTablet : ImageLayer
     {
         x = e.RawEvent.Mouse.X;
         y = e.RawEvent.Mouse.Y;
+        if (DebugMode && count++ % 60 == 0)
+            Log.Information($"Cursor: X {x}/ Y {y}");
     }
 
     public override void RenderImage(SKCanvas canvas, float offsetX, float offsetY)
