@@ -493,6 +493,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Drawing tablet that tracks your mouse position.
+        /// </summary>
+        public static string DrawingTablet {
+            get {
+                return ResourceManager.GetString("DrawingTablet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Enable Spout2.
         /// </summary>
         public static string EnableSpout2 {

@@ -1,76 +1,96 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
-		Microsoft ResX Schema
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
 
-		Version 1.3
-
-		The primary goals of this format is to allow a simple XML format 
-		that is mostly human readable. The generation and parsing of the 
-		various data types are done through the TypeConverter classes 
-		associated with the data types.
-
-		Example:
-
-		... ado.net/XML headers & schema ...
-		<resheader name="resmimetype">text/microsoft-resx</resheader>
-		<resheader name="version">1.3</resheader>
-		<resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
-		<resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
-		<data name="Name1">this is my long string</data>
-		<data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
-		<data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
-			[base64 mime encoded serialized .NET Framework object]
-		</data>
-		<data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-			[base64 mime encoded string representing a byte array form of the .NET Framework object]
-		</data>
-
-		There are any number of "resheader" rows that contain simple 
-		name/value pairs.
-
-		Each data row contains a name, and value. The row also contains a 
-		type or mimetype. Type corresponds to a .NET class that support 
-		text/value conversion through the TypeConverter architecture. 
-		Classes that don't support this are serialized and stored with the 
-		mimetype set.
-
-		The mimetype is used for serialized objects, and tells the 
-		ResXResourceReader how to depersist the object. This is currently not 
-		extensible. For a given mimetype the value must be set accordingly:
-
-		Note - application/x-microsoft.net.object.binary.base64 is the format 
-		that the ResXResourceWriter will generate, however the reader can 
-		read any of the formats listed below.
-
-		mimetype: application/x-microsoft.net.object.binary.base64
-		value   : The object must be serialized with 
-			: System.Serialization.Formatters.Binary.BinaryFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.soap.base64
-		value   : The object must be serialized with 
-			: System.Runtime.Serialization.Formatters.Soap.SoapFormatter
-			: and then encoded with base64 encoding.
-
-		mimetype: application/x-microsoft.net.object.bytearray.base64
-		value   : The object must be serialized into a byte array 
-			: using a System.ComponentModel.TypeConverter
-			: and then encoded with base64 encoding.
-	-->
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
       <xsd:complexType>
         <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
           <xsd:element name="data">
             <xsd:complexType>
               <xsd:sequence>
                 <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
                 <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
               </xsd:sequence>
-              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
               <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
               <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
             </xsd:complexType>
           </xsd:element>
           <xsd:element name="resheader">
@@ -89,14 +109,17 @@
     <value>text/microsoft-resx</value>
   </resheader>
   <resheader name="version">
-    <value>1.3</value>
+    <value>2.0</value>
   </resheader>
   <resheader name="reader">
-    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <resheader name="writer">
-    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="DrawingTablet" xml:space="preserve">
+    <value>Графический планшет, отслеживающий положение мыши</value>
+  </data>
   <data name="AddGradient" xml:space="preserve">
     <value>Добавить градиент</value>
   </data>
@@ -245,7 +268,7 @@
     <value>Время выхода:</value>
   </data>
   <data name="ExplodePNG" xml:space="preserve">
-    <value>Взорви ваш PNG</value>
+    <value>Взорвите ваш PNG</value>
   </data>
   <data name="Export" xml:space="preserve">
     <value>Экспорт</value>
@@ -359,19 +382,19 @@
     <value>Макс. контекст:</value>
   </data>
   <data name="MaxContextToolTip" xml:space="preserve">
-    <value>Сколько сообщений хранить в памяти</value>
+    <value>Сколько сообщений будут храниться в памяти</value>
   </data>
   <data name="Maximum" xml:space="preserve">
     <value>Максимум</value>
   </data>
   <data name="MaximumBits" xml:space="preserve">
-    <value>Максимальное количество бит:</value>
+    <value>Максимальное количество Bits:</value>
   </data>
   <data name="MaximumObjectSpeed" xml:space="preserve">
     <value>Максимальная скорость объекта:</value>
   </data>
   <data name="MaxTokens" xml:space="preserve">
-    <value>Макс. токенов:</value>
+    <value>Максимум токенов:</value>
   </data>
   <data name="MaxTokensToolTip" xml:space="preserve">
     <value>Сколько токенов модель может использовать для ответа (примерно 1 токен ≈ 1 слово)</value>
@@ -389,10 +412,10 @@
     <value>Минимум</value>
   </data>
   <data name="MinimumBits" xml:space="preserve">
-    <value>Минимальное количество бит:</value>
+    <value>Минимальное количество Bits:</value>
   </data>
   <data name="MinimumBitsToolTip" xml:space="preserve">
-    <value>Минимальный порог бит для реакции</value>
+    <value>Минимальный порог Bits для реакции</value>
   </data>
   <data name="MinimumObjectSpeed" xml:space="preserve">
     <value>Минимальная скорость объекта:</value>
@@ -446,7 +469,7 @@
     <value>Вывод</value>
   </data>
   <data name="PanicEmote" xml:space="preserve">
-    <value>Эмодзи паники, при паникующем беге</value>
+    <value>Эмодзи паники, бег в панике</value>
   </data>
   <data name="Performance" xml:space="preserve">
     <value>Производительность:</value>
@@ -464,7 +487,7 @@
     <value>Прикрепить изображение к вашей модели</value>
   </data>
   <data name="PlayOneSound" xml:space="preserve">
-    <value>Воспроизвести один определенный звук</value>
+    <value>Однократно воспроизвести определенный звук</value>
   </data>
   <data name="Profiles" xml:space="preserve">
     <value>Профили</value>
@@ -491,7 +514,7 @@
     <value>Используйте это для чтения вводимого текста (полезно для тестирования голосов TTS)</value>
   </data>
   <data name="Redeem" xml:space="preserve">
-    <value>Активировать:</value>
+    <value>Награда:</value>
   </data>
   <data name="Remove" xml:space="preserve">
     <value>Удалить</value>
@@ -545,7 +568,7 @@
     <value>Выбранные настройки триггера:</value>
   </data>
   <data name="SelectLayerToolTip" xml:space="preserve">
-    <value>Выбранный слой, затем нажмите AddLayer, чтобы добавить его</value>
+    <value>Выбранный слой, затем нажмите Добавить слой, чтобы добавить его</value>
   </data>
   <data name="SelectMeToolTip" xml:space="preserve">
     <value>Выберите меня :)</value>
@@ -593,7 +616,7 @@
     <value>Растягивать по оси X/Y во время разговора</value>
   </data>
   <data name="Submit" xml:space="preserve">
-    <value>Отправить</value>
+    <value>Подтвердить</value>
   </data>
   <data name="SupportUs" xml:space="preserve">
     <value>Поддержите нас:</value>
@@ -617,7 +640,7 @@
     <value>Бросок</value>
   </data>
   <data name="TimerLayer" xml:space="preserve">
-    <value>Таймер, который изменяется с подписками/битами и т.д.</value>
+    <value>Таймер, который изменяется с подписками/Bits и т.д.</value>
   </data>
   <data name="TimeStamp" xml:space="preserve">
     <value>Отметка времени</value>
@@ -647,7 +670,7 @@
     <value>Используйте это для проверки хитбокса вашего персонажа</value>
   </data>
   <data name="ToolTipHuman" xml:space="preserve">
-    <value>Переключиться в режим активного человека</value>
+    <value>Переключиться в режим активации человеком</value>
   </data>
   <data name="ToolTipSaveChanges" xml:space="preserve">
     <value>Только сохранить, не применять</value>
@@ -656,7 +679,7 @@
     <value>Как быстро изменяется текущая громкость</value>
   </data>
   <data name="ToolTipThreshhold" xml:space="preserve">
-    <value>Порог для переключения на изображение говорящего</value>
+    <value>Порог для переключения на говорящее изображение</value>
   </data>
   <data name="ToolTipTTS" xml:space="preserve">
     <value>Переключиться в режим TTS-питомца с интеграцией ИИ</value>
@@ -695,7 +718,7 @@
     <value>TTS-модель:</value>
   </data>
   <data name="TTSPet" xml:space="preserve">
-    <value>TTSPet</value>
+    <value>TTS-питомец</value>
   </data>
   <data name="TTSPetMode" xml:space="preserve">
     <value>Режим TTS-питомца</value>
@@ -722,13 +745,13 @@
     <value>Twitch включен</value>
   </data>
   <data name="TwitchRedeem" xml:space="preserve">
-    <value>Twitch активация:</value>
+    <value>Twitch награда:</value>
   </data>
   <data name="TwitchRedeemToolTip" xml:space="preserve">
-    <value>название активации Twitch, которая должна запустить TTSPet</value>
+    <value>название награды Twitch, которая должна запустить TTSPet</value>
   </data>
   <data name="TwitchRedeemToolTip2" xml:space="preserve">
-    <value>Введите название любой активации, которая должна запустить TTSPet</value>
+    <value>Введите название любой награды, которая должна запустить TTSPet</value>
   </data>
   <data name="TwitchStatus" xml:space="preserve">
     <value>Статус Twitch:</value>
@@ -761,7 +784,7 @@
     <value>Постоянное движение по осям X/Y</value>
   </data>
   <data name="Yeet" xml:space="preserve">
-    <value>Выкинь себя с экрана</value>
+    <value>Выкиньте себя с экрана</value>
   </data>
   <data name="YMovementTalk" xml:space="preserve">
     <value>Движение по Y во время разговора</value>
