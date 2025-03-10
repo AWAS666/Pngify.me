@@ -1,4 +1,5 @@
 ﻿using CppSharp.Types.Std;
+using PngifyMe.Helpers;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
@@ -19,20 +20,7 @@ public abstract class BaseImage : IDisposable
 
     public virtual SKBitmap Resize(SKBitmap bitmap, int maxWidth, int maxHeight)
     {
-        float widthRatio = (float)maxWidth / bitmap.Width;
-        float heightRatio = (float)maxHeight / bitmap.Height;
-        float scaleRatio = Math.Min(widthRatio, heightRatio);
-
-        int newWidth = (int)(bitmap.Width * scaleRatio);
-        int newHeight = (int)(bitmap.Height * scaleRatio);
-
-        using (var resizedBitmap = new SKBitmap(newWidth, newHeight))
-        using (var canvas = new SKCanvas(resizedBitmap))
-        {
-            canvas.DrawBitmap(bitmap, new SKRect(0, 0, newWidth, newHeight));
-            bitmap.Dispose();
-            return resizedBitmap.Copy();
-        }
+        return SkiaHelper.Resize(bitmap, maxWidth, maxHeight);       
     }
 
     public static BaseImage LoadFromPath(string path)

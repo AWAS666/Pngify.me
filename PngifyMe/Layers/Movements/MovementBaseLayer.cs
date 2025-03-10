@@ -12,7 +12,7 @@ public abstract class MovementBaseLayer : BaseLayer
 
     public override void OnEnter()
     {
-
+        base.OnEnter();
     }
 
     public override void OnExit()

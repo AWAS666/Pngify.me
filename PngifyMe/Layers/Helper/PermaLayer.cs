@@ -5,6 +5,7 @@
         protected float CurrentStrength = 0;
         public override void OnEnter()
         {
+            base.OnEnter();
         }
 
         public override void OnExit()

@@ -198,7 +198,8 @@ public static class LayerManager
 
             foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.BehindModel && !x.ApplyOtherEffects))
             {
-                img.RenderImage(canvas, 0, 0);
+                if (img.Entered)
+                    img.RenderImage(canvas, 0, 0);
             }
             baseImg.SetImmutable();
 
@@ -211,7 +212,8 @@ public static class LayerManager
 
             foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.BehindModel && x.ApplyOtherEffects))
             {
-                img.RenderImage(canvas, layert.PosX, layert.PosY);
+                if (img.Entered)
+                    img.RenderImage(canvas, layert.PosX, layert.PosY);
             }
 
             // Apply transformations directly to the main canvas
@@ -228,7 +230,8 @@ public static class LayerManager
 
             foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => x.ApplyOtherEffects && !x.BehindModel))
             {
-                img.RenderImage(canvas, layert.PosX, layert.PosY);
+                if (img.Entered)
+                    img.RenderImage(canvas, layert.PosX, layert.PosY);
             }
 
             canvas.Restore();
@@ -236,7 +239,8 @@ public static class LayerManager
 
             foreach (ImageLayer img in RenderedLayers.Where(x => x is ImageLayer).Cast<ImageLayer>().Where(x => !x.ApplyOtherEffects && !x.BehindModel))
             {
-                img.RenderImage(canvas, 0, 0);
+                if (img.Entered)
+                    img.RenderImage(canvas, 0, 0);
             }
         }
         BufferAndCleanUp(mainBitmap);

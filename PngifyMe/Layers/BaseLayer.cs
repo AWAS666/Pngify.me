@@ -9,6 +9,7 @@ namespace PngifyMe.Layers
         public float ExitTime = 3.0f;
         public float AutoRemoveTime = float.PositiveInfinity;
 
+        public bool Entered = false;
         public bool IsExiting = false;
 
         protected float CurrentTime = 0;
@@ -16,6 +17,7 @@ namespace PngifyMe.Layers
         protected float GlobalTime = 0;
 
         public Layersetting AddedBy;
+
 
         public virtual void SetGlobalTime(float time)
         {
@@ -55,7 +57,10 @@ namespace PngifyMe.Layers
             return false;
         }
 
-        public abstract void OnEnter();
+        public virtual void OnEnter()
+        {
+            Entered = true;
+        }
         public abstract void OnUpdateEnter(float dt, float fraction);
         public abstract void OnUpdate(float dt, float time);
         public abstract void OnUpdateExit(float dt, float fraction);
