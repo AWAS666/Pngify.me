@@ -52,9 +52,7 @@ public class DrawingTablet : ImageLayer
     {
         // todo:
         // rescale based on parameter
-        HotkeyManager.MouseHook.MouseMoved += OnMouseMove;
-        if (!HotkeyManager.MouseHook.IsRunning)
-            HotkeyManager.MouseHook.RunAsync();
+        HotkeyManager.Hook.MouseMoved += OnMouseMove;
 
         int width;
         if (string.IsNullOrEmpty(TabletPath))
@@ -90,7 +88,7 @@ public class DrawingTablet : ImageLayer
 
     public override void OnExit()
     {
-        HotkeyManager.MouseHook.MouseMoved -= OnMouseMove;
+        HotkeyManager.Hook.MouseMoved -= OnMouseMove;
         base.OnExit();
     }
 

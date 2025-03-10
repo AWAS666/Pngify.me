@@ -9,8 +9,7 @@ using System.Reactive.Linq;
 namespace PngifyMe.Services.Hotkey;
 public static class HotkeyManager
 {
-    private static SimpleGlobalHook hook;
-    public static SimpleGlobalHook MouseHook { get; private set; }
+    public static SimpleGlobalHook Hook { get; private set; }
 
     //private static List<IRegistration> subscriptions = new List<IRegistration>();
     private static new Dictionary<(KeyCode, ModifierMask), List<Action>> callBacks = new();
@@ -23,12 +22,15 @@ public static class HotkeyManager
     /// <param name="desktop"></param>
     public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
     {
-        hook = new SimpleGlobalHook(GlobalHookType.Keyboard);
-        MouseHook = new SimpleGlobalHook(GlobalHookType.Mouse);
-        hook.KeyPressed += OnKeyPressed;
+#if DEBUG 
+        Hook = new SimpleGlobalHook(GlobalHookType.All);
+#else
+        Hook = new SimpleGlobalHook(GlobalHookType.All);
+#endif
+        Hook.KeyPressed += OnKeyPressed;
         desktop.Exit += Desktop_Exit;
         Started = true;
-        hook.RunAsync();
+        Hook.RunAsync();
     }
 
     private static void OnKeyPressed(object? sender, KeyboardHookEventArgs e)
@@ -45,8 +47,7 @@ public static class HotkeyManager
 
     private static void Desktop_Exit(object? sender, Avalonia.Controls.ApplicationLifetimes.ControlledApplicationLifetimeExitEventArgs e)
     {
-        hook?.Dispose();
-        MouseHook?.Dispose();
+        Hook?.Dispose();
     }
 
     public static void AddHotkey(KeyCode virtualKeyCode, ModifierMask modifier, Action callback)
