@@ -15,8 +15,9 @@ public static class SkiaHelper
     /// <param name="bitmap"></param>
     /// <param name="maxWidth"></param>
     /// <param name="maxHeight"></param>
+    /// <param name="skipDispose">doesn't dispose original if true</param>
     /// <returns></returns>
-    public static SKBitmap Resize(SKBitmap bitmap, int maxWidth, int maxHeight)
+    public static SKBitmap Resize(SKBitmap bitmap, int maxWidth, int maxHeight, bool skipDispose = false)
     {
         float widthRatio = (float)maxWidth / bitmap.Width;
         float heightRatio = (float)maxHeight / bitmap.Height;
@@ -29,7 +30,8 @@ public static class SkiaHelper
         using (var canvas = new SKCanvas(resizedBitmap))
         {
             canvas.DrawBitmap(bitmap, new SKRect(0, 0, newWidth, newHeight));
-            bitmap.Dispose();
+            if (!skipDispose)
+                bitmap.Dispose();
             return resizedBitmap.Copy();
         }
     }

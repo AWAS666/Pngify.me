@@ -13,7 +13,6 @@ namespace PngifyMe.Layers.Image;
 public class DrawingTablet : ImageLayer
 {
     private static SKBitmap defaulttablet;
-    private static float defaultScale;
     private static SKBitmap defaultstylus;
     private SKBitmap tablet;
     private SKBitmap stylus;
@@ -40,19 +39,13 @@ public class DrawingTablet : ImageLayer
     [ImagePicker]
     public string StylusPath { get; set; } = string.Empty;
 
+    [Unit("%")]
+    public int Scale { get; set; } = 80;
+
     static DrawingTablet()
     {
         defaulttablet = SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/tablet.png")));
-        var width = defaulttablet.Width;
-        var height = defaulttablet.Height;
-        defaulttablet = SkiaHelper.Resize(defaulttablet, (int)(Specsmanager.Width * 0.8f), (int)(Specsmanager.Height * 0.8f));
-        defaultScale = defaulttablet.Width / (float)width;
-
         defaultstylus = SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/stylus.png")));
-        defaultstylus = SkiaHelper.Resize(defaultstylus, defaultstylus.Width * defaulttablet.Width / width, defaultstylus.Height * height / defaulttablet.Height);
-
-        defaulttablet.SetImmutable();
-        defaultstylus.SetImmutable();
     }
 
     public override void OnEnter()
@@ -63,31 +56,35 @@ public class DrawingTablet : ImageLayer
         if (!HotkeyManager.MouseHook.IsRunning)
             HotkeyManager.MouseHook.RunAsync();
 
-        float scale = defaultScale;
+        int width;
         if (string.IsNullOrEmpty(TabletPath))
         {
             tablet = defaulttablet;
+            width = tablet.Width;
+            tablet = SkiaHelper.Resize(tablet, Specsmanager.Width * Scale / 100, Specsmanager.Height * Scale / 100, skipDispose: true);
         }
         else
         {
-            // load and scale external
             tablet = SKBitmap.Decode(TabletPath);
-            var width = tablet.Width;
-            tablet = SkiaHelper.Resize(tablet, (int)(Specsmanager.Width * 0.8f), (int)(Specsmanager.Height * 0.8f));
-            scale = tablet.Width / (float)width;
+            width = tablet.Width;
+            tablet = SkiaHelper.Resize(tablet, Specsmanager.Width * Scale / 100, Specsmanager.Height * Scale / 100);
         }
+
+        float scale = tablet.Width / (float)width;
 
         if (string.IsNullOrEmpty(StylusPath))
         {
             stylus = defaultstylus;
+            stylus = SkiaHelper.Resize(stylus, (int)(stylus.Width * scale), (int)(stylus.Height * scale), skipDispose: true);
         }
         else
         {
-            // load and scale external
             stylus = SKBitmap.Decode(StylusPath);
-            // scale with tablet
             stylus = SkiaHelper.Resize(stylus, (int)(stylus.Width * scale), (int)(stylus.Height * scale));
         }
+
+        tablet.SetImmutable();
+        stylus.SetImmutable();
         base.OnEnter();
     }
 
