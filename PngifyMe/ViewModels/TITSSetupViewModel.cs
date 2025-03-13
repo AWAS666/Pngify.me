@@ -1,5 +1,6 @@
 ﻿using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
@@ -64,5 +65,23 @@ public partial class TITSSetupViewModel : ObservableObject
         SettingsManager.Current.Tits.HitSoundFileName = string.Empty;
     }
 
+    [RelayCommand]
+    public void SetupTriggers()
+    {
+        LayerManager.ThrowingSystem.SetupTriggers();
+        SettingsManager.Save();
+    }
+
+    [RelayCommand]
+    public void AddTrigger()
+    {
+        SettingsManager.Current.Tits.CustomTriggers.Add(new());
+    }
+
+    [RelayCommand]
+    public void RemoveTrigger(TitsCustomTrigger trigger)
+    {
+        SettingsManager.Current.Tits.CustomTriggers.Remove(trigger);
+    }
 
 }

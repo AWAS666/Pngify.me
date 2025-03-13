@@ -421,6 +421,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Custom.
+        /// </summary>
+        public static string Custom {
+            get {
+                return ResourceManager.GetString("Custom", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Custom Domain:.
         /// </summary>
         public static string CustomDomain {
@@ -1209,6 +1218,15 @@ namespace PngifyMe.Lang {
         public static string Profiles {
             get {
                 return ResourceManager.GetString("Profiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Rain.
+        /// </summary>
+        public static string Rain {
+            get {
+                return ResourceManager.GetString("Rain", resourceCulture);
             }
         }
         
@@ -2037,6 +2055,15 @@ namespace PngifyMe.Lang {
         public static string User {
             get {
                 return ResourceManager.GetString("User", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use raining bits.
+        /// </summary>
+        public static string UseRain {
+            get {
+                return ResourceManager.GetString("UseRain", resourceCulture);
             }
         }
         

@@ -1,62 +1,137 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.ViewModels.Helper;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text.Json.Serialization;
 
-namespace PngifyMe.Services.Settings
+
+namespace PngifyMe.Services.Settings;
+
+public partial class TitsSettings : ObservableObject
 {
-    public partial class TitsSettings : ObservableObject
+    public bool Enabled { get; set; } = false;
+    public bool HitLinesVisible { get; set; } = false;
+
+    [ObservableProperty]
+    private uint gravity = 1000;
+
+    [ObservableProperty]
+    private string hitSound = string.Empty;
+
+    [ObservableProperty]
+    private string hitSoundFileName = string.Empty;
+
+    [ObservableProperty]
+    private bool enableSound = true;
+
+    [ObservableProperty]
+    private float volume = 0.5f;
+
+    [ObservableProperty]
+    private uint collissionEnergyLossPercent = 20;
+
+    [ObservableProperty]
+    private bool useTwitchEmotes = false;
+
+    partial void OnUseTwitchEmotesChanged(bool oldValue, bool newValue)
     {
-        public bool Enabled { get; set; } = false;
-        public bool HitLinesVisible { get; set; } = false;
+        UseTwitchEmotesChanged?.Invoke(oldValue, newValue);
+    }
 
-        [ObservableProperty]
-        private uint gravity = 1000;
+    public EventHandler<bool> UseTwitchEmotesChanged;
 
-        [ObservableProperty]
-        private string hitSound = string.Empty;
+    public TitsTriggerSetup ThrowSetup { get; set; } = new();
+    public TitsTriggerSetup RainSetup { get; set; } = new();
 
-        [ObservableProperty]
-        private string hitSoundFileName = string.Empty;
+    public ObservableCollection<TitsCustomTrigger> CustomTriggers { get; set; } = new();
 
-        [ObservableProperty]
-        private bool enableSound = true;
+    public bool ShowHitlines => Enabled && HitLinesVisible;
+}
 
-        [ObservableProperty]
-        private float volume = 0.5f;
+public partial class TitsTriggerSetup : ObservableObject
+{
+    [ObservableProperty]
+    private uint objectSpeedMin = 2000;
 
-        [ObservableProperty]
-        private uint collissionEnergyLossPercent = 20;
+    [ObservableProperty]
+    private uint objectSpeedMax = 3000;
 
-        [ObservableProperty]
-        private bool useTwitchEmotes = false;
+    [ObservableProperty]
+    private uint minBits = 0;
 
-        partial void OnUseTwitchEmotesChanged(bool oldValue, bool newValue)
+    [ObservableProperty]
+    private uint maxBits = uint.MaxValue;
+
+    [ObservableProperty]
+    private string redeem = string.Empty;
+}
+
+public partial class TitsCustomTrigger : ObservableObject
+{
+    public string Name { get; set; }
+    public int BitsToThrow { get; set; } = 10;
+    public bool UseRain { get; set; }
+
+    [ObservableProperty]
+    private Trigger trigger;
+
+    [property: JsonIgnore]
+    [ObservableProperty]
+    private TriggerViewModel triggerVm;
+
+    public static List<TriggerTypeInfo> AvailableTriggers { get; } = new();
+    static TitsCustomTrigger()
+    {
+        InitializeAvailableTriggers();
+    }
+
+    public TitsCustomTrigger()
+    {
+        Trigger = new HotkeyTrigger();
+    }
+
+    private static void InitializeAvailableTriggers()
+    {
+        var triggerTypes = typeof(Trigger).Assembly.GetTypes()
+            .Where(t => t.IsSubclassOf(typeof(Trigger)) && !t.IsAbstract);
+
+
+        foreach (var type in triggerTypes)
         {
-            UseTwitchEmotesChanged?.Invoke(oldValue, newValue);
+            if (type == typeof(AlwaysActive)) continue;
+            AvailableTriggers.Add(new TriggerTypeInfo
+            {
+                Type = type,
+                DisplayName = type.Name
+            });
         }
-
-        public EventHandler<bool> UseTwitchEmotesChanged;
-
-        public TitsTriggerSetup ThrowSetup { get; set; } = new();
-        public TitsTriggerSetup RainSetup { get; set; } = new();
-
-        public bool ShowHitlines => Enabled && HitLinesVisible;
     }
 
-    public partial class TitsTriggerSetup : ObservableObject
+    [property: JsonIgnore]
+    [ObservableProperty]
+    private TriggerTypeInfo _selectedTriggerType;
+
+    partial void OnSelectedTriggerTypeChanged(TriggerTypeInfo? oldValue, TriggerTypeInfo newValue)
     {
-        [ObservableProperty]
-        private uint objectSpeedMin = 2000;
-
-        [ObservableProperty]
-        private uint objectSpeedMax = 3000;
-
-        [ObservableProperty]
-        private uint minBits = 0;
-
-        [ObservableProperty]
-        private uint maxBits = uint.MaxValue;
-
-        [ObservableProperty]
-        private string redeem = string.Empty;
+        if (newValue != null && (Trigger?.GetType() != newValue.Type))
+        {
+            Trigger = (Trigger)Activator.CreateInstance(newValue.Type)!;
+        }
     }
+
+    partial void OnTriggerChanged(Trigger? oldValue, Trigger newValue)
+    {
+        SelectedTriggerType = AvailableTriggers.FirstOrDefault(t => t.Type == newValue?.GetType());
+        TriggerVm = new TriggerViewModel(newValue);
+    }
+
+
+}
+
+public class TriggerTypeInfo
+{
+    public Type Type { get; set; }
+    public string DisplayName { get; set; }
 }

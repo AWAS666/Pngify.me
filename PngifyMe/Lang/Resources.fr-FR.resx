@@ -798,4 +798,13 @@
   <data name="ActivateStateToolTip" xml:space="preserve">
     <value>Activez cet état</value>
   </data>
+  <data name="UseRain" xml:space="preserve">
+    <value>Utiliser la pluie de bits</value>
+  </data>
+  <data name="Rain" xml:space="preserve">
+    <value>Pluie</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Personnalisé</value>
+  </data>
 </root>

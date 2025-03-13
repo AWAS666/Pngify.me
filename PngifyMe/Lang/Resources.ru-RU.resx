@@ -798,4 +798,13 @@
   <data name="ActivateStateToolTip" xml:space="preserve">
     <value>Активировать это состояние</value>
   </data>
+  <data name="UseRain" xml:space="preserve">
+    <value>Использовать дождь из битсов</value>
+  </data>
+  <data name="Rain" xml:space="preserve">
+    <value>Дождь</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>Пользовательский</value>
+  </data>
 </root>

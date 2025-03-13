@@ -798,4 +798,13 @@
   <data name="ActivateStateToolTip" xml:space="preserve">
     <value>激活此状态</value>
   </data>
+  <data name="UseRain" xml:space="preserve">
+    <value>使用下落的比特币</value>
+  </data>
+  <data name="Rain" xml:space="preserve">
+    <value>雨滴</value>
+  </data>
+  <data name="Custom" xml:space="preserve">
+    <value>自定义</value>
+  </data>
 </root>

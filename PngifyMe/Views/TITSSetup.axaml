@@ -8,6 +8,7 @@
 			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:lang="clr-namespace:PngifyMe.Lang"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
 			 x:DataType="vm:TITSSetupViewModel"
              x:Class="PngifyMe.Views.TITSSetup"
 			 >
@@ -71,11 +72,55 @@
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
 			<TabControl>
-				<TabItem Header="Throwing">
+				<TabItem Header="{x:Static lang:Resources.Throwing}">
 					<helper:ThrowSetup DataContext="{Binding Settings.ThrowSetup}"></helper:ThrowSetup>
 				</TabItem>
-				<TabItem Header="Rain">
+				<TabItem Header="{x:Static lang:Resources.Rain}">
 					<helper:ThrowSetup DataContext="{Binding Settings.RainSetup}"></helper:ThrowSetup>
+				</TabItem>
+				<TabItem Header="{x:Static lang:Resources.Custom}">
+					<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
+						<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,5">
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Command="{Binding SetupTriggersCommand}" ToolTip.Tip="{x:Static lang:Resources.ApplyAndSave}">
+								<lucideAvalonia:Lucide Icon="Save" StrokeBrush="DodgerBlue"
+													StrokeThickness="2" Width="18" Height="18"/>
+							</Button>
+							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Command="{Binding AddTriggerCommand}">
+								<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
+													StrokeThickness="2" Width="18" Height="18"/>
+							</Button>
+						</StackPanel>
+						<ListBox Grid.Row="1" ItemsSource="{Binding Settings.CustomTriggers}" >
+							<ListBox.ItemTemplate>
+								<DataTemplate>
+									<StackPanel Orientation="Horizontal" Spacing="10">
+										<StackPanel Spacing="5">
+											<StackPanel Orientation="Horizontal" Spacing="5">
+												<TextBox Width="200" Text="{Binding Name}"/>
+												<NumericUpDown Width="75" Value="{Binding BitsToThrow}"/>
+												<CheckBox IsChecked="{Binding UseRain, Mode=TwoWay}" VerticalAlignment="Center"
+														  Content="{x:Static lang:Resources.UseRain}" />
+												<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+														Command="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).RemoveTriggerCommand}"
+														CommandParameter="{Binding}">
+													<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+													   StrokeThickness="2" Width="18" Height="18"/>
+												</Button>
+											</StackPanel>
+											<StackPanel Orientation="Horizontal" Spacing="5">
+												<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
+														  SelectedItem="{Binding SelectedTriggerType}"
+														  DisplayMemberBinding="{Binding DisplayName}"/>
+												<helper:TriggerView DataContext="{Binding TriggerVm}"/>
+											</StackPanel>
+										</StackPanel>
+									</StackPanel>
+								</DataTemplate>
+							</ListBox.ItemTemplate>
+						</ListBox>
+					</Grid>
 				</TabItem>
 			</TabControl>
 		</StackPanel>
