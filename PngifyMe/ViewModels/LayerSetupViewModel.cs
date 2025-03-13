@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels.Helper;
@@ -49,6 +50,8 @@ public partial class LayerSetupViewModel : ObservableObject
             layer.Save();
         }
         SettingsManager.Save();
+        LayerManager.Pause();
         SettingsManager.Current.LayerSetup.ApplySettings();
+        LayerManager.UnPause();
     }
 }
