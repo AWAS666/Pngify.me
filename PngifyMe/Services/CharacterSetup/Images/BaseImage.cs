@@ -25,7 +25,7 @@ public abstract class BaseImage : IDisposable
 
     public static BaseImage LoadFromPath(string path)
     {
-        string extension = Path.GetExtension(path);
+        string extension = Path.GetExtension(path).ToLower();
         if (extension == ".gif")
         {
             return new GifImage(path);
