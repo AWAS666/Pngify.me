@@ -29,9 +29,9 @@ Feel free to suggest features and submit code yourself
 	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
 - [ ] controller tracking
-- [ ] mouse tracking
-- [ ] drawing tablets?
-- [ ] LCOLONQ mode
+- [x] mouse tracking
+- [x] drawing tablets
+- [x] LCOLONQ mode
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, itch.io and steam.
