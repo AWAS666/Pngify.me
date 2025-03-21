@@ -5,6 +5,7 @@ using Serilog;
 using System;
 using System.IO;
 using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace PngifyMe.Services
 {
@@ -23,28 +24,30 @@ namespace PngifyMe.Services
 #else
             FilePath = Path.Join(Specsmanager.BasePath, "settings.json");
 #endif
-            Load();
+            //Load();
         }
 
-        public static void Load()
+        public static async Task LoadAsync()
         {
             if (File.Exists(FilePath))
             {
                 try
                 {
-                    Current = JsonSerializer.Deserialize<AppSettings>(File.ReadAllText(FilePath), JsonSerializeHelper.GetDefault());
+                    using var stream = File.OpenRead(FilePath);
+                    Current = await JsonSerializer.DeserializeAsync<AppSettings>(stream, JsonSerializeHelper.GetDefault());
+                    // Current = JsonSerializer.Deserialize<AppSettings>(await File.ReadAllTextAsync(FilePath), JsonSerializeHelper.GetDefault());
                 }
                 catch (Exception e)
                 {
                     Current = new();
-                    Save();
+                    await SaveAsync();
                     Log.Error(e.Message);
                 }
             }
             else
             {
                 Current = new();
-                Save();
+                await SaveAsync();
             }
             Current.Profile.Load();
         }
@@ -52,6 +55,11 @@ namespace PngifyMe.Services
         public static void Save()
         {
             File.WriteAllText(FilePath, JsonSerializer.Serialize(Current, JsonSerializeHelper.GetDefault()));
+        }
+
+        public static async Task SaveAsync()
+        {
+            await File.WriteAllTextAsync(FilePath, JsonSerializer.Serialize(Current, JsonSerializeHelper.GetDefault()));
         }
     }
 }
