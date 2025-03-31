@@ -169,16 +169,21 @@ public class ThrowingSystem
         recoilChange /= 1 + (dt * 4f);
         recoilChange -= dt * recoil / 2f;
         var list = Objects.ToList();
-        foreach (var obj in list)
+        foreach (MovableObject? obj in list)
         {
             obj.Update(dt);
             if (IsColliding(obj, MainBody))
             {
+                // remove object once it has collided 5 times, this prevents objects from being stuck to the model
+                if(obj.CollisionCounter > 5)
+                {
+                    Objects.Remove(obj);
+                }
                 RecoilMain(dt, obj, ref layert);
                 obj.SetCollision(dt);
                 if (settings.EnableSound)
                     PlaySound(obj);
-
+                obj.CollisionCounter++;
             }
             if (obj.X > Specsmanager.Width + 200 || obj.X < -200 || obj.Y > Specsmanager.Height + 200 || obj.Y < -200
                 // remove by age
