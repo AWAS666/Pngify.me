@@ -9,6 +9,7 @@
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+			 xmlns:siv="https://github.com/kekyo/SkiaImageView"
 			 x:DataType="vm:TITSSetupViewModel"
              x:Class="PngifyMe.Views.TITSSetup"
 			 >
@@ -19,14 +20,25 @@
 		<StackPanel Spacing="5">
 			<TextBlock FontSize="24" Text="{x:Static lang:Resources.TITSSetup}"/>
 			<TextBlock TextWrapping="WrapWithOverflow" Text="{x:Static lang:Resources.TITSExplanation}"/>
-			<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}" Content="{x:Static lang:Resources.Activated}"/>
-			<CheckBox ToolTip.Tip="{x:Static lang:Resources.ToolTipHitbox}"
-					  IsChecked="{Binding Settings.HitLinesVisible, Mode=TwoWay}"
-					  Content="{x:Static lang:Resources.ShowHitbox}"/>
-			
-			<CheckBox IsChecked="{Binding Settings.UseTwitchEmotes, Mode=TwoWay}"
-					  ToolTip.Tip="{x:Static lang:Resources.TwitchEmotesToolTip}"
-					  Content="{x:Static lang:Resources.UseTwitchEmotes}"/>
+			<StackPanel Orientation="Horizontal" Spacing="20">
+				<StackPanel Spacing="3">
+					<CheckBox IsChecked="{Binding Settings.Enabled, Mode=TwoWay}" Content="{x:Static lang:Resources.Activated}"/>
+					<CheckBox ToolTip.Tip="{x:Static lang:Resources.ToolTipHitbox}"
+							  IsChecked="{Binding Settings.HitLinesVisible, Mode=TwoWay}"
+							  Content="{x:Static lang:Resources.ShowHitbox}"/>
+				</StackPanel>
+				<StackPanel Spacing="3">
+					<CheckBox IsChecked="{Binding Settings.UseTwitchEmotes, Mode=TwoWay}"
+							  ToolTip.Tip="{x:Static lang:Resources.TwitchEmotesToolTip}"
+							  Content="{x:Static lang:Resources.UseTwitchEmotes}"/>
+
+					<CheckBox IsChecked="{Binding Settings.UseFolderEmotes, Mode=TwoWay}"
+							  ToolTip.Tip="{x:Static lang:Resources.UseFolderEmotesToolTip}"
+							  Content="{x:Static lang:Resources.UseFolderEmotes}"/>
+				</StackPanel>
+				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+						Content="{x:Static lang:Resources.AddNewLocalEmotes}" Command="{Binding AddNewLocalEmotes}"/>
+			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
@@ -42,10 +54,10 @@
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">
-				<CheckBox IsChecked="{Binding Settings.EnableSound, Mode=TwoWay}" VerticalAlignment="Center" 
+				<CheckBox IsChecked="{Binding Settings.EnableSound, Mode=TwoWay}" VerticalAlignment="Center"
 						  Content="{x:Static lang:Resources.SoundEnabled}" />
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Command="{Binding ChangeSound}" Content="{x:Static lang:Resources.ChangeSound}" />				
+						Command="{Binding ChangeSound}" Content="{x:Static lang:Resources.ChangeSound}" />
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						ToolTip.Tip="{x:Static lang:Resources.DefaultSoundToolTip}"
 						Command="{Binding DefaultSound}" Content="{x:Static lang:Resources.DefaultSound}" />
@@ -70,59 +82,83 @@
 			</StackPanel>
 
 			<Rectangle Margin="0,5,0,5" Height="1" Fill="White"></Rectangle>
+		</StackPanel>
 
-			<TabControl>
-				<TabItem Header="{x:Static lang:Resources.Throwing}">
-					<helper:ThrowSetup DataContext="{Binding Settings.ThrowSetup}"></helper:ThrowSetup>
-				</TabItem>
-				<TabItem Header="{x:Static lang:Resources.Rain}">
-					<helper:ThrowSetup DataContext="{Binding Settings.RainSetup}"></helper:ThrowSetup>
-				</TabItem>
-				<TabItem Header="{x:Static lang:Resources.Custom}">
-					<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
-						<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,5">
-							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-									Command="{Binding SetupTriggersCommand}" ToolTip.Tip="{x:Static lang:Resources.ApplyAndSave}">
-								<lucideAvalonia:Lucide Icon="Save" StrokeBrush="DodgerBlue"
-													StrokeThickness="2" Width="18" Height="18"/>
-							</Button>
-							<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-									Command="{Binding AddTriggerCommand}">
-								<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
-													StrokeThickness="2" Width="18" Height="18"/>
-							</Button>
-						</StackPanel>
-						<ListBox Grid.Row="1" ItemsSource="{Binding Settings.CustomTriggers}" >
-							<ListBox.ItemTemplate>
-								<DataTemplate>
-									<StackPanel Orientation="Horizontal" Spacing="10">
-										<StackPanel Spacing="5">
-											<StackPanel Orientation="Horizontal" Spacing="5">
-												<TextBox Width="200" Text="{Binding Name}"/>
-												<NumericUpDown Width="75" Value="{Binding BitsToThrow}"/>
-												<CheckBox IsChecked="{Binding UseRain, Mode=TwoWay}" VerticalAlignment="Center"
-														  Content="{x:Static lang:Resources.UseRain}" />
-												<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
-														Command="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).RemoveTriggerCommand}"
-														CommandParameter="{Binding}">
-													<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
-													   StrokeThickness="2" Width="18" Height="18"/>
-												</Button>
-											</StackPanel>
-											<StackPanel Orientation="Horizontal" Spacing="5">
-												<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
-														  SelectedItem="{Binding SelectedTriggerType}"
-														  DisplayMemberBinding="{Binding DisplayName}"/>
-												<helper:TriggerView DataContext="{Binding TriggerVm}"/>
-											</StackPanel>
+
+		<TabControl Grid.Row="1">
+			<TabItem Header="{x:Static lang:Resources.Throwing}">
+				<helper:ThrowSetup DataContext="{Binding Settings.ThrowSetup}"></helper:ThrowSetup>
+			</TabItem>
+			<TabItem Header="{x:Static lang:Resources.Rain}">
+				<helper:ThrowSetup DataContext="{Binding Settings.RainSetup}"></helper:ThrowSetup>
+			</TabItem>
+			<TabItem Header="{x:Static lang:Resources.Custom}">
+				<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
+					<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,5">
+						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Command="{Binding SetupTriggersCommand}" ToolTip.Tip="{x:Static lang:Resources.ApplyAndSave}">
+							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="DodgerBlue"
+												StrokeThickness="2" Width="18" Height="18"/>
+						</Button>
+						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+								Command="{Binding AddTriggerCommand}">
+							<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
+												StrokeThickness="2" Width="18" Height="18"/>
+						</Button>
+					</StackPanel>
+					<ListBox Grid.Row="1" ItemsSource="{Binding Settings.CustomTriggers}" >
+						<ListBox.ItemTemplate>
+							<DataTemplate>
+								<StackPanel Orientation="Horizontal" Spacing="10">
+									<StackPanel Spacing="5">
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<TextBox Width="200" Text="{Binding Name}"/>
+											<NumericUpDown Width="75" Value="{Binding BitsToThrow}"/>
+											<CheckBox IsChecked="{Binding UseRain, Mode=TwoWay}" VerticalAlignment="Center"
+													  Content="{x:Static lang:Resources.UseRain}" />
+											<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+													Command="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).RemoveTriggerCommand}"
+													CommandParameter="{Binding}">
+												<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+												   StrokeThickness="2" Width="18" Height="18"/>
+											</Button>
+										</StackPanel>
+										<StackPanel Orientation="Horizontal" Spacing="5">
+											<ComboBox VerticalAlignment="Center" ItemsSource="{Binding AvailableTriggers}"
+													  SelectedItem="{Binding SelectedTriggerType}"
+													  DisplayMemberBinding="{Binding DisplayName}"/>
+											<helper:TriggerView DataContext="{Binding TriggerVm}"/>
 										</StackPanel>
 									</StackPanel>
-								</DataTemplate>
-							</ListBox.ItemTemplate>
-						</ListBox>
-					</Grid>
-				</TabItem>
-			</TabControl>
-		</StackPanel>
+								</StackPanel>
+							</DataTemplate>
+						</ListBox.ItemTemplate>
+					</ListBox>
+				</Grid>
+			</TabItem>
+			<TabItem Header="{x:Static lang:Resources.Custom}">
+				<ListBox ItemsSource="{Binding TITS.Throwables}" >
+					<ListBox.ItemTemplate>
+						<DataTemplate>
+							<StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Spacing="25">
+								<TextBlock VerticalAlignment="Center" Text="{Binding Name}"/>
+								<siv:SKImageView VerticalAlignment="Center"
+												 MaxWidth="50" Stretch="Uniform"
+												 Source="{Binding Bitmap }">
+								</siv:SKImageView>
+								<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
+										IsVisible="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).Settings.UseFolderEmotes}"
+										Command="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).RemoveEmoteCommand}"
+										CommandParameter="{Binding}">
+									<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
+									   StrokeThickness="2" Width="18" Height="18"/>
+								</Button>
+
+							</StackPanel>
+						</DataTemplate>
+					</ListBox.ItemTemplate>
+				</ListBox>
+			</TabItem>
+		</TabControl>
 	</Grid>
 </UserControl>

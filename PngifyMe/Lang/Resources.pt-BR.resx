@@ -807,4 +807,16 @@
   <data name="Custom" xml:space="preserve">
     <value>Personalizado</value>
   </data>
+  <data name="UseFolderEmotes" xml:space="preserve">
+    <value>Usar emotes locais</value>
+  </data>
+  <data name="UseFolderEmotesToolTip" xml:space="preserve">
+    <value>Usa emotes que você pode adicionar você mesmo</value>
+  </data>
+  <data name="Throwables" xml:space="preserve">
+    <value>Itens lançáveis</value>
+  </data>
+  <data name="AddNewLocalEmotes" xml:space="preserve">
+    <value>Adicionar emotes locais</value>
+  </data>
 </root>

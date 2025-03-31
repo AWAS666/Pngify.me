@@ -35,12 +35,31 @@ public partial class TitsSettings : ObservableObject
     [ObservableProperty]
     private bool useTwitchEmotes = false;
 
+    [ObservableProperty]
+    private bool useFolderEmotes = false;
+
     partial void OnUseTwitchEmotesChanged(bool oldValue, bool newValue)
     {
-        UseTwitchEmotesChanged?.Invoke(oldValue, newValue);
+        if (interlock) return;
+        interlock = true;
+        if (newValue)
+            UseFolderEmotes = false;
+        ThrowEmotesChanged?.Invoke(this, EventArgs.Empty);
+        interlock = false;
     }
 
-    public EventHandler<bool> UseTwitchEmotesChanged;
+    partial void OnUseFolderEmotesChanged(bool oldValue, bool newValue)
+    {
+        if (interlock) return;
+        interlock = true;
+        if (newValue)
+            UseTwitchEmotes = false;
+        ThrowEmotesChanged?.Invoke(this, EventArgs.Empty);
+        interlock = false;
+    }   
+
+    public EventHandler ThrowEmotesChanged;
+    private bool interlock;
 
     public TitsTriggerSetup ThrowSetup { get; set; } = new();
     public TitsTriggerSetup RainSetup { get; set; } = new();

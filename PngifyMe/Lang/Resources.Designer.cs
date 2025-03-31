@@ -106,6 +106,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Add Local Emotes.
+        /// </summary>
+        public static string AddNewLocalEmotes {
+            get {
+                return ResourceManager.GetString("AddNewLocalEmotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add New Profile.
         /// </summary>
         public static string AddNewProfile {
@@ -1663,6 +1672,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Throwables.
+        /// </summary>
+        public static string Throwables {
+            get {
+                return ResourceManager.GetString("Throwables", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Throwing.
         /// </summary>
         public static string Throwing {
@@ -2046,6 +2064,24 @@ namespace PngifyMe.Lang {
         public static string TwitchTriggers {
             get {
                 return ResourceManager.GetString("TwitchTriggers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use local emotes.
+        /// </summary>
+        public static string UseFolderEmotes {
+            get {
+                return ResourceManager.GetString("UseFolderEmotes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uses emotes that you can add yourself.
+        /// </summary>
+        public static string UseFolderEmotesToolTip {
+            get {
+                return ResourceManager.GetString("UseFolderEmotesToolTip", resourceCulture);
             }
         }
         

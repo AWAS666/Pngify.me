@@ -807,4 +807,16 @@
   <data name="Custom" xml:space="preserve">
     <value>自定义</value>
   </data>
+  <data name="UseFolderEmotes" xml:space="preserve">
+    <value>使用本地表情</value>
+  </data>
+  <data name="UseFolderEmotesToolTip" xml:space="preserve">
+    <value>使用你可以自己添加的表情</value>
+  </data>
+  <data name="Throwables" xml:space="preserve">
+    <value>可投掷物</value>
+  </data>
+  <data name="AddNewLocalEmotes" xml:space="preserve">
+    <value>添加本地表情</value>
+  </data>
 </root>

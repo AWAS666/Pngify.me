@@ -807,4 +807,16 @@
   <data name="Custom" xml:space="preserve">
     <value>Пользовательский</value>
   </data>
+  <data name="UseFolderEmotes" xml:space="preserve">
+    <value>Использовать локальные эмодзи</value>
+  </data>
+  <data name="UseFolderEmotesToolTip" xml:space="preserve">
+    <value>Использует эмодзи, которые можно добавить самостоятельно</value>
+  </data>
+  <data name="Throwables" xml:space="preserve">
+    <value>Бросаемые предметы</value>
+  </data>
+  <data name="AddNewLocalEmotes" xml:space="preserve">
+    <value>Добавить локальные эмодзи</value>
+  </data>
 </root>

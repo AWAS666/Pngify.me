@@ -2,7 +2,6 @@
 - parent layer handling on new setup -> better import
 - clean up layer states and adding to sprites -> improve code here
 - highlight selected state
-- 
 
 # improvements:
 - import progress

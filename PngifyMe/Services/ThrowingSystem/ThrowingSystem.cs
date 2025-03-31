@@ -1,4 +1,5 @@
 ﻿using Avalonia.Platform;
+using DynamicData;
 using PngifyMe.Layers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Settings;
@@ -7,6 +8,7 @@ using Serilog;
 using SkiaSharp;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -31,10 +33,11 @@ public class ThrowingSystem
     private Stream audio;
     private TitsSettings settings;
 
-    public List<SKBitmap> Throwables { get; set; }
+    public ObservableCollection<TitsObject> Throwables { get; set; } = [];
 
     private int _activeThreads = 0;
     private int frame;
+    private string localBaseDir = Path.Combine(Specsmanager.BasePath, "emotecache", "local");
 
     public int ActiveThreads => _activeThreads;
 
@@ -43,16 +46,16 @@ public class ThrowingSystem
         TwitchEventSocket.BitsUsed += TriggerBits;
         TwitchEventSocket.RedeemUsed += TriggerRedeem;
         settings = SettingsManager.Current.Tits;
-        settings.UseTwitchEmotesChanged += ReloadEmotes;
-        ReloadEmotes(this, settings.UseTwitchEmotes);
+        settings.ThrowEmotesChanged += ReloadEmotes;
+        ReloadEmotes(this, EventArgs.Empty);
         SetupTriggers();
     }
 
-    private void ReloadEmotes(object? sender, bool useTwitch)
+    private void ReloadEmotes(object? sender, EventArgs e)
     {
-        if (useTwitch)
+        Throwables.Clear();
+        if (settings.UseTwitchEmotes)
         {
-            Throwables = new List<SKBitmap>();
             if (TwitchEventSocket.Api != null)
             {
                 LoadTwitchEmotesAsync(null, null);
@@ -64,20 +67,29 @@ public class ThrowingSystem
         }
         else
         {
-            Throwables = LoadBits();
+            if (settings.UseFolderEmotes)
+            {
+                LoadFolderEmotes();
+            }
+            else
+            {
+                Throwables.AddRange(LoadBits());
+            }
         }
     }
 
-    private List<SKBitmap> LoadBits()
+
+
+    private List<TitsObject> LoadBits()
     {
         return
         [
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit100.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit1000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit5000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit10000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
-            SKBitmap.Decode(AssetLoader.Open(new Uri("avares://PngifyMeCode/Assets/bit20000.png"))).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize),SKSamplingOptions.Default),
+            TitsObject.Decode("avares://PngifyMeCode/Assets/bit1.png"),
+            TitsObject.Decode("avares://PngifyMeCode/Assets/bit100.png"),
+            TitsObject.Decode("avares://PngifyMeCode/Assets/bit1000.png"),
+            TitsObject.Decode("avares://PngifyMeCode/Assets/bit5000.png"),
+            TitsObject.Decode("avares://PngifyMeCode/Assets/bit10000.png"),
+            TitsObject.Decode("avares://PngifyMeCode/Assets/bit20000.png"),
         ];
     }
 
@@ -98,14 +110,14 @@ public class ThrowingSystem
                 {
                     var imageBytes = await File.ReadAllBytesAsync(fileName);
                     using var stream = new SKMemoryStream(imageBytes);
-                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize), SKSamplingOptions.Default));
+                    Throwables.Add(TitsObject.Decode(emote.Name, stream));
                 }
                 else
                 {
                     var imageBytes = await httpClient.GetByteArrayAsync(emote.Images.Url4X);
                     await File.WriteAllBytesAsync(fileName, imageBytes);
                     using var stream = new SKMemoryStream(imageBytes);
-                    Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize), SKSamplingOptions.Default));
+                    Throwables.Add(TitsObject.Decode(emote.Name, stream));
                 }
             }
 
@@ -118,7 +130,7 @@ public class ThrowingSystem
 
                 var imageBytes = await File.ReadAllBytesAsync(filePath);
                 using var stream = new SKMemoryStream(imageBytes);
-                Throwables.Add(SKBitmap.Decode(stream).Resize(new SKSizeI(Specsmanager.TitsSize, Specsmanager.TitsSize), SKSamplingOptions.Default));
+                Throwables.Add(TitsObject.Decode(fileName, stream));
                 count++;
             }
             if (count > 0)
@@ -128,6 +140,45 @@ public class ThrowingSystem
         catch (Exception er)
         {
             Log.Error(er, $"Emote download failed with error: {er.Message}");
+        }
+    }
+
+
+    public async Task LoadLocalEmote(string path)
+    {
+        string newPath = Path.Combine(localBaseDir, Path.GetFileName(path));
+        File.Copy(path, newPath, true);
+
+        var imageBytes = await File.ReadAllBytesAsync(newPath);
+        using var stream = new SKMemoryStream(imageBytes);
+        Throwables.Add(TitsObject.Decode(Path.GetFileName(newPath), stream));
+    }
+
+    public void RemoveLocalEmote(TitsObject obj)
+    {
+        File.Delete(Path.Combine(localBaseDir, obj.Name));
+        Throwables.Remove(obj);
+    }
+
+    private async void LoadFolderEmotes()
+    {
+        try
+        {
+            Directory.CreateDirectory(localBaseDir);
+            int count = 0;
+            foreach (string filePath in Directory.GetFiles(localBaseDir, "*.png", SearchOption.TopDirectoryOnly))
+            {
+                var imageBytes = await File.ReadAllBytesAsync(filePath);
+                using var stream = new SKMemoryStream(imageBytes);
+                Throwables.Add(TitsObject.Decode(Path.GetFileName(filePath), stream));
+                count++;
+            }
+            if (count > 0)
+                Log.Information($"{count} emotes found and loaded");
+        }
+        catch (Exception er)
+        {
+            Log.Error(er, $"Emote load from folder failed with error: {er.Message}");
         }
     }
 
@@ -175,7 +226,7 @@ public class ThrowingSystem
             if (IsColliding(obj, MainBody))
             {
                 // remove object once it has collided 5 times, this prevents objects from being stuck to the model
-                if(obj.CollisionCounter > 5)
+                if (obj.CollisionCounter > 5)
                 {
                     Objects.Remove(obj);
                 }
@@ -291,7 +342,7 @@ public class ThrowingSystem
         {
             Objects.Add(new MovableObject(
                 this,
-                item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
+                item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)).Bitmap,
                speed: new Vector2(Random.Shared.Next((int)settings.ThrowSetup.ObjectSpeedMin, (int)settings.ThrowSetup.ObjectSpeedMax),
                     -300),
                rotSpeed: Random.Shared.Next(-20, 20)
@@ -309,7 +360,7 @@ public class ThrowingSystem
             Objects.Add(new MovableObject(
                 this,
                 details: 10,
-                item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)),
+                item: Throwables.ElementAt(Random.Shared.Next(0, Throwables.Count)).Bitmap,
                speed: new Vector2(Random.Shared.Next(-400, 400),
                Random.Shared.Next((int)settings.RainSetup.ObjectSpeedMin, (int)settings.RainSetup.ObjectSpeedMax)),
                rotSpeed: Random.Shared.Next(-20, 20),

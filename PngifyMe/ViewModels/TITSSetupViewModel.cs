@@ -4,7 +4,9 @@ using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
+using PngifyMe.Services.ThrowingSystem;
 using PngifyMe.ViewModels.Helper;
+using SkiaSharp;
 using System;
 using System.IO;
 using System.Linq;
@@ -18,6 +20,7 @@ public partial class TITSSetupViewModel : ObservableObject
     private Func<IStorageProvider> GetStorageProvider;
 
     public TitsSettings Settings { get; }
+    public ThrowingSystem TITS { get; }
 
     public TITSSetupViewModel() : this(null)
     {
@@ -28,6 +31,7 @@ public partial class TITSSetupViewModel : ObservableObject
     {
         GetStorageProvider = storageProvider;
         Settings = SettingsManager.Current.Tits;
+        TITS = LayerManager.ThrowingSystem;
     }
 
     public void Trigger()
@@ -83,5 +87,33 @@ public partial class TITSSetupViewModel : ObservableObject
     {
         SettingsManager.Current.Tits.CustomTriggers.Remove(trigger);
     }
+
+    [RelayCommand]
+    public async Task AddNewLocalEmotes()
+    {
+        var paths = await GetStorageProvider().OpenFilePickerAsync(new FilePickerOpenOptions()
+        {
+            Title = "Select images",
+            FileTypeFilter = new[] { FilePickers.ImageAll },
+            AllowMultiple = true
+        });
+
+        foreach (var path in paths)
+        {
+            var realPath = WebUtility.UrlDecode(path.Path?.AbsolutePath);
+            if (string.IsNullOrEmpty(realPath)) continue;
+            await TITS.LoadLocalEmote(realPath);
+        }
+
+        Settings.UseFolderEmotes = true;
+        Settings.UseTwitchEmotes = false;
+    }
+
+    [RelayCommand]
+    public async Task RemoveEmote(TitsObject obj)
+    {
+        TITS.RemoveLocalEmote(obj);
+    }
+
 
 }
