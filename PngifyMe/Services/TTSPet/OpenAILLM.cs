@@ -33,7 +33,7 @@ namespace PngifyMe.Services.TTSPet
             {
                 ApiKey = SettingsManager.Current.LLM.OpenAIKey
             };
-            if (!string.IsNullOrEmpty(SettingsManager.Current.LLM.Domain))
+            if (!string.IsNullOrEmpty(SettingsManager.Current.LLM.Domain.Trim()))
                 options.BaseDomain = SettingsManager.Current.LLM.Domain;
             LLMService = new OpenAIService(options, new HttpClient() { Timeout = TimeSpan.FromSeconds(10) });
         }
@@ -59,13 +59,18 @@ Current Date and time: {DateTime.Now}"),
                 var completionResult = await LLMService.ChatCompletion.CreateCompletion(new ChatCompletionCreateRequest
                 {
                     Messages = messages,
-                    Model = SettingsManager.Current.LLM.ModelName,
+                    Model = SettingsManager.Current.LLM.ModelName.Trim(),
                     FrequencyPenalty = 0.2f,
                     PresencePenalty = 0.2f,
                     MaxTokens = SettingsManager.Current.LLM.MaxTokens,
                     Temperature = 0.8f
                 });
-                return completionResult.Choices.First().Message.Content;
+                if (completionResult?.Successful == true)
+                    return completionResult.Choices.First().Message.Content;
+                else
+                {
+                    throw new Exception($"Openai Error: {completionResult.Error.Message}");
+                }
             }
             catch (Exception e)
             {
