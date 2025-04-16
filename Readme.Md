@@ -21,6 +21,8 @@ Feel free to suggest features and submit code yourself
 	- likely just more compatible
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
+- [ ] multi twitch account 
+- [ ] follow as trigger
 
 ## Roadmap (future stuff)
 - [x] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
