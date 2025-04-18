@@ -1,13 +1,13 @@
-﻿using NAudio.Wave;
-using PngifyMe.Services.CharacterSetup;
-using PngifyMe.Services.CharacterSetup.Basic;
+﻿using Avalonia.Controls;
+using NAudio.CoreAudioApi;
+using NAudio.Wave;
+using NAudio.Wave.SampleProviders;
 using PngifyMe.Services.Settings;
-using PortAudioSharp;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 
 namespace PngifyMe.Services;
@@ -23,7 +23,7 @@ public static class AudioService
     public static MicSettings Settings => SettingsManager.Current.Profile.Active.MicSettings;
     private static float last = 0f;
     private static ProfileType current;
-    private static Stream stream;
+    private static WaveInEvent _waveIn;
 
     public static bool Talking { get; private set; }
     public static List<AudioDeviceConfig> InputDevices { get; }
@@ -33,16 +33,25 @@ public static class AudioService
 
     static AudioService()
     {
-        PortAudio.Initialize();
-        Log.Debug($"{PortAudio.VersionInfo.versionText}");
         InputDevices = GetAllInDevices();
         OutputDevices = GetAllOutDevices();
-        ChangeMode(SettingsManager.Current.Profile.Active.Type);
+        if (WaveInEvent.DeviceCount == 0)
+            Log.Error("No Audio input devices found...");
+        if (Settings.DeviceIn >= WaveInEvent.DeviceCount)
+            Settings.DeviceIn = 0;
+
+        using var mmEnum = new MMDeviceEnumerator();
+        var devices = mmEnum.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
+        if (devices.Count == 0)
+            Log.Error("No Audio ouput devices found...");
+        if (Settings.DeviceOut >= devices.Count)
+            Settings.DeviceOut = 0;
+
     }
 
     public static void Init()
     {
-        // init stuff I guess
+        ChangeMode(SettingsManager.Current.Profile.Active.Type);
     }
 
     public static void ChangeMode(ProfileType type)
@@ -63,204 +72,94 @@ public static class AudioService
 
     private static List<AudioDeviceConfig> GetAllInDevices()
     {
-        int host = 0;
         var list = new List<AudioDeviceConfig>();
+        int waveInDevices = WaveInEvent.DeviceCount;
 
-        for (int i = 0; i != PortAudio.DeviceCount; ++i)
+        // Loop through all input devices and display their names
+        for (int i = 0; i < waveInDevices; i++)
         {
-            DeviceInfo deviceInfo = PortAudio.GetDeviceInfo(i);
-            if (deviceInfo.maxInputChannels > 0 && deviceInfo.hostApi == host)
+            var deviceInfo = WaveInEvent.GetCapabilities(i);
+            list.Add(new AudioDeviceConfig()
             {
-                list.Add(new AudioDeviceConfig()
-                {
-                    Id = i,
-                    Name = deviceInfo.name,
-                    Channels = deviceInfo.maxInputChannels,
-                    Host = deviceInfo.hostApi,
-                    Struct = deviceInfo.structVersion,
-                });
-                host = deviceInfo.hostApi;
-            }
+                Id = i,
+                Name = deviceInfo.ProductName,
+                Channels = deviceInfo.Channels,
+            });
         }
-
         return list;
     }
 
     private static List<AudioDeviceConfig> GetAllOutDevices()
     {
         var list = new List<AudioDeviceConfig>();
+        var enumerator = new MMDeviceEnumerator();
+        var devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
 
-        for (int i = 0; i != PortAudio.DeviceCount; ++i)
+        int i = 0;
+        foreach (var deviceInfo in devices)
         {
-            DeviceInfo deviceInfo = PortAudio.GetDeviceInfo(i);
-            if (deviceInfo.maxOutputChannels > 0)
-                list.Add(new AudioDeviceConfig()
-                {
-                    Id = i,
-                    Name = deviceInfo.name,
-                    Channels = deviceInfo.maxOutputChannels,
-                    Host = deviceInfo.hostApi,
-                    Struct = deviceInfo.structVersion,
-                });
+            list.Add(new AudioDeviceConfig()
+            {
+                Id = i++,
+                Name = deviceInfo.FriendlyName,
+            });
         }
-
         return list;
     }
 
-
-    public static async Task PlaySound(System.IO.Stream mp3Stream)
+    public static async Task PlaySound(Stream stream)
     {
-        int deviceIndex = Settings.DeviceOut;
-
-        DeviceInfo info = PortAudio.GetDeviceInfo(deviceIndex);
-
-        using var waveFileReader = new Mp3FileReader(mp3Stream);
-        int sampleRate = waveFileReader.WaveFormat.SampleRate;
-        int channelCount = waveFileReader.WaveFormat.Channels;
-        var waveFormat = waveFileReader.WaveFormat;
-
-        StreamParameters param = new StreamParameters
+        WaveStream reader = new Mp3FileReader(stream);
+        using var player = new WaveOutEvent();
+        player.DeviceNumber = Settings.DeviceOut;
+        var meter = new MeteringSampleProvider(reader.ToSampleProvider());
+        meter.StreamVolume += (s, e) =>
         {
-            device = deviceIndex,
-            channelCount = channelCount,
-            sampleFormat = SampleFormat.Float32,
-            suggestedLatency = info.defaultLowOutputLatency,
-            hostApiSpecificStreamInfo = IntPtr.Zero
-        };
-
-        Stream.Callback playCallback = (IntPtr input, IntPtr output, uint frameCount,
-            ref StreamCallbackTimeInfo timeInfo, StreamCallbackFlags statusFlags, IntPtr userData) =>
-        {
-            float[] buffer = new float[frameCount * channelCount];
-            byte[] waveBuffer = new byte[frameCount * waveFormat.BlockAlign]; // To store raw PCM bytes
-
-            int bytesRead = waveFileReader.Read(waveBuffer, 0, waveBuffer.Length);
-            if (bytesRead == 0)
-            {
-                return StreamCallbackResult.Complete; // End of stream
-            }
-
-            // Convert PCM bytes to float
-            if (waveFormat.BitsPerSample == 16)
-            {
-                // 16-bit PCM -> float [-1.0, 1.0]
-                int samplesRead = bytesRead / 2; // 2 bytes per sample for 16-bit PCM
-                for (int i = 0; i < samplesRead; i++)
-                {
-                    short sampleValue = BitConverter.ToInt16(waveBuffer, i * 2);
-                    buffer[i] = sampleValue / 32768f; // Convert 16-bit PCM to float
-                }
-            }
-            else if (waveFormat.BitsPerSample == 32)
-            {
-                // 32-bit PCM -> float directly
-                int samplesRead = bytesRead / 4; // 4 bytes per sample for 32-bit float PCM
-                for (int i = 0; i < samplesRead; i++)
-                {
-                    buffer[i] = BitConverter.ToSingle(waveBuffer, i * 4); // Read as float directly
-                }
-            }
-
-            float value = buffer.Max();
+            float value = e.MaxSampleValues.OrderDescending().First();
             float current = Current(value);
             Talking = current > Settings.ThreshHold;
             LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
-
-            Marshal.Copy(buffer, 0, output, buffer.Length);
-            return StreamCallbackResult.Continue;
         };
 
-        using var stream = new Stream(
-            inParams: null,
-            outParams: param,
-            sampleRate: sampleRate,
-            framesPerBuffer: 0,
-            streamFlags: StreamFlags.ClipOff,
-            callback: playCallback,
-            userData: IntPtr.Zero
-        );
+        player.Init(meter);
+        player.Play();
 
-        stream.Start();
-
-        while (stream.IsActive)
-            await Task.Delay(50);
-
-        stream.Stop();
-        while (!stream.IsStopped)
-            await Task.Delay(50);
+        while (player.PlaybackState == PlaybackState.Playing)
+        {
+            await Task.Delay(500);
+        }
+        // cleanup
+        stream.Dispose();
+        Talking = false;
+        // close at the end
+        LevelChanged?.Invoke(null, new MicroPhoneLevel(false, 0));
     }
 
-    public static async Task PlaySoundWav(System.IO.Stream wavstream, float volume, bool ignoreSpeech = false)
+
+    public static async Task PlaySoundWav(Stream wavstream, float volume)
     {
         try
         {
-            int deviceIndex = Settings.DeviceOut;
-
-            DeviceInfo info = PortAudio.GetDeviceInfo(deviceIndex);
-
-            using var waveFileReader = new WaveFileReader(wavstream);
-            int sampleRate = waveFileReader.WaveFormat.SampleRate;
-            int channelCount = waveFileReader.WaveFormat.Channels;
-            var waveFormat = waveFileReader.WaveFormat;
-
-            StreamParameters param = new StreamParameters
+            using var reader = new WaveFileReader(wavstream);
+            // Convert to a sample provider so we can adjust volume
+            var sampleProvider = reader.ToSampleProvider();
+            var volumeProvider = new VolumeSampleProvider(sampleProvider)
             {
-                device = deviceIndex,
-                channelCount = channelCount,
-                sampleFormat = SampleFormat.Float32,
-                suggestedLatency = info.defaultLowOutputLatency,
-                hostApiSpecificStreamInfo = IntPtr.Zero
+                Volume = volume
             };
 
-            Stream.Callback playCallback = (IntPtr input, IntPtr output, uint frameCount,
-                ref StreamCallbackTimeInfo timeInfo, StreamCallbackFlags statusFlags, IntPtr userData) =>
-            {
-                // wav variant
-                float[] buffer = new float[frameCount * channelCount];
-                for (int i = 0; i < frameCount; i++)
-                {
-                    var sampleFrame = waveFileReader.ReadNextSampleFrame();
-                    if (sampleFrame == null)
-                    {
-                        return StreamCallbackResult.Complete;
-                    }
+            using var output = new WaveOutEvent();
+            output.DeviceNumber = Settings.DeviceOut;
+            // TaskCompletionSource to signal when playback stops
+            var tcs = new TaskCompletionSource<bool>();
 
-                    for (int channel = 0; channel < channelCount; channel++)
-                    {
-                        buffer[i * channelCount + channel] = sampleFrame[channel] * volume;
-                    }
-                }
+            output.Init(volumeProvider);
+            output.PlaybackStopped += (_, __) => tcs.TrySetResult(true);
 
-                if (!ignoreSpeech)
-                {
-                    float value = buffer.Max();
-                    float current = Current(value);
-                    Talking = current > Settings.ThreshHold;
-                    LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
-                }
+            output.Play();
 
-                Marshal.Copy(buffer, 0, output, buffer.Length);
-                return StreamCallbackResult.Continue;
-            };
-
-            using var stream = new Stream(
-                inParams: null,
-                outParams: param,
-                sampleRate: sampleRate,
-                framesPerBuffer: 0,
-                streamFlags: StreamFlags.ClipOff,
-                callback: playCallback,
-                userData: IntPtr.Zero
-            );
-
-            stream.Start();
-
-            while (stream.IsActive)
-                await Task.Delay(50);
-
-            stream.Stop();
-            while (!stream.IsStopped)
-                await Task.Delay(50);
+            // Await until PlaybackStopped fires
+            await tcs.Task;
 
         }
         catch (Exception e)
@@ -273,50 +172,41 @@ public static class AudioService
     {
         int deviceIndex = Settings.DeviceIn;
 
-        DeviceInfo info = PortAudio.GetDeviceInfo(deviceIndex);
-
-        StreamParameters param = new StreamParameters();
-        param.device = deviceIndex;
-        param.channelCount = info.maxInputChannels;
-        param.sampleFormat = SampleFormat.Float32;
-        param.suggestedLatency = info.defaultLowInputLatency;
-        param.hostApiSpecificStreamInfo = IntPtr.Zero;
-
-        static StreamCallbackResult callback(IntPtr input, IntPtr output,
-        UInt32 frameCount,
-        ref StreamCallbackTimeInfo timeInfo,
-        StreamCallbackFlags statusFlags,
-        IntPtr userData
-        )
+        _waveIn = new WaveInEvent
         {
-            float[] samples = new float[frameCount];
-            Marshal.Copy(input, samples, 0, (Int32)frameCount);
+            WaveFormat = new WaveFormat(8000, 1),
+            DeviceNumber = Settings.DeviceIn
+        };
 
-            //Debug.WriteLine(samples.Max());
+        _waveIn.DataAvailable += OnDataAvailable;
+        _waveIn.StartRecording();
+    }
 
-            float current = Current(samples.Max() * 2);
-            Talking = current > Settings.ThreshHold;
-            LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
-
-            return StreamCallbackResult.Continue;
+    private static void OnDataAvailable(object sender, WaveInEventArgs e)
+    {
+        float max = 0;
+        // interpret as 16 bit audio
+        for (int index = 0; index < e.BytesRecorded; index += 2)
+        {
+            short sample = (short)((e.Buffer[index + 1] << 8) |
+                                    e.Buffer[index + 0]);
+            // to floating point
+            var sample32 = sample / 32768f;
+            // absolute value 
+            if (sample32 < 0) sample32 = -sample32;
+            // is this the max value?
+            if (sample32 > max) max = sample32;
         }
-
-        stream = new(inParams: param, outParams: null, sampleRate: info.defaultSampleRate,
-           framesPerBuffer: 0,
-           streamFlags: StreamFlags.ClipOff,
-           callback: callback,
-           userData: IntPtr.Zero
-           );
-
-        stream.Start();
+        float current = Current(max);
+        Talking = current > Settings.ThreshHold;
+        LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
     }
 
     public static void Stop()
     {
-        if (stream != null)
-        {
-            stream.Stop();
-        }
+        if (_waveIn == null) return;
+        _waveIn.StopRecording();
+        _waveIn.DataAvailable -= OnDataAvailable;
     }
 
     public static void Restart()

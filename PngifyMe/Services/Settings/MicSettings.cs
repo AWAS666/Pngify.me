@@ -1,6 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.CharacterSetup;
-using PortAudioSharp;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,10 +14,10 @@ public partial class MicSettings : ObservableObject
     private int threshHold = 25;
 
     [ObservableProperty]
-    private int deviceIn = PortAudio.DefaultInputDevice;
+    private int deviceIn = 0;
 
     [ObservableProperty]
-    private int deviceOut = PortAudio.DefaultOutputDevice;
+    private int deviceOut = 0;
 
     [ObservableProperty]
     private int smoothing = 20;

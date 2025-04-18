@@ -76,7 +76,6 @@
 		<PackageReference Include="NAudio" Version="2.2.1" />
 		<PackageReference Include="NAudio.Core" Version="2.2.1" />
 		<PackageReference Include="NetCoreServer" Version="8.0.7" />
-		<PackageReference Include="PortAudioSharp2" Version="1.0.4" />
 		<PackageReference Include="Semi.Avalonia" Version="11.2.1.5" />
 		<PackageReference Include="Semi.Avalonia.ColorPicker" Version="11.2.1.5" />
 		<PackageReference Include="Semi.Avalonia.DataGrid" Version="11.2.1.5" />
