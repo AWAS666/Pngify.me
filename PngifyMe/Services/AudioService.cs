@@ -170,16 +170,23 @@ public static class AudioService
 
     public static void Start()
     {
-        int deviceIndex = Settings.DeviceIn;
-
-        _waveIn = new WaveInEvent
+        try
         {
-            WaveFormat = new WaveFormat(8000, 1),
-            DeviceNumber = Settings.DeviceIn
-        };
+            int deviceIndex = Settings.DeviceIn;
 
-        _waveIn.DataAvailable += OnDataAvailable;
-        _waveIn.StartRecording();
+            _waveIn = new WaveInEvent
+            {
+                WaveFormat = new WaveFormat(8000, 1),
+                DeviceNumber = Settings.DeviceIn
+            };
+
+            _waveIn.DataAvailable += OnDataAvailable;
+            _waveIn.StartRecording();
+        }
+        catch (Exception e)
+        {
+            Log.Fatal(e, $"Fatal error in audio service, couldn't start recording: {e.Message}");
+        }
     }
 
     private static void OnDataAvailable(object sender, WaveInEventArgs e)
