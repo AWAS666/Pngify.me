@@ -20,7 +20,7 @@ namespace PngifyMe.Helpers
                     new Notification(null, logEvent.MessageTemplate.Text),
                     showIcon: true,
                     showClose: true,
-                    expiration: TimeSpan.FromSeconds(5),
+                    expiration: logEvent.Level == LogEventLevel.Fatal ? TimeSpan.FromMinutes(5) : TimeSpan.FromSeconds(5),
                     type: Convert(logEvent.Level),
                     classes: ["Light"]
                     );
