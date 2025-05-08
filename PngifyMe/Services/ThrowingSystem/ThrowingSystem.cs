@@ -276,7 +276,6 @@ public class ThrowingSystem
             {
                 Interlocked.Increment(ref _activeThreads);
                 await AudioService.PlaySoundWav(copy, settings.Volume);
-                copy.Dispose();
                 obj.AudioPlaying = false;
                 Interlocked.Decrement(ref _activeThreads);
             });

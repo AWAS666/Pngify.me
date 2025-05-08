@@ -43,7 +43,6 @@ public class PlayRandomSound : PermaLayer
         _ = Task.Run(async () =>
         {
             await AudioService.PlaySoundWav(audio, 1);
-            audio.Dispose();
             IsExiting = true;
         });
         base.OnEnter();

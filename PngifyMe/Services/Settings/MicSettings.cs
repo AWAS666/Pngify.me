@@ -21,4 +21,11 @@ public partial class MicSettings : ObservableObject
 
     [ObservableProperty]
     private int smoothing = 20;
+
+    public EventHandler<int> DeviceOutChanged;
+
+    partial void OnDeviceOutChanged(int oldValue, int newValue)
+    {
+        DeviceOutChanged?.Invoke(this, newValue);
+    }
 }

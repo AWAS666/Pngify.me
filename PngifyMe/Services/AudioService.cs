@@ -2,6 +2,7 @@
 using NAudio.CoreAudioApi;
 using NAudio.Wave;
 using NAudio.Wave.SampleProviders;
+using PngifyMe.Services.Audio;
 using PngifyMe.Services.Settings;
 using Serilog;
 using System;
@@ -30,6 +31,7 @@ public static class AudioService
     public static List<AudioDeviceConfig> OutputDevices { get; }
 
     public static event EventHandler<MicroPhoneLevel> LevelChanged;
+    public static SoundManager SoundManager { get; private set; } = new SoundManager(output:Settings.DeviceOut);
 
     static AudioService()
     {
@@ -52,6 +54,13 @@ public static class AudioService
     public static void Init()
     {
         ChangeMode(SettingsManager.Current.Profile.Active.Type);
+        Settings.DeviceOutChanged += OutputChanged;
+    }
+
+    private static void OutputChanged(object? sender, int e)
+    {
+        SoundManager.Dispose();
+        SoundManager = new SoundManager(output: e);
     }
 
     public static void ChangeMode(ProfileType type)
@@ -140,27 +149,7 @@ public static class AudioService
     {
         try
         {
-            using var reader = new WaveFileReader(wavstream);
-            // Convert to a sample provider so we can adjust volume
-            var sampleProvider = reader.ToSampleProvider();
-            var volumeProvider = new VolumeSampleProvider(sampleProvider)
-            {
-                Volume = volume
-            };
-
-            using var output = new WaveOutEvent();
-            output.DeviceNumber = Settings.DeviceOut;
-            // TaskCompletionSource to signal when playback stops
-            var tcs = new TaskCompletionSource<bool>();
-
-            output.Init(volumeProvider);
-            output.PlaybackStopped += (_, __) => tcs.TrySetResult(true);
-
-            output.Play();
-
-            // Await until PlaybackStopped fires
-            await tcs.Task;
-
+            SoundManager.PlayStream(wavstream, volume);
         }
         catch (Exception e)
         {

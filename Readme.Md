@@ -24,7 +24,8 @@ Feel free to suggest features and submit code yourself
 - [ ] multi twitch account 
 - [ ] follow as trigger
 - [ ] crash splash screen?
-	- [ ] link to discord or steam discussions	
+	- [ ] link to discord or steam discussions
+	- [ ] fatal errors show message that needs to be acknowledged
 
 ## Roadmap (future stuff)
 - [x] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
