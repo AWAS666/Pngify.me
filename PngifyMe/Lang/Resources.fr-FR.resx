@@ -819,4 +819,7 @@
   <data name="AddNewLocalEmotes" xml:space="preserve">
     <value>Ajouter des émoticônes locales</value>
   </data>
+  <data name="ThrowSize" xml:space="preserve">
+    <value>Taille du lancer</value>
+  </data>
 </root>

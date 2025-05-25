@@ -38,6 +38,9 @@ public partial class TitsSettings : ObservableObject
     [ObservableProperty]
     private bool useFolderEmotes = false;
 
+    [ObservableProperty]
+    private uint throwSize = 75;
+
     partial void OnUseTwitchEmotesChanged(bool oldValue, bool newValue)
     {
         if (interlock) return;
@@ -56,7 +59,12 @@ public partial class TitsSettings : ObservableObject
             UseTwitchEmotes = false;
         ThrowEmotesChanged?.Invoke(this, EventArgs.Empty);
         interlock = false;
-    }   
+    }
+
+    partial void OnThrowSizeChanged(uint oldValue, uint newValue)
+    {
+        ThrowEmotesChanged?.Invoke(this, EventArgs.Empty);
+    }
 
     public EventHandler ThrowEmotesChanged;
     private bool interlock;

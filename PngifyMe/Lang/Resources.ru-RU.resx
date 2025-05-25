@@ -819,4 +819,7 @@
   <data name="AddNewLocalEmotes" xml:space="preserve">
     <value>Добавить локальные эмодзи</value>
   </data>
+  <data name="ThrowSize" xml:space="preserve">
+    <value>Размер бросаемого предмета</value>
+  </data>
 </root>

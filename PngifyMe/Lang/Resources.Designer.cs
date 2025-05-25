@@ -1690,6 +1690,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ThrowSize.
+        /// </summary>
+        public static string ThrowSize {
+            get {
+                return ResourceManager.GetString("ThrowSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Timer that changes with subs/bits/etc..
         /// </summary>
         public static string TimerLayer {

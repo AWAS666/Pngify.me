@@ -73,6 +73,10 @@
 				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Gravity}"/>
 				<helper:UintTextBox Text="{Binding Settings.Gravity}"></helper:UintTextBox>
 				<TextBlock VerticalAlignment="Center">pixels/s²</TextBlock>
+				
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.ThrowSize}"/>
+				<NumericUpDown Minimum="25" Maximum="250" Increment="5" Grid.Column="1" Value="{Binding Settings.ThrowSize}"/>
+				<TextBlock VerticalAlignment="Center">pixels</TextBlock>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="10">

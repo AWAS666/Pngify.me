@@ -819,4 +819,7 @@
   <data name="AddNewLocalEmotes" xml:space="preserve">
     <value>添加本地表情</value>
   </data>
+  <data name="ThrowSize" xml:space="preserve">
+    <value>投掷物大小</value>
+  </data>
 </root>

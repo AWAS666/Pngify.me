@@ -819,4 +819,7 @@
   <data name="AddNewLocalEmotes" xml:space="preserve">
     <value>Add Local Emotes</value>
   </data>
+  <data name="ThrowSize" xml:space="preserve">
+    <value>ThrowSize</value>
+  </data>
 </root>
