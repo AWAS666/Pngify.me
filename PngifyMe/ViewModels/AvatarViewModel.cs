@@ -2,6 +2,7 @@
 using PngifyMe.Helpers;
 using PngifyMe.Layers;
 using SkiaSharp;
+using System;
 
 namespace PngifyMe.ViewModels;
 
@@ -44,6 +45,6 @@ public partial class AvatarViewModel : ObservableObject
 
     private void UpdateFPS(object? sender, float e)
     {
-        Fps = e;
+        Fps = MathF.Round(e, 1);
     }
 }

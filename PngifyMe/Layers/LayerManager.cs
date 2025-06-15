@@ -64,19 +64,21 @@ public static class LayerManager
         float delay = 0f;
         TotalRunTime = 0;
         SettingsManager.Current.LayerSetup.ApplySettings();
+        var watch = new Stopwatch();
         while (true)
         {
-            var watch = new Stopwatch();
-            watch.Start();
+            watch.Restart();
             if (!Paused) // skip if paused
                 Update(UpdateInterval + delay);
 
-            //Debug.WriteLine($"Position code took: {watch.ElapsedMilliseconds} ms");
+            Debug.WriteLine($"Render took: {watch.ElapsedMilliseconds} ms");
+
             double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 
             // todo fix to more accurate timer
             //await Delay(Math.Max(1, time));
-            await Task.Delay((int)Math.Max(1, time - 16));
+            await Task.Delay((int)Math.Max(1, time));
+            //await Task.Delay(10);
 
             TotalRunTime += UpdateInterval;
             FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
