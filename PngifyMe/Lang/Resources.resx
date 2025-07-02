@@ -822,4 +822,7 @@
   <data name="ThrowSize" xml:space="preserve">
     <value>ThrowSize</value>
   </data>
+  <data name="AddRandomImage" xml:space="preserve">
+    <value>Adds random image from folder to your model</value>
+  </data>
 </root>

@@ -822,4 +822,7 @@
   <data name="ThrowSize" xml:space="preserve">
     <value>amanho do arremesso</value>
   </data>
+  <data name="AddRandomImage" xml:space="preserve">
+    <value>Adiciona uma imagem aleatória de uma pasta ao seu modelo</value>
+  </data>
 </root>

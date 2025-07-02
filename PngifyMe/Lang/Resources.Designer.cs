@@ -133,6 +133,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Adds random image from folder to your model.
+        /// </summary>
+        public static string AddRandomImage {
+            get {
+                return ResourceManager.GetString("AddRandomImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add Selected Layer.
         /// </summary>
         public static string AddSelectLayerToolTip {

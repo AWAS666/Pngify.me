@@ -822,4 +822,7 @@
   <data name="ThrowSize" xml:space="preserve">
     <value>投掷物大小</value>
   </data>
+  <data name="AddRandomImage" xml:space="preserve">
+    <value>从文件夹中随机添加一张图片到你的模型</value>
+  </data>
 </root>
