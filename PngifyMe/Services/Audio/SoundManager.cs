@@ -21,7 +21,7 @@ public class SoundManager : IDisposable
         _mixerFormat = WaveFormat.CreateIeeeFloatWaveFormat(sampleRate, channels);
         _mixer = new MixingSampleProvider(_mixerFormat) { ReadFully = true };
         _outputDevice = new WaveOutEvent();
-        _outputDevice.DeviceNumber = 1;
+        _outputDevice.DeviceNumber = output;
         _outputDevice.Init(_mixer);
         _outputDevice.Play();
     }
