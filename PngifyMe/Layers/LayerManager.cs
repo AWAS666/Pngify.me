@@ -74,6 +74,9 @@ public static class LayerManager
             Debug.WriteLine($"Render took: {watch.ElapsedMilliseconds} ms");
 
             double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
+#if DEBUG
+            time -= 16;
+#endif
 
             // todo fix to more accurate timer
             //await Delay(Math.Max(1, time));
