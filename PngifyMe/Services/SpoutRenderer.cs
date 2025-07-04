@@ -16,9 +16,18 @@ namespace PngifyMe.Services
 
         public static void Init()
         {
-            spoutSender = new SpoutSender();
-            spoutSender.CreateSender("Pngify.me", (uint)Specsmanager.Width, (uint)Specsmanager.Height, 0);
-            LayerManager.ImageUpdate += NewImage;
+            try
+            {
+                spoutSender = new SpoutSender();
+                spoutSender.CreateSender("Pngify.me", (uint)Specsmanager.Width, (uint)Specsmanager.Height, 0);
+                LayerManager.ImageUpdate += NewImage;
+            }
+            catch (Exception e)
+            {
+
+                throw new Exception($"Spout init error: {e.Message}",e);
+            }
+          
         }
 
         private unsafe static void NewImage(object? sender, SaveDispose<SKBitmap> e)

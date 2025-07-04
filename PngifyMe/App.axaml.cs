@@ -51,36 +51,43 @@ public partial class App : Application
 
     public async Task CompleteApplicationStart()
     {
-        // load language here, either system or steam
-        Lang.Resources.Culture = SteamLocalization.GetStartUpCulture();
-        await UpdateSplash("Starting audio");
-        AudioService.Init();
-        await UpdateSplash("Starting Websocket Server");
-        WebSocketServer.Start();
-
-        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+        try
         {
-            _mainWindow = new MainWindow();
-            HotkeyManager.Start(desktop);
+            // load language here, either system or steam
+            Lang.Resources.Culture = SteamLocalization.GetStartUpCulture();
+            await UpdateSplash("Starting audio");
+            AudioService.Init();
+            await UpdateSplash("Starting Websocket Server");
+            WebSocketServer.Start();
 
-            if (SettingsManager.Current.Twitch.Enabled == true)
+            if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
-                await UpdateSplash("Connecting to twitch");
-                await TwitchEventSocket.Start();
+                _mainWindow = new MainWindow();
+                HotkeyManager.Start(desktop);
+
+                if (SettingsManager.Current.Twitch.Enabled == true)
+                {
+                    await UpdateSplash("Connecting to twitch");
+                    await TwitchEventSocket.Start();
+                }
+
+                if (OperatingSystem.IsWindows())
+                {
+                    await UpdateSplash("Init Spout");
+                    SpoutRenderer.Init();
+                }
+
+                desktop.MainWindow = _mainWindow;
+                await UpdateSplash("Finishing");
+                _mainWindow.Show();
+
+                // close splashscreen
+                _splashScreenWindow.Close();
             }
-
-            if (OperatingSystem.IsWindows())
-            {
-                await UpdateSplash("Init Spout");
-                SpoutRenderer.Init();
-            }
-
-            desktop.MainWindow = _mainWindow;
-            await UpdateSplash("Finishing");
-            _mainWindow.Show();
-
-            // close splashscreen
-            _splashScreenWindow.Close();
+        }
+        catch (Exception e)
+        {
+            Log.Error($"App Init Error: {e.Message}",e);
         }
     }
 
