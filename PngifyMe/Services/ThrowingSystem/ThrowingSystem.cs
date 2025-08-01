@@ -397,6 +397,9 @@ public class ThrowingSystem
                 case TwitchSub subs:
                     TwitchEventSocket.AnySub += subs.Triggered;
                     break;
+                case TwitchTextCommand command:
+                    TwitchEventSocket.NewChat += command.Triggered;
+                    break;
                 default:
                     break;
             }
@@ -420,6 +423,9 @@ public class ThrowingSystem
                     break;
                 case TwitchSub subs:
                     TwitchEventSocket.AnySub -= subs.Triggered;
+                    break;
+                case TwitchTextCommand command:
+                    TwitchEventSocket.NewChat -= command.Triggered;
                     break;
             }
         }

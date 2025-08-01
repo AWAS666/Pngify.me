@@ -13,7 +13,7 @@
 	<Design.DataContext>
 		<vm:LayersettingViewModel/>
 	</Design.DataContext>
-	<Grid ColumnDefinitions="150,*" RowDefinitions="35,35,*">
+	<Grid ColumnDefinitions="150,*" RowDefinitions="45,35,*">
 		<TextBlock VerticalAlignment="Center" Grid.Row="0" Text="{x:Static lang:Resources.Trigger}"/>
 
 		<ComboBox Grid.Column="0" Grid.Row="1"

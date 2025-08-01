@@ -46,6 +46,14 @@
 				</StackPanel>
 			</StackPanel>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type sett:TwitchTextCommand}">
+			<StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5">
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.TwitchCommandTextStart}" Width="125"/>
+					<TextBox Watermark="{x:Static lang:Resources.TwitchCommandSample}" Text="{Binding Trigger}"/>
+				</StackPanel>				
+			</StackPanel>
+		</DataTemplate>
 	</UserControl.DataTemplates>
 	<StackPanel>
 		<ContentControl Content="{Binding Trigger}"/>

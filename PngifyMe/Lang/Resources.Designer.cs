@@ -2005,6 +2005,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to !command (or similar).
+        /// </summary>
+        public static string TwitchCommandSample {
+            get {
+                return ResourceManager.GetString("TwitchCommandSample", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Message starts:.
+        /// </summary>
+        public static string TwitchCommandTextStart {
+            get {
+                return ResourceManager.GetString("TwitchCommandTextStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Use your channels twitch emotes, need to connect twitch to enable this.
         /// </summary>
         public static string TwitchEmotesToolTip {

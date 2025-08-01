@@ -81,6 +81,9 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
                 case TwitchSub subs:
                     TwitchEventSocket.AnySub += subs.Triggered;
                     break;
+                case TwitchTextCommand command:
+                    TwitchEventSocket.NewChat += command.Triggered;
+                    break;
                 default:
                     break;
             }
@@ -104,6 +107,9 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
                     break;
                 case TwitchSub subs:
                     TwitchEventSocket.AnySub -= subs.Triggered;
+                    break;
+                case TwitchTextCommand command:
+                    TwitchEventSocket.NewChat -= command.Triggered;
                     break;
             }
         }

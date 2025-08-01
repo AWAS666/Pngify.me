@@ -825,4 +825,10 @@
   <data name="AddRandomImage" xml:space="preserve">
     <value>Добавляет случайное изображение из папки к вашей модели</value>
   </data>
+  <data name="TwitchCommandTextStart" xml:space="preserve">
+    <value>Сообщение начинается:</value>
+  </data>
+  <data name="TwitchCommandSample" xml:space="preserve">
+    <value>!команда (или подобное)</value>
+  </data>
 </root>

@@ -58,4 +58,18 @@ namespace PngifyMe.Services.Settings
             Callback();
         }
     }
+
+    public class TwitchTextCommand : Trigger
+    {
+        public string Trigger { get; set; }
+
+        public void Triggered(object? sender, ChannelChatMessage msg)
+        {
+            var text = msg.Message.Text;
+            if (text.StartsWith(Trigger, StringComparison.CurrentCultureIgnoreCase))
+            {
+                Callback();
+            }
+        }
+    }
 }
