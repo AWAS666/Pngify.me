@@ -3,10 +3,10 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using TwitchLib.Api.Core.Enums;
+using TwitchLib.EventSub.Core.EventArgs.Channel;
+using TwitchLib.EventSub.Core.EventArgs.Stream;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 using TwitchLib.EventSub.Websockets;
-using TwitchLib.EventSub.Websockets.Core.EventArgs.Channel;
-using TwitchLib.EventSub.Websockets.Core.EventArgs.Stream;
 
 namespace PngifyMe.Services.Twitch
 {
@@ -38,8 +38,8 @@ namespace PngifyMe.Services.Twitch
             _eventSubWebsocketClient.StreamOffline += OnStreamOffline;
 
             _eventSubWebsocketClient.ChannelRaid += OnChannelRaid;
-            _eventSubWebsocketClient.ChannelHypeTrainBegin += HypeTrainStart;
-            _eventSubWebsocketClient.ChannelHypeTrainEnd += HypeTrainEnd;
+            _eventSubWebsocketClient.ChannelHypeTrainBeginV2 += HypeTrainStart;
+            _eventSubWebsocketClient.ChannelHypeTrainEndV2 += HypeTrainEnd;
 
             _eventSubWebsocketClient.ChannelPointsCustomRewardRedemptionAdd += OnChannelPointsRedeemed;
             _eventSubWebsocketClient.ChannelCheer += Cheer;
@@ -53,14 +53,14 @@ namespace PngifyMe.Services.Twitch
 
         private static async Task ChannelSubGift(object sender, ChannelSubscriptionGiftArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
             SubGift?.Invoke(null, eventData);
             AnySub?.Invoke(null, eventData.UserName);
         }
 
         private static async Task ChannelSubscription(object sender, ChannelSubscribeArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
             Subscription?.Invoke(null, eventData);
             AnySub?.Invoke(null, eventData.UserName);
         }
@@ -153,52 +153,52 @@ namespace PngifyMe.Services.Twitch
 
         private async static Task OnChannelFollow(object? sender, ChannelFollowArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
             NewFollower?.Invoke(null, eventData.UserName);
         }
 
         private static async Task OnChannelPointsRedeemed(object? sender, ChannelPointsCustomRewardRedemptionArgs e)
         {
-            ChannelPointsCustomRewardRedemption eventData = e.Notification.Payload.Event;
+            ChannelPointsCustomRewardRedemption eventData = e.Payload.Event;
             RedeemUsed?.Invoke(null, eventData.Reward.Title);
             RedeemFull?.Invoke(null, eventData);
         }
 
         private static async Task Cheer(object sender, ChannelCheerArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
             BitsUsed?.Invoke(null, eventData);
         }
 
-        private static async Task HypeTrainStart(object? sender, ChannelHypeTrainBeginArgs e)
+        private static async Task HypeTrainStart(object? sender, ChannelHypeTrainBeginV2Args e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
         }
 
-        private static async Task HypeTrainEnd(object? sender, ChannelHypeTrainEndArgs e)
+        private static async Task HypeTrainEnd(object? sender, ChannelHypeTrainEndV2Args e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
         }
 
 
         private static async Task OnChannelRaid(object? sender, ChannelRaidArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
         }
 
         private static async Task OnStreamOffline(object? sender, StreamOfflineArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
         }
 
         private static async Task OnStreamOnline(object? sender, StreamOnlineArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
         }
 
         private static async Task ChatMessage(object sender, ChannelChatMessageArgs e)
         {
-            var eventData = e.Notification.Payload.Event;
+            var eventData = e.Payload.Event;
             NewChat?.Invoke(null, eventData);
         }
     }
