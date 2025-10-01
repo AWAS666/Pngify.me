@@ -1,6 +1,7 @@
 ﻿using Avalonia.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Services.Settings;
+using SharpHook.Data;
 using SharpHook.Native;
 using System;
 using System.Collections.ObjectModel;
@@ -17,7 +18,7 @@ namespace PngifyMe.ViewModels.Helper
         private ObservableCollection<KeyCode> allKeys;
 
         [ObservableProperty]
-        private ObservableCollection<ModifierMask> allModifiers;
+        private ObservableCollection<EventMask> allModifiers;
 
         private string hotkey;
 
@@ -47,7 +48,7 @@ namespace PngifyMe.ViewModels.Helper
             {
                 case HotkeyTrigger hotkey:
                     AllKeys = new ObservableCollection<KeyCode>(Enum.GetValues(typeof(KeyCode)).Cast<KeyCode>());
-                    AllModifiers = new ObservableCollection<ModifierMask>(Enum.GetValues(typeof(ModifierMask)).Cast<ModifierMask>());
+                    AllModifiers = new ObservableCollection<EventMask>(Enum.GetValues(typeof(EventMask)).Cast<EventMask>());
                     AllModifiers.Insert(0, 0);
                     SetHotkey();
                     break;
@@ -64,7 +65,7 @@ namespace PngifyMe.ViewModels.Helper
             e.Handled = true;
             var hot = (HotkeyTrigger)Trigger;
             hot.VirtualKeyCode = (KeyCode)Avalonia.Win32.Input.KeyInterop.VirtualKeyFromKey(e.Key);
-            hot.Modifiers = (ModifierMask)e.KeyModifiers;
+            hot.Modifiers = (EventMask)e.KeyModifiers;
             SetHotkey();
         }
 

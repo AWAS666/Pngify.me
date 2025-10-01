@@ -1,4 +1,5 @@
 ﻿using SharpHook;
+using SharpHook.Data;
 using SharpHook.Native;
 using System;
 using System.Collections.Generic;
@@ -12,7 +13,7 @@ public static class HotkeyManager
     public static SimpleGlobalHook Hook { get; private set; }
 
     //private static List<IRegistration> subscriptions = new List<IRegistration>();
-    private static new Dictionary<(KeyCode, ModifierMask), List<Action>> callBacks = new();
+    private static new Dictionary<(KeyCode, EventMask), List<Action>> callBacks = new();
 
     public static bool Started { get; private set; }
 
@@ -50,7 +51,7 @@ public static class HotkeyManager
         Hook?.Dispose();
     }
 
-    public static void AddHotkey(KeyCode virtualKeyCode, ModifierMask modifier, Action callback)
+    public static void AddHotkey(KeyCode virtualKeyCode, EventMask modifier, Action callback)
     {
         if (!Started) return;
         // just add to existing callbacks

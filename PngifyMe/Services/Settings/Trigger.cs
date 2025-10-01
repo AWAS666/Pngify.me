@@ -1,4 +1,5 @@
-﻿using SharpHook.Native;
+﻿using SharpHook.Data;
+using SharpHook.Native;
 using System;
 using System.Text.Json.Serialization;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
@@ -21,7 +22,7 @@ namespace PngifyMe.Services.Settings
     public class HotkeyTrigger : Trigger
     {
         public KeyCode VirtualKeyCode { get; set; }
-        public ModifierMask Modifiers { get; set; }
+        public EventMask Modifiers { get; set; }
     }
 
     public class TwitchRedeem : Trigger

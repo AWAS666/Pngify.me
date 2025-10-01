@@ -2,6 +2,7 @@
 using PngifyMe.Layers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
+using SharpHook.Data;
 using SharpHook.Native;
 using System;
 using System.Collections.Generic;
@@ -28,7 +29,7 @@ public partial class LayerSetup : ObservableObject
         {
             Name = "Rotate",
             Layers = [new RotateByRel()],
-            Trigger = new HotkeyTrigger() { VirtualKeyCode = KeyCode.Vc1, Modifiers = ModifierMask.LeftCtrl },
+            Trigger = new HotkeyTrigger() { VirtualKeyCode = KeyCode.Vc1, Modifiers =  EventMask.LeftCtrl },
         },
     };
 
