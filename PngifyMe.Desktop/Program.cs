@@ -46,7 +46,7 @@ class Program
     private static void SetupSerilog()
     {
         // Define the path to the log file in %localappdata%/appname
-        var localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PngifyMe", "log-.txt");
+        var localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PngifyMe", "logs", "log-.txt");
         // Ensure the directory exists
         Directory.CreateDirectory(Path.GetDirectoryName(localAppDataPath));
         // Configure Serilog to write to a file
