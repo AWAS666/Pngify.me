@@ -831,4 +831,7 @@
   <data name="TwitchCommandSample" xml:space="preserve">
     <value>!command (or similar)</value>
   </data>
+  <data name="StateSwitcher" xml:space="preserve">
+    <value>Switches to a random layer, only works with basic setup</value>
+  </data>
 </root>

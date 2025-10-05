@@ -831,4 +831,7 @@
   <data name="TwitchCommandSample" xml:space="preserve">
     <value>!comando (ou semelhante)</value>
   </data>
+  <data name="StateSwitcher" xml:space="preserve">
+    <value>Alterna para uma camada aleatória, funciona apenas com a configuração básica</value>
+  </data>
 </root>

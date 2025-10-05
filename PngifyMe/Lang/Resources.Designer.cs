@@ -1609,6 +1609,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switches to a random layer, only works with basic setup.
+        /// </summary>
+        public static string StateSwitcher {
+            get {
+                return ResourceManager.GetString("StateSwitcher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Stretch in x/y whenever talking.
         /// </summary>
         public static string StretchXY {

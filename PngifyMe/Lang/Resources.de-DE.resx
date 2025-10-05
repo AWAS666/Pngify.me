@@ -831,4 +831,7 @@
   <data name="TwitchCommandSample" xml:space="preserve">
     <value>!Befehl (oder ähnlich)</value>
   </data>
+  <data name="StateSwitcher" xml:space="preserve">
+    <value>Wechselt zu einer zufälligen Ebene, funktioniert nur mit der Basiskonfiguration</value>
+  </data>
 </root>
