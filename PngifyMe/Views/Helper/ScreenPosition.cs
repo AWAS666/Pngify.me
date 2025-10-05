@@ -1,5 +1,7 @@
 ﻿using Avalonia.Controls;
 using PngifyMe.Services;
+using Serilog;
+using System;
 using System.IO;
 using System.Text.Json;
 
@@ -15,8 +17,15 @@ namespace PngifyMe.Views.Helper
 
         public static void Save(ScreenPosition pos)
         {
-            var path = Path.Combine(Specsmanager.BasePath, "screen.json");
-            File.WriteAllText(Path.Combine(Specsmanager.BasePath, "screen.json"), JsonSerializer.Serialize(pos));
+            try
+            {
+                var path = Path.Combine(Specsmanager.BasePath, "screen.json");
+                File.WriteAllText(Path.Combine(Specsmanager.BasePath, "screen.json"), JsonSerializer.Serialize(pos));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, $"Error in saving screen position: {e.Message} | Position: {pos.Width}, {pos.Height}, {pos.Left}, {pos.Top}, {pos.WindowState}");
+            }
         }
 
         public static ScreenPosition Load()
