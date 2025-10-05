@@ -834,4 +834,7 @@
   <data name="StateSwitcher" xml:space="preserve">
     <value>Wechselt zu einer zufälligen Ebene, funktioniert nur mit der Basiskonfiguration</value>
   </data>
+  <data name="InactiveStateSwitcher" xml:space="preserve">
+    <value>Wechselt in einen bestimmten Zustand, wenn nicht gesprochen wird</value>
+  </data>
 </root>

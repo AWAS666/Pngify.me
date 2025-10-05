@@ -10,7 +10,7 @@ using System.Linq;
 namespace PngifyMe.Layers;
 
 [LayerDescription("StateSwitcher")]
-public class StateSwitcher : PermaLayer
+public class RandomStateSwitcher : PermaLayer
 {
     private float lastupdate;
 

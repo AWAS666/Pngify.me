@@ -834,4 +834,7 @@
   <data name="StateSwitcher" xml:space="preserve">
     <value>Alterna para uma camada aleatória, funciona apenas com a configuração básica</value>
   </data>
+  <data name="InactiveStateSwitcher" xml:space="preserve">
+    <value>Alterna para um determinado estado quando não estiver falando</value>
+  </data>
 </root>

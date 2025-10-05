@@ -772,6 +772,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Switches to certain state if not talking.
+        /// </summary>
+        public static string InactiveStateSwitcher {
+            get {
+                return ResourceManager.GetString("InactiveStateSwitcher", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Input.
         /// </summary>
         public static string Input {
