@@ -1,15 +1,19 @@
 ﻿using Avalonia.Controls;
-using NAudio.CoreAudioApi;
-using NAudio.Wave;
-using NAudio.Wave.SampleProviders;
-using PngifyMe.Services.Audio;
 using PngifyMe.Services.Settings;
 using Serilog;
+using SoundFlow.Abstracts.Devices;
+using SoundFlow.Backends.MiniAudio;
+using SoundFlow.Components;
+using SoundFlow.Enums;
+using SoundFlow.Providers;
+using SoundFlow.Structs;
+using SoundFlow.Visualization;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Ursa.Controls;
 
 namespace PngifyMe.Services;
 
@@ -24,43 +28,69 @@ public static class AudioService
     public static MicSettings Settings => SettingsManager.Current.Profile.Active.MicSettings;
     private static float last = 0f;
     private static ProfileType current;
-    private static WaveInEvent _waveIn;
 
     public static bool Talking { get; private set; }
+
+    private static MiniAudioEngine engine;
+    private static AudioCaptureDevice captureDevice;
+    private static AudioPlaybackDevice playbackDevice;
+
     public static List<AudioDeviceConfig> InputDevices { get; }
     public static List<AudioDeviceConfig> OutputDevices { get; }
 
     public static event EventHandler<MicroPhoneLevel> LevelChanged;
-    public static SoundManager SoundManager { get; private set; } = new SoundManager(output:Settings.DeviceOut);
+    //public static SoundManager SoundManager { get; private set; } = new SoundManager(output: Settings.DeviceOut);
 
     static AudioService()
     {
-        InputDevices = GetAllInDevices();
-        OutputDevices = GetAllOutDevices();
-        if (WaveInEvent.DeviceCount == 0)
-            Log.Error("No Audio input devices found...");
-        if (Settings.DeviceIn >= WaveInEvent.DeviceCount)
-            Settings.DeviceIn = 0;
+        try
+        {
+            engine = new MiniAudioEngine();
+            engine.UpdateDevicesInfo();
 
-        using var mmEnum = new MMDeviceEnumerator();
-        var devices = mmEnum.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-        if (devices.Count == 0)
-            Log.Error("No Audio ouput devices found...");
-        if (Settings.DeviceOut >= devices.Count)
-            Settings.DeviceOut = 0;
+            InputDevices = GetAllInDevices();
+            OutputDevices = GetAllOutDevices();
 
+            var count = engine.CaptureDevices.Length;
+            if (count == 0)
+                Log.Error("No Audio input devices found...");
+
+            count = engine.PlaybackDevices.Length;
+            if (count == 0)
+                Log.Error("No Audio ouput devices found...");
+        }
+        catch (Exception e)
+        {
+
+            Log.Fatal(e, $"Error in AudioService init: {e.Message}");
+        }
     }
 
     public static void Init()
     {
         ChangeMode(SettingsManager.Current.Profile.Active.Type);
         Settings.DeviceOutChanged += OutputChanged;
+
+        var format = new AudioFormat
+        {
+            SampleRate = 48000,
+            Channels = 2,
+            Format = SampleFormat.F32
+        };
+
+        var outDevice = engine.PlaybackDevices.FirstOrDefault(x => string.Compare(x.Name, Settings.DeviceOutName, true) == 0);
+        if (outDevice == default)
+        {
+            outDevice = engine.PlaybackDevices.ElementAtOrDefault(Settings.DeviceOut);
+        }
+        playbackDevice = engine.InitializePlaybackDevice(outDevice, format);
+        playbackDevice.Start();
     }
 
     private static void OutputChanged(object? sender, int e)
     {
-        SoundManager.Dispose();
-        SoundManager = new SoundManager(output: e);
+        var newDevice = engine.PlaybackDevices.ElementAtOrDefault(e);
+        playbackDevice = engine.SwitchDevice(playbackDevice, newDevice);
     }
 
     public static void ChangeMode(ProfileType type)
@@ -82,17 +112,13 @@ public static class AudioService
     private static List<AudioDeviceConfig> GetAllInDevices()
     {
         var list = new List<AudioDeviceConfig>();
-        int waveInDevices = WaveInEvent.DeviceCount;
-
-        // Loop through all input devices and display their names
-        for (int i = 0; i < waveInDevices; i++)
+        int i = 0;
+        foreach (var item in engine.CaptureDevices)
         {
-            var deviceInfo = WaveInEvent.GetCapabilities(i);
             list.Add(new AudioDeviceConfig()
             {
-                Id = i,
-                Name = deviceInfo.ProductName,
-                Channels = deviceInfo.Channels,
+                Id = i++,
+                Name = item.Name,
             });
         }
         return list;
@@ -101,16 +127,13 @@ public static class AudioService
     private static List<AudioDeviceConfig> GetAllOutDevices()
     {
         var list = new List<AudioDeviceConfig>();
-        var enumerator = new MMDeviceEnumerator();
-        var devices = enumerator.EnumerateAudioEndPoints(DataFlow.Render, DeviceState.Active);
-
         int i = 0;
-        foreach (var deviceInfo in devices)
+        foreach (var item in engine.PlaybackDevices)
         {
             list.Add(new AudioDeviceConfig()
             {
                 Id = i++,
-                Name = deviceInfo.FriendlyName,
+                Name = item.Name,
             });
         }
         return list;
@@ -118,29 +141,35 @@ public static class AudioService
 
     public static async Task PlaySound(Stream stream)
     {
-        WaveStream reader = new Mp3FileReader(stream);
-        using var player = new WaveOutEvent();
-        player.DeviceNumber = Settings.DeviceOut;
-        var meter = new MeteringSampleProvider(reader.ToSampleProvider());
-        meter.StreamVolume += (s, e) =>
+        var format = new AudioFormat
         {
-            float value = e.MaxSampleValues.OrderDescending().First();
+            SampleRate = 48000,
+            Channels = 2,
+            Format = SampleFormat.F32
+        };
+        using var dataProvider = new StreamDataProvider(engine, format, stream);
+        var player = new SoundPlayer(engine, format, dataProvider)
+        {
+        };
+
+        var levelMeter = new LevelMeterAnalyzer(format);
+        player.AddAnalyzer(levelMeter);
+
+        playbackDevice.MasterMixer.AddComponent(player);
+
+        player.Play();
+
+        while (player.State == PlaybackState.Playing)
+        {
+            float value = levelMeter.Peak;
             float current = Current(value);
             Talking = current > Settings.ThreshHold;
             LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
-        };
-
-        player.Init(meter);
-        player.Play();
-
-        while (player.PlaybackState == PlaybackState.Playing)
-        {
-            await Task.Delay(500);
-        }
-        // cleanup
-        stream.Dispose();
-        Talking = false;
+            await Task.Delay(10);
+        }   
+        player.Dispose();
         // close at the end
+        Talking = false;
         LevelChanged?.Invoke(null, new MicroPhoneLevel(false, 0));
     }
 
@@ -149,7 +178,26 @@ public static class AudioService
     {
         try
         {
-            SoundManager.PlayStream(wavstream, volume);
+            var format = new AudioFormat
+            {
+                SampleRate = 48000,
+                Channels = 2,
+                Format = SampleFormat.F32
+            };
+
+            using var dataProvider = new StreamDataProvider(engine, format, wavstream);
+            var player = new SoundPlayer(engine, format, dataProvider)
+            {
+                Volume = volume
+            };
+
+            playbackDevice.MasterMixer.AddComponent(player);
+            player.Play();
+            while (player.State == PlaybackState.Playing)
+            {
+                await Task.Delay(10);
+            }
+            player.Dispose();
         }
         catch (Exception e)
         {
@@ -161,16 +209,17 @@ public static class AudioService
     {
         try
         {
-            int deviceIndex = Settings.DeviceIn;
-
-            _waveIn = new WaveInEvent
+            var device = engine.CaptureDevices.FirstOrDefault(x => string.Compare(x.Name, Settings.DeviceInName, true) == 0);
+            // if no string match, try index match
+            if (device == default)
             {
-                WaveFormat = new WaveFormat(8000, 1),
-                DeviceNumber = Settings.DeviceIn
-            };
+                device = engine.CaptureDevices.ElementAtOrDefault(Settings.DeviceIn);
+            }
 
-            _waveIn.DataAvailable += OnDataAvailable;
-            _waveIn.StartRecording();
+            captureDevice = engine.InitializeCaptureDevice(device, AudioFormat.Telephony);
+
+            captureDevice.OnAudioProcessed += OnDataAvailable;
+            captureDevice.Start();
         }
         catch (Exception e)
         {
@@ -178,20 +227,14 @@ public static class AudioService
         }
     }
 
-    private static void OnDataAvailable(object sender, WaveInEventArgs e)
+    private static void OnDataAvailable(Span<float> samples, Capability capability)
     {
         float max = 0;
-        // interpret as 16 bit audio
-        for (int index = 0; index < e.BytesRecorded; index += 2)
+        foreach (var sample in samples)
         {
-            short sample = (short)((e.Buffer[index + 1] << 8) |
-                                    e.Buffer[index + 0]);
-            // to floating point
-            var sample32 = sample / 32768f;
-            // absolute value 
-            if (sample32 < 0) sample32 = -sample32;
-            // is this the max value?
-            if (sample32 > max) max = sample32;
+            var val = Math.Abs(sample);
+            if (val > max)
+                max = val;
         }
         float current = Current(max);
         Talking = current > Settings.ThreshHold;
@@ -200,9 +243,10 @@ public static class AudioService
 
     public static void Stop()
     {
-        if (_waveIn == null) return;
-        _waveIn.StopRecording();
-        _waveIn.DataAvailable -= OnDataAvailable;
+        if (captureDevice == null) return;
+        captureDevice.Stop();
+        captureDevice.OnAudioProcessed -= OnDataAvailable;
+        captureDevice.Dispose();
     }
 
     public static void Restart()
@@ -233,7 +277,4 @@ public class AudioDeviceConfig
 {
     public int Id { get; set; }
     public string Name { get; set; }
-    public int Channels { get; internal set; }
-    public int Struct { get; internal set; }
-    public int Host { get; internal set; }
 }

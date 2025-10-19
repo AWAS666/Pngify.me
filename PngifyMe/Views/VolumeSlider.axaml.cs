@@ -37,7 +37,9 @@ public partial class VolumeSlider : UserControl
         var vm = (AudioSetupViewModel)DataContext;
         if (e.AddedItems.Count == 1)
         {
-            vm.Settings.DeviceIn = ((AudioDeviceConfig)e.AddedItems[0]).Id;
+            var item = (AudioDeviceConfig)e.AddedItems[0];
+            vm.Settings.DeviceIn = item.Id;
+            vm.Settings.DeviceInName = item.Name;
         }
         AudioService.Restart();
     }
@@ -47,7 +49,10 @@ public partial class VolumeSlider : UserControl
         var vm = (AudioSetupViewModel)DataContext;
         if (e.AddedItems.Count == 1)
         {
-            vm.Settings.DeviceOut = ((AudioDeviceConfig)e.AddedItems[0]).Id;
+            var item = (AudioDeviceConfig)e.AddedItems[0];
+
+            vm.Settings.DeviceOut = item.Id;
+            vm.Settings.DeviceOutName = item.Name;
         }
     }
 

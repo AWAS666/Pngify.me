@@ -17,7 +17,13 @@ public partial class MicSettings : ObservableObject
     private int deviceIn = 0;
 
     [ObservableProperty]
+    private string deviceInName = string.Empty;
+
+    [ObservableProperty]
     private int deviceOut = 0;
+    
+    [ObservableProperty]
+    private string deviceOutName = string.Empty;
 
     [ObservableProperty]
     private int smoothing = 20;
