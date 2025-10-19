@@ -400,6 +400,12 @@ public class ThrowingSystem
                 case TwitchTextCommand command:
                     TwitchEventSocket.NewChat += command.Triggered;
                     break;
+                case TwitchRaid raid:
+                    TwitchEventSocket.Raid += raid.Triggered;
+                    break;
+                case TwitchFollow follow:
+                    TwitchEventSocket.NewFollower += follow.Triggered;
+                    break;
                 default:
                     break;
             }
@@ -426,6 +432,12 @@ public class ThrowingSystem
                     break;
                 case TwitchTextCommand command:
                     TwitchEventSocket.NewChat -= command.Triggered;
+                    break;
+                case TwitchRaid raid:
+                    TwitchEventSocket.Raid -= raid.Triggered;
+                    break;
+                case TwitchFollow follow:
+                    TwitchEventSocket.NewFollower -= follow.Triggered;
                     break;
             }
         }

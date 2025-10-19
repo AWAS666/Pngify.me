@@ -54,6 +54,8 @@
 				</StackPanel>				
 			</StackPanel>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type sett:TwitchRaid}"/>
+		<DataTemplate DataType="{x:Type sett:TwitchFollow}"/>
 	</UserControl.DataTemplates>
 	<StackPanel>
 		<ContentControl Content="{Binding Trigger}"/>

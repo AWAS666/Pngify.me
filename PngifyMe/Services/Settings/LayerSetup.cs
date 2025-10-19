@@ -62,6 +62,12 @@ public partial class LayerSetup : ObservableObject
                 case TwitchTextCommand command:
                     TwitchEventSocket.NewChat += command.Triggered;
                     break;
+                case TwitchRaid raid:
+                    TwitchEventSocket.Raid += raid.Triggered;
+                    break;
+                case TwitchFollow follow:
+                    TwitchEventSocket.NewFollower += follow.Triggered;
+                    break;
                 default:
                     break;
             }
@@ -91,6 +97,16 @@ public partial class LayerSetup : ObservableObject
         foreach (var item in Layers.Where(x => x.Trigger is TwitchTextCommand))
         {
             TwitchEventSocket.NewChat -= ((TwitchTextCommand)item.Trigger).Triggered;
+        }
+
+        foreach (var item in Layers.Where(x => x.Trigger is TwitchRaid))
+        {
+            TwitchEventSocket.Raid -= ((TwitchRaid)item.Trigger).Triggered;
+        }
+
+        foreach (var item in Layers.Where(x => x.Trigger is TwitchFollow))
+        {
+            TwitchEventSocket.NewFollower -= ((TwitchFollow)item.Trigger).Triggered;
         }
     }
 }
@@ -133,6 +149,12 @@ public class Layersetting
                 break;
             case TwitchTextCommand command:
                 TwitchEventSocket.NewChat -= command.Triggered;
+                break;
+            case TwitchRaid raid:
+                TwitchEventSocket.Raid -= raid.Triggered;
+                break;
+            case TwitchFollow follow:
+                TwitchEventSocket.NewFollower -= follow.Triggered;
                 break;
             default:
                 break;
