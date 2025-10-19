@@ -21,6 +21,7 @@ namespace PngifyMe.Services.Twitch
         public static EventHandler<string> NewFollower;
         public static EventHandler<TwitchAuth> Authenticated;
         public static EventHandler<ChannelChatMessage> NewChat;
+        public static EventHandler<string> Raid;
 
         private static EventSubWebsocketClient _eventSubWebsocketClient;
 
@@ -48,7 +49,14 @@ namespace PngifyMe.Services.Twitch
             _eventSubWebsocketClient.ChannelSubscribe += ChannelSubscription;
             _eventSubWebsocketClient.ChannelSubscriptionGift += ChannelSubGift;
 
+            _eventSubWebsocketClient.ChannelRaid += ChannelRaided;
+
             await _eventSubWebsocketClient.ConnectAsync(new Uri(ws));
+        }
+
+        private static async Task ChannelRaided(object? sender, ChannelRaidArgs e)
+        {
+            Raid?.Invoke(null, e.Payload.Event.FromBroadcasterUserName);
         }
 
         private static async Task ChannelSubGift(object sender, ChannelSubscriptionGiftArgs e)
@@ -121,12 +129,17 @@ namespace PngifyMe.Services.Twitch
 
                 //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelsubscribe
                 await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.subscribe", "1",
-                  new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }},
+                  new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                   EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
                 await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.subscription.gift", "1",
                   new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId } },
                   EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
+
+                //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelraid
+                await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.raid", "1",
+                 new Dictionary<string, string>() { { "to_broadcaster_user_id", Api.UserId } },
+                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
                 Authenticated?.Invoke(Api, Api.Auth);
             }
