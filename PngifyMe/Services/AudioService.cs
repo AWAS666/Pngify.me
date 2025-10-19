@@ -166,7 +166,8 @@ public static class AudioService
             Talking = current > Settings.ThreshHold;
             LevelChanged?.Invoke(null, new MicroPhoneLevel(Talking, (int)current));
             await Task.Delay(10);
-        }   
+        }
+        playbackDevice.MasterMixer.RemoveComponent(player);
         player.Dispose();
         // close at the end
         Talking = false;
@@ -197,6 +198,7 @@ public static class AudioService
             {
                 await Task.Delay(10);
             }
+            playbackDevice.MasterMixer.RemoveComponent(player); 
             player.Dispose();
         }
         catch (Exception e)
