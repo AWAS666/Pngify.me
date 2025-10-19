@@ -102,16 +102,20 @@ namespace PngifyMe.Services.Twitch
 
         private void LoadAuth()
         {
-            if (File.Exists(FilePath))
-            {
-                Auth = JsonSerializer.Deserialize<TwitchAuth>(File.ReadAllText(FilePath));
-                Api.Settings.AccessToken = Auth.AccessToken;
-            }
+            if (!File.Exists(FilePath)) return;
+            Auth = JsonSerializer.Deserialize<TwitchAuth>(File.ReadAllText(FilePath));
+            Api.Settings.AccessToken = Auth.AccessToken;
         }
 
         private void Save()
         {
             File.WriteAllText(FilePath, JsonSerializer.Serialize(Auth));
+        }
+
+        public void DeleteAuth()
+        {
+            if (!File.Exists(FilePath)) return;
+            File.Delete(FilePath);
         }
 
         private static string GetAuthorizationCodeUrl(string clientId, string redirectUri, List<string> scopes)

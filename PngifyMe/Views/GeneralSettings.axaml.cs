@@ -69,4 +69,9 @@ public partial class GeneralSettings : UserControl
     {
         await TwitchEventSocket.Start();
     }
+
+    private async void TwitchDeleteAuth(object sender, RoutedEventArgs e)
+    {
+        await TwitchEventSocket.DeleteAndReAuth();
+    }
 }

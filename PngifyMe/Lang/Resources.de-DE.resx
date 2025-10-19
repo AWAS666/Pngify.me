@@ -837,4 +837,10 @@
   <data name="InactiveStateSwitcher" xml:space="preserve">
     <value>Wechselt in einen bestimmten Zustand, wenn nicht gesprochen wird</value>
   </data>
+  <data name="DeleteTwitchAuth" xml:space="preserve">
+    <value>Authentifizierung zurücksetzen</value>
+  </data>
+  <data name="DeleteTwitchAuthToolTip" xml:space="preserve">
+    <value>Setzt die Authentifizierung zu Twitch zurück</value>
+  </data>
 </root>

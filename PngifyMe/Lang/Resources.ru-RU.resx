@@ -837,4 +837,10 @@
   <data name="InactiveStateSwitcher" xml:space="preserve">
     <value>Переключается в определённое состояние, если не говорит</value>
   </data>
+  <data name="DeleteTwitchAuth" xml:space="preserve">
+    <value>Сбросить аутентификацию</value>
+  </data>
+  <data name="DeleteTwitchAuthToolTip" xml:space="preserve">
+    <value>Сбрасывает аутентификацию с Twitch</value>
+  </data>
 </root>

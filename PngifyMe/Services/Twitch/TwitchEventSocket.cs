@@ -138,8 +138,8 @@ namespace PngifyMe.Services.Twitch
 
                 //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelraid
                 await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.raid", "1",
-                 new Dictionary<string, string>() { { "to_broadcaster_user_id", Api.UserId } },
-                 EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
+                    new Dictionary<string, string>() { { "to_broadcaster_user_id", Api.UserId } },
+                    EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
 
                 Authenticated?.Invoke(Api, Api.Auth);
             }
@@ -213,6 +213,15 @@ namespace PngifyMe.Services.Twitch
         {
             var eventData = e.Payload.Event;
             NewChat?.Invoke(null, eventData);
+        }
+
+        public static async Task DeleteAndReAuth()
+        {
+            Api.DeleteAuth();
+            // disconnect reconnection handler
+            _eventSubWebsocketClient.WebsocketDisconnected -= OnWebsocketDisconnected;
+            await _eventSubWebsocketClient.DisconnectAsync();
+            await Start();
         }
     }
 }

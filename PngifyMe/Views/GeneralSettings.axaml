@@ -24,6 +24,10 @@
 					ToolTip.Tip="{x:Static lang:Resources.RetryTwitchConnectionToolTip}"
 					Click="TwitchRetry"
 					Content="{x:Static lang:Resources.RetryTwitchConnection}"/>
+			<Button Classes="Primary" Theme="{DynamicResource OutlineButton}"
+					ToolTip.Tip="{x:Static lang:Resources.DeleteTwitchAuthToolTip}"
+					Click="TwitchDeleteAuth"
+					Content="{x:Static lang:Resources.DeleteTwitchAuth}"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="{x:Static lang:Resources.TwitchTokenLastsToolTip}">
 			<TextBlock Text="{x:Static lang:Resources.TwitchTokenLasts}"/>

@@ -520,6 +520,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset Auth.
+        /// </summary>
+        public static string DeleteTwitchAuth {
+            get {
+                return ResourceManager.GetString("DeleteTwitchAuth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Resets Authentication to Twitch.
+        /// </summary>
+        public static string DeleteTwitchAuthToolTip {
+            get {
+                return ResourceManager.GetString("DeleteTwitchAuthToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Drawing tablet that tracks your mouse position.
         /// </summary>
         public static string DrawingTablet {
