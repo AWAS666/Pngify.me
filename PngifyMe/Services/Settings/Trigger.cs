@@ -63,13 +63,27 @@ public class TwitchSub : Trigger
 public class TwitchTextCommand : Trigger
 {
     public string Trigger { get; set; }
+    public bool SubOnly { get; set; }
+    public bool ModOnly { get; set; }
+    public bool VipOnly { get; set; }
+    public int CoolDownSeconds { get; set; }
+
+    private DateTime last = DateTime.MinValue;
 
     public void Triggered(object? sender, ChannelChatMessage msg)
     {
         var text = msg.Message.Text;
+        if (SubOnly && !msg.IsSubscriber) return;
+        if (ModOnly && !msg.IsModerator) return;
+        if (VipOnly && !msg.IsVip) return;
+
+        // return if in cooldown
+        if (last.AddSeconds(CoolDownSeconds) > DateTime.Now) return;
+
         if (text.StartsWith(Trigger, StringComparison.CurrentCultureIgnoreCase))
         {
             Callback();
+            last = DateTime.Now;
         }
     }
 }

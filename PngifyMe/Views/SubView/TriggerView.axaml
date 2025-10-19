@@ -1,15 +1,15 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
-			 xmlns:lang="clr-namespace:PngifyMe.Lang"	
+			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 x:DataType="vm:TriggerViewModel"
-             x:Class="PngifyMe.Views.Helper.TriggerView"			 
+			 x:Class="PngifyMe.Views.Helper.TriggerView"
 			 >
 
 	<UserControl.DataTemplates>
@@ -22,8 +22,8 @@
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Hotkey}" Width="75"/>
 					<TextBox HorizontalAlignment="Left" Name="Hotkeybox" KeyDown="HotkeyDown"
-						Text="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).Hotkey}"
-						 Watermark="{x:Static lang:Resources.Hotkey}" Width="150">
+							 Text="{Binding $parent[UserControl].((vm:TriggerViewModel)DataContext).Hotkey}"
+							 Watermark="{x:Static lang:Resources.Hotkey}" Width="150">
 					</TextBox>
 				</StackPanel>
 			</StackPanel>
@@ -51,7 +51,16 @@
 				<StackPanel Orientation="Horizontal" Margin="5">
 					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.TwitchCommandTextStart}" Width="125"/>
 					<TextBox Watermark="{x:Static lang:Resources.TwitchCommandSample}" Text="{Binding Trigger}"/>
-				</StackPanel>				
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5" Spacing="5">
+					<CheckBox IsChecked="{Binding SubOnly}" Content="SubOnly" />
+					<CheckBox IsChecked="{Binding VipOnly}" Content="VipOnly" />
+					<CheckBox IsChecked="{Binding ModOnly}" Content="ModOnly" />
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Margin="5" Spacing="5">
+					<Label VerticalAlignment="Center">CoolDown</Label>
+					<helper:UintTextBox Watermark="CoolDown (sec)" Text="{Binding CoolDownSeconds }"/>
+				</StackPanel>
 			</StackPanel>
 		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:TwitchRaid}"/>
