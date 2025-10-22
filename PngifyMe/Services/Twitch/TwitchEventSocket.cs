@@ -96,11 +96,7 @@ namespace PngifyMe.Services.Twitch
 
                 await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("stream.offline", "1",
                     new Dictionary<string, string>() { { "broadcaster_user_id", Api.UserId }, },
-                    EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
-
-                await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.raid", "1",
-                      new Dictionary<string, string>() { { "to_broadcaster_user_id", Api.UserId } },
-                      EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);
+                    EventSubTransportMethod.Websocket, _eventSubWebsocketClient.SessionId);              
 
                 //https://dev.twitch.tv/docs/eventsub/eventsub-subscription-types/#channelhype_trainend
                 await Api.Api.Helix.EventSub.CreateEventSubSubscriptionAsync("channel.hype_train.begin", "1",
