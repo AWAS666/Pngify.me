@@ -15,7 +15,6 @@ public class CharacterStateHandler
     public BaseImage CurrentImage => CharacterSetup.CurrentImage;
 
     public EventHandler<CharacterState> StateChanged; // dead for now, todo
-    private bool firstTime = true;
 
     public CharacterStateHandler()
     {
@@ -67,11 +66,6 @@ public class CharacterStateHandler
 
     internal void ChangeSetup(string newValue)
     {
-        if (firstTime)
-        {
-            firstTime = false;
-            return;
-        }
         LayerManager.Pause();
         switch (newValue)
         {
