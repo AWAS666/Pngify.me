@@ -11,6 +11,7 @@ using PngifyMe.ViewModels;
 using PngifyMe.Views;
 using Serilog;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace PngifyMe;
@@ -37,11 +38,14 @@ public partial class App : Application
             _splashScreenWindow.DataContext = _splashVM;
             desktopLifetime.MainWindow = _splashScreenWindow;
 
+            var watch = Stopwatch.StartNew();
+
             _splashScreenWindow.Show();
             await UpdateSplash("Loading Settings");
             await SettingsManager.LoadAsync();
 
             await UpdateSplash("Starting app");
+            Log.Debug($"Loaded settings in {watch.ElapsedMilliseconds}ms");
 
             Dispatcher.UIThread.Post(async () => await CompleteApplicationStart(), DispatcherPriority.Background);
             //await CompleteApplicationStart();
@@ -53,36 +57,49 @@ public partial class App : Application
     {
         try
         {
+            var watch = Stopwatch.StartNew();
             // load language here, either system or steam
             Lang.Resources.Culture = SteamLocalization.GetStartUpCulture();
             await UpdateSplash("Starting audio");
             AudioService.Init();
+            Log.Debug($"Audio started in {watch.ElapsedMilliseconds}ms");
+
+            watch.Restart();
             await UpdateSplash("Starting Websocket Server");
             WebSocketServer.Start();
+            Log.Debug($"Websocket started in {watch.ElapsedMilliseconds}ms");
 
             if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
             {
+                watch.Restart();
                 _mainWindow = new MainWindow();
                 HotkeyManager.Start(desktop);
+                Log.Debug($"HotkeyManager started in {watch.ElapsedMilliseconds}ms");
 
                 if (SettingsManager.Current.Twitch.Enabled == true)
                 {
+                    watch.Restart();
                     await UpdateSplash("Connecting to twitch");
                     await TwitchEventSocket.Start();
+                    Log.Debug($"Twitch started in {watch.ElapsedMilliseconds}ms");
                 }
 
                 if (OperatingSystem.IsWindows())
                 {
+                    watch.Restart();
                     await UpdateSplash("Init Spout");
                     SpoutRenderer.Init();
+                    Log.Debug($"Spout started in {watch.ElapsedMilliseconds}ms");
                 }
 
+                watch.Restart();
                 desktop.MainWindow = _mainWindow;
                 await UpdateSplash("Finishing");
                 _mainWindow.Show();
 
                 // close splashscreen
                 _splashScreenWindow.Close();
+                Log.Debug($"Finishing Splash in {watch.ElapsedMilliseconds}ms");
             }
         }
         catch (Exception e)

@@ -15,14 +15,14 @@ Feel free to suggest features and submit code yourself
 - [x] git build chain triggered by tags 
 - [ ] web view -> just display current image on web, need ws connection of some sort probably
 - [x] stream deck websocket to trigger stuff
-- [ ] splash screen or load json in bg
-- [ ] change audio engine to this: https://github.com/LSXPrime/SoundFlow
+- [x] splash screen or load json in bg
+- [x] change audio engine to this: https://github.com/LSXPrime/SoundFlow
 	- this also allows fancy effects like audio spectrums
 	- likely just more compatible
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 - [ ] multi twitch account 
-- [ ] follow as trigger
+- [x] follow as trigger
 - [ ] crash splash screen?
 	- [ ] link to discord or steam discussions
 	- [ ] fatal errors show message that needs to be acknowledged

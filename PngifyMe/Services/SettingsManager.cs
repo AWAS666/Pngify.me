@@ -1,9 +1,12 @@
 ﻿using PngifyMe.Helpers;
 using PngifyMe.Layers.Helper;
+using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
 using Serilog;
 using System;
+using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
 
@@ -35,21 +38,26 @@ namespace PngifyMe.Services
                 {
                     using var stream = File.OpenRead(FilePath);
                     Current = await JsonSerializer.DeserializeAsync<AppSettings>(stream, JsonSerializeHelper.GetDefault());
-                    // Current = JsonSerializer.Deserialize<AppSettings>(await File.ReadAllTextAsync(FilePath), JsonSerializeHelper.GetDefault());
                 }
                 catch (Exception e)
                 {
-                    Current = new();
+                    UseDefaultSettings();
                     await SaveAsync();
                     Log.Error(e.Message);
                 }
             }
             else
             {
-                Current = new();
+                UseDefaultSettings();
                 await SaveAsync();
             }
             Current.Profile.Load();
+        }
+
+        private static void UseDefaultSettings()
+        {
+            Current = new();
+            Current.Profile.ProfileList.First().AvatarSettings = DefaultCharacter.Default();
         }
 
         public static void Save()

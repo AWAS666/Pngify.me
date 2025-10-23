@@ -77,7 +77,7 @@ public class CharacterStateHandler
         {
             case "Basic":
                 CharacterSetup = new BasicCharacterSetup();
-                SettingsManager.Current.Profile.Active.AvatarSettings = new BasicCharSettings();
+                SettingsManager.Current.Profile.Active.AvatarSettings = DefaultCharacter.Default();
                 break;
             case "Sprite (Advanced)":
                 CharacterSetup = new SpriteCharacterSetup();
