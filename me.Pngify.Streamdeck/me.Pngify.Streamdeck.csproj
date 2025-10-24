@@ -61,10 +61,10 @@
     <PackageReference Include="CommandLineParser" Version="2.9.1" />
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NetCoreServer" Version="8.0.7" />
-    <PackageReference Include="NLog" Version="6.0.4" />
+    <PackageReference Include="NLog" Version="6.0.5" />
     <PackageReference Include="StreamDeck-Tools" Version="6.3.1" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
-    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.9" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.10" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />
     <PackageReference Include="System.ServiceModel.Http" Version="8.1.2" />
     <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.0" />
