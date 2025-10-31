@@ -9,35 +9,22 @@ Feel free to suggest features and submit code yourself
 ![Logo](./PngifyMe/Assets/logo_full.png?raw=true)
 
 ## Todo
-- [x] stick on any png (redeem)
-	- [ ] move with model through states (figure out nearest outline in both states and move by difference)
-	- [ ] visualize location
-- [x] git build chain triggered by tags 
+- [ ] visualize location/preview location live in various layers
 - [ ] web view -> just display current image on web, need ws connection of some sort probably
-- [x] stream deck websocket to trigger stuff
-- [x] splash screen or load json in bg
-- [x] change audio engine to this: https://github.com/LSXPrime/SoundFlow
-	- this also allows fancy effects like audio spectrums
-	- likely just more compatible
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 - [ ] multi twitch account 
-- [x] follow as trigger
 - [ ] crash splash screen?
 	- [ ] link to discord or steam discussions
 	- [ ] fatal errors show message that needs to be acknowledged
-- [ ] Common trigger setup
+- [ ] Common trigger setup -> here the same code is copied multiple times for now
 
 ## Roadmap (future stuff)
-- [x] sprite sheet to avoid more advanced stuff, like more mouth movement when talking
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
 - [ ] virtual webcam integration
 	- [ ] https://github.com/tedd/Tedd.VirtualNetworkCam
 	- [ ] https://www.codeproject.com/Articles/437617/DirectShow-Virtual-Video-Capture-Source-Filter-in
 - [ ] controller tracking
-- [x] mouse tracking
-- [x] drawing tablets
-- [x] LCOLONQ mode
 
 ## Support
 The goal is to have this be usuable for free, downloadable from git, itch.io and steam.
