@@ -180,6 +180,12 @@
   <data name="BlinkIntervalToolTip" xml:space="preserve">
     <value>Tempo entre piscadas</value>
   </data>
+  <data name="BlinkVariance" xml:space="preserve">
+    <value>Variância de piscar</value>
+  </data>
+  <data name="BlinkVarianceToolTip" xml:space="preserve">
+    <value>Variância máxima adicionada ao intervalo de piscar</value>
+  </data>
   <data name="BlinkTime" xml:space="preserve">
     <value>Tempo de piscar</value>
   </data>

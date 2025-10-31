@@ -18,6 +18,7 @@ Feel free to suggest features and submit code yourself
 	- [x] link to discord or steam discussions
 	- [x] fatal errors show message that needs to be acknowledged
 - [ ] Common trigger setup -> here the same code is copied multiple times for now
+- [ ] headless mode which doesn't preview the model to save on resources
 
 ## Roadmap (future stuff)
 - [ ] collab feature like VTS has, invite your friends and see their PNG too

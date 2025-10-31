@@ -304,6 +304,24 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Blink Variance.
+        /// </summary>
+        public static string BlinkVariance {
+            get {
+                return ResourceManager.GetString("BlinkVariance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Maximum variance added to blink interval.
+        /// </summary>
+        public static string BlinkVarianceToolTip {
+            get {
+                return ResourceManager.GetString("BlinkVarianceToolTip", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Cancel.
         /// </summary>
         public static string Cancel {

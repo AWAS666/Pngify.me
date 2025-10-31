@@ -34,20 +34,26 @@
 						Command="{Binding Apply}" Content="{x:Static lang:Resources.ApplyAndSave}" />
 			</StackPanel>
 
-			<Grid RowDefinitions="30,30,30" Margin="5,5,5,5">
+			<Grid RowDefinitions="30,30,30,30" Margin="5,5,5,5">
 				<Grid ColumnDefinitions="150,100,100" ToolTip.Tip="{x:Static lang:Resources.BlinkIntervalToolTip}">
 					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlinkInterval}"/>
 					<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkInterval}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
-				<Grid ColumnDefinitions="150,100,100" Grid.Row="1" ToolTip.Tip="{x:Static lang:Resources.BlinkTimeToolTip}">
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="1" ToolTip.Tip="{x:Static lang:Resources.BlinkVarianceToolTip}">
+					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlinkVariance}"/>
+					<NumericUpDown Minimum="0" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkIntervalVariance}"/>
+					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
+				</Grid>
+
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="2" ToolTip.Tip="{x:Static lang:Resources.BlinkTimeToolTip}">
 					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlinkTime}"/>
 					<NumericUpDown Minimum="0.1" Increment="0.1" Grid.Column="1" Value="{Binding Settings.BlinkTime}"/>
 					<TextBlock Margin="5" VerticalAlignment="Center" Grid.Column="2">seconds</TextBlock>
 				</Grid>
 
-				<Grid ColumnDefinitions="150,100,100" Grid.Row="2"
+				<Grid ColumnDefinitions="150,100,100" Grid.Row="3"
 					  ToolTip.Tip="{x:Static lang:Resources.BlendTimeToolTip}">
 					<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.BlendTime}"/>
 					<NumericUpDown Minimum="0" Maximum="{Binding Settings.BlinkTime}" Increment="0.1" Grid.Column="1" Value="{Binding Settings.TransitionTime}"/>

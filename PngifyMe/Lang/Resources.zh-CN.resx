@@ -180,6 +180,12 @@
   <data name="BlinkIntervalToolTip" xml:space="preserve">
     <value>眨眼间隔时间</value>
   </data>
+  <data name="BlinkVariance" xml:space="preserve">
+    <value>眨眼变化</value>
+  </data>
+  <data name="BlinkVarianceToolTip" xml:space="preserve">
+    <value>添加到眨眼间隔的最大变化</value>
+  </data>
   <data name="BlinkTime" xml:space="preserve">
     <value>眨眼时间</value>
   </data>

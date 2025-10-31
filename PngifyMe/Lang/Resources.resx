@@ -180,6 +180,12 @@
   <data name="BlinkIntervalToolTip" xml:space="preserve">
     <value>Time between blinks</value>
   </data>
+  <data name="BlinkVariance" xml:space="preserve">
+    <value>Blink Variance</value>
+  </data>
+  <data name="BlinkVarianceToolTip" xml:space="preserve">
+    <value>Maximum variance added to blink interval</value>
+  </data>
   <data name="BlinkTime" xml:space="preserve">
     <value>Blink Time</value>
   </data>

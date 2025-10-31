@@ -156,7 +156,8 @@ public class SpriteCharacterSetup : ICharacterSetup
         }
         else if (blinkState == BlinkState.Closed && CurrentTime > transTime)
         {
-            transTime += settings.BlinkInterval;
+            var variance = Random.Shared.NextDouble() * settings.BlinkIntervalVariance;
+            transTime += settings.BlinkInterval + variance;
             blinkState = BlinkState.Open;
         }
 

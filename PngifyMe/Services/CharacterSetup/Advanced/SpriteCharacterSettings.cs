@@ -31,6 +31,9 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
     private double blinkInterval = 3f;
 
     [ObservableProperty]
+    private double blinkIntervalVariance = 0f;
+
+    [ObservableProperty]
     private float offsetX = 0f;
 
     [ObservableProperty]

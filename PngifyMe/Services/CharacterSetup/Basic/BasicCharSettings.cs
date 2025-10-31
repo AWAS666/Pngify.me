@@ -16,6 +16,9 @@ public partial class BasicCharSettings : ObservableObject, IAvatarSettings
     private double blinkInterval = 2f;
 
     [ObservableProperty]
+    private double blinkIntervalVariance = 0f;
+
+    [ObservableProperty]
     private double blinkTime = 0.25f;
 
     [ObservableProperty]

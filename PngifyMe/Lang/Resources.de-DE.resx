@@ -180,6 +180,12 @@
   <data name="BlinkIntervalToolTip" xml:space="preserve">
     <value>Zeit zwischen den Zwinkern</value>
   </data>
+  <data name="BlinkVariance" xml:space="preserve">
+    <value>Zwinkervarianz</value>
+  </data>
+  <data name="BlinkVarianceToolTip" xml:space="preserve">
+    <value>Maximale Varianz, die zum Zwinkerintervall hinzugefügt wird</value>
+  </data>
   <data name="BlinkTime" xml:space="preserve">
     <value>Zwinkerzeit</value>
   </data>

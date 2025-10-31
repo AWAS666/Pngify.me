@@ -180,6 +180,12 @@
   <data name="BlinkIntervalToolTip" xml:space="preserve">
     <value>Время между морганиями</value>
   </data>
+  <data name="BlinkVariance" xml:space="preserve">
+    <value>Вариация моргания</value>
+  </data>
+  <data name="BlinkVarianceToolTip" xml:space="preserve">
+    <value>Максимальная вариация, добавляемая к интервалу моргания</value>
+  </data>
   <data name="BlinkTime" xml:space="preserve">
     <value>Время моргания</value>
   </data>

@@ -149,7 +149,8 @@ public class BasicCharacterSetup : ICharacterSetup
         }
         else if (blinking && CurrentTime > transTime)
         {
-            transTime += settings.BlinkInterval;
+            var variance = Random.Shared.NextDouble() * settings.BlinkIntervalVariance;
+            transTime += settings.BlinkInterval + variance;
             blinking = false;
         }
 
