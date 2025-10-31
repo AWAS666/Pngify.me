@@ -30,6 +30,8 @@ public partial class App : Application
     public override async void OnFrameworkInitializationCompleted()
     {
         TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
+        AppDomain.CurrentDomain.UnhandledException += UnhandledExcpection;
+
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
             // Open splash screen as early as possible
@@ -51,7 +53,7 @@ public partial class App : Application
             //await CompleteApplicationStart();
         }
         base.OnFrameworkInitializationCompleted();
-    }
+    }      
 
     public async Task CompleteApplicationStart()
     {
@@ -104,7 +106,7 @@ public partial class App : Application
         }
         catch (Exception e)
         {
-            Log.Error($"App Init Error: {e.Message}",e);
+            Log.Error($"App Init Error: {e.Message}", e);
         }
     }
 
@@ -117,5 +119,10 @@ public partial class App : Application
     private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         Log.Fatal($"Task error: {e.Exception.Message}");
+    }
+    private void UnhandledExcpection(object s, UnhandledExceptionEventArgs e)
+    {
+        var ex = e.ExceptionObject as Exception;
+        Log.Error(ex, $"[Global] {ex}");
     }
 }
