@@ -71,7 +71,7 @@ public static class LayerManager
             if (!Paused) // skip if paused
                 Update(UpdateInterval + delay);
 
-            Debug.WriteLine($"Render took: {watch.ElapsedMilliseconds} ms");
+            //Debug.WriteLine($"Render took: {watch.ElapsedMilliseconds} ms");
 
             double time = UpdateInterval * 1000f - watch.Elapsed.TotalMilliseconds;
 #if DEBUG
@@ -87,7 +87,7 @@ public static class LayerManager
             FPSUpdate?.Invoke(null, (float)(1f / watch.Elapsed.TotalMilliseconds * 1000f));
             delay = (float)(watch.Elapsed.TotalMilliseconds / 1000f - UpdateInterval);
             TotalRunTime += delay;
-            Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
+            //Debug.WriteLine($"Total took: {watch.ElapsedMilliseconds} ms");
             if (RequestPause)
                 Paused = true;
         }

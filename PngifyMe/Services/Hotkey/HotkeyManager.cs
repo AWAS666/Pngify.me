@@ -1,4 +1,5 @@
-﻿using SharpHook;
+﻿using Avalonia.Layout;
+using SharpHook;
 using SharpHook.Data;
 using SharpHook.Native;
 using System;
@@ -37,7 +38,8 @@ public static class HotkeyManager
     private static void OnKeyPressed(object? sender, KeyboardHookEventArgs e)
     {
         Debug.WriteLine($"HotKey Pressed: Time = {e.RawEvent.Time}, Key = {e.RawEvent.Keyboard}, Modifiers = {e.RawEvent.Mask}");
-        if (callBacks.TryGetValue((e.RawEvent.Keyboard.KeyCode, e.RawEvent.Mask), out var actions))
+        EventMask mask = (EventMask)(e.RawEvent.Mask - EventMask.NumLock);
+        if (callBacks.TryGetValue((e.RawEvent.Keyboard.KeyCode, mask), out var actions))
         {
             foreach (var action in actions)
             {
