@@ -52,9 +52,8 @@ public static class LayerManager
     public static List<SaveDispose<SKBitmap>> FrameBuffer { get; private set; } = new();
     public static bool RequestPause { get; private set; }
 
-    public static EventHandler<Layersetting> LayerTriggered;
-
-    static LayerManager()
+    public static EventHandler<Layersetting> LayerTriggered;  
+    public static void Start()
     {
         tickLoop = Task.Run(TickLoop);
     }

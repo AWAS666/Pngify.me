@@ -2,6 +2,7 @@
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
+using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
@@ -90,6 +91,8 @@ public partial class App : Application
                     SpoutRenderer.Init();
                     Log.Debug($"Spout started in {watch.ElapsedMilliseconds}ms");
                 }
+
+                LayerManager.Start();
 
                 watch.Restart();
                 desktop.MainWindow = _mainWindow;
