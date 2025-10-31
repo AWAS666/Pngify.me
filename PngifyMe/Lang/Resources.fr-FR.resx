@@ -228,6 +228,12 @@
   <data name="Createdby" xml:space="preserve">
     <value>Créé par :</value>
   </data>
+  <data name="ChromaticAberration" xml:space="preserve">
+    <value>Aberration chromatique</value>
+  </data>
+  <data name="ColorShift" xml:space="preserve">
+    <value>Décalage des couleurs</value>
+  </data>
   <data name="Credits" xml:space="preserve">
     <value>Crédits</value>
   </data>

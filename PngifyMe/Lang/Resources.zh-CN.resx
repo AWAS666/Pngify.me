@@ -228,6 +228,12 @@
   <data name="Createdby" xml:space="preserve">
     <value>由...创建：</value>
   </data>
+  <data name="ChromaticAberration" xml:space="preserve">
+    <value>色差</value>
+  </data>
+  <data name="ColorShift" xml:space="preserve">
+    <value>颜色移动</value>
+  </data>
   <data name="Credits" xml:space="preserve">
     <value>鸣谢</value>
   </data>

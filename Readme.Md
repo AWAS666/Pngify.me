@@ -19,6 +19,7 @@ Feel free to suggest features and submit code yourself
 	- [x] fatal errors show message that needs to be acknowledged
 - [ ] Common trigger setup -> here the same code is copied multiple times for now
 - [ ] headless mode which doesn't preview the model to save on resources
+- [ ] gpu for skiasharp to allow more complex image operations and keep everything more lightweight
 
 ## Roadmap (future stuff)
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
