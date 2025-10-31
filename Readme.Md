@@ -14,9 +14,9 @@ Feel free to suggest features and submit code yourself
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 - [ ] multi twitch account 
-- [ ] crash splash screen?
-	- [ ] link to discord or steam discussions
-	- [ ] fatal errors show message that needs to be acknowledged
+- [x] crash splash screen?
+	- [x] link to discord or steam discussions
+	- [x] fatal errors show message that needs to be acknowledged
 - [ ] Common trigger setup -> here the same code is copied multiple times for now
 
 ## Roadmap (future stuff)

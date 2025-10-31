@@ -12,6 +12,7 @@ using PngifyMe.Views;
 using Serilog;
 using System;
 using System.Diagnostics;
+using System.IO;
 using System.Threading.Tasks;
 
 namespace PngifyMe;
@@ -29,9 +30,6 @@ public partial class App : Application
 
     public override async void OnFrameworkInitializationCompleted()
     {
-        TaskScheduler.UnobservedTaskException += TaskScheduler_UnobservedTaskException;
-        AppDomain.CurrentDomain.UnhandledException += UnhandledExcpection;
-
         if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktopLifetime)
         {
             // Open splash screen as early as possible
@@ -45,7 +43,6 @@ public partial class App : Application
             _splashScreenWindow.Show();
             await UpdateSplash("Loading Settings");
             await SettingsManager.LoadAsync();
-
             await UpdateSplash("Starting app");
             Log.Debug($"Loaded settings in {watch.ElapsedMilliseconds}ms");
 
@@ -114,15 +111,5 @@ public partial class App : Application
     {
         _splashVM.Text = text;
         await Task.Delay(1); // needed for ui to update
-    }
-
-    private void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
-    {
-        Log.Fatal($"Task error: {e.Exception.Message}");
-    }
-    private void UnhandledExcpection(object s, UnhandledExceptionEventArgs e)
-    {
-        var ex = e.ExceptionObject as Exception;
-        Log.Error(ex, $"[Global] {ex}");
     }
 }
