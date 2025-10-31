@@ -71,6 +71,7 @@ class Program
                 rollingInterval: RollingInterval.Day,
                 restrictedToMinimumLevel: LogEventLevel.Debug)
             .WriteTo.Sink(ErrorForwarder.Sink, restrictedToMinimumLevel: LogEventLevel.Information)
+            .WriteTo.Sink(LogViewerForwarder.Sink, restrictedToMinimumLevel: LogEventLevel.Debug)
             .MinimumLevel.Debug()
             .CreateLogger();
 

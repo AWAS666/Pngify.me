@@ -1,0 +1,54 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="600"
+             xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+             xmlns:lang="clr-namespace:PngifyMe.Lang"
+             x:Class="PngifyMe.Views.LogViewer"
+             x:DataType="vm:LogViewerViewModel">
+    <UserControl.DataContext>
+        <vm:LogViewerViewModel/>
+    </UserControl.DataContext>
+    <Grid RowDefinitions="Auto,Auto, Auto,*">
+        <TextBlock Grid.Row="0" FontSize="24" Text="Log Viewer" Margin="0,0,0,10"/>
+          <TextBox Watermark="Search logs..."  Grid.Row="1"
+                     Text="{Binding SearchText}"
+                     MinWidth="200"/>        
+        <StackPanel Grid.Row="2" Orientation="Horizontal" Spacing="10" Margin="0,5,0,10">        
+            
+            <CheckBox VerticalAlignment="Center" Content="Verbose" IsChecked="{Binding ShowVerbose, Mode=TwoWay}"/>
+            <CheckBox VerticalAlignment="Center" Content="Debug" IsChecked="{Binding ShowDebug, Mode=TwoWay}"/>
+            <CheckBox VerticalAlignment="Center" Content="Information" IsChecked="{Binding ShowInformation, Mode=TwoWay}"/>
+            <CheckBox VerticalAlignment="Center" Content="Warning" IsChecked="{Binding ShowWarning, Mode=TwoWay}"/>
+            <CheckBox VerticalAlignment="Center" Content="Error" IsChecked="{Binding ShowError, Mode=TwoWay}"/>
+            <CheckBox VerticalAlignment="Center" Content="Fatal" IsChecked="{Binding ShowFatal, Mode=TwoWay}"/>
+            
+            <Button Content="Clear" Command="{Binding ClearLogsCommand}" HorizontalAlignment="Right"/>
+        </StackPanel>
+        
+        <DataGrid Grid.Row="3"
+                  ItemsSource="{Binding FilteredLogs}"
+                  AutoGenerateColumns="False"
+                  IsReadOnly="True"
+                  GridLinesVisibility="All"
+                  BorderThickness="1"
+                  BorderBrush="Gray"
+                  SelectionMode="Single"
+                  CanUserReorderColumns="True"
+                  CanUserResizeColumns="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Timestamp" 
+                                    Binding="{Binding TimestampDisplay}"
+                                    Width="180"/>
+                <DataGridTextColumn Header="Level" 
+                                    Binding="{Binding LevelDisplay}"
+                                    Width="80"/>
+                <DataGridTextColumn Header="Message" 
+                                    Binding="{Binding Message}"
+                                    Width="*"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</UserControl>
+

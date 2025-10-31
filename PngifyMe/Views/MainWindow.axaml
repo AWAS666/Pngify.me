@@ -159,6 +159,16 @@
 					</TabItem.Header>
 					<views:CreditsAndInfo />
 				</TabItem>
+				<TabItem FontSize="12" Width="125">
+					<TabItem.Header>
+						<StackPanel Orientation="Horizontal" Spacing="5" HorizontalAlignment="Right">
+							<TextBlock VerticalAlignment="Center"  Text="Logs"/>
+							<lucideAvalonia:Lucide Icon="Logs" StrokeBrush="White"
+												   StrokeThickness="2" Width="22" Height="22"/>
+						</StackPanel>
+					</TabItem.Header>
+					<views:LogViewer />
+				</TabItem>
 			</TabControl>
 		</DockPanel>
 		<u:OverlayDialogHost/>
