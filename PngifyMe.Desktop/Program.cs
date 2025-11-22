@@ -82,6 +82,7 @@ class Program
     private static void TaskScheduler_UnobservedTaskException(object? sender, UnobservedTaskExceptionEventArgs e)
     {
         Log.Fatal($"Task error: {e.Exception.Message}");
+        e.SetObserved();
         RestartWithCrashWindow(e.Exception);
     }
     private static void UnhandledExcpection(object s, UnhandledExceptionEventArgs e)
