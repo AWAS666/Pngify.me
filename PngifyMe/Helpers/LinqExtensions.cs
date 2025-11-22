@@ -10,6 +10,7 @@ public static class LinqExtensions
 {
     private static readonly Random _rng = new Random();
 
+    [Obsolete]
     public static IEnumerable<T> Shuffle<T>(this IEnumerable<T> source)
     {
         if (source == null) throw new ArgumentNullException(nameof(source));

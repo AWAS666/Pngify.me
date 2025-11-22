@@ -1,10 +1,5 @@
-﻿using PngifyMe.Helpers;
-using PngifyMe.Layers.Helper;
-using PngifyMe.Layers.Movements;
-using PngifyMe.Services;
+﻿using PngifyMe.Layers.Helper;
 using PngifyMe.Services.CharacterSetup.Basic;
-using PngifyMe.Views.Avatar;
-using System;
 using System.Linq;
 
 namespace PngifyMe.Layers;
