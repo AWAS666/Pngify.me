@@ -4,10 +4,10 @@
 		<Nullable>enable</Nullable>
 		<LangVersion>latest</LangVersion>
 		<AvaloniaUseCompiledBindingsByDefault>True</AvaloniaUseCompiledBindingsByDefault>
-		<AssemblyVersion>2.4.1.0</AssemblyVersion>
+		<AssemblyVersion>2.5.0.0</AssemblyVersion>
 		<Version>$(VersionPrefix)</Version>
 		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-		<FileVersion>2.4.1.0</FileVersion>
+		<FileVersion>2.5.0.0</FileVersion>
 		<AssemblyName>PngifyMeCode</AssemblyName>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
