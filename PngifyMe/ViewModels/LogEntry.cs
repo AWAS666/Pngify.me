@@ -15,3 +15,4 @@ public class LogEntry
     public string TimestampDisplay => Timestamp.ToString("yyyy-MM-dd HH:mm:ss.fff");
 }
 
+
