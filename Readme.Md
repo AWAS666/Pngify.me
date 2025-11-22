@@ -14,12 +14,11 @@ Feel free to suggest features and submit code yourself
 - [ ] layers
 	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 - [ ] multi twitch account 
-- [x] crash splash screen?
-	- [x] link to discord or steam discussions
-	- [x] fatal errors show message that needs to be acknowledged
 - [ ] Common trigger setup -> here the same code is copied multiple times for now
 - [ ] headless mode which doesn't preview the model to save on resources
+	- [ ] render to obs via spout/web 
 - [ ] gpu for skiasharp to allow more complex image operations and keep everything more lightweight
+- [ ] full linux support (lf testers)
 
 ## Roadmap (future stuff)
 - [ ] collab feature like VTS has, invite your friends and see their PNG too
