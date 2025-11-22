@@ -14,6 +14,7 @@ using Serilog;
 using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace PngifyMe;
@@ -24,9 +25,13 @@ public partial class App : Application
     private SplashScreen _splashScreenWindow;
     private SplashScreenViewModel _splashVM;
 
+    public string[]? Args { get; private set; }
+
     public override void Initialize()
     {
         AvaloniaXamlLoader.Load(this);
+        if (ApplicationLifetime is IClassicDesktopStyleApplicationLifetime desktop)
+            Args = desktop.Args; // Copy here while lifetime is available
     }
 
     public override async void OnFrameworkInitializationCompleted()
@@ -51,7 +56,7 @@ public partial class App : Application
             //await CompleteApplicationStart();
         }
         base.OnFrameworkInitializationCompleted();
-    }      
+    }
 
     public async Task CompleteApplicationStart()
     {
@@ -73,7 +78,7 @@ public partial class App : Application
             {
                 watch.Restart();
                 _mainWindow = new MainWindow();
-                HotkeyManager.Start(desktop);
+                HotkeyManager.Start(desktop, Args?.Any(x => x.Contains("--hotkeydebug")));
                 Log.Debug($"HotkeyManager started in {watch.ElapsedMilliseconds}ms");
 
                 if (SettingsManager.Current.Twitch.Enabled == true)

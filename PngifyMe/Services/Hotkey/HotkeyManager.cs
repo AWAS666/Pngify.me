@@ -1,4 +1,5 @@
 ﻿using Avalonia.Layout;
+using Serilog;
 using SharpHook;
 using SharpHook.Data;
 using SharpHook.Native;
@@ -7,6 +8,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Runtime.CompilerServices;
 
 namespace PngifyMe.Services.Hotkey;
 public static class HotkeyManager
@@ -17,12 +19,13 @@ public static class HotkeyManager
     private static new Dictionary<(KeyCode, EventMask), List<Action>> callBacks = new();
 
     public static bool Started { get; private set; }
+    public static bool DebugMode { get; private set; }
 
     /// <summary>
     /// https://sharphook.tolik.io/v5.3.7/articles/keycodes.html these need to match
     /// </summary>
     /// <param name="desktop"></param>
-    public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop)
+    public static void Start(Avalonia.Controls.ApplicationLifetimes.IClassicDesktopStyleApplicationLifetime desktop, bool? debug)
     {
 #if DEBUG 
         Hook = new SimpleGlobalHook(GlobalHookType.Keyboard);
@@ -32,12 +35,15 @@ public static class HotkeyManager
         Hook.KeyPressed += OnKeyPressed;
         desktop.Exit += Desktop_Exit;
         Started = true;
+        DebugMode = debug == true;
         Hook.RunAsync();
     }
 
     private static void OnKeyPressed(object? sender, KeyboardHookEventArgs e)
     {
         Debug.WriteLine($"HotKey Pressed: Time = {e.RawEvent.Time}, Key = {e.RawEvent.Keyboard}, Modifiers = {e.RawEvent.Mask}");
+        if (DebugMode)
+            Log.Debug($"HotKey Pressed: Time = {e.RawEvent.Time}, Key = {e.RawEvent.Keyboard}, Modifiers = {e.RawEvent.Mask}");
         EventMask mask = (EventMask)(e.RawEvent.Mask - EventMask.NumLock);
         if (callBacks.TryGetValue((e.RawEvent.Keyboard.KeyCode, mask), out var actions))
         {
