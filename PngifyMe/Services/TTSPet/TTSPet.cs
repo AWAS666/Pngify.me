@@ -28,13 +28,20 @@ namespace PngifyMe.Services.TTSPet
 
         static TTSPet()
         {
-            TwitchEventSocket.BitsUsed += BitsUsed;
-            TwitchEventSocket.RedeemFull += RedeemUsed;
-            TwitchEventSocket.NewFollower += NewFollower;
-            TwitchEventSocket.NewChat += NewChat;
-            SetupTTS();
-            settings = SettingsManager.Current.LLM;
-            task = Task.Run(ProcessQueue);
+            try
+            {
+                TwitchEventSocket.BitsUsed += BitsUsed;
+                TwitchEventSocket.RedeemFull += RedeemUsed;
+                TwitchEventSocket.NewFollower += NewFollower;
+                TwitchEventSocket.NewChat += NewChat;
+                SetupTTS();
+                settings = SettingsManager.Current.LLM;
+                task = Task.Run(ProcessQueue);
+            }
+            catch (Exception e)
+            {
+                Log.Fatal(e, "Failed to initialize TTSPet: " + e.Message);
+            }
         }
 
 
