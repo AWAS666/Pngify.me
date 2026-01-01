@@ -1,4 +1,5 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Services.Helpers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.Twitch;
@@ -12,7 +13,7 @@ using System.Text.Json.Serialization;
 namespace PngifyMe.Services.CharacterSetup.Advanced;
 public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 {
-    private List<Action> callbacks = new();
+    private TriggerRegistrationHelper triggerHelper = new();
 
     [ObservableProperty]
     private List<SpriteImage> spriteImages;
@@ -61,73 +62,16 @@ public partial class SpriteCharacterSettings : ObservableObject, IAvatarSettings
 
     public void SetupTriggers()
     {
-        CleanUp();
-        foreach (var item in States)
+        triggerHelper.Cleanup();
+        triggerHelper.RegisterTriggers(States, item => () =>
         {
-            var callback = () =>
-            {
-                ActivateState = item;
-            };
-            item.Trigger.Callback = callback;
-            switch (item.Trigger)
-            {
-                case HotkeyTrigger hotKey:
-                    HotkeyManager.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
-                    callbacks.Add(callback);
-                    break;
-                case TwitchRedeem redeem:
-                    TwitchEventSocket.RedeemUsed += redeem.Triggered;
-                    break;
-                case TwitchBits bits:
-                    TwitchEventSocket.BitsUsed += bits.Triggered;
-                    break;
-                case TwitchSub subs:
-                    TwitchEventSocket.AnySub += subs.Triggered;
-                    break;
-                case TwitchTextCommand command:
-                    TwitchEventSocket.NewChat += command.Triggered;
-                    break;
-                case TwitchRaid raid:
-                    TwitchEventSocket.Raid += raid.Triggered;
-                    break;
-                case TwitchFollow follow:
-                    TwitchEventSocket.NewFollower += follow.Triggered;
-                    break;
-                default:
-                    break;
-            }
-        }
+            ActivateState = item;
+        });
     }
 
     private void CleanUp()
     {
-        HotkeyManager.RemoveCallbacks(callbacks);
-        callbacks.Clear();
-
-        foreach (var item in States)
-        {
-            switch (item.Trigger)
-            {
-                case TwitchRedeem redeem:
-                    TwitchEventSocket.RedeemUsed -= redeem.Triggered;
-                    break;
-                case TwitchBits bits:
-                    TwitchEventSocket.BitsUsed -= bits.Triggered;
-                    break;
-                case TwitchSub subs:
-                    TwitchEventSocket.AnySub -= subs.Triggered;
-                    break;
-                case TwitchTextCommand command:
-                    TwitchEventSocket.NewChat -= command.Triggered;
-                    break;
-                case TwitchRaid raid:
-                    TwitchEventSocket.Raid -= raid.Triggered;
-                    break;
-                case TwitchFollow follow:
-                    TwitchEventSocket.NewFollower -= follow.Triggered;
-                    break;
-            }
-        }
+        triggerHelper.Cleanup();
     }
 
 

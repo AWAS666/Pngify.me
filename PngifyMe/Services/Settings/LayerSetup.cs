@@ -1,5 +1,6 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
+using PngifyMe.Services.Helpers;
 using PngifyMe.Services.Hotkey;
 using PngifyMe.Services.Twitch;
 using SharpHook.Data;
@@ -12,7 +13,7 @@ namespace PngifyMe.Services.Settings;
 
 public partial class LayerSetup : ObservableObject
 {
-    private List<Action> callbacks = new();
+    private TriggerRegistrationHelper triggerHelper = new();
 
     [ObservableProperty]
     private bool showFPS = false;
@@ -35,79 +36,24 @@ public partial class LayerSetup : ObservableObject
 
     public void ApplySettings()
     {
-        CleanUp();
+        triggerHelper.Cleanup();
         LayerManager.Layers.Clear();
         foreach (var item in Layers)
         {
-            item.Trigger.Callback = item.AddLayers;
-            switch (item.Trigger)
+            if (item.Trigger is AlwaysActive)
             {
-                case AlwaysActive:
-                    item.AddLayers();
-                    break;
-                case HotkeyTrigger hotKey:
-                    var callback = () => item.AddLayers();
-                    HotkeyManager.AddHotkey(hotKey.VirtualKeyCode, hotKey.Modifiers, callback);
-                    callbacks.Add(callback);
-                    break;
-                case TwitchRedeem redeem:
-                    TwitchEventSocket.RedeemUsed += redeem.Triggered;
-                    break;
-                case TwitchBits bits:
-                    TwitchEventSocket.BitsUsed += bits.Triggered;
-                    break;
-                case TwitchSub subs:
-                    TwitchEventSocket.AnySub += subs.Triggered;
-                    break;
-                case TwitchTextCommand command:
-                    TwitchEventSocket.NewChat += command.Triggered;
-                    break;
-                case TwitchRaid raid:
-                    TwitchEventSocket.Raid += raid.Triggered;
-                    break;
-                case TwitchFollow follow:
-                    TwitchEventSocket.NewFollower += follow.Triggered;
-                    break;
-                default:
-                    break;
+                item.AddLayers();
+            }
+            else
+            {
+                triggerHelper.RegisterTrigger(item.Trigger, item.AddLayers);
             }
         }
     }
 
     public void CleanUp()
     {
-        HotkeyManager.RemoveCallbacks(callbacks);
-        callbacks.Clear();
-
-        foreach (var item in Layers.Where(x => x.Trigger is TwitchRedeem))
-        {
-            TwitchEventSocket.RedeemUsed -= ((TwitchRedeem)item.Trigger).Triggered;
-        }
-
-        foreach (var item in Layers.Where(x => x.Trigger is TwitchBits))
-        {
-            TwitchEventSocket.BitsUsed -= ((TwitchBits)item.Trigger).Triggered;
-        }
-
-        foreach (var item in Layers.Where(x => x.Trigger is TwitchSub))
-        {
-            TwitchEventSocket.AnySub -= ((TwitchSub)item.Trigger).Triggered;
-        }
-
-        foreach (var item in Layers.Where(x => x.Trigger is TwitchTextCommand))
-        {
-            TwitchEventSocket.NewChat -= ((TwitchTextCommand)item.Trigger).Triggered;
-        }
-
-        foreach (var item in Layers.Where(x => x.Trigger is TwitchRaid))
-        {
-            TwitchEventSocket.Raid -= ((TwitchRaid)item.Trigger).Triggered;
-        }
-
-        foreach (var item in Layers.Where(x => x.Trigger is TwitchFollow))
-        {
-            TwitchEventSocket.NewFollower -= ((TwitchFollow)item.Trigger).Triggered;
-        }
+        triggerHelper.Cleanup();
     }
 }
 
@@ -136,28 +82,6 @@ public class Layersetting
 
     public void Cleanup()
     {
-        switch (Trigger)
-        {
-            case TwitchRedeem redeem:
-                TwitchEventSocket.RedeemUsed -= redeem.Triggered;
-                break;
-            case TwitchBits redeem:
-                TwitchEventSocket.BitsUsed -= redeem.Triggered;
-                break;
-            case TwitchSub sub:
-                TwitchEventSocket.AnySub -= sub.Triggered;
-                break;
-            case TwitchTextCommand command:
-                TwitchEventSocket.NewChat -= command.Triggered;
-                break;
-            case TwitchRaid raid:
-                TwitchEventSocket.Raid -= raid.Triggered;
-                break;
-            case TwitchFollow follow:
-                TwitchEventSocket.NewFollower -= follow.Triggered;
-                break;
-            default:
-                break;
-        }
+        TriggerRegistrationHelper.UnregisterSingleTrigger(Trigger);
     }
 }
