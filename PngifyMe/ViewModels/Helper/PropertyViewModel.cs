@@ -1,6 +1,8 @@
 ﻿using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace PngifyMe.ViewModels.Helper
 {
@@ -23,6 +25,15 @@ namespace PngifyMe.ViewModels.Helper
 
         [ObservableProperty]
         private bool folderPicker;
+
+        [ObservableProperty]
+        private bool isEnum;
+
+        [ObservableProperty]
+        private Type enumType;
+
+        [ObservableProperty]
+        private ObservableCollection<string> enumValues;
 
         public bool Picker => FilePicker || FolderPicker;
 

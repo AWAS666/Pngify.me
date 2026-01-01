@@ -18,7 +18,7 @@
 	
 	<StackPanel Orientation="Horizontal" Margin="5" Spacing="3">
 		<TextBlock VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
-		<ContentControl Content="{Binding Value}" Width="100" VerticalAlignment="Center">
+		<ContentControl Content="{Binding Value}" Width="100" VerticalAlignment="Center" IsVisible="{Binding !IsEnum}">
 			<ContentControl.DataTemplates>
 				<DataTemplate DataType="{x:Type x:String}">
 					<TextBox Text="{Binding $parent[UserControl].((vm:PropertyViewModel)DataContext).Value}"/>
@@ -28,6 +28,10 @@
 				</DataTemplate>
 			</ContentControl.DataTemplates>
 		</ContentControl>
+		<ComboBox Width="100" VerticalAlignment="Center" 
+				  IsVisible="{Binding IsEnum}"
+				  ItemsSource="{Binding EnumValues}"
+				  SelectedItem="{Binding Value, Mode=TwoWay}"/>
 		<TextBlock IsVisible="{Binding !Picker}" VerticalAlignment="Center" Text="{Binding Unit}" Width="100"/>
 		<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 				IsVisible="{Binding FilePicker}" Click="SelectFile" Content="{x:Static lang:Resources.PickFile}"></Button>

@@ -59,6 +59,23 @@ namespace PngifyMe.ViewModels.Helper
                 var folder = prop.GetCustomAttribute<FolderPickerAttribute>();
                 propertyViewModel.FolderPicker = folder != null;
 
+                if (prop.PropertyType.IsEnum)
+                {
+                    propertyViewModel.IsEnum = true;
+                    propertyViewModel.EnumType = prop.PropertyType;
+                    var enumValues = Enum.GetValues(prop.PropertyType);
+                    propertyViewModel.EnumValues = new ObservableCollection<string>();
+                    foreach (var enumValue in enumValues)
+                    {
+                        propertyViewModel.EnumValues.Add(enumValue.ToString());
+                    }
+                    var currentValue = prop.GetValue(LayerModel);
+                    if (currentValue != null)
+                    {
+                        propertyViewModel.Value = currentValue.ToString();
+                    }
+                }
+
                 PropertyList.Add(propertyViewModel);
             }
         }
@@ -73,7 +90,15 @@ namespace PngifyMe.ViewModels.Helper
                 {
                     try
                     {
-                        var convertedValue = Convert.ChangeType(propertyViewModel.Value, prop.PropertyType);
+                        object convertedValue;
+                        if (prop.PropertyType.IsEnum && propertyViewModel.Value is string enumString)
+                        {
+                            convertedValue = Enum.Parse(prop.PropertyType, enumString);
+                        }
+                        else
+                        {
+                            convertedValue = Convert.ChangeType(propertyViewModel.Value, prop.PropertyType);
+                        }
                         prop.SetValue(LayerModel, convertedValue);
                     }
                     catch (Exception e)

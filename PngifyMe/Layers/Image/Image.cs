@@ -1,4 +1,5 @@
 ﻿using PngifyMe.Layers.Helper;
+using PngifyMe.Services;
 using PngifyMe.Services.CharacterSetup.Images;
 using Semi.Avalonia.Tokens.Palette;
 using Serilog;
@@ -7,6 +8,15 @@ using System;
 using System.IO;
 
 namespace PngifyMe.Layers.Image;
+
+public enum TransitionType
+{
+    FadeInOut,
+    FadeIn,
+    FadeOut,
+    MoveX,
+    MoveY,
+}
 
 [LayerDescription("PinImageToModel")]
 public class Image : ImageLayer
@@ -27,6 +37,9 @@ public class Image : ImageLayer
     [Unit("seconds")]
     public float TransitionTime { get; set; } = 0.0f;
 
+    [Enum]
+    public TransitionType TransitionType { get; set; } = TransitionType.FadeInOut;
+
     private BaseImage image;
 
     public override void OnEnter()
@@ -39,7 +52,9 @@ public class Image : ImageLayer
         }
 
         AutoRemoveTime = StickyFor;
-        ExitTime = TransitionTime;
+        // do not set this for just fade in, else image will stick for transition time
+        if (TransitionType != TransitionType.FadeIn)
+            ExitTime = TransitionTime;
         image = BaseImage.LoadFromPath(FilePath);
         base.OnEnter();
     }
@@ -60,21 +75,96 @@ public class Image : ImageLayer
         if (image == null)
             return;
 
-        float opacity;
-        if (IsExiting)
+        var img = GetImage();
+
+        if (TransitionTime == 0f)
         {
-            opacity = TransitionTime == 0f ? 0f : 1 - CurrentExitingTime / TransitionTime;
+            canvas.DrawBitmap(img, PosX - img.Width / 2, PosY - img.Height / 2);
+            return;
         }
-        else
+
+        float opacity = 1.0f;
+        float renderX = PosX;
+        float renderY = PosY;
+
+        switch (TransitionType)
         {
-            opacity = TransitionTime == 0f ? 1f : CurrentTime / TransitionTime;
-            opacity = MathF.Min(opacity, 1f);
+            case TransitionType.FadeInOut:
+                if (IsExiting)
+                {
+                    opacity = 1 - CurrentExitingTime / TransitionTime;
+                }
+                else
+                {
+                    opacity = CurrentTime / TransitionTime;
+                    opacity = MathF.Min(opacity, 1f);
+                }
+                break;
+
+            case TransitionType.FadeIn:
+                if (IsExiting)
+                {
+                    opacity = 1.0f;
+                }
+                else
+                {
+                    opacity = CurrentTime / TransitionTime;
+                    opacity = MathF.Min(opacity, 1f);
+                }
+                break;
+
+            case TransitionType.FadeOut:
+                if (IsExiting)
+                {
+                    opacity = 1 - CurrentExitingTime / TransitionTime;
+                }
+                else
+                {
+                    opacity = 1.0f;
+                }
+                break;
+
+            case TransitionType.MoveX:
+                var canvasWidth = Specsmanager.Width;
+                var startX = -img.Width / 2;
+                var endX = canvasWidth + img.Width / 2;
+
+                if (IsExiting)
+                {
+                    var exitProgress = CurrentExitingTime / TransitionTime;
+                    exitProgress = MathF.Min(exitProgress, 1f);
+                    renderX = PosX + (endX - PosX) * exitProgress;
+                }
+                else
+                {
+                    var enterProgress = CurrentTime / TransitionTime;
+                    enterProgress = MathF.Min(enterProgress, 1f);
+                    renderX = startX + (PosX - startX) * enterProgress;
+                }
+                break;
+
+            case TransitionType.MoveY:
+                var canvasHeight = Specsmanager.Height;
+                var startY = -img.Height / 2;
+                var endY = canvasHeight + img.Height / 2;
+
+                if (IsExiting)
+                {
+                    var exitProgress = CurrentExitingTime / TransitionTime;
+                    exitProgress = MathF.Min(exitProgress, 1f);
+                    renderY = PosY + (endY - PosY) * exitProgress;
+                }
+                else
+                {
+                    var enterProgress = CurrentTime / TransitionTime;
+                    enterProgress = MathF.Min(enterProgress, 1f);
+                    renderY = startY + (PosY - startY) * enterProgress;
+                }
+                break;
         }
 
         using var paint = new SKPaint { Color = SKColors.White.WithAlpha((byte)(opacity * 255)) };
-
-        var img = GetImage();
-        canvas.DrawBitmap(img, PosX - img.Width / 2, PosY - img.Height / 2, paint);
+        canvas.DrawBitmap(img, renderX - img.Width / 2, renderY - img.Height / 2, paint);
     }
 
     public SKBitmap GetImage()
