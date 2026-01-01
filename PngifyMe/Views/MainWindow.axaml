@@ -29,7 +29,7 @@
 		</views:AvatarView>
 		<DockPanel x:Name="settings" 
 				   Background="#DD000080"
-			  HorizontalAlignment="Right" Width="700">
+			  HorizontalAlignment="Right" Width="750">
 			<Grid DockPanel.Dock="Top" >
 
 				<vmh:ModeSelect></vmh:ModeSelect>

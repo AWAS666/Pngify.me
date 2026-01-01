@@ -88,17 +88,16 @@
 									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default" VerticalAlignment="Center"/>
 									<CheckBox ToolTip.Tip="{x:Static lang:Resources.ToggleAvatarToolTip}"
 										IsChecked="{Binding ToggleAble, Mode=TwoWay}" VerticalAlignment="Center" Content="ToggleAble"/>
-
-								</StackPanel>
-								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
 									<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 										Click="ShowTransition"
 										Content="{x:Static lang:Resources.Transitions}"/>
-									<TextBox Name="Hotkeybox"
-											 Text="{Binding Hotkey}"
-											 Margin="15,0,0,0" Watermark="Hotkey" Width="150"
-											 KeyDown="HotkeyDown">
-									</TextBox>
+								</StackPanel>								
+								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">	
+									<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.Trigger}"/>
+									<ComboBox VerticalAlignment="Center" ItemsSource="{Binding State.AvailableTriggers}"
+											  SelectedItem="{Binding State.SelectedTriggerType}"
+											  DisplayMemberBinding="{Binding DisplayName}"/>
+									<helper:TriggerView DataContext="{Binding State.TriggerVm}"/>
 								</StackPanel>
 
 								<Grid ColumnDefinitions="100,160,100,160">

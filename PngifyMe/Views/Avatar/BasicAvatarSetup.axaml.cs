@@ -61,10 +61,4 @@ public partial class BasicAvatarSetup : UserControl
         };
         await Drawer.ShowCustomModal<TransitionView, BasicStateViewModel, object?>(vm, "LocalHost", options);
     }
-
-    private void HotkeyDown(object sender, KeyEventArgs e)
-    {
-        var vm = ((TextBox)sender).DataContext as BasicStateViewModel;
-        vm.OnKeyDown(e);
-    }
 }

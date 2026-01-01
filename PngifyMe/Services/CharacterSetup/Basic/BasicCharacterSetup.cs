@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using PngifyMe.Services.CharacterSetup.Images;
+using PngifyMe.Services.Helpers;
 using PngifyMe.Services.Hotkey;
 using SkiaSharp;
 using System;
@@ -26,7 +27,7 @@ public class BasicCharacterSetup : ICharacterSetup
 
     private double transTime;
     private bool blinking;
-    private List<Action> callbacks = new();
+    private TriggerRegistrationHelper triggerHelper = new();
     public BaseImage CurrentImage { get; private set; }
 
     public double? BlendTime { get; private set; }
@@ -77,16 +78,8 @@ public class BasicCharacterSetup : ICharacterSetup
 
     public void SetupHotKeys()
     {
-        HotkeyManager.RemoveCallbacks(callbacks);
-        callbacks.Clear();
-        foreach (var state in settings.States)
-        {
-            if (state.Trigger == null)
-                continue;
-            var callback = () => ToggleState(state);
-            HotkeyManager.AddHotkey(state.Trigger.VirtualKeyCode, state.Trigger.Modifiers, callback);
-            callbacks.Add(callback);
-        }
+        triggerHelper.Cleanup();
+        triggerHelper.RegisterTriggers(settings.States, state => () => ToggleState(state));
         // also reloads current just in case
         SwitchState(CurrentState, reload: true);
     }
