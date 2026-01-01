@@ -5,6 +5,7 @@ using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels;
 using PngifyMe.ViewModels.Helper;
 using System.Linq;
+using System.Net;
 
 namespace PngifyMe.Views;
 
@@ -85,7 +86,7 @@ public partial class ProfileSetup : UserControl
 
         if (path == null) return;
 
-        await SettingsManager.Current.Profile.ExportProfile(vmS.Profile, path.Path.AbsolutePath);
+        await SettingsManager.Current.Profile.ExportProfile(vmS.Profile, WebUtility.UrlDecode(path.Path?.AbsolutePath));
     }
 
     public async void Import(object sender, RoutedEventArgs e)
@@ -103,7 +104,7 @@ public partial class ProfileSetup : UserControl
 
         foreach (var item in path)
         {
-            var prof = await SettingsManager.Current.Profile.ImportProfile(item.Path.AbsolutePath);
+            var prof = await SettingsManager.Current.Profile.ImportProfile(WebUtility.UrlDecode(item.Path?.AbsolutePath));
             vm.Profiles.Add(new ProfileViewModel(prof));
         }
     }
