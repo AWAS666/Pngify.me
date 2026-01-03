@@ -16,6 +16,8 @@ public enum TransitionType
     FadeOut,
     MoveX,
     MoveY,
+    MoveXMirror,
+    MoveYMirror
 }
 
 [LayerDescription("PinImageToModel")]
@@ -125,6 +127,7 @@ public class Image : ImageLayer
                 break;
 
             case TransitionType.MoveX:
+            case TransitionType.MoveXMirror:
                 var canvasWidth = Specsmanager.Width;
                 var startX = -img.Width / 2;
                 var endX = canvasWidth + img.Width / 2;
@@ -133,7 +136,10 @@ public class Image : ImageLayer
                 {
                     var exitProgress = CurrentExitingTime / TransitionTime;
                     exitProgress = MathF.Min(exitProgress, 1f);
-                    renderX = PosX + (endX - PosX) * exitProgress;
+                    if (TransitionType == TransitionType.MoveX)
+                        renderX = PosX + (endX - PosX) * exitProgress;
+                    else
+                        renderX = PosX - (endX - PosX) * exitProgress;
                 }
                 else
                 {
@@ -144,6 +150,7 @@ public class Image : ImageLayer
                 break;
 
             case TransitionType.MoveY:
+            case TransitionType.MoveYMirror:
                 var canvasHeight = Specsmanager.Height;
                 var startY = -img.Height / 2;
                 var endY = canvasHeight + img.Height / 2;
@@ -152,7 +159,10 @@ public class Image : ImageLayer
                 {
                     var exitProgress = CurrentExitingTime / TransitionTime;
                     exitProgress = MathF.Min(exitProgress, 1f);
-                    renderY = PosY + (endY - PosY) * exitProgress;
+                    if (TransitionType == TransitionType.MoveY)
+                        renderY = PosY + (endY - PosY) * exitProgress;
+                    else
+                        renderY = PosY - (endY - PosY) * exitProgress;
                 }
                 else
                 {
