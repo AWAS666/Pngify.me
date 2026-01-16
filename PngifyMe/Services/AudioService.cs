@@ -45,8 +45,10 @@ public static class AudioService
     {
         try
         {
+            //https://lsxprime.github.io/soundflow-docs/#/docs/1.4.0/utilities-and-debugging
+            SoundFlow.Utils.Log.OnLog += Log_OnLog;
             engine = new MiniAudioEngine();
-            engine.UpdateDevicesInfo();
+            engine.UpdateAudioDevicesInfo();
 
             InputDevices = GetAllInDevices();
             OutputDevices = GetAllOutDevices();
@@ -61,8 +63,32 @@ public static class AudioService
         }
         catch (Exception e)
         {
-
             Log.Fatal(e, $"Error in AudioService init: {e.Message}");
+        }
+    }
+
+    private static void Log_OnLog(SoundFlow.Utils.LogEntry entry)
+    {
+        switch (entry.Level)
+        {
+            case SoundFlow.Utils.LogLevel.Debug:
+                Log.Debug($"SoundFlow:{entry.Message}");
+                break;
+            case SoundFlow.Utils.LogLevel.Info:
+                Log.Information($"SoundFlow:{entry.Message}");
+                break;
+            case SoundFlow.Utils.LogLevel.Warning:
+                Log.Warning($"SoundFlow:{entry.Message}");
+                break;
+            case SoundFlow.Utils.LogLevel.Error:
+                Log.Error($"SoundFlow:{entry.Message}");
+                break;
+            case SoundFlow.Utils.LogLevel.Critical:
+                Log.Fatal($"SoundFlow:{entry.Message}");
+                break;
+            default:
+                Log.Fatal($"SoundFlow(unknown level):{entry.Message}");
+                break;
         }
     }
 
@@ -83,6 +109,7 @@ public static class AudioService
         {
             outDevice = engine.PlaybackDevices.ElementAtOrDefault(Settings.DeviceOut);
         }
+        Log.Debug($"Initializing output device: {outDevice.Name}");
         playbackDevice = engine.InitializePlaybackDevice(outDevice, format);
         playbackDevice.Start();
     }
@@ -198,7 +225,7 @@ public static class AudioService
             {
                 await Task.Delay(10);
             }
-            playbackDevice.MasterMixer.RemoveComponent(player); 
+            playbackDevice.MasterMixer.RemoveComponent(player);
             player.Dispose();
         }
         catch (Exception e)
