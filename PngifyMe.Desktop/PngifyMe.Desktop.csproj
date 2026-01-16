@@ -30,4 +30,24 @@
   <ItemGroup>
     <ProjectReference Include="..\PngifyMe\PngifyMe.csproj" />
   </ItemGroup>
+
+  <Target Name="CleanupNativeLibrariesAfterPublish" AfterTargets="Publish" Condition="'$(PublishDir)' != ''">
+    <PropertyGroup>
+      <!-- Determine RID from PublishDir or RuntimeIdentifier -->
+      <_DetectedRID>$(RuntimeIdentifier)</_DetectedRID>
+      <_DetectedRID Condition="'$(_DetectedRID)' == '' AND '$(PublishDir)' != '' AND $([System.String]::Copy('$(PublishDir)').Contains('win-x64'))">win-x64</_DetectedRID>
+      <_DetectedRID Condition="'$(_DetectedRID)' == '' AND '$(PublishDir)' != '' AND $([System.String]::Copy('$(PublishDir)').Contains('linux-x64'))">linux-x64</_DetectedRID>
+      <_DetectedRID Condition="'$(_DetectedRID)' == '' AND '$(PublishDir)' != '' AND $([System.String]::Copy('$(PublishDir)').Contains('osx-arm64'))">osx-arm64</_DetectedRID>
+      <_DetectedRID Condition="'$(_DetectedRID)' == '' AND '$(PublishDir)' != '' AND $([System.String]::Copy('$(PublishDir)').Contains('osx-x64'))">osx-x64</_DetectedRID>
+    </PropertyGroup>
+    
+    <!-- Delete the wrong file based on RID -->
+    <Delete Files="$(PublishDir)libsteam_api.so" Condition="'$(_DetectedRID)' == 'win-x64' AND Exists('$(PublishDir)libsteam_api.so')" />
+    <Delete Files="$(PublishDir)steam_api64.dll" Condition="'$(_DetectedRID)' == 'linux-x64' AND Exists('$(PublishDir)steam_api64.dll')" />
+    <Delete Files="$(PublishDir)steam_api64.dll" Condition="('$(_DetectedRID)' == 'osx-arm64' OR '$(_DetectedRID)' == 'osx-x64') AND Exists('$(PublishDir)steam_api64.dll')" />
+    <Delete Files="$(PublishDir)libsteam_api.so" Condition="('$(_DetectedRID)' == 'osx-arm64' OR '$(_DetectedRID)' == 'osx-x64') AND Exists('$(PublishDir)libsteam_api.so')" />
+    
+    <Message Importance="High" Text="Cleaned up native libraries for RID '$(_DetectedRID)' in '$(PublishDir)'" Condition="'$(_DetectedRID)' != ''" />
+  </Target>
+
 </Project>
