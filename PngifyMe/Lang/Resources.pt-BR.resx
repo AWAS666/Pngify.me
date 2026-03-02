@@ -855,4 +855,7 @@
   <data name="DeleteTwitchAuthToolTip" xml:space="preserve">
     <value>Redefine a autenticação com o Twitch</value>
   </data>
+  <data name="BackToDefault" xml:space="preserve">
+    <value>Retornar ao tempo padrão (s):</value>
+  </data>
 </root>

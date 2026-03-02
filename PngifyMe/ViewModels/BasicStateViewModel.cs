@@ -33,6 +33,17 @@ namespace PngifyMe.ViewModels
             }
         }
 
+        private double backToDefault;
+
+        public double BackToDefault
+        {
+            get => backToDefault; set
+            {
+                SetProperty(ref backToDefault, value);
+                state.BackToDefault = value;
+            }
+        }
+
         private float entryTime;
 
         public float EntryTime
@@ -72,6 +83,7 @@ namespace PngifyMe.ViewModels
             this.parent = parent;
             Name = state.Name;
             DefaultState = state.Default;
+            BackToDefault = state.BackToDefault;
 
             EntryTime = state.EntryTime;
             ExitTime = state.ExitTime;

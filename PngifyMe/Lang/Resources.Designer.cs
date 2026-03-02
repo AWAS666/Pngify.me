@@ -19,7 +19,7 @@ namespace PngifyMe.Lang {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     public class Resources {
@@ -232,6 +232,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Return to Default time (s):.
+        /// </summary>
+        public static string BackToDefault {
+            get {
+                return ResourceManager.GetString("BackToDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Basic Avatar State Setup.
         /// </summary>
         public static string BasicAvatarSetup {
@@ -367,6 +376,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Chromatic aberration.
+        /// </summary>
+        public static string ChromaticAberration {
+            get {
+                return ResourceManager.GetString("ChromaticAberration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Clear.
         /// </summary>
         public static string Clear {
@@ -399,6 +417,15 @@ namespace PngifyMe.Lang {
         public static string CollissionSpeedDrop {
             get {
                 return ResourceManager.GetString("CollissionSpeedDrop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Color shift.
+        /// </summary>
+        public static string ColorShift {
+            get {
+                return ResourceManager.GetString("ColorShift", resourceCulture);
             }
         }
         

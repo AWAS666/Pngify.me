@@ -13,6 +13,11 @@ public partial class CharacterState : ObservableObject
 {
     public string Name { get; set; }
     public bool Default { get; set; }
+
+    /// <summary>
+    /// auto transitions back to default after x time
+    /// </summary>
+    public double BackToDefault { get; set; } = 0;
     public ImageSetting Open { get; set; } = new();
     public ImageSetting OpenBlink { get; set; } = new();
     public ImageSetting Closed { get; set; } = new();

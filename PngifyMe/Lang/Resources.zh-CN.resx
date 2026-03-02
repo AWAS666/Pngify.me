@@ -855,4 +855,7 @@
   <data name="DeleteTwitchAuthToolTip" xml:space="preserve">
     <value>重置与 Twitch 的认证</value>
   </data>
+  <data name="BackToDefault" xml:space="preserve">
+    <value>返回默认时间（秒）：</value>
+  </data>
 </root>

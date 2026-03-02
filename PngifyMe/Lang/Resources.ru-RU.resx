@@ -855,4 +855,7 @@
   <data name="DeleteTwitchAuthToolTip" xml:space="preserve">
     <value>Сбрасывает аутентификацию с Twitch</value>
   </data>
+  <data name="BackToDefault" xml:space="preserve">
+    <value>Возврат к значению по умолчанию через (с):</value>
+  </data>
 </root>

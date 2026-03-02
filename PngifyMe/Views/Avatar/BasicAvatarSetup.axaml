@@ -1,8 +1,8 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="600" d:DesignHeight="1200"
 			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
 			 xmlns:vmh="clr-namespace:PngifyMe.ViewModels.Helper"
@@ -11,7 +11,7 @@
 			 xmlns:u="https://irihi.tech/ursa"
 			 xmlns:lang="clr-namespace:PngifyMe.Lang"
 			 x:DataType="vm:BasicSetupViewModel"
-             x:Class="PngifyMe.Views.Avatar.BasicAvatarSetup"
+			 x:Class="PngifyMe.Views.Avatar.BasicAvatarSetup"
 			 xmlns:siv="https://github.com/kekyo/SkiaImageView"
 			 >
 	<Design.DataContext>
@@ -28,7 +28,7 @@
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding Add}">
 					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
-												   StrokeThickness="2" Width="18" Height="18"/>
+										   StrokeThickness="2" Width="18" Height="18"/>
 				</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						Command="{Binding Apply}" Content="{x:Static lang:Resources.ApplyAndSave}" />
@@ -71,33 +71,37 @@
 								<StackPanel Orientation="Horizontal" Spacing="5">
 									<TextBox Watermark="{x:Static lang:Resources.Name}" Width="150" Text="{Binding State.Name}"></TextBox>
 									<Button
-										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).Remove}"
-										CommandParameter="{Binding}"
-										Margin="5,0,0,0" HorizontalAlignment="Left">
+									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).Remove}"
+									CommandParameter="{Binding}"
+									Margin="5,0,0,0" HorizontalAlignment="Left">
 										<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
-												   StrokeThickness="2" Width="18" Height="18"/>
+															   StrokeThickness="2" Width="18" Height="18"/>
 									</Button>
 
 									<Button
-										Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).SwitchState}"
-										CommandParameter="{Binding}"
-										Margin="5,0,0,0" HorizontalAlignment="Left"
-										Content="{x:Static lang:Resources.Activate}" />
+									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+									Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).SwitchState}"
+									CommandParameter="{Binding}"
+									Margin="5,0,0,0" HorizontalAlignment="Left"
+									Content="{x:Static lang:Resources.Activate}" />
 									<CheckBox IsChecked="{Binding DefaultState, Mode=TwoWay}" Click="CheckChanged" Content="Default" VerticalAlignment="Center"/>
 									<CheckBox ToolTip.Tip="{x:Static lang:Resources.ToggleAvatarToolTip}"
-										IsChecked="{Binding ToggleAble, Mode=TwoWay}" VerticalAlignment="Center" Content="ToggleAble"/>
+											  IsChecked="{Binding ToggleAble, Mode=TwoWay}" VerticalAlignment="Center" Content="ToggleAble"/>
 									<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-										Click="ShowTransition"
-										Content="{x:Static lang:Resources.Transitions}"/>
-								</StackPanel>								
-								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">	
+											Click="ShowTransition"
+											Content="{x:Static lang:Resources.Transitions}"/>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="5" >
 									<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.Trigger}"/>
 									<ComboBox VerticalAlignment="Center" ItemsSource="{Binding State.AvailableTriggers}"
 											  SelectedItem="{Binding State.SelectedTriggerType}"
 											  DisplayMemberBinding="{Binding DisplayName}"/>
 									<helper:TriggerView DataContext="{Binding State.TriggerVm}"/>
+								</StackPanel>
+								<StackPanel Orientation="Horizontal" Spacing="5" Margin="0,0,0,25">
+									<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.BackToDefault}"/>
+									<NumericUpDown IsEnabled="{Binding !DefaultState}" Minimum="0" Maximum="7200" MinWidth="100" Value="{Binding BackToDefault }"></NumericUpDown>
 								</StackPanel>
 
 								<Grid ColumnDefinitions="100,160,100,160">

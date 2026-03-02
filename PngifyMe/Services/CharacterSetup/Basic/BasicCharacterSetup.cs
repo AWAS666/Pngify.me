@@ -34,6 +34,7 @@ public class BasicCharacterSetup : ICharacterSetup
 
     public float CurrentTime { get; private set; }
     public float EntryTime { get; private set; }
+    public bool ShouldSwitchToDefault { get; private set; }
     public float ExitTime { get; private set; }
     public BaseImage LastImage { get; private set; }
     public IAvatarSettings Settings { get; set; }
@@ -72,6 +73,8 @@ public class BasicCharacterSetup : ICharacterSetup
         if (lastState != null)
             ExitTime = CurrentTime + lastState.ExitTime;
         EntryTime = ExitTime + CurrentState.EntryTime;
+
+        ShouldSwitchToDefault = CurrentState.BackToDefault != 0 && !CurrentState.Default;
 
         StateChanged?.Invoke(this, state);
     }
@@ -130,6 +133,14 @@ public class BasicCharacterSetup : ICharacterSetup
         {
             LastImage = CurrentImage;
             BlendTime = null;
+        }
+
+        if (ShouldSwitchToDefault)
+        {
+            if(CurrentTime > EntryTime + CurrentState.BackToDefault)
+            {
+                SwitchState(settings.States.First(x => x.Default));
+            }
         }
     }
 
