@@ -20,6 +20,11 @@ namespace PngifyMe.Services.Twitch
         public TwitchAPI Api { get; private set; }
         public string FilePath { get; }
         public string Redirect { get; } = "http://localhost:9797/";
+
+        /// <summary>
+        /// this is used in case main port is blocked
+        /// </summary>
+        public string AltRedirect { get; } = "http://localhost:9898/";
         public string UserId { get; private set; }
         public string UserName { get; private set; }
 
@@ -57,14 +62,17 @@ namespace PngifyMe.Services.Twitch
             {
                 Auth = new TwitchAuth();
 
-                // open browser to let user verify here
-                Process.Start(new ProcessStartInfo
+                string token;
+                try
                 {
-                    FileName = GetAuthorizationCodeUrl(SecretsManager.TwitchClientId, Redirect, scopes),
-                    UseShellExecute = true
-                });
-
-                string token = await StartHttpListener(Redirect);
+                    token = await GetToken(Redirect);
+                }
+                catch (Exception e)
+                {
+                    Log.Warning(e, $"Fallback to alternative port: {e.Message}");
+                    // retry with alt, it's fine if we throw here as then we got a major issue!!
+                    token = await GetToken(AltRedirect);
+                }
 
                 Auth.AccessToken = token;
                 Api.Settings.AccessToken = token;
@@ -77,6 +85,19 @@ namespace PngifyMe.Services.Twitch
             Log.Debug($"Twitch id: {UserId}, Name: {UserName}");
 
             Save();
+        }
+
+        private async Task<string> GetToken(string redirect)
+        {
+            // open link in user app
+            Process.Start(new ProcessStartInfo
+            {
+                FileName = GetAuthorizationCodeUrl(SecretsManager.TwitchClientId, redirect, scopes),
+                UseShellExecute = true
+            });
+
+            // open browser to let user verify here
+            return await StartHttpListener(redirect);
         }
 
         public TwitchClient ConnectClient()
