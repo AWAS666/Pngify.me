@@ -75,6 +75,18 @@
 
 		</StackPanel>
 
+		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="{x:Static lang:Resources.WebOutputOBSHint}">
+			<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.EnableWebOutput}"/>
+			<CheckBox x:Name="webOutput"/>
+			<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.WebOutputOBSHint}" TextWrapping="Wrap" Opacity="0.8"/>
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<Label VerticalAlignment="Center" Content="{x:Static lang:Resources.WebOutputBackgroundColor}"/>
+			<ColorView x:Name="webOutputBackgroundColorPicker" HorizontalAlignment="Left"
+					   ColorChanged="WebOutputBackgroundColorChanged"
+					   Palette="{DynamicResource SemiColorPalette}"
+					   Theme="{StaticResource SimpleColorView}"/>
+		</StackPanel>
 
 	</StackPanel>
 </UserControl>

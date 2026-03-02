@@ -1,10 +1,12 @@
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Interactivity;
+using Avalonia.Media;
 using Avalonia.Threading;
 using PngifyMe.Services;
 using PngifyMe.Services.Twitch;
 using PngifyMe.ViewModels;
+using Semi.Avalonia;
 
 namespace PngifyMe.Views;
 
@@ -50,6 +52,15 @@ public partial class GeneralSettings : UserControl
 
         spout2.Bind(CheckBox.IsCheckedProperty, spout);
 
+        var webOutputBinding = new Binding
+        {
+            Source = SettingsManager.Current.General,
+            Path = nameof(SettingsManager.Current.General.EnableWebOutput),
+            Mode = BindingMode.TwoWay
+        };
+        webOutput.Bind(CheckBox.IsCheckedProperty, webOutputBinding);
+
+        SyncWebOutputBackgroundColorFromSetting();
 
         TwitchEventSocket.Authenticated += UpdateText;
 
@@ -73,5 +84,21 @@ public partial class GeneralSettings : UserControl
     private async void TwitchDeleteAuth(object sender, RoutedEventArgs e)
     {
         await TwitchEventSocket.DeleteAndReAuth();
+    }
+
+    private void SyncWebOutputBackgroundColorFromSetting()
+    {
+        var hex = SettingsManager.Current.General.WebOutputBackgroundColor ?? "#00FF00";
+        hex = hex.TrimStart('#');
+        if (hex.Length == 6 && int.TryParse(hex, System.Globalization.NumberStyles.HexNumber, null, out _))
+            webOutputBackgroundColorPicker.Color = Color.Parse($"#{hex}");
+        else
+            webOutputBackgroundColorPicker.Color = Color.Parse("#00FF00");
+    }
+
+    private void WebOutputBackgroundColorChanged(object? sender, ColorChangedEventArgs e)
+    {
+        var c = e.NewColor;
+        SettingsManager.Current.General.WebOutputBackgroundColor = $"#{c.R:X2}{c.G:X2}{c.B:X2}";
     }
 }

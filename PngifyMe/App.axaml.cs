@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.Markup.Xaml;
 using Avalonia.Threading;
@@ -96,6 +96,11 @@ public partial class App : Application
                     SpoutRenderer.Init();
                     Log.Debug($"Spout started in {watch.ElapsedMilliseconds}ms");
                 }
+
+                watch.Restart();
+                await UpdateSplash("Init Web Output");
+                WebOutputRenderer.Init();
+                Log.Debug($"Web output started in {watch.ElapsedMilliseconds}ms");
 
                 LayerManager.Start();
 

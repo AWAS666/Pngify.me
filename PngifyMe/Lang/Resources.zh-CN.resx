@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -269,6 +269,12 @@
   </data>
   <data name="EnableSpout2" xml:space="preserve">
     <value>启用 Spout2</value>
+  </data>
+  <data name="EnableWebOutput" xml:space="preserve">
+    <value>启用 Web 输出（OBS 浏览器源）</value>
+  </data>
+  <data name="WebOutputOBSHint" xml:space="preserve">
+    <value>在 OBS 中：浏览器源 → http://localhost:7667/</value>
   </data>
   <data name="EndPoint" xml:space="preserve">
     <value>终端：</value>

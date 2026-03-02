@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -269,6 +269,12 @@
   </data>
   <data name="EnableSpout2" xml:space="preserve">
     <value>Spout2 aktivieren</value>
+  </data>
+  <data name="EnableWebOutput" xml:space="preserve">
+    <value>Web-Ausgabe aktivieren (OBS Browser-Quelle)</value>
+  </data>
+  <data name="WebOutputOBSHint" xml:space="preserve">
+    <value>In OBS: Browser-Quelle → http://localhost:7667/</value>
   </data>
   <data name="EndPoint" xml:space="preserve">
     <value>Endpunkt:</value>
