@@ -1,6 +1,6 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <OutputType>Exe</OutputType>
     <LangVersion>8</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
@@ -43,6 +43,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="ui\profilePI.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="ui\statePI.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
@@ -62,7 +65,7 @@
     <PackageReference Include="Microsoft.CSharp" Version="4.7.0" />
     <PackageReference Include="NetCoreServer" Version="8.0.7" />
     <PackageReference Include="NLog" Version="6.0.5" />
-    <PackageReference Include="StreamDeck-Tools" Version="6.3.1" />
+    <PackageReference Include="StreamDeck-Tools" Version="6.3.2" />
     <PackageReference Include="System.Data.DataSetExtensions" Version="4.5.0" />
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="9.0.10" />
     <PackageReference Include="System.ServiceModel.Primitives" Version="8.1.2" />

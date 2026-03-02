@@ -56,6 +56,7 @@ namespace me.Pngify.Streamdeck
             request.SetHeader("Upgrade", "websocket");
             request.SetHeader("Connection", "Upgrade");
             request.SetHeader("Sec-WebSocket-Key", Convert.ToBase64String(WsNonce));
+            request.SetHeader("Sec-WebSocket-Protocol", "chat, superchat");
             request.SetHeader("Sec-WebSocket-Version", "13");
             request.SetBody();
         }
@@ -82,7 +83,7 @@ namespace me.Pngify.Streamdeck
             Logger.Instance.LogMessage(TracingLevel.INFO, $"Chat WebSocket client disconnected a session with Id {Id}");
 
             // Wait for a while...
-            Thread.Sleep(1000);
+            Thread.Sleep(5000);
 
             // Try to connect again
             if (!_stop)

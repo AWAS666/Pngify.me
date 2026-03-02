@@ -9,6 +9,7 @@ using System.Text.Json;
 using System;
 using PngifyMe.Services.Settings;
 using PngifyMe.Services.CharacterSetup.Basic;
+using Avalonia.Threading;
 
 namespace PngifyMe.Services.WebSocket;
 
@@ -56,6 +57,7 @@ public class Server : WsServer
     {
         LayerManager.CharacterStateHandler.StateChanged += MicStateChanged;
         LayerManager.LayerTriggered += LayerTriggered;
+        //todo: add trigger for profile switched
     }
 
     private void LayerTriggered(object? sender, Layersetting e)
@@ -116,8 +118,17 @@ public class Session : WsSession
                     //check mic states, add those if match:
                     var match = SettingsManager.Current.Profile.Active.AvatarSettings.AvailableStates()
                                 .FirstOrDefault(x => string.Equals(x, data.Parameter, StringComparison.OrdinalIgnoreCase));
-                    if (match != null)
-                        LayerManager.CharacterStateHandler.ToggleState(match);
+                    if (match == null) return;
+                    LayerManager.CharacterStateHandler.ToggleState(match);
+                    break;
+                case "SwitchProfile":
+                    var profile = SettingsManager.Current.Profile.ProfileList.FirstOrDefault(x => string.Equals(x.Name, data.Parameter, StringComparison.OrdinalIgnoreCase));
+                    if (profile == null) return;
+                    // need to wrap this here!
+                    Dispatcher.UIThread.Post(() =>
+                    {
+                        SettingsManager.Current.Profile.LoadNewProfile(profile);
+                    });
                     break;
                 default:
                     break;

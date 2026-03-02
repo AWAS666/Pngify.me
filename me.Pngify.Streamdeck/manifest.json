@@ -29,6 +29,21 @@
       "Tooltip": "This will trigger a switch state in PNGify.me, switching to a different model setup.",
       "UUID": "me.pngify.streamdeck.switchstateaction",
       "PropertyInspectorPath": "ui/statePI.html"
+    },
+    {
+      "Icon": "imgs/logo_white",
+      "Name": "Switch Profile",
+      "States": [
+        {
+          "Image": "imgs/logo_white",
+          "TitleAlignment": "middle",
+          "FontSize": 12
+        }
+      ],
+      "SupportedInMultiActions": false,
+      "Tooltip": "This will trigger a profile switch in PNGify.me, switching to a different profile.",
+      "UUID": "me.pngify.streamdeck.switchprofileaction",
+      "PropertyInspectorPath": "ui/profilePI.html"
     }
   ],
   "Author": "Meteora Labs",
@@ -37,7 +52,7 @@
   "Description": "Stream deck integration for PNGify.me, allows you to switch images and trigger effects via the Streamdeck.",
   "Icon": "imgs/logo",
   "URL": "https://pngify.me",
-  "Version": "1.0.4.0",
+  "Version": "1.0.6.0",
   "CodePath": "me.Pngify.Streamdeck.exe",
   "Category": "Pngify.Me",
   "CategoryIcon": "imgs/logo_white",
