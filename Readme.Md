@@ -11,10 +11,10 @@ Feel free to suggest features and submit code yourself
 ## Todo
 - [ ] visualize location/preview location live in various layers
 - [ ] web view -> just display current image on web, need ws connection of some sort probably
-- [ ] layers
-	- [ ] cpu/gpu temp layer (might need admin access for this though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
+- [x] layers
+	- [x] cpu/gpu temp layer (needs admin access for CPU though... https://github.com/LibreHardwareMonitor/LibreHardwareMonitor) 
 - [ ] multi twitch account 
-- [ ] Common trigger setup -> here the same code is copied multiple times for now
+- [x] Common trigger setup -> here the same code is copied multiple times for now
 - [ ] headless mode which doesn't preview the model to save on resources
 	- [ ] render to obs via spout/web 
 - [ ] gpu for skiasharp to allow more complex image operations and keep everything more lightweight

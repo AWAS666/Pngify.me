@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -653,6 +653,9 @@
   </data>
   <data name="TimerLayer" xml:space="preserve">
     <value>Timer that changes with subs/bits/etc.</value>
+  </data>
+  <data name="TemperatureOverlay" xml:space="preserve">
+    <value>CPU / GPU temperature display</value>
   </data>
   <data name="TimeStamp" xml:space="preserve">
     <value>TimeStamp</value>
