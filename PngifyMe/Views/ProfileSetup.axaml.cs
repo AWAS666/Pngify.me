@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using PngifyMe.Services;
+using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
 using PngifyMe.ViewModels;
 using PngifyMe.ViewModels.Helper;
@@ -46,7 +47,7 @@ public partial class ProfileSetup : UserControl
             newProfile.Text = string.Empty;
             return;
         }
-        var profile = new Profile() { Name = text };
+        var profile = new Profile() { Name = text, AvatarSettings = DefaultCharacter.Default() };
         vm.Profiles.Add(new ProfileViewModel(profile));
         SettingsManager.Current.Profile.ProfileList.Add(profile);
     }
