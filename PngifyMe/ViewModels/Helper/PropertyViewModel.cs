@@ -1,4 +1,4 @@
-﻿using Avalonia.Platform.Storage;
+using Avalonia.Platform.Storage;
 using CommunityToolkit.Mvvm.ComponentModel;
 using System;
 using System.Collections.ObjectModel;
@@ -38,5 +38,16 @@ namespace PngifyMe.ViewModels.Helper
         public bool Picker => FilePicker || FolderPicker;
 
         public FilePickerFileType? PickFilter { get; internal set; }
+
+        /// <summary>
+        /// When true, show "Edit on canvas" button next to this property row (set for the first canvas position property, e.g. PosX).
+        /// </summary>
+        public bool ShowEditOnCanvasButton { get; set; }
+
+        /// <summary>
+        /// When set, Save() writes to the parent property's sub-property (e.g. "Position" and "X") instead of a direct property.
+        /// </summary>
+        public string? SourcePropertyName { get; set; }
+        public string? SourceSubPropertyName { get; set; }
     }
 }

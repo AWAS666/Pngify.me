@@ -1,4 +1,4 @@
-﻿using PngifyMe.Layers.Helper;
+using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
 using PngifyMe.Services.CharacterSetup.Images;
 using Semi.Avalonia.Tokens.Palette;
@@ -6,6 +6,7 @@ using Serilog;
 using SkiaSharp;
 using System;
 using System.IO;
+using System.Text.Json.Serialization;
 
 namespace PngifyMe.Layers.Image;
 
@@ -23,11 +24,19 @@ public enum TransitionType
 [LayerDescription("PinImageToModel")]
 public class Image : ImageLayer
 {
-    [Unit("pixels (center)")]
+    [Unit(UnitNames.PixelsCenter)]
     public float PosX { get; set; } = 960;
 
-    [Unit("pixels (center)")]
+    [Unit(UnitNames.PixelsCenter)]
     public float PosY { get; set; } = 540;
+
+    [JsonIgnore]
+    [CanvasPosition]
+    public CanvasPosition2D Position
+    {
+        get => new() { X = PosX, Y = PosY };
+        set { PosX = value.X; PosY = value.Y; }
+    }
 
     [Unit("Path")]
     [ImagePicker]
@@ -81,13 +90,13 @@ public class Image : ImageLayer
 
         if (TransitionTime == 0f)
         {
-            canvas.DrawBitmap(img, PosX - img.Width / 2, PosY - img.Height / 2);
+            canvas.DrawBitmap(img, Position.X - img.Width / 2, Position.Y - img.Height / 2);
             return;
         }
 
         float opacity = 1.0f;
-        float renderX = PosX;
-        float renderY = PosY;
+        float renderX = Position.X;
+        float renderY = Position.Y;
 
         switch (TransitionType)
         {
@@ -137,15 +146,15 @@ public class Image : ImageLayer
                     var exitProgress = CurrentExitingTime / TransitionTime;
                     exitProgress = MathF.Min(exitProgress, 1f);
                     if (TransitionType == TransitionType.MoveX)
-                        renderX = PosX + (endX - PosX) * exitProgress;
+                        renderX = Position.X + (endX - Position.X) * exitProgress;
                     else
-                        renderX = PosX - (endX - PosX) * exitProgress;
+                        renderX = Position.X - (endX - Position.X) * exitProgress;
                 }
                 else
                 {
                     var enterProgress = CurrentTime / TransitionTime;
                     enterProgress = MathF.Min(enterProgress, 1f);
-                    renderX = startX + (PosX - startX) * enterProgress;
+                    renderX = startX + (Position.X - startX) * enterProgress;
                 }
                 break;
 
@@ -160,15 +169,15 @@ public class Image : ImageLayer
                     var exitProgress = CurrentExitingTime / TransitionTime;
                     exitProgress = MathF.Min(exitProgress, 1f);
                     if (TransitionType == TransitionType.MoveY)
-                        renderY = PosY + (endY - PosY) * exitProgress;
+                        renderY = Position.Y + (endY - Position.Y) * exitProgress;
                     else
-                        renderY = PosY - (endY - PosY) * exitProgress;
+                        renderY = Position.Y - (endY - Position.Y) * exitProgress;
                 }
                 else
                 {
                     var enterProgress = CurrentTime / TransitionTime;
                     enterProgress = MathF.Min(enterProgress, 1f);
-                    renderY = startY + (PosY - startY) * enterProgress;
+                    renderY = startY + (Position.Y - startY) * enterProgress;
                 }
                 break;
         }

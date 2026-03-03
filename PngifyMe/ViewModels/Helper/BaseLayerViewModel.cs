@@ -1,9 +1,12 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
+using PngifyMe.Services;
 using Serilog;
 using System;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Reflection;
 using System.Text.Json.Serialization;
 
@@ -18,6 +21,9 @@ namespace PngifyMe.ViewModels.Helper
         {
             LayerModel = layer;
             Name = layer.GetType().Name;
+            HasCanvasOverlay = layer.GetType()
+                .GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>() != null);
             UpdatePropertyList();
             Parent = parent;
         }
@@ -27,14 +33,55 @@ namespace PngifyMe.ViewModels.Helper
         [ObservableProperty]
         private string name;
 
+        /// <summary>
+        /// True if the layer has any property marked with <see cref="CanvasPositionAttribute"/> (canvas overlay can edit position/size).
+        /// </summary>
+        public bool HasCanvasOverlay { get; }
+
+        [RelayCommand]
+        private void OpenCanvasOverlay()
+        {
+            CanvasOverlayService.SetOverlay(new PositionSizeOverlayViewModel(this));
+        }
+
         private void UpdatePropertyList()
         {
             PropertyList.Clear();
-            // Use reflection to get properties
-            foreach (var prop in LayerModel.GetType().GetProperties(BindingFlags.Public | BindingFlags.Instance))
+            var layerType = LayerModel.GetType();
+            var hasPointProperty = layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>()?.IsPointProperty == true);
+            foreach (var prop in layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                // Ignore JSON ignored properties
+                var canvasPosAttr = prop.GetCustomAttribute<CanvasPositionAttribute>();
+                if (canvasPosAttr != null && canvasPosAttr.IsPointProperty)
+                {
+                    var posObj = prop.GetValue(LayerModel);
+                    var xVal = GetSubPropertyValue(posObj, "X");
+                    var yVal = GetSubPropertyValue(posObj, "Y");
+                    PropertyList.Add(new PropertyViewModel
+                    {
+                        Name = $"{prop.Name}.X",
+                        Value = xVal?.ToString() ?? "0",
+                        Unit = UnitNames.PixelsCenter,
+                        Type = typeof(float),
+                        ShowEditOnCanvasButton = true,
+                        SourcePropertyName = prop.Name,
+                        SourceSubPropertyName = "X",
+                    });
+                    PropertyList.Add(new PropertyViewModel
+                    {
+                        Name = $"{prop.Name}.Y",
+                        Value = yVal?.ToString() ?? "0",
+                        Unit = UnitNames.PixelsCenter,
+                        Type = typeof(float),
+                        SourcePropertyName = prop.Name,
+                        SourceSubPropertyName = "Y",
+                    });
+                    continue;
+                }
                 if (Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)))
+                    continue;
+                if (hasPointProperty && (prop.Name == "PosX" || prop.Name == "PosY"))
                     continue;
 
                 var propertyViewModel = new PropertyViewModel
@@ -59,6 +106,10 @@ namespace PngifyMe.ViewModels.Helper
                 var folder = prop.GetCustomAttribute<FolderPickerAttribute>();
                 propertyViewModel.FolderPicker = folder != null;
 
+                var canvasPos = prop.GetCustomAttribute<CanvasPositionAttribute>();
+                if (canvasPos != null && !canvasPos.IsPointProperty && canvasPos.Role == CanvasPositionRole.X)
+                    propertyViewModel.ShowEditOnCanvasButton = true;
+
                 if (prop.PropertyType.IsEnum)
                 {
                     propertyViewModel.IsEnum = true;
@@ -80,31 +131,63 @@ namespace PngifyMe.ViewModels.Helper
             }
         }
 
+        private static object? GetSubPropertyValue(object? obj, string subName)
+        {
+            if (obj == null) return null;
+            var sub = obj.GetType().GetProperty(subName, BindingFlags.Public | BindingFlags.Instance);
+            return sub?.GetValue(obj);
+        }
+
         public void Save()
         {
             foreach (var propertyViewModel in PropertyList)
             {
-                var prop = LayerModel.GetType().GetProperty(propertyViewModel.Name, BindingFlags.Public | BindingFlags.Instance);
-
-                if (prop != null)
+                if (!string.IsNullOrEmpty(propertyViewModel.SourcePropertyName) && !string.IsNullOrEmpty(propertyViewModel.SourceSubPropertyName))
+                {
+                    var prop = LayerModel.GetType().GetProperty(propertyViewModel.SourcePropertyName, BindingFlags.Public | BindingFlags.Instance);
+                    if (prop == null) continue;
+                    var posObj = prop.GetValue(LayerModel);
+                    if (posObj == null)
+                    {
+                        posObj = Activator.CreateInstance(prop.PropertyType);
+                        if (posObj == null) continue;
+                    }
+                    var subProp = posObj.GetType().GetProperty(propertyViewModel.SourceSubPropertyName, BindingFlags.Public | BindingFlags.Instance);
+                    if (subProp != null)
+                    {
+                        try
+                        {
+                            var converted = Convert.ChangeType(propertyViewModel.Value, subProp.PropertyType);
+                            subProp.SetValue(posObj, converted);
+                            prop.SetValue(LayerModel, posObj);
+                        }
+                        catch (Exception e)
+                        {
+                            Log.Debug("Conversion error: " + e.Message, e);
+                        }
+                    }
+                    continue;
+                }
+                var directProp = LayerModel.GetType().GetProperty(propertyViewModel.Name, BindingFlags.Public | BindingFlags.Instance);
+                if (directProp != null)
                 {
                     try
                     {
                         object convertedValue;
-                        if (prop.PropertyType.IsEnum && propertyViewModel.Value is string enumString)
+                        if (directProp.PropertyType.IsEnum && propertyViewModel.Value is string enumString)
                         {
-                            convertedValue = Enum.Parse(prop.PropertyType, enumString);
+                            convertedValue = Enum.Parse(directProp.PropertyType, enumString);
                         }
                         else
                         {
-                            convertedValue = Convert.ChangeType(propertyViewModel.Value, prop.PropertyType);
+                            convertedValue = Convert.ChangeType(propertyViewModel.Value, directProp.PropertyType);
                         }
-                        prop.SetValue(LayerModel, convertedValue);
+                        directProp.SetValue(LayerModel, convertedValue);
                     }
                     catch (Exception e)
                     {
                         Log.Debug("Conversion error: " + e.Message, e);
-                        propertyViewModel.Value = prop.GetValue(LayerModel)?.ToString();
+                        propertyViewModel.Value = directProp.GetValue(LayerModel)?.ToString();
                     }
                 }
             }

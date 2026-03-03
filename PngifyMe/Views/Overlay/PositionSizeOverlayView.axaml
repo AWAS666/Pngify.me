@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
+             xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
+             x:DataType="vm:PositionSizeOverlayViewModel"
+             x:Class="PngifyMe.Views.Overlay.PositionSizeOverlayView">
+	<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="#40000000">
+		<Canvas x:Name="targetCanvas" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" IsHitTestVisible="True" ZIndex="0">
+			<Ellipse x:Name="targetGraphic" Width="16" Height="16" Fill="#40FFFFFF" Stroke="White" StrokeThickness="2"/>
+		</Canvas>
+		<Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="12" Padding="12" ZIndex="1"
+				Background="#E0202020" CornerRadius="4" BoxShadow="0 2 8 0 #40000000" IsHitTestVisible="True">
+			<StackPanel Spacing="8" MinWidth="180">
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<TextBlock Text="X" VerticalAlignment="Center" Width="24"/>
+					<NumericUpDown Value="{Binding X}" Minimum="0" Maximum="10000" Increment="10" Width="80"/>
+				</StackPanel>
+				<StackPanel Orientation="Horizontal" Spacing="8">
+					<TextBlock Text="Y" VerticalAlignment="Center" Width="24"/>
+					<NumericUpDown Value="{Binding Y}" Minimum="0" Maximum="10000" Increment="10" Width="80"/>
+				</StackPanel>
+				<Button x:Name="closeButton" HorizontalAlignment="Stretch"
+						Classes="Secondary" Theme="{DynamicResource OutlineButton}">
+					<StackPanel Orientation="Horizontal" Spacing="6">
+						<lucideAvalonia:Lucide Icon="X" StrokeThickness="2" Width="16" Height="16"/>
+						<TextBlock Text="Close"/>
+					</StackPanel>
+				</Button>
+			</StackPanel>
+		</Border>
+	</Grid>
+</UserControl>

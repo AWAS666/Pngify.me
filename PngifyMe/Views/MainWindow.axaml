@@ -6,6 +6,8 @@
         xmlns:views="clr-namespace:PngifyMe.Views"
 		xmlns:u="https://irihi.tech/ursa"		
         xmlns:vmh="clr-namespace:PngifyMe.Views.Helper"
+		xmlns:vmHelper="clr-namespace:PngifyMe.ViewModels.Helper"
+		xmlns:viewsOverlay="clr-namespace:PngifyMe.Views.Overlay"
         mc:Ignorable="d" d:DesignWidth="1200" d:DesignHeight="720"
 		xmlns:sett="clr-namespace:PngifyMe.Settings"
 		xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
@@ -23,10 +25,20 @@
 		</Style>
 	</Window.Styles>
 	<Grid x:Name="grid" KeyDown="EscDown" Focusable="True">
-		<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
-						  DoubleTapped="DoubleClick">
-
-		</views:AvatarView>
+		<Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" DoubleTapped="DoubleClick">
+			<views:AvatarView HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
+			<ContentControl x:Name="canvasOverlayHost" HorizontalAlignment="Stretch" VerticalAlignment="Stretch"
+							Background="Transparent" IsHitTestVisible="False">
+				<ContentControl.DataTemplates>
+					<DataTemplate DataType="{x:Type vmHelper:TestOverlayViewModel}">
+						<viewsOverlay:TestOverlayView/>
+					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmHelper:PositionSizeOverlayViewModel}">
+						<viewsOverlay:PositionSizeOverlayView/>
+					</DataTemplate>
+				</ContentControl.DataTemplates>
+			</ContentControl>
+		</Grid>
 		<DockPanel x:Name="settings" 
 				   Background="#DD000080"
 			  HorizontalAlignment="Right" Width="750">
