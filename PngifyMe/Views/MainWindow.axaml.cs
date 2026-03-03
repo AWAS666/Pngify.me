@@ -112,6 +112,8 @@ public partial class MainWindow : Window
     {
         settings.IsVisible = !settings.IsVisible;
         ErrorForwarder.Sink.SetActive(settings.IsVisible);
+        if (!settings.IsVisible)
+            CanvasOverlayService.ClearOverlay();
     }
 
     private void EscDown(object? sender, KeyEventArgs e)
@@ -135,6 +137,7 @@ public partial class MainWindow : Window
     {
         settings.IsVisible = false;
         ErrorForwarder.Sink.SetActive(false);
+        CanvasOverlayService.ClearOverlay();
     }
 
 }

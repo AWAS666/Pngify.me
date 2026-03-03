@@ -39,9 +39,9 @@ namespace PngifyMe.ViewModels.Helper
         public bool HasCanvasOverlay { get; }
 
         [RelayCommand]
-        private void OpenCanvasOverlay()
+        private void OpenCanvasOverlay(object? sourceControl)
         {
-            CanvasOverlayService.SetOverlay(new PositionSizeOverlayViewModel(this));
+            CanvasOverlayService.SetOverlay(new PositionSizeOverlayViewModel(this), sourceControl as Control);
         }
 
         private void UpdatePropertyList()

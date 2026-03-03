@@ -11,6 +11,7 @@
              x:Class="PngifyMe.Views.Helper.LayerView"
 			 x:Name="layerView"
 			 xmlns:lang="clr-namespace:PngifyMe.Lang"
+			 
 			 >
 
 	<Design.DataContext>
@@ -32,6 +33,7 @@
 						<Button Content="Edit on canvas" ToolTip.Tip="Edit position/size on avatar preview"
 								IsVisible="{Binding ShowEditOnCanvasButton}"
 								Command="{Binding #layerView.DataContext.OpenCanvasOverlayCommand}"
+								CommandParameter="{Binding #layerView}"
 								Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
 					</StackPanel>
 				</DataTemplate>
