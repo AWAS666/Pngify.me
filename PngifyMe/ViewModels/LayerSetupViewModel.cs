@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using PngifyMe.Services;
 using PngifyMe.Services.Settings;
@@ -53,5 +53,6 @@ public partial class LayerSetupViewModel : ObservableObject
         LayerManager.Pause();
         SettingsManager.Current.LayerSetup.ApplySettings();
         LayerManager.UnPause();
+        CanvasOverlayService.ClearOverlay();
     }
 }

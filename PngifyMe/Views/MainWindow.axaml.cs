@@ -131,6 +131,7 @@ public partial class MainWindow : Window
     {
         SettingsManager.Save();
         Specsmanager.Save();
+        CanvasOverlayService.ClearOverlay();
     }
 
     private void CloseSettings(object? sender, RoutedEventArgs e)
