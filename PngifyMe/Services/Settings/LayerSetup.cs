@@ -1,4 +1,4 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.ComponentModel;
 using PngifyMe.Layers;
 using PngifyMe.Services.Helpers;
 using PngifyMe.Services.Hotkey;
@@ -75,7 +75,8 @@ public class Layersetting
     {
         foreach (var layer in Layers)
         {
-            LayerManager.AddLayer(layer.Clone(this), Trigger.IsToggleable);
+            layer.AddedBy = this;
+            LayerManager.AddLayer(layer, Trigger.IsToggleable);
         }
         LayerManager.LayerTriggered?.Invoke(this, this);
     }
