@@ -1294,6 +1294,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pixels (center).
+        /// </summary>
+        public static string PixelsCenter {
+            get {
+                return ResourceManager.GetString("PixelsCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Play once specific sound.
         /// </summary>
         public static string PlayOneSound {
@@ -1726,6 +1735,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to CPU / GPU temperature display.
+        /// </summary>
+        public static string TemperatureOverlay {
+            get {
+                return ResourceManager.GetString("TemperatureOverlay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Test Rain.
         /// </summary>
         public static string TestRain {
@@ -1794,15 +1812,6 @@ namespace PngifyMe.Lang {
         public static string TimerLayer {
             get {
                 return ResourceManager.GetString("TimerLayer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to CPU / GPU temperature display.
-        /// </summary>
-        public static string TemperatureOverlay {
-            get {
-                return ResourceManager.GetString("TemperatureOverlay", resourceCulture);
             }
         }
         

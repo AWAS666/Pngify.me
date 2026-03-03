@@ -10,9 +10,7 @@ namespace PngifyMe.ViewModels.Helper;
 public sealed partial class PositionSizeOverlayViewModel : ObservableObject
 {
     private readonly BaseLayerViewModel _layerViewModel;
-    private readonly PropertyInfo? _propPosition;
-    private readonly PropertyInfo? _propX;
-    private readonly PropertyInfo? _propY;
+    private readonly PropertyInfo _propPosition;
     private bool _isRefreshing;
 
     public BaseLayerViewModel LayerViewModel => _layerViewModel;
@@ -21,17 +19,8 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
     {
         _layerViewModel = layerViewModel ?? throw new ArgumentNullException(nameof(layerViewModel));
         var layerType = layerViewModel.LayerModel.GetType();
-        _propPosition = FindPointProperty(layerType);
-        if (_propPosition == null)
-        {
-            _propX = FindPropertyByRole(layerType, CanvasPositionRole.X);
-            _propY = FindPropertyByRole(layerType, CanvasPositionRole.Y);
-        }
-        else
-        {
-            _propX = null;
-            _propY = null;
-        }
+        _propPosition = FindPointProperty(layerType)
+            ?? throw new InvalidOperationException($"Layer type {layerType.Name} has no property marked with [CanvasPosition].");
         RefreshFromLayer();
     }
 
@@ -39,19 +28,7 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
     {
         foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
         {
-            var attr = prop.GetCustomAttribute<CanvasPositionAttribute>();
-            if (attr?.IsPointProperty == true)
-                return prop;
-        }
-        return null;
-    }
-
-    private static PropertyInfo? FindPropertyByRole(Type type, CanvasPositionRole role)
-    {
-        foreach (var prop in type.GetProperties(BindingFlags.Public | BindingFlags.Instance))
-        {
-            var attr = prop.GetCustomAttribute<CanvasPositionAttribute>();
-            if (attr != null && !attr.IsPointProperty && attr.Role == role)
+            if (prop.GetCustomAttribute<CanvasPositionAttribute>() != null)
                 return prop;
         }
         return null;
@@ -69,17 +46,9 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
         try
         {
             var model = _layerViewModel.LayerModel;
-            if (_propPosition != null)
-            {
-                var pos = GetPositionObject(model);
-                X = GetFloatFromObject(pos, "X");
-                Y = GetFloatFromObject(pos, "Y");
-            }
-            else
-            {
-                X = GetFloat(_propX, model);
-                Y = GetFloat(_propY, model);
-            }
+            var pos = GetPositionObject(model);
+            X = GetFloatFromObject(pos, "X");
+            Y = GetFloatFromObject(pos, "Y");
         }
         finally
         {
@@ -89,7 +58,7 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
 
     private object? GetPositionObject(object model)
     {
-        return _propPosition?.GetValue(model);
+        return _propPosition.GetValue(model);
     }
 
     private static float GetFloatFromObject(object? obj, string propertyName)
@@ -100,25 +69,8 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
         return v != null ? Convert.ToSingle(v) : 0;
     }
 
-    private static float GetFloat(PropertyInfo? prop, object model)
-    {
-        if (prop == null) return 0;
-        var v = prop.GetValue(model);
-        return v != null ? Convert.ToSingle(v) : 0;
-    }
-
-    private void SetLayerValue(PropertyInfo? prop, float value, string propertyName)
-    {
-        if (prop == null) return;
-        var model = _layerViewModel.LayerModel;
-        var converted = Convert.ChangeType(value, prop.PropertyType);
-        prop.SetValue(model, converted);
-        SyncToPropertyList(propertyName, value);
-    }
-
     private void SetPositionXY(float x, float y)
     {
-        if (_propPosition == null) return;
         var model = _layerViewModel.LayerModel;
         var pos = GetPositionObject(model);
         if (pos == null)
@@ -156,18 +108,12 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
     partial void OnXChanged(float value)
     {
         if (_isRefreshing) return;
-        if (_propPosition != null)
-            SetPositionXY(value, Y);
-        else
-            SetLayerValue(_propX, value, _propX?.Name ?? "PosX");
+        SetPositionXY(value, Y);
     }
     partial void OnYChanged(float value)
     {
         if (_isRefreshing) return;
-        if (_propPosition != null)
-            SetPositionXY(X, value);
-        else
-            SetLayerValue(_propY, value, _propY?.Name ?? "PosY");
+        SetPositionXY(X, value);
     }
 
     [RelayCommand]

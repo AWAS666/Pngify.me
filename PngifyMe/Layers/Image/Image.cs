@@ -24,10 +24,10 @@ public enum TransitionType
 [LayerDescription("PinImageToModel")]
 public class Image : ImageLayer
 {
-    [Unit(UnitNames.PixelsCenter)]
+    [Unit("pixels (center)")]
     public float PosX { get; set; } = 960;
 
-    [Unit(UnitNames.PixelsCenter)]
+    [Unit("pixels (center)")]
     public float PosY { get; set; } = 540;
 
     [JsonIgnore]

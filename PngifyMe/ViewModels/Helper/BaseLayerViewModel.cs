@@ -1,5 +1,7 @@
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.Input;
 using CommunityToolkit.Mvvm.ComponentModel;
+using PngifyMe.Lang;
 using PngifyMe.Layers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
@@ -49,11 +51,11 @@ namespace PngifyMe.ViewModels.Helper
             PropertyList.Clear();
             var layerType = LayerModel.GetType();
             var hasPointProperty = layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>()?.IsPointProperty == true);
+                .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>() != null);
             foreach (var prop in layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
                 var canvasPosAttr = prop.GetCustomAttribute<CanvasPositionAttribute>();
-                if (canvasPosAttr != null && canvasPosAttr.IsPointProperty)
+                if (canvasPosAttr != null)
                 {
                     var posObj = prop.GetValue(LayerModel);
                     var xVal = GetSubPropertyValue(posObj, "X");
@@ -62,7 +64,7 @@ namespace PngifyMe.ViewModels.Helper
                     {
                         Name = $"{prop.Name}.X",
                         Value = xVal?.ToString() ?? "0",
-                        Unit = UnitNames.PixelsCenter,
+                        Unit = Resources.PixelsCenter,
                         Type = typeof(float),
                         ShowEditOnCanvasButton = true,
                         SourcePropertyName = prop.Name,
@@ -72,7 +74,7 @@ namespace PngifyMe.ViewModels.Helper
                     {
                         Name = $"{prop.Name}.Y",
                         Value = yVal?.ToString() ?? "0",
-                        Unit = UnitNames.PixelsCenter,
+                        Unit = Resources.PixelsCenter,
                         Type = typeof(float),
                         SourcePropertyName = prop.Name,
                         SourceSubPropertyName = "Y",
@@ -94,7 +96,9 @@ namespace PngifyMe.ViewModels.Helper
                 var unitAttribute = prop.GetCustomAttribute<UnitAttribute>();
                 if (unitAttribute != null)
                 {
-                    propertyViewModel.Unit = unitAttribute.Unit;
+                    propertyViewModel.Unit = unitAttribute.Unit == "pixels (center)"
+                        ? Resources.PixelsCenter
+                        : unitAttribute.Unit;
                 }
 
                 var filePickerAttribute = prop.GetCustomAttribute<FilePickerAttribute>();
@@ -105,10 +109,6 @@ namespace PngifyMe.ViewModels.Helper
                 }
                 var folder = prop.GetCustomAttribute<FolderPickerAttribute>();
                 propertyViewModel.FolderPicker = folder != null;
-
-                var canvasPos = prop.GetCustomAttribute<CanvasPositionAttribute>();
-                if (canvasPos != null && !canvasPos.IsPointProperty && canvasPos.Role == CanvasPositionRole.X)
-                    propertyViewModel.ShowEditOnCanvasButton = true;
 
                 if (prop.PropertyType.IsEnum)
                 {

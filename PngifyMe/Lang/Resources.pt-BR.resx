@@ -495,6 +495,9 @@
   <data name="PickFolder" xml:space="preserve">
     <value>Escolha a pasta</value>
   </data>
+  <data name="PixelsCenter" xml:space="preserve">
+    <value>pixels (centro)</value>
+  </data>
   <data name="PinImageToModel" xml:space="preserve">
     <value>Fixar uma imagem ao seu modelo</value>
   </data>
