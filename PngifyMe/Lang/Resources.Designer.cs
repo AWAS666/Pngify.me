@@ -1294,6 +1294,15 @@ namespace PngifyMe.Lang {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to pixels (center).
+        /// </summary>
+        public static string PixelsCenter {
+            get {
+                return ResourceManager.GetString("PixelsCenter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Play once specific sound.
         /// </summary>
         public static string PlayOneSound {

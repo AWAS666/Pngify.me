@@ -7,9 +7,11 @@
 			 xmlns:vm="clr-namespace:PngifyMe.ViewModels.Helper"
 			 xmlns:helper="clr-namespace:PngifyMe.Views.Helper"
 			 xmlns:sett="clr-namespace:PngifyMe.Services.Settings"
-			 x:DataType="vm:BaseLayerViewModel"
+             x:DataType="vm:BaseLayerViewModel"
              x:Class="PngifyMe.Views.Helper.LayerView"
+			 x:Name="layerView"
 			 xmlns:lang="clr-namespace:PngifyMe.Lang"
+			 
 			 >
 
 	<Design.DataContext>
@@ -23,10 +25,17 @@
 					Command="{Binding Parent.RemoveCommand}"
 					CommandParameter="{Binding}"></Button>
 		</StackPanel>
-		<ItemsControl ItemsSource="{Binding PropertyList}">
+		<ItemsControl ItemsSource="{Binding PropertyList}" x:Name="propertyList">
 			<ItemsControl.ItemTemplate>
 				<DataTemplate>
-					<helper:PropertyView DataContext="{Binding}"></helper:PropertyView>
+					<StackPanel Orientation="Horizontal" Spacing="4">
+						<helper:PropertyView DataContext="{Binding}"/>
+						<Button Content="Edit on canvas" ToolTip.Tip="Edit position/size on avatar preview"
+								IsVisible="{Binding ShowEditOnCanvasButton}"
+								Command="{Binding #layerView.DataContext.OpenCanvasOverlayCommand}"
+								CommandParameter="{Binding #layerView}"
+								Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
+					</StackPanel>
 				</DataTemplate>
 			</ItemsControl.ItemTemplate>
 		</ItemsControl>

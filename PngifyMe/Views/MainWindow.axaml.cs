@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Input;
@@ -7,6 +7,7 @@ using Avalonia.Threading;
 using PngifyMe.Helpers;
 using PngifyMe.Services;
 using PngifyMe.Services.Twitch;
+using PngifyMe.ViewModels.Helper;
 using PngifyMe.Views.Helper;
 using Serilog;
 using System.Linq;
@@ -39,6 +40,20 @@ public partial class MainWindow : Window
         var topLevel = TopLevel.GetTopLevel(this);
         ErrorForwarder.Sink.SetNotificationHandler(new WindowNotificationManager(topLevel) { MaxItems = 3 });
         Log.Information("Double Click your avatar to hide the settings");
+
+        CanvasOverlayService.CurrentOverlayViewModelChanged += OnCanvasOverlayViewModelChanged;
+#if DEBUG
+        CanvasOverlayService.SetOverlay(new TestOverlayViewModel());
+#endif
+    }
+
+    private void OnCanvasOverlayViewModelChanged(object? sender, object? vm)
+    {
+        Dispatcher.UIThread.Post(() =>
+        {
+            canvasOverlayHost.Content = vm;
+            canvasOverlayHost.IsHitTestVisible = vm != null;
+        });
     }
 
 
@@ -97,6 +112,8 @@ public partial class MainWindow : Window
     {
         settings.IsVisible = !settings.IsVisible;
         ErrorForwarder.Sink.SetActive(settings.IsVisible);
+        if (!settings.IsVisible)
+            CanvasOverlayService.ClearOverlay();
     }
 
     private void EscDown(object? sender, KeyEventArgs e)
@@ -114,12 +131,14 @@ public partial class MainWindow : Window
     {
         SettingsManager.Save();
         Specsmanager.Save();
+        CanvasOverlayService.ClearOverlay();
     }
 
     private void CloseSettings(object? sender, RoutedEventArgs e)
     {
         settings.IsVisible = false;
         ErrorForwarder.Sink.SetActive(false);
+        CanvasOverlayService.ClearOverlay();
     }
 
 }

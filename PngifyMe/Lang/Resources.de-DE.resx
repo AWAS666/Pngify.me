@@ -495,6 +495,9 @@
   <data name="PickFolder" xml:space="preserve">
     <value>Ordner auswählen</value>
   </data>
+  <data name="PixelsCenter" xml:space="preserve">
+    <value>Pixel (Mitte)</value>
+  </data>
   <data name="PinImageToModel" xml:space="preserve">
     <value>Ein Bild an deinem Modell anheften</value>
   </data>

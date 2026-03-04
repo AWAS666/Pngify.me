@@ -1,7 +1,8 @@
-﻿using PngifyMe.Layers.Helper;
+using PngifyMe.Layers.Helper;
 using PngifyMe.Services.Twitch;
 using SkiaSharp;
 using System;
+using System.Text.Json.Serialization;
 using TwitchLib.EventSub.Core.SubscriptionTypes.Channel;
 
 namespace PngifyMe.Layers.Image
@@ -27,6 +28,14 @@ namespace PngifyMe.Layers.Image
 
         [Unit("pixels (center)")]
         public float PosY { get; set; } = 540;
+
+        [JsonIgnore]
+        [CanvasPosition]
+        public CanvasPosition2D Position
+        {
+            get => new() { X = PosX, Y = PosY };
+            set { PosX = value.X; PosY = value.Y; }
+        }
 
         [Unit("seconds per Bit")]
         public int TimeBits { get; set; } = 10;

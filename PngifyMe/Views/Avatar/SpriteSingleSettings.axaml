@@ -65,14 +65,18 @@
 			<NumericUpDown Increment="1" Value="{Binding X}"/>
 			<Label VerticalAlignment="Center">Y</Label>
 			<NumericUpDown Increment="1" Value="{Binding Y}"/>
-
-			<Rectangle Margin="5,0,5,0" Width="1" Fill="White"></Rectangle>
-
-			<TextBlock VerticalAlignment="Center">Anchor Position</TextBlock>
+			<Button Content="Edit on canvas" ToolTip.Tip="Edit position on avatar preview"
+					Classes="Secondary" Theme="{DynamicResource OutlineButton}" Click="OpenPositionOnCanvas"/>
+			
+		</StackPanel>
+		<StackPanel Orientation="Horizontal" Spacing="5">
+			<TextBlock VerticalAlignment="Center">Anchor</TextBlock>
 			<Label VerticalAlignment="Center">X</Label>
 			<NumericUpDown Increment="1" Value="{Binding AnchorX}"/>
 			<Label VerticalAlignment="Center">Y</Label>
 			<NumericUpDown Increment="1" Value="{Binding AnchorY}"/>
+			<Button Content="Edit on canvas" ToolTip.Tip="Edit anchor on avatar preview"
+					Classes="Secondary" Theme="{DynamicResource OutlineButton}" Click="OpenAnchorOnCanvas"/>
 		</StackPanel>
 		<StackPanel Orientation="Horizontal" Spacing="5" ToolTip.Tip="Ignore means it's shown regardless of blinking or not">
 			<TextBlock VerticalAlignment="Center">Blinking:</TextBlock>

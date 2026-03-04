@@ -23,9 +23,46 @@ public partial class SpriteAvatarSetup : UserControl
 {
     private Point _dragStartPosition;
     private Grid _draggedItem;
+    private PropertyChangedEventHandler? _selectedChangedHandler;
+
     public SpriteAvatarSetup()
     {
         InitializeComponent();
+        DataContextChanged += OnDataContextChanged;
+    }
+
+    private void OnDataContextChanged(object? sender, EventArgs e)
+    {
+        if (_selectedChangedHandler != null && DataContext is SpriteSetupViewModel oldVm)
+        {
+            oldVm.Settings.PropertyChanged -= _selectedChangedHandler;
+            _selectedChangedHandler = null;
+        }
+        if (DataContext is SpriteSetupViewModel vm)
+        {
+            _selectedChangedHandler = (_, args) =>
+            {
+                if (args.PropertyName != nameof(vm.Settings.Selected)) return;
+                SyncOverlayToSelection(vm);
+            };
+            vm.Settings.PropertyChanged += _selectedChangedHandler;
+        }
+    }
+
+    private void SyncOverlayToSelection(SpriteSetupViewModel vm)
+    {
+        if (CanvasOverlayService.CurrentOverlayViewModel is not SpritePointOverlayViewModel spriteOverlay)
+            return;
+        var newSelected = vm.Settings.Selected;
+        if (newSelected == null)
+        {
+            CanvasOverlayService.ClearOverlay();
+            return;
+        }
+        if (newSelected == spriteOverlay.Sprite)
+            return;
+        var sourceControl = this.FindControl<Control>("test");
+        CanvasOverlayService.SetOverlay(new SpritePointOverlayViewModel(newSelected, spriteOverlay.IsAnchorMode), sourceControl ?? this);
     }
 
     private IStorageProvider GetStorage()

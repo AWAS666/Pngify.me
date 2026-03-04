@@ -1,0 +1,12 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Class="PngifyMe.Views.Overlay.TestOverlayView">
+	<Border Background="#00000000" CornerRadius="4" Padding="12"
+			HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+		<StackPanel Spacing="8" HorizontalAlignment="Left" VerticalAlignment="Top">
+			<TextBlock Text="Test overlay" FontSize="16" Foreground="White"/>
+			<TextBlock x:Name="mousePosText" Text="Mouse: —" FontSize="12" Foreground="White"/>
+			<TextBlock x:Name="canvasPosText" Text="Canvas: —" FontSize="12" Foreground="White"/>
+		</StackPanel>
+	</Border>
+</UserControl>
