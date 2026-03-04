@@ -11,7 +11,7 @@ namespace PngifyMe.ViewModels;
 public partial class LogViewerViewModel : ObservableObject
 {
     [ObservableProperty]
-    private ObservableCollection<LogEntry> allLogs = new();
+    private ObservableCollection<LogEntry> allLogs;
 
     [ObservableProperty]
     private ObservableCollection<LogEntry> filteredLogs = new();
@@ -38,29 +38,9 @@ public partial class LogViewerViewModel : ObservableObject
     private string searchText = string.Empty;
 
     public LogViewerViewModel()
-    {
-        var logEntries = LogViewerSink.LogEntries;
-        foreach (var entry in logEntries)
-        {
-            AllLogs.Add(entry);
-        }
-        logEntries.CollectionChanged += (s, e) =>
-        {
-            if (e.NewItems != null)
-            {
-                foreach (LogEntry entry in e.NewItems)
-                {
-                    AllLogs.Add(entry);
-                }
-            }
-            if (e.OldItems != null)
-            {
-                foreach (LogEntry entry in e.OldItems)
-                {
-                    AllLogs.Remove(entry);
-                }
-            }
-        };
+    {       
+        // we just copy reference of the sink and done
+        AllLogs = LogViewerSink.LogEntries;      
         
         PropertyChanged += (s, e) =>
         {
@@ -117,6 +97,8 @@ public partial class LogViewerViewModel : ObservableObject
     private void ClearLogs()
     {
         LogViewerSink.LogEntries.Clear();
+        // need to clean up our copy aswell -> why dont we just references
+        ApplyFilters();
     }
 }
 
