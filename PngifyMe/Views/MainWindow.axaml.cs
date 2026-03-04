@@ -1,3 +1,4 @@
+using System;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
@@ -6,7 +7,6 @@ using Avalonia.Interactivity;
 using Avalonia.Threading;
 using PngifyMe.Helpers;
 using PngifyMe.Services;
-using PngifyMe.Services.Twitch;
 using PngifyMe.ViewModels.Helper;
 using PngifyMe.Views.Helper;
 using Serilog;
@@ -18,6 +18,8 @@ namespace PngifyMe.Views;
 
 public partial class MainWindow : Window
 {
+    private SettingsPanelView? _settingsPanelView;
+    private SettingsWindow? _settingsWindow;
 
     public MainWindow()
     {
@@ -33,13 +35,17 @@ public partial class MainWindow : Window
         grid.Bind(Grid.BackgroundProperty, binding);
 
         this.Title = $"{Title}-{Assembly.GetExecutingAssembly().GetName().Version?.ToString()}";
-        TwitchEventSocket.Authenticated += Authenticated;
-        if (SettingsManager.Current.Twitch.Enabled == true)
-            twitchStatus.Text = Lang.Resources.Connecting;
 
         var topLevel = TopLevel.GetTopLevel(this);
         ErrorForwarder.Sink.SetNotificationHandler(new WindowNotificationManager(topLevel) { MaxItems = 3 });
         Log.Information("Double Click your avatar to hide the settings");
+
+        _settingsPanelView = new SettingsPanelView();
+        _settingsPanelView.DetachRequested += OnSettingsDetachRequested;
+        _settingsPanelView.AttachRequested += OnSettingsAttachRequested;
+        _settingsPanelView.CloseRequested += OnSettingsCloseRequested;
+        _settingsPanelView.SaveRequested += OnSettingsSaveRequested;
+        settingsContentHost.Content = _settingsPanelView;
 
         CanvasOverlayService.CurrentOverlayViewModelChanged += OnCanvasOverlayViewModelChanged;
 #if DEBUG
@@ -59,6 +65,8 @@ public partial class MainWindow : Window
 
     protected override void OnClosing(WindowClosingEventArgs e)
     {
+        if (_settingsPanelView?.IsDetached == true)
+            Reattach();
         ScreenPosition.Save(new ScreenPosition()
         {
             Left = Position.X,
@@ -100,16 +108,13 @@ public partial class MainWindow : Window
         base.OnLoaded(e);
     }
 
-    private void Authenticated(object? sender, TwitchAuth e)
-    {
-        Dispatcher.UIThread.Invoke(() =>
-        {
-            twitchStatus.Text = Lang.Resources.Connected;
-        });
-    }
-
     private void DoubleClick(object? sender, TappedEventArgs e)
     {
+        if (_settingsPanelView?.IsDetached == true)
+        {
+            _settingsWindow?.Activate();
+            return;
+        }
         settings.IsVisible = !settings.IsVisible;
         ErrorForwarder.Sink.SetActive(settings.IsVisible);
         if (!settings.IsVisible)
@@ -118,27 +123,62 @@ public partial class MainWindow : Window
 
     private void EscDown(object? sender, KeyEventArgs e)
     {
-         if (e.Key == Key.Escape)
+        if (e.Key == Key.Escape)
             DoubleClick(null, null);
     }
 
-    private void TwitchPressed(object? sender, PointerPressedEventArgs e)
+    private void OnSettingsDetachRequested(object? sender, EventArgs e)
     {
-        tabs.SelectedIndex = 7;
+        if (_settingsPanelView == null) return;
+        settings.IsVisible = false;
+        ErrorForwarder.Sink.SetActive(false);
+        settingsContentHost.Content = null;
+        _settingsWindow ??= new SettingsWindow();
+        _settingsWindow.SetClosingCallback(Reattach);
+        _settingsWindow.Content = _settingsPanelView;
+        _settingsPanelView.SetDetached(true);
+        _settingsWindow.Show(this);
     }
 
-    private void SaveSettings(object? sender, RoutedEventArgs e)
+    private void OnSettingsAttachRequested(object? sender, EventArgs e) => Reattach();
+
+    private void OnSettingsCloseRequested(object? sender, EventArgs e)
+    {
+        if (_settingsPanelView?.IsDetached == true)
+        {
+            Reattach();
+            settings.IsVisible = false;
+            ErrorForwarder.Sink.SetActive(false);
+            CanvasOverlayService.ClearOverlay();
+        }
+        else
+        {
+            settings.IsVisible = false;
+            ErrorForwarder.Sink.SetActive(false);
+            CanvasOverlayService.ClearOverlay();
+        }
+    }
+
+    private void OnSettingsSaveRequested(object? sender, EventArgs e)
     {
         SettingsManager.Save();
         Specsmanager.Save();
         CanvasOverlayService.ClearOverlay();
     }
 
-    private void CloseSettings(object? sender, RoutedEventArgs e)
+    private void Reattach()
     {
-        settings.IsVisible = false;
-        ErrorForwarder.Sink.SetActive(false);
-        CanvasOverlayService.ClearOverlay();
+        if (_settingsPanelView == null) return;
+        if (_settingsWindow != null)
+        {
+            _settingsWindow.SetClosingCallback(null);
+            _settingsWindow.Content = null;
+            _settingsWindow.Close();
+            _settingsWindow = null;
+        }
+        settingsContentHost.Content = _settingsPanelView;
+        _settingsPanelView.SetDetached(false);
+        settings.IsVisible = true;
+        ErrorForwarder.Sink.SetActive(true);
     }
-
 }

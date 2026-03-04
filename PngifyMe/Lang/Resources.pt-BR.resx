@@ -252,6 +252,12 @@
   <data name="DarkenImage" xml:space="preserve">
     <value>Escureça sua imagem</value>
   </data>
+  <data name="DetachSettings" xml:space="preserve">
+    <value>Desanexar</value>
+  </data>
+  <data name="DockSettings" xml:space="preserve">
+    <value>Ancorar</value>
+  </data>
   <data name="Default" xml:space="preserve">
     <value>Padrão</value>
   </data>
@@ -680,6 +686,12 @@
   </data>
   <data name="ToolTipCloseSettings" xml:space="preserve">
     <value>Fechar configurações</value>
+  </data>
+  <data name="ToolTipDetachSettings" xml:space="preserve">
+    <value>Abrir configurações em janela separada</value>
+  </data>
+  <data name="ToolTipDockSettings" xml:space="preserve">
+    <value>Retornar configurações à janela principal</value>
   </data>
   <data name="ToolTipCurrent" xml:space="preserve">
     <value>Volume atual da fala</value>

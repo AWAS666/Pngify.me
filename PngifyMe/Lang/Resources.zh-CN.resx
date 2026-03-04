@@ -252,6 +252,12 @@
   <data name="DarkenImage" xml:space="preserve">
     <value>使图像变暗</value>
   </data>
+  <data name="DetachSettings" xml:space="preserve">
+    <value>分离</value>
+  </data>
+  <data name="DockSettings" xml:space="preserve">
+    <value>停靠</value>
+  </data>
   <data name="Default" xml:space="preserve">
     <value>默认</value>
   </data>
@@ -680,6 +686,12 @@
   </data>
   <data name="ToolTipCloseSettings" xml:space="preserve">
     <value>关闭设置</value>
+  </data>
+  <data name="ToolTipDetachSettings" xml:space="preserve">
+    <value>在单独窗口中打开设置</value>
+  </data>
+  <data name="ToolTipDockSettings" xml:space="preserve">
+    <value>将设置移回主窗口</value>
   </data>
   <data name="ToolTipCurrent" xml:space="preserve">
     <value>当前说话音量</value>

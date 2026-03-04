@@ -252,6 +252,12 @@
   <data name="DarkenImage" xml:space="preserve">
     <value>Mache dein Bild dunkler</value>
   </data>
+  <data name="DetachSettings" xml:space="preserve">
+    <value>Abkoppeln</value>
+  </data>
+  <data name="DockSettings" xml:space="preserve">
+    <value>Andocken</value>
+  </data>
   <data name="Default" xml:space="preserve">
     <value>Standard</value>
   </data>
@@ -680,6 +686,12 @@
   </data>
   <data name="ToolTipCloseSettings" xml:space="preserve">
     <value>Einstellungen schließen</value>
+  </data>
+  <data name="ToolTipDetachSettings" xml:space="preserve">
+    <value>Einstellungen in separates Fenster öffnen</value>
+  </data>
+  <data name="ToolTipDockSettings" xml:space="preserve">
+    <value>Einstellungen ins Hauptfenster zurückholen</value>
   </data>
   <data name="ToolTipCurrent" xml:space="preserve">
     <value>Aktuelle Lautstärke</value>
