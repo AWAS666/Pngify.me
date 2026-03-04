@@ -1,4 +1,5 @@
-﻿using PngifyMe.Helpers;
+using PngifyMe;
+using PngifyMe.Helpers;
 using PngifyMe.Layers.Helper;
 using PngifyMe.Services.CharacterSetup.Basic;
 using PngifyMe.Services.Settings;
@@ -52,6 +53,21 @@ namespace PngifyMe.Services
                 await SaveAsync();
             }
             Current.Profile.Load();
+            ApplyStartupProfile();
+        }
+
+        private static void ApplyStartupProfile()
+        {
+            var name = StartupOptions.ProfileName;
+            StartupOptions.ProfileName = null;
+            if (string.IsNullOrWhiteSpace(name)) return;
+
+            var profile = Current.Profile.ProfileList
+                .FirstOrDefault(p => string.Equals(p.Name, name.Trim(), StringComparison.OrdinalIgnoreCase));
+            if (profile != null)
+                Current.Profile.LoadNewProfile(profile);
+            else
+                Log.Warning("Startup profile \"{ProfileName}\" not found; using default.", name);
         }
 
         private static void UseDefaultSettings()

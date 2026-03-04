@@ -1,4 +1,4 @@
-﻿using Avalonia;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
@@ -25,7 +25,8 @@ class Program
     public static void Main(string[] args)
     {
         try
-        {
+        {          
+            ParseStartupArgs(args);
             SetupSerilog();
 
             if (args.Length > 0 && args[0] == "--crash")
@@ -46,7 +47,7 @@ class Program
         {
             Log.CloseAndFlush();
         }
-    }
+    }   
 
     // Avalonia configuration, don't remove; also used by visual designer.
     public static AppBuilder BuildAvaloniaApp()
@@ -58,12 +59,30 @@ class Program
             .UseReactiveUI();
     }
 
+    private static void ParseStartupArgs(string[] args)
+    {
+        // todo: figure out how todo help here, just console write aint doing it because of avalonia
+        if (args == null || args.Length == 0) return;
+        for (var i = 0; i < args.Length; i++)
+        {
+            if (string.Equals(args[i], "--profile", StringComparison.OrdinalIgnoreCase) && i + 1 < args.Length)
+            {
+                var value = args[i + 1];
+                if (!value.StartsWith("--", StringComparison.Ordinal))
+                {
+                    PngifyMe.StartupOptions.ProfileName = value;
+                    i++;
+                }
+            }
+        }
+    }
+
     private static void SetupSerilog()
     {
         // Define the path to the log file in %localappdata%/appname
         var localAppDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "PngifyMe", "logs", "log-.txt");
         // Ensure the directory exists
-        Directory.CreateDirectory(Path.GetDirectoryName(localAppDataPath));
+        Directory.CreateDirectory(Path.GetDirectoryName(localAppDataPath)!);
         // Configure Serilog to write to a file
         //https://github.com/serilog/serilog/wiki/configuration-basics
         Log.Logger = new LoggerConfiguration()
