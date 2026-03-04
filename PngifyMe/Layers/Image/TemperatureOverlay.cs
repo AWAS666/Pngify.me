@@ -2,6 +2,7 @@ using LibreHardwareMonitor.Hardware;
 using PngifyMe.Layers.Helper;
 using SkiaSharp;
 using System;
+using System.Text.Json.Serialization;
 
 namespace PngifyMe.Layers.Image;
 
@@ -26,6 +27,14 @@ public class TemperatureOverlay : ImageLayer
 
     [Unit("pixels (center)")]
     public float PosY { get; set; } = 100;
+
+    [JsonIgnore]
+    [CanvasPosition]
+    public CanvasPosition2D Position
+    {
+        get => new() { X = PosX, Y = PosY };
+        set { PosX = value.X; PosY = value.Y; }
+    }
 
     [Unit("bool")]
     public bool ShowCpu { get; set; } = true;
