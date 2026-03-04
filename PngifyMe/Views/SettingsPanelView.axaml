@@ -15,6 +15,7 @@
 				<Button x:Name="detachDockButton"
 						Click="OnDetachDockClick"
 						ToolTip.Tip="{x:Static lang:Resources.ToolTipDetachSettings}"
+						Classes="Danger"
 						Theme="{DynamicResource SolidButton}">
 					<StackPanel Orientation="Horizontal" Spacing="5">
 						<TextBlock x:Name="detachDockButtonText" Text="{x:Static lang:Resources.DetachSettings}"/>
