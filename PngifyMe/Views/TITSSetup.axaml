@@ -43,6 +43,7 @@
 			<StackPanel Orientation="Horizontal" Spacing="10">
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 						HorizontalAlignment="Left"
+						HotKey="CTRL+T"
 						ToolTip.Tip="{x:Static lang:Resources.TestThrowToolTip}"
 						Command="{Binding Trigger}" Content="{x:Static lang:Resources.TestThrow}" />
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
@@ -100,12 +101,14 @@
 				<Grid RowDefinitions="Auto,*" Margin="5,5,0,0">
 					<StackPanel Orientation="Horizontal" Spacing="10" Margin="0,0,0,5">
 						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-								Command="{Binding SetupTriggersCommand}" ToolTip.Tip="{x:Static lang:Resources.ApplyAndSave}">
+								Command="{Binding SetupTriggersCommand}" ToolTip.Tip="{x:Static lang:Resources.ApplyAndSave}"
+								HotKey="Ctrl+S">
 							<lucideAvalonia:Lucide Icon="Save" StrokeBrush="DodgerBlue"
 												StrokeThickness="2" Width="18" Height="18"/>
 						</Button>
 						<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-								Command="{Binding AddTriggerCommand}">
+								Command="{Binding AddTriggerCommand}"
+								HotKey="Ctrl+N">
 							<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 												StrokeThickness="2" Width="18" Height="18"/>
 						</Button>
@@ -122,7 +125,8 @@
 													  Content="{x:Static lang:Resources.UseRain}" />
 											<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
 													Command="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).RemoveTriggerCommand}"
-													CommandParameter="{Binding}">
+													CommandParameter="{Binding}"
+													HotKey="Delete">
 												<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
 												   StrokeThickness="2" Width="18" Height="18"/>
 											</Button>
@@ -153,7 +157,8 @@
 								<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
 										IsVisible="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).Settings.UseFolderEmotes}"
 										Command="{Binding $parent[ListBox].((vm:TITSSetupViewModel)DataContext).RemoveEmoteCommand}"
-										CommandParameter="{Binding}">
+										CommandParameter="{Binding}"
+										HotKey="Delete">
 									<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
 									   StrokeThickness="2" Width="18" Height="18"/>
 								</Button>

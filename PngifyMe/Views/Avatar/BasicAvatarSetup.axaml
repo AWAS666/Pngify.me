@@ -26,12 +26,14 @@
 			<StackPanel Orientation="Horizontal" Margin="5,5,5,5" Spacing="5">
 				<TextBlock VerticalAlignment="Center">States</TextBlock>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Command="{Binding Add}">
+						Command="{Binding Add}"
+						HotKey="Ctrl+N">
 					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 										   StrokeThickness="2" Width="18" Height="18"/>
 				</Button>
 				<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-						Command="{Binding Apply}" Content="{x:Static lang:Resources.ApplyAndSave}" />
+						Command="{Binding Apply}" Content="{x:Static lang:Resources.ApplyAndSave}"
+						HotKey="Ctrl+S" />
 			</StackPanel>
 
 			<Grid RowDefinitions="30,30,30,30" Margin="5,5,5,5">
@@ -74,6 +76,7 @@
 									Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 									Command="{Binding $parent[ListBox].((vm:BasicSetupViewModel)DataContext).Remove}"
 									CommandParameter="{Binding}"
+									HotKey="Delete"
 									Margin="5,0,0,0" HorizontalAlignment="Left">
 										<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
 															   StrokeThickness="2" Width="18" Height="18"/>

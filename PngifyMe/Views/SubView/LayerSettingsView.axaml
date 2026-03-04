@@ -20,7 +20,7 @@
 
 		<TextBox Watermark="{x:Static lang:Resources.Name}" HorizontalAlignment="Stretch" Text="{Binding Name}"/>
 		<Button Command="{Binding Parent.RemoveCommand}"
-				CommandParameter="{Binding}" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
+				CommandParameter="{Binding}" HotKey="Delete" Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 			Margin="5,0,0,0" Grid.Column="1" HorizontalAlignment="Left">
 			<lucideAvalonia:Lucide Icon="Minus" StrokeBrush="DodgerBlue"
 									StrokeThickness="2" Width="18" Height="18"/>
@@ -37,7 +37,8 @@
 					  Width="150"/>
 			<Button ToolTip.Tip="{x:Static lang:Resources.AddSelectLayerToolTip}"
 				Classes="Secondary" Theme="{DynamicResource OutlineButton}"
-				Command="{Binding AddNewLayer}" Content="{x:Static lang:Resources.AddLayer}"/>
+				Command="{Binding AddNewLayer}" Content="{x:Static lang:Resources.AddLayer}"
+				HotKey="Ctrl+N"/>
 			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 					Click="ShowSelector" Content="{x:Static lang:Resources.LayerMenu}"/>
 		</StackPanel>

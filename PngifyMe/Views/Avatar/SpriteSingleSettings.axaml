@@ -24,7 +24,8 @@
 			<Button Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 					Click="SwapImage">SwapImage</Button>
 			<Button Classes="Danger" Theme="{DynamicResource OutlineButton}"
-					Command="{Binding RemoveCommand}">
+					Command="{Binding RemoveCommand}"
+					HotKey="Delete">
 				<lucideAvalonia:Lucide Icon="Trash" StrokeBrush="DarkOrange"
 								StrokeThickness="2" Width="18" Height="18"/>
 			</Button>

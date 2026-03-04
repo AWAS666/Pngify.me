@@ -21,12 +21,14 @@
 				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.TriggerConditions}"/>
 				<Button Command="{Binding AddNewSettings}"
 						ToolTip.Tip="{x:Static lang:Resources.NewTriggerToolTip}"
+						HotKey="Ctrl+N"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}">
 					<lucideAvalonia:Lucide Icon="Plus" StrokeBrush="DodgerBlue"
 												   StrokeThickness="2" Width="18" Height="18"/>
 					</Button>
 				<Button Command="{Binding Save}" Content="{x:Static lang:Resources.ApplyAndSave}"
 						ToolTip.Tip="{x:Static lang:Resources.ApplyAndSaveToolTip}"
+						HotKey="Ctrl+S"
 						Classes="Secondary" Theme="{DynamicResource OutlineButton}"/>
 			</StackPanel>
 		</StackPanel>
@@ -44,6 +46,7 @@
 								<TextBox MinWidth="100" Text="{Binding Name}"></TextBox>
 								<Button Command="{Binding Parent.RemoveCommand}" 
 										CommandParameter="{Binding}"
+										HotKey="Delete"
 										Content="{x:Static lang:Resources.Remove}"/>
 								<Label Content="{x:Static lang:Resources.Trigger}"/>
 								<TextBlock Text="{Binding SelectedTriggerType.Name}"/>

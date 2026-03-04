@@ -23,7 +23,8 @@
 			<Button Content="{x:Static lang:Resources.Remove}"
 					Classes="Secondary" Theme="{DynamicResource OutlineButton}"
 					Command="{Binding Parent.RemoveCommand}"
-					CommandParameter="{Binding}"></Button>
+					CommandParameter="{Binding}"
+					HotKey="Delete"></Button>
 		</StackPanel>
 		<ItemsControl ItemsSource="{Binding PropertyList}" x:Name="propertyList">
 			<ItemsControl.ItemTemplate>
