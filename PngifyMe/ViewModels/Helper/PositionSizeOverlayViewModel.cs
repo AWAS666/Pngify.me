@@ -1,13 +1,11 @@
-using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers.Helper;
-using PngifyMe.Services;
 using System;
 using System.Reflection;
 
 namespace PngifyMe.ViewModels.Helper;
 
-public sealed partial class PositionSizeOverlayViewModel : ObservableObject
+public sealed partial class PositionSizeOverlayViewModel : CanvasPointOverlayViewModelBase
 {
     private readonly BaseLayerViewModel _layerViewModel;
     private readonly PropertyInfo _propPosition;
@@ -17,7 +15,6 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
     /// We own this instance; read once from layer at init, then update it and push back to the layer.
     /// </summary>
     private readonly CanvasPosition2D _position;
-    private bool _isRefreshing;
 
     public BaseLayerViewModel LayerViewModel => _layerViewModel;
 
@@ -37,7 +34,7 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
             Y = GetFloat(pos, "Y")
         };
 
-        _isRefreshing = true;
+        BeginPositionRefresh();
         try
         {
             X = _position.X;
@@ -45,7 +42,7 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
         }
         finally
         {
-            _isRefreshing = false;
+            EndPositionRefresh();
         }
     }
 
@@ -66,12 +63,6 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
         var v = prop?.GetValue(obj);
         return v != null ? Convert.ToSingle(v) : 0;
     }
-
-    [ObservableProperty]
-    private float _x;
-
-    [ObservableProperty]
-    private float _y;
 
     private void PushPositionToLayer()
     {
@@ -94,20 +85,5 @@ public sealed partial class PositionSizeOverlayViewModel : ObservableObject
         }
     }
 
-    partial void OnXChanged(float value)
-    {
-        if (_isRefreshing) return;
-        PushPositionToLayer();
-    }
-    partial void OnYChanged(float value)
-    {
-        if (_isRefreshing) return;
-        PushPositionToLayer();
-    }
-
-    [RelayCommand]
-    private void Close()
-    {
-        CanvasOverlayService.ClearOverlay();
-    }
+    protected override void PushToModel() => PushPositionToLayer();
 }

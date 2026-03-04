@@ -36,6 +36,9 @@
 					<DataTemplate DataType="{x:Type vmHelper:PositionSizeOverlayViewModel}">
 						<viewsOverlay:PositionSizeOverlayView/>
 					</DataTemplate>
+					<DataTemplate DataType="{x:Type vmHelper:SpritePointOverlayViewModel}">
+						<viewsOverlay:PositionSizeOverlayView/>
+					</DataTemplate>
 				</ContentControl.DataTemplates>
 			</ContentControl>
 		</Grid>

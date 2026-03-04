@@ -1,4 +1,4 @@
-﻿using Avalonia.Controls;
+using Avalonia.Controls;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PngifyMe.Layers;
@@ -56,8 +56,10 @@ public partial class SpriteImage : ObservableObject
     public Vector2 CurrentPosition => Position + Offset;
 
     [JsonIgnore]
-    public Vector2 CurrentAnchor => Anchor + rotOffset;
-    private Vector2 rotOffset = Vector2.Zero;
+    public Vector2 CurrentAnchor => Anchor + RotOffset;
+
+    [JsonIgnore]
+    public Vector2 RotOffset { get; private set; } = Vector2.Zero;
 
     [property: JsonIgnore]
     [ObservableProperty]
@@ -193,8 +195,8 @@ public partial class SpriteImage : ObservableObject
         {
             Vector2 dif = Anchor - Parent.Anchor;
             Vector2 newDif = Rotate(dif, Parent.CurrentRotation / 180 * MathF.PI);
-            rotOffset = newDif - dif;
-            offset += rotOffset;
+            RotOffset = newDif - dif;
+            offset += RotOffset;
         }
 
         // Calculate the velocity based on the offset difference

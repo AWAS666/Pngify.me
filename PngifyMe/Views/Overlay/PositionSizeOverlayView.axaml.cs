@@ -30,7 +30,7 @@ public partial class PositionSizeOverlayView : UserControl
             _vmSubscribed.PropertyChanged -= Vm_PropertyChanged;
             _vmSubscribed = null;
         }
-        if (DataContext is ViewModels.Helper.PositionSizeOverlayViewModel vm)
+        if (DataContext is ViewModels.Helper.CanvasPointOverlayViewModelBase vm)
         {
             _vmSubscribed = vm;
             vm.PropertyChanged += Vm_PropertyChanged;
@@ -38,11 +38,11 @@ public partial class PositionSizeOverlayView : UserControl
         }
     }
 
-    private ViewModels.Helper.PositionSizeOverlayViewModel? _vmSubscribed;
+    private ViewModels.Helper.CanvasPointOverlayViewModelBase? _vmSubscribed;
 
     private void Vm_PropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
-        if (e.PropertyName is nameof(ViewModels.Helper.PositionSizeOverlayViewModel.X) or nameof(ViewModels.Helper.PositionSizeOverlayViewModel.Y))
+        if (e.PropertyName is nameof(ViewModels.Helper.CanvasPointOverlayViewModelBase.X) or nameof(ViewModels.Helper.CanvasPointOverlayViewModelBase.Y))
             UpdateTargetPosition();
     }
 
@@ -55,7 +55,7 @@ public partial class PositionSizeOverlayView : UserControl
 
     private void OnPointerPressed(object? sender, PointerPressedEventArgs e)
     {
-        if (DataContext is not ViewModels.Helper.PositionSizeOverlayViewModel vm)
+        if (DataContext is not ViewModels.Helper.CanvasPointOverlayViewModelBase vm)
             return;
         var point = e.GetCurrentPoint(this);
         if (point.Properties.IsLeftButtonPressed)
@@ -68,7 +68,7 @@ public partial class PositionSizeOverlayView : UserControl
 
     private void OnPointerMoved(object? sender, PointerEventArgs e)
     {
-        if (!_isDragging || DataContext is not ViewModels.Helper.PositionSizeOverlayViewModel vm)
+        if (!_isDragging || DataContext is not ViewModels.Helper.CanvasPointOverlayViewModelBase vm)
             return;
         var point = e.GetCurrentPoint(this);
         SetPositionFromPointer(point.Position, vm);
@@ -81,17 +81,13 @@ public partial class PositionSizeOverlayView : UserControl
             _isDragging = false;
     }
 
-    /// <summary>
-    /// Convert control position (top-left origin) to canvas space (top-left origin) and set VM X,Y.
-    /// </summary>
-    private void SetPositionFromPointer(Point controlPos, ViewModels.Helper.PositionSizeOverlayViewModel vm)
+    private void SetPositionFromPointer(Point controlPos, ViewModels.Helper.CanvasPointOverlayViewModelBase vm)
     {
         var bounds = Bounds;
         if (bounds.Width <= 0 || bounds.Height <= 0) return;
-        double canvasX = (controlPos.X / bounds.Width) * Specsmanager.Width;
-        double canvasY = (controlPos.Y / bounds.Height) * Specsmanager.Height;
-        vm.X = (float)canvasX;
-        vm.Y = (float)canvasY;
+        var (logicalX, logicalY) = vm.ControlToLogical(controlPos.X, controlPos.Y, bounds.Width, bounds.Height, Specsmanager.Width, Specsmanager.Height);
+        vm.X = logicalX;
+        vm.Y = logicalY;
         UpdateTargetPosition();
     }
 
@@ -100,17 +96,13 @@ public partial class PositionSizeOverlayView : UserControl
         UpdateTargetPosition();
     }
 
-    /// <summary>
-    /// Convert canvas (X,Y) (top-left origin) to control space and position the target graphic.
-    /// </summary>
     private void UpdateTargetPosition()
     {
-        if (DataContext is not ViewModels.Helper.PositionSizeOverlayViewModel vm)
+        if (DataContext is not ViewModels.Helper.CanvasPointOverlayViewModelBase vm)
             return;
         var bounds = Bounds;
         if (bounds.Width <= 0 || bounds.Height <= 0) return;
-        double controlX = (vm.X / Specsmanager.Width) * bounds.Width;
-        double controlY = (vm.Y / Specsmanager.Height) * bounds.Height;
+        var (controlX, controlY) = vm.LogicalToControl(bounds.Width, bounds.Height, Specsmanager.Width, Specsmanager.Height);
         Canvas.SetLeft(targetGraphic, controlX - TargetGraphicSize / 2);
         Canvas.SetTop(targetGraphic, controlY - TargetGraphicSize / 2);
     }

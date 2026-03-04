@@ -1,6 +1,7 @@
 using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Avalonia.Platform.Storage;
+using PngifyMe.Services;
 using PngifyMe.Services.CharacterSetup.Advanced;
 using PngifyMe.ViewModels.Helper;
 using System.Linq;
@@ -35,5 +36,17 @@ public partial class SpriteSingleSettings : UserControl
         {
             con.SwitchImage(WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath));
         }
+    }
+
+    private void OpenPositionOnCanvas(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is not SpriteImage sprite) return;
+        CanvasOverlayService.SetOverlay(new SpritePointOverlayViewModel(sprite, isAnchor: false), this);
+    }
+
+    private void OpenAnchorOnCanvas(object? sender, RoutedEventArgs e)
+    {
+        if (DataContext is not SpriteImage sprite) return;
+        CanvasOverlayService.SetOverlay(new SpritePointOverlayViewModel(sprite, isAnchor: true), this);
     }
 }
