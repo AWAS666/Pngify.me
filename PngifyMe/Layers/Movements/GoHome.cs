@@ -13,7 +13,7 @@ public class GoHome : MovementBaseLayer
     [Unit("seconds")]
     public float TotalTime { get; set; } = 8;
 
-    private bool Reverse;
+    private bool reverse;
 
     public GoHome()
     {
@@ -37,10 +37,16 @@ public class GoHome : MovementBaseLayer
     public override bool Update(float dt)
     {
         if (CurrentTime >= TotalTime / 2)
-            Reverse = true;
+            reverse = true;
 
         if (CurrentTime < 0)
             return true;
-        return base.Update(Reverse ? -dt : dt);
+        return base.Update(reverse ? -dt : dt);
+    }
+
+    public override void Reset()
+    {
+        reverse = false;
+        base.Reset();
     }
 }

@@ -8,7 +8,7 @@ public abstract class RampOnConditionOnceLayer : PermaLayer
     private float stateChangeTime;
     private bool lastCondition;
     private float activatedTime;
-    private bool activating;
+    private bool activating;   
 
     protected bool Triggering;
     protected bool Releasing;
@@ -83,6 +83,15 @@ public abstract class RampOnConditionOnceLayer : PermaLayer
 
         lastCondition = current;
         base.OnUpdate(dt, time);
+    }
+
+    public override void Reset()
+    {
+        stateChangeTime = 0;
+        lastCondition = false;
+        activatedTime = 0;
+        activating = false;
+        base.Reset();
     }
 
 }

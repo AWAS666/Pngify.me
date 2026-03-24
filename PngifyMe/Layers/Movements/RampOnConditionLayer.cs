@@ -70,4 +70,11 @@ public abstract class RampOnConditionLayer : PermaLayer
         base.OnUpdate(dt, time);
     }
 
+    public override void Reset()
+    {
+        stateChangeTime = 0;
+        lastCondition = false;
+        base.Reset();
+    }
+
 }

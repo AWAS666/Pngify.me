@@ -12,9 +12,7 @@ public class HopOnceOnTalk : RampOnConditionOnceLayer
     [Unit("pixels")]
     public float Offset { get; set; } = 20f;
     public float Frequency { get; set; } = 2f;
-    public HopOnceOnTalk()
-    {
-    }
+   
     public override void OnCalculateParameters(float dt, ref LayerValues values)
     {
         // this should make it so sinus always start from zero on fresh trigger

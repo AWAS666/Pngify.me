@@ -35,4 +35,10 @@ public abstract class MovementBaseLayer : BaseLayer
     {
         CurrentStrength = 1.0f - Easings.CubicEaseOut(fraction);
     }
+
+    public override void Reset()
+    {
+        CurrentStrength = 0;
+        base.Reset();
+    }
 }

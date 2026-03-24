@@ -91,5 +91,11 @@ namespace PngifyMe.Layers.Image
             float width = paint.MeasureText(text);
             canvas.DrawText(text, PosX + offsetX - width / 2, PosY + offsetY, paint);
         }
+
+        public override void Reset()
+        {
+            negativeTime = 0;
+            base.Reset();
+        }
     }
 }

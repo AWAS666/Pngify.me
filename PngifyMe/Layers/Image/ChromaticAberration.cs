@@ -121,5 +121,10 @@ namespace PngifyMe.Layers.Image
             return output;
         }
 
+        public override void Reset()
+        {
+            lastStrength = float.MinValue;
+            base.Reset();
+        }
     }
 }

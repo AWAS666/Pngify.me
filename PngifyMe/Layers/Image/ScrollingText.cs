@@ -1,4 +1,5 @@
-﻿using PngifyMe.Layers.Helper;
+﻿using Avalonia.Media;
+using PngifyMe.Layers.Helper;
 using PngifyMe.Services;
 using SkiaSharp;
 
@@ -44,6 +45,12 @@ namespace PngifyMe.Layers.Image
 
             if (currentOffset > Specsmanager.Width)
                 IsExiting = true;
+        }
+
+        public override void Reset()
+        {
+            currentOffset = 0;
+            base.Reset();
         }
     }
 }

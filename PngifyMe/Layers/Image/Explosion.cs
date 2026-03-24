@@ -92,6 +92,13 @@ public class Explosion : ImageLayer
         base.OnUpdateExit(dt, fraction);
     }
 
+    public override void Reset()
+    {
+        firstframe = 0;
+        drawing = false;
+        base.Reset();
+    }
+
     static List<Particle> CreateParticles(SKBitmap image, int particleSize)
     {
         var particles = new List<Particle>();

@@ -76,6 +76,7 @@ public class Layersetting
         foreach (var layer in Layers)
         {
             layer.AddedBy = this;
+            layer.Reset();
             LayerManager.AddLayer(layer, Trigger.IsToggleable);
         }
         LayerManager.LayerTriggered?.Invoke(this, this);

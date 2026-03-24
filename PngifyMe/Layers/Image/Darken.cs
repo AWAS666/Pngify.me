@@ -44,5 +44,11 @@ namespace PngifyMe.Layers.Image
             // Draw a rectangle covering the entire bitmap
             canvas.DrawRect(new SKRect(0, 0, bitmap.Width, bitmap.Height), paint);
         }
+
+        public override void Reset()
+        {
+            framecounter = 0;
+            base.Reset();
+        }
     }
 }

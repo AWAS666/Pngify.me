@@ -46,4 +46,10 @@ public class Panic : MovementBaseLayer
         values.PosX += x;
         values.PosY += (float)Math.Sin(CurrentTime * Speed / 30) * Speed / 10 * CurrentStrength;
     }
+
+    public override void Reset()
+    {
+        zoom = 0;
+        base.Reset();
+    }
 }
