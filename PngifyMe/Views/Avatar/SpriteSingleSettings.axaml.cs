@@ -32,9 +32,9 @@ public partial class SpriteSingleSettings : UserControl
             FileTypeFilter = new[] { FilePickers.ImageAll },
             AllowMultiple = false
         });
-        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.LocalPath))
         {
-            con.SwitchImage(WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath));
+            con.SwitchImage(path.FirstOrDefault()?.Path?.LocalPath);
         }
     }
 

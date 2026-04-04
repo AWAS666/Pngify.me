@@ -26,9 +26,9 @@ public partial class PropertyView : UserControl
             AllowMultiple = false
         });
 
-        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.LocalPath))
         {
-            vm.Value = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            vm.Value = path.FirstOrDefault()?.Path?.LocalPath;
         }
     }
 
@@ -43,9 +43,9 @@ public partial class PropertyView : UserControl
             Title = " Select a Folder"
         });
 
-        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.LocalPath))
         {
-            vm.Value = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            vm.Value = path.FirstOrDefault()?.Path?.LocalPath;
         }
     }
 }

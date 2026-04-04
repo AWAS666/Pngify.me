@@ -27,9 +27,9 @@ public partial class ImageSelectView : UserControl
             FileTypeFilter = new[] { FilePickers.ImageAll },
             AllowMultiple = false
         });
-        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.LocalPath))
         {
-            vm.LoadFromFile(WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath));
+            vm.LoadFromFile(path.FirstOrDefault()?.Path?.LocalPath);
         }
     }
 

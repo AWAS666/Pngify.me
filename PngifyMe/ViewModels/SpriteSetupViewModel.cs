@@ -43,9 +43,9 @@ public partial class SpriteSetupViewModel : ObservableObject
             FileTypeFilter = new[] { FilePickers.PngTuberPlus },
             AllowMultiple = false
         });
-        var filePath = path.FirstOrDefault()?.Path?.AbsolutePath;
+        var filePath = path.FirstOrDefault()?.Path?.LocalPath;
         if (string.IsNullOrEmpty(filePath)) return;
-        filePath = WebUtility.UrlDecode(filePath);
+        //filePath = WebUtility.UrlDecode(filePath);
 
         var file = await File.ReadAllTextAsync(filePath);
         var obj = JsonSerializer.Deserialize<Dictionary<string, PngTuberPlusObject>>(file);
@@ -106,7 +106,7 @@ public partial class SpriteSetupViewModel : ObservableObject
         {
             try
             {
-                filePath = WebUtility.UrlDecode(item.Path.AbsolutePath);
+                filePath = item.Path.LocalPath;
                 var sprite = new SpriteImage();
                 await Task.Run(async () =>
                 {

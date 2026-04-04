@@ -30,7 +30,7 @@ public class StaticImage : BaseImage
         {
             Bitmap = SKBitmap.Decode(input);
             if (Bitmap == null)
-                throw new Exception("Failed to load image.");
+                throw new Exception("Failed to load image, check file path for special characters");
         }
         Bitmap.SetImmutable();
     }

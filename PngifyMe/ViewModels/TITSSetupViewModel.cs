@@ -56,9 +56,9 @@ public partial class TITSSetupViewModel : ObservableObject
             FileTypeFilter = new[] { FilePickers.AudioAll },
             AllowMultiple = false
         });
-        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.AbsolutePath))
+        if (!string.IsNullOrEmpty(path.FirstOrDefault()?.Path?.LocalPath))
         {
-            SettingsManager.Current.Tits.HitSound = WebUtility.UrlDecode(path.FirstOrDefault()?.Path?.AbsolutePath);
+            SettingsManager.Current.Tits.HitSound = path.FirstOrDefault()?.Path?.LocalPath;
             SettingsManager.Current.Tits.HitSoundFileName = Path.GetFileName(SettingsManager.Current.Tits.HitSound);
         }
     }
@@ -100,7 +100,7 @@ public partial class TITSSetupViewModel : ObservableObject
 
         foreach (var path in paths)
         {
-            var realPath = WebUtility.UrlDecode(path.Path?.AbsolutePath);
+            var realPath = path.Path?.LocalPath;
             if (string.IsNullOrEmpty(realPath)) continue;
             await TITS.LoadLocalEmote(realPath);
         }

@@ -87,7 +87,7 @@ public partial class ProfileSetup : UserControl
 
         if (path == null) return;
 
-        await SettingsManager.Current.Profile.ExportProfile(vmS.Profile, WebUtility.UrlDecode(path.Path?.AbsolutePath));
+        await SettingsManager.Current.Profile.ExportProfile(vmS.Profile, path.Path?.LocalPath);
     }
 
     public async void Import(object sender, RoutedEventArgs e)
@@ -105,7 +105,7 @@ public partial class ProfileSetup : UserControl
 
         foreach (var item in path)
         {
-            var prof = await SettingsManager.Current.Profile.ImportProfile(WebUtility.UrlDecode(item.Path?.AbsolutePath));
+            var prof = await SettingsManager.Current.Profile.ImportProfile(item.Path?.LocalPath);
             vm.Profiles.Add(new ProfileViewModel(prof));
         }
     }
