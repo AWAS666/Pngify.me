@@ -480,6 +480,9 @@
   <data name="OriginOffset" xml:space="preserve">
     <value>смещает исходную точку эффекта, полезно для вращения, растягивания снизу</value>
   </data>
+  <data name="CropLayer" xml:space="preserve">
+    <value>Обрезает основной аватар до прямоугольной области</value>
+  </data>
   <data name="OtherSoftware" xml:space="preserve">
     <value>Другое ПО/Игры</value>
   </data>

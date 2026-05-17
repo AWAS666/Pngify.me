@@ -480,6 +480,9 @@
   <data name="OriginOffset" xml:space="preserve">
     <value>偏移效果原点，有助于旋转，从底部拉伸</value>
   </data>
+  <data name="CropLayer" xml:space="preserve">
+    <value>将主头像裁剪为矩形区域</value>
+  </data>
   <data name="OtherSoftware" xml:space="preserve">
     <value>其他软件/游戏</value>
   </data>

@@ -480,6 +480,9 @@
   <data name="OriginOffset" xml:space="preserve">
     <value>desloca a origem do efeito, útil para rotação, esticamento a partir de baixo</value>
   </data>
+  <data name="CropLayer" xml:space="preserve">
+    <value>Recorta o avatar principal para uma região retangular</value>
+  </data>
   <data name="OtherSoftware" xml:space="preserve">
     <value>Outros softwares/jogos</value>
   </data>

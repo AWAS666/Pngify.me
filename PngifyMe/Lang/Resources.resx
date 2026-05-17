@@ -480,6 +480,9 @@
   <data name="OriginOffset" xml:space="preserve">
     <value>offsets effect origin, useful for rotation, stretch from bottom</value>
   </data>
+  <data name="CropLayer" xml:space="preserve">
+    <value>Crops the main avatar to a rectangular region</value>
+  </data>
   <data name="OtherSoftware" xml:space="preserve">
     <value>Other Software/Games</value>
   </data>

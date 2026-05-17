@@ -25,7 +25,8 @@ namespace PngifyMe.ViewModels.Helper
             Name = layer.GetType().Name;
             HasCanvasOverlay = layer.GetType()
                 .GetProperties(BindingFlags.Public | BindingFlags.Instance)
-                .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>() != null);
+                .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>() != null
+                    || p.GetCustomAttribute<CanvasRegionAttribute>() != null);
             UpdatePropertyList();
             Parent = parent;
         }
@@ -43,7 +44,13 @@ namespace PngifyMe.ViewModels.Helper
         [RelayCommand]
         private void OpenCanvasOverlay(object? sourceControl)
         {
-            CanvasOverlayService.SetOverlay(new PositionSizeOverlayViewModel(this), sourceControl as Control);
+            var layerType = LayerModel.GetType();
+            var hasRegion = layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Any(p => p.GetCustomAttribute<CanvasRegionAttribute>() != null);
+            if (hasRegion)
+                CanvasOverlayService.SetOverlay(new CropRegionOverlayViewModel(this), sourceControl as Control);
+            else
+                CanvasOverlayService.SetOverlay(new PositionSizeOverlayViewModel(this), sourceControl as Control);
         }
 
         private void UpdatePropertyList()
@@ -52,8 +59,53 @@ namespace PngifyMe.ViewModels.Helper
             var layerType = LayerModel.GetType();
             var hasPointProperty = layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
                 .Any(p => p.GetCustomAttribute<CanvasPositionAttribute>() != null);
+            var hasRegionProperty = layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance)
+                .Any(p => p.GetCustomAttribute<CanvasRegionAttribute>() != null);
             foreach (var prop in layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
+                var canvasRegionAttr = prop.GetCustomAttribute<CanvasRegionAttribute>();
+                if (canvasRegionAttr != null)
+                {
+                    var regionObj = prop.GetValue(LayerModel);
+                    PropertyList.Add(new PropertyViewModel
+                    {
+                        Name = $"{prop.Name}.X",
+                        Value = GetSubPropertyValue(regionObj, "X")?.ToString() ?? "0",
+                        Unit = Resources.PixelsCenter,
+                        Type = typeof(float),
+                        ShowEditOnCanvasButton = true,
+                        SourcePropertyName = prop.Name,
+                        SourceSubPropertyName = "X",
+                    });
+                    PropertyList.Add(new PropertyViewModel
+                    {
+                        Name = $"{prop.Name}.Y",
+                        Value = GetSubPropertyValue(regionObj, "Y")?.ToString() ?? "0",
+                        Unit = Resources.PixelsCenter,
+                        Type = typeof(float),
+                        SourcePropertyName = prop.Name,
+                        SourceSubPropertyName = "Y",
+                    });
+                    PropertyList.Add(new PropertyViewModel
+                    {
+                        Name = $"{prop.Name}.Width",
+                        Value = GetSubPropertyValue(regionObj, "Width")?.ToString() ?? "0",
+                        Unit = "pixels",
+                        Type = typeof(float),
+                        SourcePropertyName = prop.Name,
+                        SourceSubPropertyName = "Width",
+                    });
+                    PropertyList.Add(new PropertyViewModel
+                    {
+                        Name = $"{prop.Name}.Height",
+                        Value = GetSubPropertyValue(regionObj, "Height")?.ToString() ?? "0",
+                        Unit = "pixels",
+                        Type = typeof(float),
+                        SourcePropertyName = prop.Name,
+                        SourceSubPropertyName = "Height",
+                    });
+                    continue;
+                }
                 var canvasPosAttr = prop.GetCustomAttribute<CanvasPositionAttribute>();
                 if (canvasPosAttr != null)
                 {
@@ -84,6 +136,8 @@ namespace PngifyMe.ViewModels.Helper
                 if (Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)))
                     continue;
                 if (hasPointProperty && (prop.Name == "PosX" || prop.Name == "PosY"))
+                    continue;
+                if (hasRegionProperty && (prop.Name is "CenterOffsetX" or "CenterOffsetY" or "Width" or "Height"))
                     continue;
 
                 var propertyViewModel = new PropertyViewModel

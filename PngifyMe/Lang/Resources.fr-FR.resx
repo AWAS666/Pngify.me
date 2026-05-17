@@ -480,6 +480,9 @@
   <data name="OriginOffset" xml:space="preserve">
     <value>décale l'origine de l'effet, utile pour la rotation, l'étirement depuis le bas</value>
   </data>
+  <data name="CropLayer" xml:space="preserve">
+    <value>Recadre l'avatar principal dans une région rectangulaire</value>
+  </data>
   <data name="OtherSoftware" xml:space="preserve">
     <value>Autres logiciels/jeux</value>
   </data>

@@ -13,6 +13,11 @@ public abstract class ImageLayer : PermaLayer
 
     public abstract void RenderImage(SKCanvas canvas, float x, float y);
 
+    /// <summary>
+    /// Called after the main avatar and transition are drawn. Use to end clip regions started in <see cref="RenderImage"/>.
+    /// </summary>
+    public virtual void RenderImageAfterAvatar(SKCanvas canvas, float x, float y) { }
+
     public ImageLayer()
     {
         ExitTime = 0f;
