@@ -78,11 +78,17 @@ namespace PngifyMe.Services
 
         public static void Save()
         {
-            File.WriteAllText(FilePath, JsonSerializer.Serialize(Current, JsonSerializeHelper.GetDefault()));
+            SaveAsync().GetAwaiter().GetResult();
         }
 
         public static async Task SaveAsync()
         {
+            // create singular backup
+            // todo: more backups?
+            if (File.Exists(FilePath))
+            {
+               File.Copy(FilePath, FilePath + ".bak", true);
+            }
             await File.WriteAllTextAsync(FilePath, JsonSerializer.Serialize(Current, JsonSerializeHelper.GetDefault()));
         }
     }
