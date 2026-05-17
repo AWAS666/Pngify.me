@@ -63,74 +63,16 @@ namespace PngifyMe.ViewModels.Helper
                 .Any(p => p.GetCustomAttribute<CanvasRegionAttribute>() != null);
             foreach (var prop in layerType.GetProperties(BindingFlags.Public | BindingFlags.Instance))
             {
-                var canvasRegionAttr = prop.GetCustomAttribute<CanvasRegionAttribute>();
-                if (canvasRegionAttr != null)
+                if (prop.GetCustomAttribute<CanvasRegionAttribute>() != null)
                 {
-                    var regionObj = prop.GetValue(LayerModel);
-                    PropertyList.Add(new PropertyViewModel
-                    {
-                        Name = $"{prop.Name}.X",
-                        Value = GetSubPropertyValue(regionObj, "X")?.ToString() ?? "0",
-                        Unit = Resources.PixelsCenter,
-                        Type = typeof(float),
-                        ShowEditOnCanvasButton = true,
-                        SourcePropertyName = prop.Name,
-                        SourceSubPropertyName = "X",
-                    });
-                    PropertyList.Add(new PropertyViewModel
-                    {
-                        Name = $"{prop.Name}.Y",
-                        Value = GetSubPropertyValue(regionObj, "Y")?.ToString() ?? "0",
-                        Unit = Resources.PixelsCenter,
-                        Type = typeof(float),
-                        SourcePropertyName = prop.Name,
-                        SourceSubPropertyName = "Y",
-                    });
-                    PropertyList.Add(new PropertyViewModel
-                    {
-                        Name = $"{prop.Name}.Width",
-                        Value = GetSubPropertyValue(regionObj, "Width")?.ToString() ?? "0",
-                        Unit = "pixels",
-                        Type = typeof(float),
-                        SourcePropertyName = prop.Name,
-                        SourceSubPropertyName = "Width",
-                    });
-                    PropertyList.Add(new PropertyViewModel
-                    {
-                        Name = $"{prop.Name}.Height",
-                        Value = GetSubPropertyValue(regionObj, "Height")?.ToString() ?? "0",
-                        Unit = "pixels",
-                        Type = typeof(float),
-                        SourcePropertyName = prop.Name,
-                        SourceSubPropertyName = "Height",
-                    });
+                    foreach (var regionProperty in CanvasRegionAttribute.CreatePropertyViewModels(prop, LayerModel))
+                        PropertyList.Add(regionProperty);
                     continue;
                 }
-                var canvasPosAttr = prop.GetCustomAttribute<CanvasPositionAttribute>();
-                if (canvasPosAttr != null)
+                if (prop.GetCustomAttribute<CanvasPositionAttribute>() != null)
                 {
-                    var posObj = prop.GetValue(LayerModel);
-                    var xVal = GetSubPropertyValue(posObj, "X");
-                    var yVal = GetSubPropertyValue(posObj, "Y");
-                    PropertyList.Add(new PropertyViewModel
-                    {
-                        Name = $"{prop.Name}.X",
-                        Value = xVal?.ToString() ?? "0",
-                        Unit = Resources.PixelsCenter,
-                        Type = typeof(float),
-                        ShowEditOnCanvasButton = true,
-                        SourcePropertyName = prop.Name,
-                        SourceSubPropertyName = "X",
-                    });
-                    PropertyList.Add(new PropertyViewModel
-                    {
-                        Name = $"{prop.Name}.Y",
-                        Value = yVal?.ToString() ?? "0",
-                        Unit = Resources.PixelsCenter,
-                        Type = typeof(float),
-                        SourcePropertyName = prop.Name,
-                        SourceSubPropertyName = "Y",
-                    });
+                    foreach (var positionProperty in CanvasPositionAttribute.CreatePropertyViewModels(prop, LayerModel))
+                        PropertyList.Add(positionProperty);
                     continue;
                 }
                 if (Attribute.IsDefined(prop, typeof(JsonIgnoreAttribute)))
@@ -183,13 +125,6 @@ namespace PngifyMe.ViewModels.Helper
 
                 PropertyList.Add(propertyViewModel);
             }
-        }
-
-        private static object? GetSubPropertyValue(object? obj, string subName)
-        {
-            if (obj == null) return null;
-            var sub = obj.GetType().GetProperty(subName, BindingFlags.Public | BindingFlags.Instance);
-            return sub?.GetValue(obj);
         }
 
         public void Save()
