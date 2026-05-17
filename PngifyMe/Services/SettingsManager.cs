@@ -78,7 +78,7 @@ namespace PngifyMe.Services
 
         public static void Save()
         {
-            SaveAsync().GetAwaiter().GetResult();
+            _ = SaveAsync();
         }
 
         public static async Task SaveAsync()
