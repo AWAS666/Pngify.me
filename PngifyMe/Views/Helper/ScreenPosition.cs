@@ -30,10 +30,19 @@ namespace PngifyMe.Views.Helper
 
         public static ScreenPosition Load()
         {
-            var path = Path.Combine(Specsmanager.BasePath, "screen.json");
-            if (!File.Exists(path))
+            try
+            {
+                var path = Path.Combine(Specsmanager.BasePath, "screen.json");
+                if (!File.Exists(path))
+                    return null;
+                return JsonSerializer.Deserialize<ScreenPosition>(File.ReadAllText(path));
+            }
+            catch (Exception e)
+            {
+                Log.Error(e, $"Error in reading of screen position: {e.Message}");
                 return null;
-            return JsonSerializer.Deserialize<ScreenPosition>(File.ReadAllText(path));
+            }
+           
         }
     }
 }
