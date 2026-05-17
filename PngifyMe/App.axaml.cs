@@ -112,6 +112,7 @@ public partial class App : Application
         catch (Exception e)
         {
             Log.Error($"App Init Error: {e.Message}", e);
+            throw;
         }
     }
 
