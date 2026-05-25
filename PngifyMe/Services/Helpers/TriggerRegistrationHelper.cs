@@ -11,6 +11,7 @@ public class TriggerRegistrationHelper
 {
     private readonly List<Action> _hotkeyCallbacks = new();
     private readonly List<TwitchRedeem> _registeredRedeems = new();
+    private readonly List<TwitchCustomPowerUp> _registeredCustomPowerUps = new();
     private readonly List<TwitchBits> _registeredBits = new();
     private readonly List<TwitchSub> _registeredSubs = new();
     private readonly List<TwitchTextCommand> _registeredTextCommands = new();
@@ -33,6 +34,10 @@ public class TriggerRegistrationHelper
             case TwitchRedeem redeem:
                 TwitchEventSocket.RedeemUsed += redeem.Triggered;
                 _registeredRedeems.Add(redeem);
+                break;
+            case TwitchCustomPowerUp powerUP:
+                TwitchEventSocket.CustomPowerUp += powerUP.Triggered;
+                _registeredCustomPowerUps.Add(powerUP);
                 break;
             case TwitchBits bits:
                 TwitchEventSocket.BitsUsed += bits.Triggered;
@@ -94,6 +99,12 @@ public class TriggerRegistrationHelper
                     TwitchEventSocket.RedeemUsed -= redeem.Triggered;
                 }
                 break;
+            case TwitchCustomPowerUp poweruP:
+                if (_registeredCustomPowerUps.Remove(poweruP))
+                {
+                    TwitchEventSocket.CustomPowerUp -= poweruP.Triggered;
+                }
+                break;
             case TwitchBits bits:
                 if (_registeredBits.Remove(bits))
                 {
@@ -139,6 +150,9 @@ public class TriggerRegistrationHelper
             case TwitchRedeem redeem:
                 TwitchEventSocket.RedeemUsed -= redeem.Triggered;
                 break;
+            case TwitchCustomPowerUp powerUP:
+                TwitchEventSocket.CustomPowerUp -= powerUP.Triggered;
+                break;
             case TwitchBits bits:
                 TwitchEventSocket.BitsUsed -= bits.Triggered;
                 break;
@@ -169,6 +183,12 @@ public class TriggerRegistrationHelper
             TwitchEventSocket.RedeemUsed -= redeem.Triggered;
         }
         _registeredRedeems.Clear();
+
+        foreach (var powerup in _registeredCustomPowerUps)
+        {
+            TwitchEventSocket.CustomPowerUp -= powerup.Triggered;
+        }
+        _registeredCustomPowerUps.Clear();
 
         foreach (var bits in _registeredBits)
         {

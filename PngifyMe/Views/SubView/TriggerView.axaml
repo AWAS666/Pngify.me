@@ -34,6 +34,12 @@
 				<TextBox VerticalAlignment="Center" Text="{Binding Redeem}" Width="150"/>
 			</StackPanel>
 		</DataTemplate>
+		<DataTemplate DataType="{x:Type sett:TwitchCustomPowerUp}">
+			<StackPanel Orientation="Horizontal" Margin="5">
+				<TextBlock VerticalAlignment="Center" Text="{x:Static lang:Resources.Redeem}" Width="75"/>
+				<TextBox VerticalAlignment="Center" Text="{Binding Name}" Width="150"/>
+			</StackPanel>
+		</DataTemplate>
 		<DataTemplate DataType="{x:Type sett:TwitchBits}">
 			<StackPanel>
 				<StackPanel Orientation="Horizontal" Margin="5">

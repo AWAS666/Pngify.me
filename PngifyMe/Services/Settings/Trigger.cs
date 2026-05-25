@@ -38,6 +38,19 @@ public class TwitchRedeem : Trigger
     }
 }
 
+public class TwitchCustomPowerUp : Trigger
+{
+    public string Name { get; set; }
+
+    public void Triggered(object? sender, string e)
+    {
+        if (string.Compare(Name, e, StringComparison.OrdinalIgnoreCase) == 0)
+        {
+            Callback();
+        }
+    }
+}
+
 public class TwitchBits : Trigger
 {
     public uint MinAmount { get; set; }
