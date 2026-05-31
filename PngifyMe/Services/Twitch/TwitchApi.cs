@@ -18,7 +18,7 @@ namespace PngifyMe.Services.Twitch
     public class TwitchApi
     {
         public TwitchAPI Api { get; private set; }
-        public string FilePath { get; }
+        public static string FilePath { get; }
         public string Redirect { get; } = "http://localhost:9797/";
 
         /// <summary>
@@ -45,11 +45,11 @@ namespace PngifyMe.Services.Twitch
         };
         public TwitchAuth? Auth { get; private set; }
 
-        public TwitchApi()
+        static TwitchApi()
         {
             var folder = Environment.SpecialFolder.LocalApplicationData;
             var path = Environment.GetFolderPath(folder) + "\\PngifyMe";
-            Directory.CreateDirectory(path);
+            //Directory.CreateDirectory(path);
             FilePath = Path.Join(path, "twitch.json");
         }
 
@@ -133,7 +133,7 @@ namespace PngifyMe.Services.Twitch
             File.WriteAllText(FilePath, JsonSerializer.Serialize(Auth));
         }
 
-        public void DeleteAuth()
+        public static void DeleteAuth()
         {
             if (!File.Exists(FilePath)) return;
             File.Delete(FilePath);

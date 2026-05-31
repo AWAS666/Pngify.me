@@ -245,7 +245,7 @@ public static class TwitchEventSocket
 
     public static async Task DeleteAndReAuth()
     {
-        Api.DeleteAuth();
+        TwitchApi.DeleteAuth();
         // disconnect reconnection handler
         _eventSubWebsocketClient.WebsocketDisconnected -= OnWebsocketDisconnected;
         await _eventSubWebsocketClient.DisconnectAsync();
