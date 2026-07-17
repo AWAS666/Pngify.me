@@ -1,11 +1,12 @@
 <UserControl xmlns="https://github.com/avaloniaui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+			 mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 			 xmlns:i="https://github.com/projektanker/icons.avalonia"
-             xmlns:vm="clr-namespace:PngifyMe.ViewModels"
+			 xmlns:vm="clr-namespace:PngifyMe.ViewModels"
 			 xmlns:lang="clr-namespace:PngifyMe.Lang"
+			 xmlns:lucideAvalonia="clr-namespace:LucideAvalonia;assembly=LucideAvalonia"
 			 x:Class="PngifyMe.Views.VolumeSlider"
 			 x:DataType="vm:AudioSetupViewModel">
 	<Design.DataContext>
@@ -19,6 +20,9 @@
 				<ComboBox Name="inputAudio" ItemsSource="{Binding InputDevices }"
 						  DisplayMemberBinding="{ Binding Name}"
 						  SelectionChanged="InputDeviceChanged"/>
+				<Button Click="RefreshDevices">
+					<lucideAvalonia:Lucide Icon="RefreshCw" StrokeBrush="White" StrokeThickness="2" Width="22" Height="22"/>
+				</Button>
 			</StackPanel>
 
 			<StackPanel Orientation="Horizontal" Spacing="5" Margin="5,5,5,5">
@@ -26,8 +30,11 @@
 
 				<ComboBox Name="outputAudio" DisplayMemberBinding="{ Binding Name}"
 						  ItemsSource="{Binding OutputDevices}"
-						   SelectionChanged="OutputDeviceChanged"
+						  SelectionChanged="OutputDeviceChanged"
 						  />
+				<Button Click="RefreshDevices">
+					<lucideAvalonia:Lucide Icon="RefreshCw" StrokeBrush="White" StrokeThickness="2" Width="22" Height="22"/>
+				</Button>
 			</StackPanel>
 
 			<Grid RowDefinitions="35,200,35" ColumnDefinitions="75,75,75" Margin="5,5,5,5">
@@ -49,11 +56,11 @@
 				<TextBlock Grid.Row="2" HorizontalAlignment="Center"
 						   ToolTip.Tip="{x:Static lang:Resources.ToolTipCurrent}"
 						   Text="{x:Static lang:Resources.Current}"/>
-				
+
 				<TextBlock ToolTip.Tip="{x:Static lang:Resources.ToolTipThreshhold}"
-					Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Treshhold}"/>
+						   Grid.Row="2" Grid.Column="1" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Treshhold}"/>
 				<TextBlock ToolTip.Tip="{x:Static lang:Resources.ToolTipThreshhold}"
-					Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Smoothing}"/>
+						   Grid.Row="2" Grid.Column="2" HorizontalAlignment="Center" Text="{x:Static lang:Resources.Smoothing}"/>
 			</Grid>
 		</StackPanel>
 	</Grid>

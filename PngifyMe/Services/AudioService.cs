@@ -35,8 +35,8 @@ public static class AudioService
     private static AudioCaptureDevice captureDevice;
     private static AudioPlaybackDevice playbackDevice;
 
-    public static List<AudioDeviceConfig> InputDevices { get; }
-    public static List<AudioDeviceConfig> OutputDevices { get; }
+    public static List<AudioDeviceConfig> InputDevices { get; private set; }
+    public static List<AudioDeviceConfig> OutputDevices { get; private set; }
 
     public static event EventHandler<MicroPhoneLevel> LevelChanged;
     //public static SoundManager SoundManager { get; private set; } = new SoundManager(output: Settings.DeviceOut);
@@ -48,10 +48,7 @@ public static class AudioService
             //https://lsxprime.github.io/soundflow-docs/#/docs/1.4.0/utilities-and-debugging
             SoundFlow.Utils.Log.OnLog += Log_OnLog;
             engine = new MiniAudioEngine();
-            engine.UpdateAudioDevicesInfo();
-
-            InputDevices = GetAllInDevices();
-            OutputDevices = GetAllOutDevices();
+            RefreshDevices();
 
             var count = engine.CaptureDevices.Length;
             if (count == 0)
@@ -65,6 +62,14 @@ public static class AudioService
         {
             Log.Fatal(e, $"Error in AudioService init: {e.Message}");
         }
+    }
+
+    public static void RefreshDevices()
+    {
+        engine.UpdateAudioDevicesInfo();
+
+        InputDevices = GetAllInDevices();
+        OutputDevices = GetAllOutDevices();
     }
 
     private static void Log_OnLog(SoundFlow.Utils.LogEntry entry)

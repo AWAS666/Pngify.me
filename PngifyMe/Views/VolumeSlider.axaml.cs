@@ -65,4 +65,10 @@ public partial class VolumeSlider : UserControl
             current.Value = e.Percent;
         });
     }
+
+    private void RefreshDevices(object? sender, Avalonia.Interactivity.RoutedEventArgs e)
+    {
+        AudioService.RefreshDevices();
+        RefreshContext();
+    }   
 }
